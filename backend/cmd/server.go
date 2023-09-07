@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -14,7 +15,12 @@ import (
 
 func main() {
 	// The HTTP Server
-	server := &http.Server{Addr: "0.0.0.0:3333", Handler: internal.Router()}
+    port := "3333"
+    addr := "0.0.0.0:" + port
+
+	server := &http.Server{Addr: addr, Handler: internal.Router()}
+
+    fmt.Println("Server ready on port", port)
 
 	// Server run context
 	serverCtx, serverStopCtx := context.WithCancel(context.Background())
