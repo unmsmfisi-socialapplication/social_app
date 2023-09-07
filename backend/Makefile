@@ -6,17 +6,19 @@ else
 endif
 
 ifeq ($(uname_S), Windows)
-    target = main.exe
+    target = bin\\main.exe
+	main = cmd\\server.go
 endif
 ifeq ($(uname_S), Linux)
-    target = main
+    target = bin/main
+	main = cmd/server.go
 endif
 
 build:
-	go build -o bin/$(target) cmd/server.go
+	go build -o $(target) $(main)
 
 run:
 	go run cmd/server.go
 
 live:
-	air -c .air.toml --build.cmd "go build -o bin\\$(target) cmd\\server.go" --build.bin "bin\\$(target)"
+	air -c .air.toml --build.cmd "go build -o $(target) $(main)" --build.bin "$(target)"
