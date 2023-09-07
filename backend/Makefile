@@ -17,3 +17,6 @@ build:
 
 run:
 	go run cmd/server.go
+
+live:
+	air -c .air.toml --build.cmd "go build -o bin\\$(target) cmd\\server.go" --build.bin "bin\\$(target)"
