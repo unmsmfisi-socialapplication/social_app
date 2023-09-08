@@ -15,6 +15,16 @@ func NewLoginHandler(useCase *application.LoginUseCase) *LoginHandler {
 	return &LoginHandler{useCase: useCase}
 }
 
+func sendJSONResponse(w http.ResponseWriter, statusCode int, status string, response string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
+	jsonResponse := map[string]string{
+		"status":   status,
+		"response": response,
+	}
+	json.NewEncoder(w).Encode(jsonResponse)
+}
+
 func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	var requestData struct {
 		Username string `json:"username"`
@@ -23,7 +33,7 @@ func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&requestData)
 	if err != nil {
-		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+		sendJSONResponse(w, http.StatusBadRequest, "error", "Invalid request payload")
 		return
 	}
 
@@ -31,24 +41,20 @@ func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		switch err {
 		case application.ErrUserNotFound:
-			w.WriteHeader(http.StatusNotFound)
-			w.Write([]byte("User not found"))
+			sendJSONResponse(w, http.StatusNotFound, "NOTFOUND", "User not found")
 			return
 		case application.ErrInvalidCredentials:
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte("Invalid password"))
+			sendJSONResponse(w, http.StatusUnauthorized, "NOPASSWORD", "Invalid password")
 			return
 		default:
-			http.Error(w, "Error during authentication", http.StatusInternalServerError)
+			sendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error during authentication")
 			return
 		}
 	}
 
 	if isAuthenticated {
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Authentication successful"))
+		sendJSONResponse(w, http.StatusOK, "OK", "Authentication successful")
 	} else {
-		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte("Authentication failed"))
+		sendJSONResponse(w, http.StatusUnauthorized, "ERROR", "Authentication failed")
 	}
 }
