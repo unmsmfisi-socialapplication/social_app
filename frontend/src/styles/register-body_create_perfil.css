@@ -1,0 +1,177 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan cuando el espacio es insuficiente */
+  justify-content: center; /* Centra los elementos horizontalmente */
+  width: 100%;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  text-align: center;
+}
+
+.profile-image {
+  width: 5em; /* Cambia el ancho máximo a 5em para que coincida con el botón */
+  max-width: 100%; /* Ajusta el ancho máximo al 100% */
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  transition: opacity 0.3s;
+}
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-color: #b3b3b3;
+  color: #fdfdfd;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  font-size: 5em;
+  width: 5em;
+  height: 5em;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.upload-button:hover .profile-image {
+  opacity: 0.5;
+}
+
+.column.has-image .upload-button span {
+  display: none;
+}
+
+.column:not(.has-image) .upload-button span {
+  display: block;
+  font-size: 0.35em;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Poppins', sans-serif;
+}
+
+.upload-button input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.upload-button .column-content {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.column.has-image .upload-button {
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.text-container {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.column:not(.has-image) h1 {
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+}
+
+.column:not(.has-image) p {
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 5em 10em 1em 0;
+}
+
+.btn-accepter {
+  width: 330px;
+  height: 60px;
+  background-color: #1B4965;
+  border-radius: 5px;
+  font-size: 20px;
+  color: #FDFDFD;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-accepter:hover,
+.btn-accepter:active {
+  background-color: #62B6CB;
+  color: black;
+}
+
+.btn-sauter {
+  width: 350px;
+  height: 60px;
+  color: black;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    max-width: 330px;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
