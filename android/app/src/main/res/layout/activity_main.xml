@@ -6,13 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/textView"
+        android:layout_width="289dp"
+        android:layout_height="85dp"
+        android:fontFamily="@font/poppins"
+        android:text="Empecemos con la configuración de tu perfil. Primero sube una foto de perfil."
+        android:textAlignment="center"
+        android:textColor="@color/textColor0"
+        android:textFontWeight="400"
+        android:textSize="18dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="185dp"
+        android:layout_height="185dp"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubirFoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/userFoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@color/backgroundColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:srcCompat="@drawable/user_photo" />
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnSubirFoto"
+        android:layout_width="310dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/buttonColor"
+        android:fontFamily="@font/poppins"
+        android:text="Sube tu foto"
+        android:textColor="@color/textColor1"
+        android:textFontWeight="400"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="310dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="164dp"
+        android:fontFamily="@font/poppins"
+        android:text="Te solicitaremos permiso para acceder a tu multimedia y la cámara. Recuerda aceptarlo para continuar."
+        android:textAlignment="center"
+        android:textColor="@color/textColor0"
+        android:textSize="12dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.901" />
+
+    <TextView
+        android:id="@+id/txtOmitirPaso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Deseo omitir este paso por ahora >"
+        android:textColor="@color/textColor2"
+        android:textFontWeight="400"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.788" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
