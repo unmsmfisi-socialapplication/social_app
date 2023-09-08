@@ -7,6 +7,8 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	_ "github.com/lib/pq"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/searchpost"
 )
 
 func Router() http.Handler {
@@ -17,6 +19,10 @@ func Router() http.Handler {
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"world\"}"))
+	})
+
+	r.Get("/buscar", func(w http.ResponseWriter, r *http.Request) {
+		searchpost.SearchPost(w, r) // Llama a la función SearchPost desde el paquete models
 	})
 
 	r.Get("/slow", func(w http.ResponseWriter, r *http.Request) {
