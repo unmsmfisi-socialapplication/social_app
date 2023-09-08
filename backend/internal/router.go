@@ -32,5 +32,7 @@ func Router() http.Handler {
 		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
 	})
 
+	r.Mount("/reactions", reactionsResource{}.Routes())
+
 	return r
 }
