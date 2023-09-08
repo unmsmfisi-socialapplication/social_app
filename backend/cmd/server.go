@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -10,9 +11,18 @@ import (
 	"time"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/database"
 )
 
 func main() {
+	fmt.Println("Hola mundo")
+	// Connect to database
+    db, errConnection := database.ConnectDB()
+    if errConnection != nil {
+        log.Fatal("Connection error:", errConnection)
+    }
+    defer db.Close() 
+
 	// The HTTP Server
 	server := &http.Server{Addr: "0.0.0.0:3333", Handler: internal.Router()}
 
@@ -42,6 +52,9 @@ func main() {
 		}
 		serverStopCtx()
 	}()
+
+	// Print a message indicating that the server is running
+	fmt.Println("Server running on 3333")
 
 	// Run the server
 	err := server.ListenAndServe()
