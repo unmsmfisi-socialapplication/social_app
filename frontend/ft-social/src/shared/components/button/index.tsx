@@ -5,7 +5,7 @@ import './index.less';
 type WButtonProps = {
     typeColor: 'primary' | 'secondary' | 'tertiary';
     text: string; // Definir que text es de tipo string
-    size: 'small' | 'medium' | 'large' ;
+    size: 'small' | 'medium' | 'large'  ;
 };
   
   const WButton: React.FC<WButtonProps> = ({ typeColor , text ,size}) => {
@@ -22,7 +22,7 @@ type WButtonProps = {
 export default WButton;
 
 WButton.defaultProps = {
-    typeColor: 'secondary',
+    typeColor: 'primary',
     text: 'Default text',
     size: undefined,
 };
