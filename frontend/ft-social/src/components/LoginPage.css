@@ -1,0 +1,75 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("login-bg-image.png"); /* Missing image */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.login-container {
+  text-align: center;
+  background-color: #fff;
+  padding: 20px 35px 50px;
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /*So the borders are visible (No background image yet)*/
+  width: 30%;
+}
+
+.welcome-text {
+  margin-bottom: 20px;
+  font-weight: 900;
+}
+
+.forgot-password {
+  margin-top: 10px;
+  float: right;
+}
+
+.login-button {
+  background-color: midnightblue;
+  color: #fff;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.separator-line {
+  flex: 1;
+  height: 1px;
+  background-color: #000;
+}
+
+.separator-circle {
+  width: 5px;
+  height: 5px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  margin: 0 25px;
+}
+
+.create-account-button {
+  background-color: powderblue;
+  color: #000;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+}

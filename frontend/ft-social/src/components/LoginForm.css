@@ -1,0 +1,26 @@
+.input-container {
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  padding: 10px;
+  border: none;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.email-input {
+  font-family: "Poppins", sans-serif;
+  padding: 5px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  text-align: left;
+}
+
+.input-container label {
+  font-weight: bold;
+}
+
+.input-container .MuiSvgIcon-root {
+  margin-left: 10px;
+}

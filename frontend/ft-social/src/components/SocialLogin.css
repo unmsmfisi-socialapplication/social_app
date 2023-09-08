@@ -1,0 +1,23 @@
+.social-login {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: #000;
+  padding: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+}
+
+.google-button .MuiSvgIcon-root {
+  margin-right: 10px;
+}
