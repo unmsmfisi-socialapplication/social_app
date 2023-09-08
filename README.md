@@ -4,6 +4,8 @@ This is a social app based on ActivityPub trying to address current issues of th
 # Repo
 The repo contains the whole project: frontend, backend and mobile
 
+-------------------------------------------------------------------------------------------------------------------
+
 #Change Name In User Profile View
 
 In this section the name change view was made in the create profile form
