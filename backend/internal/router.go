@@ -7,6 +7,8 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/User/infraestructure"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/database"
 )
 
 func Router() http.Handler {
@@ -31,6 +33,12 @@ func Router() http.Handler {
 
 		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
 	})
+
+	db := database.NewDatabase()
+	userRepository := infraestructure.NewUserDBRepository(db)
+	editUserHanddler := infraestructure.NewEditUserHandler(*userRepository)
+
+	r.Put("/user/{id_user}", editUserHanddler.EditUser)
 
 	return r
 }
