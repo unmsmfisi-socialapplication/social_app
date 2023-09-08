@@ -13,6 +13,11 @@
         android:theme="@style/Theme.MobileSocialAPP"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.Verificacion"
+            android:exported="false"
+            android:label="@string/title_activity_verificacion"
+            android:theme="@style/Theme.MobileSocialAPP" />
+        <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
             android:label="@string/app_name"

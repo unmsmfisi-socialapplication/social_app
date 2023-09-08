@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MobileSocialAPP</string>
+    <string name="title_activity_verificacion">Verificacion</string>
 </resources>
