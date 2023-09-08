@@ -1,0 +1,56 @@
+{
+    "realProfile": {
+        "importProfile": {
+            "name": "ActivityPub Social Profile Import",
+            "description": "Profile for importing user data from ActivityPub-based social networks like Pixelfeed or Mastodon",
+            "source": {
+                "type": "ActivityPub Service",
+                "endpoint": "URL_DEL_SERVICIO/activitypub_endpoint",
+                "authentication": "USER_AUTH_TOKEN"
+            },
+            "destination": {
+                "type": "Current Social Service",
+                "profileFields": {
+                    "avatar": "user_avatar",
+                    "coverPhoto": "user_cover",
+                    "bio": "user_bio",
+                    "name": "user_name"
+                }
+            },
+            "additionalData": {
+                "originalProfileLink": "LINK_A_MASTODON_OR_PIXELFEED"
+            },
+            "errorHandling": {
+                "onError": "logError",
+                "logPath": "/path/to/error/logfile.log"
+            }
+        }
+    },
+    "profileSchema": {
+        "importProfile": {
+            "name": "string",
+            "description": "string",
+            "source": {
+                "type": "string",
+                "endpoint": "string (URL format)",
+                "authentication": "string"
+            },
+            "destination": {
+                "type": "string",
+                "profileFields": {
+                    "avatar": "string (path or URL format)",
+                    "coverPhoto": "string (path or URL format)",
+                    "bio": "string",
+                    "name": "string"
+                }
+            },
+            "additionalData": {
+                "originalProfileLink": "string (URL format)"
+            },
+            "errorHandling": {
+                "onError": "string (e.g., 'logError', 'skip', etc.)",
+                "logPath": "string (path format)"
+            }
+        }
+    }
+}
