@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 0px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.Izquierdo{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center; 
+  width: 100%;
+}
+
+.perfil-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  margin: 0 auto;
+  font-size: 30px;
+  font-style: bold;
+}
+
+.perfil-circle {
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background-color: #B3B3B3; /* Color de fondo del círculo de perfil */
+  margin-top: 50px;
+}
+
+.formulario-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 50px;
+  font-size: 20px;
+}
+.campo{
+  width: 500px;
+  height: 40px;
+  background-color: #F7F7F8 ;
+  border: none;
+}
+.boton-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 800px;
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+.form-group {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+}
+
+.boton-hecho {
+  background-color: #1B4965; /* Color de fondo del botón */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;/*borde redondo*/
+  cursor: pointer;
+  width: 300px;
+  height: 60px;
+  font-size: 20px;
+}
+
+.boton-hecho:hover {
+  background-color: #0056b3; /* Cambio de color al pasar el mouse */
+}
+
+
+
