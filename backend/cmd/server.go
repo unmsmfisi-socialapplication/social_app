@@ -15,7 +15,6 @@ import (
 )
 
 func main() {
-	fmt.Println("Hola mundo")
 	// Connect to database
     db, errConnection := database.ConnectDB()
     if errConnection != nil {
