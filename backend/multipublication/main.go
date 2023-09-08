@@ -4,7 +4,6 @@ import (
   "fmt"
   "log"
   "net/http"
-
   "github.com/go-fed/activitypub"
   "github.com/unmsmfisi-socialapplication/social_app/internal/multipublication/application"
 )
