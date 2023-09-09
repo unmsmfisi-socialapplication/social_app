@@ -2,16 +2,17 @@ package infrastructure
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 )
 
 type LoginHandler struct {
-	useCase *application.LoginUseCase
+	useCase application.LoginUsecaseInterface
 }
 
-func NewLoginHandler(useCase *application.LoginUseCase) *LoginHandler {
+func NewLoginHandler(useCase application.LoginUsecaseInterface) *LoginHandler {
 	return &LoginHandler{useCase: useCase}
 }
 
@@ -22,7 +23,13 @@ func sendJSONResponse(w http.ResponseWriter, statusCode int, status string, resp
 		"status":   status,
 		"response": response,
 	}
-	json.NewEncoder(w).Encode(jsonResponse)
+	jsonBytes, err := json.Marshal(jsonResponse)
+	if err != nil {
+		http.Error(w, "Error generating JSON", http.StatusInternalServerError)
+		return
+	}
+	w.Write(jsonBytes)
+
 }
 
 func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
@@ -33,7 +40,7 @@ func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&requestData)
 	if err != nil {
-		sendJSONResponse(w, http.StatusBadRequest, "error", "Invalid request payload")
+		sendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
 		return
 	}
 
@@ -48,6 +55,7 @@ func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 			return
 		default:
 			sendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error during authentication")
+			fmt.Println(err.Error())
 			return
 		}
 	}
