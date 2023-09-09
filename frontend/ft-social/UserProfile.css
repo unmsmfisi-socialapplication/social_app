@@ -1,0 +1,44 @@
+.user-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius:25px;
+    background-color: powderblue;
+    margin-top: 100px;
+  }
+  .navigate{
+    height: 700px;
+    background-color:  rgb(241,241,241);
+    border-radius: 5px;
+  }
+  .principal {
+    margin-top: 50px;
+    background-color:white;
+    width: 100%;
+    padding: 20px;
+  }
+  .user-avatar {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  .change-avatar-button {
+    background-color: #1876d2; 
+    color: white;
+  }
+  .text-field {
+    margin-top: 10px;
+  }
+  .save-button {
+    margin-top: 20px;
+    background-color: #1876d2; 
+    color: white; 
+  }
+.navigate .MuiTab-root {
+  transition: box-shadow 0.4s ease;
+}
+.navigate .MuiTab-root:hover {
+  background-color: rgb(222, 222, 222);
+  box-shadow: 5px 5px 10px 2px rgb(0,0,0.3,0.3);
+}
