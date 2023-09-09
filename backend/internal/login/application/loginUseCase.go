@@ -11,6 +11,10 @@ var (
 	ErrInvalidCredentials = errors.New("invalid credentials")
 )
 
+type LoginUsecaseInterface interface {
+	Authenticate(username, password string) (bool, error)
+}
+
 type UserRepository interface {
 	GetUserByUsername(username string) (*domain.User, error)
 }
