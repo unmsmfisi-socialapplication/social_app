@@ -7,9 +7,11 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+
+	wsInf "github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
 )
 
-func Router() http.Handler {
+func Router(wsHandler *wsInf.Handler) http.Handler {
 	r := chi.NewRouter()
 
 	r.Use(middleware.RequestID)
@@ -31,6 +33,8 @@ func Router() http.Handler {
 
 		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
 	})
+
+	r.Post("/ws/createRoom", wsHandler.CreateRoom)
 
 	return r
 }

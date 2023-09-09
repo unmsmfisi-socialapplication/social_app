@@ -10,11 +10,17 @@ import (
 	"time"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/domain"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
 )
 
 func main() {
+	//Handlers
+	hub := domain.NewHub()
+	wsHandler := infraestructure.NewHandler(hub)
+
 	// The HTTP Server
-	server := &http.Server{Addr: "0.0.0.0:3333", Handler: internal.Router()}
+	server := &http.Server{Addr: "0.0.0.0:3333", Handler: internal.Router(wsHandler)}
 
 	// Server run context
 	serverCtx, serverStopCtx := context.WithCancel(context.Background())
