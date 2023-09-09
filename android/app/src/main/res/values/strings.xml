@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Social</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="sign_in_to_continue">Inicia sesión para continuar</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="forgot_password_ask">¿Olvidaste la contraseña?</string>
+    <string name="login">Inicio de sesión</string>
+    <string name="create_new_account">Crear una nueva cuenta</string>
+    <string name="continue_with_google">Continuar con Google</string>
+
+
+    
+
+
+
 </resources>
