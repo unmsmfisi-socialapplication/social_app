@@ -21,8 +21,8 @@ func Router() http.Handler {
 		w.Write([]byte("{\"hello\": \"world\"}"))
 	})
 
-	r.Get("/buscar", func(w http.ResponseWriter, r *http.Request) {
-		searchpost.SearchPost(w, r) // Llama a la función SearchPost desde el paquete models
+	r.Get("/search", func(w http.ResponseWriter, r *http.Request) {
+		searchpost.SearchPost(w, r)
 	})
 
 	r.Get("/slow", func(w http.ResponseWriter, r *http.Request) {
