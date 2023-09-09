@@ -1,16 +1,22 @@
 package domain
 
+import (
+	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/domain/entity"
+)
+
+//Interfaces must be implemented at the infraestructure layer
+
 //Access category data
 type TopicCategoryRepository interface {
-	FindAll() ([]*Topic_Category, error)
+	FindAll() ([]*entity.Topic_Category, error)
 }
 
 //Access subcategory data
 type TopicSubcategoryRepository interface {
-	FindAll() ([]*Topic_Subcategory, error)
+	FindAll() ([]*entity.Topic_Subcategory, error)
 }
 
 //Select interest topics
 type InterestTopicsUserRepository interface {
-	Create(interest *Interest_Topic_Users) error
+	Create(interest *entity.Interest_Topic_Users) error
 }

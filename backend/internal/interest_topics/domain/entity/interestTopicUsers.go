@@ -1,4 +1,4 @@
-package domain
+package entity
 
 type Interest_Topic_Users struct {
 	Id             int64 `json:"id"`

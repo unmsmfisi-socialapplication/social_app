@@ -1,4 +1,4 @@
-package domain
+package entity
 
 type Topic_Subcategory struct {
 	Id          int64  `json:"id"`
