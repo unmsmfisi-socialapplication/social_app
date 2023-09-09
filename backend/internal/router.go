@@ -7,13 +7,23 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/application"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure"
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 )
 
 func Router() http.Handler {
 	r := chi.NewRouter()
+    
+    err := database.InitDatabase()
+    if err != nil {
+        panic(err)
+    }
 
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
+
+    db := database.GetDB()
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"world\"}"))
@@ -31,6 +41,12 @@ func Router() http.Handler {
 
 		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
 	})
+
+    importProfileRepository := infrastructure.NewProfileRepository(db)
+    importProfileUseCase := application.NewImportProfileUseCase(importProfileRepository)
+    importProfileHandler := infrastructure.NewImportProfileHandler(importProfileUseCase)
+
+    r.Put("/import-profile", importProfileHandler.ImportProfile)
 
 	return r
 }
