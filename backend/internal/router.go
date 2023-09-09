@@ -11,6 +11,7 @@ import (
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 )
 
 func Router() http.Handler {
@@ -19,12 +20,12 @@ func Router() http.Handler {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
 
-	err := infrastructure.InitDatabase()
+	err := database.InitDatabase()
 	if err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
 	}
 
-	dbInstance := infrastructure.GetDB()
+	dbInstance := database.GetDB()
 
 	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
 
