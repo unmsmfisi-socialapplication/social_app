@@ -25,10 +25,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2  # Check out the repository code
 
-      - name: Set up Python 3.11
+      - name: Set up Python 3.10
         uses: actions/setup-python@v2
         with:
-          python-version: '3.11'  # Use Python 3.11
+          python-version: '3.10'  # Use Python 3.10
 
       - name: Check Requirements file existence
         id: check_files
