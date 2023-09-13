@@ -5,7 +5,7 @@ name: CI Data
 on:
   pull_request:
     branches:
-      - main
+      - develop
     # Only trigger when changes are made within the 'data/' directory
     paths: 
       - 'data/**'
