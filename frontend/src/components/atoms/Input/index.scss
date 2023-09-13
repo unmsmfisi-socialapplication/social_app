@@ -1,0 +1,37 @@
+@import '../../../../resources/styles/variables.scss';
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+
+/* Input.scss */
+.input-container {
+  position: relative;
+  width: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input {
+  width: 100%;
+  padding: 10px; 
+  border: 1px solid #F7F7F8;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+
+  &:focus {
+    border-color: #007bff; // Cambiar el color del borde cuando el input tiene foco
+  }
+}
+
+.icon {
+  width: 20px;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  margin-top: 2px;
+  color: #878787;
+}

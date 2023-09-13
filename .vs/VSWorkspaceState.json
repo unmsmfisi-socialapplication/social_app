@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\components",
+    "\\frontend\\src\\components\\atoms",
+    "\\frontend\\src\\components\\atoms\\Button"
+  ],
+  "SelectedNode": "\\frontend\\src\\components\\atoms\\Button\\button.tsx",
+  "PreviewInSolutionExplorer": false
+}
