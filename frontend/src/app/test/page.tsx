@@ -1,10 +1,13 @@
-'use client'
-import { useState } from "react"
-import Layout from "../layout"
+"use client";
+import { useState } from "react";
+import Layout from "../layout";
 import { Button } from "@mui/material";
 import { WButton } from "@/components";
+import { WCircleIcon } from "@/components";
+import CheckIcon from "@mui/icons-material/Check";
+
 export default function TestPage() {
-    const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   const handleCount = () => {
     setCount(count + 1);
@@ -29,6 +32,7 @@ export default function TestPage() {
       </div>
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
+      <WCircleIcon iconSize={30} icon={CheckIcon} />
     </Layout>
   );
 }
