@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { WButton } from "@/components";
 import { WCircleIcon } from "@/components";
 import CheckIcon from "@mui/icons-material/Check";
+import AllInclusive from "@mui/icons-material/AllInclusive";
 
 export default function TestPage() {
   const [count, setCount] = useState(0);
@@ -33,6 +34,7 @@ export default function TestPage() {
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
       <WCircleIcon iconSize={30} icon={CheckIcon} />
+      <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
     </Layout>
   );
 }
