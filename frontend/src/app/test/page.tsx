@@ -50,6 +50,39 @@ export default function TestPage() {
         fullWidth
       />
     </div>
+        
+    <div
+      //Estilos a usar para la caja 
+        style={{
+          width: "500px",
+          height: "150px",
+          backgroundColor: "red", /*Referencia de la ubicación de los objetos de la caja*/
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "15px auto",
+          gap: "15px",
+        }}>
+        <WInput
+          typeColor="primary"
+          icon={<AccountCircleIcon />}
+          placeholder="Correo electrónico"
+          size="small"
+          variant="filled"
+          fullWidth
+          type="text"
+        />
+        <WInput
+          typeColor="primary"
+          icon={undefined}
+          placeholder="Contraseña"
+          size="small"
+          variant="filled"
+          fullWidth
+          type="password" 
+        />
+    </div>
     </Layout>
   );
 }
