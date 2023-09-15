@@ -1,9 +1,15 @@
 name: Frontend CI
 
 on:
-  push:
+  pull_request:
     branches:
-      - develop 
+      - develop
+    # Only trigger when changes are made within the 'frontend/' directory
+    paths:
+      - 'frontend/**'
+defaults:
+  run:
+    working-directory: ./frontend
 
 jobs:
   build:
