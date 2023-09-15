@@ -1,0 +1,28 @@
+name: Mobile CI
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setting up Kotlin environment
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Build App
+        run: ./gradlew build
+
+      - name: Test App
+        run: ./gradlew test
+
+      - name: Package App
+        run: ./gradlew assembleRelease
