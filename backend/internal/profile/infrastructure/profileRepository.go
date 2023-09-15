@@ -19,7 +19,7 @@ func (pr *ProfileRepository) UpdateProfile(profile *domain.Profile) (*domain.Pro
 
     tx, _ := pr.db.Begin()
     
-    _, err := tx.Exec("UPDATE Profiles SET profile_picture = $1, biography = $2 WHERE username = $3", profile.ProfilePicture, profile.Biography, profile.Username)
+    _, err := tx.Exec("UPDATE Profiles SET profile_picture = $1, biography = $2 WHERE username = $3", profile.ProfileImage, profile.Biography, profile.Username)
 	if err != nil {
         log.Println(err)
 		return nil, err

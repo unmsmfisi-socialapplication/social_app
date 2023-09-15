@@ -18,10 +18,24 @@ func NewImportProfileHandler(profileRepository *application_import.ImportProfile
 
 func (iph *ImportProfileHandler) ImportProfile(w http.ResponseWriter, r *http.Request) {
     var requestData ImportProfileRequest
+    var responseData ImportProfileResponse
+
+    type responseError struct {
+        Error string `json:"error"`
+    }
 
     err := json.NewDecoder(r.Body).Decode(&requestData)
     if err != nil {
         w.WriteHeader(http.StatusBadRequest)
+        json.NewEncoder(w).Encode(responseData.Error(err.Error()))
+        log.Println(err)
+        return
+    }
+
+    err = requestData.Validate()
+    if err != nil {
+        w.WriteHeader(http.StatusBadRequest)
+        json.NewEncoder(w).Encode(responseData.Error(err.Error()))
         log.Println(err)
         return
     }
@@ -29,11 +43,11 @@ func (iph *ImportProfileHandler) ImportProfile(w http.ResponseWriter, r *http.Re
     p, err := iph.importProfileUseCase.ImportProfile(requestData.ToProfile())
     if err != nil {
         w.WriteHeader(http.StatusInternalServerError)
+        json.NewEncoder(w).Encode(responseData.Error(err.Error()))
         log.Println(err)
         return
     }
 
-    var responseData ImportProfileResponse
     responseData.FromProfile(p)
 
     w.WriteHeader(http.StatusCreated)

@@ -11,54 +11,50 @@ var importProfileRequest infrastructure_import.ImportProfileRequest
 var importProfileResponse infrastructure_import.ImportProfileResponse
 
 func ToProfileTest(t *testing.T) {
-    t.Log("ToProfileTest")
+	t.Log("ToProfileTest")
 
-    importProfileRequest = infrastructure_import.ImportProfileRequest{
-        Username:       "test",
-        ProfilePicture: "test",
-        Biography:      "test",
-    }
+	importProfileRequest = infrastructure_import.ImportProfileRequest{}
 
-    profile := importProfileRequest.ToProfile()
+	profile := importProfileRequest.ToProfile()
 
-    if profile.Username != importProfileResponse.Username {
-        t.Errorf("Error: %v", "Username")
-    }
+	if profile.Username != importProfileResponse.Username {
+		t.Errorf("Error: %v", "Username")
+	}
 
-    if profile.ProfilePicture != importProfileResponse.ProfilePicture {
-        t.Errorf("Error: %v", "ProfilePicture")
-    }
+	if profile.ProfileImage != importProfileResponse.ProfilePicture {
+		t.Errorf("Error: %v", "ProfilePicture")
+	}
 
-    if profile.Biography != importProfileResponse.Biography {
-        t.Errorf("Error: %v", "Biography")
-    }
+	if profile.Biography != importProfileResponse.Biography {
+		t.Errorf("Error: %v", "Biography")
+	}
 
-    t.Log("ToProfileTest: Success")
+	t.Log("ToProfileTest: Success")
 }
 
 func FromProfileTest(t *testing.T) {
-    t.Log("FromProfileTest")
+	t.Log("FromProfileTest")
 
-    p := &domain.Profile{
-        Id_profile:     1,
-        Username:       "test",
-        ProfilePicture: "test",
-        Biography:      "test",
-    }
+	p := &domain.Profile{
+		Id_profile:   "test",
+		Username:     "test",
+		ProfileImage: "test",
+		Biography:    "test",
+	}
 
-    importProfileResponse.FromProfile(p)
+	importProfileResponse.FromProfile(p)
 
-    if importProfileResponse.Username != p.Username {
-        t.Errorf("Error: %v", "Username")
-    }
+	if importProfileResponse.Username != p.Username {
+		t.Errorf("Error: %v", "Username")
+	}
 
-    if importProfileResponse.ProfilePicture != p.ProfilePicture {
-        t.Errorf("Error: %v", "ProfilePicture")
-    }
+	if importProfileResponse.ProfilePicture != p.ProfileImage {
+		t.Errorf("Error: %v", "ProfilePicture")
+	}
 
-    if importProfileResponse.Biography != p.Biography {
-        t.Errorf("Error: %v", "Biography")
-    }
+	if importProfileResponse.Biography != p.Biography {
+		t.Errorf("Error: %v", "Biography")
+	}
 
-    t.Log("FromProfileTest: Success")
+	t.Log("FromProfileTest: Success")
 }

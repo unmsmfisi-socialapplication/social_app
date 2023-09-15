@@ -12,10 +12,10 @@ func TestImportProfileUseCase(t *testing.T) {
 	t.Log("TestImportProfileUseCase")
 
 	p := &domain.Profile{
-		Id_profile:     1,
-		Username:       "test",
-		ProfilePicture: "test",
-		Biography:      "test",
+		Id_profile:   "test",
+		Username:     "test",
+		ProfileImage: "test",
+		Biography:    "test",
 	}
 
 	var profile *domain.Profile
@@ -33,7 +33,7 @@ func TestImportProfileUseCase(t *testing.T) {
 		t.Errorf("Error: %v", err)
 	}
 
-	if profile.ProfilePicture != p.ProfilePicture {
+	if profile.ProfileImage != p.ProfileImage {
 		t.Errorf("Error: %v", err)
 	}
 
