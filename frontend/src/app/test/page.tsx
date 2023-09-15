@@ -2,7 +2,9 @@
 import { useState } from "react"
 import Layout from "../layout"
 import { Button } from "@mui/material";
-import { WButton } from "@/components";
+import { WButton, WInput } from "@/components";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 export default function TestPage() {
     const [count, setCount] = useState(0);
 
@@ -29,6 +31,25 @@ export default function TestPage() {
       </div>
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
+      <div>
+      <WInput
+        typeColor="primary"
+        icon={<AccountCircleIcon />} // Icono de usuario
+        placeholder="Nombre de usuario"
+        size="small"
+        variant="filled"
+        fullWidth
+      />
+
+      <WInput
+        typeColor="secondary"
+        icon={<AccountCircleIcon />} // Icono de usuario
+        placeholder="Correo electrónico"
+        size="medium"
+        variant="filled"
+        fullWidth
+      />
+    </div>
     </Layout>
   );
 }
