@@ -3,7 +3,7 @@ name: Mobile CI
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   build:
