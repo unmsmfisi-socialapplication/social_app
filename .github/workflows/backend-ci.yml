@@ -6,7 +6,7 @@ on:
   pull_request:
     branches:
       - develop
-    # Only trigger when changes are made within the 'data/' directory
+    # Only trigger when changes are made within the 'backend/' directory
     paths:
       - 'backend/**'
 
@@ -33,13 +33,13 @@ jobs:
         run: go mod download
 
       - name: Build Backend
-        run: go build -o backend ./path-to-backend
+        run: go build -o build/backend-main cmd/server.go
 
       - name: Install golint
         run: go install golang.org/x/lint/golint@latest
 
       - name: Run golint # Linter
-        run: golint ./path-to-backend
+        run: golint ./...
 
       - name: Run Unit Tests # Unit Test
-        run: go test ./path-to-backend
+        run: go test ./...
