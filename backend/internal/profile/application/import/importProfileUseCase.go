@@ -4,8 +4,6 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
 )
 
-type profileRequest interface {}
-
 type ImportProfileUseCase struct {
     profileRepository domain.ProfileRepositoryI
 }
