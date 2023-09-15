@@ -4,9 +4,12 @@ on:
   pull_request:
     branches:
       - develop
-    # Only trigger when changes are made within the 'backend/' directory
+    # Only trigger when changes are made within the 'frontend/' directory
     paths:
       - 'frontend/**'
+defaults:
+  run:
+    working-directory: ./frontend
 
 jobs:
   build:
