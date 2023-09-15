@@ -17,7 +17,7 @@ const WInput: React.FC<WInputProps> = ({
   icon,
   placeholder = 'Placeholder',
   size = 'medium',
-  variant = 'filled',
+  variant = 'outlined',
   fullWidth = false,
   type = 'text',
 }) => {
