@@ -1,0 +1,37 @@
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: none;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  height: 30px;
+  border-radius: 4px;
+  background: #f7f7f8;
+}
+
+.email-input {
+  font-family: "Poppins", sans-serif;
+  padding: 5px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  text-align: left;
+
+  &::placeholder {
+    color: #878787;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+
+.input-container label {
+  font-weight: bold;
+}
+
+.input-container .MuiSvgIcon-root {
+  margin-right: 8px;
+}

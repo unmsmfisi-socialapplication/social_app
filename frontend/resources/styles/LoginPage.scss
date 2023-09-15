@@ -1,0 +1,141 @@
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url(https://s3-alpha-sig.figma.com/img/b670/eea7/49c87329a76b810104e23cbaba6deedc?Expires=1695600000&Signature=F2NS2oOVoxRtenvGuHbFtymlDEAHnUMYoLKPtlDpgYasP6OjUvd0IL3YFP5FEqDE-NEtVImGtXDpiS2gKYQg91OBwYxOUGkxicsxWlPwOAfAzcWeWDnCZmwjGP0zWEcZbre9Dw8zxGEdhtzllnx7H9rudVdebTRqcO8R8Oujf5z-IWbauKld~FGmzx7eC2NXEb-zg4w~OY9~lZoiRjmNZ0YHc5RId1h4vturW7bGQgoxP535NAA-~absWWEg8A8KfjuI7HSr1uQXYwlT5TeUoaM3k0Q6tftKc263-qxw4rpCT9CbCWs4hh8u1FJEb6EkBwvGd8DqLCmrfcWkRkfanA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* filter: blur(6px); */
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  text-align: center;
+  background-color: #fff;
+  padding: 41px 44px 61px;
+  border-radius: 30px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  width: 479px;
+  height: 598px;
+  flex-shrink: 0;
+}
+
+.welcome-title {
+  margin-bottom: 12px;
+  color: #000;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.welcome-paragraph {
+  color: #000;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 27px;
+}
+
+.forgot-password > a {
+  float: right;
+  color: #1976d2;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  margin-bottom: 40px;
+}
+
+.login-button {
+  background-color: #1b4965;
+  color: #fff;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border-radius: 5px;
+}
+
+.login-btn {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.separator-line {
+  flex: 1;
+  height: 1px;
+  background-color: #000;
+}
+
+.separator-circle {
+  width: 5px;
+  height: 5px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  margin: 0 25px;
+}
+
+.create-account-button {
+  padding: 15px 20px;
+  border: 1px solid #cae9ff;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  background: #cae9ff;
+  color: #000;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.continuar {
+  color: #000;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 17px 0;
+}

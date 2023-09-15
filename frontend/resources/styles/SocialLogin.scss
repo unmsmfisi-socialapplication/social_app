@@ -1,0 +1,55 @@
+.social-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 18px;
+  height: 50px;
+}
+
+/* .google-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: #000;
+  padding: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+} */
+
+/* .google-button .MuiSvgIcon-root {
+  margin-right: 10px;
+} */
+
+a {
+  cursor: pointer;
+}
+
+.google {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: url(https://s3-alpha-sig.figma.com/img/2eea/7ec6/729735e1355701e5b397629e18fc101a?Expires=1695600000&Signature=HW6RxBQPHPkA1KdDtSQEbLzt0pu0j~t~UsKAnZzQxq0ZSGpKm4Htp3pIU~cS3iKjnex7aomUhMEFjsp6yjXN6Fey62NOYEl1FVpekyfZ5kBrBM03-USN5hULO2uR0PevhtfSaiTtRbXGUdbTcl481KmDWiMe2zllRlV7BrG5-cA0QKr0~U0xDFTkFvsLRft1jbD8t6ekpwwLCxmcYfmLQ3gIbLUI1TLh9fdP6op4eL4TYHVpX1R4dAgN-KOfsOzeIAHNVuTyKhCkOO-Uq94QXXILa4D7rWNTIp9b8g4qg7y0VVvJyP0ROvumyTCMp3TduiwV2bv~4u2sOG95VN4o7Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4);
+  background-size: contain;
+}
+
+.threads {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: url(https://s3-alpha-sig.figma.com/img/49ee/4e55/97bc0232929bffd4dc7b95524770dbee?Expires=1695600000&Signature=mSj9LDhIK8g~lbbMPcJWdARXrxhTLDszzHJjvv85e1BEMJQZB0NKECQDyFGmznGbCAOAJqpsIkwrXRj5cxVogmiaeZyrQZQE1jendkrvOEgYMFU8wKZtAI8pJBTcwzlTFYYc7BxjzTZYsEsgDyvo9fxy2CdPPC~IwEVDjHTtRh99ZAKO0cgp~wjZW99nyzafGD3IpWeMF2yCUnYosvayZ~se9e2oDrPrZak~cRd9azF9Md9gZUl3AoqnTR4llU99CcAlednIMjheApzeNS2q~b7M3vihTMv9zZyV6naW-eL4C-~lSUMEbIJMV1oJAZgBbnsI4BzVxPzTlnVaz4BpLg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4);
+  background-size: contain;
+}
+
+.mastodon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: url(https://s3-alpha-sig.figma.com/img/0e79/4522/74a284de43039d1b6fa63dd0439dc527?Expires=1695600000&Signature=mzKCm1P~aiND4zJTu1-ssUplkl8Z3m0gi8Dq0p5Th24fePXY-ExzQz9G-aVL8-8aznFPqsETxMXx2mY1tHaA3Pg6KU2g-AxjJeeQ1RlD~rROuzVOPik61aDgOWrwY1J~vNeJCfDcrRNzEGg7FWnMmm-FqBhGj5~VjsFfPstMFEUoQpetFb7TIjgP73vkkurqxZOIeMPkxXH-7RPW9tpQq88Eeg20GsUGEeIL06bzlvy9Ms4zdZDnnWDvOdH3HFHfWP1PRk2JAhepmgyJZKs87KYQYje1gh~Ha555nnlWVP5Pf2nQ5okzcKwEs4E67Im6VdS9KD4EpALPZrPwjb-RbA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4);
+  background-size: contain;
+}
