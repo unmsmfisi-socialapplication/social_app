@@ -9,6 +9,7 @@ interface WInputProps {
   size?: 'small' | 'medium';
   variant?: 'standard' | 'filled' | 'outlined';
   fullWidth?: boolean;
+  type?: string;
 }
 
 const WInput: React.FC<WInputProps> = ({
@@ -18,6 +19,7 @@ const WInput: React.FC<WInputProps> = ({
   size = 'medium',
   variant = 'filled',
   fullWidth = false,
+  type = 'text',
 }) => {
   return (
     <TextField
@@ -26,10 +28,11 @@ const WInput: React.FC<WInputProps> = ({
       size={size}
       color={typeColor}
       placeholder={placeholder}
+      type={type}
       InputProps={{
-        endAdornment:  icon && (
+        endAdornment: icon && (
           <InputAdornment position="end">{icon}</InputAdornment>
-        ) ,
+        ),
       }}
     />
   );
