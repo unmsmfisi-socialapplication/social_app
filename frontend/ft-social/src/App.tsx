@@ -9,7 +9,7 @@ function App() {
     <>
       {/* TODO: Page routing */}
       <LoginPageContainer />
-      {/* Crear un dasboard */}
+      {/* Crear un dashboard */}
       {/* Usa Suspense para envolver el componente perezoso */}
       <Suspense fallback={<div>Cargando...</div>}>
         <ChatModule />
