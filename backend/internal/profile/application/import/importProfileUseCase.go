@@ -1,6 +1,8 @@
-package application
+package application_import
 
-import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
+import (
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
+)
 
 type profileRequest interface {}
 

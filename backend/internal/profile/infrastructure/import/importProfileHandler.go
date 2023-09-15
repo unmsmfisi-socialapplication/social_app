@@ -1,18 +1,18 @@
-package infrastructure
+package infrastructure_import
 
 import (
 	"encoding/json"
 	"log"
 	"net/http"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/application"
+	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/import"
 )
 
 type ImportProfileHandler struct {
-    importProfileUseCase *application.ImportProfileUseCase
+    importProfileUseCase *application_import.ImportProfileUseCase
 }
 
-func NewImportProfileHandler(profileRepository *application.ImportProfileUseCase) *ImportProfileHandler {
+func NewImportProfileHandler(profileRepository *application_import.ImportProfileUseCase) *ImportProfileHandler {
     return &ImportProfileHandler{profileRepository}
 }
 

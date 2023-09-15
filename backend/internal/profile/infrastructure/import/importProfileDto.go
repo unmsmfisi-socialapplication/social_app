@@ -1,4 +1,4 @@
-package infrastructure
+package infrastructure_import
 
 import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
 

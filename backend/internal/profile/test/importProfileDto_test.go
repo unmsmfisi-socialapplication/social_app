@@ -4,16 +4,16 @@ import (
 	"testing"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure"
+	infrastructure_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/import"
 )
 
-var importProfileRequest infrastructure.ImportProfileRequest
-var importProfileResponse infrastructure.ImportProfileResponse
+var importProfileRequest infrastructure_import.ImportProfileRequest
+var importProfileResponse infrastructure_import.ImportProfileResponse
 
 func ToProfileTest(t *testing.T) {
     t.Log("ToProfileTest")
 
-    importProfileRequest = infrastructure.ImportProfileRequest{
+    importProfileRequest = infrastructure_import.ImportProfileRequest{
         Username:       "test",
         ProfilePicture: "test",
         Biography:      "test",
