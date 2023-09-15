@@ -32,7 +32,7 @@ jobs:
 
       - name: Check Requirements file existence
         id: check_files
-        uses: thebinaryfelix/check-file-existence-action@1.0.0
+        uses: andstor/file-existence-action@v2
         with:
           files: 'requirements.txt'  # Check if 'requirements.txt' exists
 
