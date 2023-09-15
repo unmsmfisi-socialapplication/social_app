@@ -13,7 +13,7 @@ import (
 
 func ConnectDB() (*sql.DB, error) {
 
-	if err := configs.LoadEnv("configs/.env"); err != nil {
+	if err := configs.LoadEnv("configs/.env.example"); err != nil {
 		log.Fatal(err)
 	}
 
