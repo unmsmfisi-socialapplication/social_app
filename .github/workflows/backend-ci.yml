@@ -1,0 +1,45 @@
+# Define the name of the GitHub Action workflow
+name: CI Backend
+
+# Trigger the workflow on pull requests to the 'develop' branch
+on:
+  pull_request:
+    branches:
+      - develop
+    # Only trigger when changes are made within the 'backend/' directory
+    paths:
+      - 'backend/**'
+
+# Define default settings for jobs
+defaults:
+  run:
+    working-directory: ./backend
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest # Run on the latest version of Ubuntu
+
+    # Define the steps to be executed within the job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 # Check out the repository code
+
+      - name: Set Up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.21.1 # GO lastest version
+
+      - name: Install Dependencies
+        run: go mod download
+
+      - name: Build Backend
+        run: go build -o build/backend-main cmd/server.go
+
+      - name: Install golint
+        run: go install golang.org/x/lint/golint@latest
+
+      - name: Run golint # Linter
+        run: golint ./...
+
+      - name: Run Unit Tests # Unit Test
+        run: go test ./...
