@@ -23,11 +23,9 @@ export default function TestPage() {
           backgroundColor: "red",
         }}
       >
-        <WButton>DD</WButton>
-        <WButton typeColor="secondary">DD</WButton>
-        <WButton typeColor="secondary" size="large">
-          DD
-        </WButton>
+        <WButton typeColor="primary" text="DD"/>
+        <WButton typeColor="secondary" text="button" size="large" />
+        <WButton text="test" size="large" />
       </div>
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
@@ -43,7 +41,7 @@ export default function TestPage() {
 
       <WInput
         typeColor="secondary"
-        icon={<AccountCircleIcon />} // Icono de usuario
+        icon={<AccountCircleIcon />} 
         placeholder="Correo electrónico"
         size="medium"
         variant="filled"
