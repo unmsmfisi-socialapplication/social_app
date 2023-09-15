@@ -35,6 +35,7 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	})
 
 	r.Post("/ws/createRoom", wsHandler.CreateRoom)
+	r.Get("/ws/joinRoom/{roomId}", wsHandler.JoinRoom)
 
 	return r
 }

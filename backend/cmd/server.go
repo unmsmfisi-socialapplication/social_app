@@ -19,6 +19,8 @@ func main() {
 	hub := domain.NewHub()
 	wsHandler := infraestructure.NewHandler(hub)
 
+	go hub.RunChatManager()
+
 	// The HTTP Server
 	server := &http.Server{Addr: "0.0.0.0:3333", Handler: internal.Router(wsHandler)}
 
