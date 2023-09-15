@@ -5,9 +5,9 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- Permiso de galeria -->
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -21,7 +21,7 @@
         android:theme="@style/Theme.Social"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".UploadPhotoUser"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".UploadPhotoUser">
 
 
     <TextView
@@ -29,14 +29,14 @@
         android:layout_width="185dp"
         android:layout_height="185dp"
         app:cardCornerRadius="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSubirFoto"
+        app:layout_constraintBottom_toTopOf="@+id/btnUploadPhoto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/userFoto"
+            android:id="@+id/userPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -48,7 +48,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btnSubirFoto"
+        android:id="@+id/btnUploadPhoto"
         android:layout_width="345dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"
@@ -84,13 +84,14 @@
         app:layout_constraintVertical_bias="0.901" />
 
     <TextView
-        android:id="@+id/txtOmitirPaso"
+        android:id="@+id/txtSkip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
         android:text="Deseo omitir este paso por ahora >"
         android:textColor="@color/textColor2"
         android:textFontWeight="400"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.916"

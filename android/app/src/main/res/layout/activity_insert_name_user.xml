@@ -6,19 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".InsertNameUser">
 
-    <ImageButton
-        android:id="@+id/ibtnAtras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+    <Button
+        android:id="@+id/btnBack_uploadP"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@color/textColor1"
+        android:drawableStart="@drawable/baseline_arrow_back_ios_new_24"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/arrow" />
+        app:layout_constraintVertical_bias="0.43" />
 
     <TextView
         android:id="@+id/textView3"
@@ -28,14 +27,13 @@
         android:text="Ahora, ingresa tu nombre de perfil."
         android:textAlignment="center"
         android:textColor="@color/textColor0"
-        android:textFontWeight="400"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
+        app:layout_constraintVertical_bias="0.14" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -49,7 +47,7 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/userFoto_name"
+            android:id="@+id/userPhoto_select"
             android:layout_width="186dp"
             android:layout_height="wrap_content"
             android:background="@color/backgroundColor"
@@ -84,10 +82,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.466" />
 
     <Button
-        android:id="@+id/btnAceptar"
+        android:id="@+id/btnAccept_name"
         android:layout_width="345dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"
