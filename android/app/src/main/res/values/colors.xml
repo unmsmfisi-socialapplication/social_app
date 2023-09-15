@@ -5,4 +5,5 @@
     <color name="textColor1">#FFFFFFFF</color>
     <color name="textColor2">#FF5FA8D3</color>
     <color name="buttonColor">#FF1B4965</color>
+    <color name="inputColor">#FFF7F7F8</color>
 </resources>
