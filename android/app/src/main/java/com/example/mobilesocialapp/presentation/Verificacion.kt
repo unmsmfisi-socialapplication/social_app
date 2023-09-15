@@ -52,32 +52,33 @@ fun BodyValidate() {
             , horizontalAlignment = Alignment.CenterHorizontally
         ) {
             EspaciadorHorizontal(tamaño = 30.0)
-            Column(modifier = Modifier.padding(horizontal = 20.dp)) {
-                Label("Verficiacion de cuenta", TextAlign.Center, 24)
+            Column(modifier = Modifier.padding(horizontal = 80.dp)) {
+                Label("Verficiación de cuenta", TextAlign.Center, 24)
             }
             Column {
                 Column(modifier = Modifier.fillMaxSize()) {
-                    Column(modifier = Modifier.padding(top = 20.dp, start = 20.dp, end = 20.dp)) {
-                        Label("Ingrese los siguientes datos", TextAlign.Left, 14)
-                    }
                     Column(modifier = Modifier
                         .padding(top = 20.dp, start = 20.dp, end = 20.dp)
+                        .fillMaxSize()
                         ) {
                         Image(
                             painter = painterResource(id = R.drawable.imgemail),
-                            contentDescription = "Logo pepsico",
+                            contentDescription = "Correo",
                             modifier = Modifier
-                                .size(238.dp, 180.86.dp),
+                                .fillMaxSize()
+                                .size(200.dp),
                             alignment = Alignment.Center
                         )
                     }
-                    Column(modifier = Modifier.padding(top = 20.dp, start = 20.dp, end = 20.dp),
+                    Column(modifier = Modifier.padding(top = 50.dp, start = 60.dp, end = 60.dp),
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                        Label("¡Listo, se ha enviado un enlace de verificación a su correo electrónico!", TextAlign.Left, 14)
+                        Label("¡Listo! Se ha enviado un enlace de verificación a su correo electrónico"
+                            , TextAlign.Center, 20)
                     }
-                    Column(modifier = Modifier.padding(top = 20.dp, start = 20.dp, end = 20.dp),
+                    Column(modifier = Modifier.padding(top = 40.dp, start = 30.dp, end = 30.dp),
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                        Label("Puede minimizar la pantalla para realizar la verificación", TextAlign.Left, 14)
+                        Label("Puede minimizar la pantalla para realizar la verificación",
+                            TextAlign.Center, 14)
                     }
                     Column(modifier = Modifier.padding(top = 40.dp, end = 20.dp, start = 20.dp)) {
                         Button(

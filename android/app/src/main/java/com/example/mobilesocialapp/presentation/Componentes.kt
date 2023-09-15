@@ -16,10 +16,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mobilesocialapp.R
 
 
 @Composable
@@ -42,13 +46,14 @@ fun EspaciadorVertical(tamaño: Double) {
 }
 @Composable
 fun Label(texto: String, alineacion: TextAlign?, tamaño: Int) {
-    /*val firaSansFamily = FontFamily(
-        Font(R.font.regular, FontWeight.Normal)
-    )*/
+    val poppins = FontFamily(
+        Font(R.font.poppinsregular, FontWeight.Normal)
+    )
+
     Text(
         text = texto,
         modifier = Modifier.fillMaxWidth(),
-        //fontFamily = firaSansFamily,
+        fontFamily = poppins,
         textAlign = alineacion,
         fontSize = tamaño.sp
     )
