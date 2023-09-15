@@ -1,8 +1,8 @@
 package domain
 
 type Profile struct {
-    Id_profile     int
-	Username       string
-	ProfilePicture string
-	Biography      string
+	Id_profile   string
+	Username     string
+	ProfileImage string
+	Biography    string
 }
