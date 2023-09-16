@@ -57,16 +57,12 @@ dependencies {
 
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.1")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     val roomVersion = "2.5.2"
     val composeUiVersion = "1.5.0"
 
+    //Fragment
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -75,7 +71,7 @@ dependencies {
 
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.48")
-    debugImplementation("androidx.compose.ui:ui-tooling:$composeUiVersion")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.1")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeUiVersion")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
