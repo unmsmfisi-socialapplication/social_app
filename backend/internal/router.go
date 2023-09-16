@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure"
+	infrastructure_routes "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/routes"
 )
 
 func Router() http.Handler {
@@ -33,7 +33,7 @@ func Router() http.Handler {
 		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
 	})
     
-    r.Route("/profile", infrastructure.ProfileHandler)
+    r.Route("/profile", infrastructure_routes.ProfileHandler)
 
 	return r
 }
