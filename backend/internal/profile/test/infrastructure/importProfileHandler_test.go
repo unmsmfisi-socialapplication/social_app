@@ -8,12 +8,11 @@ import (
 	"testing"
 
 	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/import"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure"
 	infrastructure_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/import"
 )
 
 func TestImportProfileHandler_ImportProfile(t *testing.T) {
-	profileRepositoryTest := infrastructure.NewProfileRepositoryTest()
+	profileRepositoryTest := NewProfileRepositoryTest()
     importProfileUseCase := application_import.NewImportProfileUseCase(profileRepositoryTest)
     handler := infrastructure_import.NewImportProfileHandler(importProfileUseCase)
 
