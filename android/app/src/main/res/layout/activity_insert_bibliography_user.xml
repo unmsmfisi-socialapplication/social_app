@@ -6,4 +6,114 @@
     android:layout_height="match_parent"
     tools:context=".InsertBibliographyUser">
 
+    <Button
+        android:id="@+id/btnBack_name"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@color/textColor1"
+        android:drawableStart="@drawable/baseline_arrow_back_ios_new_24"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Finalmente, ingresa una bibliografía."
+        android:textAlignment="center"
+        android:textColor="@color/textColor0"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.143" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="185dp"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputbibliography"
+        app:layout_constraintEnd_toStartOf="@+id/txtNameUser"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/userPhoto_Final"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroundColor"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:srcCompat="@drawable/user_photo" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtNameUser"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/textColor0"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtUserName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.592" />
+
+    <TextView
+        android:id="@+id/txtUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bibliografía"
+        app:layout_constraintBottom_toTopOf="@+id/inputbibliography"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/inputbibliography"
+        android:layout_width="345dp"
+        android:layout_height="50dp"
+        android:background="@color/inputColor"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.676" />
+
+    <Button
+        android:id="@+id/btnAccept_bibliography"
+        android:layout_width="345dp"
+        android:layout_height="wrap_content"
+        android:background="@color/buttonColor"
+        android:fontFamily="@font/poppins"
+        android:text="Hecho"
+        android:textAllCaps="false"
+        android:textColor="@color/textColor1"
+        android:textFontWeight="400"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputbibliography" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
