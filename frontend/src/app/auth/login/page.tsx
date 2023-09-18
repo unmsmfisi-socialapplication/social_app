@@ -11,15 +11,15 @@ export default function LoginPage() {
       <Button variant="contained">Hello World</Button>
       <WInput
         typeColor="primary"
-        icon={<AccountCircleIcon />} // Icono de usuario
+        icon={<AccountCircleIcon />}
         placeholder="Nombre de usuario"
         fullWidth
       />
 
       <WInput
         typeColor="primary"
-        icon={<AccountCircleIcon />} 
-        placeholder="Correo electrónico"
+        type="password"
+        placeholder="Contraseña"
         fullWidth
       />
     </EnrollmentHoc>

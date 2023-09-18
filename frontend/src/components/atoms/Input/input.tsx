@@ -9,7 +9,7 @@ interface WInputProps {
   size?: 'small' | 'medium';
   variant?: 'standard' | 'filled' | 'outlined';
   fullWidth?: boolean;
-  type?: string;
+  type?: 'text' | 'password';
 }
 
 const WInput: React.FC<WInputProps> = ({
