@@ -82,6 +82,6 @@ export default function TestPage() {
       <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
     </Layout>
   );
-
 }
+
 
