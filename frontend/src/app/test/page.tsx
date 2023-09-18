@@ -40,13 +40,14 @@ export default function TestPage() {
         placeholder="Nombre de usuario"
         fullWidth
       />
+
       <WInput
         typeColor="secondary"
         icon={<AccountCircleIcon />} 
         placeholder="Correo electrónico"
         fullWidth
       />
-    </div>
+    </div> 
 
     <div
       //Estilos a usar para la caja 
@@ -81,5 +82,6 @@ export default function TestPage() {
       <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
     </Layout>
   );
+
 }
 
