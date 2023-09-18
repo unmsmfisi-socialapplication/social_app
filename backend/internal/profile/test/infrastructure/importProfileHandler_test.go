@@ -9,11 +9,12 @@ import (
 
 	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/import"
 	infrastructure_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/import"
+	infrastructure_repository "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/repository"
 )
 
 func TestImportProfileHandler_ImportProfile(t *testing.T) {
-	profileRepositoryTest := NewProfileRepositoryTest()
-    importProfileUseCase := application_import.NewImportProfileUseCase(profileRepositoryTest)
+    profileRepository := infrastructure_repository.NewProfileRepository()
+    importProfileUseCase := application_import.NewImportProfileUseCase(profileRepository)
     handler := infrastructure_import.NewImportProfileHandler(importProfileUseCase)
 
 	requestBody := []byte(`{

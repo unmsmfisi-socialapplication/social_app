@@ -7,18 +7,12 @@ import (
 	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/import"
 	infrastructure_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/import"
 	infrastructure_repository "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/repository"
-	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 )
 
 func ProfileHandler(r chi.Router) {
-	err := database.InitDatabase()
-	if err != nil {
-		panic(err)
-	}
+    // TODO: Add database
 
-	db := database.GetDB()
-	importProfileRepository := infrastructure_repository.NewProfileRepository(db)
-
+	importProfileRepository := infrastructure_repository.NewProfileRepository()
 	importProfileUseCase := application_import.NewImportProfileUseCase(importProfileRepository)
 	importProfileHandler := infrastructure_import.NewImportProfileHandler(importProfileUseCase)
 
