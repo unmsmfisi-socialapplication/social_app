@@ -9,7 +9,7 @@ import CheckIcon from "@mui/icons-material/Check"
 import AllInclusive from "@mui/icons-material/AllInclusive"
 
 export default function TestPage() {
-   const [count, setCount] = useState(0);
+    const [count, setCount] = useState(0);
 
   const handleCount = () => {
     setCount(count + 1);
@@ -39,7 +39,6 @@ export default function TestPage() {
         placeholder="Nombre de usuario"
         fullWidth
       />
-
       <WInput
         typeColor="secondary"
         icon={<AccountCircleIcon />} 
@@ -47,7 +46,6 @@ export default function TestPage() {
         fullWidth
       />
     </div>
-
     <div
       //Estilos a usar para la caja 
         style={{
