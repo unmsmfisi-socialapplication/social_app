@@ -33,6 +33,7 @@ export default function TestPage() {
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
       <div>
+
       <WInput
         typeColor="primary"
         icon={<AccountCircleIcon />} // Icono de usuario
@@ -46,6 +47,7 @@ export default function TestPage() {
         fullWidth
       />
     </div>
+
     <div
       //Estilos a usar para la caja 
         style={{
@@ -80,3 +82,4 @@ export default function TestPage() {
     </Layout>
   );
 }
+
