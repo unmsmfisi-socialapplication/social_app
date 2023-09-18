@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -24,6 +25,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "sass": "^1.66.1"
   }
 }
