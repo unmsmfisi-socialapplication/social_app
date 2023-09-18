@@ -48,7 +48,7 @@ export default function TestPage() {
         fullWidth
       />
     </div> 
-
+         
     <div
       //Estilos a usar para la caja 
         style={{
@@ -82,6 +82,5 @@ export default function TestPage() {
       <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
     </Layout>
   );
-
 }
 
