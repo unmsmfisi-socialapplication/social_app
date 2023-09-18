@@ -5,7 +5,7 @@ export default function RootEnrollment({
   children: React.ReactNode;
 }) {
   const divStyle = {
-    padding: "60px 70px",
+    padding: "90px 100px 120px 10px",
     gap: "25px",
     background: `url('/images/enrollment.png')`,
     backgroundSize: "cover",

@@ -7,4 +7,5 @@ export { default as WInput } from './atoms/Input/input';
 
 
 // export organism components
+export { default as WCardAuth } from './organisms/CardAuth';
 
