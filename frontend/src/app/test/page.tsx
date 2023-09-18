@@ -34,8 +34,6 @@ export default function TestPage() {
         typeColor="primary"
         icon={<AccountCircleIcon />} // Icono de usuario
         placeholder="Nombre de usuario"
-        size="small"
-        variant="filled"
         fullWidth
       />
 
@@ -43,8 +41,6 @@ export default function TestPage() {
         typeColor="secondary"
         icon={<AccountCircleIcon />} 
         placeholder="Correo electrónico"
-        size="medium"
-        variant="filled"
         fullWidth
       />
     </div>
@@ -54,7 +50,6 @@ export default function TestPage() {
         style={{
           width: "500px",
           height: "150px",
-          backgroundColor: "red", /*Referencia de la ubicación de los objetos de la caja*/
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -67,7 +62,6 @@ export default function TestPage() {
           icon={<AccountCircleIcon />}
           placeholder="Correo electrónico"
           size="small"
-          variant="filled"
           fullWidth
           type="text"
         />
@@ -76,7 +70,6 @@ export default function TestPage() {
           icon={undefined}
           placeholder="Contraseña"
           size="small"
-          variant="filled"
           fullWidth
           type="password" 
         />
