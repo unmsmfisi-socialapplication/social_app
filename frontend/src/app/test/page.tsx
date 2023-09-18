@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react"
 import Layout from "../layout"
-import { Button } from "@mui/material";
+import { Button } from "@mui/material"
 import { WButton, WInput } from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { WCircleIcon } from "@/components"
