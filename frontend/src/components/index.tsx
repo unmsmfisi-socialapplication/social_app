@@ -9,4 +9,5 @@ export { default as WCircleIcon } from "./atoms/CircleIcon/circleIcon";
 
 
 // export organism components
+export { default as WCardAuth } from './organisms/CardAuth';
 
