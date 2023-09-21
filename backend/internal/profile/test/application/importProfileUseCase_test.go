@@ -18,12 +18,17 @@ func TestImportProfileUseCase(t *testing.T) {
 		Biography:    "test",
 	}
 
-	var profile *domain.Profile
+    profile := &domain.Profile{
+        Id_profile:   p.Id_profile,
+        Username:     p.Username,
+        ProfileImage: p.ProfileImage,
+        Biography:    p.Biography,
+    }
 
 	profileRepository := infrastructure_repository.NewProfileRepository()
 	importProfileUseCase := application_import.NewImportProfileUseCase(profileRepository)
 
-	profile, err := importProfileUseCase.ImportProfile(p)
+	err := importProfileUseCase.ImportProfile(p)
 
 	if err != nil {
 		t.Errorf("Error: %v", err)

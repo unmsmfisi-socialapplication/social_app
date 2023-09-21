@@ -12,10 +12,10 @@ func NewImportProfileUseCase(profileRepository domain.ProfileRepositoryI) *Impor
     return &ImportProfileUseCase{profileRepository}
 }
 
-func (ipuc *ImportProfileUseCase) ImportProfile(p *domain.Profile) (*domain.Profile, error) {
-    profile, err := ipuc.profileRepository.UpdateProfile(p)
+func (ipuc *ImportProfileUseCase) ImportProfile(p *domain.Profile) (error) {
+    err := ipuc.profileRepository.UpdateProfile(p)
     if err != nil {
-        return nil, err
+        return err
     }
-    return profile, nil
+    return nil
 }

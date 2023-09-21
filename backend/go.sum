@@ -1,2 +1,13 @@
+git.sr.ht/~mariusor/go-xsd-duration v0.0.0-20220703122237-02e73435a078 h1:cliQ4HHsCo6xi2oWZYKWW4bly/Ory9FuTpFPRxj/mAg=
+git.sr.ht/~mariusor/go-xsd-duration v0.0.0-20220703122237-02e73435a078/go.mod h1:g/V2Hjas6Z1UHUp4yIx6bATpNzJ7DYtD0FG3+xARWxs=
+github.com/go-ap/activitypub v0.0.0-20230807182453-602f717f6ca3 h1:Lxp2XxNZ+2bqlpJbKeQme5kMf9NqPJQB1l2eZLJ7W/A=
+github.com/go-ap/activitypub v0.0.0-20230807182453-602f717f6ca3/go.mod h1:qw0WNf+PTG69Xu6mVqUluDuKl1VwVYdgntOZQFBZQ48=
+github.com/go-ap/errors v0.0.0-20221205040414-01c1adfc98ea h1:ywGtLGVjJjMrq4mu35Qmu+NtlhlTk/gTayE6Bb4tQZk=
+github.com/go-ap/errors v0.0.0-20221205040414-01c1adfc98ea/go.mod h1:SaTNjEEkp0q+w3pUS1ccyEL/lUrHteORlDq/e21mCc8=
+github.com/go-ap/jsonld v0.0.0-20221030091449-f2a191312c73 h1:GMKIYXyXPGIp+hYiWOhfqK4A023HdgisDT4YGgf99mw=
+github.com/go-ap/jsonld v0.0.0-20221030091449-f2a191312c73/go.mod h1:jyveZeGw5LaADntW+UEsMjl3IlIwk+DxlYNsbofQkGA=
 github.com/go-chi/chi v1.5.4 h1:QHdzF2szwjqVV4wmByUnTcsbIg7UGaQ0tPF2t5GcAIs=
 github.com/go-chi/chi v1.5.4/go.mod h1:uaf8YgoFazUOkPBG7fxPftUylNumIev9awIWOENIuEg=
+github.com/valyala/fastjson v1.6.3/go.mod h1:CLCAqky6SMuOcxStkYQvblddUtoRxhYMGLrsQns1aXY=
+github.com/valyala/fastjson v1.6.4 h1:uAUNq9Z6ymTgGhcm0UynUAB6tlbakBrz6CQFax3BXVQ=
+github.com/valyala/fastjson v1.6.4/go.mod h1:CLCAqky6SMuOcxStkYQvblddUtoRxhYMGLrsQns1aXY=

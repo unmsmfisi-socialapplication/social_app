@@ -11,6 +11,6 @@ func NewProfileRepository() *ProfileRepository {
 	return &ProfileRepository{}
 }
 
-func (pr *ProfileRepository) UpdateProfile(profile *domain.Profile) (*domain.Profile, error) {
-	return profile, nil
+func (pr *ProfileRepository) UpdateProfile(profile *domain.Profile) (error) {
+	return nil
 }

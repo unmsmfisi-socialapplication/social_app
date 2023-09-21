@@ -6,3 +6,12 @@ type Profile struct {
 	ProfileImage string
 	Biography    string
 }
+
+func NewProfile(id_profile string, username string, profileImage string, biography string) *Profile {
+    return &Profile{
+        Id_profile:   id_profile,
+        Username:     username,
+        ProfileImage: profileImage,
+        Biography:    biography,
+    }
+}

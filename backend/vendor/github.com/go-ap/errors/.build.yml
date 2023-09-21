@@ -1,0 +1,16 @@
+image: archlinux
+packages:
+  - go
+sources:
+  - https://github.com/go-ap/errors
+environment:
+  GO111MODULE: 'on'
+tasks:
+  - tests: |
+      cd errors
+      make test
+  - coverage: |
+      set -a +x
+      cd errors && make coverage
+      GIT_SHA=$(git rev-parse --verify HEAD)
+      GIT_BRANCH=$(git name-rev --name-only HEAD)

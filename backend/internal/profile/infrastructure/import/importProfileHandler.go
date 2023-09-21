@@ -1,55 +1,45 @@
 package infrastructure_import
 
 import (
-	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 
+	"github.com/go-ap/activitypub"
 	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/import"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/import/dto"
 )
 
 type ImportProfileHandler struct {
-    importProfileUseCase *application_import.ImportProfileUseCase
+	importProfileUseCase *application_import.ImportProfileUseCase
 }
 
-func NewImportProfileHandler(profileRepository *application_import.ImportProfileUseCase) *ImportProfileHandler {
-    return &ImportProfileHandler{profileRepository}
+func NewImportProfileHandler(ipUseCase *application_import.ImportProfileUseCase) *ImportProfileHandler {
+	return &ImportProfileHandler{ipUseCase}
 }
 
 func (iph *ImportProfileHandler) ImportProfile(w http.ResponseWriter, r *http.Request) {
-    var requestData ImportProfileRequest
-    var responseData ImportProfileResponse
-
-    type responseError struct {
-        Error string `json:"error"`
-    }
-
-    err := json.NewDecoder(r.Body).Decode(&requestData)
+    request, err := dto.NewImportProfileRequest(&r.Body)
     if err != nil {
         w.WriteHeader(http.StatusBadRequest)
-        json.NewEncoder(w).Encode(responseData.Error(err.Error()))
-        log.Println(err)
-        return
+        w.Write([]byte(fmt.Sprintf(`{"error": "%s"}`, err.Error())))
     }
 
-    err = requestData.Validate()
-    if err != nil {
-        w.WriteHeader(http.StatusBadRequest)
-        json.NewEncoder(w).Encode(responseData.Error(err.Error()))
-        log.Println(err)
-        return
-    }
+    profile := request.ToProfile()
 
-    p, err := iph.importProfileUseCase.ImportProfile(requestData.ToProfile())
+    err = iph.importProfileUseCase.ImportProfile(profile)
     if err != nil {
         w.WriteHeader(http.StatusInternalServerError)
-        json.NewEncoder(w).Encode(responseData.Error(err.Error()))
-        log.Println(err)
-        return
+        w.Write([]byte(fmt.Sprintf(`{"error": "%s"}`, err.Error())))
     }
 
-    responseData.FromProfile(p)
+    response := dto.NewImportProfileResponse(request.Person)
+
+    resp, err := activitypub.MarshalJSON(response.Data)
+    if err != nil {
+        w.WriteHeader(http.StatusInternalServerError)
+        w.Write([]byte(fmt.Sprintf(`{"error": "%s"}`, err.Error())))
+    }
 
     w.WriteHeader(http.StatusCreated)
-    json.NewEncoder(w).Encode(responseData)
+    w.Write([]byte(fmt.Sprintf(`{"response": "%s", "data": %s}`, response.Response, string(resp))))
 }
