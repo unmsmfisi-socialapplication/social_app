@@ -10,6 +10,8 @@ interface WInputProps {
   variant?: 'standard' | 'filled' | 'outlined';
   fullWidth?: boolean;
   type?: 'text' | 'password';
+  error?: boolean; // Propiedad para controlar el error
+  errorMessage?: string; // Nuevo: Mensaje de error
 }
 
 const WInput: React.FC<WInputProps> = ({
@@ -20,6 +22,8 @@ const WInput: React.FC<WInputProps> = ({
   variant = 'outlined',
   fullWidth = false,
   type = 'text',
+  error = false, // Valor por defecto: no hay error
+  errorMessage = '',
 }) => {
   return (
     <TextField
@@ -29,11 +33,14 @@ const WInput: React.FC<WInputProps> = ({
       color={typeColor}
       placeholder={placeholder}
       type={type}
+      error={error} // Pasar la propiedad de error a TextField
       InputProps={{
         endAdornment: icon && (
           <InputAdornment position="end">{icon}</InputAdornment>
         ),
       }}
+      label={error ? errorMessage : ''} // Mostrar mensaje de error si hay error
+      helperText={error ? '' : errorMessage} // Mostrar mensaje de error si hay error
     />
   );
 };
