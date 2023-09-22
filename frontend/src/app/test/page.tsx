@@ -34,7 +34,7 @@ export default function TestPage() {
       <button onClick={handleCount}>presioname</button>
       <div>
 
-      <WInput placeholder="Nombre" error={true}/>
+      <WInput placeholder="Nombre" error={true} errorMessage="error"/>
       
       <WInput
         typeColor="primary"

@@ -39,6 +39,7 @@ const WInput: React.FC<WInputProps> = ({
           <InputAdornment position="end">{icon}</InputAdornment>
         ),
       }}
+      helperText={error ? '' : errorMessage}
     />
   );
 };
