@@ -1,4 +1,3 @@
-import WVerificationCode from './molecules/VerificationCode/verificationCode';
 // export atom components
 export { default as WButton } from './atoms/Button/button';
 export { default as WInput } from './atoms/Input/input';
