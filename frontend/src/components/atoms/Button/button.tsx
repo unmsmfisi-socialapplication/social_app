@@ -13,7 +13,7 @@ const WButton: React.FC<WButtonProps> = ({ typeColor, text, size }) => {
   return (
     <Button
       style={{ minWidth: size === "large" ? "100%" : "auto" }}
-      className={`button button--${typeColor}`}
+      className={`button typeButton--${typeColor}`}
       size={size}
     >
       {text}
