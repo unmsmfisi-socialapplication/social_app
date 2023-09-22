@@ -1,0 +1,8 @@
+.link.linkClass{
+    &--primary{
+        display: flex;
+    }
+    &--secondary{
+        display: inline;
+    }
+}

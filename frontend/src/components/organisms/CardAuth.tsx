@@ -18,7 +18,7 @@ const cardStyle: React.CSSProperties = {
 export default function CardAuth({ title, children, variant }: WCardProps) {
   return (
     <Card style={cardStyle} variant={variant}>
-      <span style={{ fontSize: "90px" }}>{title}</span>
+      <span style={{ fontSize: "60px" }}>{title}</span>
       <Box>{children}</Box>
     </Card>
   );
