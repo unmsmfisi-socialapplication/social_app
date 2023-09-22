@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 
 import RootEnrollment from "../Enrollment";
+import { WButton } from "@/components";
 
 export default function EnrollmentHoc({
   children,
@@ -36,6 +37,7 @@ export default function EnrollmentHoc({
           <Grid item xs={4}>
             <Box>{children}</Box>
           </Grid>
+          <WButton typeColor="primary" text="Login" size="large" />
         </Grid>
       )}
     </RootEnrollment>

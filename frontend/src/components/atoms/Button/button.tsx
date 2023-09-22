@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import "./index.scss";
 
 interface WButtonProps {
-  typeColor?: "primary" | "secondary";
+  typeColor?: "primary" | "secondary" | "disabled";
   text?: string;
   size?: "large";
 }
