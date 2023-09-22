@@ -4,7 +4,7 @@ export { default as WInput } from './atoms/Input/input';
 export { default as WCircleIcon } from "./atoms/CircleIcon/circleIcon";
 
 // export molecule components
-
+export { default as WVerificationCode } from './molecules/VerificationCode/verificationCode';
 
 
 
