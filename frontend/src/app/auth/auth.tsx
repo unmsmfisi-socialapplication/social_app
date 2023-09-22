@@ -37,7 +37,6 @@ export default function EnrollmentHoc({
           <Grid item xs={4}>
             <Box>{children}</Box>
           </Grid>
-          <WButton typeColor="primary" text="Login" size="large" />
         </Grid>
       )}
     </RootEnrollment>
