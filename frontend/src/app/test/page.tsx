@@ -33,6 +33,9 @@ export default function TestPage() {
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
       <div>
+
+      <WInput placeholder="Nombre" error={true} errorMessage="error"/>
+      
       <WInput
         typeColor="primary"
         icon={<AccountCircleIcon />} // Icono de usuario
