@@ -2,8 +2,11 @@
 import { useState } from "react"
 import Layout from "../layout"
 import { Button } from "@mui/material";
-import { WButton, WInput } from "@/components";
+import { WButton, WInput, WCircleIcon  } from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CheckIcon from "@mui/icons-material/Check"
+import AllInclusive from "@mui/icons-material/AllInclusive"
+
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
@@ -23,11 +26,9 @@ export default function TestPage() {
           backgroundColor: "red",
         }}
       >
-        <WButton>DD</WButton>
-        <WButton typeColor="secondary">DD</WButton>
-        <WButton typeColor="secondary" size="large">
-          DD
-        </WButton>
+        <WButton typeColor="primary" text="DD"/>
+        <WButton typeColor="secondary" text="button" size="large" />
+        <WButton text="test" size="large" />
       </div>
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
@@ -36,20 +37,50 @@ export default function TestPage() {
         typeColor="primary"
         icon={<AccountCircleIcon />} // Icono de usuario
         placeholder="Nombre de usuario"
-        size="small"
-        variant="filled"
         fullWidth
       />
 
       <WInput
         typeColor="secondary"
-        icon={<AccountCircleIcon />} // Icono de usuario
+        icon={<AccountCircleIcon />} 
         placeholder="Correo electrónico"
-        size="medium"
-        variant="filled"
         fullWidth
       />
+      </div> 
+
+    <div
+      //Estilos a usar para la caja 
+        style={{
+          width: "500px",
+          height: "150px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "15px auto",
+          gap: "15px",
+        }}>
+        <WInput
+          typeColor="primary"
+          icon={<AccountCircleIcon />}
+          placeholder="Correo electrónico"
+          size="small"
+          fullWidth
+          type="text"
+        />
+        <WInput
+          typeColor="primary"
+          icon={undefined}
+          placeholder="Contraseña"
+          size="small"
+          fullWidth
+          type="password" 
+        />
     </div>
+      <WCircleIcon iconSize={30} icon={CheckIcon} />
+      <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
     </Layout>
   );
 }
+
+
