@@ -11,6 +11,7 @@ export default function LoginPage() {
   return (
     <EnrollmentHoc>
         <CardAuth title="Bienvenido de nuevo" size="large">
+            <br />
             <span>Correo</span>
             <WInput typeColor="primary" placeholder="Ingrese su correo" fullWidth size="small"/>
             <br />
@@ -18,11 +19,11 @@ export default function LoginPage() {
             <span>Contraseña</span>
             <WInput type="password" typeColor="primary" placeholder="Ingrese su contraseña" fullWidth size="small" />
             <BasicsLink text="Has olvidado tu contraseña?" underline="none" />
-            <br />
-            <span  >¿No tienes una cuenta?</span>
+            <br /> <br />
+            <div >
+            <span >¿No tienes una cuenta? </span>
             <BasicsLink  text="Registrarse" underline="none" displayType="inline-flex" />
-            <br />
-            <br />
+            </div>
             <WButton text="Iniciar Sesión" size="large" />
         </CardAuth>
     </EnrollmentHoc>
