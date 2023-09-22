@@ -1,0 +1,14 @@
+@import "../../../../resources/styles/variables.scss";
+
+.circleIcon {
+  padding: 12px;
+  border-radius: 100%;
+  &--primary {
+    background-color: $primary-color;
+    color: white;
+  }
+  &--secondary {
+    background-color: $secondary-color;
+    color: black;
+  }
+}
