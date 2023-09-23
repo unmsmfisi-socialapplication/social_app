@@ -9,12 +9,7 @@ import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined
 export default function RegisterPage() {
   return (
     <EnrollmentHoc>
-      <CardAuth
-        typeColor="secondary"
-        title="SIGN-UP"
-        size="large"
-        variant="outlined"
-      >
+      <CardAuth title="SIGN-UP" variant="outlined">
         <div style={{ margin: "15px 0" }}>
           <span>Your Full Name</span>
           <WInput
