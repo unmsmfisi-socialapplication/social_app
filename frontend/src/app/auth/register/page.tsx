@@ -2,8 +2,7 @@
 import EnrollmentHoc from "@/app/auth/auth";
 import CardAuth from "@/components/organisms/CardAuth";
 
-import { WInput } from "@/components";
-import { WButton } from "@/components";
+import { WInput, WButton } from "@/components";
 
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 
@@ -15,7 +14,6 @@ export default function RegisterPage() {
         title="SIGN-UP"
         size="large"
         variant="outlined"
-        style={{ fontWeight: "900" }}
       >
         <div style={{ margin: "15px 0" }}>
           <span>Your Full Name</span>
@@ -64,7 +62,7 @@ export default function RegisterPage() {
           />
         </div>
 
-        <WButton typeColor="secondary" text="Sign in" size="large" />
+        <WButton typeColor="primary" text="Sign in" size="large" />
       </CardAuth>
     </EnrollmentHoc>
   );
