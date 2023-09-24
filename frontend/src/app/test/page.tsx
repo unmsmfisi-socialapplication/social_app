@@ -2,8 +2,11 @@
 import { useState } from "react"
 import Layout from "../layout"
 import { Button } from "@mui/material";
-import { WButton, WInput } from "@/components";
+import { WButton, WInput, WCircleIcon  } from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CheckIcon from "@mui/icons-material/Check"
+import AllInclusive from "@mui/icons-material/AllInclusive"
+
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
@@ -23,9 +26,9 @@ export default function TestPage() {
           backgroundColor: "red",
         }}
       >
-        <WButton typeColor="primary" text="DD"/>
+        <WButton typeColor="primary" text="DD" disabled/>
         <WButton typeColor="secondary" text="button" size="large" />
-        <WButton text="test" size="large" />
+        <WButton text="test" size="large" disabled />
       </div>
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
@@ -43,8 +46,8 @@ export default function TestPage() {
         placeholder="Correo electrónico"
         fullWidth
       />
-    </div>
-        
+      </div> 
+
     <div
       //Estilos a usar para la caja 
         style={{
@@ -74,6 +77,10 @@ export default function TestPage() {
           type="password" 
         />
     </div>
+      <WCircleIcon iconSize={30} icon={CheckIcon} />
+      <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
     </Layout>
   );
 }
+
+
