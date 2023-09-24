@@ -56,6 +56,10 @@ android {
     viewBinding{
         enable = true
     }
+
+    tasks.register<Wrapper>("wrapper") {
+        gradleVersion = "4.1"
+    }
 }
 
 dependencies {
