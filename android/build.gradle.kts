@@ -6,8 +6,8 @@ plugins {
 
 buildscript {
     dependencies {
-        val navegacionVersion="2.7.2"
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navegacionVersion")
+        /*val navegacionVersion="2.7.3"
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navegacionVersion")*/
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.47")
         classpath("com.google.gms:google-services:4.4.0")
     }

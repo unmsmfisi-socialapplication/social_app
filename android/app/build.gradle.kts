@@ -57,15 +57,15 @@ android {
         enable = true
     }
 
-    tasks.register<Wrapper>("wrapper") {
+    /*tasks.register<Wrapper>("wrapper") {
         gradleVersion = "4.1"
-    }
+    }*/
 }
 
 dependencies {
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
     val roomVersion = "2.5.2"
     val composeUiVersion = "1.5.1"
 
