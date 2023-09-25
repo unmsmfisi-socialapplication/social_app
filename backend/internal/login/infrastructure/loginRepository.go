@@ -17,7 +17,7 @@ func NewUserDBRepository(database *sql.DB) application.UserRepository {
 }
 
 func (u *UserDBRepository) GetUserByUsername(username string) (*domain.User, error) {
-	query := `SELECT username, password FROM users WHERE username = $1`
+	query := `SELECT user_name, password FROM SOC_APP_USERS WHERE user_name = $1`
 
 	row := u.db.QueryRow(query, username)
 
