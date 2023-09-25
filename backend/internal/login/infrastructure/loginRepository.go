@@ -3,7 +3,6 @@ package infrastructure
 import (
 	"database/sql"
 
-	_ "github.com/lib/pq"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/domain"
 )
