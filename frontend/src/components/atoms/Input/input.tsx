@@ -10,6 +10,8 @@ interface WInputProps {
   variant?: 'standard' | 'filled' | 'outlined';
   fullWidth?: boolean;
   type?: 'text' | 'password';
+  error?: boolean;
+  errorMessage?: string;
 }
 
 const WInput: React.FC<WInputProps> = ({
@@ -20,6 +22,8 @@ const WInput: React.FC<WInputProps> = ({
   variant = 'outlined',
   fullWidth = false,
   type = 'text',
+  error = false,
+  errorMessage = '',
 }) => {
   return (
     <TextField
@@ -29,11 +33,13 @@ const WInput: React.FC<WInputProps> = ({
       color={typeColor}
       placeholder={placeholder}
       type={type}
+      error={error}
       InputProps={{
         endAdornment: icon && (
           <InputAdornment position="end">{icon}</InputAdornment>
         ),
       }}
+      helperText={error && errorMessage}
     />
   );
 };
