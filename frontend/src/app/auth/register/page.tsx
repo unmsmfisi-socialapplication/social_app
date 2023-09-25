@@ -9,55 +9,38 @@ import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined
 export default function RegisterPage() {
   return (
     <EnrollmentHoc>
-      <CardAuth title="SIGN-UP" variant="outlined">
-        <div style={{ margin: "15px 0" }}>
-          <span>Your Full Name</span>
+      <CardAuth title="Registro" variant="outlined">
+          <span>Nombre Completo</span>
           <WInput
-            typeColor="primary"
-            placeholder="Enter your name"
+            placeholder="Nombre Completo"
             size="small"
-            variant="outlined"
             fullWidth
             type="text"
           />
-        </div>
-        <div style={{ margin: "15px 0" }}>
-          <span>Email</span>
+          <span>Correo</span>
           <WInput
-            typeColor="primary"
-            placeholder="Enter your email"
+            placeholder="Correo"
             size="small"
-            variant="outlined"
             fullWidth
             type="text"
           />
-        </div>
-        <div style={{ margin: "15px 0" }}>
-          <span>Password</span>
+          <span>Contraseña</span>
           <WInput
-            typeColor="primary"
             icon={<VisibilityOffOutlinedIcon />}
-            placeholder="Enter your password"
+            placeholder="Contraseña"
             size="small"
-            variant="outlined"
             fullWidth
             type="password"
           />
-        </div>
-        <div style={{ margin: "15px 0" }}>
-          <span>Confirm Password</span>
+          <span>Confirmar Contraseña</span>
           <WInput
-            typeColor="primary"
             icon={<VisibilityOffOutlinedIcon />}
-            placeholder="Enter your password"
+            placeholder="Confirmar Contraseña"
             size="small"
-            variant="outlined"
             fullWidth
             type="password"
           />
-        </div>
-
-        <WButton typeColor="primary" text="Sign in" size="large" />
+        <WButton typeColor="primary" text="Registrarse" size="large" />
       </CardAuth>
     </EnrollmentHoc>
   );
