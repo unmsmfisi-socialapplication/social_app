@@ -6,6 +6,6 @@ COPY . .
 
 RUN go mod download && go mod verify
 
-RUN go build -o bin/main cmd/server.go
+RUN go build -o build/main cmd/server.go
 
-CMD ["bin/main"]
+CMD ["build/main"]
