@@ -10,7 +10,8 @@ interface BasicsLinkProps {
 }
 
 const WBasicsLink: React.FC<BasicsLinkProps> = ({ underline, text, href,displayType }) => {
-  const linkStyle = {    
+  const linkStyle = {  
+    right: 100,  
     gap: 2,
     justifyContent: 'space-end',
   };
