@@ -93,7 +93,7 @@ dependencies {
     //kotlin extenciones
     implementation("androidx.room:room-ktx:$roomVersion")
     //picasso
-    implementation("com.squareup.picasso:picasso:2.71828")
+    //implementation("com.squareup.picasso:picasso:2.71828")
     //implementation("com.github.danysantiago:sendgrid-android:1")
 
     implementation("androidx.core:core-ktx:1.12.0")
