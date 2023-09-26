@@ -69,7 +69,11 @@ dependencies {
     val roomVersion = "2.5.2"
     val composeUiVersion = "1.5.1"
 
-    implementation("androidx.compose.runtime:runtime:1.5.1")
+    implementation("androidx.compose.runtime:runtime:$composeUiVersion")
+    implementation("androidx.compose.runtime:runtime-livedata:$composeUiVersion")
+    implementation("androidx.compose.runtime:runtime-rxjava2:$composeUiVersion")
+    implementation("androidx.compose.ui:ui:$composeUiVersion")
+
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
