@@ -66,6 +66,9 @@ dependencies {
 
 
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
 
     val roomVersion = "2.5.2"
     val composeUiVersion = "1.5.1"
