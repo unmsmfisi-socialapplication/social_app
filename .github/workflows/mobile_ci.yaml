@@ -24,6 +24,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+          cache: gradlew
 
       - name: Grant execute permissions to gradle wrapper
         run: chmod +x ./gradlew
