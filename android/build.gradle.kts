@@ -14,3 +14,14 @@ buildscript {
         //classpath("com.android.tools.build:gradle:7.4.1")
     }
 }
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            setUrl("https://jitpack.io")
+        }
+    }
+}
+
