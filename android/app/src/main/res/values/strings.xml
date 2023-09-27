@@ -18,4 +18,13 @@
     <string name="mastodon">Mastodon</string>
     <string name="sign_up">Regístrate</string>
     <string name="does_not_count">¿No tienes una cuenta?</string>
+    <string name="none"></string>
+    <string name="onboarding_register">Registrate</string>
+    <string name="onboarding_connected_world_title">Encuentra amigos y obtén inspiración</string>
+    <string name="onboarding_connected_world_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
+    <string name="onboarding_remote_meeting_title">Conoce comunidades increíbles y divertidas</string>
+    <string name="onboarding_remote_meeting_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
+    <string name="onboarding_online_friends_title">Chatea con amigos</string>
+    <string name="onboarding_online_friends_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
+
 </resources>
