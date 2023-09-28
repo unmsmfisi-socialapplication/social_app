@@ -99,3 +99,61 @@ func (h *Handler) JoinRoom(w http.ResponseWriter, r *http.Request) {
 	clt.ReadMessage(h.hub)
 
 }
+
+type RoomRes struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+func (h *Handler) GetRooms(w http.ResponseWriter, r *http.Request) {
+	rooms := make([]RoomRes, 0)
+
+	for _, ro := range h.hub.Rooms {
+		rooms = append(rooms, RoomRes{
+			ID:   ro.ID,
+			Name: ro.Name,
+		})
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+
+	serializedBody, _ := json.Marshal(&rooms)
+	_, _ = w.Write(serializedBody)
+}
+
+type ClientRes struct {
+	ID       string `json:"id"`
+	Username string `json:"username"`
+}
+
+func (h *Handler) GetClients(w http.ResponseWriter, r *http.Request) {
+	var clients []ClientRes
+
+	roomID := chi.URLParam(r, "roomId")
+
+	_, exists := h.hub.Rooms[roomID]
+	if !exists {
+		clients = make([]ClientRes, 0)
+
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
+
+		serializedBody, _ := json.Marshal(&clients)
+		_, _ = w.Write(serializedBody)
+	}
+
+	for _, clt := range h.hub.Rooms[roomID].Clients {
+		clients = append(clients, ClientRes{
+			ID:       clt.ID,
+			Username: clt.Username,
+		})
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+
+	serializedBody, _ := json.Marshal(&clients)
+	_, _ = w.Write(serializedBody)
+
+}
