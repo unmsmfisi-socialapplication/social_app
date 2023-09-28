@@ -10,6 +10,9 @@ describe('validateName', () => {
     expect(validateName('123ABC')).toBe(false);
     expect(validateName('John@Doe')).toBe(false);
   });
+  it('should return false for an empty string on name input', () => {
+    expect(validateEmail('')).toBe(false);
+  });
 });
 
 describe('validateEmail', () => {
@@ -21,6 +24,10 @@ describe('validateEmail', () => {
   it('debería devolver false para correos no válidos', () => {
     expect(validateEmail('12@3ABC')).toBe(false);
     expect(validateEmail('JohnWick')).toBe(false);
+  });
+  
+  it('should return false for an empty string on email input', () => {
+    expect(validateEmail('')).toBe(false);
   });
 });
 
@@ -58,5 +65,5 @@ describe('validatePassword', () => {
 
   it('should return false for an empty string', () => {
     expect(validatePassword("")).toBe(false);
-  });
+  });
 });
