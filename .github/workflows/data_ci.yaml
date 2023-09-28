@@ -1,0 +1,66 @@
+# Define the name of the GitHub Action workflow
+name: CI Data 
+
+# Trigger the workflow on pull requests to the 'main' branch
+on:
+  pull_request:
+    branches:
+      - develop
+    # Only trigger when changes are made within the 'data/' directory
+    paths: 
+      - 'data/**'
+
+# Define default settings for jobs
+defaults:
+  run:
+    working-directory: ./data
+
+# Define the main job to be executed
+jobs:
+  ci:
+    runs-on: ubuntu-latest  # Run on the latest version of Ubuntu
+
+    # Define the steps to be executed within the job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Check out the repository code
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'  # Use Python 3.10
+
+      - name: Check Requirements file existence
+        id: check_files
+        uses: andstor/file-existence-action@v2
+        with:
+          files: 'requirements.txt'  # Check if 'requirements.txt' exists
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+        # Cache dependencies only if 'requirements.txt' exists
+        if: steps.check_files.outputs.exists == 'true'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Install required packages and dependencies
+          pip install ruff pytest pynblint lessc
+          # Install additional requirements if 'requirements.txt' exists
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Lint syntax errors with ruff
+        run: |
+          # Perform syntax linting using 'ruff'
+          # Stop the build if there are Python syntax errors or undefined names
+          ruff --format=github --select=E,F --ignore=E501 --target-version=py311 .
+
+      - name: Run Tests
+        run: echo "Run future tests"
+        # Execute your data science tests here
+        # run: pytest
