@@ -1,0 +1,37 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+    # Only trigger when changes are made within the 'frontend/' directory
+    paths:
+      - 'frontend/**'
+defaults:
+  run:
+    working-directory: ./frontend
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Node.js and npm
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Build app
+      run: npm run build
+
+    - name: Run Linting
+      run: npm run lint
+
+    - name: Tests and log errors
+      run: npm test > test_results.log 2>&1
