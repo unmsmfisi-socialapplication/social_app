@@ -23,7 +23,7 @@ func NewRegistrationUseCase(r UserRepository) *RegistrationUseCase {
 	return &RegistrationUseCase{repo: r}
 }
 
-func (r *RegistrationUseCase) Register(username, email, password, name, lastName, birthday string) (*domain.User, error) {
+func (r *RegistrationUseCase) Register(phone, email, username,password string) (*domain.User, error) {
 	
 	existingUser, err := r.repo.GetUserByEmail(email)
 	if err != nil {
@@ -34,7 +34,7 @@ func (r *RegistrationUseCase) Register(username, email, password, name, lastName
 	}
 
 	
-	newUser, err := domain.NewUser(username, email, password, name, lastName, birthday)
+	newUser, err := domain.NewUser(phone, email, username,password)
 	if err != nil {
 		return nil, err
 	}

@@ -1,32 +1,33 @@
 package domain
 
 import (
+
+
 	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
-	Username string
+	
+	Phone string
 	Email string
+	User_name string
 	Password string
-	Name string
-	LastName string
-	Birthday string
 
 }
 
-func NewUser(username, email, password, name, lastName, birthday string) (*User ,error){
+func NewUser( phone, email, username,password string) (*User ,error){
 	hashedPassword, err := hashPassword(password)
 	if err != nil {
 		return nil, err
 	}
-
+	
 	return &User{
-		Username: username,
+		
+		Phone: phone,
 		Email: email,
+		User_name: username,
 		Password: hashedPassword,
-		Name: name,
-		LastName: lastName,
-		Birthday: birthday,
+	
 	},nil
 }
 
