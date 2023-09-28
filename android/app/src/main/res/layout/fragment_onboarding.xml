@@ -7,6 +7,7 @@
     android:layout_marginHorizontal="30dp"
     tools:context=".presentation.onboarding.OnboardingFragment">
 
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/sliderViewPager"
         android:layout_width="match_parent"
@@ -76,8 +77,7 @@
             android:backgroundTint="@color/color01"
             android:text="@string/onboarding_register"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/text_login"
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/login"
-            android:textSize="16sp"
-            android:visibility="invisible" />
+            android:textSize="16dp"
+            android:visibility="invisible"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
