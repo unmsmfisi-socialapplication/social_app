@@ -3,7 +3,7 @@ import { validateName, validateEmail , validatePassword } from '../utilities/Val
 describe('validateName', () => {
   it('should return true for valid names', () => {
     expect(validateName('John Doe')).toBe(true);
-    expect(validateName('María López')).toBe(true);
+    expect(validateName('María  López')).toBe(true);
   });
 
   it('should return false for invalid names', () => {
