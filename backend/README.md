@@ -18,7 +18,7 @@ We use a standard go layout. [See](https://github.com/golang-standards/project-l
 
 ### Prerequisites
 
-- Visual Studio Code
+- Visual Studio Code or other IDE
 - Go  1.20
 
 ### Installation
