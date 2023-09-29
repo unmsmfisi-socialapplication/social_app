@@ -2,7 +2,7 @@ package infraestructure
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	"github.com/go-chi/chi"
@@ -20,37 +20,32 @@ func NewHandler(h *domain.Hub) *Handler {
 	}
 }
 
-type CreateRoomReq struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-}
-
 func (h *Handler) CreateRoom(w http.ResponseWriter, r *http.Request) {
-	var req CreateRoomReq
+	var res roomRes
 
 	//Reading complete request body
-	emptyRequestBody, err := ioutil.ReadAll(r.Body)
+	emptyRequestBody, err := io.ReadAll(r.Body)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 	//Transform into request body struct
-	err = json.Unmarshal(emptyRequestBody, &req)
+	err = json.Unmarshal(emptyRequestBody, &res)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	h.hub.Rooms[req.ID] = &domain.Room{
-		ID:      req.ID,
-		Name:    req.Name,
+	h.hub.Rooms[res.ID] = &domain.Room{
+		ID:      res.ID,
+		Name:    res.Name,
 		Clients: make(map[string]*domain.Client),
 	}
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 
-	serializedBody, _ := json.Marshal(&req)
+	serializedBody, _ := json.Marshal(&res)
 	_, _ = w.Write(serializedBody)
 }
 
@@ -100,16 +95,16 @@ func (h *Handler) JoinRoom(w http.ResponseWriter, r *http.Request) {
 
 }
 
-type RoomRes struct {
+type roomRes struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
 func (h *Handler) GetRooms(w http.ResponseWriter, r *http.Request) {
-	rooms := make([]RoomRes, 0)
+	rooms := make([]roomRes, 0)
 
 	for _, ro := range h.hub.Rooms {
-		rooms = append(rooms, RoomRes{
+		rooms = append(rooms, roomRes{
 			ID:   ro.ID,
 			Name: ro.Name,
 		})
