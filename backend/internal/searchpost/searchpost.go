@@ -3,6 +3,7 @@ package searchpost
 import (
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -34,29 +35,33 @@ func closeDB(db *sql.DB) {
 	}
 }
 
+func handleError(w http.ResponseWriter, err error, status int) {
+	http.Error(w, err.Error(), status)
+}
+
 // Function to manage the HTTP request
 func SearchPost(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		http.Error(w, "Disallowed method", http.StatusMethodNotAllowed)
+		handleError(w, errors.New("Disallowed method"), http.StatusMethodNotAllowed)
 		return
 	}
 
 	requestData, err := extractDataFromRequest(r)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		handleError(w, err, http.StatusBadRequest)
 		return
 	}
 
 	db, err := openDB()
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		handleError(w, err, http.StatusInternalServerError)
 		return
 	}
 	defer closeDB(db)
 
 	result, err := performSearch(db, requestData)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		handleError(w, err, http.StatusInternalServerError)
 		return
 	}
 
@@ -140,7 +145,7 @@ func writeResponse(w http.ResponseWriter, result []Post) {
 
 	err := json.NewEncoder(w).Encode(result)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		handleError(w, err, http.StatusInternalServerError)
 		return
 	}
 }
