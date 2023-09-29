@@ -21,7 +21,7 @@ func Router() http.Handler {
 		w.Write([]byte("{\"hello\": \"world\"}"))
 	})
 
-	r.Get("/search", func(w http.ResponseWriter, r *http.Request) {
+	r.Post("/search", func(w http.ResponseWriter, r *http.Request) {
 		searchpost.SearchPost(w, r)
 	})
 
