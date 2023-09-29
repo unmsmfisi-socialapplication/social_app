@@ -17,9 +17,6 @@
             android:name=".EmptyActivity"
             android:exported="false" />
         <activity
-            android:name=".EmptyActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
