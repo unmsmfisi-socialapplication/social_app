@@ -19,3 +19,8 @@ vendor/
 
 # Go workspace file
 go.work
+
+# Dev directories
+.idea/
+.vscode/
+*.iml
