@@ -1,16 +1,39 @@
 package application
 
 import (
-	"database/sql"
+	"errors"
+
+	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/domain/entity"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/domain"
 )
 
-type InterestTopics struct {
-	db *sql.DB
+var (
+	ErrInvalidInsertion = errors.New("invalid insertion")
+)
+
+type InterestTopicsUseCaseI interface {
+	SetInterestTopics(user_id, interest_id string) (bool, error)
 }
 
-// Create the instance initializated with a connection to the database
-func SetInterestTopics(db *sql.DB) *InterestTopics {
-	return &InterestTopics{db}
+type InterestTopicsUseCase struct {
+	repo domain.UserInterestsRepository
 }
 
-//Implementation
+func NewInterestTopicsUseCase(repo domain.UserInterestsRepository) *InterestTopicsUseCase {
+	return &InterestTopicsUseCase{
+		repo: repo,
+	}
+}
+
+func (itus *InterestTopicsUseCase) SetInterestTopics(user_id, interest_id string) (bool, error) {
+	userInterest := &entity.UserInterests{
+		User_id:     user_id,
+		Interest_id: interest_id,
+	}
+
+	err := itus.repo.Create(userInterest)
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
