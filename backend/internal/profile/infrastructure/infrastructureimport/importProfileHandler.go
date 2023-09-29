@@ -9,15 +9,15 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructureimport/dto"
 )
 
-type ImportProfileHandler struct {
+type importProfileHandler struct {
 	importProfileUseCase *applicationimport.ImportProfileUseCase
 }
 
-func NewImportProfileHandler(ipUseCase *applicationimport.ImportProfileUseCase) *ImportProfileHandler {
-	return &ImportProfileHandler{ipUseCase}
+func NewImportProfileHandler(ipUseCase *applicationimport.ImportProfileUseCase) *importProfileHandler {
+	return &importProfileHandler{ipUseCase}
 }
 
-func (iph *ImportProfileHandler) ImportProfile(w http.ResponseWriter, r *http.Request) {
+func (iph *importProfileHandler) ImportProfile(w http.ResponseWriter, r *http.Request) {
     request, err := dto.NewImportProfileRequest(&r.Body)
     if err != nil {
         w.WriteHeader(http.StatusBadRequest)
