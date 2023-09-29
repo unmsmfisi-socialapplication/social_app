@@ -7,9 +7,9 @@ import (
 
 	"testing"
 
-	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/import"
-	infrastructure_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/import"
-	infrastructure_repository "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/repository"
+	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/applicationimport"
+	infrastructure_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructureimport"
+	infrastructure_repository "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructurerepository"
 )
 
 func TestImportProfileHandler_ImportProfile(t *testing.T) {
