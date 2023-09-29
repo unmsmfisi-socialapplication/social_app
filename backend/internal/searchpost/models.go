@@ -9,3 +9,8 @@ type Post struct {
 	Location string `json:"location"`
 	Labels   string `json:"labels"`
 }
+
+type RequestData struct {
+	Keyword string   `json:"keyword"`
+	Labels  []string `json:"labels"`
+}
