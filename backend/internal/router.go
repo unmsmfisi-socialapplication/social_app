@@ -11,6 +11,8 @@ import (
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
+	postApp "github.com/unmsmfisi-socialapplication/social_app/internal/post/application"
+	postInfra "github.com/unmsmfisi-socialapplication/social_app/internal/post/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 )
 
@@ -28,9 +30,13 @@ func Router() http.Handler {
 	dbInstance := database.GetDB()
 
 	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
+	dbPost := postInfra.NewPostDBRepository(dbInstance)
 
 	loginUseCase := application.NewLoginUseCase(dbRepo)
 	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
+
+	postUseCase := postApp.NewPostUseCase(dbPost)
+	postHandler := postInfra.NewPostHandler(postUseCase)
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"world\"}"))
@@ -51,6 +57,7 @@ func Router() http.Handler {
 
 	// Login
 	r.Post("/login", loginHandler.HandleLogin)
-
+	//Post
+	r.Post("/post", postHandler.HandlePost)
 	return r
 }
