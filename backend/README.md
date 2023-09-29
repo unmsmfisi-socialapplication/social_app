@@ -4,3 +4,6 @@ We use a standard go layout. [See](https://github.com/golang-standards/project-l
 
 # Tests
 to run tests use `go test ./...`
+
+# Install dependencies
+to install use `go mod vendor`
