@@ -32,7 +32,7 @@ jobs:
       - name: Install Dependencies
         run: go mod download
 
-      - name: Install Vendro
+      - name: Install Vendor
         run: go mod vendor
 
       - name: Build Backend
