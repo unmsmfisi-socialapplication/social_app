@@ -12,11 +12,11 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-vendor/
-bin/
-pkg/
-build/
-cache/
+/vendor/
+/bin/
+/pkg/
+/build/
+/cache/
 
 # Archivos específicos generados por Go
 go.sum
