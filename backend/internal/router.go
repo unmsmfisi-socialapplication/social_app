@@ -9,7 +9,6 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/comment"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
@@ -28,10 +27,8 @@ func Router() http.Handler {
 
 	dbInstance := database.GetDB()
 
-	commentRouter := comment.CommentModuleRouter(dbInstance)
-	r.Mount("/comments", commentRouter)
-
 	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
+
 	loginUseCase := application.NewLoginUseCase(dbRepo)
 	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
 
