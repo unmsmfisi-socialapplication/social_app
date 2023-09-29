@@ -12,12 +12,6 @@ export default function LoginPage() {
         <CardAuth title="testing-title-login-user">
             <span>Email</span>
             <WInput typeColor="primary" placeholder="tesing usario" fullWidth/>
-            <LogoTitle
-        src="/public/images/FrameStudentNET.png" 
-        alt="Mi Imagen"
-        width="200px" 
-        height="30px"
-      />
         </CardAuth>
     </EnrollmentHoc>
   );
