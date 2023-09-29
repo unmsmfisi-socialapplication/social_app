@@ -6,14 +6,14 @@ import (
 	"fmt"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
-	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
+	
 )
 
 type UserDBRepository struct {
-	db *database.Database
+	db *sql.DB
 }
 
-func NewUserDBRepository(database *database.Database) (*UserDBRepository) {
+func NewUserDBRepository(database *sql.DB) (*UserDBRepository) {
 	return &UserDBRepository{db: database}
 }
 
@@ -21,8 +21,8 @@ func (u *UserDBRepository) GetUserByEmail(email string) (*domain.User, error) {
 	
 	query := `SELECT  phone, email, user_name, password FROM public.soc_app_users WHERE email = $1`
 
-	row := u.db.DB.QueryRow(query, email)
-	prueba,_:= u.db.DB.Exec(query, email)
+	row := u.db.QueryRow(query, email)
+	prueba,_:= u.db.Exec(query, email)
 	fmt.Println(prueba.RowsAffected())
 	var user domain.User
 	err := row.Scan( &user.Phone, &user.Email, &user.User_name, &user.Password)
@@ -56,7 +56,7 @@ func (u *UserDBRepository) RegisterUser( phone, email, username,password string)
 	query := `INSERT INTO soc_app_users ( insertion_date,phone, email, user_name, password) VALUES (NOW(),$1, $2, $3, $4)`
 
 	fmt.Println("Insertando usuario en la base de datos...")
-	tx,er:=u.db.DB.Begin()
+	tx,er:=u.db.Begin()
 	if er!=nil{
 		fmt.Println("Error al iniciar la transaccion")
 

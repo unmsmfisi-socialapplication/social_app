@@ -2,34 +2,24 @@ package database
 
 import (
 	"database/sql"
-	
-	"log"
 
 	_ "github.com/lib/pq"
+	config "github.com/unmsmfisi-socialapplication/social_app"
 )
 
-type Database struct {
-	*sql.DB
+var db *sql.DB
+
+func InitDatabase() error {
+	var err error
+	db, err = sql.Open("postgres", config.LoadConfig().DBConnectionString)
+
+	return err
 }
 
-func InitDatabase() *Database {
-	
-	db, err := sql.Open("postgres", "postgres://postgres:root@localhost:5432/social_app?sslmode=disable")
-	log.Println("Conectando a la base de datos...")
-	if err != nil {
-		log.Fatal(err)
-	}
-	if err = db.Ping(); err != nil {
-		log.Fatal(err)
-	}
-	
-	
-	
-	return &Database{db}
+func GetDB() *sql.DB {
+	return db
 }
 
-
-func(db *Database) Close() error {
-	return db.DB.Close()
+type UserDBRepository struct {
+	db *sql.DB
 }
-
