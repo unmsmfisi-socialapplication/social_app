@@ -1,11 +1,14 @@
-FROM golang:1.21.1-alpine3.18
 
 WORKDIR /app
 
 COPY . .
 
-RUN go mod download && go mod verify
+RUN go mod download
 
-RUN go build -o build/main cmd/server.go
+RUN go mod verify
 
-CMD ["build/main"]
+RUN go build -o build/backend-develop cmd/server.go
+
+EXPOSE 3333
+
+CMD ["build/backend-develop"]
