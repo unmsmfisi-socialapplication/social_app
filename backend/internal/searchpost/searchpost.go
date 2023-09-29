@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
 // Database configuration will then go in a separate file
@@ -40,7 +41,7 @@ func SearchPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	keyword, err := extractKeywordFromRequest(r)
+	requestData, err := extractDataFromRequest(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -53,9 +54,14 @@ func SearchPost(w http.ResponseWriter, r *http.Request) {
 	}
 	defer closeDB(db)
 
-	result, err := performSearch(db, keyword)
+	result, err := performSearch(db, requestData)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if len(result) == 0 {
+		writeResponse(w, []Post{})
 		return
 	}
 
@@ -63,29 +69,44 @@ func SearchPost(w http.ResponseWriter, r *http.Request) {
 }
 
 // Function to extract the keyword from the request
-func extractKeywordFromRequest(r *http.Request) (string, error) {
+func extractDataFromRequest(r *http.Request) (RequestData, error) {
+	var requestData RequestData
+
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		return "", err
-	}
-
-	var requestData struct {
-		Keyword string `json:"keyword"`
+		return requestData, err
 	}
 
 	err = json.Unmarshal(body, &requestData)
 	if err != nil {
-		return "", err
+		return requestData, err
 	}
 
-	return requestData.Keyword, nil
+	return requestData, nil
 }
 
 // Function to search the database
-func performSearch(db *sql.DB, keyword string) ([]Post, error) {
+func performSearch(db *sql.DB, requestData RequestData) ([]Post, error) {
+	query := `SELECT id_post, id_user, content, "postHour", "postDate", location, labels FROM Posts WHERE `
 
-	query := `SELECT id_post, id_user, content,"postHour","postDate", location, labels FROM Posts WHERE content ILIKE '%' || $1 || '%' OR labels ILIKE '%' || $1 || '%'`
-	rows, err := db.Query(query, keyword)
+	args := make([]interface{}, len(requestData.Labels)+1)
+
+	if len(requestData.Labels) > 0 {
+		query += "("
+		for i, label := range requestData.Labels {
+			if i > 0 {
+				query += " OR "
+			}
+			query += "labels ILIKE '%' || $" + strconv.Itoa(i+1) + " || '%'"
+			args[i] = label
+		}
+		query += ") AND "
+	}
+
+	query += "content ILIKE '%' || $" + strconv.Itoa(len(requestData.Labels)+1) + " || '%'"
+	args[len(args)-1] = requestData.Keyword
+
+	rows, err := db.Query(query, args...)
 	if err != nil {
 		return nil, err
 	}
