@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="black60">#00000099</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
-    <color name="color01">#BEE9E8</color>
-    <color name="color02">#62B6CB</color>
-    <color name="color03">#CAE9FF</color>
-    <color name="color04">#1B4965</color>
-    <color name="color05">#5FA8D3</color>
-    <color name="gray">#C3C3C3</color>
+    <color name="color01">#007AFF</color>
+    <color name="color02">#D8F1FE</color>
+    <color name="gray">#C0C0C0</color>
     <color name="transparent">#00FF0000</color>
 </resources>
