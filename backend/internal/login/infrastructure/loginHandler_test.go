@@ -1,4 +1,7 @@
-package test
+//go:build unit
+// +build unit
+
+package infrastructure
 
 import (
 	"bytes"
@@ -8,8 +11,6 @@ import (
 	"testing"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
-
-	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 )
 
 type mockLoginUsecase struct {
@@ -77,7 +78,7 @@ func TestHandleLogin(t *testing.T) {
 			mockUseCase := &mockLoginUsecase{
 				AuthenticateFn: tt.mockAuth,
 			}
-			handler := infrastructure.NewLoginHandler(mockUseCase)
+			handler := NewLoginHandler(mockUseCase)
 			recorder := httptest.NewRecorder()
 
 			handler.HandleLogin(recorder, req)
