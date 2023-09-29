@@ -7,6 +7,6 @@ type Config struct {
 
 func LoadConfig() *Config {
 	return &Config{
-		DBConnectionString: "host=localhost user=postgres password=root dbname=redsocial sslmode=disable",
+		DBConnectionString: "host=localhost user=postgres password=1234 dbname=unmsm_social_app port=5432",
 	}
 }

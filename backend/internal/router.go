@@ -9,9 +9,15 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
+
+	loginApplication "github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
+	loginInfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/handler"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/repository"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/service"
+	// postReactionApplication "github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/application"
+	// postReactionInfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/infrastructure"
 )
 
 func Router() http.Handler {
@@ -27,10 +33,13 @@ func Router() http.Handler {
 
 	dbInstance := database.GetDB()
 
-	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
+	dbRepo := loginInfrastructure.NewUserDBRepository(dbInstance)
+	loginUseCase := loginApplication.NewLoginUseCase(dbRepo)
+	loginHandler := loginInfrastructure.NewLoginHandler(loginUseCase)
 
-	loginUseCase := application.NewLoginUseCase(dbRepo)
-	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
+	postReactionRepository := repository.NewPostReactionRepository(dbInstance)
+	postReactionService := service.NewPostReactionService(postReactionRepository)
+	postReactionHandler := handler.NewPostReactionHandler(postReactionService)
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"world\"}"))
@@ -51,6 +60,9 @@ func Router() http.Handler {
 
 	// Login
 	r.Post("/login", loginHandler.HandleLogin)
+
+	r.Get("/reactions/{post_id}", postReactionHandler.GetReactionsForPost)
+	r.Post("/reactions", postReactionHandler.CreatePostReactionHandler)
 
 	return r
 }
