@@ -1,0 +1,39 @@
+name: Mobile CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+    paths:
+      - 'android/**'
+
+defaults:
+  run:
+    working-directory: ./android
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setting up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Grant execute permissions to gradle wrapper
+        run: chmod +x ./gradlew
+
+      - name: Build App
+        run: ./gradlew build
+
+      - name: Test App
+        run: ./gradlew test
+
+      - name: Package App
+        run: ./gradlew assembleRelease

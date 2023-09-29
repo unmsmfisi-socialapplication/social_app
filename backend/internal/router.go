@@ -2,11 +2,22 @@ package internal
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
+
+	loginApplication "github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
+	loginInfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/handler"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/repository"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/service"
+	// postReactionApplication "github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/application"
+	// postReactionInfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/post_reactions/infrastructure"
 )
 
 func Router() http.Handler {
@@ -14,6 +25,21 @@ func Router() http.Handler {
 
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
+
+	err := database.InitDatabase()
+	if err != nil {
+		log.Fatalf("Failed to initialize database: %v", err)
+	}
+
+	dbInstance := database.GetDB()
+
+	dbRepo := loginInfrastructure.NewUserDBRepository(dbInstance)
+	loginUseCase := loginApplication.NewLoginUseCase(dbRepo)
+	loginHandler := loginInfrastructure.NewLoginHandler(loginUseCase)
+
+	postReactionRepository := repository.NewPostReactionRepository(dbInstance)
+	postReactionService := service.NewPostReactionService(postReactionRepository)
+	postReactionHandler := handler.NewPostReactionHandler(postReactionService)
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"world\"}"))
@@ -32,7 +58,11 @@ func Router() http.Handler {
 		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
 	})
 
-	r.Mount("/reactions", reactionsResource{}.Routes())
+	// Login
+	r.Post("/login", loginHandler.HandleLogin)
+
+	r.Get("/reactions/{post_id}", postReactionHandler.GetReactionsForPost)
+	r.Post("/reactions", postReactionHandler.CreatePostReactionHandler)
 
 	return r
 }
