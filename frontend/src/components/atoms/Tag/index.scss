@@ -1,0 +1,21 @@
+@import "../../../../resources/styles/variables.scss";
+.tagLink{
+    display: flex;
+    align-items: center;
+    width: max-content;
+    padding: 8px 15px;
+    border-radius: 20px;
+    gap:6px;
+    font-size: 14px;
+    background-color: $third-color;
+    transition: all 0.3s;
+    cursor: pointer;
+    &--active{
+       background-color: $primary-color;
+       color: white;
+    }
+    &:hover{
+        background-color: $primary-color;
+        color: white;
+    }
+}
