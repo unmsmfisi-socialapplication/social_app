@@ -15,8 +15,8 @@ func NewUserInterestsDBRepository(db *sql.DB) domain.UserInterestsRepository {
 	return &UserInterestsDBRepository{db: db}
 }
 
-func (ui *UserInterestsDBRepository) Create(interest *entity.UserInterests) error {
-	query := `INSERT INTO SOC_APP_M_USERS_INTERESTS (user_id, interest_id) VALUES ($1,$2)`
+func (ui *UserInterestsDBRepository) Create(interest *entity.UserInterestTopics) error {
+	query := `INSERT INTO soc_app_users_interest_topics (user_id, interest_id) VALUES ($1,$2)`
 
 	_, err := ui.db.Exec(query, interest.User_id, interest.Interest_id)
 	if err != nil {

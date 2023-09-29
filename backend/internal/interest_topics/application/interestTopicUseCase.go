@@ -26,7 +26,7 @@ func NewInterestTopicsUseCase(repo domain.UserInterestsRepository) *InterestTopi
 }
 
 func (itus *InterestTopicsUseCase) SetInterestTopics(user_id, interest_id string) (bool, error) {
-	userInterest := &entity.UserInterests{
+	userInterest := &entity.UserInterestTopics{
 		User_id:     user_id,
 		Interest_id: interest_id,
 	}

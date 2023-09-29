@@ -8,5 +8,5 @@ import (
 
 // Select interest topics
 type UserInterestsRepository interface {
-	Create(interest *entity.UserInterests) error
+	Create(interest *entity.UserInterestTopics) error
 }
