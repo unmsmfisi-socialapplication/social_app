@@ -2,5 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/poppins</item>
+        <item>@font/syne</item>
+        <item>@font/syne_bold</item>
+        <item>@font/syne_medium</item>
     </array>
 </resources>
