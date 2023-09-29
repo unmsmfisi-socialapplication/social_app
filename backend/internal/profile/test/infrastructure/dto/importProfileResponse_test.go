@@ -23,15 +23,14 @@ func TestNewImportProfileResponse(t *testing.T) {
         Data: expectedPerson,
     }
 
-	// Crear una nueva respuesta ImportProfileResponse
 	response := dto.NewImportProfileResponse(expectedPerson)
 
-	// Verificar que los campos de la respuesta sean los esperados
+    messageExcepted := "Profile Imported Succesfully"
 	if response.Response != "Profile Imported Succesfully" {
-		t.Errorf("Se esperaba el valor 'Profile Imported Succesfully', pero se obtuvo '%s'", response.Response)
+        t.Errorf("Expected response '%s', but got '%s'", messageExcepted, response.Response)
 	}
 
     if expectedResponse.Data != response.Data {
-        t.Errorf("Se esperaba la respuesta '%s', pero se obtuvo '%s'", expectedResponse, response)
+        t.Errorf("Expected response '%s', but got '%s'", expectedResponse, response)
     }
 }

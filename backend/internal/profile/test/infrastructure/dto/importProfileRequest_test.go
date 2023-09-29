@@ -64,7 +64,7 @@ func NewProfileRequestTest(t *testing.T) {
 
 	importProfileRequest, err := dto.NewImportProfileRequest(&readCloser)
 	if err != nil {
-		t.Error("error to create profile request")
+		t.Error("Error to create profile request")
 	}
 
 	if expectedRequest.Person != importProfileRequest.Person {
