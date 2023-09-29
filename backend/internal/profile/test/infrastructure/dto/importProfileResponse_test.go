@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/go-ap/activitypub"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/import/dto"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructureimport/dto"
 )
 
 func TestNewImportProfileResponse(t *testing.T) {

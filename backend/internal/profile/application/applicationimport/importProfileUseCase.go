@@ -1,4 +1,4 @@
-package application_import
+package applicationimport
 
 import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"

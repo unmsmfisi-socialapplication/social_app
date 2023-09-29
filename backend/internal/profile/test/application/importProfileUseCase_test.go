@@ -3,9 +3,9 @@ package test
 import (
 	"testing"
 
-	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/import"
+	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/applicationimport"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
-	infrastructure_repository "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/repository"
+	infrastructure_repository "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructurerepository"
 )
 
 func TestImportProfileUseCase(t *testing.T) {
