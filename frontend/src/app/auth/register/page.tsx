@@ -1,15 +1,14 @@
 "use client";
 import EnrollmentHoc from "@/app/auth/auth";
-import CardAuth from "@/components/organisms/CardAuth";
 
-import { WInput, WButton } from "@/components";
+import { WInput, WButton , WCardAuth } from "@/components";
 
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 
 export default function RegisterPage() {
   return (
     <EnrollmentHoc>
-      <CardAuth title="Registro" variant="outlined">
+      <WCardAuth title="Registro" variant="outlined">
           <span>Nombre Completo</span>
           <WInput
             placeholder="Nombre Completo"
@@ -41,7 +40,7 @@ export default function RegisterPage() {
             type="password"
           />
         <WButton typeColor="primary" text="Registrarse" size="large" />
-      </CardAuth>
+      </WCardAuth>
     </EnrollmentHoc>
   );
 }
