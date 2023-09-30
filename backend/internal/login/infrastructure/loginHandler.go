@@ -54,7 +54,7 @@ func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 			utils.SendJSONResponse(w, http.StatusNotFound, "NOTFOUND", "User not found")
 			return
 		case application.ErrInvalidCredentials:
-			utils.SendJSONResponse(w, http.StatusUnauthorized, "NOPASSWORD", "Invalid password")
+			utils.SendJSONResponse(w, http.StatusUnauthorized, "BADCREDENTIALS", "Invalid credentials")
 			return
 		default:
 			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error during authentication")
