@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Profile Import",
+    "type": "object",
+    "properties": {
+    "@context": {
+    "type": "array",
+    "items": [
+    {
+    "type": "string",
+    "const": "https://www.w3.org/ns/activitystreams"
+    },
+    {
+    "type": "object",
+    "properties": {
+    "https://github.com/language": {
+    "type": "string"
+    }
+    },
+    "required": ["https://github.com/language"]
+    }
+    ]
+    },
+    "type": {
+    "type": "string",
+    "enum": ["Profile"]
+    },
+    "actor": {
+    "type": "string",
+    "format": "uri"
+    },
+    "name": {
+    "type": "string"
+    },
+    "object": {
+    "type": "object",
+    "properties": {
+    "id": {
+    "type": "string",
+    "format": "uri"
+    },
+    "type": {
+    "type": "string",
+    "enum": ["Person"]
+    },
+    "name": {
+    "type": "string"
+    },
+    "preferredUsername": {
+    "type": "string"
+    },
+    "summary": {
+    "type": "string"
+    },
+    "profileImage": {
+    "type": "string",
+    "format": "uri"
+    },
+    "coverImage": {
+    "type": "string",
+    "format": "uri"
+    },
+    "endpoints": {
+    "type": "object",
+    "properties": {
+    "sharedInbox": {
+    "type": "string",
+    "format": "uri"
+    }
+    }
+    },
+    "importedFrom": {
+    "type": "string",
+    "format": "uri"
+    }
+    },
+    "required": ["id", "type", "name", "preferredUsername"]
+    },
+    "to": {
+    "type": "array",
+    "items": {
+    "type": "string",
+    "format": "uri"
+    }
+    },
+    "cc": {
+    "type": "string",
+    "format": "uri"
+    }
+    },
+    "required": ["@context", "type", "actor", "name", "object", "to"]
+    }
