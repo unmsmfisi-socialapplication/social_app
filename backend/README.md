@@ -13,7 +13,9 @@ We use a standard go layout. [See](https://github.com/golang-standards/project-l
   - [Usage](#usage)
   - [Docker](#docker)
     - [Prerequisites](#docker-prerequisites)
-    - [Run](#run)
+    - [Getting Started](#docker-getting-started)
+    - [Stopping the application](#stopping-the-application)
+    - [Troubleshooting](#troubleshooting)
 
 ## Getting Started
 
@@ -45,7 +47,7 @@ go test ./...
 - Docker
 - Docker compose plugin
 
-### Getting started
+### Docker Getting started
 
 1. Build the docker image
 ```bash
