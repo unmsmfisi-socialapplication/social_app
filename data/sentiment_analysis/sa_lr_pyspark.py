@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import udf, regexp_replace
+from pyspark.sql.functions import regexp_replace
 from pyspark.ml.feature import Tokenizer, StopWordsRemover
 from pyspark.ml.feature import CountVectorizer
 from pyspark.ml.feature import IDF
@@ -30,7 +30,6 @@ def pre_process(df):
     word_clean_data = remover.transform(wordData)
     
     stemmer = SnowballStemmer(language='english')
-    stemmer_udf = udf(lambda tokens: [stemmer.stem(token) for token in tokens])
     
     count = CountVectorizer(inputCol="word_clean", outputCol="rawFeatures")
     model = count.fit(word_clean_data)
