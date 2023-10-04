@@ -40,7 +40,7 @@ import axios, { AxiosResponse } from 'axios';
         },
         data: params,
       });
-      console.log("response : ", response);
+      //TODO: TEST login integration console.log("response : ", response);
 
       return response;
     } catch (error) {
