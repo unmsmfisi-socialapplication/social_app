@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import *
+from pyspark.sql.functions import udf, regexp_replace
 from pyspark.ml.feature import Tokenizer, StopWordsRemover
 from pyspark.ml.feature import CountVectorizer
 from pyspark.ml.feature import IDF
@@ -7,9 +7,6 @@ from pyspark.ml.classification import LogisticRegression
 from pyspark.ml.evaluation import BinaryClassificationEvaluator
 from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-from pyspark.sql import SQLContext
-import pyspark as ps
-import warnings
 from nltk.stem.snowball import SnowballStemmer
 
 def read_file(fileUrl, spark):
