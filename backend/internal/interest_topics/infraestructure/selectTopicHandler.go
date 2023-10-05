@@ -31,11 +31,12 @@ func (slh *SelectTopicHandler) HandleSelectTopic(w http.ResponseWriter, r *http.
 	}
 
 	for i := 0; i < len(requestData.Interest_id); i++ {
-		insertion, err := slh.useCase.SetInterestTopics(requestData.User_id, requestData.Interest_id[i])
+		err := slh.useCase.SetInterestTopics(requestData.User_id, requestData.Interest_id[i])
 		if err != nil {
 			switch err {
 			case application.ErrInvalidInsertion:
-				utils.SendJSONResponse(w, http.StatusNotFound, "NOTFOUND", "User not found")
+				utils.SendJSONResponse(w, http.StatusNotFound, "NOTFOUND", "Attempted insertion of an existing user interest topic")
+				fmt.Println(err.Error())
 				return
 			default:
 				utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error during insertion")
@@ -44,11 +45,9 @@ func (slh *SelectTopicHandler) HandleSelectTopic(w http.ResponseWriter, r *http.
 			}
 
 		}
-		if insertion {
-			utils.SendJSONResponse(w, http.StatusOK, "OK", "Insertion successful")
-		} else {
-			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Insertion failed")
-		}
 	}
+
+	utils.SendJSONResponse(w, http.StatusOK, "OK", "Insertion successful")
+	return
 
 }

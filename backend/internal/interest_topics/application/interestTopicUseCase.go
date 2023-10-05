@@ -7,11 +7,11 @@ import (
 )
 
 var (
-	ErrInvalidInsertion = errors.New("invalid insertion")
+	ErrInvalidInsertion = errors.New("existing user interest topic")
 )
 
 type InterestTopicsUseCaseI interface {
-	SetInterestTopics(user_id, interest_id string) (bool, error)
+	SetInterestTopics(user_id, interest_id string)  error
 }
 
 type InterestTopicsUseCase struct {
@@ -24,7 +24,7 @@ func NewInterestTopicsUseCase(repo domain.UserInterestsRepository) *InterestTopi
 	}
 }
 
-func (itus *InterestTopicsUseCase) SetInterestTopics(user_id, interest_id string) (bool, error) {
+func (itus *InterestTopicsUseCase) SetInterestTopics(user_id, interest_id string) error {
 	userInterest := &domain.UserInterestTopics{
 		User_id:     user_id,
 		Interest_id: interest_id,
@@ -32,7 +32,7 @@ func (itus *InterestTopicsUseCase) SetInterestTopics(user_id, interest_id string
 
 	err := itus.repo.Create(userInterest)
 	if err != nil {
-		return false, err
+		return err
 	}
-	return true, nil
+	return nil
 }
