@@ -30,6 +30,15 @@
     <string name="full_name">Tu nombre</string>
     <string name="conditions_register">By Using this app you agree with the Terms of Service</string>
     <string name="join_now">Únete Ahora</string>
+    <string name="recover_password">Recuperar contraseña</string>
+    <string name="enter_email">Ingresa tu correo electrónico</string>
+    <string name="next">Continuar</string>
+    <string name="i_have_recovery_code">Tengo un codigo de recuperación</string>
+    <string name="return_to_login">Regresa a inicio de sesión</string>
+    <string name="submit">Enviar</string>
+    <string name="enter_verification_code">Ingrese el código de verificación</string>
+    <string name="text_enter_email">Introduce el código que te hemos enviado a tu correo electrónico</string>
+    <string name="resend_code">Reenviar código</string>
 
 
     
