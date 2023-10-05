@@ -30,47 +30,38 @@ func TestNewRateLimiter(t *testing.T) {
 func TestRateLimiter_Allow(t *testing.T) {
 	rl := middlewareratelimiter.NewRateLimiter(2, time.Second)
 
-	// First request should be allowed
 	if !rl.Allow() {
 		t.Error("Expected first request to be allowed, but it was denied")
 	}
 
-	// Second request should be allowed
 	if !rl.Allow() {
 		t.Error("Expected second request to be allowed, but it was denied")
 	}
 
-	// Third request should be denied
 	if rl.Allow() {
 		t.Error("Expected third request to be denied, but it was allowed")
 	}
 
-	// Wait for the interval to pass
 	time.Sleep(time.Second * 2)
 
-	// Fourth request should be allowed
 	if !rl.Allow() {
 		t.Error("Expected fourth request to be allowed, but it was denied")
 	}
 }
 
 func TestRateLimiter_Handle(t *testing.T) {
-	// Create a new rate limiter with a limit of 2 requests per second
 	rl := middlewareratelimiter.NewRateLimiter(2, time.Second)
 
-	// Create a new test server with the rate limiter middleware
 	ts := httptest.NewServer(rl.Handle(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	})))
 	defer ts.Close()
 
-	// Create a new request to the test server
 	req, err := http.NewRequest(http.MethodGet, ts.URL, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	// Send the first request, should be allowed
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		t.Fatal(err)
@@ -79,7 +70,6 @@ func TestRateLimiter_Handle(t *testing.T) {
 		t.Errorf("Expected first request to return status code %d, but got %d", http.StatusOK, res.StatusCode)
 	}
 
-	// Send the second request, should be allowed
 	res, err = http.DefaultClient.Do(req)
 	if err != nil {
 		t.Fatal(err)
@@ -88,7 +78,6 @@ func TestRateLimiter_Handle(t *testing.T) {
 		t.Errorf("Expected second request to return status code %d, but got %d", http.StatusOK, res.StatusCode)
 	}
 
-	// Send the third request, should be denied
 	res, err = http.DefaultClient.Do(req)
 	if err != nil {
 		t.Fatal(err)
@@ -97,10 +86,8 @@ func TestRateLimiter_Handle(t *testing.T) {
 		t.Errorf("Expected third request to return status code %d, but got %d", http.StatusTooManyRequests, res.StatusCode)
 	}
 
-	// Wait for the interval to pass
 	time.Sleep(time.Second * 2)
 
-	// Send the fourth request, should be allowed
 	res, err = http.DefaultClient.Do(req)
 	if err != nil {
 		t.Fatal(err)
