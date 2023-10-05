@@ -1,7 +1,9 @@
 "use client";
 import EnrollmentHoc from "@/app/auth/auth";
 
-import { WInput, WButton , WCardAuth } from "@/components";
+import { WInput, WButton , WCardAuth, WLink } from "@/components";
+
+import { Box } from "@mui/material";
 
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 
@@ -39,6 +41,15 @@ export default function RegisterPage() {
             fullWidth
             type="password"
           />
+          <Box>
+            <span style={{ marginRight: "10px" }}>¿Ya tienes una cuenta? </span>
+            <WLink
+              text="¡Entra aquí!"
+              underline="none"
+              displayType="inline-flex"
+              href='/auth/login'
+            />
+          </Box>
         <WButton typeColor="primary" text="Registrarse" size="large" />
       </WCardAuth>
     </EnrollmentHoc>
