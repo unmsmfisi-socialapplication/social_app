@@ -8,6 +8,9 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
 )
 
+var countPost int64 = 0
+var localPost = []domain.Post{}
+
 type PostsDBRepository struct {
 	db *sql.DB
 }
@@ -17,10 +20,11 @@ func NewPostDBRepository(database *sql.DB) application.PostRepository {
 }
 
 func (p *PostsDBRepository) CreatePost(post domain.CreatePost) (*domain.Post, error) {
+	countPost++
 
-	return &domain.Post{
-		Id:            1,
-		UserId:        1,
+	dbPost := &domain.Post{
+		Id:            countPost,
+		UserId:        post.UserId,
 		Title:         post.Title,
 		Description:   post.Description,
 		HasMultimedia: post.HasMultimedia,
@@ -28,5 +32,9 @@ func (p *PostsDBRepository) CreatePost(post domain.CreatePost) (*domain.Post, er
 		Multimedia:    post.Multimedia,
 		InsertionDate: time.Now(),
 		UpdateDate:    time.Now(),
-	}, nil
+	}
+
+	localPost = append(localPost, *dbPost)
+
+	return dbPost, nil
 }
