@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Social</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="student_network">STUDENT NETWORK</string>
+    <string name="register">Registro</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="forgot_password_ask">¿Olvidaste la contraseña?</string>
+    <string name="create_new_account">Crear una nueva cuenta</string>
+    <string name="continue_with_google">Continuar con Google</string>
+    <string name="error_email">Correo electronico inválido</string>
+    <string name="error_password">Contraseña inválida</string>
+    <string name="or_enter_with">O ingresa con</string>
+    <string name="remember_me">Recuérdame</string>
+    <string name="google">Google</string>
+    <string name="mastodon">Mastodon</string>
+    <string name="sign_up">Regístrate</string>
+    <string name="does_not_count">¿No tienes una cuenta?</string>
+    <string name="none"></string>
+    <string name="onboarding_register">Registrate</string>
+    <string name="onboarding_connected_world_title">Encuentra amigos y obtén inspiración</string>
+    <string name="onboarding_connected_world_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
+    <string name="onboarding_remote_meeting_title">Conoce comunidades increíbles y divertidas</string>
+    <string name="onboarding_remote_meeting_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
+    <string name="onboarding_online_friends_title">Chatea con amigos</string>
+    <string name="onboarding_online_friends_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
+
+</resources>

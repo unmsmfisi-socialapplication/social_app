@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "registration",
+    "type": "object",
+    "properties": {
+      "user_id": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "firstname": {
+        "type": "string",
+        "minLength": 1
+      },
+      "lastname": {
+        "type": "string",
+        "minLength": 1
+      },
+      "user": {
+        "type": "string",
+        "minLength": 3
+      },
+      "email": {
+        "type": "string",
+        "format": "email"
+      },
+      "birthdate": {
+        "type": "string",
+        "format": "date"
+      },
+      "actor_type": {
+        "type": "string",
+        "enum": ["person", "Organization"]
+      },
+      "gender": {
+        "type": "string",
+        "enum": ["male", "female", "other"]
+      },
+      "password": {
+        "type": "string",
+        "minLength": 6
+      },
+      "created_at": {
+        "type": "string",
+        "format": "date-time"
+      }
+    },
+    "required": ["user_id", "firstname", "lastname", "user", "email", "birthdate", "gender", "password", "created_at"]
+  }
+  
