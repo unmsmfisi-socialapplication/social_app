@@ -48,6 +48,5 @@ func (slh *SelectTopicHandler) HandleSelectTopic(w http.ResponseWriter, r *http.
 	}
 
 	utils.SendJSONResponse(w, http.StatusOK, "OK", "Insertion successful")
-	return
 
 }
