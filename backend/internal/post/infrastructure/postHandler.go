@@ -17,7 +17,7 @@ func NewPostHandler(useCase application.PostUseCaseInterface) *PostHandler {
 	return &PostHandler{useCase: useCase}
 }
 
-func (ph *PostHandler) HandlePost(w http.ResponseWriter, r *http.Request) {
+func (ph *PostHandler) HandleCreatePost(w http.ResponseWriter, r *http.Request) {
 	var requestData domain.CreatePost
 
 	if err := json.NewDecoder(r.Body).Decode(&requestData); err != nil {
@@ -26,6 +26,7 @@ func (ph *PostHandler) HandlePost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	postCreate, err := ph.useCase.CreatePost(requestData)
+
 	if err != nil {
 		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
 		return
