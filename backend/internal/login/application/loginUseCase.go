@@ -32,8 +32,7 @@ func (l *LoginUseCase) Authenticate(username, password string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-
-	if user == nil {
+	if username != user.Username {
 		return false, ErrUserNotFound
 	}
 
