@@ -4,18 +4,22 @@ import Button from "@mui/material/Button";
 import "./index.scss";
 
 interface WButtonProps {
+  id?: string;
   typeColor?: "primary" | "secondary" | "disabled";
+  type?: "submit" ;
   text?: string;
   size?: "large";
   disabled?: boolean;
 }
 
 
-const WButton: React.FC<WButtonProps> = ({ disabled, typeColor, text, size }) => {
+const WButton: React.FC<WButtonProps> = ({ id , disabled, typeColor, text, type, size }) => {
   const buttonClass = `button typeButton--${disabled ? "disabled" : typeColor}`;
   return (
     <Button
+      id={id}
       style={{ minWidth: size === "large" ? "100%" : "auto" }}
+      type = {type}
       className={buttonClass}
       size={size}
       disabled={disabled}
