@@ -3,7 +3,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import "./index.scss";
 
-interface WButtonProps {
+export interface WButtonProps {
   id?: string;
   typeColor?: "primary" | "secondary" | "disabled";
   type?: "submit" ;

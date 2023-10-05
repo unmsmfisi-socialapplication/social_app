@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Layout from "../layout"
 import { Button } from "@mui/material";
-import { WButton, WInput, WCircleIcon  } from "@/components";
+import { WButton, WInput, WCircleIcon } from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CheckIcon from "@mui/icons-material/Check"
 import AllInclusive from "@mui/icons-material/AllInclusive"
@@ -12,8 +12,35 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 
+import CustomDialog, { CustomDialogProps } from "@/components/molecules/customDialog/customDialog";
+
 export default function TestPage() {
-    const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
+
+  const modalProps: CustomDialogProps = {
+    title: {
+      textContent: "!La foto no cumple con las especificaciones, subir otra foto¡",
+      typeColor: "error",
+      fontSize: 20,
+      fontWeight: 700,
+    },
+    content: {
+      textContent: "Peso max (10 mb)\nTamaño max (851x315 px)\nLa plataforma acepta estas especificaciones para la foto de portada.",
+      fontSize: 14,
+      fontWeight: 400,
+    },
+    subtitle: {
+      textContent: "Especificaciones de foto de portada",
+      fontSize: 16,
+      fontWeight: 700,
+    },
+    size: "xs",
+    buttonProps: {
+      text: "Cargar Foto",
+      typeColor: "primary",
+      size: "large",
+    }
+  }
 
   const handleCount = () => {
     setCount(count + 1);
@@ -30,7 +57,7 @@ export default function TestPage() {
           backgroundColor: "red",
         }}
       >
-        <WButton typeColor="primary" text="DD" disabled/>
+        <WButton typeColor="primary" text="DD" disabled />
         <WButton typeColor="secondary" text="button" size="large" />
         <WButton text="test" size="large" disabled />
       </div>
@@ -38,25 +65,25 @@ export default function TestPage() {
       <button onClick={handleCount}>presioname</button>
       <div>
 
-      <WInput placeholder="Nombre" error={true} errorMessage="error"/>
-      
-      <WInput
-        typeColor="primary"
-        icon={<AccountCircleIcon />} // Icono de usuario
-        placeholder="Nombre de usuario"
-        fullWidth
-      />
+        <WInput placeholder="Nombre" error={true} errorMessage="error" />
 
-      <WInput
-        typeColor="secondary"
-        icon={<AccountCircleIcon />} 
-        placeholder="Correo electrónico"
-        fullWidth
-      />
-      </div> 
+        <WInput
+          typeColor="primary"
+          icon={<AccountCircleIcon />} // Icono de usuario
+          placeholder="Nombre de usuario"
+          fullWidth
+        />
 
-    <div
-      //Estilos a usar para la caja 
+        <WInput
+          typeColor="secondary"
+          icon={<AccountCircleIcon />}
+          placeholder="Correo electrónico"
+          fullWidth
+        />
+      </div>
+
+      <div
+        //Estilos a usar para la caja 
         style={{
           width: "500px",
           height: "150px",
@@ -81,16 +108,19 @@ export default function TestPage() {
           placeholder="Contraseña"
           size="small"
           fullWidth
-          type="password" 
+          type="password"
         />
-    </div>
+      </div>
       <WCircleIcon iconSize={30} icon={CheckIcon} />
       <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
-      <div style={{display:"flex",flexDirection:"column",gap:"10px", margin:"10px"}} >
-        <WTag text="Home"  icon={CottageOutlinedIcon}  isActive/>
-        <WTag text="Explorer" icon={SearchIcon}  />
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px", margin: "10px" }} >
+        <WTag text="Home" icon={CottageOutlinedIcon} isActive />
+        <WTag text="Explorer" icon={SearchIcon} />
         <WTag text="Notifications" icon={NotificationsNoneIcon} />
         <WTag text="Messages" icon={MailOutlineIcon} />
+      </div>
+      <div>
+        <CustomDialog title={modalProps.title} content={modalProps.content} subtitle={modalProps.subtitle} size={modalProps.size} buttonProps={modalProps.buttonProps} />
       </div>
     </Layout>
   );
