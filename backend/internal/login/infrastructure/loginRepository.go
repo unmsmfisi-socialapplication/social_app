@@ -16,17 +16,8 @@ func NewUserDBRepository(database *sql.DB) application.UserRepository {
 }
 
 func (u *UserDBRepository) GetUserByUsername(username string) (*domain.User, error) {
-	query := `SELECT user_name, password FROM SOC_APP_USERS WHERE user_name = $1`
-
-	row := u.db.QueryRow(query, username)
-
-	var user domain.User
-	err := row.Scan(&user.Username, &user.Password)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, nil
-		}
-		return nil, err
-	}
-	return &user, nil
+	return &domain.User{
+		Username: "my_user",
+		Password: "$2y$10$JFvY.pJMUgQqPYYGvPWIBOdSvrfLKpvDTbYKCU4VCt1SRA3wdY7Iq", // this is gonna be in https://bcrypt.online/ for: "hopefully this is not a plain text password" (without quotes)
+	}, nil
 }

@@ -1,4 +1,7 @@
-package test
+//go:build unit
+// +build unit
+
+package infrastructure
 
 import (
 	"bytes"
@@ -8,8 +11,6 @@ import (
 	"testing"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
-
-	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 )
 
 type mockLoginUsecase struct {
@@ -41,11 +42,19 @@ func TestHandleLogin(t *testing.T) {
 			inputBody:  `{"username": "test", "password": "wrongpassword"}`,
 			mockAuth:   func(username, password string) (bool, error) { return false, application.ErrInvalidCredentials },
 			wantStatus: http.StatusUnauthorized,
-			wantBody:   `{"response":"Invalid password","status":"NOPASSWORD"}`,
+			wantBody:   `{"response":"Invalid credentials","status":"BADCREDENTIALS"}`,
 		},
 		{
 			name:       "Bad request",
 			inputBody:  `{"username": "test"`,
+			mockAuth:   func(username, password string) (bool, error) { return false, nil },
+			wantStatus: http.StatusBadRequest,
+			wantBody:   `{"response":"Invalid request payload","status":"ERROR"}`,
+		},
+
+		{
+			name:       "Bad request",
+			inputBody:  `{"username": "test","hashedpassword:"test"}`,
 			mockAuth:   func(username, password string) (bool, error) { return false, nil },
 			wantStatus: http.StatusBadRequest,
 			wantBody:   `{"response":"Invalid request payload","status":"ERROR"}`,
@@ -77,7 +86,7 @@ func TestHandleLogin(t *testing.T) {
 			mockUseCase := &mockLoginUsecase{
 				AuthenticateFn: tt.mockAuth,
 			}
-			handler := infrastructure.NewLoginHandler(mockUseCase)
+			handler := NewLoginHandler(mockUseCase)
 			recorder := httptest.NewRecorder()
 
 			handler.HandleLogin(recorder, req)
