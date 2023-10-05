@@ -69,6 +69,7 @@ export default function LoginPage() {
               text="Registrarse"
               underline="none"
               displayType="inline-flex"
+              href='/auth/register'
             />
           </Box>
           <WButton type="submit" text="Iniciar Sesión" size="large" />
