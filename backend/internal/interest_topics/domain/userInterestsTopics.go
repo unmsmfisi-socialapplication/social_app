@@ -1,4 +1,4 @@
-package entity
+package domain
 
 type UserInterestTopics struct {
 	User_interest_id string `json:"user_interest_id"`

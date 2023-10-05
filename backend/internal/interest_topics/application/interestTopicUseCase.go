@@ -3,7 +3,6 @@ package application
 import (
 	"errors"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/domain/entity"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/domain"
 )
 
@@ -26,7 +25,7 @@ func NewInterestTopicsUseCase(repo domain.UserInterestsRepository) *InterestTopi
 }
 
 func (itus *InterestTopicsUseCase) SetInterestTopics(user_id, interest_id string) (bool, error) {
-	userInterest := &entity.UserInterestTopics{
+	userInterest := &domain.UserInterestTopics{
 		User_id:     user_id,
 		Interest_id: interest_id,
 	}

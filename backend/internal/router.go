@@ -16,7 +16,6 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 
 	interest_topics_application "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/application"
-	interest_topics_repository "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/infraestructure/repository"
 	interest_topics_infraestructure "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/infraestructure"
 
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
@@ -54,7 +53,7 @@ func Router() http.Handler {
 	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
 
 	//interesTopics
-	dbinterestTopics := interest_topics_repository.NewUserInterestsDBRepository(dbInstance)
+	dbinterestTopics := interest_topics_infraestructure.NewUserInterestsDBRepository(dbInstance)
 	selectTopicUseCase := interest_topics_application.NewInterestTopicsUseCase(dbinterestTopics)
 	selecTopicHandler := interest_topics_infraestructure.NewSelectTopicHandler(selectTopicUseCase)
 
