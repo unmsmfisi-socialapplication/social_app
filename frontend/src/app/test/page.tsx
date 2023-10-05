@@ -11,9 +11,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
+import AvatarInput from "@/components/molecules/AvatarInput";
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
+    const [avatar,setAvatar] = useState<File | undefined>()
 
   const handleCount = () => {
     setCount(count + 1);
@@ -92,6 +94,7 @@ export default function TestPage() {
         <WTag text="Notifications" icon={NotificationsNoneIcon} />
         <WTag text="Messages" icon={MailOutlineIcon} />
       </div>
+      <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar)=>setAvatar(avatar)} />
     </Layout>
   );
 }
