@@ -1,11 +1,9 @@
 import pandas as pd
-import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
-import matplotlib.pyplot as plt
 import re
 from bs4 import BeautifulSoup
 import nltk
