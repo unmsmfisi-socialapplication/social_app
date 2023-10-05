@@ -44,7 +44,7 @@ export default function RegisterPage() {
           <Box>
             <span style={{ marginRight: "10px" }}>¿Ya tienes una cuenta? </span>
             <WLink
-              text="Entra aquí"
+              text="¡Entra aquí!"
               underline="none"
               displayType="inline-flex"
               href='/auth/login'
