@@ -11,13 +11,19 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
+import AvatarInput from "@/components/molecules/AvatarInput";
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
+    const [password, setPassword] = useState('');
+    const [avatar,setAvatar] = useState<File | undefined>()
 
   const handleCount = () => {
     setCount(count + 1);
     alert(count);
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
   return (
     <Layout>
@@ -54,6 +60,17 @@ export default function TestPage() {
         fullWidth
       />
       </div> 
+      
+      <WInput
+        value={password}
+        name="password"
+        placeholder="Contraseña"
+        type="password"
+        onChange={handleChange}
+        fullWidth
+      />
+
+
 
     <div
       //Estilos a usar para la caja 
@@ -92,6 +109,7 @@ export default function TestPage() {
         <WTag text="Notifications" icon={NotificationsNoneIcon} />
         <WTag text="Messages" icon={MailOutlineIcon} />
       </div>
+      <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar)=>setAvatar(avatar)} />
     </Layout>
   );
 }
