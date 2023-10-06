@@ -67,7 +67,7 @@ func (r *CommentRepository) GetCommentByID(commentID int64) (*domain.Comment, er
 }
 
 //Code to update a comment in the database
-func (r *CommentRepository) UpdateComment(comment *domain.Comment) error {
+func (r *CommentRepository) UpdateComment(commentID int64, comment *domain.Comment) error {
     query := `
         UPDATE SOC_APP_POSTS_COMMENTS
         SET user_id = $2, post_id = $3, comment = $4, update_date = $5, parent_comment_id = $6
@@ -75,7 +75,7 @@ func (r *CommentRepository) UpdateComment(comment *domain.Comment) error {
     `
     _, err := r.db.Exec(
         query,
-        comment.CommentID,
+        commentID,
         comment.UserID,
         comment.PostID,
         comment.Comment,
