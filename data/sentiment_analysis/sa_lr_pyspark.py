@@ -8,8 +8,23 @@ from pyspark.ml.evaluation import BinaryClassificationEvaluator
 from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 
+from pyspark.sql.functions import monotonically_increasing_id, lit
+from pyspark.sql.types import StringType
+import requests
+
 def read_file(fileUrl, spark):
     df = spark.read.csv(fileUrl, sep=",", inferSchema=True, header=False)
+    return df
+
+def read_url(fileUrl, spark):
+    response = requests.get(fileUrl)
+    data = response.text.splitlines()
+    
+    df = spark.createDataFrame(data, StringType())
+    df = df.withColumn("id", monotonically_increasing_id())
+    df = df.withColumn("label", lit(None))
+    df = df.withColumnRenamed("value", "tweet")
+    
     return df
 
 
@@ -84,7 +99,8 @@ def logistic_regression(train_data, test_data):
 
 if __name__ == "__main__":
     spark = SparkSession.builder.appName("SocialApp").getOrCreate()
-    url = ""  # Provide the path to file
+    #url = ""  # Provide the path to file
+    url="https://twitter.com/elonmusk/status/1519480761749016577"
     df = read_file(url, spark)
     df = pre_process(df)
     train_data, test_data = train_test_split(df)
