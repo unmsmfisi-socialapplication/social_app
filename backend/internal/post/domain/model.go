@@ -23,7 +23,10 @@ type MastodonContent struct {
 }
 
 type PixelfedContent struct {
-    // Pixelfed-specific fields
+    Caption   string   `json:"caption"`  // Caption in Pixelfed
+    ImageURLs []string `json:"imageUrls"` // URLs of images in Pixelfed
+    Tags      []string `json:"tags"`      // Tags in Pixelfed
+    // Other Pixelfed-specific fields
 }
 
 type CreatePost struct {
