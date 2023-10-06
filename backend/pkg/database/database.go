@@ -4,14 +4,14 @@ import (
 	"database/sql"
 
 	_ "github.com/lib/pq"
-	config "github.com/unmsmfisi-socialapplication/social_app"
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 var db *sql.DB
 
 func InitDatabase() error {
 	var err error
-	db, err = sql.Open("postgres", config.LoadConfig().DBConnectionString)
+	db, err = sql.Open("postgres", utils.LoadConfig().DBConnectionString)
 
 	return err
 }
