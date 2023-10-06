@@ -12,11 +12,8 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 
-import { CustomDialogProps } from "@/components/molecules/customDialog/customDialog";
-import {WCustomDialog} from "@/components";
-
 export default function TestPage() {
-  const [count, setCount] = useState(0);
+    const [count, setCount] = useState(0);
 
   const modalProps: CustomDialogProps = {
     title: {
@@ -40,6 +37,9 @@ export default function TestPage() {
   const handleCount = () => {
     setCount(count + 1);
     alert(count);
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
   return (
     <Layout>
@@ -69,13 +69,13 @@ export default function TestPage() {
           fullWidth
         />
 
-        <WInput
-          typeColor="secondary"
-          icon={<AccountCircleIcon />}
-          placeholder="Correo electrónico"
-          fullWidth
-        />
-      </div>
+      <WInput
+        typeColor="secondary"
+        icon={<AccountCircleIcon />} 
+        placeholder="Correo electrónico"
+        fullWidth
+      />
+      </div> 
 
       <div
         //Estilos a usar para la caja 
@@ -113,9 +113,6 @@ export default function TestPage() {
         <WTag text="Explorer" icon={SearchIcon} />
         <WTag text="Notifications" icon={NotificationsNoneIcon} />
         <WTag text="Messages" icon={MailOutlineIcon} />
-      </div>
-      <div>
-        <WCustomDialog title={modalProps.title} content={modalProps.content} subtitle={modalProps.subtitle} size={modalProps.size} buttonProps={modalProps.buttonProps} />
       </div>
     </Layout>
   );
