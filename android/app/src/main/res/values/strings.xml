@@ -41,4 +41,5 @@
     <string name="resend_code">Reenviar código</string>
     <string name="title_message">Mensajes</string>
     <string name="send_message">Escribe tu mensaje</string>
+
 </resources>
