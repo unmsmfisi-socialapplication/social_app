@@ -69,6 +69,12 @@ func TestHandleHandleSelectTopic(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			req, err := http.NewRequest(http.MethodPost, "/interestTopics", bytes.NewBufferString(tt.inputBody))
+
+			if req.URL.Path != "/interestTopics" {
+				t.Errorf("expected request to /interestTopics, got %s", req.URL.Path)
+				return
+			}
+
 			if err != nil {
 				t.Fatalf("could not create request: %v", err)
 			}
