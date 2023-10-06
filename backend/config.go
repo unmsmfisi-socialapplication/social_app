@@ -3,6 +3,7 @@ package config
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 )
@@ -36,7 +37,6 @@ func CheckEnvVariables() error {
 	requiredVariables := []string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_DBNAME", "DB_SSLMODE"}
 
 	for _, variable := range requiredVariables {
-		fmt.Println(os.Getenv(variable))
 		if os.Getenv(variable) == "" {
 			return fmt.Errorf("Environment variable %s is not set", variable)
 		}
@@ -45,14 +45,14 @@ func CheckEnvVariables() error {
 	return nil
 }
 
-func LoadConfig() *Config {
+func LoadConfig() (*Config, error) {
 
 	LoadEnvFromFile(".env")
 
 	err := CheckEnvVariables()
 	if err != nil {
-		fmt.Println("Environment variables are incorrectly set")
-		return nil
+		log.Fatal("Environment variables are incorrectly set")
+		return nil, err
 	}
 
 	return &Config{
@@ -64,5 +64,5 @@ func LoadConfig() *Config {
 			os.Getenv("DB_NAME"),
 			os.Getenv("DB_SSLMODE"),
 		),
-	}
+	}, nil
 }
