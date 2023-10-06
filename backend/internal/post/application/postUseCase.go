@@ -104,7 +104,10 @@ func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
+	// Convert the JSON response to a string
 	responseString := string(jsonResponse)
 
+	// Send the JSON response as a string
 	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", responseString)
+
 }
