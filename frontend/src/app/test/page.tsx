@@ -15,11 +15,15 @@ import AvatarInput from "@/components/molecules/AvatarInput";
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
+    const [password, setPassword] = useState('');
     const [avatar,setAvatar] = useState<File | undefined>()
 
   const handleCount = () => {
     setCount(count + 1);
     alert(count);
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
   return (
     <Layout>
@@ -56,6 +60,17 @@ export default function TestPage() {
         fullWidth
       />
       </div> 
+      
+      <WInput
+        value={password}
+        name="password"
+        placeholder="Contraseña"
+        type="password"
+        onChange={handleChange}
+        fullWidth
+      />
+
+
 
     <div
       //Estilos a usar para la caja 
