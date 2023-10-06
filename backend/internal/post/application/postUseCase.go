@@ -2,7 +2,6 @@ package application
 
 import (
 	"errors"
-	"time"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
 )
@@ -33,7 +32,7 @@ func (uc *PostUseCase) CreatePost(postData domain.CreatePost) (map[string]*domai
 
 	// Create and store the post for Mastodon if applicable
 	if postData.Mastodon != nil {
-		mastodonPost, err := uc.repo.CreatePost(postData.Mastodon)
+		mastodonPost, err := uc.repo.CreatePost(postData)
 		if err != nil {
 			return nil, err
 		}
@@ -42,14 +41,12 @@ func (uc *PostUseCase) CreatePost(postData domain.CreatePost) (map[string]*domai
 
 	// Create and store the post for Pixelfed if applicable
 	if postData.Pixelfed != nil {
-		pixelfedPost, err := uc.repo.CreatePost(postData.Pixelfed)
+		pixelfedPost, err := uc.repo.CreatePost(postData)
 		if err != nil {
 			return nil, err
 		}
 		createdPosts["pixelfed"] = pixelfedPost
 	}
-
-	// Add logic to create and store posts for other social networks as needed
 
 	return createdPosts, nil
 }
