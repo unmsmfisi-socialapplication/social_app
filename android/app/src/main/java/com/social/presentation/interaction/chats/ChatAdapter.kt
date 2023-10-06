@@ -9,7 +9,7 @@ import com.social.databinding.ContainerSendMessageBinding
 import com.social.domain.model.ChatMessageUser
 
 class ChatAdapter(
-    private val chatMessage: List<ChatMessageUser>,
+    val chatMessage: List<ChatMessageUser>,
     private val receiverProfileImage: Bitmap,
     private val sendProfileImage: Bitmap,
     private val senderId: String
