@@ -3,6 +3,7 @@
 #"!pip install transformers
 
 # Importar
+from textwrap import wrap
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering, pipeline
 the_model = 'mrm8488/distill-bert-base-spanish-wwm-cased-finetuned-spa-squad2-es'
 tokenizer = AutoTokenizer.from_pretrained(the_model, do_lower_case=False)
@@ -26,7 +27,6 @@ nlp = pipeline('question-answering', model=model, tokenizer=tokenizer)
 salida = nlp({'question':pregunta, 'context':contexto})
 print(salida)
 
-from textwrap import wrap
 
 def pregunta_respuesta(model, nlp):
 
