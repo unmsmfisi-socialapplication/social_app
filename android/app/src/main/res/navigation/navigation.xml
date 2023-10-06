@@ -56,4 +56,9 @@
             android:id="@+id/action_confirmationEmailFragment_to_codeConfirmationFragment"
             app:destination="@id/codeConfirmationFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/listChatsFragment"
+        android:name="com.social.presentation.interaction.chats.ListChatsFragment"
+        android:label="fragment_list_chat"
+        tools:layout="@layout/fragment_list_chat" />
 </navigation>

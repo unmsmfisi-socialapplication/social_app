@@ -7,6 +7,9 @@
     <color name="color01">#007AFF</color>
     <color name="color02">#D8F1FE</color>
     <color name="color03">#FFC4C4C4</color>
+    <color name="color04">#66AEFD</color>
+    <color name="color05">#BFD8F4</color>
+    <color name="color06">#666262</color>
     <color name="gray">#C0C0C0</color>
     <color name="transparent">#00FF0000</color>
 </resources>
