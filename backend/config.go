@@ -12,7 +12,7 @@ type Config struct {
 	AppPort            string
 }
 
-func loadEnvFromFile(filename string) {
+func LoadEnvFromFile(filename string) {
 	file, _ := os.Open(filename)
 	defer file.Close()
 
@@ -32,7 +32,7 @@ func loadEnvFromFile(filename string) {
 	}
 }
 
-func checkEnvVariables() error {
+func CheckEnvVariables() error {
 	requiredVariables := []string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_DBNAME", "DB_SSLMODE"}
 
 	for _, variable := range requiredVariables {
@@ -47,9 +47,9 @@ func checkEnvVariables() error {
 
 func LoadConfig() *Config {
 
-	loadEnvFromFile(".env")
+	LoadEnvFromFile(".env")
 
-	err := checkEnvVariables()
+	err := CheckEnvVariables()
 	if err != nil {
 		fmt.Println("Environment variables are incorrectly set")
 		return nil
