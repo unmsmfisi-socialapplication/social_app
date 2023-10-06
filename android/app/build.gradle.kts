@@ -66,6 +66,9 @@ dependencies {
 
 
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
 
     val roomVersion = "2.5.2"
     val composeUiVersion = "1.5.1"
@@ -95,7 +98,8 @@ dependencies {
     //picasso
     //implementation("com.squareup.picasso:picasso:2.71828")
     //implementation("com.github.danysantiago:sendgrid-android:1")
-
+    implementation("org.mockito:mockito-core:3.10.0")
+    implementation("com.makeramen:roundedimageview:2.3.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.7.2")

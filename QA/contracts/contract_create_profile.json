@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "profile_picture": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "contentMediaType": "image/*"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "enum": [
+                "camera"
+              ]
+            }
+          },
+          "required": [
+            "source"
+          ]
+        }
+      ]
+    },
+    "username": {
+      "type": "string"
+    },
+    "biography": {
+      "type": "string",
+      "maxLength": 160
+    }
+  },
+  "required": [
+    "username"
+  ]
+}
