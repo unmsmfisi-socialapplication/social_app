@@ -1,10 +1,6 @@
 //TODO: Create function reutilization file for all the constant values
-import { passwordCompare } from "./Constant";
+import { passwordMismatchError } from "./Constant";
 
-export function validatePassword(password1: string, password2: string): string | null {
-    if (password1 === password2) {
-      return null; // The passwords match
-    } else {
-      return passwordCompare;
-    }
-  }
+export function validatePassword(password1: string, password2: string): boolean {
+  return password1 === password2;
+}
