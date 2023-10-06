@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Layout from "../layout"
 import { Button } from "@mui/material";
-import { WButton, WInput, WCircleIcon } from "@/components";
+import { WButton, WInput, WCircleIcon  } from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CheckIcon from "@mui/icons-material/Check"
 import AllInclusive from "@mui/icons-material/AllInclusive"
@@ -11,28 +11,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
+import AvatarInput from "@/components/molecules/AvatarInput";
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
-
-  const modalProps: CustomDialogProps = {
-    title: {
-      textContent: "!La foto no cumple con las especificaciones, subir otra foto¡",
-      typeColor: "error",
-    },
-    content: {
-      textContent: "Peso max (10 mb)\nTamaño max (851x315 px)\nLa plataforma acepta estas especificaciones para la foto de portada.",
-    },
-    subtitle: {
-      textContent: "Especificaciones de foto de portada",
-    },
-    size: "xs",
-    buttonProps: {
-      text: "Cargar Foto",
-      typeColor: "primary",
-      size: "large",
-    }
-  }
+    const [password, setPassword] = useState('');
+    const [avatar,setAvatar] = useState<File | undefined>()
 
   const handleCount = () => {
     setCount(count + 1);
@@ -52,7 +36,7 @@ export default function TestPage() {
           backgroundColor: "red",
         }}
       >
-        <WButton typeColor="primary" text="DD" disabled />
+        <WButton typeColor="primary" text="DD" disabled/>
         <WButton typeColor="secondary" text="button" size="large" />
         <WButton text="test" size="large" disabled />
       </div>
@@ -60,14 +44,14 @@ export default function TestPage() {
       <button onClick={handleCount}>presioname</button>
       <div>
 
-        <WInput placeholder="Nombre" error={true} errorMessage="error" />
-
-        <WInput
-          typeColor="primary"
-          icon={<AccountCircleIcon />} // Icono de usuario
-          placeholder="Nombre de usuario"
-          fullWidth
-        />
+      <WInput placeholder="Nombre" error={true} errorMessage="error"/>
+      
+      <WInput
+        typeColor="primary"
+        icon={<AccountCircleIcon />} // Icono de usuario
+        placeholder="Nombre de usuario"
+        fullWidth
+      />
 
       <WInput
         typeColor="secondary"
@@ -76,9 +60,20 @@ export default function TestPage() {
         fullWidth
       />
       </div> 
+      
+      <WInput
+        value={password}
+        name="password"
+        placeholder="Contraseña"
+        type="password"
+        onChange={handleChange}
+        fullWidth
+      />
 
-      <div
-        //Estilos a usar para la caja 
+
+
+    <div
+      //Estilos a usar para la caja 
         style={{
           width: "500px",
           height: "150px",
@@ -103,19 +98,19 @@ export default function TestPage() {
           placeholder="Contraseña"
           size="small"
           fullWidth
-          type="password"
+          type="password" 
         />
-      </div>
+    </div>
       <WCircleIcon iconSize={30} icon={CheckIcon} />
       <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px", margin: "10px" }} >
-        <WTag text="Home" icon={CottageOutlinedIcon} isActive />
-        <WTag text="Explorer" icon={SearchIcon} />
+      <div style={{display:"flex",flexDirection:"column",gap:"10px", margin:"10px"}} >
+        <WTag text="Home"  icon={CottageOutlinedIcon}  isActive/>
+        <WTag text="Explorer" icon={SearchIcon}  />
         <WTag text="Notifications" icon={NotificationsNoneIcon} />
         <WTag text="Messages" icon={MailOutlineIcon} />
       </div>
+      <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar)=>setAvatar(avatar)} />
     </Layout>
   );
 }
-
 
