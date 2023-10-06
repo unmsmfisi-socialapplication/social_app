@@ -1,18 +1,18 @@
-import { validarContraseñas } from '../utilities/Functions';
+import { validatePassword } from '../utilities/Functions';
 import { passwordCompare } from '../utilities/Constant';
 
-describe('Validar Contraseñas', () => {
-  it('Debería devolver nulo si las contraseñas coinciden', () => {
-    const contraseña1 = 'contraseña123';
-    const contraseña2 = 'contraseña123';
-    const resultado = validarContraseñas(contraseña1, contraseña2);
-    expect(resultado).toBeNull();
+describe('Validate passwords', () => {
+  it('It should return null if the passwords match', () => {
+    const password1 = 'password123';
+    const password2 = 'password123';
+    const result = validatePassword(password1, password2);
+    expect(result).toBeNull();
   });
 
-  it('Debería devolver un mensaje de error si las contraseñas no coinciden', () => {
-    const contraseña1 = 'contraseña123';
-    const contraseña2 = 'otracontraseña';
-    const resultado = validarContraseñas(contraseña1, contraseña2);
-    expect(resultado).toBe(passwordCompare);
+  it('It should return an error message if the passwords do not match', () => {
+    const password1 = 'password123';
+    const password2 = 'anotherpassword';
+    const result = validatePassword(password1, password2);
+    expect(result).toBe(passwordCompare);
   });
 });
