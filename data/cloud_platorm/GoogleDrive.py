@@ -5,7 +5,7 @@
 
 directorio_credenciales = 'credentials_module.json'
 
-# INICIAR SESION
+# log in
 def login():
     GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = directorio_credenciales
     gauth = GoogleAuth()
@@ -43,14 +43,14 @@ def subir_archivo(ruta_archivo,id_folder):
 
 
 def test_subir_archivo(self):
-        # Define a local file path for the test
-        ruta_archivo = 'ruta_de_prueba/fondo_prueba.jpg'   
+    #Define a local file path for the test
+    ruta_archivo = 'ruta_de_prueba/fondo_prueba.jpg'   
 
-         # Define a test folder ID in Google Drive
-        id_folder = 'ID_DE_LA_CARPETA_DE_PRUEBA'   
+    #Define a test folder ID in Google Drive
+    id_folder = 'ID_DE_LA_CARPETA_DE_PRUEBA'   
 
-        # Execute the subir_archivo function with the test parameters
-        subir_archivo(ruta_archivo, id_folder)
+    #Execute the subir_archivo function with the test parameters
+    subir_archivo(ruta_archivo, id_folder)
 
          
 
