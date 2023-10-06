@@ -11,11 +11,9 @@ var (
 	ErrEmailInUse = errors.New("EMAIL_IN_USE")
 	ErrFormat = errors.New("INVALID_PASSWORD")
 	ErrPhone = errors.New("INVALID_PHONE")
-	nombreErr=errors.New("PLANTILLA_ERROR")
-	ErrUserNotFound       = errors.New("usuario no encontrado")
-	ErrInvalidCredentials = errors.New("credenciales inválidas")
+	ErrUserNotFound       = errors.New("user not found")
+	ErrInvalidCredentials = errors.New("invalid credentials")
 )
-
 type UserRepository interface {
 	GetUserByEmail(email string) (*domain.User, error)
 	InsertUser(newUser *domain.User) (*domain.User, error)
@@ -67,5 +65,8 @@ func (r *RegistrationUseCase) RegisterUser(phone, email, username,password strin
 		return nil, err
 	}
     newUser, err = r.repo.InsertUser(newUser)
+	if err != nil {
+		return nil, err
+	}
 	return newUser, nil
 }

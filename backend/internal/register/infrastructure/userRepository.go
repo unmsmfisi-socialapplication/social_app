@@ -40,7 +40,7 @@ func (u *UserDBRepository) InsertUser(newUser *domain.User) (*domain.User, error
 	fmt.Println("Insertando usuario en la base de datos...")
 	tx,er:=u.db.Begin()
 	if er!=nil{
-		fmt.Println("Error al iniciar la transaccion")
+		fmt.Println("Error while starting the transaction")
 	}
 	
 	_,err:=tx.Exec(query,newUser.Phone,newUser.Email,newUser.User_name,newUser.Password) 
