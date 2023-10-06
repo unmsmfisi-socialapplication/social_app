@@ -29,32 +29,39 @@ func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Requ
         return
     }
 
-    // Create and publish posts on selected social networks
     var mastodonPost *domain.Post
     var pixelfedPost *domain.Post
 
-    if requestData.MastodonData != (domain.CreatePost{}) {
-        mastodonPost, err := ph.useCase.CreatePost(requestData.MastodonData)
-        if err != nil {
-            utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
-            return
-        }
-    }
+    // if requestData.MastodonData != nil {
+        // mastodonPost, err := ph.useCase.CreatePost(*requestData.MastodonData)
+        // if err != nil {
+        // 	utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
+        // 	return
+        // }
+    // }
 
-    if requestData.PixelfedData != (domain.CreatePost{}) {
-        pixelfedPost, err := ph.useCase.CreatePost(requestData.PixelfedData)
-        if err != nil {
-            utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
-            return
-        }
-    }
+    // if requestData.PixelfedData != nil {
+        // pixelfedPost, err := ph.useCase.CreatePost(*requestData.PixelfedData)
+        // if err != nil {
+        // 	utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
+        // 	return
+        // }
+    //  }
 
-
-    // Send a response with the created posts (you can customize this part)
     response := map[string]interface{}{
         "mastodon": mastodonPost,
         "pixelfed": pixelfedPost,
     }
 
-    utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", response)
+    jsonResponse, err := json.Marshal(response)
+    if err != nil {
+        utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
+        return
+    }
+
+    // Convert the JSON response to a string
+    responseString := string(jsonResponse)
+
+    // Send the JSON response as a string
+    utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", responseString)
 }
