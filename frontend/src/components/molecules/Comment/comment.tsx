@@ -7,13 +7,14 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import StarIcon from '@mui/icons-material/Star';
 import ShareIcon from '@mui/icons-material/Share';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-interface User {
-    usuario?: string;
-    name?: string; 
-}
+import "./index.scss";
+
 
 interface WCommentProps {
-  user?: User;
+  user?: {
+    usuario?: string;
+    name?: string; 
+  };
   sendUser?: string;
   typeColor?: "primary" | "secondary" ;
   comment?: string;
@@ -26,64 +27,34 @@ interface WCommentProps {
 }
 
 const WComment: React.FC<WCommentProps> = ({
-  user = {
-    usuario: "millys123",
-    name: "Milly"
-  },
-  sendUser = "janedoel123",
-  typeColor = "primary",
-  comment = "Lorem ipsum dolor sit amet consectetur. Congue et nunc sed nascetur malesuada",
-  fullWidth = false,
-  countHeart = 12,
-  countComment = 5,
-  countShareds = 6,
-  countStatistics = 126,
-  countStars = 23
+  user,
+  sendUser,
+  comment,
+  countHeart,
+  countComment,
+  countShareds,
+  countStatistics,
+  countStars
 }) => {
-  const divStyle = {
-    display: "grid",
-    alignItems: "center",
-    gap: "10px",
-    width: "100%",
-    minWidth: "500px"
-  };
 
-  const divIcon = {
-    display: "inherit", 
-    alignItems: "center", 
-    gap: "5px"
-  }
-
-  const divSectionIcon = {
-    display: "flex", 
-    justifyContent: "space-between", 
-    width: "100%"
-  }
-
-  const divUser = {
-    display: "flex", 
-    flex: "start", 
-    gap: "10px", 
-    alignItems: "center"
-  }
   return (
-    <div style={divStyle}>
-      <div style={divUser}>
+    <div className="comment-main-container">
+      <div className="comment-avatar-main">
         <WCircleIcon 
             typeColor="comment"
             iconSize={50}
             icon={AccountCircleIcon}
         />
-        <div style={{display: "inherit", flexDirection: "column"}}>
-            <span style={{color: "#878787"}}><strong style={{color: "#000"}}>{user.name}</strong> @{user.usuario}</span>
-            <span style={{color: "#878787"}}>Respondiendo a <a href="#" style={{textDecoration: "none", color: "#007AFF"}}>@{sendUser}</a></span>
+        <div>
+            <span><strong>{user?.name}</strong> @{user?.usuario}</span>
+            <span>Respondiendo a <a href="#">@{sendUser}</a></span>
         </div>
       </div>
       <div>
         {comment}
       </div>
-      <div style={divSectionIcon}>
-        <div style={divIcon}>
+      <div className="comment-icons-main">
+        <div className="comment-icon">
             <WCircleIcon
                 typeColor="comment"
                 iconSize={18}
@@ -91,7 +62,7 @@ const WComment: React.FC<WCommentProps> = ({
             />
             <span>{countHeart}</span>
         </div>
-        <div style={divIcon}>
+        <div className="comment-icon">
             <WCircleIcon
                 typeColor="comment"
                 iconSize={18}
@@ -99,7 +70,7 @@ const WComment: React.FC<WCommentProps> = ({
             />
             <span>{countComment}</span>
         </div>
-        <div style={divIcon}>
+        <div className="comment-icon">
             <WCircleIcon
                 typeColor="comment"
                 iconSize={18}
@@ -107,7 +78,7 @@ const WComment: React.FC<WCommentProps> = ({
             />
             <span>{countShareds}</span>
         </div>
-        <div style={divIcon}>
+        <div className="comment-icon">
             <WCircleIcon
                 typeColor="comment"
                 iconSize={18}
@@ -115,7 +86,7 @@ const WComment: React.FC<WCommentProps> = ({
             />
             <span>{countStatistics}</span>
         </div>
-        <div style={divIcon}>
+        <div className="comment-icon">
             <WCircleIcon
                 typeColor="comment"
                 iconSize={18}
@@ -123,7 +94,7 @@ const WComment: React.FC<WCommentProps> = ({
             />
             <span>{countStars}</span>
         </div>
-        <div style={divIcon}>
+        <div className="comment-icon">
             <WCircleIcon
                 typeColor="comment"
                 iconSize={18}
@@ -136,3 +107,17 @@ const WComment: React.FC<WCommentProps> = ({
 };
 
 export default WComment;
+
+WComment.defaultProps={
+  user: {
+    usuario: "millys123",
+    name: "Milly"
+  },
+  sendUser: "janedoel123",
+  comment: "Lorem ipsum dolor sit amet consectetur. Congue et nunc sed nascetur malesuada",
+  countHeart: 12,
+  countComment: 5,
+  countShareds: 6,
+  countStatistics: 126,
+  countStars: 23
+}
