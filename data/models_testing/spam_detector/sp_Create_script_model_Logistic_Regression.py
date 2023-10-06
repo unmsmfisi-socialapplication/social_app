@@ -10,19 +10,8 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import gdown
-
-# Descargar los recursos de NLTK necesarios
-nltk.download('punkt')
-nltk.download('stopwords')
-
-# Define el enlace compartible de Google Drive
-google_drive_url = "https://drive.google.com/uc?id=153kIWdyo8JaMoaKHnQ90qigDMW1830Mg"
-
-# Descarga el archivo desde Google Drive
-gdown.download(google_drive_url, 'Final-Dataset.csv', quiet=False)
-
-# Cargar el archivo CSV
-data = pd.read_csv('Final-Dataset.csv')
+import time
+import schedule
 
 # Función para limpiar el texto
 def clean_text(text):
