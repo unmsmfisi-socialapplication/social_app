@@ -18,7 +18,7 @@ object ApiSocialApp {
     @Singleton
     fun getMainApi(@Named("soccial_app")okHttpClient: OkHttpClient): ApiInterface {
         return Retrofit.Builder()
-            .baseUrl("https://{servidor}:{puerto}")
+            .baseUrl("https://social-app-backend-service-7bg5siys2q-uc.a.run.app")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
