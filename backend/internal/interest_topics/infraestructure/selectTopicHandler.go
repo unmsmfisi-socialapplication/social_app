@@ -35,11 +35,11 @@ func (slh *SelectTopicHandler) HandleSelectTopic(w http.ResponseWriter, r *http.
 		if err != nil {
 			switch err {
 			case application.ErrInvalidInsertion:
-				utils.SendJSONResponse(w, http.StatusInternalServerError, "NOTFOUND", "Attempted insertion of an existing user interest topic")
+				utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Attempted insertion of an existing user interest topic")
 				fmt.Println(err.Error())
 				return
 			default:
-				utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Error during insertion")
+				utils.SendJSONResponse(w, http.StatusNotFound, "NOTFOUND", "Error during insertion")
 				fmt.Println(err.Error())
 				return
 			}
