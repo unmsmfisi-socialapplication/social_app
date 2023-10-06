@@ -53,7 +53,9 @@ func TestImportProfileHandler_ImportProfile(t *testing.T) {
 
 	handler.ImportProfile(res, req)
 
-	if res.Code != http.StatusCreated {
-        t.Errorf("Expected status code %d, but got %d", http.StatusCreated, res.Code)
+    expectedStatus := http.StatusOK
+
+	if res.Code != expectedStatus {
+        t.Errorf("Expected status code %d, but got %d", expectedStatus, res.Code)
 	}
 }

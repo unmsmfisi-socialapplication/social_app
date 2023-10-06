@@ -26,6 +26,12 @@ func NewImportProfileRequest(requestBody *io.ReadCloser) (*ImportProfileRequest,
     }
 
     obj := activity.Object
+	if obj.GetType() != activitypub.PersonType {
+        return nil, fmt.Errorf("invalid actor type")
+	}
+	if obj.GetID() == "" {
+        return nil, fmt.Errorf("missing id")
+	}
 
     p, ok := obj.(*activitypub.Person)
     if !ok {
