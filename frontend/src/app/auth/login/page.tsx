@@ -1,13 +1,24 @@
 "use client";
 import * as Yup from "yup";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { Box } from "@mui/material";
 import EnrollmentHoc from "@/app/auth/auth";
 import { WInput, WButton, WLink, WCardAuth } from "@/components";
 import { INITIAL_FORMIK_VALUES, LOGIN_VALUES, YUP_SCHEMA } from "./constant";
 import { validateEmail, validatePassword } from "@/utilities/Validation";
+import AuthRepository from "@/domain/repositories/AuthRepository";
 
 export default function LoginPage() {
+  const [auth, setAuth] = useState<any>(null);
+  const authRequestLogin = async (request: any) => {
+    const { data, error } = await AuthRepository.authRequest(request);
+    if (data && error === null) {
+      setAuth({ ...data });
+    } else {
+      console.log("error", error);
+    }
+  };
   const formik = useFormik({
     initialValues: { ...INITIAL_FORMIK_VALUES },
     validationSchema: Yup.object({
@@ -16,20 +27,20 @@ export default function LoginPage() {
     onSubmit: (values) => {
       // TODO: Add login logic
       console.log(values);
+      authRequestLogin(values);
     },
   });
-
   return (
     <EnrollmentHoc>
       <form onSubmit={formik.handleSubmit}>
         <WCardAuth title="Bienvenido de nuevo" size="large">
-          <span>Correo Electrónico</span>
+          <span>Nombre de usuario</span>
           <WInput
             name={LOGIN_VALUES.EMAIL}
             value={formik.values.username}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="Ingrese su correo"
+            placeholder="Ingrese su correo o usuario"
             error={
               formik.touched.username && !validateEmail(formik.values.username)
             }
@@ -46,8 +57,7 @@ export default function LoginPage() {
             onBlur={formik.handleBlur}
             placeholder="Ingrese su contraseña"
             error={
-              formik.touched.password &&
-              !validatePassword(formik.values.password)
+              formik.touched.password && !validatePassword(formik.values.password)
             }
             errorMessage={formik.errors.password}
             size="small"
@@ -59,9 +69,11 @@ export default function LoginPage() {
               text="Registrarse"
               underline="none"
               displayType="inline-flex"
+              href='/auth/register'
             />
           </Box>
           <WButton type="submit" text="Iniciar Sesión" size="large" />
+          {auth && <span>{auth?.response}</span>}
         </WCardAuth>
       </form>
     </EnrollmentHoc>
