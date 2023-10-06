@@ -46,7 +46,7 @@ func TestHandleHandleSelectTopic(t *testing.T) {
 			name:       "Existing user interest topic",
 			inputBody:  `{"user_id":"1","interest_id":["1","3","4"]}`,
 			mock:       func(user_id, interest_id string) error { return application.ErrInvalidInsertion },
-			wantStatus: http.StatusInternalServerError,
+			wantStatus: http.StatusConflict,
 			wantBody:   `{"response":"Attempted insertion of an existing user interest topic","status":"ERROR"}`,
 		},
 		{
