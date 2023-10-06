@@ -12,6 +12,8 @@ import (
 	infrastructure_login "github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 	infrastructure_register "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
+	application_register "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
+
 )
 
 func Router() http.Handler {
@@ -53,7 +55,8 @@ func Router() http.Handler {
 	r.Post("/login", loginHandler.HandleLogin)
 	// Register
 	userRepository := infrastructure_register.NewUserDBRepository(dbInstance)
-	registerUserHandler := infrastructure_register.NewRegisterUserHandler(*userRepository)
+	useCaseRegister := application_register.NewRegistrationUseCase(userRepository)
+	registerUserHandler := infrastructure_register.NewRegisterUserHandler(useCaseRegister)
 	r.Post("/register", registerUserHandler.RegisterUser)
 
 	return r

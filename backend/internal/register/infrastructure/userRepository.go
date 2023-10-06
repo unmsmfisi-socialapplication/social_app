@@ -2,11 +2,9 @@ package infrastructure
 
 import (
 	"database/sql"
-	"errors"
 	"fmt"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
-	
 )
 
 type UserDBRepository struct {
@@ -35,23 +33,7 @@ func (u *UserDBRepository) GetUserByEmail(email string) (*domain.User, error) {
 	return &user, nil
 }
 
-func (u *UserDBRepository) RegisterUser( phone, email, username,password string) (*domain.User, error) {
-
-	existingUser, err := u.GetUserByEmail(email)
-	
-	if err != nil {
-		return nil, err
-	}
-	if existingUser != nil {
-		return nil, errors.New("el correo electrónico ya está en uso")
-	}
-
-
-	newUser, err := domain.NewUser(phone, email, username,password) // Utilizamos el correo electrónico como identificador
-	if err != nil {
-		return nil, err
-	}
-	
+func (u *UserDBRepository) InsertUser(newUser *domain.User) (*domain.User, error) {
 
 	query := `INSERT INTO soc_app_users ( insertion_date,phone, email, user_name, password) VALUES (NOW(),$1, $2, $3, $4)`
 
@@ -59,15 +41,14 @@ func (u *UserDBRepository) RegisterUser( phone, email, username,password string)
 	tx,er:=u.db.Begin()
 	if er!=nil{
 		fmt.Println("Error al iniciar la transaccion")
-
 	}
-	_,err=tx.Exec(query,newUser.Phone,newUser.Email,newUser.User_name,newUser.Password) // Usamos el correo como username
+	
+	_,err:=tx.Exec(query,newUser.Phone,newUser.Email,newUser.User_name,newUser.Password) 
 	if err != nil {
 		return nil, err
 	}
 
 	tx.Commit()
-
 	
 	return newUser, nil
 }
