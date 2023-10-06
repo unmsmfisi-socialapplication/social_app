@@ -1,8 +1,7 @@
-from pydrive2.auth import GoogleAuth
-from pydrive2.drive import GoogleDrive
-from pydrive2.files import FileNotUploadedError
-
-import unittest
+#from pydrive2.auth import GoogleAuth
+#from pydrive2.drive import GoogleDrive
+#from pydrive2.files import FileNotUploadedError
+#import unittest
 
 directorio_credenciales = 'credentials_module.json'
 
@@ -57,11 +56,11 @@ def test_subir_archivo(self):
 
 
 if __name__ == "__main__":
-    ruta_archivo = '/home/falv/Escritorio/fondo.jpg'
-    id_folder = '0AI_9cD6f9EEZUk9PVA'
-    id_drive = '1LVdc-DUwr30kfrA30cVO3K92RVh56pmw'
-    ruta_descarga = '/home/falv/Descargas/'
-    crear_archivo_texto('HolaDrive.txt','Hey MoonCoders',id_folder)
-    subir_archivo(ruta_archivo,id_folder)
-    unittest.main()
+    #ruta_archivo = '/home/falv/Escritorio/fondo.jpg'
+    #id_folder = '0AI_9cD6f9EEZUk9PVA'
+    #id_drive = '1LVdc-DUwr30kfrA30cVO3K92RVh56pmw'
+    #ruta_descarga = '/home/falv/Descargas/'
+    #crear_archivo_texto('HolaDrive.txt','Hey MoonCoders',id_folder)
+    #subir_archivo(ruta_archivo,id_folder)
+    #unittest.main()
     
