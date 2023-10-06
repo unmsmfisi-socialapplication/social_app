@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"errors"
+	"fmt"
 	"io"
 
 	"github.com/go-ap/activitypub"
@@ -20,13 +20,20 @@ func NewImportProfileRequest(requestBody *io.ReadCloser) (*ImportProfileRequest,
         return nil, err
     }
 
-    activity.UnmarshalJSON(body)
+    err = activity.UnmarshalJSON(body)
+    if err != nil {
+        return nil, fmt.Errorf("Invalid JSON")
+    }
 
     obj := activity.Object
 
-    p := obj.(*activitypub.Person)
+    p, ok := obj.(*activitypub.Person)
+    if !ok {
+        return nil, fmt.Errorf("Invalid object type")
+    }
+
     if p.Name == nil || p.Icon == nil || p.Summary == nil {
-        return nil, errors.New("invalid actor")
+        return nil, fmt.Errorf("Missing required fields")
     }
 
     return &ImportProfileRequest{Person: p}, nil

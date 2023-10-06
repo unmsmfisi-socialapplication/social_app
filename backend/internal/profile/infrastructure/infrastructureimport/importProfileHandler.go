@@ -22,6 +22,7 @@ func (iph *importProfileHandler) ImportProfile(w http.ResponseWriter, r *http.Re
     if err != nil {
         w.WriteHeader(http.StatusBadRequest)
         w.Write([]byte(fmt.Sprintf(`{"error": "%s"}`, err.Error())))
+        return
     }
 
     profile := request.ToProfile()
@@ -30,6 +31,7 @@ func (iph *importProfileHandler) ImportProfile(w http.ResponseWriter, r *http.Re
     if err != nil {
         w.WriteHeader(http.StatusInternalServerError)
         w.Write([]byte(fmt.Sprintf(`{"error": "%s"}`, err.Error())))
+        return
     }
 
     response := dto.NewImportProfileResponse(request.Person)
@@ -38,8 +40,9 @@ func (iph *importProfileHandler) ImportProfile(w http.ResponseWriter, r *http.Re
     if err != nil {
         w.WriteHeader(http.StatusInternalServerError)
         w.Write([]byte(fmt.Sprintf(`{"error": "%s"}`, err.Error())))
+        return
     }
 
-    w.WriteHeader(http.StatusCreated)
+    w.WriteHeader(http.StatusOK)
     w.Write([]byte(fmt.Sprintf(`{"response": "%s", "data": %s}`, response.Response, string(resp))))
 }
