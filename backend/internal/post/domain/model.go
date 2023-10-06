@@ -30,14 +30,14 @@ type PixelfedContent struct {
 }
 
 type CreatePost struct {
-    UserId        int64          `json:"userId"`
-    Title         string         `json:"title" db:"title" validate:"max=100"`
-    Description   string         `json:"description" db:"description" validate:"max=1000"`
-    HasMultimedia bool           `json:"hasMultimedia"`
-    Public        bool           `json:"public"`
-    Multimedia    string         `json:"multimedia" db:"multimedia" validate:"max=1000"`
+    UserId        int64  `json:"userId"`
+    Title         string `json:"title" db:"title" validate:"max=100"`
+    Description   string `json:"description" db:"description" validate:"max=1000"`
+    HasMultimedia bool   `json:"hasMultimedia"`
+    Public        bool   `json:"public"`
+    Multimedia    string `json:"multimedia" db:"multimedia" validate:"max=1000"`
 
-    Mastodon MastodonContent `json:"mastodon,omitempty"`
-    Pixelfed PixelfedContent `json:"pixelfed,omitempty"`
+    Mastodon *MastodonContent `json:"mastodon,omitempty"`
+    Pixelfed *PixelfedContent `json:"pixelfed,omitempty"`
 }
 
