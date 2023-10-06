@@ -40,5 +40,6 @@
     <string name="text_enter_email">Introduce el código que te hemos enviado a tu correo electrónico</string>
     <string name="resend_code">Reenviar código</string>
     <string name="title_message">Mensajes</string>
+    <string name="send_message">Escribe tu mensaje</string>
 
 </resources>
