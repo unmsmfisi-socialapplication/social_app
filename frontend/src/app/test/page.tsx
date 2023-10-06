@@ -12,7 +12,8 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 
-import CustomDialog, { CustomDialogProps } from "@/components/molecules/customDialog/customDialog";
+import { CustomDialogProps } from "@/components/molecules/customDialog/customDialog";
+import {WCustomDialog} from "@/components";
 
 export default function TestPage() {
   const [count, setCount] = useState(0);
@@ -21,18 +22,12 @@ export default function TestPage() {
     title: {
       textContent: "!La foto no cumple con las especificaciones, subir otra foto¡",
       typeColor: "error",
-      fontSize: 20,
-      fontWeight: 700,
     },
     content: {
       textContent: "Peso max (10 mb)\nTamaño max (851x315 px)\nLa plataforma acepta estas especificaciones para la foto de portada.",
-      fontSize: 14,
-      fontWeight: 400,
     },
     subtitle: {
       textContent: "Especificaciones de foto de portada",
-      fontSize: 16,
-      fontWeight: 700,
     },
     size: "xs",
     buttonProps: {
@@ -120,7 +115,7 @@ export default function TestPage() {
         <WTag text="Messages" icon={MailOutlineIcon} />
       </div>
       <div>
-        <CustomDialog title={modalProps.title} content={modalProps.content} subtitle={modalProps.subtitle} size={modalProps.size} buttonProps={modalProps.buttonProps} />
+        <WCustomDialog title={modalProps.title} content={modalProps.content} subtitle={modalProps.subtitle} size={modalProps.size} buttonProps={modalProps.buttonProps} />
       </div>
     </Layout>
   );

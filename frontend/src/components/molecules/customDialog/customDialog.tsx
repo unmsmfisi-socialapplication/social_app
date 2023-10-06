@@ -10,18 +10,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import WButton, { WButtonProps } from "@/components/atoms/Button/button";
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
-  },
-  // agregamos mas border radius para que se vea mas redondo
-  '& .MuiPaper-root': {
-    borderRadius: '20px',
-  },
-}));
 
 export interface CustomDialogProps {
   title: CustomText,
@@ -34,10 +22,20 @@ export interface CustomDialogProps {
 export interface CustomText {
   textContent: string;
   typeColor?: string;
-  fontSize?: number;
-  fontWeight?: number;
 }
 
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+  // agregamos mas border radius para que se vea mas redondo
+  '& .MuiPaper-root': {
+    borderRadius: '20px',
+  },
+}));
 
 
 const CustomDialog: React.FC<CustomDialogProps> = ({ content, title, subtitle, size, buttonProps }) => {
@@ -67,8 +65,8 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ content, title, subtitle, s
             m: 0,
             p: 2,
             textAlign: 'center',
-            fontSize: title.fontSize,
-            fontWeight: title.fontWeight,
+            fontSize: 20,
+            fontWeight: 700,
             paddingX: '25px' // Espacio adicional para el botón de cerrar
           }}
           id="customized-dialog-title"
@@ -92,11 +90,11 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ content, title, subtitle, s
 
         <DialogContent dividers>
           {subtitle && (
-            <Typography sx={{ whiteSpace: 'pre-line', textAlign: 'center', paddingX: 3, fontWeight: subtitle.fontWeight, fontSize: subtitle.fontSize, color: subtitle.typeColor }} gutterBottom>
+            <Typography sx={{ whiteSpace: 'pre-line', textAlign: 'center', paddingX: 3, fontWeight: 700, fontSize: 16, color: subtitle.typeColor }} gutterBottom>
               {subtitle.textContent}
             </Typography>
           )}
-          <Typography sx={{ whiteSpace: 'pre-line', textAlign: 'center', paddingX: 3, fontWeight: content.fontWeight, fontSize: content.fontSize, color: content.typeColor }} gutterBottom>
+          <Typography sx={{ whiteSpace: 'pre-line', textAlign: 'center', paddingX: 3, fontWeight: 400, fontSize: 14, color: content.typeColor }} gutterBottom>
             {content.textContent}
           </Typography>
         </DialogContent>
