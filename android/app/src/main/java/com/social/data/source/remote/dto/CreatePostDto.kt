@@ -1,9 +1,10 @@
 package com.social.data.source.remote.dto
 
 import com.social.domain.model.CreatePost
+import com.social.domain.model.CreatePostResponse
 
 data class CreatePostDto(
-    val response: String,
+    val response: CreatePostResponse,
     val status: String
 )
 
