@@ -17,7 +17,9 @@ type Post struct {
 }
 
 type MastodonContent struct {
-	// Mastodon-specific fields
+    Text       string `json:"text"`       // Text of the toot in Mastodon
+    Visibility string `json:"visibility"` // Visibility of the toot (public, private, unlisted, etc.)
+    // Other Mastodon-specific fields
 }
 
 type PixelfedContent struct {
