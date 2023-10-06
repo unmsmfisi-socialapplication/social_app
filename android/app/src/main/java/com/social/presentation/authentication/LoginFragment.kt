@@ -10,7 +10,6 @@ import com.social.utils.Toast.showMessage
 import com.social.utils.Validation
 import com.social.utils.Validation.setupValidation
 
-
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var globalView: View
@@ -24,13 +23,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         setupPasswordValidation()
         action()
     }
+
     private fun action() {
         binding.textRegister.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            findNavController()
+                .navigate(R.id.action_loginFragment_to_registerFragment)
         }
-
         binding.textForgotPassword.setOnClickListener {
-            recoverPassword()
+            findNavController()
+                .navigate(R.id.action_loginFragment_to_confirmationEmailFragment)
         }
         binding.buttonGoogle.setOnClickListener {
             googleLoginButton()
@@ -43,15 +44,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-    private fun recoverPassword(){
-        showMessage(requireContext(), "Pendiente")
-    }
-
     private fun googleLoginButton() {
         showMessage(requireContext(), "Pendiente")
     }
 
-    private fun mastodonLoginButton(){
+    private fun mastodonLoginButton() {
         showMessage(requireContext(), "Pendiente")
     }
 

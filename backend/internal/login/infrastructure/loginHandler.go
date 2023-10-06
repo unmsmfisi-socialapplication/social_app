@@ -18,13 +18,31 @@ func NewLoginHandler(useCase application.LoginUsecaseInterface) *LoginHandler {
 }
 
 func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
+	var raw json.RawMessage
+	err := json.NewDecoder(r.Body).Decode(&raw)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+
 	var requestData struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
 	}
-
-	err := json.NewDecoder(r.Body).Decode(&requestData)
+	err = json.Unmarshal(raw, &requestData)
 	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+	var extra map[string]interface{}
+	err = json.Unmarshal(raw, &extra)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+	delete(extra, "username")
+	delete(extra, "password")
+	if len(extra) != 0 {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
 		return
 	}
@@ -36,7 +54,7 @@ func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 			utils.SendJSONResponse(w, http.StatusNotFound, "NOTFOUND", "User not found")
 			return
 		case application.ErrInvalidCredentials:
-			utils.SendJSONResponse(w, http.StatusUnauthorized, "NOPASSWORD", "Invalid password")
+			utils.SendJSONResponse(w, http.StatusUnauthorized, "BADCREDENTIALS", "Invalid credentials")
 			return
 		default:
 			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error during authentication")
