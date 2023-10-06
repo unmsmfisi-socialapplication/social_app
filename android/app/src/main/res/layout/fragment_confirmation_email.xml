@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="30dp"
+    tools:context=".presentation.authentication.confirm.ConfirmationEmailFragment">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/syne_bold"
+        android:text="@string/student_network"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRecover"
+        style="@style/TextViewHeader"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:text="@string/recover_password"
+        android:textColor="@color/color01"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="188dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRecover">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_email_recover"
+                style="@style/TextInputEditTextStyle"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/error_email"
+            style="@style/TextViewError"
+            android:text="@string/error_email" />
+
+        <Button
+            android:id="@+id/button_continue"
+            style="@style/ButtonStyle"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/color01"
+            android:text="@string/next"
+            android:textColor="@color/white" />
+
+        <TextView
+            style="@style/TextViewLinked"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:gravity="end"
+            android:text="@string/i_have_recovery_code" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
