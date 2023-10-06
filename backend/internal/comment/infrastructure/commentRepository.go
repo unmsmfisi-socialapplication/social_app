@@ -17,7 +17,6 @@ func NewCommentRepository(database *sql.DB) *CommentRepository {
 
 // Code to create a comment in the database
 func (r *CommentRepository) CreateComment(comment *domain.Comment) error {
-    
     query := `
         INSERT INTO SOC_APP_POSTS_COMMENTS (user_id, post_id, comment, insertion_date, update_date, parent_comment_id)
         VALUES ($1, $2, $3, $4, $5, $6)

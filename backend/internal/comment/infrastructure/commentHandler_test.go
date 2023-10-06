@@ -27,7 +27,7 @@ func NewMockCommentUseCase() *MockCommentUseCase {
 func (mcu *MockCommentUseCase) GetByID(commentID int64) (*domain.Comment, error) {
 	comment, ok := mcu.Comments[commentID]
 	if !ok {
-		return nil, errors.New("GET BY ID COMMENT NOT FOUND")
+		return nil, errors.New("GetByID: comment not found")
 	} 
 	return comment, nil
 }
@@ -40,7 +40,7 @@ func (mcu *MockCommentUseCase) Create(comment *domain.Comment) error {
 func (mcu *MockCommentUseCase) Update(commentID int64, comment *domain.Comment) error {
 	_, ok := mcu.Comments[commentID]
 	if !ok {
-		return errors.New("UPDATE COMMENT NOT FOUND")
+		return errors.New("Update: Comment not found")
 	}
 
 	mcu.Comments[commentID] = comment
@@ -50,7 +50,7 @@ func (mcu *MockCommentUseCase) Update(commentID int64, comment *domain.Comment) 
 func (mcu *MockCommentUseCase) Delete(commentID int64) error {
 	_, ok := mcu.Comments[commentID]
 	if !ok {
-		return errors.New("comment not found")
+		return errors.New("Delete: Comment not found")
 	}
 
 	delete(mcu.Comments, commentID)
@@ -58,20 +58,14 @@ func (mcu *MockCommentUseCase) Delete(commentID int64) error {
 }
 
 func setupRouter() *chi.Mux {
-    // Configura el enrutador como lo haces en tu aplicación principal
     r := chi.NewRouter()
-
-    // Configura las rutas y controladores necesarios para las pruebas
-
     return r
 }
 
 func TestCommentHandler_HandleGetCommentByID(t *testing.T) {
 	r := chi.NewRouter()
-	// Create instance of MockCommentUseCase
 	mockUseCase := NewMockCommentUseCase()
     	
-	// Add simulate comments to map 
 	commentID := int64(1)
 	mockUseCase.Comments[commentID] = &domain.Comment{
 		CommentID:  commentID,
@@ -81,7 +75,6 @@ func TestCommentHandler_HandleGetCommentByID(t *testing.T) {
 		InsertionDate: time.Now(),
 		UpdateDate:    time.Now(),
 	}
-	// Configure CommentHandler with the instance of MockCommentUseCase
 	commentHandler := NewCommentHandler(mockUseCase)
 	r.Get("/comments/{commentID}", commentHandler.HandleGetCommentByID)
 	
@@ -89,13 +82,9 @@ func TestCommentHandler_HandleGetCommentByID(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	// Create an HTTP test response 
 	w := httptest.NewRecorder()
-
 	r.ServeHTTP(w, req)
-	//println(w.Body.String())
 
-	// Test status code and response body
 	if w.Code != http.StatusOK {
 		t.Errorf("ERROR: Waiting status code %d, but get %d", http.StatusOK, w.Code)
 	} else {
@@ -158,7 +147,6 @@ func TestCommentHandler_HandleUpdateComment(t *testing.T) {
 
 	commentHandler := NewCommentHandler(mockUseCase)
 	r.Put("/comments/{commentID}", commentHandler.HandleUpdateComment)
-	// Create an HTTP test request
 	commentData := struct {
 		UserID          int64     `json:"userID"`
 		PostID          int64     `json:"postID"`
@@ -180,11 +168,9 @@ func TestCommentHandler_HandleUpdateComment(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Create an HTTP test response 
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 
-	// Test status code and response body
 	if w.Code != http.StatusOK {
 		t.Errorf("ERROR: Waiting status code %d, but get %d", http.StatusOK, w.Code)
 	} else {
@@ -194,10 +180,8 @@ func TestCommentHandler_HandleUpdateComment(t *testing.T) {
 
 func TestCommentHandler_HandleDeleteComment(t *testing.T) {
 	r := chi.NewRouter()
-	// Step 1: Create instance of MockCommentUseCase
 	mockUseCase := NewMockCommentUseCase()
 
-	// Add simulate comments to map 
 	commentID := int64(1)
 	mockUseCase.Comments[commentID] = &domain.Comment{
 		CommentID:  commentID,
@@ -208,23 +192,18 @@ func TestCommentHandler_HandleDeleteComment(t *testing.T) {
 		UpdateDate:    time.Now(),
 	}
 
-	// Configure CommentHandler with the instance of MockCommentUseCase
 	commentHandler := NewCommentHandler(mockUseCase)
 	r.Delete("/comments/{commentID}", commentHandler.HandleDeleteComment)
-
-	// Create an HTTP test request
 
 	req, err := http.NewRequest("DELETE", "/comments/1", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	// Create an HTTP test response 
 	w := httptest.NewRecorder()
 
 	r.ServeHTTP(w, req)
 
-	// Test status code and response body
 	if w.Code != http.StatusOK {
 		t.Errorf("ERROR: Waiting status code %d, but get %d", http.StatusOK, w.Code)
 	} else {
