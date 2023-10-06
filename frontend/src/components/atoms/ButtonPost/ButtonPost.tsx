@@ -16,7 +16,7 @@ const WButtonPost: React.FC<WButtonPost> = ({ disabled, typeColor, text, size })
   const buttonClass = `button typeButton--${disabled ? "disabled" : typeColor}`;
   return (
     <Button
-      style={{ minWidth: size === "large" ? "100%" : "auto", bordeRadius: "18px" }}
+      style={{ minWidth: size === "large" ? "100%" : "auto", borderRadius: "18px" }}
       className={buttonClass}
       size={size}
       disabled={disabled}
