@@ -1,5 +1,4 @@
 import { validatePassword } from '../utilities/Functions';
-import { passwordMismatchError } from '../utilities/Constant';
 
 describe('Validate passwords', () => {
   it('It should return null if the passwords match', () => {
