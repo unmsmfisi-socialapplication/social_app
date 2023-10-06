@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.social.databinding.ConteinerUserChatBinding
 import com.social.domain.model.ChatUserData
 
-class UsersAdapter(private val users: List<ChatUserData>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+class UsersAdapter(val users: List<ChatUserData>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
     private lateinit var binding: ConteinerUserChatBinding
     private lateinit var globalView: View
 
