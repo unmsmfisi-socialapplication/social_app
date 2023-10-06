@@ -12,6 +12,7 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 import AvatarInput from "@/components/molecules/AvatarInput";
+import CommentThink from "@/components/molecules/CommentThink";
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
@@ -110,51 +111,11 @@ export default function TestPage() {
         <WTag text="Messages" icon={MailOutlineIcon} />
       </div>
       <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar)=>setAvatar(avatar)} />
-      
-      <div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    background: "#fff",
-    padding: "20px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    borderRadius: "8px",
-    width: "700px",
-  }}
->
-  <div
-    style={{
-      height: "75px",
-      display: "flex",
-      alignItems: "center",
-      gap: "20px",
-      padding: "10px",
-    }}
-  >
-    <WCircleIcon 
-      iconSize={50} 
-      icon={AccountCircleIcon} 
-    />
-    <WButton 
-      typeColor="secondary" 
-      text="Público"
-      disabled
-    />
-  </div>
-  <textarea
-    style={{
-      width: "100%",
-      height: "150px",
-      padding: "10px",
-      border: "1px solid",
-      boxSizing: "border-box",
-      borderRadius: "5px",
-      fontSize: "16px",
-    }}
-    placeholder="Escribe lo que estás pensando"
-  />
-</div>
+      <CommentThink
+        avatarDefaultURL="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        publicTag={"Público"}
+        placeholder={"Escribe lo que estás pensando"}
+      />
     </Layout>
   );
 }
