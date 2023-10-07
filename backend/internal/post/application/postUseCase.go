@@ -14,22 +14,27 @@ var (
 	ErrIncompleteData = errors.New("incomplete data")
 )
 
+// PostUseCaseInterface defines the interface for post-related use cases.
 type PostUseCaseInterface interface {
 	CreatePost(postData domain.CreatePost) (map[string]*domain.Post, error)
 }
 
+// PostRepository defines the interface for post-related data storage operations.
 type PostRepository interface {
 	CreatePost(postData interface{}) (*domain.Post, error)
 }
 
+// PostUseCase is responsible for handling post-related business logic.
 type PostUseCase struct {
 	repo PostRepository
 }
 
+// NewPostUseCase creates a new instance of PostUseCase.
 func NewPostUseCase(r PostRepository) *PostUseCase {
 	return &PostUseCase{repo: r}
 }
 
+// CreatePost creates a post based on the provided data for Mastodon and Pixelfed.
 func (uc *PostUseCase) CreatePost(postData domain.CreatePost) (map[string]*domain.Post, error) {
 	createdPosts := make(map[string]*domain.Post)
 
@@ -54,14 +59,17 @@ func (uc *PostUseCase) CreatePost(postData domain.CreatePost) (map[string]*domai
 	return createdPosts, nil
 }
 
+// PostHandler handles HTTP requests related to posts.
 type PostHandler struct {
 	useCase PostUseCaseInterface
 }
 
+// NewPostHandler creates a new instance of PostHandler.
 func NewPostHandler(useCase PostUseCaseInterface) *PostHandler {
 	return &PostHandler{useCase: useCase}
 }
 
+// HandleCreateMultiPost handles the creation of posts for Mastodon and Pixelfed.
 func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Request) {
 	var requestData struct {
 		MastodonData *domain.CreatePost `json:"mastodon,omitempty"`
@@ -73,24 +81,15 @@ func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	
 	var mastodonPost *domain.Post
 	var pixelfedPost *domain.Post
 
 	if requestData.MastodonData != nil {
-		/* mastodonPost, err := ph.useCase.CreatePost(*requestData.MastodonData)
-		if err != nil {
-			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
-			return
-		}*/
+		// Add your Mastodon-specific code here
 	}
 
 	if requestData.PixelfedData != nil {
-		/* pixelfedPost, err := ph.useCase.CreatePost(*requestData.PixelfedData)
-		if err != nil {
-			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
-			return
-		} */
+		// Add your Pixelfed-specific code here
 	}
 
 	response := map[string]interface{}{
@@ -109,5 +108,4 @@ func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Requ
 
 	// Send the JSON response as a string
 	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", responseString)
-
 }

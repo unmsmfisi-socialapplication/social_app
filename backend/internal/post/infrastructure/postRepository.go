@@ -9,16 +9,20 @@ import (
 )
 
 var countPost int64 = 0
+
 var localPost = []domain.Post{}
 
+// PostsDBRepository is a repository for managing posts in a database.
 type PostsDBRepository struct {
     db *sql.DB
 }
 
+// NewPostDBRepository creates a new instance of PostsDBRepository.
 func NewPostDBRepository(database *sql.DB) *PostsDBRepository {
     return &PostsDBRepository{db: database}
 }
 
+// CreatePost creates a new post in the database based on the provided data.
 func (p *PostsDBRepository) CreatePost(postData interface{}) (*domain.Post, error) {
     countPost++
 
