@@ -38,8 +38,8 @@ export default function TestPage() {
         }}
       >
         <WButton typeColor="primary" text="DD" disabled/>
-        <WButton typeColor="secondary" text="button" size="large" />
-        <WButton text="test" size="large" disabled />
+        <WButton typeColor="terciary" text="button" size="large" />
+        <WButton text="test" size="large" typeColor="quaternary"/>
       </div>
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
