@@ -12,7 +12,7 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/email_sender/domain"
 )
 
-var (
+const (
 	status_err     = "ERROR"
 	status_success = "OK"
 	err_Payload    = "Invalid request payload"
