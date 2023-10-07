@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Layout from "../layout"
 import { Button } from "@mui/material";
-import { WButton, WInput, WCircleIcon  } from "@/components";
+import { WButton, WInput, WCircleIcon, WModalPhoto  } from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CheckIcon from "@mui/icons-material/Check"
 import AllInclusive from "@mui/icons-material/AllInclusive"
@@ -104,6 +104,7 @@ export default function TestPage() {
     </div>
       <WCircleIcon iconSize={30} icon={CheckIcon} />
       <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
+      <WModalPhoto warning />
       <div style={{display:"flex",flexDirection:"column",gap:"10px", margin:"10px"}} >
         <WTag text="Home"  icon={CottageOutlinedIcon}  isActive/>
         <WTag text="Explorer" icon={SearchIcon}  />
@@ -119,5 +120,4 @@ export default function TestPage() {
     </Layout>
   );
 }
-
 
