@@ -24,9 +24,50 @@ func (slh *SelectTopicHandler) HandleSelectTopic(w http.ResponseWriter, r *http.
 		Interest_id []string `json:"interest_id"`
 	}
 
-	err := json.NewDecoder(r.Body).Decode(&requestData)
+	var raw json.RawMessage
+	err := json.NewDecoder(r.Body).Decode(&raw)
 	if err != nil {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+	err = json.Unmarshal(raw, &requestData)
+	if err != nil || requestData.User_id == "" {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+	var extra map[string]interface{}
+	err = json.Unmarshal(raw, &extra)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+
+	//user_id not defined
+	delete(extra, "user_id")
+	if len(extra) == 0 {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+	delete(extra, "interest_id")
+
+	//extra parameters in payload
+	if len(extra) != 0 {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+
+	//Avoid duplicate interest_id
+	seen := make(map[string]bool)
+	for _, value := range requestData.Interest_id  {
+		if seen[value] {
+			utils.SendJSONResponse(w, http.StatusConflict, "ERROR", "Error during insertion")
+			return
+		}
+		seen[value] = true
+	}
+
+	if len(requestData.Interest_id) == 0 {
+		utils.SendJSONResponse(w, http.StatusOK, "OK", "Skipped setting interest topics")
 		return
 	}
 

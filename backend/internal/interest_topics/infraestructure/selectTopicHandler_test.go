@@ -50,8 +50,39 @@ func TestHandleHandleSelectTopic(t *testing.T) {
 			wantBody:   `{"response":"Attempted insertion of an existing user interest topic","status":"ERROR"}`,
 		},
 		{
-			name:       "Bad request",
+			name:       "Duplicate interest_id",
+			inputBody:  `{"user_id":"1","interest_id":["1","3","1"]}`,
+			mock:       func(user_id, interest_id string) error { return application.ErrInvalidInsertion },
+			wantStatus: http.StatusConflict,
+			wantBody:   `{"response":"Error during insertion","status":"ERROR"}`,
+		},
+		{
+			name:       "Bad request - General",
 			inputBody:  `{"user_id": "1","interest_id": ""}`,
+			mock:       func(user_id, interest_id string) error { return nil },
+			wantStatus: http.StatusBadRequest,
+			wantBody:   `{"response":"Invalid request payload","status":"ERROR"}`,
+		},
+
+		{
+			name:       "Bad request - user_id not defined",
+			inputBody:  `{"interest_id": ["1","3","4"]}`,
+			mock:       func(user_id, interest_id string) error { return nil },
+			wantStatus: http.StatusBadRequest,
+			wantBody:   `{"response":"Invalid request payload","status":"ERROR"}`,
+		},
+
+		{
+			name:       "Bad request - interest_id not defined",
+			inputBody:  `{"user_id": "1"}`,
+			mock:       func(user_id, interest_id string) error { return nil },
+			wantStatus: http.StatusBadRequest,
+			wantBody:   `{"response":"Invalid request payload","status":"ERROR"}`,
+		},
+
+		{
+			name:       "Bad request - extra parameters",
+			inputBody:  `{"user_id":"2","interest_id":["1","3","4"],"random":""}`,
 			mock:       func(user_id, interest_id string) error { return nil },
 			wantStatus: http.StatusBadRequest,
 			wantBody:   `{"response":"Invalid request payload","status":"ERROR"}`,
@@ -63,6 +94,14 @@ func TestHandleHandleSelectTopic(t *testing.T) {
 			mock:       func(user_id, interest_id string) error { return nil },
 			wantStatus: http.StatusOK,
 			wantBody:   `{"response":"Insertion successful","status":"OK"}`,
+		},
+
+		{
+			name:       "Skipped insertion ",
+			inputBody:  `{"user_id":"2","interest_id":[]}`,
+			mock:       func(user_id, interest_id string) error { return nil },
+			wantStatus: http.StatusOK,
+			wantBody:   `{"response":"Skipped setting interest topics","status":"OK"}`,
 		},
 	}
 
