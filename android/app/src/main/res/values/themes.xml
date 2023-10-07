@@ -84,7 +84,6 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-
     <style name="TextViewError">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -93,6 +92,22 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">textEnd</item>
         <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="android:background">@color/color04</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="IconButtonStyle">
+        <item name="cornerRadius">10dp</item>
+        <item name="android:background">@color/color04</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_height">42dp</item>
     </style>
 
 </resources>
