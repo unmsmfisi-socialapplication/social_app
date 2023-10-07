@@ -76,5 +76,4 @@ func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Requ
 
 // HandleCreatePost is a placeholder for handling single post creation (optional).
 func (ph *PostHandler) HandleCreatePost(w http.ResponseWriter, r *http.Request) {
-    // You can add code to handle single post creation here if needed
 }

@@ -85,11 +85,9 @@ func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Requ
 	var pixelfedPost *domain.Post
 
 	if requestData.MastodonData != nil {
-		// Add your Mastodon-specific code here
 	}
 
 	if requestData.PixelfedData != nil {
-		// Add your Pixelfed-specific code here
 	}
 
 	response := map[string]interface{}{
