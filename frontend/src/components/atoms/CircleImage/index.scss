@@ -1,0 +1,30 @@
+@import '../../../../resources/styles/variables.scss';
+
+.circleImage {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    &.circleImage--primary::after {
+        border: 4px solid $primary-color;
+    }
+
+    &.circleImage--secondary::after {
+        border: 4px solid $secondary-color;
+    }
+
+    &.circleImage--third::after {
+        border: 4px solid $third-color;
+    }
+}
