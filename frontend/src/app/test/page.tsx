@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Layout from "../layout"
 import { Button } from "@mui/material";
-import { WButton, WInput, WCircleIcon  } from "@/components";
+import { WButton, WInput, WCircleIcon, WModalPhoto  } from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CheckIcon from "@mui/icons-material/Check"
 import AllInclusive from "@mui/icons-material/AllInclusive"
@@ -12,6 +12,7 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 import AvatarInput from "@/components/molecules/AvatarInput";
+import CommentThink from "@/components/molecules/CommentThink";
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
@@ -103,6 +104,7 @@ export default function TestPage() {
     </div>
       <WCircleIcon iconSize={30} icon={CheckIcon} />
       <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
+      <WModalPhoto warning />
       <div style={{display:"flex",flexDirection:"column",gap:"10px", margin:"10px"}} >
         <WTag text="Home"  icon={CottageOutlinedIcon}  isActive/>
         <WTag text="Explorer" icon={SearchIcon}  />
@@ -110,8 +112,12 @@ export default function TestPage() {
         <WTag text="Messages" icon={MailOutlineIcon} />
       </div>
       <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar)=>setAvatar(avatar)} />
+      <CommentThink
+        avatarDefaultURL="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        publicTag={"Público"}
+        placeholder={"Escribe lo que estás pensando"}
+      />
     </Layout>
   );
 }
-
 

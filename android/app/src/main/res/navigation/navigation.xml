@@ -56,4 +56,18 @@
             android:id="@+id/action_confirmationEmailFragment_to_codeConfirmationFragment"
             app:destination="@id/codeConfirmationFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/listChatsFragment"
+        android:name="com.social.presentation.interaction.chats.ListChatsFragment"
+        android:label="fragment_list_chat"
+        tools:layout="@layout/fragment_list_chat" >
+        <action
+            android:id="@+id/action_listChatsFragment_to_chatScreenFragment"
+            app:destination="@id/chatScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatScreenFragment"
+        android:name="com.social.presentation.interaction.chats.ChatScreenFragment"
+        android:label="fragment_chat_screen"
+        tools:layout="@layout/fragment_chat_screen" />
 </navigation>
