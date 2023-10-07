@@ -12,11 +12,9 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment"
+	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
-
-	interest_topics_application "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/application"
-	interest_topics_infraestructure "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/infraestructure"
 
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 )
@@ -52,11 +50,6 @@ func Router() http.Handler {
 	loginUseCase := application.NewLoginUseCase(dbRepo)
 	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
 
-	//interesTopics
-	dbinterestTopics := interest_topics_infraestructure.NewUserInterestsDBRepository(dbInstance)
-	selectTopicUseCase := interest_topics_application.NewInterestTopicsUseCase(dbinterestTopics)
-	selecTopicHandler := interest_topics_infraestructure.NewSelectTopicHandler(selectTopicUseCase)
-
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"world\"}"))
 	})
@@ -76,6 +69,10 @@ func Router() http.Handler {
 
 	// Login
 	r.Post("/login", loginHandler.HandleLogin)
-	r.Post("/interestTopics", selecTopicHandler.HandleSelectTopic)
+
+	//Email-sender
+
+	emailRouter := email.EmailModuleRouter()
+	r.Mount("/email", emailRouter)
 	return r
 }
