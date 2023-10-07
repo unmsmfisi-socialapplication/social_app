@@ -12,6 +12,7 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 import AvatarInput from "@/components/molecules/AvatarInput";
+import CommentThink from "@/components/molecules/CommentThink";
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
@@ -111,6 +112,11 @@ export default function TestPage() {
         <WTag text="Messages" icon={MailOutlineIcon} />
       </div>
       <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar)=>setAvatar(avatar)} />
+      <CommentThink
+        avatarDefaultURL="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        publicTag={"Público"}
+        placeholder={"Escribe lo que estás pensando"}
+      />
     </Layout>
   );
 }
