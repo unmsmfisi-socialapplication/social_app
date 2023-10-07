@@ -38,4 +38,17 @@
             color: white;
         }
     }
+
+    &--white {
+        background-color: white;
+        border-color: black;
+        color: black;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: black;
+            color: white;
+            border-color: white;
+        }
+    }
 }
