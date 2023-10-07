@@ -61,9 +61,8 @@
             border: 1px solid #0779B8;
             color: #dfdfdf; /* Cambia el color de fondo al pasar el cursor si es necesario */
             transition: all 1850ms ease;
-            font-size: 19px;
             }
-        }
+        } 
 
     &--disabled {
         background-color: $disabled-color ;
