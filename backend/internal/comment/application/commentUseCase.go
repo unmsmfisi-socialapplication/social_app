@@ -9,14 +9,14 @@ import (
 type CommentUseCaseInterface interface {
 	GetByID(commentID int64) (*domain.Comment, error)
 	Create(comment *domain.Comment) error
-	Update(commentID int64, comment *domain.Comment) error
+	Update(comment *domain.Comment) error
 	Delete(commentID int64) error
 }
 
 type CommentRepository interface {
 	GetCommentByID(commentID int64) (*domain.Comment, error)
 	CreateComment(comment *domain.Comment) error
-	UpdateComment(commentID int64, comment *domain.Comment) error
+	UpdateComment(comment *domain.Comment) error
 	DeleteComment(commentID int64) error
 }
 
@@ -43,8 +43,8 @@ func (c *CommentUseCase) Create(comment *domain.Comment) error {
 	return c.repo.CreateComment(comment)
 }
 
-func (c *CommentUseCase) Update(commentID int64, comment *domain.Comment) error {
-	return c.repo.UpdateComment(commentID, comment)
+func (c *CommentUseCase) Update(comment *domain.Comment) error {
+	return c.repo.UpdateComment(comment)
 }
 
 func (c *CommentUseCase) Delete(commentID int64) error {
