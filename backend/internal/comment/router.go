@@ -20,10 +20,10 @@ func CommentModuleRouter(dbInstance *sql.DB) *chi.Mux{
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"from comments section\"}"))
 	})
-	r.Get("/{commentID:[0-9]+}", commentHandler.HandleGetCommentByID)
+	r.Get("/{commentID}", commentHandler.HandleGetCommentByID)
 	r.Post("/", commentHandler.HandleCreateComment)
 	r.Put("/", commentHandler.HandleUpdateComment) //refactor this route
-	r.Delete("/{commentID:[0-9]+}", commentHandler.HandleDeleteComment)
+	r.Delete("/{commentID}", commentHandler.HandleDeleteComment)
 
 	return r
 }
