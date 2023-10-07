@@ -65,3 +65,6 @@ func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Requ
     // Send the JSON response as a string
     utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", responseString)
 }
+
+func (ph *PostHandler) HandleCreatePost(w http.ResponseWriter, r *http.Request) {
+}
