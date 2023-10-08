@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.interaction.chats.ChatScreenFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bottom_radius_style"
+        android:padding="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:src="@drawable/icon_arrow_back"
+            app:tint="@color/white" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@color/transparent">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_contactProfile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:scaleType="centerCrop"
+                android:background="@color/transparent"
+                android:src="@drawable/defaul_user_profile"
+                app:riv_oval="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:background="@color/transparent">
+
+                <TextView
+                    android:id="@+id/text_userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:background="@color/transparent" />
+
+                <TextView
+                    android:id="@+id/text_userConnection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:background="@color/transparent" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_call"
+            style="@style/IconButtonStyle"
+            android:src="@drawable/icon_phone"
+            android:rotationY="180"
+            android:layout_marginHorizontal="10dp"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btn_videocam"
+            style="@style/IconButtonStyle"
+            android:src="@drawable/icon_video_camera"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcyView_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:visibility="gone"
+        android:padding="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color05"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_emojis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/icon_face"
+                app:tint="@color/white" />
+
+            <EditText
+                android:id="@+id/input_sendMessage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/send_message"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+            <ImageButton
+                android:id="@+id/btn_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/icon_camera"
+                app:tint="@color/white" />
+
+            <ImageButton
+                android:id="@+id/btn_microphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/icon_microphone"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_sendMessage"
+            style="@style/IconButtonStyle"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_send_message"
+            android:layout_marginLeft="10dp"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
