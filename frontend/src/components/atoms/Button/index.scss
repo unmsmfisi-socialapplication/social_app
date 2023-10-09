@@ -28,6 +28,32 @@
         }
     }
 
+    &--terciary {
+        background-color: #ffffff ;
+        color: #007AFF;
+        border: 1px solid #A7CAF8;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: #ffffff ;
+            color: #007AFF;
+            border: 1px solid #A7CAF8;
+        }
+    }       
+
+    &--quaternary {
+        background-color: #E0EDFD ;
+        color: #007AFF;
+        border: 1px solid #A7CAF8;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: #E0EDFD ;
+            color: #007AFF;
+            border: 1px solid #A7CAF8;   
+        }
+    }        
+
     &--disabled {
         background-color: $disabled-color ;
         color: white;

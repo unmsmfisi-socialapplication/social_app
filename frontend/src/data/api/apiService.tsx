@@ -30,7 +30,6 @@ import axios, { AxiosResponse } from 'axios';
     params: Record<string, any> = {}
   ): Promise<AxiosResponse<T>> {
     const idToken = localStorage.getItem('token') || '';
-  
     try {
       const response = await axios({
         url,
@@ -41,6 +40,8 @@ import axios, { AxiosResponse } from 'axios';
         },
         data: params,
       });
+      //TODO: TEST login integration console.log("response : ", response);
+
       return response;
     } catch (error) {
       console.error('errorDoPost', error);
