@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 interface WInputProps {
   value?: string;
@@ -33,6 +36,12 @@ const WInput: React.FC<WInputProps> = ({
   onChange = () => {},
   onBlur = () => {},
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
   return (
     <TextField
       value={value}
@@ -44,11 +53,19 @@ const WInput: React.FC<WInputProps> = ({
       size={size}
       color={typeColor}
       placeholder={placeholder}
-      type={type}
+      type={type === 'password' && !showPassword ? 'password' : 'text'}
       error={error}
       InputProps={{
-        endAdornment: icon && (
-          <InputAdornment position="end">{icon}</InputAdornment>
+        endAdornment: (
+          <InputAdornment position="end">
+            {type === 'password' ? (
+              <IconButton onClick={togglePasswordVisibility} edge="end">
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            ) : (
+              icon && <InputAdornment position="end">{icon}</InputAdornment>
+            )}
+          </InputAdornment>
         ),
       }}
       helperText={error && errorMessage}

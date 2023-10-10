@@ -1,0 +1,453 @@
+{
+	"info": {
+		"_postman_id": "7e56c3c2-0d57-48ff-b829-5f208a97b452",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24663869"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3333",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333"
+				}
+			},
+			"response": [
+				{
+					"name": "Successful Registration Test",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"123456789\",\r\n  \"email\": \"email@example.com\",\r\n  \"user_name\": \"username\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 06 Oct 2023 18:57:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"prueba\": \"1. Successful Registration Test\",\r\n  \"codigoHTTP\": \"201\",\r\n  \"message\": \"Creación exitosa\"\r\n}"
+				},
+				{
+					"name": "User Already Exists Test",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"123456789\",\r\n  \"email\": \"email@example.com\",\r\n  \"user_name\": \"username\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 06 Oct 2023 18:57:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"prueba\": \"2. User Already Exists Test\",\r\n  \"codigoHTTP\": \"400\",\r\n  \"message\": \"El nombre de usuario ya está en uso\"\r\n}"
+				},
+				{
+					"name": "Repository Error Test",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"123456789\",\r\n  \"email\": \"email@example.com\",\r\n  \"user_name\": \"username\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 06 Oct 2023 18:57:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"prueba\": \"3. Repository Error Test\",\r\n  \"codigoHTTP\": \"500\",\r\n  \"message\": \"Error relacionado con el repositorio\"\r\n}\r\n"
+				},
+				{
+					"name": "Invalid JSON Test",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"123456789\",\r\n  \"email\": \"email@example.com\",\r\n  \"user_name\": \"username\",\r\n  \"password\": \"password123\" // Falta el corchete de cierre, JSON inválido\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 06 Oct 2023 18:57:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"prueba\": \"4. Invalid JSON Test\",\r\n  \"codigoHTTP\": \"400\",\r\n  \"message\": \"JSON inválido (HTTP 400 Bad Request)\"\r\n}\r\n"
+				},
+				{
+					"name": "Registration with Incorrect Phone Number Test",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"1234\", // Número de teléfono demasiado corto\r\n  \"email\": \"email@example.com\",\r\n  \"user_name\": \"username\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 06 Oct 2023 18:57:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"prueba\": \"5. Registration with Incorrect Phone Number Test\",\r\n  \"codigoHTTP\": \"400\",\r\n  \"message\": \"Número de teléfono incorrecto\"\r\n}\r\n"
+				},
+				{
+					"name": "Registration with Invalid Email Address Test",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"123456789\",\r\n  \"email\": \"email@example\", // Formato de correo electrónico incorrecto\r\n  \"user_name\": \"username\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 06 Oct 2023 18:57:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"prueba\": \"6. Registration with Invalid Email Address Test\",\r\n  \"codigoHTTP\": \"400\",\r\n  \"message\": \"Dirección de correo electrónico no válida\"\r\n}\r\n"
+				},
+				{
+					"name": "Registration with Weak Password Test",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"123456789\",\r\n  \"email\": \"email@example.com\",\r\n  \"user_name\": \"username\",\r\n  \"password\": \"12345\" // Contraseña demasiado corta\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 06 Oct 2023 18:57:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"prueba\": \"7. Registration with Weak Password Test\",\r\n  \"codigoHTTP\": \"400\",\r\n  \"message\": \"Contraseña débil\"\r\n}\r\n"
+				},
+				{
+					"name": "Registration with Missing Fields Test",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"123456789\",\r\n  \"user_name\": \"username\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 06 Oct 2023 18:57:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"prueba\": \"8. Registration with Missing Fields Test\",\r\n  \"codigoHTTP\": \"400\",\r\n  \"message\": \"Campos obligatorios faltantes\"\r\n}"
+				},
+				{
+					"name": "Registration with Malicious Data Test",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"phone\": \"123456789\", \r\n    \"email\": \"email@example.com\", \r\n    \"user_name\": \"username\",\r\n     \"password\": \"password123\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 06 Oct 2023 18:57:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "18"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\"hello\": \"world\"}"
+				}
+			]
+		}
+	]
+}
