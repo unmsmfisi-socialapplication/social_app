@@ -21,11 +21,12 @@
     <style name="ButtonStyleSocial">
         <item name="cornerRadius">5dp</item>
         <item name="android:layout_height">55dp</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:backgroundTint">@color/white</item>
         <item name="android:strokeColor">@color/black</item>
         <item name="strokeWidth">1dp</item>
+        <item name="android:paddingLeft">10dp</item>
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
@@ -33,13 +34,32 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">55dp</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:singleLine">true</item>
     </style>
 
     <style name="TextInputLayoutStyle">
-        <item name="boxStrokeColor">@color/black</item>
-        <item name="hintTextColor">@color/black</item>
+        <item name="boxStrokeColor">@color/color01</item>
+        <item name="hintTextColor">@color/color01</item>
+    </style>
+
+    <style name="TextInputEditTextNumberStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TextInputLayoutNumberStyle">
+        <item name="boxStrokeColor">@color/color01</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">80dp</item>
     </style>
 
     <style name="TextViewLinked">
@@ -58,6 +78,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="TextViewHeader">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="TextViewError">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -66,6 +92,22 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">textEnd</item>
         <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="android:background">@color/color04</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="IconButtonStyle">
+        <item name="cornerRadius">10dp</item>
+        <item name="android:background">@color/color04</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_height">42dp</item>
     </style>
 
 </resources>

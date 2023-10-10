@@ -7,6 +7,7 @@
     <string name="login">Iniciar sesión</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
+    <string name="password_confirm">Confirmar Contraseña</string>
     <string name="forgot_password_ask">¿Olvidaste la contraseña?</string>
     <string name="create_new_account">Crear una nueva cuenta</string>
     <string name="continue_with_google">Continuar con Google</string>
@@ -19,12 +20,26 @@
     <string name="sign_up">Regístrate</string>
     <string name="does_not_count">¿No tienes una cuenta?</string>
     <string name="none"></string>
-    <string name="onboarding_register">Registrate</string>
+    <string name="onboarding_register">Regístrate</string>
     <string name="onboarding_connected_world_title">Encuentra amigos y obtén inspiración</string>
     <string name="onboarding_connected_world_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
     <string name="onboarding_remote_meeting_title">Conoce comunidades increíbles y divertidas</string>
     <string name="onboarding_remote_meeting_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
     <string name="onboarding_online_friends_title">Chatea con amigos</string>
     <string name="onboarding_online_friends_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
+    <string name="full_name">Tu nombre</string>
+    <string name="conditions_register">By Using this app you agree with the Terms of Service</string>
+    <string name="join_now">Únete Ahora</string>
+    <string name="recover_password">Recuperar contraseña</string>
+    <string name="enter_email">Ingresa tu correo electrónico</string>
+    <string name="next">Continuar</string>
+    <string name="i_have_recovery_code">Tengo un codigo de recuperación</string>
+    <string name="return_to_login">Regresa a inicio de sesión</string>
+    <string name="submit">Enviar</string>
+    <string name="enter_verification_code">Ingrese el código de verificación</string>
+    <string name="text_enter_email">Introduce el código que te hemos enviado a tu correo electrónico</string>
+    <string name="resend_code">Reenviar código</string>
+    <string name="title_message">Mensajes</string>
+    <string name="send_message">Escribe tu mensaje</string>
 
 </resources>
