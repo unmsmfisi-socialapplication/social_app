@@ -37,10 +37,11 @@ export default function TestPage() {
           backgroundColor: "red",
         }}
       >
-        <WButton typeColor="primary" text="DD" disabled/>
-        <WButton typeColor="secondary" text="button" size="large" />
-        <WButton text="test" size="large" disabled />
+        <WButton typeColor="secondary" text="DDdasdasdasdasdasdasdasdasd" />
+        <WButton typeColor="terciary" text="button" size="large" />
       </div>
+      <WButton text="test" size="large" typeColor="terciary"/>
+
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
       <div>
