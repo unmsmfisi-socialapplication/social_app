@@ -34,7 +34,7 @@ func LoadEnvFromFile(filename string) {
 }
 
 func CheckEnvVariables() error {
-	requiredVariables := []string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_DBNAME", "DB_SSLMODE"}
+	requiredVariables := []string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "DB_SSLMODE"}
 
 	for _, variable := range requiredVariables {
 		if os.Getenv(variable) == "" {
