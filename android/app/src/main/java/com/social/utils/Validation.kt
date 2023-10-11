@@ -9,11 +9,11 @@ import android.widget.EditText
 object Validation {
 
     fun isEmailValid(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches() && !email.contains(" ")
     }
 
     fun isPasswordValid(password: String): Boolean {
-        return password.isNotEmpty() && password.length >= 8
+        return password.isNotEmpty() && password.length >= 8 && !password.contains(" ")
     }
 
     fun setupValidation(

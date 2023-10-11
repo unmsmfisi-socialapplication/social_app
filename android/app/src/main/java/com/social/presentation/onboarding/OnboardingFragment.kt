@@ -1,10 +1,10 @@
 package com.social.presentation.onboarding
 
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
@@ -43,15 +43,16 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         binding.indicatorLayout.removeAllViews()
         for (i in dots.indices) {
             dots[i] = TextView(requireContext())
-            dots[i].text = Html.fromHtml("&#8226")
+            dots[i].text = HtmlCompat.fromHtml("&#8226;", HtmlCompat.FROM_HTML_MODE_LEGACY)
             dots[i].textSize = 35f
             dots[i].setTextColor(requireContext().getColor(R.color.color03))
             binding.indicatorLayout.addView(dots[i])
         }
-        dots[position]?.setTextColor(requireContext().getColor(R.color.color01))
+        dots[position].setTextColor(requireContext().getColor(R.color.color01))
         configureIndicatorLayout(position > 0)
         setElementVisibility(position > 0)
     }
+
 
     private fun configureIndicatorLayout(shouldModify: Boolean) {
         val params = binding.indicatorLayout.layoutParams as ConstraintLayout.LayoutParams
