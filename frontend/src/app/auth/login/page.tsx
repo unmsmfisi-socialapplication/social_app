@@ -33,7 +33,7 @@ export default function LoginPage() {
   return (
     <EnrollmentHoc>
       <form onSubmit={formik.handleSubmit}>
-        <WCardAuth title="Bienvenido de nuevo" size="large">
+        <WCardAuth title="Bienvenido" size="large">
           <span>Nombre de usuario</span>
           <WInput
             name={LOGIN_VALUES.EMAIL}
