@@ -52,7 +52,7 @@ jobs:
         uses: mattes/gce-cloudsql-proxy-action@v1
         with:
           creds: ${{ secrets.GCP_SA_DCR_KEY }}
-          instance: ${{ env.PROJECT_ID }}:${{ env.GAR_LOCATION }}:{{ env.DB_INSTANCE }}
+          instance: ${{ env.PROJECT_ID }}:${{ env.GAR_LOCATION }}:${{ env.DB_INSTANCE }}
 
       - name: Run database migrations
         run: "go run cmd/migrations/migrations.go"
