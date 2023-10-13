@@ -71,7 +71,7 @@ describe('validatePassword', () => {
 describe('validateUsername', () => {
   it('should return false for an empty string on name input', () => {
     expect(validateUsername('usuario123')).toBe(true);
-    expect(validateUsername('nombre-usuario')).toBe(true);
+    expect(validateUsername('nombre-usuario1')).toBe(true);
     expect(validateUsername('Usuario_456')).toBe(true);
   });
 
