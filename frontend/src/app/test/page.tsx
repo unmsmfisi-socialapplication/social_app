@@ -124,7 +124,7 @@ export default function TestPage() {
       <div>
         <WDetailsImage
           accountName={"Influencia Animal"}
-          op={"Miguel D."}
+          name={"Miguel D."}
           icon={PetsIcon}
         />
       </div>

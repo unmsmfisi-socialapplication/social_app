@@ -3,13 +3,13 @@ import WCircleIcon from "@/components/atoms/CircleIcon/circleIcon";
 
 interface WDetailsImageProps {
   accountName: string;
-  op: string;
+  name: string;
   icon: React.ComponentType;
 }
 
 const WDetailsImage: React.FC<WDetailsImageProps> = ({
-  accountName = "Jane Doe",
-  op = "janedoe123",
+  accountName,
+  name,
   icon: IconComponent,
 }) => {
   const divStyle = {
@@ -26,7 +26,7 @@ const WDetailsImage: React.FC<WDetailsImageProps> = ({
     lineHeight: "19px",
     color: "#000",
   };
-  const pStyleOP = {
+  const pStyleName = {
     color: "rgba(0, 0, 0, 0.40)",
   };
 
@@ -35,10 +35,16 @@ const WDetailsImage: React.FC<WDetailsImageProps> = ({
       <WCircleIcon iconSize={30} typeColor={"secondary"} icon={IconComponent} />
       <div>
         <p style={divStyleText}>{accountName}</p>
-        <p style={{ ...divStyleText, ...pStyleOP }}>Posteado por {op}</p>
+        <p style={{ ...divStyleText, ...pStyleName }}>Posteado por {name}</p>
       </div>
     </div>
   );
 };
 
 export default WDetailsImage;
+
+WDetailsImage.defaultProps = {
+  accountName: "Jane Doe",
+  name: "janedoe123",
+  icon: React.Component,
+};
