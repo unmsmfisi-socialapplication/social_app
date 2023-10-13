@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	config "github.com/unmsmfisi-socialapplication/social_app"
+	config "github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 func TestLoadEnvFromFile(t *testing.T) {
@@ -22,7 +22,7 @@ func TestLoadEnvFromFile(t *testing.T) {
 		"DB_HOST":     "localhost",
 		"DB_USER":     "testuser",
 		"DB_PASSWORD": "testpass",
-		"DB_NAME":   "testdb",
+		"DB_NAME":     "testdb",
 		"DB_SSLMODE":  "disable",
 	}
 
@@ -40,6 +40,7 @@ func TestCheckEnvVariables(t *testing.T) {
 	os.Setenv("DB_PASSWORD", "testpass")
 	os.Setenv("DB_DBNAME", "testdb")
 	os.Setenv("DB_SSLMODE", "disable")
+	os.Setenv("DB_SCHEMA", "sa")
 
 	err := config.CheckEnvVariables()
 	if err != nil {
