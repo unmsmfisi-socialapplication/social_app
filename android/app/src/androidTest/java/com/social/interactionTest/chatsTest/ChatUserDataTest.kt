@@ -5,17 +5,17 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ChatUserDataTest {
-
     @Test
     fun testChatUserData() {
-        val chatUserData = ChatUserData(
-            name = "John Doe",
-            image = "base64encodedimage",
-            message = "Hello",
-            hourSend = "12:00 PM",
-            countNotification = "3",
-            token = "token123"
-        )
+        val chatUserData =
+            ChatUserData(
+                name = "John Doe",
+                image = "base64encodedimage",
+                message = "Hello",
+                hourSend = "12:00 PM",
+                countNotification = "3",
+                token = "token123",
+            )
 
         assertEquals("John Doe", chatUserData.name)
         assertEquals("base64encodedimage", chatUserData.image)
