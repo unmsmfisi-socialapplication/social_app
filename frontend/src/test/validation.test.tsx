@@ -67,3 +67,19 @@ describe('validatePassword', () => {
     expect(validatePassword("")).toBe(false);
   });
 });
+
+describe('validateUsername', () => {
+  it('debería devolver true para correos válidos', () => {
+    expect(validateEmail('wilfredohg57@gmail.com')).toBe(true);
+    expect(validateEmail('devcell@gmail.com')).toBe(true);
+  });
+
+  it('debería devolver false para correos no válidos', () => {
+    expect(validateEmail('12@3ABC')).toBe(false);
+    expect(validateEmail('JohnWick')).toBe(false);
+  });
+  
+  it('should return false for an empty string on email input', () => {
+    expect(validateEmail('')).toBe(false);
+  });
+});
