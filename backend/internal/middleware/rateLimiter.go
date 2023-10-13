@@ -7,17 +7,19 @@ import (
 )
 
 type RateLimiter struct {
-	Requests      int
+	MaxRequests   int
 	Interval      time.Duration
 	LastTimestamp time.Time
 	Mutex         sync.Mutex
+	requests      int
 }
 
-func NewRateLimiter(requests int, interval time.Duration) *RateLimiter {
+func NewRateLimiter(maxRequests int, interval time.Duration) *RateLimiter {
 	return &RateLimiter{
-		Requests:      requests,
+		MaxRequests:   maxRequests,
 		Interval:      interval,
 		LastTimestamp: time.Now(),
+		requests:      0,
 	}
 }
 
@@ -29,11 +31,12 @@ func (rl *RateLimiter) Allow() bool {
 
 	if now.Sub(rl.LastTimestamp) >= rl.Interval {
 		rl.LastTimestamp = now
+		rl.requests = 0
 		return true
 	}
 
-	if rl.Requests > 0 {
-		rl.Requests--
+	if rl.requests < rl.MaxRequests {
+		rl.requests++
 		return true
 	}
 

@@ -10,12 +10,12 @@ import (
 )
 
 func TestNewRateLimiter(t *testing.T) {
-	requests := 10
+	maxRequests := 10
 	interval := time.Minute
-	rl := middlewareratelimiter.NewRateLimiter(requests, interval)
+	rl := middlewareratelimiter.NewRateLimiter(maxRequests, interval)
 
-	if rl.Requests != requests {
-		t.Errorf("Expected Requests to be %d, but got %d", requests, rl.Requests)
+	if rl.MaxRequests != maxRequests {
+		t.Errorf("Expected Requests to be %d, but got %d", maxRequests, rl.MaxRequests)
 	}
 
 	if rl.Interval != interval {
