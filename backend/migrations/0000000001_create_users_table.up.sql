@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE TABLE sa.SOC_APP_USERS(
   user_id bigserial,
   insertion_date timestamp,
@@ -9,3 +11,5 @@ CREATE TABLE sa.SOC_APP_USERS(
 );
 CREATE UNIQUE INDEX UQ_SOC_APP_USERS ON sa.SOC_APP_USERS(phone,email,user_name);
 CREATE INDEX IDX_SOC_APP_USERS ON sa.SOC_APP_USERS (insertion_date);
+
+COMMIT;

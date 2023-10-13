@@ -31,7 +31,7 @@ func main() {
 	}
 
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://migrations", // Con 3 barras sale error
+		"file://migrations",
 		"postgres", driver)
 
 	if err != nil {
@@ -39,7 +39,7 @@ func main() {
 		return
 	}
 
-	err = m.Up() // or m.Step(2) if you want to explicitly set the number of migrations to run
+	err = m.Up()
 	if err != nil {
 		fmt.Println(err.Error())
 		return
