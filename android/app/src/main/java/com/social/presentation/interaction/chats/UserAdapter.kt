@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.social.databinding.ConteinerUserChatBinding
 import com.social.domain.model.ChatUserData
 
-class UsersAdapter(val users: List<ChatUserData>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+class UserAdapter(val users: List<ChatUserData>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     private lateinit var binding: ConteinerUserChatBinding
     private lateinit var globalView: View
 
@@ -25,7 +25,7 @@ class UsersAdapter(val users: List<ChatUserData>) : RecyclerView.Adapter<UsersAd
     }
 
     override fun onBindViewHolder(
-        holder: UsersAdapter.UserViewHolder,
+        holder: UserAdapter.UserViewHolder,
         position: Int,
     ) {
         holder.bindUserData(users[position])

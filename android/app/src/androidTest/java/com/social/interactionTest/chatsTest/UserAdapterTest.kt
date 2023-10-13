@@ -2,15 +2,15 @@ package com.social.interactionTest.chatsTest
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.social.domain.model.ChatUserData
-import com.social.presentation.interaction.chats.UsersAdapter
+import com.social.presentation.interaction.chats.UserAdapter
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class UsersAdapterTest {
-    private lateinit var usersAdapter: UsersAdapter
+class UserAdapterTest {
+    private lateinit var usersAdapter: UserAdapter
 
     @Before
     fun setUp() {
@@ -31,7 +31,7 @@ class UsersAdapterTest {
                     countNotification = "1",
                 ),
             )
-        usersAdapter = UsersAdapter(users)
+        usersAdapter = UserAdapter(users)
     }
 
     @Test
