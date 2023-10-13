@@ -9,7 +9,7 @@ import (
 
 func TestLoadEnvFromFile(t *testing.T) {
 	tempFile := "test.env"
-	content := []byte("DB_HOST=localhost\nDB_USER=testuser\nDB_PASSWORD=testpass\nDB_DBNAME=testdb\nDB_SSLMODE=disable")
+	content := []byte("DB_HOST=localhost\nDB_USER=testuser\nDB_PASSWORD=testpass\nDB_NAME=testdb\nDB_SSLMODE=disable")
 	err := os.WriteFile(tempFile, content, 0644)
 	if err != nil {
 		t.Fatal(err)
@@ -22,7 +22,7 @@ func TestLoadEnvFromFile(t *testing.T) {
 		"DB_HOST":     "localhost",
 		"DB_USER":     "testuser",
 		"DB_PASSWORD": "testpass",
-		"DB_DBNAME":   "testdb",
+		"DB_NAME":   "testdb",
 		"DB_SSLMODE":  "disable",
 	}
 

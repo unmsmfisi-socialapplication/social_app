@@ -24,9 +24,36 @@
 
         &:hover {
             background-color: $third-color;
-            color: black;
+            border: 1px solid #DADADA;
+            color: #DADADA;
         }
     }
+
+    &--terciary {
+        background-color: #ffffff ;
+        color: #007AFF;
+        border: 1px solid #A7CAF8;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: #ffffff ;
+            color: #007AFF;
+            border: 1px solid #A7CAF8;
+        }
+    }       
+
+    &--quaternary {
+        background-color: #E0EDFD ;
+        color: #007AFF;
+        border: 1px solid #A7CAF8;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: #E0EDFD ;
+            color: #007AFF;
+            border: 1px solid #A7CAF8;   
+        }
+    }        
 
     &--disabled {
         background-color: $disabled-color ;
@@ -36,19 +63,6 @@
         &:hover {
             background-color: $disabled-color;
             color: white;
-        }
-    }
-
-    &--white {
-        background-color: white;
-        border-color: black;
-        color: black;
-        font-family: $font-poppins-regular;
-
-        &:hover {
-            background-color: black;
-            color: white;
-            border-color: white;
         }
     }
 }

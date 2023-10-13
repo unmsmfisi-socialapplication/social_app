@@ -1,6 +1,3 @@
-//go:build unit
-// +build unit
-
 package infrastructure
 
 import (
@@ -69,7 +66,7 @@ func TestHandleLogin(t *testing.T) {
 
 		{
 			name:       "Login successful",
-			inputBody:  `{"username": "test", "password": "test"}`,
+			inputBody:  `{"username": "myuser12", "password": "Social@12"}`,
 			mockAuth:   func(username, password string) (bool, error) { return true, nil },
 			wantStatus: http.StatusOK,
 			wantBody:   `{"response":"Authentication successful","status":"OK"}`,
