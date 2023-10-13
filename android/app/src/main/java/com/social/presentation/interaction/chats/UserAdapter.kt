@@ -10,18 +10,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.social.databinding.ConteinerUserChatBinding
 import com.social.domain.model.ChatUserData
 
-class UsersAdapter(val users: List<ChatUserData>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+class UserAdapter(val users: List<ChatUserData>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     private lateinit var binding: ConteinerUserChatBinding
     private lateinit var globalView: View
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): UserViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         binding = ConteinerUserChatBinding.inflate(inflater, parent, false)
         globalView = binding.root
         return UserViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: UsersAdapter.UserViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: UserAdapter.UserViewHolder,
+        position: Int,
+    ) {
         holder.bindUserData(users[position])
     }
 
@@ -31,7 +37,6 @@ class UsersAdapter(val users: List<ChatUserData>) : RecyclerView.Adapter<UsersAd
 
     inner class UserViewHolder(private val binding: ConteinerUserChatBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bindUserData(user: ChatUserData) {
             binding.chatUserName.text = user.name
             binding.chatMessage.text = user.message

@@ -8,5 +8,5 @@ data class ChatUserData(
     var message: String = "",
     var hourSend: String = "",
     var countNotification: String = "",
-    var token: String = ""
+    var token: String = "",
 ) : Serializable

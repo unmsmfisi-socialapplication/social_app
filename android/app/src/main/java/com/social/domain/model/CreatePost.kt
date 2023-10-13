@@ -1,8 +1,8 @@
 package com.social.domain.model
 
-data class CreatePost (
+data class CreatePost(
     val response: CreatePostResponse,
-    val status: String
+    val status: String,
 )
 
-class InvalidCreatePostException(message:String):Exception(message)
+class InvalidCreatePostException(message: String) : Exception(message)

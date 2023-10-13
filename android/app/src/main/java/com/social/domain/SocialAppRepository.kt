@@ -6,6 +6,7 @@ import com.social.domain.model.CreatePostBody
 import com.social.domain.model.LoginBody
 
 interface SocialAppRepository {
-    suspend fun validateUser(loginBody: LoginBody):LoginDto
+    suspend fun validateUser(loginBody: LoginBody): LoginDto
+
     suspend fun createPost(createPostBody: CreatePostBody): CreatePostDto
 }

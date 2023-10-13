@@ -33,14 +33,14 @@ export default function LoginPage() {
   return (
     <EnrollmentHoc>
       <form onSubmit={formik.handleSubmit}>
-        <WCardAuth title="Bienvenido de nuevo" size="large">
+        <WCardAuth title="Bienvenido" size="large">
           <span>Nombre de usuario</span>
           <WInput
-            name={LOGIN_VALUES.EMAIL}
+            name={LOGIN_VALUES.USERNAME}
             value={formik.values.username}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="Ingrese su correo o usuario"
+            placeholder="Ingrese su usuario"
             error={
               formik.touched.username && !validateEmail(formik.values.username)
             }
