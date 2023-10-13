@@ -5,7 +5,7 @@ import "./index.scss";
 
 interface WButtonProps {
   id?: string;
-  typeColor?: "primary" | "secondary" | "disabled" | "white";
+  typeColor?: "primary" | "secondary" | "terciary"| "quaternary"| "disabled" | "white";
   type?: "submit" ;
   text?: string;
   size?: "large";

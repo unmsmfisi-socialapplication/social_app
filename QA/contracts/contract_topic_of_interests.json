@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ActivityPub User Interests",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "string",
+                    "const": "https://www.w3.org/ns/activitystreams"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "@language": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["@language"]
+                }
+            ]
+        },
+        "type": {
+            "type": "string",
+            "enum": ["Collection"]
+        },
+        "actor": {
+            "type": "string",
+            "format": "uri"
+        },
+        "object": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": ["Interest"]
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "summary": {
+                        "type": "string"
+                    }
+                },
+                "required": ["id", "type", "name", "summary"]
+            }
+        }
+    },
+    "required": ["@context", "type", "actor", "object"]
+}

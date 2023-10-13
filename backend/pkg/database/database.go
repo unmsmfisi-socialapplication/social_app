@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	_ "github.com/lib/pq"
-	config "github.com/unmsmfisi-socialapplication/social_app"
+	config "github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 var db *sql.DB
