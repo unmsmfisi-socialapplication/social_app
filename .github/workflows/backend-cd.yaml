@@ -33,6 +33,9 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE_BACKEND }}" > .env
 
+      - name: Run database migrations
+        run: "go run cmd/migrations/migrations.go"
+
       - name: Google Auth
         id: auth
         uses: google-github-actions/auth@v1
@@ -63,7 +66,6 @@ jobs:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
           image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGES }}:${{ github.sha }}
-          port: 3333
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
