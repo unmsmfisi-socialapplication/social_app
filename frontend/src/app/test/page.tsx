@@ -13,7 +13,6 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import AvatarInput from "@/components/molecules/AvatarInput";
 import WDetailsImage from "@/components/molecules/DetailsImage/index";
-import PetsIcon from "@mui/icons-material/Pets"; //used in WDetailsImage for testing purposes
 
 export default function TestPage() {
   const [count, setCount] = useState(0);
@@ -125,9 +124,20 @@ export default function TestPage() {
         <WDetailsImage
           accountName={"Influencia Animal"}
           name={"Miguel D."}
-          icon={PetsIcon}
+          icon={TestIcon}
         />
       </div>
     </Layout>
   );
 }
+
+const TestIcon: React.FC = () => {
+  return (
+    <div>
+      <img 
+        style={{ height:"30px", width:"30px", borderRadius:"100%" }} 
+        src="https://images.unsplash.com/photo-1542309667-2a115d1f54c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1936&h=1936&q=80"
+      />
+    </div>
+  )
+};
