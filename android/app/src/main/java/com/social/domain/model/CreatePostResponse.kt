@@ -7,7 +7,7 @@ data class CreatePostResponse(
     val Description: String,
     val HasMultimedia: Boolean,
     val Public: Boolean,
-    val Multimedia: String?="",
+    val Multimedia: String? = "",
     val InsertionDate: String,
-    val UpdateDate: String
+    val UpdateDate: String,
 )
