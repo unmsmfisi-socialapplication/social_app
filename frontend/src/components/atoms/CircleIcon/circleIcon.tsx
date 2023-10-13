@@ -4,7 +4,7 @@ import { SvgIcon, SvgIconProps } from "@mui/material";
 import "./index.scss";
 
 interface WCircleIconProps {
-  typeColor?: "primary" | "secondary";
+  typeColor?: "primary" | "secondary" | "comment";
   icon: React.ComponentType<SvgIconProps>;
   iconSize?: number;
 }

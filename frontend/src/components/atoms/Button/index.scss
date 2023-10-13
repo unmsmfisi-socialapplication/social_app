@@ -1,29 +1,68 @@
 @import '../../../../resources/styles/variables.scss';
 
-.button {
+.button.typeButton {
     padding: 0 35px 0 35px;
     height: 38px;
     border-radius: 5px;
+
     &--primary {
-        background-color: $primary-color;
+        background-color: $primary-color ;
         color: white;
         font-family: $font-poppins-regular;
+
         &:hover {
-            background-color: $primary-color;
+            background-color: $primary-color ;
             color: white;
         }
     }
+
     &--secondary {
-        background-color: $third-color; 
+        background-color: $third-color ;
         color: black;
         border: 1px solid black;
         font-family: $font-poppins-regular;
+
         &:hover {
-            background-color: $third-color; 
-            color: black;
+            background-color: $third-color;
+            border: 1px solid #DADADA;
+            color: #DADADA;
+        }
+    }
+
+    &--terciary {
+        background-color: #ffffff ;
+        color: #007AFF;
+        border: 1px solid #A7CAF8;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: #ffffff ;
+            color: #007AFF;
+            border: 1px solid #A7CAF8;
+        }
+    }       
+
+    &--quaternary {
+        background-color: #E0EDFD ;
+        color: #007AFF;
+        border: 1px solid #A7CAF8;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: #E0EDFD ;
+            color: #007AFF;
+            border: 1px solid #A7CAF8;   
+        }
+    }        
+
+    &--disabled {
+        background-color: $disabled-color ;
+        color: white;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: $disabled-color;
+            color: white;
         }
     }
 }
-
-
-

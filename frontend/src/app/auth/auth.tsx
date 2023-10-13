@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 
 import RootEnrollment from "../Enrollment";
+import { WButton } from "@/components";
 
 export default function EnrollmentHoc({
   children,
