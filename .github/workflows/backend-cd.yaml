@@ -33,7 +33,7 @@ jobs:
         id: auth
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: ${{ secrets.GCP_SA_DCR_KEY}}
+          credentials_json: ${{ secrets.GCP_SA_DCR_KEY }}
   
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
