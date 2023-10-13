@@ -1,4 +1,4 @@
-import { validateName, validateEmail, validatePassword } from '../utilities/Validation';
+import { validateName, validateEmail, validatePassword, validateUsername } from '../utilities/Validation';
 
 describe('validateName', () => {
   it('should return true for valid names', () => {
@@ -16,7 +16,7 @@ describe('validateName', () => {
 });
 
 describe('validateEmail', () => {
-  it('debería devolver true para correos válidos', () => {
+  it('should return false for an empty string on name input', () => {
     expect(validateEmail('wilfredohg57@gmail.com')).toBe(true);
     expect(validateEmail('devcell@gmail.com')).toBe(true);
   });
@@ -66,4 +66,19 @@ describe('validatePassword', () => {
   it('should return false for an empty string', () => {
     expect(validatePassword("")).toBe(false);
   });
+});
+
+describe('validateUsername', () => {
+  it('should return false for an empty string on name input', () => {
+    expect(validateUsername('usuario123')).toBe(true);
+    expect(validateUsername('nombre-usuario')).toBe(true);
+    expect(validateUsername('Usuario_456')).toBe(true);
+  });
+
+  it('debería devolver false para correos no válidos', () => {
+    expect(validateUsername('usuario@789')).toBe(false);
+    expect(validateUsername('us')).toBe(false);
+    expect(validateUsername('nombre de usuario')).toBe(false);
+  });
+  
 });
