@@ -15,7 +15,6 @@ export default function LoginPage() {
     const { data, error } = await AuthRepository.authRequest(request);
     if (data && error === null) {
       setAuth({ ...data });
-      console.log("data", data);
     } else {
       console.log("error", error);
     }
