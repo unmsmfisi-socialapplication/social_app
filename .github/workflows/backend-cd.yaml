@@ -21,6 +21,7 @@ env:
   IMAGES: social-app-images
   SERVICE: social-app-backend-service # TODO: update Cloud Run service name
   REGION: us-central1 # TODO: update Cloud Run service region
+  DB_INSTANCE: db-social-app-dev
 
 jobs:
   deploy:
@@ -47,6 +48,15 @@ jobs:
       - name: Use gcloud CLI
         run: gcloud info
 
+      - name: Connect to Cloud SQL Proxy
+        uses: mattes/gce-cloudsql-proxy-action@v1
+        with:
+          creds: ${{ secrets.GCP_SA_DCR_KEY }}
+          instance: ${{ env.PROJECT_ID }}:${{ env.GAR_LOCATION }}:{{ env.DB_INSTANCE }}
+
+      - name: Run database migrations
+        run: "go run cmd/migrations/migrations.go"
+
       - name: Docker auth
         run: |-
           gcloud auth configure-docker us-central1-docker.pkg.dev
@@ -63,7 +73,6 @@ jobs:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
           image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGES }}:${{ github.sha }}
-          port: 3333
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
