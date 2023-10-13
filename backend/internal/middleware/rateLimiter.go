@@ -1,4 +1,4 @@
-package middlewareratelimiter
+package middleware
 
 import (
 	"net/http"

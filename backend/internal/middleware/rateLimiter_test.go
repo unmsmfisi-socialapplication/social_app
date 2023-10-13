@@ -1,18 +1,16 @@
-package test
+package middleware
 
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
-
-	middlewareratelimiter "github.com/unmsmfisi-socialapplication/social_app/internal/middleware"
 )
 
 func TestNewRateLimiter(t *testing.T) {
 	maxRequests := 10
 	interval := time.Minute
-	rl := middlewareratelimiter.NewRateLimiter(maxRequests, interval)
+	rl := NewRateLimiter(maxRequests, interval)
 
 	if rl.MaxRequests != maxRequests {
 		t.Errorf("Expected Requests to be %d, but got %d", maxRequests, rl.MaxRequests)
@@ -28,7 +26,7 @@ func TestNewRateLimiter(t *testing.T) {
 }
 
 func TestRateLimiter_Allow(t *testing.T) {
-	rl := middlewareratelimiter.NewRateLimiter(2, time.Second)
+	rl := NewRateLimiter(2, time.Second)
 
 	if !rl.Allow() {
 		t.Error("Expected first request to be allowed, but it was denied")
@@ -50,7 +48,7 @@ func TestRateLimiter_Allow(t *testing.T) {
 }
 
 func TestRateLimiter_Handle(t *testing.T) {
-	rl := middlewareratelimiter.NewRateLimiter(2, time.Second)
+	rl := NewRateLimiter(2, time.Second)
 
 	ts := httptest.NewServer(rl.Handle(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
