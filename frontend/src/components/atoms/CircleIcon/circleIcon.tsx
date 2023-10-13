@@ -15,10 +15,15 @@ const WCircleIcon: React.FC<WCircleIconProps> = ({
   icon,
   iconSize,
 }) => {
+  const borderStyle = {
+    border: "2mm solid white",
+    borderRadius: "50%", //To make sure the edge is circular
+  };
+
   return (
     <SvgIcon
       component={icon}
-      sx={{ fontSize: iconSize }}
+      sx={{ fontSize: iconSize, ...borderStyle }} // Add the border to the style
       className={`circleIcon circleIcon--${typeColor}`}
     ></SvgIcon>
   );
