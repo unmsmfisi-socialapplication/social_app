@@ -28,13 +28,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE_BACKEND }}" > .env
+
       - name: Google Auth
         id: auth
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_DCR_KEY}}
-  
+
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
@@ -46,7 +50,7 @@ jobs:
       - name: Docker auth
         run: |-
           gcloud auth configure-docker us-central1-docker.pkg.dev
-    
+
       - name: Build and Push Container
         run: |-
           docker build -t ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGES }}:${{ github.sha }} .
@@ -59,6 +63,7 @@ jobs:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
           image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGES }}:${{ github.sha }}
+          port: 3333
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
