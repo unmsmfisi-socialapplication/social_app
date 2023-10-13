@@ -8,13 +8,16 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ApiInterface {
-
     /*****Endpoints*****/
-    //Login
+    // Login
     @POST("/login")
-    suspend fun validateUser(@Body loginBody : LoginBody): LoginDto
+    suspend fun validateUser(
+        @Body loginBody: LoginBody,
+    ): LoginDto
 
-    //Create Post
+    // Create Post
     @POST("/post/")
-    suspend fun createPost(@Body createPostBody: CreatePostBody): CreatePostDto
+    suspend fun createPost(
+        @Body createPostBody: CreatePostBody,
+    ): CreatePostDto
 }

@@ -10,26 +10,27 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class UsersAdapterTest {
-
     private lateinit var usersAdapter: UsersAdapter
 
     @Before
     fun setUp() {
-        val users = listOf(
-            ChatUserData(
-                name = "John Doe",
-                image = "base64encodedimage",
-                message = "Hello",
-                hourSend = "12:00 PM",
-                countNotification = "3"),
-            ChatUserData(
-                name = "Jeanpiere Palacios",
-                image = "base64encodedimage2",
-                message = "Esto es una prueba",
-                hourSend = "12:06 PM",
-                countNotification = "1",)
-
-        )
+        val users =
+            listOf(
+                ChatUserData(
+                    name = "John Doe",
+                    image = "base64encodedimage",
+                    message = "Hello",
+                    hourSend = "12:00 PM",
+                    countNotification = "3",
+                ),
+                ChatUserData(
+                    name = "Jeanpiere Palacios",
+                    image = "base64encodedimage2",
+                    message = "Esto es una prueba",
+                    hourSend = "12:06 PM",
+                    countNotification = "1",
+                ),
+            )
         usersAdapter = UsersAdapter(users)
     }
 
@@ -49,11 +50,13 @@ class UsersAdapterTest {
         val firstUser = usersAdapter.users[0]
         assertEquals("Hello", firstUser.message)
     }
+
     @Test
     fun testUserAdapterFirstUserHourSend() {
         val firstUser = usersAdapter.users[0]
         assertEquals("12:00 PM", firstUser.hourSend)
     }
+
     @Test
     fun testUserAdapterFirstUserCountNotification() {
         val firstUser = usersAdapter.users[0]
