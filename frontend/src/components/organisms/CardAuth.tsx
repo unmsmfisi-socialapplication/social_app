@@ -10,13 +10,16 @@ interface WCardProps {
   children?: React.ReactNode;
 }
 const cardStyle: React.CSSProperties = {
+    display :"block" ,
     border: "none",
+    width: "100%",
+    padding: "23px"
   };
 
 export default function CardAuth({ title, children, variant }: WCardProps) {
   return (
     <Card style={cardStyle} variant={variant}>
-      <span style={{ fontSize: "75px"}}>{title}</span>
+      <span style={{  fontSize: "65px"}}>{title}</span>
       <Box style={{marginTop : "10px",display:"flex" , flexDirection:"column", gap : "0.8rem"}} >{children}</Box>
     </Card>
   );
