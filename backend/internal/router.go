@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"reflect"
 	"time"
 
 	"github.com/go-chi/chi"
@@ -21,13 +23,31 @@ import (
 )
 
 func Router() http.Handler {
+
+	err := database.InitDatabase()
+	if err != nil {
+		log.Fatalf("Failed to initialize database: %v", err)
+	}
+
+	dbInstance := database.GetDB()
+
 	r := chi.NewRouter()
 
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
+	origin := os.Getenv("ALLOW_ORIGINS")
+	array := []string{"A", "B"}
+
+	fmt.Println("--------------------------")
+	fmt.Println(origin)
+	fmt.Println(reflect.TypeOf(origin))
+	fmt.Println("--------------------------")
+	fmt.Println(array)
+	fmt.Println(reflect.TypeOf(array))
+	fmt.Println("--------------------------")
 
 	corsMiddleware := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedOrigins:   []string{os.Getenv("ALLOW_ORIGINS")},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},
@@ -36,13 +56,6 @@ func Router() http.Handler {
 	})
 
 	r.Use(corsMiddleware.Handler)
-
-	err := database.InitDatabase()
-	if err != nil {
-		log.Fatalf("Failed to initialize database: %v", err)
-	}
-
-	dbInstance := database.GetDB()
 
 	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
 	loginUseCase := application.NewLoginUseCase(dbRepo)
