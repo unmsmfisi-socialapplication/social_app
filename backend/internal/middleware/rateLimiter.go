@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"sync"
 	"time"
+
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 type RateLimiter struct {
@@ -12,14 +14,16 @@ type RateLimiter struct {
 	LastTimestamp time.Time
 	Mutex         sync.Mutex
 	requests      int
+	timeProvider  *utils.TimeProvider
 }
 
-func NewRateLimiter(maxRequests int, interval time.Duration) *RateLimiter {
+func NewRateLimiter(maxRequests int, interval time.Duration, timeProvider utils.TimeProvider) *RateLimiter {
 	return &RateLimiter{
 		MaxRequests:   maxRequests,
 		Interval:      interval,
 		LastTimestamp: time.Now(),
 		requests:      0,
+		timeProvider:  &timeProvider,
 	}
 }
 
@@ -27,7 +31,7 @@ func (rl *RateLimiter) Allow() bool {
 	rl.Mutex.Lock()
 	defer rl.Mutex.Unlock()
 
-	now := time.Now()
+	now := (*rl.timeProvider).Now()
 
 	if now.Sub(rl.LastTimestamp) >= rl.Interval {
 		rl.LastTimestamp = now

@@ -14,8 +14,9 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
-	middlewareratelimiter "github.com/unmsmfisi-socialapplication/social_app/internal/middleware"
+	internalmiddleware "github.com/unmsmfisi-socialapplication/social_app/internal/middleware"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 func Router() http.Handler {
@@ -35,7 +36,8 @@ func Router() http.Handler {
 
 	r.Use(corsMiddleware.Handler)
 
-	rateLimiterMiddleware := middlewareratelimiter.NewRateLimiter(100, 1*time.Minute)
+	realTimeProvider := utils.NewRealTimeProvider()
+	rateLimiterMiddleware := internalmiddleware.NewRateLimiter(10, 5*time.Second, realTimeProvider)
 
 	r.Use(rateLimiterMiddleware.Handle)
 
