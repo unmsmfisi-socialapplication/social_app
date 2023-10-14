@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "84b2c61a-2f97-44d6-a659-6bed12c0415a",
+		"name": "QA_LOGIN_TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30305102"
+	},
+	"comment": "Este es un archivo exportado de Postman que contiene múltiples solicitudes relacionadas con el modulo de intereses de QA.",
+	"item": [
+		{
+			"name": "061023",
+			"item": [
+				{
+					"name": "CP_01",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"myuser12\",\r\n    \"password\": \"Social@12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CP_02",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"myuser12\",\r\n    \"password\": \"hopefullythisisnotaplaintext\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CP_03",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"nonexistentuser\",\r\n    \"password\": \"Social@12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CP_04",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"\", \"password\": \"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CP_05",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"myuser12\",\r\n    \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CP_06",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"Social@12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CP_07",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"invaliduser\",\r\n    \"password\": \"invalidpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
