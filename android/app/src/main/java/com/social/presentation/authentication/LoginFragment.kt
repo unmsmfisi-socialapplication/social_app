@@ -14,7 +14,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var globalView: View
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
         globalView = view
@@ -74,8 +77,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-    private fun performLogin(email: String, password: String) {
+    private fun performLogin(
+        email: String,
+        password: String,
+    ) {
         showMessage(requireContext(), "$email - $password")
     }
-
 }
