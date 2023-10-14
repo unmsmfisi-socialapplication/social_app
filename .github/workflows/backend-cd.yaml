@@ -24,7 +24,23 @@ env:
   DB_INSTANCE: db-social-app-dev
 
 jobs:
+  migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Connect to Cloud SQL Proxy
+        uses: mattes/gce-cloudsql-proxy-action@v1
+        with:
+          creds: ${{ secrets.GCP_SA_DCR_KEY }}
+          instance: ${{ env.PROJECT_ID }}:${{ env.GAR_LOCATION }}:${{ env.DB_INSTANCE }}
+
+      - name: Run database migrations
+        run: "go run cmd/migrations/migrations.go"
+
   deploy:
+    needs: migrations
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -47,15 +63,6 @@ jobs:
   
       - name: Use gcloud CLI
         run: gcloud info
-
-      - name: Connect to Cloud SQL Proxy
-        uses: mattes/gce-cloudsql-proxy-action@v1
-        with:
-          creds: ${{ secrets.GCP_SA_DCR_KEY }}
-          instance: ${{ env.PROJECT_ID }}:${{ env.GAR_LOCATION }}:${{ env.DB_INSTANCE }}
-
-      - name: Run database migrations
-        run: "go run cmd/migrations/migrations.go"
 
       - name: Docker auth
         run: |-
