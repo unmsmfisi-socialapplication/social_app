@@ -54,12 +54,12 @@ func LoadEnvFromFile(filename string) {
 }
 
 func GetCorsOrigins() []string {
-	value := os.Getenv("ALLOW_ORIGINS")
+	value := os.Getenv("CORS_ORIGINS")
 	return strings.Split(value, ",")
 }
 
 func GetCorsMaxAge() int {
-	maxAge, err := strconv.Atoi(os.Getenv("MAX_AGE"))
+	maxAge, err := strconv.Atoi(os.Getenv("CORS_MAXAGE"))
 
 	if err != nil {
 		return 300
@@ -73,7 +73,7 @@ func CheckEnvVariables() error {
 
 	for _, variable := range requiredVariables {
 		if os.Getenv(variable) == "" {
-			return fmt.Errorf("Environment variable %s is not set", variable)
+			return fmt.Errorf("environment variable %s is not set", variable)
 		}
 	}
 
