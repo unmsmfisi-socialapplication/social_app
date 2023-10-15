@@ -5,7 +5,11 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"strings"
+
+	"github.com/go-chi/chi"
+	"github.com/go-chi/cors"
 )
 
 type Config struct {
@@ -23,7 +27,7 @@ func LoadEnvFromFile(filename string) {
 
 	defer file.Close()
 
-	env := make(map[string]interface{})
+	env := make(map[string]string)
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -38,27 +42,34 @@ func LoadEnvFromFile(filename string) {
 
 				value = strings.ReplaceAll(value, "[", "")
 				value = strings.ReplaceAll(value, "]", "")
-				env[key] = strings.Split(value, ",")
-
-			} else {
-				env[key] = value
 			}
+
+			env[key] = value
 		}
 	}
 
 	for key, value := range env {
-		switch val := value.(type) {
-		case string:
-			os.Setenv(key, val)
-		case []string:
-
-		}
-
+		os.Setenv(key, value)
 	}
 }
 
+func GetCorsOrigins() []string {
+	value := os.Getenv("ALLOW_ORIGINS")
+	return strings.Split(value, ",")
+}
+
+func GetCorsMaxAge() int {
+	maxAge, err := strconv.Atoi(os.Getenv("MAX_AGE"))
+
+	if err != nil {
+		return 300
+	}
+
+	return maxAge
+}
+
 func CheckEnvVariables() error {
-	requiredVariables := []string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "DB_SSLMODE", "DB_SCHEMA", "ALLOW_ORIGINS"}
+	requiredVariables := []string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "DB_SSLMODE", "DB_SCHEMA", "CORS_ORIGINS", "CORS_MAXAGE"}
 
 	for _, variable := range requiredVariables {
 		if os.Getenv(variable) == "" {
@@ -90,4 +101,19 @@ func LoadConfig() (*Config, error) {
 			os.Getenv("DB_SCHEMA"),
 		),
 	}, nil
+}
+
+func ConfigCors(router *chi.Mux) {
+	origins := GetCorsOrigins()
+	maxAge := GetCorsMaxAge()
+
+	corsMiddleware := cors.New(cors.Options{
+		AllowedOrigins:   origins,
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: true,
+		MaxAge:           maxAge,
+	})
+	router.Use(corsMiddleware.Handler)
 }

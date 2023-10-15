@@ -6,13 +6,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
-	"reflect"
 	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/go-chi/cors"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment"
 	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
@@ -20,6 +17,7 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
 
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 func Router() http.Handler {
@@ -35,27 +33,8 @@ func Router() http.Handler {
 
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
-	origin := os.Getenv("ALLOW_ORIGINS")
-	array := []string{"A", "B"}
 
-	fmt.Println("--------------------------")
-	fmt.Println(origin)
-	fmt.Println(reflect.TypeOf(origin))
-	fmt.Println("--------------------------")
-	fmt.Println(array)
-	fmt.Println(reflect.TypeOf(array))
-	fmt.Println("--------------------------")
-
-	corsMiddleware := cors.New(cors.Options{
-		AllowedOrigins:   []string{os.Getenv("ALLOW_ORIGINS")},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
-		ExposedHeaders:   []string{"Link"},
-		AllowCredentials: true,
-		MaxAge:           300,
-	})
-
-	r.Use(corsMiddleware.Handler)
+	utils.ConfigCors(r)
 
 	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
 	loginUseCase := application.NewLoginUseCase(dbRepo)
