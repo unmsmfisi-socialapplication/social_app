@@ -12,11 +12,14 @@ class ChatScreenFragment : Fragment(R.layout.fragment_chat_screen) {
     private lateinit var globalView: View
     private lateinit var receiverUser: ChatUserData
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChatScreenBinding.bind(view)
         globalView = view
     }
 
-    //Backend
+    // Backend
 }
