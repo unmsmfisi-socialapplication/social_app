@@ -16,7 +16,7 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
-
+	interest_topics "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 )
 
@@ -80,5 +80,9 @@ func Router() http.Handler {
 
 	emailRouter := email.EmailModuleRouter()
 	r.Mount("/email", emailRouter)
+
+	//interestTopics
+	interestTopicsRouter:=interest_topics.InterestTopicsModuleRouter(dbInstance)
+	r.Mount("/interestTopics",interestTopicsRouter)
 	return r
 }
