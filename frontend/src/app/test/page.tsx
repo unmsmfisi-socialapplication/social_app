@@ -14,6 +14,7 @@ import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 import AvatarInput from "@/components/molecules/AvatarInput";
 import CommentThink from "@/components/molecules/CommentThink";
 import SquareButton from '../../components/atoms/ButtonSquare/ButtonSquare';
+import WButtonMotion from "../../components/atoms/ButtonAnimated/buttonAnimated";
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
@@ -42,13 +43,16 @@ export default function TestPage() {
         <WButton typeColor="terciary" text="button" size="large" />
       </div>
       <WButton text="test" size="large" typeColor="terciary"/>
-
+      <WButton typeColor="terciary" text="button" size="large" />
+      <WButtonMotion text="Animated Button"  />
       <h1>Test Page</h1>
+
+
       <button onClick={handleCount}>presioname</button>
+
       <div>
 
       <WInput placeholder="Nombre" error={true} errorMessage="error"/>
-      
       <WInput
         typeColor="primary"
         icon={<AccountCircleIcon />} // Icono de usuario
