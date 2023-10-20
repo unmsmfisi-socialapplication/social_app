@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Layout from "../layout"
 import { Button } from "@mui/material";
-import { WButton, WInput, WCircleIcon, WModalPhoto  } from "@/components";
+import { WButton, WInput, WCircleIcon, WModalPhoto} from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CheckIcon from "@mui/icons-material/Check"
 import AllInclusive from "@mui/icons-material/AllInclusive"
@@ -13,6 +13,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 import AvatarInput from "@/components/molecules/AvatarInput";
 import CommentThink from "@/components/molecules/CommentThink";
+import SquareButton from '../../components/atoms/ButtonSquare/ButtonSquare';
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
@@ -103,6 +104,11 @@ export default function TestPage() {
           type="password" 
         />
     </div>
+
+    <div className="App">
+      <SquareButton />
+    </div>
+
       <WCircleIcon iconSize={30} icon={CheckIcon} />
       <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
       <WModalPhoto warning />

@@ -17,7 +17,10 @@ class ConfirmationEmailFragment : Fragment(R.layout.fragment_confirmation_email)
     private lateinit var codeArg: String
     private lateinit var bundle: Bundle
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentConfirmationEmailBinding.bind(view)
 
@@ -49,9 +52,10 @@ class ConfirmationEmailFragment : Fragment(R.layout.fragment_confirmation_email)
     private fun sendCode() {
         codeArg = generateCode()
         showMessage(requireContext(), "Codigo: $codeArg")
-        bundle = Bundle().apply {
-            putString("codeConfirm", codeArg)
-        }
+        bundle =
+            Bundle().apply {
+                putString("codeConfirm", codeArg)
+            }
         findNavController()
             .navigate(R.id.action_confirmationEmailFragment_to_codeConfirmationFragment, bundle)
     }
