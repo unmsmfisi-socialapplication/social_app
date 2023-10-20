@@ -5,33 +5,28 @@ import (
 )
 
 type User struct {
-	
-	Phone string
-	Email string
-	User_name string
+	Phone    string
+	Email    string
+	Username string
 	Password string
-
 }
 
-func NewUser( phone, email, username,password string) (*User ,error){
+func NewUser(email, username, password string) (*User, error) {
 	hashedPassword, err := HashPassword(password)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return &User{
-		
-		Phone: phone,
-		Email: email,
-		User_name: username,
+		Email:    email,
+		Username: username,
 		Password: hashedPassword,
-	
-	},nil
+	}, nil
 }
 
 func HashPassword(password string) (string, error) {
-	hashedPassword, err:= bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err!= nil {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
 		return "", err
 	}
 	return string(hashedPassword), nil
