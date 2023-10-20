@@ -6,7 +6,6 @@ import (
 	"log"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
-	"golang.org/x/crypto/bcrypt"
 )
 
 type UserRepository struct {
@@ -43,13 +42,7 @@ func (u *UserRepository) InsertUser(newUser *domain.User) (*domain.User, error) 
 		return nil, err
 	}
 
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(newUser.Password), 14)
-	if err != nil {
-		log.Println("error when hashing password")
-		return nil, err
-	}
-
-	_, err = tx.Exec(query, newUser.Email, newUser.Username, hashedPassword)
+	_, err = tx.Exec(query, newUser.Email, newUser.Username, newUser.Password)
 	if err != nil {
 		return nil, err
 	}

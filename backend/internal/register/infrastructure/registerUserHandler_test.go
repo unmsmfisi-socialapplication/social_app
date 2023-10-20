@@ -31,6 +31,7 @@ func (m *mockUserRepository) InsertUser(newUser *domain.User) (*domain.User, err
 	m.users[newUser.Email] = newUser
 	return newUser, nil
 }
+
 func TestRegisterUserHandler_RegisterUser(t *testing.T) {
 
 	mockUserRepository := &mockUserRepository{
@@ -70,6 +71,7 @@ func TestRegisterUserHandler_RegisterUser(t *testing.T) {
 	if response["email"] != data["email"] {
 		t.Errorf("Expected email to be %s, but got %s", data["email"], response["email"])
 	}
+
 	if response["user_name"] != data["user_name"] {
 		t.Errorf("Expected user_name to be %s, but got %s", data["user_name"], response["user_name"])
 	}
