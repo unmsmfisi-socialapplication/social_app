@@ -11,37 +11,45 @@ import androidx.viewpager.widget.PagerAdapter
 import com.social.R
 
 class ViewPagerAdapter(private val context: Context) : PagerAdapter() {
+    private val images =
+        arrayOf(
+            R.drawable.online_world,
+            R.drawable.connected_world,
+            R.drawable.remote_meeting,
+            R.drawable.online_friends,
+        )
 
-    private val images = arrayOf(
-        R.drawable.online_world,
-        R.drawable.connected_world,
-        R.drawable.remote_meeting,
-        R.drawable.online_friends,
-    )
+    private val titles =
+        arrayOf(
+            R.string.none,
+            R.string.onboarding_connected_world_title,
+            R.string.onboarding_remote_meeting_title,
+            R.string.onboarding_online_friends_title,
+        )
 
-    private val titles = arrayOf(
-        R.string.none,
-        R.string.onboarding_connected_world_title,
-        R.string.onboarding_remote_meeting_title,
-        R.string.onboarding_online_friends_title,
-    )
-
-    private val subtitles = arrayOf(
-        R.string.none,
-        R.string.onboarding_connected_world_subtitle,
-        R.string.onboarding_remote_meeting_subtitle,
-        R.string.onboarding_online_friends_subtitle,
-    )
+    private val subtitles =
+        arrayOf(
+            R.string.none,
+            R.string.onboarding_connected_world_subtitle,
+            R.string.onboarding_remote_meeting_subtitle,
+            R.string.onboarding_online_friends_subtitle,
+        )
 
     override fun getCount(): Int {
         return titles.size
     }
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+    override fun isViewFromObject(
+        view: View,
+        `object`: Any,
+    ): Boolean {
         return view == `object` as LinearLayout
     }
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+    override fun instantiateItem(
+        container: ViewGroup,
+        position: Int,
+    ): Any {
         val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = layoutInflater.inflate(R.layout.slider_layout, container, false)
 
@@ -58,7 +66,11 @@ class ViewPagerAdapter(private val context: Context) : PagerAdapter() {
         return view
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+    override fun destroyItem(
+        container: ViewGroup,
+        position: Int,
+        `object`: Any,
+    ) {
         container.removeView(`object` as LinearLayout)
     }
 }

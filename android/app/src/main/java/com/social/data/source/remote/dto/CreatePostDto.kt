@@ -5,7 +5,7 @@ import com.social.domain.model.CreatePostResponse
 
 data class CreatePostDto(
     val response: CreatePostResponse,
-    val status: String
+    val status: String,
 )
 
 fun CreatePostDto.aCreatePost(): CreatePost {
