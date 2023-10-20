@@ -1,8 +1,6 @@
-package internal
+package router
 
 import (
-	// Importa tus paquetes necesarios aquí
-
 	"fmt"
 	"log"
 	"net/http"
@@ -10,7 +8,6 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/go-chi/cors"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment"
 	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
@@ -21,21 +18,6 @@ import (
 )
 
 func Router() http.Handler {
-	r := chi.NewRouter()
-
-	r.Use(middleware.RequestID)
-	r.Use(middleware.Logger)
-
-	corsMiddleware := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
-		ExposedHeaders:   []string{"Link"},
-		AllowCredentials: true,
-		MaxAge:           300,
-	})
-
-	r.Use(corsMiddleware.Handler)
 
 	err := database.InitDatabase()
 	if err != nil {
@@ -43,6 +25,12 @@ func Router() http.Handler {
 	}
 
 	dbInstance := database.GetDB()
+
+	r := chi.NewRouter()
+
+	r.Use(middleware.RequestID)
+	r.Use(middleware.Logger)
+	r.Use(configCorsMiddleware())
 
 	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
 	loginUseCase := application.NewLoginUseCase(dbRepo)
