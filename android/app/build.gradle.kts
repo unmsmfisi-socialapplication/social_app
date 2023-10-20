@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -81,6 +82,7 @@ dependencies {
 
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.48")
+
     debugImplementation("androidx.compose.ui:ui-tooling:$composeUiVersion")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeUiVersion")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
@@ -93,7 +95,7 @@ dependencies {
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
-    //kotlin extenciones
+    //kotlin extensiones
     implementation("androidx.room:room-ktx:$roomVersion")
     //picasso
     //implementation("com.squareup.picasso:picasso:2.71828")

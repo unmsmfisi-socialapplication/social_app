@@ -20,8 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val validateUser: ValidateUser,
-    application: Application
+    private val authenticationUseCase: AuthenticationUseCase
 ) : ViewModel() {
     private val _state = MutableLiveData<LoginDataState>()
     val state: LiveData<LoginDataState> get() = _state
@@ -43,30 +42,39 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginEvent.SearchUser -> {
-                validateUser(
+                authenticationUseCase.validateUser(
                     LoginBody(
                         username = username.value.text,
                         password = password.value.text
                     )
                 ).onEach { user ->
-                    println("user: $username and password: $password")
+                    Log.i("Autenticacion: ","user: $username and password: $password")
                     when (user){
                         is Resource.Loading->{
                             _state.value = LoginDataState(isLoading = true)
                         }
                         is Resource.Error->{
-                            _state.value = LoginDataState(error = user.message ?: "Error")
-                            _eventFlow.emit(
-                                UILoginEvent.ShowMessage(user.message?:"Error")
-                            )
+                            if(user.message!!.contains("404")){
+                                _eventFlow.emit(
+                                    UILoginEvent.ShowMessage(user.message?:"Error")
+                                )
+                            }else if(user.message.contains("401")){
+                                _eventFlow.emit(
+                                    UILoginEvent.ShowMessage(user.message?:"Error")
+                                )
+                            }else{
+                                _state.value = LoginDataState(error = user.message ?: "Error")
+                            }
+
                         }
                         is Resource.Success->{
-                            _state.value = LoginDataState(dataLogin = user.data!!)
+                            /*_state.value = LoginDataState(dataLogin = user.data!!)
                             if(_state.value!!.dataLogin.isNotEmpty()){
                                 _eventFlow.emit(UILoginEvent.GetData)
                             }else{
                                 UILoginEvent.ShowMessage(user.message?:"Error de datos usuario")
-                            }
+                            }*/
+                            _eventFlow.emit(UILoginEvent.ShowMessage(user.message?:"Authentication successful"))
                         }
                     }
                 }.launchIn(viewModelScope)

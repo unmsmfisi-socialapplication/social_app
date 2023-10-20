@@ -13,7 +13,7 @@ object Validation {
     }
 
     fun isPasswordValid(password: String): Boolean {
-        return password.isNotEmpty() && password.length >= 8
+        return password.isNotEmpty() && password.length >= 4
     }
 
     fun setupValidation(
