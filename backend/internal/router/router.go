@@ -1,8 +1,6 @@
-package internal
+package router
 
 import (
-	// Importa tus paquetes necesarios aquí
-
 	"fmt"
 	"log"
 	"net/http"
@@ -17,7 +15,6 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
 
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
-	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 func Router() http.Handler {
@@ -33,8 +30,7 @@ func Router() http.Handler {
 
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
-
-	utils.ConfigCors(r)
+	r.Use(configCorsMiddleware())
 
 	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
 	loginUseCase := application.NewLoginUseCase(dbRepo)

@@ -9,12 +9,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/router"
 )
 
 func main() {
 	// The HTTP Server
-	server := &http.Server{Addr: "0.0.0.0:3333", Handler: internal.Router()}
+	server := &http.Server{Addr: "0.0.0.0:3333", Handler: router.Router()}
 
 	// Server run context
 	serverCtx, serverStopCtx := context.WithCancel(context.Background())

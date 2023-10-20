@@ -5,11 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 	"strings"
-
-	"github.com/go-chi/chi"
-	"github.com/go-chi/cors"
 )
 
 type Config struct {
@@ -53,21 +49,6 @@ func LoadEnvFromFile(filename string) {
 	}
 }
 
-func GetCorsOrigins() []string {
-	value := os.Getenv("CORS_ORIGINS")
-	return strings.Split(value, ",")
-}
-
-func GetCorsMaxAge() int {
-	maxAge, err := strconv.Atoi(os.Getenv("CORS_MAXAGE"))
-
-	if err != nil {
-		return 300
-	}
-
-	return maxAge
-}
-
 func CheckEnvVariables() error {
 	requiredVariables := []string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "DB_SSLMODE", "DB_SCHEMA", "CORS_ORIGINS", "CORS_MAXAGE"}
 
@@ -101,19 +82,4 @@ func LoadConfig() (*Config, error) {
 			os.Getenv("DB_SCHEMA"),
 		),
 	}, nil
-}
-
-func ConfigCors(router *chi.Mux) {
-	origins := GetCorsOrigins()
-	maxAge := GetCorsMaxAge()
-
-	corsMiddleware := cors.New(cors.Options{
-		AllowedOrigins:   origins,
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
-		ExposedHeaders:   []string{"Link"},
-		AllowCredentials: true,
-		MaxAge:           maxAge,
-	})
-	router.Use(corsMiddleware.Handler)
 }
