@@ -1,6 +1,29 @@
 @import '../../resources/styles/variables.scss';
+
 :root {
     font-family: $font-poppins-regular;
     font-size: $regular-text;
 }
 
+/* RootEnrollment.css */
+
+.root-enrollment {
+    padding: 90px 45px 100px 5px;
+    gap: 25px;
+    background: url('/images/enrollment.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+
+    /* Media query para pantallas pequeñas */
+    @media (max-width: 1350px) {
+        background: url('/images/enrollAuthMobile.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 0 auto;
+        display: flex;
+        align-items: center;
+    }
+}

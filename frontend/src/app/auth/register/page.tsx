@@ -25,6 +25,13 @@ export default function RegisterPage() {
             fullWidth
             type="text"
           />
+          <span>Nombre de Usuario</span>
+          <WInput
+            placeholder="Nombre de Usuario"
+            size="small"
+            fullWidth
+            type="text"
+          />
           <span>Contraseña</span>
           <WInput
             icon={<VisibilityOffOutlinedIcon />}
