@@ -2,7 +2,7 @@
 name: CD Backend manually triggered
 
 on:
-  push:
+  workflow_dispatch:
     branches:
       - develop
 
