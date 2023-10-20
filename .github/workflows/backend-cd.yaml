@@ -72,9 +72,10 @@ jobs:
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v1
         with:
-          service: ${{ vars.BACKEND_SERVICE }}
-          region: ${{ vars.REGION }}
-          image: ${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.BACKEND_REPOSITORY }}/${{ vars.BACKEND_IMAGES }}:${{ github.sha }}
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGES }}:${{ github.sha }}
+          port: 3333
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}

@@ -2,3 +2,6 @@
 export function validatePassword(password1: string, password2: string): boolean {
   return password1 === password2;
 }
+export function validatePassword(password1: string, password2: string): boolean {
+  return password1 === password2;
+}

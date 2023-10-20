@@ -4,6 +4,7 @@ import (
 	// Importa tus paquetes necesarios aquí
 
 	"fmt"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/reactions/posts"
 	"log"
 	"net/http"
 	"time"
@@ -43,6 +44,18 @@ func Router() http.Handler {
 	}
 
 	dbInstance := database.GetDB()
+
+	gormInstance, err := database.NewGormInstance()
+
+	if err != nil {
+		log.Fatalf("Failed to initialize database: %v", err)
+	}
+
+	commentRouter := comment.CommentModuleRouter(dbInstance)
+	r.Mount("/comments", commentRouter)
+
+	postReactionsRouter := posts.PostReactionModuleRouter(gormInstance)
+	r.Mount("/post_reactions", postReactionsRouter)
 
 	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
 	loginUseCase := application.NewLoginUseCase(dbRepo)
