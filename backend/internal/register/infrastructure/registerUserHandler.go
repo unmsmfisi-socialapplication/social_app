@@ -17,12 +17,10 @@ func NewRegisterUserHandler(uc *application.RegistrationUseCase) *RegisterUserHa
 }
 
 func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Request) {
-
 	var data struct {
-		Phone     string `json:"phone"`
-		Email     string `json:"email"`
-		User_name string `json:"user_name"`
-		Password  string `json:"password"`
+		Email    string `json:"email"`
+		Username string `json:"user_name"`
+		Password string `json:"password"`
 	}
 	err := json.NewDecoder(r.Body).Decode(&data)
 	if err != nil {
@@ -30,7 +28,8 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	_, er := rh.useCase.RegisterUser(data.Phone, data.Email, data.User_name, data.Password)
+
+	_, er := rh.useCase.RegisterUser(data.Email, data.Username, data.Password)
 	if er != nil {
 		switch er {
 		case application.ErrEmailInUse:

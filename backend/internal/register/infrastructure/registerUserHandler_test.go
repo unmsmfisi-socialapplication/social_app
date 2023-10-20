@@ -1,4 +1,4 @@
-package test
+package infrastructure
 
 import (
 	"bytes"
@@ -10,7 +10,6 @@ import (
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
 )
 
 type mockUserRepository struct {
@@ -40,7 +39,7 @@ func TestRegisterUserHandler_RegisterUser(t *testing.T) {
 
 	mockUseCase := application.NewRegistrationUseCase(mockUserRepository)
 
-	handler := infrastructure.NewRegisterUserHandler(mockUseCase)
+	handler := NewRegisterUserHandler(mockUseCase)
 
 	data := map[string]string{
 		"phone":     "123456789",
@@ -68,9 +67,6 @@ func TestRegisterUserHandler_RegisterUser(t *testing.T) {
 		t.Errorf("Failed to unmarshal response: %v", err)
 	}
 
-	if response["phone"] != data["phone"] {
-		t.Errorf("Expected phone to be %s, but got %s", data["phone"], response["phone"])
-	}
 	if response["email"] != data["email"] {
 		t.Errorf("Expected email to be %s, but got %s", data["email"], response["email"])
 	}

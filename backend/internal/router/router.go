@@ -14,9 +14,9 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
 
-	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
-	registerinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
 	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
+	registerinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 )
 
 func Router() http.Handler {
@@ -33,7 +33,6 @@ func Router() http.Handler {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
 	r.Use(configCorsMiddleware())
-
 
 	commentRouter := comment.CommentModuleRouter(dbInstance)
 
@@ -61,9 +60,9 @@ func Router() http.Handler {
 	loginUseCase := application.NewLoginUseCase(loginRepo)
 	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
 	r.Post("/login", loginHandler.HandleLogin)
-	
+
 	// Register
-	registerRepo := registerinfrastructure.NewUserDBRepository(dbInstance)
+	registerRepo := registerinfrastructure.NewUserRepository(dbInstance)
 	registerUseCase := registerapplication.NewRegistrationUseCase(registerRepo)
 	registerHandler := registerinfrastructure.NewRegisterUserHandler(registerUseCase)
 	r.Post("/register", registerHandler.RegisterUser)

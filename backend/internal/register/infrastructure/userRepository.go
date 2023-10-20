@@ -3,8 +3,10 @@ package infrastructure
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type UserRepository struct {
@@ -16,14 +18,13 @@ func NewUserRepository(database *sql.DB) *UserRepository {
 }
 
 func (u *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
-
-	query := `SELECT  phone, email, user_name, password FROM public.soc_app_users WHERE email = $1`
+	query := `SELECT email, user_name, password FROM public.soc_app_users WHERE email = $1`
 
 	row := u.db.QueryRow(query, email)
 	prueba, _ := u.db.Exec(query, email)
 	fmt.Println(prueba.RowsAffected())
 	var user domain.User
-	err := row.Scan(&user.Phone, &user.Email, &user.User_name, &user.Password)
+	err := row.Scan(&user.Email, &user.Username, &user.Password)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
@@ -34,16 +35,21 @@ func (u *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
 }
 
 func (u *UserRepository) InsertUser(newUser *domain.User) (*domain.User, error) {
+	query := `INSERT INTO soc_app_users ( insertion_date, email, user_name, password) VALUES (NOW(), $1, $2, $3)`
 
-	query := `INSERT INTO soc_app_users ( insertion_date,phone, email, user_name, password) VALUES (NOW(),$1, $2, $3, $4)`
-
-	fmt.Println("Insertando usuario en la base de datos...")
-	tx, er := u.db.Begin()
-	if er != nil {
-		fmt.Println("Error while starting the transaction")
+	tx, err := u.db.Begin()
+	if err != nil {
+		log.Println("Error while starting the transaction")
+		return nil, err
 	}
 
-	_, err := tx.Exec(query, newUser.Phone, newUser.Email, newUser.User_name, newUser.Password)
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(newUser.Password), 14)
+	if err != nil {
+		log.Println("error when hashing password")
+		return nil, err
+	}
+
+	_, err = tx.Exec(query, newUser.Email, newUser.Username, hashedPassword)
 	if err != nil {
 		return nil, err
 	}
