@@ -14,31 +14,47 @@ defaults:
   run:
     working-directory: ./backend
 
-env:
-  PROJECT_ID: prefab-faculty-399316 # TODO: update Google Cloud project id
-  GAR_LOCATION: us-central1 # TODO: update Artifact Registry location
-  REPOSITORY: social-app-backend-repo # TODO: update Artifact Registry repository name
-  IMAGES: social-app-images
-  SERVICE: social-app-backend-service # TODO: update Cloud Run service name
-  REGION: us-central1 # TODO: update Cloud Run service region
-
 jobs:
-  deploy:
+  migrations:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-        
+        uses: actions/checkout@v4
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE_BACKEND_TEMP }}" > .env
+
+      - name: Connect to Cloud SQL Proxy
+        uses: mattes/gce-cloudsql-proxy-action@v1
+        with:
+          creds: ${{ secrets.GCP_SA_DCR_KEY }}
+          instance: ${{ vars.PROJECT_ID }}:${{ vars.GAR_LOCATION }}:${{ vars.DB_INSTANCE }}
+
+      - name: Run database migrations
+        run: "go run cmd/migrations/migrations.go"
+
+  deploy:
+    needs: migrations
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE_BACKEND }}" > .env
+
       - name: Google Auth
         id: auth
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_DCR_KEY}}
-  
+
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          project_id: ${{ env.PROJECT_ID }}
+          project_id: ${{ vars.PROJECT_ID }}
   
       - name: Use gcloud CLI
         run: gcloud info
@@ -46,19 +62,19 @@ jobs:
       - name: Docker auth
         run: |-
           gcloud auth configure-docker us-central1-docker.pkg.dev
-    
+
       - name: Build and Push Container
         run: |-
-          docker build -t ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGES }}:${{ github.sha }} .
-          docker push ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGES }}:${{ github.sha }}
+          docker build -t ${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.BACKEND_REPOSITORY }}/${{ vars.BACKEND_IMAGES }}:${{ github.sha }} .
+          docker push ${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.BACKEND_REPOSITORY }}/${{ vars.BACKEND_IMAGES }}:${{ github.sha }}
 
       - name: Deploy to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v1
         with:
-          service: ${{ env.SERVICE }}
-          region: ${{ env.REGION }}
-          image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGES }}:${{ github.sha }}
+          service: ${{ vars.BACKEND_SERVICE }}
+          region: ${{ vars.REGION }}
+          image: ${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.BACKEND_REPOSITORY }}/${{ vars.BACKEND_IMAGES }}:${{ github.sha }}
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}

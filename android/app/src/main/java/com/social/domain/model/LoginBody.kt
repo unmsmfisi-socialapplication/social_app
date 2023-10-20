@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class LoginBody(
     val username: String,
-    val password: String
-): Parcelable
+    val password: String,
+) : Parcelable
