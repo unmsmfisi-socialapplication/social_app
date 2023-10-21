@@ -54,7 +54,15 @@ class LoginViewModel @Inject constructor(
                             _state.value = LoginDataState(isLoading = true)
                         }
                         is Resource.Error->{
-                            if(user.message!!.contains("404")){
+                            _state.value = LoginDataState(error = user.message)
+                            val status = _state.value?.error
+                            val status2 = user.data?.status
+                            val status3 = user.message
+                            Log.i("Monchito", status.toString()?:"a")
+                            Log.i("Monchito", status2.toString()?:"b")
+                            Log.i("Monchito", status3.toString()?:"c")
+                            _state.value = LoginDataState(error = status!!)
+                            /*if(user.message!!.contains("404")){
                                 _eventFlow.emit(
                                     UILoginEvent.ShowMessage(user.message?:"Error")
                                 )
@@ -64,7 +72,10 @@ class LoginViewModel @Inject constructor(
                                 )
                             }else{
                                 _state.value = LoginDataState(error = user.message ?: "Error")
-                            }
+                            }*/
+                            _eventFlow.emit(
+                                UILoginEvent.ShowMessage(status?:"Error")
+                            )
 
                         }
                         is Resource.Success->{
@@ -74,7 +85,16 @@ class LoginViewModel @Inject constructor(
                             }else{
                                 UILoginEvent.ShowMessage(user.message?:"Error de datos usuario")
                             }*/
-                            _eventFlow.emit(UILoginEvent.ShowMessage(user.message?:"Authentication successful"))
+                            val status = _state.value?.dataLogin
+                            val status2 = user.data?.status
+                            val status3 = user.message
+                            Log.i("Monchito", status.toString()?:"a")
+                            Log.i("Monchito", status2.toString()?:"b")
+                            Log.i("Monchito", status3.toString()?:"c")
+                            _state.value = LoginDataState(dataLogin = status)
+                            _eventFlow.emit(UILoginEvent.ShowMessage(status?:"Bien"))
+                            //_eventFlow.emit(UILoginEvent.ShowMessage(user.message?:"Authentication successful"))
+
                         }
                     }
                 }.launchIn(viewModelScope)

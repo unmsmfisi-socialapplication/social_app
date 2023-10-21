@@ -31,7 +31,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             viewModel.evenFlow.collectLatest { event->
                 when(event){
                     is LoginViewModel.UILoginEvent.GetData->{
-                        val userData = viewModel.state.value!!.dataLogin[0]
+                        val userData = viewModel.state.value!!.dataLogin?.get(0)
                         Log.i("dato_usuario", userData.toString())
                     }
                     is LoginViewModel.UILoginEvent.ShowMessage->{
@@ -43,8 +43,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
 
 
-        setupEmailValidation()
-        setupPasswordValidation()
+        //setupEmailValidation()
+        //setupPasswordValidation()
         action()
     }
 
