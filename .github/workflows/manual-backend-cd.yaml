@@ -69,6 +69,7 @@ jobs:
           service: ${{ vars.BACKEND_SERVICE }}
           region: ${{ vars.REGION }}
           image: ${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.BACKEND_REPOSITORY }}/${{ vars.BACKEND_IMAGES }}:${{ github.sha }}
+          port: 3333
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
