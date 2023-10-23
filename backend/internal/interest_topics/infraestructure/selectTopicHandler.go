@@ -13,8 +13,8 @@ type SelectTopicHandler struct {
 }
 
 type requestData struct {
-	User_id     string   `json:"user_id"`
-	Interest_id []string `json:"interest_id"`
+	UserId     string   `json:"user_id"`
+	InterestId []string `json:"interest_id"`
 }
 
 func NewSelectTopicHandler(useCase application.InterestTopicsUseCaseI) *SelectTopicHandler {
@@ -22,17 +22,11 @@ func NewSelectTopicHandler(useCase application.InterestTopicsUseCaseI) *SelectTo
 	return &SelectTopicHandler{useCase: useCase}
 }
 
-func checkInvalidPayload(request *http.Request, requestData *requestData) bool {
+func checkInvalidPayload(raw json.RawMessage, requestData *requestData) bool {
 
-	var raw json.RawMessage
-	err := json.NewDecoder(request.Body).Decode(&raw)
-	if err != nil {
-		return true
-	}
-	
 	//user_id not defined
-	err = json.Unmarshal(raw, &requestData)
-	if err != nil || requestData.User_id == "" {
+	err := json.Unmarshal(raw, &requestData)
+	if err != nil || requestData.UserId == "" {
 		return true
 	}
 	var extra map[string]interface{}
@@ -52,11 +46,16 @@ func checkInvalidPayload(request *http.Request, requestData *requestData) bool {
 	return len(extra) != 0
 }
 
-func extraValidations(writer http.ResponseWriter, requestData *requestData ) bool{
-	
+func extraValidations(writer http.ResponseWriter, requestData requestData) bool {
+
+	if len(requestData.InterestId) < 3 && len(requestData.InterestId) > 0 {
+		utils.SendJSONResponse(writer, http.StatusBadRequest, "ERROR", "At least 3 interest topics must be selected")
+		return true
+	}
+
 	//Avoid duplicate interest_id
 	seen := make(map[string]bool)
-	for _, value := range requestData.Interest_id {
+	for _, value := range requestData.InterestId {
 		if seen[value] {
 			utils.SendJSONResponse(writer, http.StatusConflict, "ERROR", "Duplicate interest topic")
 			return true
@@ -65,27 +64,31 @@ func extraValidations(writer http.ResponseWriter, requestData *requestData ) boo
 	}
 
 	//Interest topics not selected
-	if len(requestData.Interest_id) == 0 {
+	if len(requestData.InterestId) == 0 {
 		utils.SendJSONResponse(writer, http.StatusOK, "OK", "Skipped setting interest topics")
 		return true
 	}
+
 	return false
 
 }
 func (handler *SelectTopicHandler) HandleSelectTopic(writer http.ResponseWriter, request *http.Request) {
 
 	var requestData requestData
-	
-	if checkInvalidPayload(request, &requestData) {
+
+	var raw json.RawMessage
+	err := json.NewDecoder(request.Body).Decode(&raw)
+
+	if checkInvalidPayload(raw, &requestData) || err!=nil{
 		utils.SendJSONResponse(writer, http.StatusBadRequest, "ERROR", "Invalid request payload")
 		return
 	}
 
-	if extraValidations(writer, &requestData) {
+	if extraValidations(writer, requestData) {
 		return
 	}
 
-	err := handler.useCase.SetInterestTopics(requestData.User_id, requestData.Interest_id)
+	err = handler.useCase.SetInterestTopics(requestData.UserId, requestData.InterestId)
 	if err != nil {
 		if err == application.ExistingUserInterestTopic {
 			utils.SendJSONResponse(writer, http.StatusConflict, "ERROR", "Attempted insertion of an existing user interest topic")
@@ -96,7 +99,7 @@ func (handler *SelectTopicHandler) HandleSelectTopic(writer http.ResponseWriter,
 		}
 
 	}
-	
+
 	utils.SendJSONResponse(writer, http.StatusOK, "OK", "Insertion successful")
 
 }

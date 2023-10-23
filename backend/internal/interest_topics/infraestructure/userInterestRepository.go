@@ -16,7 +16,7 @@ func NewUserInterestsDBRepository(database *sql.DB) domain.UserInterestsReposito
 	return &UserInterestsDBRepository{db: database}
 }
 
-func (dbRepository UserInterestsDBRepository) FindUserInterestTopics(interests []*domain.UserInterestTopics) error {
+func (dbRepository UserInterestsDBRepository) FindUserInterestTopics(interests []domain.UserInterestTopic) error {
 	query := `SELECT user_id, interest_id FROM soc_app_users_interest_topics`
 
 	rows, err := dbRepository.db.Query(query)
@@ -28,19 +28,19 @@ func (dbRepository UserInterestsDBRepository) FindUserInterestTopics(interests [
 	interestMap := make(map[string]bool)
 	for _, interest := range interests {
 		// Create a unique key for each item
-		key := interest.User_id + "_" + interest.Interest_id
+		key := interest.UserId + "_" + interest.InterestId
 		interestMap[key] = true
 	}
 
 	for rows.Next() {
-		var interestTopic domain.UserInterestTopics
-		err := rows.Scan(&interestTopic.User_id, &interestTopic.Interest_id)
+		var interestTopic domain.UserInterestTopic
+		err := rows.Scan(&interestTopic.UserId, &interestTopic.InterestId)
 		if err != nil {
 			return err
 		}
 
 		// Check if the key exists in the map
-		key := interestTopic.User_id + "_" + interestTopic.Interest_id
+		key := interestTopic.UserId + "_" + interestTopic.InterestId
 		if interestMap[key] {
 			return application.ExistingUserInterestTopic // Attempted insertion of an existing user interest topic
 		}
@@ -54,7 +54,7 @@ func (dbRepository UserInterestsDBRepository) FindUserInterestTopics(interests [
 	return nil
 }
 
-func (dbRepository *UserInterestsDBRepository) Create(interests []*domain.UserInterestTopics) error {
+func (dbRepository *UserInterestsDBRepository) Create(interests []domain.UserInterestTopic) error {
 
 	//Handling the atomicity of transaction
 	tx, err := dbRepository.db.Begin()
@@ -68,7 +68,7 @@ func (dbRepository *UserInterestsDBRepository) Create(interests []*domain.UserIn
 	for _, interest := range interests {
 
 		query := "INSERT INTO soc_app_users_interest_topics (user_id, interest_id) VALUES ($1, $2)"
-		_, err := tx.Exec(query, interest.User_id, interest.Interest_id)
+		_, err := tx.Exec(query, interest.UserId, interest.InterestId)
 		if err != nil {
 			//If an error occurs, a rollback of the previous insertions is performed
 			tx.Rollback()

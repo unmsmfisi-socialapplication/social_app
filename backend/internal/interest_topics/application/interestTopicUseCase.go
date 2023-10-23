@@ -11,7 +11,7 @@ var (
 )
 
 type InterestTopicsUseCaseI interface {
-	SetInterestTopics(user_id string, interest_id[] string)  error
+	SetInterestTopics(userId string, interest_id []string) error
 }
 
 type InterestTopicsUseCase struct {
@@ -24,13 +24,13 @@ func NewInterestTopicsUseCase(repository domain.UserInterestsRepository) *Intere
 	}
 }
 
-func (usecase *InterestTopicsUseCase) SetInterestTopics(user_id string, interest_id[] string) error {
-	var userInterests []*domain.UserInterestTopics
-		
-	for i := 0; i < len(interest_id); i++ {
-		userInterest := &domain.UserInterestTopics{
-			User_id:     user_id,
-			Interest_id: interest_id[i],
+func (usecase *InterestTopicsUseCase) SetInterestTopics(userId string, interestId []string) error {
+	var userInterests []domain.UserInterestTopic
+
+	for i := 0; i < len(interestId); i++ {
+		userInterest := domain.UserInterestTopic{
+			UserId:     userId,
+			InterestId: interestId[i],
 		}
 		userInterests = append(userInterests, userInterest)
 	}

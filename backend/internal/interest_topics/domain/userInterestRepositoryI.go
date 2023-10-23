@@ -4,6 +4,6 @@ package domain
 
 // Select interest topics
 type UserInterestsRepository interface {
-	FindUserInterestTopics(interests []*UserInterestTopics)  error
-	Create(interest[] *UserInterestTopics) error
+	FindUserInterestTopics(interests []UserInterestTopic)  error
+	Create(interests[] UserInterestTopic) error
 }
