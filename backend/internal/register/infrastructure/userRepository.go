@@ -17,7 +17,7 @@ func NewUserRepository(database *sql.DB) *UserRepository {
 }
 
 func (u *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
-	query := `SELECT email, user_name, password FROM public.soc_app_users WHERE email = $1`
+	query := `SELECT email, user_name, password FROM sa.soc_app_users WHERE email = $1`
 
 	row := u.db.QueryRow(query, email)
 	prueba, _ := u.db.Exec(query, email)
@@ -34,7 +34,7 @@ func (u *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
 }
 
 func (u *UserRepository) InsertUser(newUser *domain.User) (*domain.User, error) {
-	query := `INSERT INTO soc_app_users ( insertion_date, email, user_name, password) VALUES (NOW(), $1, $2, $3)`
+	query := `INSERT INTO sa.soc_app_users (insertion_date, email, user_name, password) VALUES (NOW(), $1, $2, $3)`
 
 	tx, err := u.db.Begin()
 	if err != nil {
