@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: 'Create env file'
         run: |
@@ -69,7 +69,6 @@ jobs:
           service: ${{ vars.BACKEND_SERVICE }}
           region: ${{ vars.REGION }}
           image: ${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.BACKEND_REPOSITORY }}/${{ vars.BACKEND_IMAGES }}:${{ github.sha }}
-          port: 3333
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
