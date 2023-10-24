@@ -2,7 +2,6 @@ package infrastructure
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/auth/application"
@@ -58,7 +57,6 @@ func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 			return
 		default:
 			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error during authentication")
-			fmt.Println(err.Error())
 			return
 		}
 	}
