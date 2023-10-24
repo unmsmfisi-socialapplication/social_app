@@ -5,10 +5,9 @@ import (
 )
 
 type User struct {
-	Phone    string
-	Email    string
 	Username string
 	Password string
+    Email    string
 }
 
 func NewUser(email, username, password string) (*User, error) {
@@ -22,6 +21,11 @@ func NewUser(email, username, password string) (*User, error) {
 		Username: username,
 		Password: hashedPassword,
 	}, nil
+}
+
+func (u *User) ComparePassword(password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
+	return err == nil
 }
 
 func HashPassword(password string) (string, error) {

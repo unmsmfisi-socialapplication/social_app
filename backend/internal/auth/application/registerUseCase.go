@@ -4,27 +4,21 @@ import (
 	"errors"
 	"regexp"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/auth/domain"
 )
 
 var (
-	ErrEmailInUse         = errors.New("EMAIL_IN_USE")
-	ErrFormat             = errors.New("INVALID_PASSWORD")
-	ErrPhone              = errors.New("INVALID_PHONE")
-	ErrUserNotFound       = errors.New("user not found")
-	ErrInvalidCredentials = errors.New("invalid credentials")
+	ErrEmailInUse    = errors.New("EMAIL_IN_USE")
+	ErrUsernameInUse = errors.New("USERNAME_IN_USE")
+	ErrFormat        = errors.New("INVALID_PASSWORD")
+	ErrPhone         = errors.New("INVALID_PHONE")
 )
 
-type UserRepository interface {
-	GetUserByEmail(email string) (*domain.User, error)
-	InsertUser(newUser *domain.User) (*domain.User, error)
-}
-
 type RegistrationUseCase struct {
-	repo UserRepository
+	repo IUserRepository
 }
 
-func NewRegistrationUseCase(r UserRepository) *RegistrationUseCase {
+func NewRegistrationUseCase(r IUserRepository) *RegistrationUseCase {
 	return &RegistrationUseCase{repo: r}
 }
 
@@ -52,6 +46,15 @@ func (r *RegistrationUseCase) RegisterUser(email, username, password string) (*d
 	if existingUser != nil {
 		return nil, ErrEmailInUse
 	}
+
+	existingUser, err = r.repo.GetUserByUsername(username)
+	if err != nil {
+		return nil, err
+	}
+	if existingUser != nil {
+		return nil, ErrUsernameInUse
+	}
+
 	if !isValidPassword(password) {
 		return nil, ErrFormat
 	}

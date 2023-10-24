@@ -2,8 +2,6 @@ package application
 
 import (
 	"errors"
-
-	"github.com/unmsmfisi-socialapplication/social_app/internal/login/domain"
 )
 
 var (
@@ -15,15 +13,11 @@ type LoginUsecaseInterface interface {
 	Authenticate(username, password string) (bool, error)
 }
 
-type UserRepository interface {
-	GetUserByUsername(username string) (*domain.User, error)
-}
-
 type LoginUseCase struct {
-	repo UserRepository
+	repo IUserRepository
 }
 
-func NewLoginUseCase(r UserRepository) *LoginUseCase {
+func NewLoginUseCase(r IUserRepository) *LoginUseCase {
 	return &LoginUseCase{repo: r}
 }
 
@@ -32,6 +26,11 @@ func (l *LoginUseCase) Authenticate(username, password string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
+
+    if user == nil {
+        return false, ErrUserNotFound
+    }
+
 	if username != user.Username {
 		return false, ErrUserNotFound
 	}

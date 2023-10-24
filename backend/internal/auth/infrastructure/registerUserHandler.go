@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/auth/application"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 

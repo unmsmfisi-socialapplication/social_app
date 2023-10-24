@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/auth/application"
 )
 
 type mockLoginUsecase struct {

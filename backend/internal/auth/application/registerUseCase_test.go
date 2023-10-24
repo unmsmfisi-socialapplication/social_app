@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/auth/domain"
 )
 
 type mockUserRepository struct {
@@ -17,6 +17,15 @@ func (m *mockUserRepository) GetUserByEmail(email string) (*domain.User, error) 
 		return nil, nil
 	}
 	return user, nil
+}
+
+func (m *mockUserRepository) GetUserByUsername(username string) (*domain.User, error) {
+    for _, user := range m.users {
+        if user.Username == username {
+            return user, nil
+        }
+    }
+    return nil, nil
 }
 
 func (m *mockUserRepository) InsertUser(newUser *domain.User) (*domain.User, error) {

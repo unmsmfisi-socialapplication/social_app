@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/auth/domain"
 )
 
 type UserRepository struct {
@@ -14,6 +14,21 @@ type UserRepository struct {
 
 func NewUserRepository(database *sql.DB) *UserRepository {
 	return &UserRepository{db: database}
+}
+
+func (u *UserRepository) GetUserByUsername(username string) (*domain.User, error) {
+    query := `SELECT email, user_name, password FROM sa.soc_app_users WHERE user_name = $1`
+
+    row := u.db.QueryRow(query, username)
+    var user domain.User
+    err := row.Scan(&user.Email, &user.Username, &user.Password)
+    if err != nil {
+        if err == sql.ErrNoRows {
+            return nil, nil
+        }
+        return nil, err
+    }
+    return &user, nil
 }
 
 func (u *UserRepository) GetUserByEmail(email string) (*domain.User, error) {

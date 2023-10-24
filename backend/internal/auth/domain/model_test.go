@@ -1,6 +1,3 @@
-//go:build unit
-// +build unit
-
 package domain
 
 import (
@@ -45,4 +42,18 @@ func TestHashPassword(t *testing.T) {
 		t.Errorf("Expected a non-empty hashed password, but got an empty string")
 	}
 
+}
+
+func TestComparePassword(t *testing.T) {
+    password := "password123"
+
+    userToCompare, err := NewUser("test", "test", password)
+
+    if err != nil {
+        t.Errorf("Expected no error, but got %v", err)
+    }
+
+    if !userToCompare.ComparePassword(password) {
+        t.Errorf("Expected password to be the same, but got different passwords")
+    }
 }
