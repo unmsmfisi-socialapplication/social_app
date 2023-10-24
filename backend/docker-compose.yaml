@@ -9,6 +9,9 @@ services:
       - "3333:3333"
     depends_on: 
       - db
+    volumes:
+      - .:/app
+      - /app/build
   db:
     image: postgres:16.0-alpine3.18
     restart: always
@@ -20,10 +23,7 @@ services:
       POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8080:8080"
-    depends_on: 
-      - db
+    volumes:
+      - social-app-data:/var/lib/postgresql/data
+volumes:
+  social-app-data:
