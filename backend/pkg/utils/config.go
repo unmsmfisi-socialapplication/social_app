@@ -33,13 +33,6 @@ func LoadEnvFromFile(filename string) {
 		if len(parts) == 2 {
 			key := parts[0]
 			value := parts[1]
-
-			if strings.Contains(value, "[") {
-
-				value = strings.ReplaceAll(value, "[", "")
-				value = strings.ReplaceAll(value, "]", "")
-			}
-
 			env[key] = value
 		}
 	}
