@@ -41,7 +41,9 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 		case application.ErrPhone:
 			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid phone format")
 			return
-
+        case application.ErrUsernameInUse:
+            utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Username already in use")
+            return
 		}
 	}
 	json.NewEncoder(w).Encode(data)
