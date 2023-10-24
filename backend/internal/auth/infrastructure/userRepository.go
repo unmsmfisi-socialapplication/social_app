@@ -2,7 +2,6 @@ package infrastructure
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/auth/domain"
@@ -35,10 +34,8 @@ func (u *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
 	query := `SELECT email, user_name, password FROM sa.soc_app_users WHERE email = $1`
 
 	row := u.db.QueryRow(query, email)
-	prueba, _ := u.db.Exec(query, email)
-	fmt.Println(prueba.RowsAffected())
 	var user domain.User
-	err := row.Scan(&user.Email, &user.Username, &user.Password)
+    err := row.Scan(&user.Email, &user.Username, &user.Password)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
