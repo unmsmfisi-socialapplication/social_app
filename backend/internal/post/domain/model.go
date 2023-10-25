@@ -24,3 +24,18 @@ type CreatePost struct {
 	Public        bool   `json:"public"`
 	Multimedia    string `json:"multimedia" db:"multimedia" validate:"max=1000"`
 }
+
+func CreatePostToPost(p CreatePost) Post {
+	post := Post{
+		UserId:        p.UserId,
+		Title:         p.Title,
+		Description:   p.Description,
+		HasMultimedia: p.HasMultimedia,
+		Public:        p.Public,
+		Multimedia:    p.Multimedia,
+		InsertionDate: time.Now(),
+		UpdateDate:    time.Now(),
+	}
+
+	return post
+}

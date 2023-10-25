@@ -17,6 +17,7 @@ type PostUseCaseInterface interface {
 
 type PostRepository interface {
 	CreatePost(post domain.CreatePost) (*domain.Post, error)
+	ValidateUserExist(post domain.CreatePost) bool
 }
 
 type PostUseCase struct {
