@@ -46,12 +46,15 @@ func isValidPassword(password string) bool {
 
 func (r *RegistrationUseCase) RegisterUser(email, username, password string) (*domain.User, error) {
 	existingUser, err := r.repo.GetUserByEmail(email)
+
 	if err != nil {
 		return nil, err
 	}
+
 	if existingUser != nil {
 		return nil, ErrEmailInUse
 	}
+
 	if !isValidPassword(password) {
 		return nil, ErrFormat
 	}

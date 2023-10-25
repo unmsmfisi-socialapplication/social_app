@@ -19,7 +19,7 @@ func NewRegisterUserHandler(uc *application.RegistrationUseCase) *RegisterUserHa
 func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Request) {
 	var data struct {
 		Email    string `json:"email"`
-		Username string `json:"user_name"`
+		Username string `json:"username"`
 		Password string `json:"password"`
 	}
 	err := json.NewDecoder(r.Body).Decode(&data)
@@ -41,8 +41,10 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 		case application.ErrPhone:
 			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid phone format")
 			return
-
+		default:
+			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Unexpected error")
+			return
 		}
 	}
-	json.NewEncoder(w).Encode(data)
+	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", data)
 }
