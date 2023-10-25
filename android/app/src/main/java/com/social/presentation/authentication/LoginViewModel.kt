@@ -54,47 +54,24 @@ class LoginViewModel @Inject constructor(
                             _state.value = LoginDataState(isLoading = true)
                         }
                         is Resource.Error->{
-                            _state.value = LoginDataState(error = user.message)
-                            val status = _state.value?.error
-                            val status2 = user.data?.status
-                            val status3 = user.message
-                            Log.i("Monchito", status.toString()?:"a")
-                            Log.i("Monchito", status2.toString()?:"b")
-                            Log.i("Monchito", status3.toString()?:"c")
-                            _state.value = LoginDataState(error = status!!)
-                            /*if(user.message!!.contains("404")){
+                            _state.value = LoginDataState(error = user.message?:"Error")
+                            if(user.message!!.contains("HTTP 404")){
                                 _eventFlow.emit(
-                                    UILoginEvent.ShowMessage(user.message?:"Error")
+                                    UILoginEvent.ShowMessage("User not found")
                                 )
-                            }else if(user.message.contains("401")){
+                            }else if(user.message.contains("HTTP 401")){
                                 _eventFlow.emit(
-                                    UILoginEvent.ShowMessage(user.message?:"Error")
+                                    UILoginEvent.ShowMessage("Invalid credentials")
                                 )
                             }else{
-                                _state.value = LoginDataState(error = user.message ?: "Error")
-                            }*/
-                            _eventFlow.emit(
-                                UILoginEvent.ShowMessage(status?:"Error")
-                            )
-
+                                _eventFlow.emit(
+                                    UILoginEvent.ShowMessage(user.message?:"Error")
+                                )
+                            }
                         }
                         is Resource.Success->{
-                            /*_state.value = LoginDataState(dataLogin = user.data!!)
-                            if(_state.value!!.dataLogin.isNotEmpty()){
-                                _eventFlow.emit(UILoginEvent.GetData)
-                            }else{
-                                UILoginEvent.ShowMessage(user.message?:"Error de datos usuario")
-                            }*/
-                            val status = _state.value?.dataLogin
-                            val status2 = user.data?.status
-                            val status3 = user.message
-                            Log.i("Monchito", status.toString()?:"a")
-                            Log.i("Monchito", status2.toString()?:"b")
-                            Log.i("Monchito", status3.toString()?:"c")
-                            _state.value = LoginDataState(dataLogin = status)
-                            _eventFlow.emit(UILoginEvent.ShowMessage(status?:"Bien"))
-                            //_eventFlow.emit(UILoginEvent.ShowMessage(user.message?:"Authentication successful"))
-
+                            _state.value = LoginDataState(error = user.message?:"Autenticado")
+                            _eventFlow.emit(UILoginEvent.ShowMessage(user.message.toString()))
                         }
                     }
                 }.launchIn(viewModelScope)

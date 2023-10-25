@@ -19,7 +19,6 @@ class ValidateUser @Inject constructor(
 ) {
     operator fun invoke(loginBody: LoginBody): Flow<Resource<Login>> {
         return flow {
-            var response : String =""
             try {
                 if (loginBody.username.isBlank()) {
                     throw InvalidUserException("Ingrese usuario")
@@ -29,21 +28,19 @@ class ValidateUser @Inject constructor(
                 }
                 emit(Resource.Loading())
                 val login = socialAppRepository.validateUser(loginBody).aLogin()
-                Log.i("Gaaaa", login.status)
-                Log.i("Gaaaa", login.response)
-                response = login.status
-                when (response) {
+                when (login.status) {
                     "OK" -> {
-                        emit(Resource.Success(response))
+                        emit(Resource.Success(login.response))
                     }
                     else -> {
-                        emit(Resource.Error(response))
+                        emit(Resource.Error(login.response))
                     }
                 }
             } catch (u: UnknownHostException) {
                 emit(Resource.Error("No se pudo conectar al servidor"))
             } catch (e: Exception) {
-                emit(Resource.Error(e.message.toString()))
+                emit(Resource.Error(e.localizedMessage.toString()))
+
             }
         }
     }
