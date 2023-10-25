@@ -5,6 +5,7 @@ import "./index.scss";
 
 interface WButtonProps {
   id?: string;
+  dataTestid?: string;
   typeColor?: "primary" | "secondary" | "terciary"| "quaternary"| "disabled" | "white";
   type?: "submit" ;
   text?: string;
@@ -14,11 +15,12 @@ interface WButtonProps {
 }
 
 
-const WButton: React.FC<WButtonProps> = ({ id , disabled, typeColor, text, type, size, variant }) => {
+const WButton: React.FC<WButtonProps> = ({ dataTestid , id , disabled, typeColor, text, type, size, variant }) => {
   const buttonClass = `button typeButton--${disabled ? "disabled" : typeColor}`;
   return (
     <Button
       id={id}
+      data-testid={dataTestid}
       style={{ minWidth: size === "large" ? "100%" : "auto" }}
       type = {type}
       className={buttonClass}
@@ -37,5 +39,6 @@ WButton.defaultProps = {
   typeColor: "primary",
   text: "Button",
   disabled: false,
-  variant: "contained"
+  variant: "contained",
+  dataTestid: "button",
 };

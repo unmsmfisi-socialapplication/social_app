@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Layout from "../layout";
 import { Button } from "@mui/material";
-import { WButton, WInput, WCircleIcon, WModalPhoto} from "@/components";
+import { WButton, WInput, WCircleIcon, WModalPhoto ,WComment } from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CheckIcon from "@mui/icons-material/Check"
 import AllInclusive from "@mui/icons-material/AllInclusive"
@@ -43,7 +43,7 @@ export default function TestPage() {
         <WButton typeColor="terciary" text="button" size="large" />
       </div>
       <WButton text="test" size="large" typeColor="terciary"/>
-
+      <WComment/>
       <h1>Test Page</h1>
       <button onClick={handleCount}>presioname</button>
       <div>
