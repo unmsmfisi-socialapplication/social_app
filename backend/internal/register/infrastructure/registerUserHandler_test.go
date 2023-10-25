@@ -12,6 +12,15 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
 )
 
+type RegistrationResponse struct {
+	Response struct {
+		Email    string `json:"email"`
+		Username string `json:"username"`
+		Password string `json:"password"`
+	} `json:"response"`
+	Status string `json:"status"`
+}
+
 type mockUserRepository struct {
 	users map[string]*domain.User
 }
@@ -33,22 +42,20 @@ func (m *mockUserRepository) InsertUser(newUser *domain.User) (*domain.User, err
 }
 
 func TestRegisterUserHandler_RegisterUser(t *testing.T) {
-
 	mockUserRepository := &mockUserRepository{
 		users: make(map[string]*domain.User),
 	}
-
 	mockUseCase := application.NewRegistrationUseCase(mockUserRepository)
-
 	handler := NewRegisterUserHandler(mockUseCase)
 
 	data := map[string]string{
-		"phone":     "123456789",
-		"email":     "test@example.com",
-		"user_name": "testuser",
-		"password":  "TestPassword123!",
+		"email":    "test@example.com",
+		"username": "testuser",
+		"password": "TestPassword123!",
 	}
+
 	requestData, _ := json.Marshal(data)
+
 	req, err := http.NewRequest("POST", "/register", bytes.NewReader(requestData))
 	if err != nil {
 		t.Fatal(err)
@@ -62,17 +69,18 @@ func TestRegisterUserHandler_RegisterUser(t *testing.T) {
 		t.Errorf("Expected status code %d, but got %d", http.StatusOK, rr.Code)
 	}
 
-	var response map[string]string
+	var response RegistrationResponse
+
 	err = json.Unmarshal(rr.Body.Bytes(), &response)
 	if err != nil {
 		t.Errorf("Failed to unmarshal response: %v", err)
 	}
 
-	if response["email"] != data["email"] {
-		t.Errorf("Expected email to be %s, but got %s", data["email"], response["email"])
+	if response.Response.Email != data["email"] {
+		t.Errorf("Expected email to be %s, but got %s", data["email"], response.Response.Email)
 	}
 
-	if response["user_name"] != data["user_name"] {
-		t.Errorf("Expected user_name to be %s, but got %s", data["user_name"], response["user_name"])
+	if response.Response.Username != data["username"] {
+		t.Errorf("Expected username to be %s, but got %s", data["username"], response.Response.Username)
 	}
 }
