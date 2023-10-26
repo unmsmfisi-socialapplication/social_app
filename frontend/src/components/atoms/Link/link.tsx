@@ -1,15 +1,19 @@
+'use client';
 import * as React from 'react';
-import Link from '@mui/material/Link';
+import LinkMaterial from '@mui/material/Link';
+import Link from "next/link"
 
 
 interface BasicsLinkProps {
   underline?: "none" | "always" | "none";
   text?: string;
+  dataTestid?: string;
   href?: string;
   displayType?: "flex" | "inline-flex";
 }
 
-const WBasicsLink: React.FC<BasicsLinkProps> = ({ underline, text, href,displayType }) => {
+const WBasicsLink: React.FC<BasicsLinkProps> = ({ underline,  text,dataTestid, href,displayType }) => {
+
   const linkStyle = {  
     right: 100,  
     gap: 2,
@@ -17,13 +21,14 @@ const WBasicsLink: React.FC<BasicsLinkProps> = ({ underline, text, href,displayT
   };
 
   return (
-    <Link
+  <Link data-testid={dataTestid} href={href} >
+      <LinkMaterial
       sx={linkStyle}
-      href={href}
       underline={underline}
-    >
+       >
       {text}
-    </Link>
+      </LinkMaterial>
+  </Link>
   );
 };
 
@@ -35,5 +40,5 @@ WBasicsLink.defaultProps = {
     underline:"always",
     text: "link",
     href: "#",
-    displayType: "flex",
+    displayType: "flex",
 };
