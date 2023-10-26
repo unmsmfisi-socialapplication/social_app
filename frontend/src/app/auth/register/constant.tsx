@@ -38,7 +38,7 @@ export const REGISTER_VALUES = {
   EMAIL: "email",
   USERNAME: "username",
   PASSWORD: "password",
-  PASSWORD_CONFIRM: "password"
+  PASSWORD_CONFIRM: "password_confirm"
 };
 
 export const INITIAL_FORMIK_VALUES = {

@@ -2,9 +2,7 @@
 import EnrollmentHoc from "@/app/auth/auth";
 import * as Yup from "yup";
 import { WInput, WButton , WCardAuth, WLink } from "@/components";
-
 import { Box } from "@mui/material";
-
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { useState } from "react";
 import { INITIAL_FORMIK_VALUES, REGISTER_VALUES, YUP_SCHEMA } from './constant';
@@ -45,6 +43,7 @@ export default function RegisterPage() {
             size="small"
             fullWidth
             type="text"
+            onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name={REGISTER_VALUES.NAME}
             value={formik.values.name}
@@ -60,10 +59,11 @@ export default function RegisterPage() {
             fullWidth
             type="text"
             name={REGISTER_VALUES.EMAIL}
+            value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={
-              formik.touched.password && !validateEmail(formik.values.email)
+              formik.touched.email && !validateEmail(formik.values.email)
             }
             errorMessage={formik.errors.email}
           />
@@ -74,10 +74,10 @@ export default function RegisterPage() {
             fullWidth
             type="text"
             name={REGISTER_VALUES.USERNAME}
-            value={formik.values.email}
+            value={formik.values.username}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.touched.email && !validateName(formik.values.email)}
+            error={formik.touched.username && !validateName(formik.values.username)}
             errorMessage={formik.errors.username}
           />
           <span>Contraseña</span>
@@ -90,6 +90,7 @@ export default function RegisterPage() {
             name={REGISTER_VALUES.PASSWORD}
             value={formik.values.password}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={formik.touched.password && !validatePassword(formik.values.password)}
             errorMessage={formik.errors.password}
           />
@@ -105,8 +106,7 @@ export default function RegisterPage() {
             placeholder="Confirmar Contraseña"
             onBlur={formik.handleBlur}
             error={
-              formik.touched.password_confirm && !validatePassword(formik.values.password_confirm) && formik.values.password == formik.values.password_confirm
-            }
+              formik.touched.password_confirm && !validatePassword(formik.values.password_confirm) }
             errorMessage={formik.errors.password_confirm}
           />
           <Box>
