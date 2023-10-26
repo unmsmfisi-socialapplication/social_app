@@ -8,6 +8,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 interface WInputProps {
   value?: string;
   typeColor?: 'primary' | 'secondary';
+  dataTestid?:string;
   name?: string;
   icon?: React.ReactElement;
   placeholder?: string;
@@ -23,6 +24,7 @@ interface WInputProps {
 
 const WInput: React.FC<WInputProps> = ({
   typeColor = 'primary',
+  dataTestid,
   value,
   name,
   icon,
@@ -46,6 +48,7 @@ const WInput: React.FC<WInputProps> = ({
     <TextField
       value={value}
       name={name}
+      data-testid={dataTestid}
       onChange={onChange}
       onBlur={onBlur}
       fullWidth={fullWidth}
