@@ -21,7 +21,7 @@ const WBasicsLink: React.FC<BasicsLinkProps> = ({ underline,  text,dataTestid, h
   };
 
   return (
-  <Link data-testid={dataTestid} href={href} >
+  <Link data-testid={dataTestid} href={href || "/"} >
       <LinkMaterial
       sx={linkStyle}
       underline={underline}
