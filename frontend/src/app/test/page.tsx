@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Layout from "../layout"
 import { Button } from "@mui/material";
-import { WButton, WInput, WCircleIcon, WModalPhoto} from "@/components";
+import { WButton, WInput, WCircleIcon, WModalPhoto, WButtonMotion} from "@/components";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CheckIcon from "@mui/icons-material/Check"
 import AllInclusive from "@mui/icons-material/AllInclusive"
@@ -14,7 +14,6 @@ import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 import AvatarInput from "@/components/molecules/AvatarInput";
 import CommentThink from "@/components/molecules/CommentThink";
 import SquareButton from '../../components/atoms/ButtonSquare/ButtonSquare';
-import WButtonMotion from "../../components/atoms/ButtonAnimated/buttonAnimated";
 
 export default function TestPage() {
     const [count, setCount] = useState(0);
@@ -44,7 +43,7 @@ export default function TestPage() {
       </div>
       <WButton text="test" size="large" typeColor="terciary"/>
       <WButton typeColor="terciary" text="button" size="large" />
-      <WButtonMotion text="Animated Button"  />
+      <WButtonMotion text="POST NOW" />
       <h1>Test Page</h1>
 
 

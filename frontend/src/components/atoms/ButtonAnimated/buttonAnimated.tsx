@@ -1,6 +1,7 @@
+"use client";
 import React from "react";
 import Button from "@mui/material/Button";
-import "./ButtonAnimated.scss"; // Importa el archivo SCSS que contiene los estilos
+import "./buttonAnimated.scss";
 
 interface WButtonMotionProps {
   id?: string;
