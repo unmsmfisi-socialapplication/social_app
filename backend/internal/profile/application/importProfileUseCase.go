@@ -5,10 +5,10 @@ import (
 )
 
 type ImportProfileUseCase struct {
-    profileRepository domain.ProfileRepositoryI
+    profileRepository IProfileRepository
 }
 
-func NewImportProfileUseCase(profileRepository domain.ProfileRepositoryI) *ImportProfileUseCase {
+func NewImportProfileUseCase(profileRepository IProfileRepository) *ImportProfileUseCase {
     return &ImportProfileUseCase{profileRepository}
 }
 
