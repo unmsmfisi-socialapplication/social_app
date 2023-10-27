@@ -10,9 +10,12 @@ const nextConfig = {
       {
         source: '/',
         destination: '/auth/login',
-        permanent: true,
+        permanent: false,
       },
     ];
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 

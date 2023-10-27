@@ -1,0 +1,52 @@
+@import '../../../../resources/styles/variables.scss';
+
+.button-animated {
+    position: relative;
+    display: block;
+    width: 290px;
+    height: 50px;
+    background-color: #f0f0f0;
+    color: #007aff;
+    font-size: 19px;
+    font-weight: 600;
+    border: 1px solid #a7caf8;
+    border-radius: 13px;
+    overflow: hidden;
+    transition: all 500ms ease;
+    z-index: 0;
+    font-family: $font-poppins-regular;
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        margin: auto;
+        background-color: #007aff;
+        transition: all 500ms ease;
+        z-index: -1;
+        right: 180px;
+        left: -230px;
+        width: 100%;
+        height: 150%;
+        box-shadow:
+            0 0 10px #007aff,
+            0 0 30px #007aff,
+            0 0 30px #007aff;
+        transition: all 850ms ease;
+        transform: rotate(45deg);
+    }
+
+    &:hover::before {
+        left: 520px;
+    }
+
+    &:hover {
+        background-color: #007aff;
+        border: 1px solid #007aff;
+        color: #dfdfdf;
+        transition: all 1850ms ease;
+    }
+}
