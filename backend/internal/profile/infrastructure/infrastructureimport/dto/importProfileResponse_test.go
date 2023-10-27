@@ -1,10 +1,9 @@
-package test
+package dto
 
 import (
 	"testing"
 
 	"github.com/go-ap/activitypub"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructureimport/dto"
 )
 
 func TestNewImportProfileResponse(t *testing.T) {
@@ -18,12 +17,12 @@ func TestNewImportProfileResponse(t *testing.T) {
 		Icon:              activitypub.IRI("https://kenzoishii.example.com/image/165987aklre4"),
 	}
 
-    expectedResponse := dto.ImportProfileResponse{
+    expectedResponse := ImportProfileResponse{
         Response: "Profile Imported Succesfully",
         Data: expectedPerson,
     }
 
-	response := dto.NewImportProfileResponse(expectedPerson)
+	response := NewImportProfileResponse(expectedPerson)
 
     messageExcepted := "Profile Imported Succesfully"
 	if response.Response != "Profile Imported Succesfully" {

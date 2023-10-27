@@ -1,9 +1,8 @@
-package test
+package applicationimport
 
 import (
 	"testing"
 
-	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/applicationimport"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
 	infrastructure_repository "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructurerepository"
 )
@@ -26,7 +25,7 @@ func TestImportProfileUseCase(t *testing.T) {
     }
 
 	profileRepository := infrastructure_repository.NewProfileRepository()
-	importProfileUseCase := application_import.NewImportProfileUseCase(profileRepository)
+	importProfileUseCase := NewImportProfileUseCase(profileRepository)
 
 	err := importProfileUseCase.ImportProfile(p)
 

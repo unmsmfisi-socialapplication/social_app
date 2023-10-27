@@ -1,4 +1,4 @@
-package test
+package dto
 
 import (
 	"bytes"
@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	"github.com/go-ap/activitypub"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructureimport/dto"
 )
 
 func NewProfileRequestTest(t *testing.T) {
@@ -58,11 +57,11 @@ func NewProfileRequestTest(t *testing.T) {
 		Liked:             activitypub.IRI("https://example.com/liked"),
 	}
 
-	expectedRequest := dto.ImportProfileRequest{
+	expectedRequest := ImportProfileRequest{
 		Person: &expectedPerson,
 	}
 
-	importProfileRequest, err := dto.NewImportProfileRequest(&readCloser)
+	importProfileRequest, err := NewImportProfileRequest(&readCloser)
 	if err != nil {
 		t.Error("Error to create profile request")
 	}
