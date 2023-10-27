@@ -1,22 +1,27 @@
 package infrastructure
 
 import (
+    "context"
     "encoding/json"
     "net/http"
 
     "github.com/unmsmfisi-socialapplication/social_app/internal/post/application"
     "github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
     "github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
+    "github.com/mattn/go-mastodon"
 )
 
 // PostHandler handles HTTP requests related to posts.
 type PostHandler struct {
-    useCase application.PostUseCaseInterface
+    useCase      application.PostUseCaseInterface
+    clientID     string // Tu client_id
+    clientSecret string // Tu client_secret
+    instanceURL  string // URL de la instancia de Mastodon
 }
 
-// NewPostHandler creates a new instance of PostHandler.
-func NewPostHandler(useCase application.PostUseCaseInterface) *PostHandler {
-    return &PostHandler{useCase: useCase}
+// NewPostHandler crea una nueva instancia de PostHandler con las credenciales de la aplicación.
+func NewPostHandler(useCase application.PostUseCaseInterface, clientID, clientSecret, instanceURL string) *PostHandler {
+    return &PostHandler{useCase: useCase, clientID: clientID, clientSecret: clientSecret, instanceURL: instanceURL}
 }
 
 // HandleCreateMultiPost handles the creation of posts for Mastodon and Pixelfed.
@@ -33,26 +38,21 @@ func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Requ
         return
     }
 
+    conf := &mastodon.Config{
+        ClientID:     ph.clientID,
+        ClientSecret: ph.clientSecret,
+        Server:       ph.instanceURL,
+    }
+    client := mastodon.NewClient(conf)
+
+    err := client.Authenticate(context.Background(), "user", "password")
+    if err != nil {
+        utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
+        return
+    }
+
     var mastodonPost *domain.Post
     var pixelfedPost *domain.Post
-
-    // Uncomment and add your Mastodon-specific code here
-    // if requestData.MastodonData != nil {
-    //     mastodonPost, err := ph.useCase.CreatePost(*requestData.MastodonData)
-    //     if err != nil {
-    //         utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
-    //         return
-    //     }
-    // }
-
-    // Uncomment and add your Pixelfed-specific code here
-    // if requestData.PixelfedData != nil {
-    //     pixelfedPost, err := ph.useCase.CreatePost(*requestData.PixelfedData)
-    //     if err != nil {
-    //         utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
-    //         return
-    //     }
-    // }
 
     // Create a response map with Mastodon and Pixelfed posts
     response := map[string]interface{}{
