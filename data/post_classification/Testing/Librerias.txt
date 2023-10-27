@@ -1,2 +1,0 @@
-pip install torch torchvision
-pip install transformers

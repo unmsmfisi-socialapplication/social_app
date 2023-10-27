@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "89ca47a7-b3b4-402f-bace-bfe81f2b46ae",
+		"name": "QA_topic_of_interests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27775741"
+	},
+	"item": [
+		{
+			"name": "Backend de prueba",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Valid Interest",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"@context\": [\"https://www.w3.org/ns/activitystreams\", {\"@language\": \"es\"}],\r\n    \"type\": \"Collection\",\r\n    \"actor\": \"https://ejemplo.com/sofia/\",\r\n    \"object\": [\r\n        {\r\n            \"id\": \"https://ejemplo.com/intereses/musica\",\r\n            \"type\": \"Interest\",\r\n            \"name\": \"Música\",\r\n            \"summary\": \"Todo lo relacionado con la música, desde géneros hasta instrumentos.\"\r\n        },\r\n        {\r\n            \"id\": \"https://ejemplo.com/intereses/tecnologia\",\r\n            \"type\": \"Interest\",\r\n            \"name\": \"Tecnología\",\r\n            \"summary\": \"Innovaciones, gadgets, software y más.\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"validate"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Type is not collection",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"@context\": [\"https://www.w3.org/ns/activitystreams\", {\"@language\": \"es\"}],\r\n    \"type\": \"List\",\r\n    \"actor\": \"https://ejemplo.com/sofia/\",\r\n    \"object\": [\r\n        {\r\n        \"id\": \"https://ejemplo.com/intereses/musica\",\r\n        \"type\": \"Interest\",\r\n        \"name\": \"Música\",\r\n        \"summary\": \"Todo lo relacionado con la música, desde géneros hasta instrumentos.\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"validate"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Missing id property",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Missing object property",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/validate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"@context\": [\"https://www.w3.org/ns/activitystreams\", {\"@language\": \"es\"}],\r\n    \"type\": \"List\",\r\n    \"actor\": \"https://ejemplo.com/sofia/\",\r\n    \"object\": [\r\n        {\r\n        \"id\": \"https://ejemplo.com/intereses/musica\",\r\n        \"type\": \"Interest\",\r\n        \"name\": \"Música\",\r\n        \"summary\": \"Todo lo relacionado con la música, desde géneros hasta instrumentos.\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/validate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"@context\": [\"https://www.w3.org/ns/activitystreams\", {\"@language\": \"es\"}],\r\n    \"type\": \"Collection\",\r\n    \"actor\": \"https://ejemplo.com/sofia/\",\r\n    \"object\": [\r\n        {\r\n            \"id\": \"https://ejemplo.com/intereses/musica\",\r\n            \"type\": \"Interest\",\r\n            \"name\": \"Música\",\r\n            \"summary\": \"Todo lo relacionado con la música, desde géneros hasta instrumentos.\"\r\n        },\r\n        {\r\n            \"id\": \"https://ejemplo.com/intereses/tecnologia\",\r\n            \"type\": \"Interest\",\r\n            \"name\": \"Tecnología\",\r\n            \"summary\": \"Innovaciones, gadgets, software y más.\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/validate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"@context\": [\"https://www.w3.org/ns/activitystreams\", {\"@language\": \"es\"}],\r\n    \"type\": \"Collection\",\r\n    \"actor\": \"https://ejemplo.com/sofia/\",\r\n    \"object\": [\r\n        {\r\n        \"type\": \"Interest\",\r\n        \"name\": \"Música\",\r\n        \"summary\": \"Todo lo relacionado con la música, desde géneros hasta instrumentos.\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/validate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"@context\": [\"https://www.w3.org/ns/activitystreams\", {\"@language\": \"es\"}],\r\n    \"type\": \"Collection\",\r\n    \"actor\": \"https://ejemplo.com/sofia/\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
