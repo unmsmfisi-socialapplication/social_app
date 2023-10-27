@@ -12,8 +12,7 @@ import (
 func ProfileModuleRouter(dbInstance *sql.DB) *chi.Mux {
     r := chi.NewRouter()
 
-    // TODO: Add database
-	importProfileRepository := infrastructure.NewProfileRepository()
+	importProfileRepository := infrastructure.NewProfileRepository(dbInstance)
 	importProfileUseCase := application.NewImportProfileUseCase(importProfileRepository)
 	importProfileHandler := infrastructure.NewImportProfileHandler(importProfileUseCase)
 

@@ -8,10 +8,21 @@ import (
 	"testing"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/application"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
 )
 
+type MockProfileRepository struct{}
+
+func newMockProfileRepository() *MockProfileRepository {
+	return &MockProfileRepository{}
+}
+
+func (mr *MockProfileRepository) UpdateProfile(p *domain.Profile) error {
+	return nil
+}
+
 func TestImportProfileHandler_ImportProfile(t *testing.T) {
-	profileRepository := NewProfileRepository()
+	profileRepository := newMockProfileRepository()
 	importProfileUseCase := application.NewImportProfileUseCase(profileRepository)
 	handler := NewImportProfileHandler(importProfileUseCase)
 
@@ -32,7 +43,7 @@ func TestImportProfileHandler_ImportProfile(t *testing.T) {
         "name": "Sofia Rodriguez",
         "preferredUsername": "SofiR",
         "summary": "Amante de la naturaleza y entusiasta de la tecnología.",
-            "icon": "https://kenzoishii.example.com/image/165987aklre4",
+        "icon": "https://kenzoishii.example.com/image/165987aklre4",
         "endpoints": {
           "sharedInbox": "https://appsocial.com/inbox"
         },
@@ -51,9 +62,9 @@ func TestImportProfileHandler_ImportProfile(t *testing.T) {
 
 	handler.ImportProfile(res, req)
 
-    expectedStatus := http.StatusOK
+	expectedStatus := http.StatusOK
 
 	if res.Code != expectedStatus {
-        t.Errorf("Expected status code %d, but got %d", expectedStatus, res.Code)
+		t.Errorf("Expected status code %d, but got %d", expectedStatus, res.Code)
 	}
 }
