@@ -30,9 +30,16 @@ func (ch *CommentHandler) HandleGetCommentByID(w http.ResponseWriter, r *http.Re
 	}
 
 	commentID, _ := strconv.ParseInt(commentIDStr, 10, 64)
+
+
+
 	comment, err := ch.useCase.GetByID(commentID)
 	if err != nil {
-		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error getting comment")
+		if commentID > 0{
+			utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Comment not found")
+		} else {
+			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error getting comment")
+		}
 		fmt.Println(err.Error())
 		return
 	}
@@ -114,7 +121,11 @@ func (ch *CommentHandler) HandleUpdateComment(w http.ResponseWriter, r *http.Req
 	}
 	err := ch.useCase.Update(commentID, comment)
 	if err != nil {
-		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error updating comment")
+		if commentID > 0{
+			utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Comment not found")
+		} else {
+			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error updating comment")
+		}
 		fmt.Println(err.Error())
 		return
 	} 
@@ -134,7 +145,11 @@ func (ch *CommentHandler) HandleDeleteComment(w http.ResponseWriter, r *http.Req
 	err := ch.useCase.Delete(commentID)
 	
 	if err != nil {
-		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error deleting comment")
+		if commentID > 0{
+			utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Comment not found")
+		} else {
+			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error deleting comment")
+		}
 		fmt.Println(err.Error())
 		return
 	}
