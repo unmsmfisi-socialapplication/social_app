@@ -1,10 +1,9 @@
-package test
+package application
 
 import (
 	"errors"
 	"testing"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/email_sender/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/email_sender/domain"
 )
 
@@ -27,7 +26,7 @@ func TestEmailSenderUseCase_SendEmail(t *testing.T) {
 
 	t.Run("delegates to repository", func(t *testing.T) {
 		mockRepo := &mockRepository{}
-		useCase := application.NewEmailSenderUseCase(mockRepo)
+		useCase := NewEmailSenderUseCase(mockRepo)
 
 		_ = useCase.SendEmail(email)
 
@@ -39,7 +38,7 @@ func TestEmailSenderUseCase_SendEmail(t *testing.T) {
 	t.Run("handles repository error", func(t *testing.T) {
 		mockError := errors.New("test error")
 		mockRepo := &mockRepository{sendEmailErr: mockError}
-		useCase := application.NewEmailSenderUseCase(mockRepo)
+		useCase := NewEmailSenderUseCase(mockRepo)
 
 		err := useCase.SendEmail(email)
 
