@@ -59,7 +59,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                     start: Int,
                     count: Int,
                     after: Int
-                ) {}
+                ) {
+                }
 
                 override fun onTextChanged(
                     s: CharSequence?,
@@ -73,9 +74,9 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                         binding.errorUsername.visibility = View.VISIBLE
                     }
                 }
+
                 override fun afterTextChanged(s: Editable?) {}
-            }
-        )
+            })
     }
 
     private fun userUnique(username: String): Boolean {
