@@ -1,0 +1,13 @@
+node_modules
+Dockerfile
+.dockerignore
+.next
+.gitignore
+.gitkeep
+.eslint.json
+**/test
+**.test.tsx
+jest.config.js
+jest.setup.js
+.prettierrc.json
+README.md
