@@ -75,7 +75,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_upload_profile"
             style="@style/ButtonStyleProfile"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="90dp"
