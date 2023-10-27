@@ -1,13 +1,7 @@
 # This workflow will build a golang project
-name: CD Backend
+name: CD Backend manually triggered
 
-on:
-  push:
-    branches:
-      - develop
-    # Only trigger when changes are made within the 'backend/' directory
-    paths:
-      - 'backend/**'
+on: workflow_dispatch
 
 # Define default settings for jobs
 defaults:
@@ -19,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 'Create env file'
         run: |
@@ -39,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: 'Create env file'
         run: |
