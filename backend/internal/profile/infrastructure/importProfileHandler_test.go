@@ -1,4 +1,4 @@
-package infrastructureroutes
+package infrastructure
 
 import (
 	"bytes"
@@ -7,15 +7,13 @@ import (
 
 	"testing"
 
-	application_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/applicationimport"
-	infrastructure_import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructureimport"
-	infrastructure_repository "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructurerepository"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/application"
 )
 
 func TestImportProfileHandler_ImportProfile(t *testing.T) {
-	profileRepository := infrastructure_repository.NewProfileRepository()
-	importProfileUseCase := application_import.NewImportProfileUseCase(profileRepository)
-	handler := infrastructure_import.NewImportProfileHandler(importProfileUseCase)
+	profileRepository := NewProfileRepository()
+	importProfileUseCase := application.NewImportProfileUseCase(profileRepository)
+	handler := NewImportProfileHandler(importProfileUseCase)
 
 	requestBody := []byte(`
     {

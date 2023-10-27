@@ -1,19 +1,19 @@
-package infrastructureimport
+package infrastructure
 
 import (
 	"fmt"
 	"net/http"
 
 	"github.com/go-ap/activitypub"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/application/applicationimport"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructureimport/dto"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/application"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/dto"
 )
 
 type importProfileHandler struct {
-	importProfileUseCase *applicationimport.ImportProfileUseCase
+	importProfileUseCase *application.ImportProfileUseCase
 }
 
-func NewImportProfileHandler(ipUseCase *applicationimport.ImportProfileUseCase) *importProfileHandler {
+func NewImportProfileHandler(ipUseCase *application.ImportProfileUseCase) *importProfileHandler {
 	return &importProfileHandler{ipUseCase}
 }
 

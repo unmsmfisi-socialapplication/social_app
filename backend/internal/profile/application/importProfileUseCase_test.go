@@ -1,11 +1,20 @@
-package applicationimport
+package application
 
 import (
 	"testing"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
-	infrastructure_repository "github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructurerepository"
 )
+
+type MockProfileRepository struct{}
+
+func newMockProfileRepository() *MockProfileRepository {
+    return &MockProfileRepository{}
+}
+
+func (mr *MockProfileRepository) UpdateProfile(p *domain.Profile) error {
+    return nil
+}
 
 func TestImportProfileUseCase(t *testing.T) {
 	t.Log("TestImportProfileUseCase")
@@ -24,7 +33,7 @@ func TestImportProfileUseCase(t *testing.T) {
         Biography:    p.Biography,
     }
 
-	profileRepository := infrastructure_repository.NewProfileRepository()
+	profileRepository := newMockProfileRepository()
 	importProfileUseCase := NewImportProfileUseCase(profileRepository)
 
 	err := importProfileUseCase.ImportProfile(p)

@@ -1,4 +1,4 @@
-package infrastructurerepository
+package infrastructure
 
 import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"

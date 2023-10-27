@@ -12,7 +12,7 @@ import (
 	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/infrastructure/infrastructureroutes"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
 
 	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
@@ -39,6 +39,8 @@ func Router() http.Handler {
 
 	postRoutes := post.PostModuleRouter(dbInstance)
 
+    profileRouter := profile.ProfileModuleRouter(dbInstance)
+
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"world\"}"))
 	})
@@ -56,7 +58,6 @@ func Router() http.Handler {
 		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
 	})
 
-	r.Route("/profile", infrastructureroutes.ProfileHandler)
 
 	// Login
 	loginRepo := infrastructure.NewUserDBRepository(dbInstance)
@@ -73,6 +74,8 @@ func Router() http.Handler {
 	r.Mount("/comments", commentRouter)
 
 	r.Mount("/post", postRoutes)
+
+	r.Mount("/profile", profileRouter)
 
 	//Email-sender
 
