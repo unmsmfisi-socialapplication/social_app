@@ -21,9 +21,9 @@
             android:id="@+id/icon_left"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:contentDescription="@string/description"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/icon_left_arrow"
-            android:contentDescription="@string/description"/>
+            app:srcCompat="@drawable/icon_left_arrow" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,8 +34,8 @@
                 android:id="@+id/icon_check"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                app:srcCompat="@drawable/icon_confirmation"
-                android:contentDescription="@string/description"/>
+                android:contentDescription="@string/description"
+                app:srcCompat="@drawable/icon_confirmation" />
         </LinearLayout>
     </LinearLayout>
 
@@ -58,11 +58,11 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_icon"
                 style="@style/ImageViewProfile"
-                android:scaleType="center"
+                android:backgroundTint="@color/color02"
                 android:contentDescription="@string/photo_profile"
+                android:scaleType="center"
                 app:shapeAppearanceOverlay="@style/ImageViewCorner"
-                app:srcCompat="@drawable/icon_user"
-                android:backgroundTint="@color/color02"/>
+                app:srcCompat="@drawable/icon_user" />
 
             <Space
                 android:layout_width="20dp"
@@ -139,5 +139,15 @@
             android:layout_width="200dp"
             android:layout_marginTop="20dp"
             android:text="@string/add_link" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <include layout="@layout/navigation_bar" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

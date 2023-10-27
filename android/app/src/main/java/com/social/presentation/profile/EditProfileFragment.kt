@@ -12,9 +12,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.social.R
 import com.social.databinding.FragmentEditProfileBinding
+import com.social.databinding.NavigationBarBinding
 
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding: FragmentEditProfileBinding
+    private lateinit var bindingNavBar: NavigationBarBinding
+
     private val imagePicker =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK && result.data != null) {
@@ -27,6 +30,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
+        bindingNavBar = NavigationBarBinding.bind(view)
         action()
     }
 
@@ -78,7 +82,6 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun userUnique(username: String): Boolean {
-        //consulta a backend
         if (username == "c" || username == "cr" || username == "crh") {
             return false
         }
