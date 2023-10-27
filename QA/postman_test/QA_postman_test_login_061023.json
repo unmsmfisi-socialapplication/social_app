@@ -5,6 +5,7 @@
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "30305102"
 	},
+	"comment": "Este es un archivo exportado de Postman que contiene múltiples solicitudes relacionadas con el modulo de intereses de QA.",
 	"item": [
 		{
 			"name": "061023",
