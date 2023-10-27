@@ -1,7 +1,6 @@
 package com.social.presentation.authentication
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
@@ -9,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.social.domain.model.LoginBody
-import com.social.domain.use_case.ValidateUser
+import com.social.domain.usecase.ValidateUser
 import com.social.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -48,29 +47,30 @@ class LoginViewModel @Inject constructor(
                         password = password.value.text
                     )
                 ).onEach { user ->
-                    Log.i("Autenticacion: ","user: $username and password: $password")
-                    when (user){
-                        is Resource.Loading->{
+                    when (user) {
+                        is Resource.Loading -> {
                             _state.value = LoginDataState(isLoading = true)
                         }
-                        is Resource.Error->{
-                            _state.value = LoginDataState(error = user.message?:"Error")
-                            if(user.message!!.contains("HTTP 404")){
+
+                        is Resource.Error -> {
+                            _state.value = LoginDataState(error = user.message ?: "Error")
+                            if (user.message!!.contains("HTTP 404")) {
                                 _eventFlow.emit(
                                     UILoginEvent.ShowMessage("User not found")
                                 )
-                            }else if(user.message.contains("HTTP 401")){
+                            } else if (user.message.contains("HTTP 401")) {
                                 _eventFlow.emit(
                                     UILoginEvent.ShowMessage("Invalid credentials")
                                 )
-                            }else{
+                            } else {
                                 _eventFlow.emit(
-                                    UILoginEvent.ShowMessage(user.message?:"Error")
+                                    UILoginEvent.ShowMessage(user.message ?: "Error")
                                 )
                             }
                         }
-                        is Resource.Success->{
-                            _state.value = LoginDataState(error = user.message?:"Autenticado")
+
+                        is Resource.Success -> {
+                            _state.value = LoginDataState(error = user.message ?: "Autenticado")
                             _eventFlow.emit(UILoginEvent.ShowMessage(user.message.toString()))
                         }
                     }
@@ -81,6 +81,7 @@ class LoginViewModel @Inject constructor(
 
     sealed class UILoginEvent {
         object GetData : UILoginEvent()
+
         data class ShowMessage(val message: String) : UILoginEvent()
     }
 }

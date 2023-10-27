@@ -30,7 +30,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -54,7 +54,7 @@ android {
         }
     }
 
-    viewBinding{
+    viewBinding {
         enable = true
     }
 
@@ -64,7 +64,6 @@ android {
 }
 
 dependencies {
-
 
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.3")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
@@ -80,14 +79,14 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("com.google.android.gms:play-services-maps:18.1.0")
 
-    //Dagger - Hilt
+    // Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.48")
 
     debugImplementation("androidx.compose.ui:ui-tooling:$composeUiVersion")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeUiVersion")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
-    //Retrofit
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
@@ -95,11 +94,12 @@ dependencies {
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
-    //kotlin extensiones
+
     implementation("androidx.room:room-ktx:$roomVersion")
-    //picasso
-    //implementation("com.squareup.picasso:picasso:2.71828")
-    //implementation("com.github.danysantiago:sendgrid-android:1")
+    // picasso
+    // implementation("com.squareup.picasso:picasso:2.71828")
+    // implementation("com.github.danysantiago:sendgrid-android:1")
+    implementation("org.mockito:mockito-core:3.10.0")
     implementation("com.makeramen:roundedimageview:2.3.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")

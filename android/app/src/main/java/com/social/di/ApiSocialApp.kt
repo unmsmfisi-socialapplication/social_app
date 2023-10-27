@@ -4,7 +4,7 @@ import android.util.Log
 import com.social.data.repository.SocialAppRepositoryImp
 import com.social.data.source.remote.ApiInterface
 import com.social.domain.SocialAppRepository
-import com.social.domain.use_case.ValidateUser
+import com.social.domain.usecase.ValidateUser
 import com.social.presentation.authentication.AuthenticationUseCase
 import dagger.Module
 import dagger.Provides
@@ -23,7 +23,9 @@ import javax.inject.Singleton
 object ApiSocialApp {
     @Provides
     @Singleton
-    fun getMainApi(@Named("social_app")okHttpClient: OkHttpClient): ApiInterface {
+    fun getMainApi(
+        @Named("social_app")okHttpClient: OkHttpClient,
+    ): ApiInterface {
         return Retrofit.Builder()
             .baseUrl("https://social-app-backend-service-7bg5siys2q-uc.a.run.app")
             .client(okHttpClient)
