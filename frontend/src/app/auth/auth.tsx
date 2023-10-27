@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { Box, Grid } from "@mui/material";
 
 import RootEnrollment from "../Enrollment";
-import { WButton } from "@/components";
-
+import './auth.scss';
 export default function EnrollmentHoc({
   children,
 }: {
@@ -19,22 +18,15 @@ export default function EnrollmentHoc({
   return (
     <RootEnrollment>
       {isClient && (
-        <Grid container spacing={2}>
+        <Grid className="auth__section" container spacing={2}>
           <Grid
-            style={{
-              paddingRight: "240px",
-              color: "white",
-              fontFamily: "inherit",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+            className="auth__section--side"
             item
-            xs={8}
+            xs={6}
           >
-            <span style={{ fontSize: "80px" }}>STUDENT NETWORK</span>
+            <span>STUDENT NETWORK</span>
           </Grid>
-          <Grid item xs={4}>
+          <Grid className="auth__section--right" item xs={6} >
             <Box>{children}</Box>
           </Grid>
         </Grid>

@@ -1,4 +1,4 @@
-package config
+package utils
 
 import (
 	"bufio"
@@ -14,7 +14,13 @@ type Config struct {
 }
 
 func LoadEnvFromFile(filename string) {
-	file, _ := os.Open(filename)
+	file, err := os.Open(filename)
+
+	if err != nil {
+		fmt.Printf("Error opening file: %v", err)
+		return
+	}
+
 	defer file.Close()
 
 	env := make(map[string]string)
@@ -23,8 +29,11 @@ func LoadEnvFromFile(filename string) {
 	for scanner.Scan() {
 		line := scanner.Text()
 		parts := strings.SplitN(line, "=", 2)
+
 		if len(parts) == 2 {
-			env[parts[0]] = parts[1]
+			key := parts[0]
+			value := parts[1]
+			env[key] = value
 		}
 	}
 
@@ -34,11 +43,11 @@ func LoadEnvFromFile(filename string) {
 }
 
 func CheckEnvVariables() error {
-	requiredVariables := []string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "DB_SSLMODE"}
+	requiredVariables := []string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "DB_SSLMODE", "DB_SCHEMA", "CORS_ORIGINS", "CORS_MAXAGE"}
 
 	for _, variable := range requiredVariables {
 		if os.Getenv(variable) == "" {
-			return fmt.Errorf("Environment variable %s is not set", variable)
+			return fmt.Errorf("environment variable %s is not set", variable)
 		}
 	}
 
@@ -57,12 +66,13 @@ func LoadConfig() (*Config, error) {
 
 	return &Config{
 		DBConnectionString: fmt.Sprintf(
-			"host=%s user=%s password=%s dbname=%s sslmode=%s",
+			"host=%s user=%s password=%s dbname=%s sslmode=%s search_path=%s",
 			os.Getenv("DB_HOST"),
 			os.Getenv("DB_USER"),
 			os.Getenv("DB_PASSWORD"),
 			os.Getenv("DB_NAME"),
 			os.Getenv("DB_SSLMODE"),
+			os.Getenv("DB_SCHEMA"),
 		),
 	}, nil
 }

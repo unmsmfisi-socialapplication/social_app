@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 import EnrollmentHoc from "@/app/auth/auth";
 import { WInput, WButton, WLink, WCardAuth } from "@/components";
 import { INITIAL_FORMIK_VALUES, LOGIN_VALUES, YUP_SCHEMA } from "./constant";
-import { validateEmail, validatePassword } from "@/utilities/Validation";
+import { validateUsername, validatePassword } from "@/utilities/Validation";
 import AuthRepository from "@/domain/repositories/AuthRepository";
 
 export default function LoginPage() {
@@ -33,16 +33,16 @@ export default function LoginPage() {
   return (
     <EnrollmentHoc>
       <form onSubmit={formik.handleSubmit}>
-        <WCardAuth title="Bienvenido de nuevo" size="large">
+        <WCardAuth title="Bienvenido" size="large">
           <span>Nombre de usuario</span>
           <WInput
-            name={LOGIN_VALUES.EMAIL}
+            name={LOGIN_VALUES.USERNAME}
             value={formik.values.username}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="Ingrese su correo o usuario"
+            placeholder="Ingrese su usuario"
             error={
-              formik.touched.username && !validateEmail(formik.values.username)
+              formik.touched.username && !validateUsername(formik.values.username)
             }
             errorMessage={formik.errors.username}
             fullWidth
