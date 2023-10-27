@@ -9,6 +9,4 @@ import dagger.hilt.android.HiltAndroidApp
    'java.lang.IllegalStateException' EXCEPTION
 * */
 @HiltAndroidApp
-class Social:Application(){
-
-}
+class Social : Application()

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,7 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var globalView: View
-    private val viewModel : LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(
         view: View,
@@ -31,26 +30,24 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         globalView = view
 
         lifecycleScope.launchWhenCreated {
-            viewModel.evenFlow.collectLatest { event->
-                when(event){
-                    is LoginViewModel.UILoginEvent.GetData->{
+            viewModel.evenFlow.collectLatest { event ->
+                when (event) {
+                    is LoginViewModel.UILoginEvent.GetData -> {
                         val userData = viewModel.state.value!!.dataLogin?.get(0)
                         Log.i("dato_usuario", userData.toString())
                     }
-                    is LoginViewModel.UILoginEvent.ShowMessage->{
+
+                    is LoginViewModel.UILoginEvent.ShowMessage -> {
                         showMessage(requireContext(), event.message)
                     }
                 }
             }
         }
 
-
-
-        //setupEmailValidation()
-        //setupPasswordValidation()
+        // setupEmailValidation()
+        // setupPasswordValidation()
         action()
     }
-
 
 
     private fun action() {

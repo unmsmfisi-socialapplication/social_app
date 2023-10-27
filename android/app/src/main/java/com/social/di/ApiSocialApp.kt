@@ -22,7 +22,7 @@ object ApiSocialApp {
     @Provides
     @Singleton
     fun getMainApi(
-        @Named("soccial_app")okHttpClient: OkHttpClient,
+        @Named("soccial_app") okHttpClient: OkHttpClient,
     ): ApiInterface {
         return Retrofit.Builder()
             .baseUrl("https://social-app-backend-service-7bg5siys2q-uc.a.run.app")
@@ -49,7 +49,7 @@ object ApiSocialApp {
 
     @Provides
     @Singleton
-    fun authenticationUseCase(repository: SocialAppRepository):AuthenticationUseCase{
+    fun authenticationUseCase(repository: SocialAppRepository): AuthenticationUseCase {
         return AuthenticationUseCase(
             validateUser = ValidateUser(repository)
         )

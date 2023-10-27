@@ -1,6 +1,5 @@
 package com.social.presentation.authentication
 
-import android.app.Application
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
@@ -8,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.social.domain.model.LoginBody
-import com.social.domain.usecase.ValidateUser
 import com.social.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -44,7 +42,7 @@ class LoginViewModel @Inject constructor(
                 authenticationUseCase.validateUser(
                     LoginBody(
                         username = username.value.text,
-                        password = password.value.text
+                        password = password.value.text,
                     )
                 ).onEach { user ->
                     when (user) {
@@ -56,15 +54,15 @@ class LoginViewModel @Inject constructor(
                             _state.value = LoginDataState(error = user.message ?: "Error")
                             if (user.message!!.contains("HTTP 404")) {
                                 _eventFlow.emit(
-                                    UILoginEvent.ShowMessage("User not found")
+                                    UILoginEvent.ShowMessage("User not found"),
                                 )
                             } else if (user.message.contains("HTTP 401")) {
                                 _eventFlow.emit(
-                                    UILoginEvent.ShowMessage("Invalid credentials")
+                                    UILoginEvent.ShowMessage("Invalid credentials"),
                                 )
                             } else {
                                 _eventFlow.emit(
-                                    UILoginEvent.ShowMessage(user.message ?: "Error")
+                                    UILoginEvent.ShowMessage(user.message ?: "Error"),
                                 )
                             }
                         }
