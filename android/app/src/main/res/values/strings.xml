@@ -53,5 +53,6 @@
     <string name="add_link">Agregar enlace</string>
     <string name="photo_profile">Foto de perfil</string>
     <string name="user_exists">El usuario existe</string>
+    <string name="description">Descripción</string>
 
 </resources>
