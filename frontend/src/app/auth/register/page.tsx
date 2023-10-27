@@ -124,4 +124,4 @@ export default function RegisterPage() {
       </form>
     </EnrollmentHoc>
   );
-}
+

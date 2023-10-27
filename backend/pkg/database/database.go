@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"log"
 
 	_ "github.com/lib/pq"
 	config "github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
@@ -10,15 +11,24 @@ import (
 var db *sql.DB
 
 func InitDatabase() error {
-	var err error
 	db_config, err := config.LoadConfig()
 	if err != nil {
 		return err
 	}
 
-	db, err = sql.Open("postgres", db_config.DBConnectionString)
+	database, err := sql.Open("postgres", db_config.DBConnectionString)
+	if err != nil {
+		return err
+	}
 
-	return err
+	if err = database.Ping(); err != nil {
+		return err
+	}
+
+	log.Print("successful database connection")
+
+	db = database
+	return nil
 }
 
 func GetDB() *sql.DB {

@@ -27,11 +27,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run Build app
-      run: npm run build
-
     - name: Run Linting
       run: npm run lint
+
+    - name: Run Build app
+      run: npm run build
 
     - name: Tests and log errors
       run: npm test > test_results.log 2>&1
