@@ -1,8 +1,9 @@
+
 'use client'
 import { useState } from 'react'
 import Layout from '../layout'
 import { Button } from '@mui/material'
-import { WButton, WInput, WCircleIcon, WModalPhoto, WComment } from '@/components'
+import { WButton, WInput, WCircleIcon, WModalPhoto, WComment , WButtonMotion } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
 import AllInclusive from '@mui/icons-material/AllInclusive'
@@ -20,6 +21,7 @@ export default function TestPage() {
     const [count, setCount] = useState(0)
     const [password, setPassword] = useState('')
     const [avatar, setAvatar] = useState<File | undefined>()
+
 
     const handleCount = () => {
         setCount(count + 1)
@@ -67,7 +69,6 @@ export default function TestPage() {
                 onChange={handleChange}
                 fullWidth
             />
-
             <div
                 //Estilos a usar para la caja
                 style={{
