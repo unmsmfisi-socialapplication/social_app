@@ -51,7 +51,7 @@ object ApiSocialApp {
     @Singleton
     fun authenticationUseCase(repository: SocialAppRepository): AuthenticationUseCase {
         return AuthenticationUseCase(
-            validateUser = ValidateUser(repository)
+            validateUser = ValidateUser(repository),
         )
     }
 }

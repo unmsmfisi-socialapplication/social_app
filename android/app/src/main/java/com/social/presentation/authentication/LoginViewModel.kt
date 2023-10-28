@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authenticationUseCase: AuthenticationUseCase
+    private val authenticationUseCase: AuthenticationUseCase,
 ) : ViewModel() {
     private val _state = MutableLiveData<LoginDataState>()
     val state: LiveData<LoginDataState> get() = _state
@@ -43,7 +43,7 @@ class LoginViewModel @Inject constructor(
                     LoginBody(
                         username = username.value.text,
                         password = password.value.text,
-                    )
+                    ),
                 ).onEach { user ->
                     when (user) {
                         is Resource.Loading -> {

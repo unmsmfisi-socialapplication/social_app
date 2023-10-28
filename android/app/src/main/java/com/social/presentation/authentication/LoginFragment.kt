@@ -49,7 +49,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         action()
     }
 
-
     private fun action() {
         binding.textRegister.setOnClickListener {
             findNavController()
@@ -101,7 +100,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         viewModel.getData(LoginEvent.EnterUser(value = email))
         viewModel.getData(LoginEvent.EnterPassword(value = password))
         viewModel.getData(LoginEvent.SearchUser)
-        //viewModel.getData(LoginEvent.SearchUser)
+        // viewModel.getData(LoginEvent.SearchUser)
     }
 
     private fun performLogin(
