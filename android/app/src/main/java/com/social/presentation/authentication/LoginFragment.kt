@@ -32,12 +32,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         lifecycleScope.launchWhenCreated {
             viewModel.evenFlow.collectLatest { event ->
                 when (event) {
-                    is LoginViewModel.UILoginEvent.GetData -> {
+                    is LoginViewModel.uiLoginEvent.GetData -> {
                         val userData = viewModel.state.value!!.dataLogin?.get(0)
                         Log.i("dato_usuario", userData.toString())
                     }
 
-                    is LoginViewModel.UILoginEvent.ShowMessage -> {
+                    is LoginViewModel.uiLoginEvent.ShowMessage -> {
                         showMessage(requireContext(), event.message)
                     }
                 }

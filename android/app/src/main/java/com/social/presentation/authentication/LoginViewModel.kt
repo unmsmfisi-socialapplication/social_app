@@ -16,7 +16,9 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class LoginViewModel
+@Inject
+constructor(
     private val authenticationUseCase: AuthenticationUseCase,
 ) : ViewModel() {
     private val _state = MutableLiveData<LoginDataState>()
@@ -25,7 +27,7 @@ class LoginViewModel @Inject constructor(
     val username: State<TextState> = _username
     private val _password = mutableStateOf(TextState())
     val password: State<TextState> = _password
-    private val _eventFlow = MutableSharedFlow<UILoginEvent>()
+    private val _eventFlow = MutableSharedFlow<uiLoginEvent>()
     val evenFlow = _eventFlow.asSharedFlow()
 
     fun getData(event: LoginEvent) {
@@ -54,22 +56,22 @@ class LoginViewModel @Inject constructor(
                             _state.value = LoginDataState(error = user.message ?: "Error")
                             if (user.message!!.contains("HTTP 404")) {
                                 _eventFlow.emit(
-                                    UILoginEvent.ShowMessage("User not found"),
+                                    uiLoginEvent.ShowMessage("User not found"),
                                 )
                             } else if (user.message.contains("HTTP 401")) {
                                 _eventFlow.emit(
-                                    UILoginEvent.ShowMessage("Invalid credentials"),
+                                    uiLoginEvent.ShowMessage("Invalid credentials"),
                                 )
                             } else {
                                 _eventFlow.emit(
-                                    UILoginEvent.ShowMessage(user.message ?: "Error"),
+                                    uiLoginEvent.ShowMessage(user.message ?: "Error"),
                                 )
                             }
                         }
 
                         is Resource.Success -> {
                             _state.value = LoginDataState(error = user.message ?: "Autenticado")
-                            _eventFlow.emit(UILoginEvent.ShowMessage(user.message.toString()))
+                            _eventFlow.emit(uiLoginEvent.ShowMessage(user.message.toString()))
                         }
                     }
                 }.launchIn(viewModelScope)
@@ -77,9 +79,9 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    sealed class UILoginEvent {
-        object GetData : UILoginEvent()
+    sealed class uiLoginEvent {
+        object GetData : uiLoginEvent()
 
-        data class ShowMessage(val message: String) : UILoginEvent()
+        data class ShowMessage(val message: String) : uiLoginEvent()
     }
 }
