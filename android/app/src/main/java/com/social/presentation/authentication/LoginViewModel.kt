@@ -27,7 +27,7 @@ constructor(
     val username: State<TextState> = _username
     private val _password = mutableStateOf(TextState())
     val password: State<TextState> = _password
-    private val _eventFlow = MutableSharedFlow<uiLoginEvent>()
+    private val _eventFlow = MutableSharedFlow<UILoginEvent>()
     val evenFlow = _eventFlow.asSharedFlow()
 
     fun getData(event: LoginEvent) {
@@ -56,22 +56,22 @@ constructor(
                             _state.value = LoginDataState(error = user.message ?: "Error")
                             if (user.message!!.contains("HTTP 404")) {
                                 _eventFlow.emit(
-                                    uiLoginEvent.ShowMessage("User not found"),
+                                    UILoginEvent.ShowMessage("User not found"),
                                 )
                             } else if (user.message.contains("HTTP 401")) {
                                 _eventFlow.emit(
-                                    uiLoginEvent.ShowMessage("Invalid credentials"),
+                                    UILoginEvent.ShowMessage("Invalid credentials"),
                                 )
                             } else {
                                 _eventFlow.emit(
-                                    uiLoginEvent.ShowMessage(user.message ?: "Error"),
+                                    UILoginEvent.ShowMessage(user.message ?: "Error"),
                                 )
                             }
                         }
 
                         is Resource.Success -> {
                             _state.value = LoginDataState(error = user.message ?: "Autenticado")
-                            _eventFlow.emit(uiLoginEvent.ShowMessage(user.message.toString()))
+                            _eventFlow.emit(UILoginEvent.ShowMessage(user.message.toString()))
                         }
                     }
                 }.launchIn(viewModelScope)
@@ -79,9 +79,9 @@ constructor(
         }
     }
 
-    sealed class uiLoginEvent {
-        object GetData : uiLoginEvent()
+    sealed class UILoginEvent {
+        object GetData : UILoginEvent()
 
-        data class ShowMessage(val message: String) : uiLoginEvent()
+        data class ShowMessage(val message: String) : UILoginEvent()
     }
 }

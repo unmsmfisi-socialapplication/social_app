@@ -32,6 +32,7 @@ constructor(
                     "OK" -> {
                         emit(Resource.Success(login.response))
                     }
+
                     else -> {
                         emit(Resource.Error(login.response))
                     }
