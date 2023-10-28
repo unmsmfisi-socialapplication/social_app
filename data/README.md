@@ -7,14 +7,18 @@ This folder contains all data scripts and features , all made in python with ini
 ├── cloud_platorm
 │   ├── GoogleDrive.py
 │   └── setting.yaml
-├── models
-│   ├── post_classification
-│   ├── sentiment_analysis
-│   └── spam_detector
 ├── models_pg
 │   ├── post_classification
 │   ├── sentiment_analysis
 │   └── spam_detector
+├── preprocessing
+│   ├── pp_model.py
+├── training
+│   ├── tn_pc.py
+│   ├── tn_sa.py
+│   └── tn_sd.py
+├── execution
+│   ├── ex_model.py
  ```
 
 ### Cloud_platorm
@@ -22,10 +26,18 @@ All the components required to configure storage will be in the Cloud_platform f
 initial File for Automatic credentials in Google Cloud Platform and a script with all cloud functions required
 for development
 
-### models
+### models (Provisional)
 This folder contains all oficial features of Data development , each subfolder contains the respective
-feature with an official python script of logical machine learning model
-
+feature with an official python script of logical machine learning model. (Provisional)
 
 ### models_pg
 This folder is  just for concept testing made in jupyter notebook
+
+### preprocessing
+This folder contains the script(s) for maange the preprocessing of raw data and deliver it for the respective feature model
+
+# training
+This folder contains the script(s) for manage the training of each model.
+
+#Execution
+This folder contains the script(s) for execution and results obtaining of each model
