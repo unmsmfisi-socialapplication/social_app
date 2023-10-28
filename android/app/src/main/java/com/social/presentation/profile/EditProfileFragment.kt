@@ -25,33 +25,39 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
             }
         }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
         action()
     }
 
-    private fun action() {
+    private fun action(
+
+    ) {
         binding.buttonUploadProfile.setOnClickListener {
             openGallery()
         }
         userVerification()
     }
 
-    private fun openGallery() {
+    private fun openGallery(
+    ) {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         imagePicker.launch(intent)
     }
 
-    private fun uploadImage(uri: Uri) {
+    private fun uploadImage(uri: Uri
+    ) {
         val bitmap = BitmapFactory.decodeStream(
             requireContext().contentResolver.openInputStream(uri)
         )
         binding.imagenProfile.setImageBitmap(bitmap)
     }
 
-    private fun userVerification() {
+    private fun userVerification(
+    ) {
         binding.inputUserName.addTextChangedListener(
             object : TextWatcher {
                 override fun beforeTextChanged(
@@ -75,11 +81,14 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                     }
                 }
 
-                override fun afterTextChanged(s: Editable?) {}
+                override fun afterTextChanged(s: Editable?
+                ) {
+                }
             })
     }
 
-    private fun userUnique(username: String): Boolean {
+    private fun userUnique(username: String
+    ): Boolean {
         if (username == "c" || username == "cr" || username == "crh") {
             return false
         }
