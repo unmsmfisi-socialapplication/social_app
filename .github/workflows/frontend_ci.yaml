@@ -22,7 +22,7 @@ jobs:
     - name: Install Node.js and npm
       uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: '20'
 
     - name: Install dependencies
       run: npm install
@@ -34,4 +34,4 @@ jobs:
       run: npm run build
 
     - name: Tests and log errors
-      run: npm test > test_results.log 2>&1
+      run: npm test
