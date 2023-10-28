@@ -4,7 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
+
+	"github.com/go-chi/chi"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment/domain"
@@ -20,24 +23,27 @@ func NewCommentHandler(useCase application.CommentUseCaseInterface) *CommentHand
 }
 
 func (ch *CommentHandler) HandleGetCommentByID(w http.ResponseWriter, r *http.Request) {
-	var requestData struct {
-		CommentID int64 `json:"commentID"`
-	}
-
-	err := json.NewDecoder(r.Body).Decode(&requestData)
-
-	if err != nil {
+	commentIDStr := chi.URLParam(r, "commentID")
+	if commentIDStr == "" {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid commentID")
 		return
 	}
 
-	comment, err := ch.useCase.GetByID(requestData.CommentID)
+	commentID, _ := strconv.ParseInt(commentIDStr, 10, 64)
+
+
+
+	comment, err := ch.useCase.GetByID(commentID)
 	if err != nil {
-		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error getting comment")
+		if commentID > 0{
+			utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Comment not found")
+		} else {
+			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error getting comment")
+		}
 		fmt.Println(err.Error())
 		return
 	}
-
+	
 	commentJSON, err := json.Marshal(comment)
 	if err != nil {
 		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error marshaling comment to JSON")
@@ -59,7 +65,6 @@ func (ch *CommentHandler) HandleCreateComment(w http.ResponseWriter, r *http.Req
 	}
 
 	errStructure := json.NewDecoder(r.Body).Decode(&commentData)
-
 	if errStructure != nil {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid comment")
 		return
@@ -73,7 +78,6 @@ func (ch *CommentHandler) HandleCreateComment(w http.ResponseWriter, r *http.Req
         UpdateDate:      commentData.UpdateDate,
         ParentCommentID: commentData.ParentCommentID,
     }
-
 	err := ch.useCase.Create(comment)
 	
 	if err != nil {
@@ -86,8 +90,14 @@ func (ch *CommentHandler) HandleCreateComment(w http.ResponseWriter, r *http.Req
 }
 
 func (ch *CommentHandler) HandleUpdateComment(w http.ResponseWriter, r *http.Request) {
+	commentIDStr := chi.URLParam(r, "commentID")
+	if commentIDStr == "" {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid commentID")
+		return
+	}
+	commentID, _ := strconv.ParseInt(commentIDStr, 10, 64)
+
 	var commentData struct {
-		CommentID       int64     `json:"commentID"`
 		UserID          int64     `json:"userID"`
 		PostID          int64     `json:"postID"`
 		Comment         string    `json:"comment"`
@@ -95,16 +105,13 @@ func (ch *CommentHandler) HandleUpdateComment(w http.ResponseWriter, r *http.Req
 		UpdateDate      time.Time `json:"updateDate"`
 		ParentCommentID int64     `json:"parentCommentID"`  
 	}
-
 	errStructure := json.NewDecoder(r.Body).Decode(&commentData)
-
 	if errStructure != nil {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid comment")
 		return
 	}
 
 	comment := &domain.Comment{
-		CommentID:       commentData.CommentID,
 		UserID:          commentData.UserID,
 		PostID:          commentData.PostID,
 		Comment:         commentData.Comment,
@@ -112,11 +119,13 @@ func (ch *CommentHandler) HandleUpdateComment(w http.ResponseWriter, r *http.Req
 		UpdateDate:      commentData.UpdateDate,
 		ParentCommentID: commentData.ParentCommentID,
 	}
-
-	err := ch.useCase.Update(comment)
-	
+	err := ch.useCase.Update(commentID, comment)
 	if err != nil {
-		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error updating comment")
+		if commentID > 0{
+			utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Comment not found")
+		} else {
+			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error updating comment")
+		}
 		fmt.Println(err.Error())
 		return
 	} 
@@ -125,20 +134,22 @@ func (ch *CommentHandler) HandleUpdateComment(w http.ResponseWriter, r *http.Req
 }
 
 func (ch *CommentHandler) HandleDeleteComment(w http.ResponseWriter, r *http.Request) {
-	var requestData struct {
-		CommentID int64 `json:"commentID"`
-	}
-
-	err := json.NewDecoder(r.Body).Decode(&requestData)
-
-	if err != nil {
+	commentIDStr := chi.URLParam(r, "commentID")
+	
+	if commentIDStr == "" {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid commentID")
 		return
 	}
 
-	err = ch.useCase.Delete(requestData.CommentID)
+	commentID, _ := strconv.ParseInt(commentIDStr, 10, 64)
+	err := ch.useCase.Delete(commentID)
+	
 	if err != nil {
-		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error deleting comment")
+		if commentID > 0{
+			utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Comment not found")
+		} else {
+			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error deleting comment")
+		}
 		fmt.Println(err.Error())
 		return
 	}

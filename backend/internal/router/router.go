@@ -1,8 +1,6 @@
-package internal
+package router
 
 import (
-	// Importa tus paquetes necesarios aquí
-
 	"fmt"
 	"log"
 	"net/http"
@@ -10,32 +8,18 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/go-chi/cors"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment"
 	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
 
+	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
+	registerinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 )
 
 func Router() http.Handler {
-	r := chi.NewRouter()
-
-	r.Use(middleware.RequestID)
-	r.Use(middleware.Logger)
-
-	corsMiddleware := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
-		ExposedHeaders:   []string{"Link"},
-		AllowCredentials: true,
-		MaxAge:           300,
-	})
-
-	r.Use(corsMiddleware.Handler)
 
 	err := database.InitDatabase()
 	if err != nil {
@@ -44,9 +28,11 @@ func Router() http.Handler {
 
 	dbInstance := database.GetDB()
 
-	dbRepo := infrastructure.NewUserDBRepository(dbInstance)
-	loginUseCase := application.NewLoginUseCase(dbRepo)
-	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
+	r := chi.NewRouter()
+
+	r.Use(middleware.RequestID)
+	r.Use(middleware.Logger)
+	r.Use(configCorsMiddleware())
 
 	commentRouter := comment.CommentModuleRouter(dbInstance)
 
@@ -70,7 +56,16 @@ func Router() http.Handler {
 	})
 
 	// Login
+	loginRepo := infrastructure.NewUserDBRepository(dbInstance)
+	loginUseCase := application.NewLoginUseCase(loginRepo)
+	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
 	r.Post("/login", loginHandler.HandleLogin)
+
+	// Register
+	registerRepo := registerinfrastructure.NewUserRepository(dbInstance)
+	registerUseCase := registerapplication.NewRegistrationUseCase(registerRepo)
+	registerHandler := registerinfrastructure.NewRegisterUserHandler(registerUseCase)
+	r.Post("/register", registerHandler.RegisterUser)
 
 	r.Mount("/comments", commentRouter)
 
