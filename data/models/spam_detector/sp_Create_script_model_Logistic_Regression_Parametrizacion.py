@@ -1,4 +1,6 @@
 import pandas as pd
+import requests
+import io
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
@@ -9,9 +11,18 @@ from bs4 import BeautifulSoup
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-import gdown
 import time
 import schedule
+
+# Definición de variables parametrizadas
+file_url = "https://drive.google.com/uc?id=153kIWdyo8JaMoaKHnQ90qigDMW1830Mg"
+TEXT_COLUMN = "FORMATTED_CONTENT"
+LABEL_COLUMN = "CLASS"
+max_features = 5000
+test_size = 0.2
+random_state = 42
+INTERVAL_SECONDS = 24 * 60 * 60  # 24 horas
+
 
 # Función para limpiar el texto
 def clean_text(text):
@@ -28,17 +39,23 @@ def clean_text(text):
     cleaned_text = ' '.join(tokens)
     return cleaned_text
 
+
+# Función para cargar y analizar el archivo desde la URL
+def load_and_analyze_data(file_url):
+    try:
+        response = requests.get(file_url)
+        response.raise_for_status()  # Verificar si la solicitud fue exitosa
+        data = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
+        return data
+    except requests.exceptions.RequestException as e:
+        print(f"Error en la solicitud: {e}")
+        return None
+
 # Función para entrenar y evaluar el modelo
 def train_and_evaluate_model():
     # Descargar los recursos de NLTK necesarios
     nltk.download('punkt')
     nltk.download('stopwords')
-
-    # Define el enlace compartible de Google Drive
-    google_drive_url = "https://drive.google.com/uc?id=153kIWdyo8JaMoaKHnQ90qigDMW1830Mg"
-
-    # Descarga el archivo desde Google Drive
-    gdown.download(google_drive_url, 'Final-Dataset.csv', quiet=False)
 
     # Cargar el archivo CSV
     data = pd.read_csv('Final-Dataset.csv')
