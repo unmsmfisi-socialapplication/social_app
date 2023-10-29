@@ -42,7 +42,7 @@ func TestRegistrationUseCase_RegisterUser(t *testing.T) {
 	}
 
 	user, err := useCase.RegisterUser(userCreate)
-	
+
 	if err != nil {
 		t.Errorf("Expected no error, but got %v", err)
 	}
@@ -60,7 +60,8 @@ func TestRegistrationUseCase_RegisterUser(t *testing.T) {
 	}
 
 	userCreate.Password = "password"
-
+	userCreate.Email = "anotherEmai3.141516@mail.com"	
+	
 	_, err = useCase.RegisterUser(userCreate)
 	if err != ErrFormat {
 		t.Errorf("Expected ErrFormat, but got %v", err)
