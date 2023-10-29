@@ -7,8 +7,7 @@ import (
 )
 
 var (
-	ErrUserNotFound   = errors.New("user not found")
-	ErrIncompleteData = errors.New("incomplete data")
+	ErrUserNotFound = errors.New("user not found")
 )
 
 type PostUseCaseInterface interface {
@@ -17,7 +16,7 @@ type PostUseCaseInterface interface {
 
 type PostRepository interface {
 	CreatePost(post domain.CreatePost) (*domain.Post, error)
-	ValidateUserExist(post domain.CreatePost) bool
+	UserExist(post domain.CreatePost) bool
 }
 
 type PostUseCase struct {
@@ -29,10 +28,15 @@ func NewPostUseCase(r PostRepository) *PostUseCase {
 }
 
 func (l *PostUseCase) CreatePost(post domain.CreatePost) (*domain.Post, error) {
+
+	if !l.repo.UserExist(post) {
+		return nil, ErrUserNotFound
+	}
+
 	dbPost, err := l.repo.CreatePost(post)
 
-	if dbPost == nil {
-		return dbPost, err
+	if err != nil {
+		return nil, err
 	}
 
 	return dbPost, nil

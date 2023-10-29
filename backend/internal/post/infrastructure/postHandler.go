@@ -25,6 +25,16 @@ func (ph *PostHandler) HandleCreatePost(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
+	if requestData.BasePost.UserId == 0 {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request User")
+		return
+	}
+
+	if requestData.BasePost.Title == "" {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request Title")
+		return
+	}
+
 	postCreate, err := ph.useCase.CreatePost(requestData)
 
 	if err != nil {
