@@ -1,26 +1,51 @@
 package domain
 
 import (
+	"time"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
-	Phone    string
+	Id            int
+	Email         string
+	Phone         string
+	Username      string
+	Password      string
+	InsertionDate time.Time
+}
+
+type UserCreate struct {
 	Email    string
 	Username string
 	Password string
 }
 
-func NewUser(email, username, password string) (*User, error) {
-	hashedPassword, err := HashPassword(password)
+type UserReponse struct {
+	Id       int
+	Email    string `json:"email"`
+	Username string `json:"username"`
+}
+
+func UserToUserReponse(user User) UserReponse {
+	return UserReponse{
+		Id:       user.Id,
+		Email:    user.Email,
+		Username: user.Username,
+	}
+}
+
+func NewUser(user UserCreate) (*User, error) {
+	hashedPassword, err := HashPassword(user.Password)
 	if err != nil {
 		return nil, err
 	}
 
 	return &User{
-		Email:    email,
-		Username: username,
-		Password: hashedPassword,
+		Email:         user.Email,
+		Username:      user.Username,
+		Password:      hashedPassword,
+		InsertionDate: time.Now(),
 	}, nil
 }
 

@@ -8,9 +8,9 @@ import (
 )
 
 var (
-	ErrEmailInUse         = errors.New("EMAIL_IN_USE")
-	ErrFormat             = errors.New("INVALID_PASSWORD")
-	ErrPhone              = errors.New("INVALID_PHONE")
+	ErrEmailInUse         = errors.New("email is already in use")
+	ErrFormat             = errors.New("invalid passowrd")
+	ErrPhone              = errors.New("invalid phone")
 	ErrUserNotFound       = errors.New("user not found")
 	ErrInvalidCredentials = errors.New("invalid credentials")
 )
@@ -44,8 +44,9 @@ func isValidPassword(password string) bool {
 	return true
 }
 
-func (r *RegistrationUseCase) RegisterUser(email, username, password string) (*domain.User, error) {
-	existingUser, err := r.repo.GetUserByEmail(email)
+func (r *RegistrationUseCase) RegisterUser(user domain.UserCreate) (*domain.User, error) {
+
+	existingUser, err := r.repo.GetUserByEmail(user.Email)
 
 	if err != nil {
 		return nil, err
@@ -55,11 +56,12 @@ func (r *RegistrationUseCase) RegisterUser(email, username, password string) (*d
 		return nil, ErrEmailInUse
 	}
 
-	if !isValidPassword(password) {
+	if !isValidPassword(user.Password) {
 		return nil, ErrFormat
 	}
 
-	newUser, err := domain.NewUser(email, username, password)
+	newUser, err := domain.NewUser(user)
+
 	if err != nil {
 		return nil, err
 	}
