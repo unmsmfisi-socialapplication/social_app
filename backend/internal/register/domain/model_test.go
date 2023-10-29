@@ -20,15 +20,15 @@ func TestNewUser(t *testing.T) {
 		t.Errorf("Expected no error, but got %v", err)
 	}
 
-	if user.Email != email {
-		t.Errorf("Expected email to be %s, but got %s", email, user.Email)
+	if user.Email != userCreate.Email {
+		t.Errorf("Expected email to be %s, but got %s", userCreate.Email, user.Email)
 	}
 
-	if user.Username != username {
-		t.Errorf("Expected username to be %s, but got %s", username, user.Username)
+	if user.Username != userCreate.Username {
+		t.Errorf("Expected username to be %s, but got %s", userCreate.Username, user.Username)
 	}
 
-	if user.Password == password {
+	if user.Password == userCreate.Password {
 		t.Errorf("Expected password to be hashed, but got %s", user.Password)
 	}
 
