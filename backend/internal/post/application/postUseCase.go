@@ -11,12 +11,12 @@ var (
 )
 
 type PostUseCaseInterface interface {
-	CreatePost(post domain.CreatePost) (*domain.Post, error)
+	CreatePost(post domain.PostCreate) (*domain.Post, error)
 }
 
 type PostRepository interface {
-	CreatePost(post domain.CreatePost) (*domain.Post, error)
-	UserExist(post domain.CreatePost) bool
+	CreatePost(post domain.PostCreate) (*domain.Post, error)
+	UserExist(post domain.PostCreate) bool
 }
 
 type PostUseCase struct {
@@ -27,7 +27,7 @@ func NewPostUseCase(r PostRepository) *PostUseCase {
 	return &PostUseCase{repo: r}
 }
 
-func (l *PostUseCase) CreatePost(post domain.CreatePost) (*domain.Post, error) {
+func (l *PostUseCase) CreatePost(post domain.PostCreate) (*domain.Post, error) {
 
 	if !l.repo.UserExist(post) {
 		return nil, ErrUserNotFound

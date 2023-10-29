@@ -15,7 +15,7 @@ func NewPostDBRepository(database *sql.DB) application.PostRepository {
 	return &PostsDBRepository{db: database}
 }
 
-func (p *PostsDBRepository) CreatePost(post domain.CreatePost) (*domain.Post, error) {
+func (p *PostsDBRepository) CreatePost(post domain.PostCreate) (*domain.Post, error) {
 
 	query := `INSERT INTO soc_app_posts
 	(user_id,title, description, has_multimedia, public, multimedia, insertion_date, update_date)
@@ -23,7 +23,7 @@ func (p *PostsDBRepository) CreatePost(post domain.CreatePost) (*domain.Post, er
 	RETURNING post_id;	
 	`
 
-	dbPost := domain.CreatePostToPost(post)
+	dbPost := domain.PostCreateToPost(post)
 
 	err := p.db.QueryRow(
 		query,
@@ -44,14 +44,14 @@ func (p *PostsDBRepository) CreatePost(post domain.CreatePost) (*domain.Post, er
 	return &dbPost, nil
 }
 
-func (p *PostsDBRepository) UserExist(post domain.CreatePost) bool {
+func (p *PostsDBRepository) UserExist(post domain.PostCreate) bool {
 	query := `SELECT user_id FROM sa.soc_app_users WHERE user_id =  $1`
 
 	var dbUserId int64
 
 	err := p.db.QueryRow(query, post.UserId).Scan(&dbUserId)
 
-	if err != nil {		
+	if err != nil {
 		return false
 	}
 

@@ -18,19 +18,19 @@ func NewPostHandler(useCase application.PostUseCaseInterface) *PostHandler {
 }
 
 func (ph *PostHandler) HandleCreatePost(w http.ResponseWriter, r *http.Request) {
-	var requestData domain.CreatePost
+	var requestData domain.PostCreate
 
 	if err := json.NewDecoder(r.Body).Decode(&requestData); err != nil {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
 		return
 	}
 
-	if requestData.BasePost.UserId == 0 {
+	if requestData.PostBase.UserId == 0 {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request User")
 		return
 	}
 
-	if requestData.BasePost.Title == "" {
+	if requestData.PostBase.Title == "" {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request Title")
 		return
 	}

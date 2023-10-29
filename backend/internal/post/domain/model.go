@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type BasePost struct {
+type PostBase struct {
 	UserId        int64
 	Title         string
 	Description   string
@@ -14,19 +14,19 @@ type BasePost struct {
 }
 
 type Post struct {
-	BasePost      BasePost
+	BasePost      PostBase
 	Id            int64
 	InsertionDate time.Time
 	UpdateDate    time.Time
 }
 
-type CreatePost struct {
-	BasePost
+type PostCreate struct {
+	PostBase
 }
 
-func CreatePostToPost(p CreatePost) Post {
+func PostCreateToPost(p PostCreate) Post {
 	post := Post{
-		BasePost: BasePost{
+		BasePost: PostBase{
 			UserId:        p.UserId,
 			Title:         p.Title,
 			Description:   p.Description,
