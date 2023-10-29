@@ -8,11 +8,13 @@ import (
 )
 
 func TestNewUser(t *testing.T) {
-	email := "user@example.com"
-	username := "user123"
-	password := "password123"
+	userCreate := UserCreate{
+		Email:    "user@example.com",
+		Username: "user123",
+		Password: "Password123!",
+	}
 
-	user, err := NewUser(email, username, password)
+	user, err := NewUser(userCreate)
 
 	if err != nil {
 		t.Errorf("Expected no error, but got %v", err)

@@ -42,6 +42,7 @@ func TestRegistrationUseCase_RegisterUser(t *testing.T) {
 	}
 
 	user, err := useCase.RegisterUser(userCreate)
+	
 	if err != nil {
 		t.Errorf("Expected no error, but got %v", err)
 	}
