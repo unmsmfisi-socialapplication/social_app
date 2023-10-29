@@ -1,4 +1,4 @@
-package test
+package infrastructure
 
 import (
 	"errors"
@@ -6,13 +6,7 @@ import (
 	"testing"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/email_sender/domain"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/email_sender/infrastructure"
 )
-
-// Mock para smtp.SendMail
-type EmailSender interface {
-	SendMail(addr string, a smtp.Auth, from string, to []string, msg []byte) error
-}
 
 type MockEmailSender struct {
 	SendMailFn func(addr string, a smtp.Auth, from string, to []string, msg []byte) error
@@ -23,7 +17,7 @@ func (m *MockEmailSender) SendMail(addr string, a smtp.Auth, from string, to []s
 }
 
 func TestSendEmail(t *testing.T) {
-	mockAuth := infrastructure.LoginAuth("testuser", "testpass")
+	mockAuth := LoginAuth("testuser", "testpass")
 
 	tests := []struct {
 		name    string
@@ -49,7 +43,7 @@ func TestSendEmail(t *testing.T) {
 					return tt.sendErr
 				},
 			}
-			repo := infrastructure.NewEmailSenderRepository(mockAuth, mockSender)
+			repo := NewEmailSenderRepository(mockAuth, mockSender)
 
 			err := repo.SendEmail(&domain.Email{
 				To:      "test@example.com",
