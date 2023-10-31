@@ -1,7 +1,8 @@
 'use client';
 import * as React from 'react';
-import Link from '@mui/material/Link';
-import { useRouter } from 'next/router';
+import LinkMaterial from '@mui/material/Link';
+import Link from 'next/link';
+
 
 
 interface BasicsLinkProps {
@@ -13,7 +14,7 @@ interface BasicsLinkProps {
 }
 
 const WBasicsLink: React.FC<BasicsLinkProps> = ({ underline,  text,dataTestid, href,displayType }) => {
-  const router = useRouter()
+
 
   const linkStyle = {  
     right: 100,  
@@ -21,15 +22,13 @@ const WBasicsLink: React.FC<BasicsLinkProps> = ({ underline,  text,dataTestid, h
     justifyContent: 'space-end',
   };
 
+  // la navegación en next se recomienda usar su componente link
   return (
-      <Link
-      data-testid={dataTestid}
-      sx={linkStyle}
-      onClick={()=> router.push(href || "/")}
-      underline={underline}
-       >
-      {text}
-      </Link>
+      
+        <Link data-testid={dataTestid} href={href || ""}>
+        {text}
+        </Link>
+      
   );
 };
 

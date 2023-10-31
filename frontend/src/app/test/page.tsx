@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Layout from '../layout'
 import { Button } from '@mui/material'
-import { WButton, WInput, WCircleIcon, WModalPhoto, WComment, WButtonMotion } from '@/components'
+import { WButton, WInput, WCircleIcon, WModalPhoto, WComment } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
 import AllInclusive from '@mui/icons-material/AllInclusive'
