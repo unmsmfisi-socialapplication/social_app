@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
-import LinkMaterial from '@mui/material/Link';
-import Link from "next/link"
+import Link from '@mui/material/Link';
+import { useRouter } from 'next/router';
 
 
 interface BasicsLinkProps {
@@ -13,6 +13,7 @@ interface BasicsLinkProps {
 }
 
 const WBasicsLink: React.FC<BasicsLinkProps> = ({ underline,  text,dataTestid, href,displayType }) => {
+  const router = useRouter()
 
   const linkStyle = {  
     right: 100,  
@@ -21,14 +22,14 @@ const WBasicsLink: React.FC<BasicsLinkProps> = ({ underline,  text,dataTestid, h
   };
 
   return (
-  <Link data-testid={dataTestid} href={href} >
-      <LinkMaterial
+      <Link
+      data-testid={dataTestid}
       sx={linkStyle}
+      onClick={()=> router.push(href || "/")}
       underline={underline}
        >
       {text}
-      </LinkMaterial>
-  </Link>
+      </Link>
   );
 };
 
@@ -40,5 +41,5 @@ WBasicsLink.defaultProps = {
     underline:"always",
     text: "link",
     href: "#",
-    displayType: "flex",
+    displayType:"flex",
 };
