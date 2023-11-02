@@ -13,10 +13,3 @@ require (
 )
 
 require github.com/mattn/go-mastodon v0.0.6
-
-require (
-	github.com/hashicorp/errwrap v1.1.0 // indirect
-	github.com/hashicorp/go-multierror v1.1.1 // indirect
-	go.uber.org/atomic v1.7.0 // indirect
-)
-
