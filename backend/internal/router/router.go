@@ -17,6 +17,8 @@ import (
 	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
 	registerinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
+
+	follow "github.com/unmsmfisi-socialapplication/social_app/internal/follow"
 )
 
 func Router() http.Handler {
@@ -75,5 +77,9 @@ func Router() http.Handler {
 
 	emailRouter := email.EmailModuleRouter()
 	r.Mount("/email", emailRouter)
+
+	// Follow Profile
+	followRouter := follow.FollowModuleRouter(dbInstance)
+	r.Mount("/follow_profile", followRouter)
 	return r
 }

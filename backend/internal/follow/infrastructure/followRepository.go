@@ -19,8 +19,7 @@ func NewFollowerRepository(database *sql.DB) *FollowerRepository {
 
 func (u *FollowerRepository) InsertNewFollower(newFollower *domain.Follower) (*domain.Follower, error) {
 	schema := os.Getenv("DB_SCHEMA")
-	query := fmt.Sprintf(`INSERT INTO %s.soc_app_profile_followers (follow_date, follower_profile_id , following_profile_id ) VALUES (NOW(), $1, $2)`, schema)
-
+	query := fmt.Sprintf(`INSERT INTO %s.SOC_APP_USER_PROFILE_FOLLOW (follow_date, follower_profile_id , following_profile_id ) VALUES (NOW(), $1, $2)`, schema)
 	tx, err := u.db.Begin()
 	if err != nil {
 		log.Println("Error while starting the transaction")
@@ -28,11 +27,12 @@ func (u *FollowerRepository) InsertNewFollower(newFollower *domain.Follower) (*d
 	}
 
 	_, err = tx.Exec(query, newFollower.Follower_profile_id, newFollower.Following_profile_id)
+	//fmt.Print(err)
 	if err != nil {
 		return nil, err
+	} else {
+		tx.Commit()
+		return newFollower, nil
 	}
 
-	tx.Commit()
-
-	return newFollower, nil
 }
