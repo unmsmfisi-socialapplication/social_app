@@ -12,7 +12,7 @@ require (
 	golang.org/x/crypto v0.13.0
 )
 
-require github.com/mattn/go-mastodon@latest
+require github.com/mattn/go-mastodon v1.2.3
 
 require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
