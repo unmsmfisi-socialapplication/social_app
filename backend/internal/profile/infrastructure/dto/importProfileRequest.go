@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
 )
@@ -53,12 +54,25 @@ func NewImportProfileRequest(requestBody *io.ReadCloser) (*ImportProfileRequest,
 }
 
 func (r *ImportProfileRequest) ToProfile() *domain.Profile {
-	return &domain.Profile{
-		Id_profile:   r.Object.Id,
-		Username:     r.Object.PreferredUsername,
-		Biography:    r.Object.Summary,
-		ProfileImage: r.Object.ProfileImage,
+	var name, lastname string
+
+	splittedName := strings.Split(r.Object.Name, " ")
+	if len(splittedName) > 1 {
+		name = splittedName[0]
+		lastname = splittedName[1]
+	} else {
+		name = splittedName[0]
+		lastname = ""
 	}
+
+	return domain.NewProfile(
+		r.Object.Id,
+		name,
+		lastname,
+		r.Object.PreferredUsername,
+		r.Object.ProfileImage,
+		r.Object.Summary,
+	)
 }
 
 func (r *ImportProfileRequest) Validate() error {
