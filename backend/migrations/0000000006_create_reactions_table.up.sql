@@ -8,9 +8,9 @@ CREATE TABLE sa.SOC_APP_POSTS_REACTIONS (
   insertion_date timestamp NOT NULL,
   update_date timestamp NOT NULL,
   PRIMARY KEY (post_reaction_id),
-  FOREIGN KEY (user_id) REFERENCES SOC_APP_USERS(user_id),
-  FOREIGN KEY (post_id) REFERENCES SOC_APP_POSTS(post_id),
-  FOREIGN KEY (reaction_id) REFERENCES SOC_APP_M_USERS_REACTIONS(reaction_id)
+  FOREIGN KEY (user_id) REFERENCES sa.SOC_APP_USERS(user_id),
+  FOREIGN KEY (post_id) REFERENCES sa.SOC_APP_POSTS(post_id),
+  FOREIGN KEY (reaction_id) REFERENCES sa.SOC_APP_M_USERS_REACTIONS(reaction_id)
 );
 CREATE UNIQUE INDEX UQ_SOC_APP_POSTS_REACTIONS ON sa.SOC_APP_POSTS_REACTIONS(user_id,post_id);
 
