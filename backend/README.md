@@ -27,6 +27,10 @@ We use a standard go layout. [See](https://github.com/golang-standards/project-l
 ### Use Enviroment Variables
 In order to use the environment variables you must duplicate in an `.env` file the content of the `.env.example` file, this file will contain all the necessary variables for the application to work.
 
+### Use DataBase Migrations
+1. Properly configure environment variables.
+2. Execute the command `go run cmd/migrations/migrations.go` in order to perform the migrations correctly.
+
 ### Installation
 
 to install use 

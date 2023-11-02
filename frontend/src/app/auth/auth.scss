@@ -1,0 +1,25 @@
+.auth__section {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    &--side {
+        padding-right: 20px;
+        color: white;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            font-size: 75px;
+        }
+        @media (max-width: 1350px) {
+            display: none;
+        }
+    }
+    &--right {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+}
