@@ -1,55 +1,96 @@
 package dto
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
-	"github.com/go-ap/activitypub"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
 )
 
+type ObjectInput struct {
+	Id                string         `json:"id"`
+	Type              string         `json:"type"`
+	Name              string         `json:"name"`
+	PreferredUsername string         `json:"preferredUsername"`
+	Summary           string         `json:"summary"`
+	ProfileImage      string         `json:"profileImage"`
+	CoverImage        string         `json:"coverImage"`
+	Endpoints         EndpointsInput `json:"endpoints"`
+	ImportedFrom      string         `json:"importedFrom"`
+}
+
+type EndpointsInput struct {
+	SharedInbox string `json:"sharedInbox"`
+}
+
 type ImportProfileRequest struct {
-    Person *activitypub.Person
+	Context json.RawMessage `json:"@context"`
+	Type    string          `json:"type"`
+	Actor   string          `json:"actor"`
+	Name    string          `json:"name"`
+	Object  ObjectInput     `json:"object"`
+	To      []string        `json:"to"`
+	CC      string          `json:"cc"`
 }
 
 func NewImportProfileRequest(requestBody *io.ReadCloser) (*ImportProfileRequest, error) {
-    var activity activitypub.Activity
+	var request ImportProfileRequest
 
-    body, err := io.ReadAll(*requestBody)
-    if err != nil {
-        return nil, err
-    }
-
-    err = activity.UnmarshalJSON(body)
-    if err != nil {
-        return nil, fmt.Errorf("Invalid JSON")
-    }
-
-    obj := activity.Object
-	if obj.GetType() != activitypub.PersonType {
-        return nil, fmt.Errorf("invalid actor type")
-	}
-	if obj.GetID() == "" {
-        return nil, fmt.Errorf("missing id")
+	err := json.NewDecoder(*requestBody).Decode(&request)
+	if err != nil {
+		return nil, err
 	}
 
-    p, ok := obj.(*activitypub.Person)
-    if !ok {
-        return nil, fmt.Errorf("Invalid object type")
-    }
+	fmt.Println(request)
 
-    if p.Name == nil || p.Icon == nil || p.Summary == nil {
-        return nil, fmt.Errorf("Missing required fields")
-    }
+	err = request.Validate()
+	if err != nil {
+		return nil, err
+	}
 
-    return &ImportProfileRequest{Person: p}, nil
+	return &request, nil
 }
 
 func (r *ImportProfileRequest) ToProfile() *domain.Profile {
 	return &domain.Profile{
-		Id_profile:   r.Person.GetID().String(),
-		Username:     r.Person.Name.String(),
-		Biography:    r.Person.Summary.First().String(),
-		ProfileImage: r.Person.Icon.GetLink().String(),
+		Id_profile:   r.Object.Id,
+		Username:     r.Object.PreferredUsername,
+		Biography:    r.Object.Summary,
+		ProfileImage: r.Object.ProfileImage,
 	}
+}
+
+func (r *ImportProfileRequest) Validate() error {
+	requiredFields := []string{"@context", "type", "actor", "name", "object", "to"}
+
+	for _, field := range requiredFields {
+		if field == "object" {
+			if r.Object.Id == "" || r.Object.Type == "" || r.Object.Name == "" ||
+				r.Object.PreferredUsername == "" || r.Object.Summary == "" ||
+				r.Object.ProfileImage == "" || r.Object.CoverImage == "" ||
+				r.Object.Endpoints.SharedInbox == "" || r.Object.ImportedFrom == "" {
+
+				return fmt.Errorf("invalid %s field", field)
+			}
+		} else if field == "to" {
+			if len(r.To) == 0 {
+				return fmt.Errorf("invalid %s field", field)
+			}
+		} else {
+			if r.Context == nil || r.Type == "" || r.Actor == "" || r.Name == "" {
+				return fmt.Errorf("invalid %s field", field)
+			}
+		}
+	}
+
+	if r.Type != "Profile" {
+		return fmt.Errorf("invalid type field")
+	}
+
+	if r.Object.Type != "Person" {
+		return fmt.Errorf("invalid object.type field")
+	}
+
+	return nil
 }
