@@ -10,3 +10,5 @@ require (
 	github.com/go-chi/cors v1.2.1
 	golang.org/x/crypto v0.13.0
 )
+
+require github.com/mattn/go-mastodon@latest
