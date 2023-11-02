@@ -13,7 +13,8 @@ var db *sql.DB
 var server = "svdb-social.database.windows.net"
 var port = 1433
 var user = "useradmin"
-var password = "_k8A801_"
+// hidden key
+var password = "" 
 var database = "socialdb_data"
 
 func main() {
