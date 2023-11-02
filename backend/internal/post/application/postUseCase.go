@@ -83,12 +83,12 @@ func (ph *PostHandler) HandleCreateMultiPost(w http.ResponseWriter, r *http.Requ
 
 	var mastodonPost *domain.Post
 	var pixelfedPost *domain.Post
-
+/*
 	if requestData.MastodonData != nil {
 	}
 
 	if requestData.PixelfedData != nil {
-	}
+	}*/
 
 	response := map[string]interface{}{
 		"mastodon": mastodonPost,

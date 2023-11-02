@@ -10,10 +10,13 @@ import (
 
 func PostModuleRouter(dbInstance *sql.DB) *chi.Mux {
 	r := chi.NewRouter()
+	clientID := "ClienteID" // Reemplaza "ClienteID" con el valor real
+	clientSecret := "ClienteSecret" // Reemplaza "ClienteSecret" con el valor real
+	instanceURL := "URLDeInstancia" // Reemplaza "URLDeInstancia" con la URL real
 
 	postRepository := infrastructure.NewPostDBRepository(dbInstance)
 	postUseCase := application.NewPostUseCase(postRepository)
-	postHandler := infrastructure.NewPostHandler(postUseCase)
+	postHandler := infrastructure.NewPostHandler(postUseCase, clientID, clientSecret, instanceURL)
 
 	r.Post("/create", postHandler.HandleCreatePost)
 
