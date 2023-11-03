@@ -25,12 +25,11 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        logout: (state, action) => {
+        logout: (state) => {
             state.user = initialUser
             state.loading = false
             state.status = apiSattus.IDLE
             //TODO: clear localstorage
-            localStorage.clear()
         },
     },
     extraReducers: (builder) => {
