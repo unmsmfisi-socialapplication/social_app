@@ -5,6 +5,7 @@ import praw
 #For Csv load
 import csv
 #For data manipulation
+import pandas as pd
 
 '''
 Test variables for API (Reccomended)
@@ -17,14 +18,14 @@ graph_url = 'https://graph.facebook.com/v18.0/'
 '''
 # Functions for API collection (Testing requirements)
 
-def func_get_url():
+def func_get_url(access_url):
     print('\n access code url',access_url)
     code = input("\n enter the url")
     code = code.rsplit('access_token=')[1]
     code = code.rsplit('&data_access_expiration')[0]
     return code
 
-def func_get_long_lived_access_token(access_token = ''):
+def func_get_long_lived_access_token(client_id,client_secret,access_token = '', graph_url = ''):
     url = graph_url + 'oauth/access_token'
     param = dict()
     param['grant_type'] = 'fb_exchange_token'
@@ -109,7 +110,7 @@ def consume_api_and_save_csv(api_url):
 def create_dataframe(api_url):
     try:
         # Make the request to the API
-        response = rq.get(api_url)
+        response = requests.get(api_url)
 
         # If the request is successful, it saves the data in a dataframe.
         if response.status_code == 200:
