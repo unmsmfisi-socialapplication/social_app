@@ -29,9 +29,9 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         view: View,
         savedInstanceState: Bundle?,
         ) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentEditProfileBinding.bind(view)
-        action()
+            super.onViewCreated(view, savedInstanceState)
+            binding = FragmentEditProfileBinding.bind(view)
+            action()
     }
 
     private fun action() {
@@ -48,8 +48,9 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun uploadImage(uri: Uri) {
-        val bitmap = BitmapFactory.decodeStream(
-            requireContext().contentResolver.openInputStream((uri))
+        val bitmap =
+            BitmapFactory.decodeStream(
+            requireContext().contentResolver.openInputStream(uri)
         )
         binding.imagenProfile.setImageBitmap(bitmap)
     }
@@ -81,7 +82,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         })
     }
 
-    private fun userUnique(username: String,): Boolean {
+    private fun userUnique(username: String): Boolean {
         if (username == "c" || username == "cr" || username == "crh") {
             return false
         }

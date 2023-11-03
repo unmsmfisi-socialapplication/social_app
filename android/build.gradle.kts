@@ -34,7 +34,7 @@ subprojects {
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         version.set("1.0.0")
         verbose.set(true)
-        android.set(false)
+        android.set(true)
 
         reporters {
             reporter(ReporterType.HTML)
