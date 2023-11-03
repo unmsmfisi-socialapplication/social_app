@@ -24,7 +24,15 @@ const initialState: UserState = {
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state, action) => {
+            state.user = initialUser
+            state.loading = false
+            state.status = apiSattus.IDLE
+            //TODO: clear localstorage
+            localStorage.clear()
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(getUser.fulfilled, (state, action) => {
             state.loading = false
