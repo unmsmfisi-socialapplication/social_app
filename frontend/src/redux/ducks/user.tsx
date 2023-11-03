@@ -14,9 +14,8 @@ interface UserState {
 }
 
 const initialUser = {} as IUser
-const storedUser = localStorage.getItem('user')
 const initialState: UserState = {
-    user: storedUser ? JSON.parse(storedUser) : initialUser,
+    user: initialUser,
     loading: false,
     status: apiSattus.IDLE,
     error: null,
@@ -25,15 +24,7 @@ const initialState: UserState = {
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {
-        logout: (state, action) => {
-            state.user = initialUser
-            state.loading = false
-
-            //TODO: clear localstorage
-            localStorage.clear()
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getUser.fulfilled, (state, action) => {
             state.loading = false

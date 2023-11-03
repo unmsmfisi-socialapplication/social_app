@@ -44,6 +44,7 @@ export default function LoginPage() {
 
     useEffect(() => {
         handleStatusAuth(useSelector.status)
+
     }, [useSelector.status])
 
     return (
