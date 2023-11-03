@@ -2,9 +2,7 @@ package infrastructure
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
-	"os"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/follow/domain"
 )
@@ -18,8 +16,7 @@ func NewFollowerRepository(database *sql.DB) *FollowerRepository {
 }
 
 func (u *FollowerRepository) InsertNewFollower(newFollower *domain.Follower) (*domain.Follower, error) {
-	schema := os.Getenv("DB_SCHEMA")
-	query := fmt.Sprintf(`INSERT INTO %s.SOC_APP_USER_PROFILE_FOLLOW (follow_date, follower_profile_id , following_profile_id ) VALUES (NOW(), $1, $2)`, schema)
+	query := `INSERT INTO SOC_APP_USER_PROFILE_FOLLOW (follow_date, follower_profile_id , following_profile_id ) VALUES (NOW(), $1, $2)`
 	tx, err := u.db.Begin()
 	if err != nil {
 		log.Println("Error while starting the transaction")
