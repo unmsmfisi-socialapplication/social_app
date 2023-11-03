@@ -27,7 +27,7 @@ class ListPostViewModel : ViewModel() {
                     _data.value = it
                 }
             } catch (e: Exception) {
-               e.message
+                e.message
             }
         }
     }

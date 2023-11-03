@@ -1,5 +1,6 @@
 package com.social.utils
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ abstract class BaseAdapter<T>(var data: List<T>) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ) : BaseViewHolder<T> {
+    ): BaseViewHolder<T> {
         return getViewHolder(parent)
     }
 
@@ -23,13 +24,9 @@ abstract class BaseAdapter<T>(var data: List<T>) :
         holder.bind(data[position])
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(nData: List<T>) {
         data = nData
-        notifyDataSetChanged()
-    }
-
-    fun reset() {
-        data = emptyList()
         notifyDataSetChanged()
     }
 
