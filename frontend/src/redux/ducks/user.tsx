@@ -27,7 +27,6 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state, action) => {
-            console.log('LOGOUT', action.payload)
             state.user = initialUser
             state.loading = false
 
@@ -38,7 +37,7 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getUser.fulfilled, (state, action) => {
             state.loading = false
-            state.status = "SUCCESS"
+            state.status = apiSattus.SUCCES
             if (action.payload === null) {
                 state.error = 'credenciales incorrectas'
             } else {
@@ -52,7 +51,7 @@ export const authSlice = createSlice({
         })
         builder.addCase(getUser.rejected, (state, action) => {
             state.loading = false
-            state.status = 'FAILED'
+            state.status = apiSattus.FAILED
             state.error = 'credenciales incorrectas'
         })
     },

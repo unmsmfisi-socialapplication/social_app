@@ -14,16 +14,13 @@ export default function LoginPage() {
     const [auth, setAuth] = useState<any>(null)
     const dispatch = useAppDispatch()
     const useSelector = useAppSelector((state) => state.auth)
-    console.log(auth)
 
     const handleStatusAuth = (status: string) => {
-        console.log(status)
         switch (status) {
             case apiSattus.SUCCES:
                 window.location.href = '/intranet'
                 break
             case apiSattus.FAILED:
-                console.log('Credenciales incorrectas')
                 setAuth({ response: 'Credenciales incorrectas' })
                 break
             default:
@@ -38,7 +35,6 @@ export default function LoginPage() {
         }),
         onSubmit: (values) => {
             // TODO: Add login logic
-            console.log(values)
             const { username, password } = values
             dispatch(getUser({ username, password })).then(() => {
                 handleStatusAuth(useSelector.status)
