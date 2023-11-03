@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Layout from '../layout'
 import { Button } from '@mui/material'
-import { WButton, WInput, WCircleIcon, WModalPhoto, WComment, WButtonMotion } from '@/components'
+import { WButton, WInput, WCircleIcon, WModalPhoto, WComment, WButtonMotion, WCardFollow } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
 import AllInclusive from '@mui/icons-material/AllInclusive'
@@ -120,6 +120,13 @@ export default function TestPage() {
                 publicTag={'Público'}
                 placeholder={'Escribe lo que estás pensando'}
             />
+            <div>
+                <WCardFollow
+                    userAvatar="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    userName="XokasXD"
+                    userHandle="XokasXD"
+                />
+            </div>
         </Layout>
     )
 }

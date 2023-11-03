@@ -11,6 +11,7 @@ export { default as WButtonMotion } from './atoms/ButtonAnimated/buttonAnimated'
 export { default as WIconSpam } from './atoms/IconSpam/Icon'
 export { default as WCircleImage } from './atoms/CircleImage/circleImage'
 export { default as WInputCode } from './atoms/InputCode/inputCode'
+export { default as WCardFollow } from './atoms/CardFollow/CardFollow'
 // export molecule components
 export { default as WLogo } from './atoms/Logo/titleSearch'
 export { default as WAvatar } from './molecules/AvatarInput/index'
