@@ -15,7 +15,8 @@ import com.social.databinding.FragmentEditProfileBinding
 
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding: FragmentEditProfileBinding
-    private val imagePicker = registerForActivityResult(
+    private val imagePicker =
+        registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(),
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK && result.data != null) {
@@ -29,9 +30,9 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         view: View,
         savedInstanceState: Bundle?,
         ) {
-            super.onViewCreated(view, savedInstanceState)
-            binding = FragmentEditProfileBinding.bind(view)
-            action()
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentEditProfileBinding.bind(view)
+        action()
     }
 
     private fun action() {
