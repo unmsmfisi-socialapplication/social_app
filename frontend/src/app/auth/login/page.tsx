@@ -1,6 +1,6 @@
 'use client'
 import * as Yup from 'yup'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import { Box } from '@mui/material'
 import EnrollmentHoc from '@/app/auth/auth'
@@ -8,19 +8,29 @@ import { WInput, WButton, WLink, WCardAuth } from '@/components'
 import { INITIAL_FORMIK_VALUES, LOGIN_VALUES, YUP_SCHEMA } from './constant'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { validateUsername, validatePassword } from '@/utilities/Validation'
-import AuthRepository from '@/domain/repositories/AuthRepository'
-import { login } from '@/redux/ducks/user'
-
+import { getUser } from '@/redux/actions/userAction'
+import { apiSattus } from '@/utilities/Constant'
 export default function LoginPage() {
     const [auth, setAuth] = useState<any>(null)
     const dispatch = useAppDispatch()
-    const onLogin = ({ username, password }: { username: string; password: string }) => {
-        try {
-            dispatch(login(username, password))
-        } catch (error) {
-            console.log('error', error)
+    const useSelector = useAppSelector((state) => state.auth)
+    console.log(auth)
+
+    const handleStatusAuth = (status: string) => {
+        console.log(status)
+        switch (status) {
+            case apiSattus.SUCCES:
+                window.location.href = '/intranet'
+                break
+            case apiSattus.FAILED:
+                console.log('Credenciales incorrectas')
+                setAuth({ response: 'Credenciales incorrectas' })
+                break
+            default:
+                break
         }
     }
+
     const formik = useFormik({
         initialValues: { ...INITIAL_FORMIK_VALUES },
         validationSchema: Yup.object({
@@ -30,9 +40,16 @@ export default function LoginPage() {
             // TODO: Add login logic
             console.log(values)
             const { username, password } = values
-            onLogin({ username, password })
+            dispatch(getUser({ username, password })).then(() => {
+                handleStatusAuth(useSelector.status)
+            })
         },
     })
+
+    useEffect(() => {
+        handleStatusAuth(useSelector.status)
+    }, [useSelector.status])
+
     return (
         <EnrollmentHoc>
             <form onSubmit={formik.handleSubmit}>
@@ -66,7 +83,13 @@ export default function LoginPage() {
                         <span style={{ marginRight: '10px' }}>¿No tienes una cuenta? </span>
                         <WLink text="Registrarse" underline="none" displayType="inline-flex" href="/auth/register" />
                     </Box>
-                    <WButton type="submit" text="Iniciar Sesión" size="large" />
+                    <WButton
+                        onClick={() => handleStatusAuth(useSelector.status)}
+                        loading={useSelector.loading}
+                        type="submit"
+                        text="Iniciar Sesión"
+                        size="large"
+                    />
                     {auth && <span>{auth?.response}</span>}
                 </WCardAuth>
             </form>

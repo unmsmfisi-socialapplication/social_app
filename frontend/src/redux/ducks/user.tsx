@@ -1,108 +1,64 @@
-import AuthServices from '@/domain/usecases/AuthServises'
-import { IUser, User, createUser, initalUser } from '@/data/entities/User'
-import { Dispatch } from '@reduxjs/toolkit'
-
-interface IAction {
-    type: string
-    payload?: any
-}
+import { IUser } from '@/data/entities/User'
+import { createSlice } from '@reduxjs/toolkit'
+import { getUser } from '../actions/userAction'
+import build from 'next/dist/build'
+import { apiSattus } from '@/utilities/Constant'
 
 // TODO:Add datafake
-const UserFake = (): User => {
-    return createUser({
-        id: 1,
-        type: 'user',
-        name: 'Juan Gutierrez',
-        username: 'gosble',
-        email: 'gosble@social.com',
-        phone: '941593329',
-        roleId: 1,
-        preferredUsername: 'gosble',
-        summary: 'I am a developer',
-    })
+
+interface UserState {
+    user: any
+    loading: boolean
+    status: string
+    error: string | null
 }
 
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-const LOGIN_ERROR = 'LOGIN_ERROR'
-const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-
-const initialState = {} as IUser
-export default function userReducer(state: IUser = initialState, action: IAction): IUser {
-    switch (action.type) {
-        case LOGIN_SUCCESS:
-            return { ...action.payload, error: {} }
-        case LOGOUT_SUCCESS:
-            return { ...action.payload }
-        case LOGIN_ERROR:
-            return { ...action.payload, successLogin: false, loading: false, isProcessing: true }
-        default:
-            return state
-    }
+const initialUser = {} as IUser
+const storedUser = localStorage.getItem('user')
+const initialState: UserState = {
+    user: storedUser ? JSON.parse(storedUser) : initialUser,
+    loading: false,
+    status: apiSattus.IDLE,
+    error: null,
 }
 
-export const login = (user: string, password: string) => async (dispatch: Dispatch) => {
-    console.log('login', user, password)
-    const userPayload: User = UserFake()
-    try {
-        dispatch({
-            type: LOGOUT_SUCCESS,
-            payload: {
-                loading: true,
-                isProcessing: true,
-            },
-        })
-        const request = {
-            user,
-            password,
-        }
-        console.log('request', request)
-        const { data, error } = await AuthServices.authRequest(request)
-        if (data && error === null) {
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: {
-                    userPayload,
-                    loading: false,
-                },
-            })
-        } else {
-            if (request.user === 'myuser123' && request.password === 'Social@123') {
-                dispatch({
-                    type: LOGIN_SUCCESS,
-                    payload: {
-                        userPayload,
-                        loading: false,
-                    },
-                })
-                console.log('entro good')
+export const authSlice = createSlice({
+    name: 'auth',
+    initialState,
+    reducers: {
+        logout: (state, action) => {
+            console.log('LOGOUT', action.payload)
+            state.user = initialUser
+            state.loading = false
+
+            //TODO: clear localstorage
+            localStorage.clear()
+        },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getUser.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = "SUCCESS"
+            if (action.payload === null) {
+                state.error = 'credenciales incorrectas'
             } else {
-                dispatch({
-                    type: LOGIN_ERROR,
-                    payload: {
-                        error: { message: 'Credenciales Incorrectas' },
-                    },
-                })
+                state.user = action.payload
+                localStorage.setItem('user', JSON.stringify(action.payload))
             }
-        }
-    } catch (error) {
-        dispatch({
-            type: LOGIN_ERROR,
-            payload: {
-                error: { message: 'Credenciales Incorrectas' },
-            },
         })
-    }
-}
+        builder.addCase(getUser.pending, (state) => {
+            state.loading = true
+            state.status = apiSattus.LOADING
+        })
+        builder.addCase(getUser.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'FAILED'
+            state.error = 'credenciales incorrectas'
+        })
+    },
+})
 
-export const logout = () => async (dispatch: Dispatch) => {
-    try {
-        localStorage.clear()
-        dispatch({
-            type: LOGOUT_SUCCESS,
-        })
-    } catch (error) {
-        dispatch({
-            type: LOGOUT_SUCCESS,
-        })
-    }
-}
+export const selectUser = (state: any) => state.auth.user
+export const { logout } = authSlice.actions
+
+export default authSlice.reducer
