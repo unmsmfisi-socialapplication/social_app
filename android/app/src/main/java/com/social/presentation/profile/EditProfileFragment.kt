@@ -82,7 +82,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 }
 
                 override fun afterTextChanged(s: Editable?) {}
-            }
+            },
         )
     }
 
