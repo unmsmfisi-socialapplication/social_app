@@ -19,12 +19,12 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
         ) { result ->
-        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-            result.data?.data?.let {
-                uploadImage(it)
+            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+                result.data?.data?.let {
+                    uploadImage(it)
+                }
             }
         }
-    }
 
     override fun onViewCreated(
         view: View,
@@ -52,7 +52,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private fun uploadImage(uri: Uri) {
         val bitmap =
             BitmapFactory.decodeStream(
-                requireContext().contentResolver.openInputStream(uri,)
+                requireContext().contentResolver.openInputStream(uri),
             )
         binding.imagenProfile.setImageBitmap(bitmap)
     }
@@ -60,29 +60,30 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private fun userVerification() {
         binding.inputUserName.addTextChangedListener(
             object : TextWatcher {
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int,
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int,
-            ) {
-                if (userUnique(s.toString())) {
-                    binding.errorUsername.visibility = View.GONE
-                } else {
-                    binding.errorUsername.visibility = View.VISIBLE
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
                 }
-            }
 
-            override fun afterTextChanged(s: Editable?) {}
-        })
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                    if (userUnique(s.toString())) {
+                        binding.errorUsername.visibility = View.GONE
+                    } else {
+                        binding.errorUsername.visibility = View.VISIBLE
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            }
+        )
     }
 
     private fun userUnique(username: String): Boolean {
