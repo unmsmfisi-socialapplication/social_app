@@ -15,17 +15,21 @@ import com.social.databinding.FragmentEditProfileBinding
 
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding: FragmentEditProfileBinding
-    private val imagePicker = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-            result.data?.data?.let {
-                uploadImage(it)
+    private val imagePicker =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+                result.data?.data?.let {
+                    uploadImage(it)
+                }
             }
         }
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
         action()
@@ -39,43 +43,47 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun openGallery() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        val intent =
+            Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         imagePicker.launch(intent)
     }
 
     private fun uploadImage(uri: Uri) {
-        val bitmap = BitmapFactory.decodeStream(
-            requireContext().contentResolver.openInputStream((uri))
-        )
+        val bitmap =
+            BitmapFactory.decodeStream(
+                requireContext().contentResolver.openInputStream(uri),
+            )
         binding.imagenProfile.setImageBitmap(bitmap)
     }
 
     private fun userVerification() {
-        binding.inputUserName.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-                if (userUnique(s.toString())) {
-                    binding.errorUsername.visibility = View.GONE
-                } else {
-                    binding.errorUsername.visibility = View.VISIBLE
+        binding.inputUserName.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
                 }
-            }
 
-            override fun afterTextChanged(s: Editable?) {}
-        })
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                    if (userUnique(s.toString())) {
+                        binding.errorUsername.visibility = View.GONE
+                    } else {
+                        binding.errorUsername.visibility = View.VISIBLE
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            },
+        )
     }
 
     private fun userUnique(username: String): Boolean {
