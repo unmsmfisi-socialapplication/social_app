@@ -15,4 +15,4 @@ from load_csv import consume_api_and_save_csv
 )
 
 def test_consume_api(input_url,expected):
-    assert consume_api_and_save_csv(input_url) == True
+    assert consume_api_and_save_csv(input_url) 

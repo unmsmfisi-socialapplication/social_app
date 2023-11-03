@@ -33,8 +33,7 @@ def consume_api_and_save_csv(api_url):
             print("No se encontraron datos en la respuesta del API.")
     else:
         print("Error al obtener datos del API. Código de estado:", response.status_code)
-
-    return True
+ 
  
 
 # Calling the function with the API URL 
