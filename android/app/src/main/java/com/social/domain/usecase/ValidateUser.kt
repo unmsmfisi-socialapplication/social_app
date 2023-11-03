@@ -13,35 +13,35 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class ValidateUser
-@Inject
-constructor(
-    private val socialAppRepository: SocialAppRepository,
-) {
-    operator fun invoke(loginBody: LoginBody): Flow<Resource<List<LoginUserData>>> {
-        return flow {
-            try {
-                if (loginBody.username.isBlank()) {
-                    throw InvalidUserException("Ingrese usuario")
-                }
-                if (loginBody.password.isBlank()) {
-                    throw InvalidUserException("Ingrese contraseña")
-                }
-                emit(Resource.Loading())
-                val login = socialAppRepository.validateUser(loginBody).aLogin()
-                when (login.status) {
-                    "OK" -> {
-                        emit(Resource.Success(login.response))
+    @Inject
+    constructor(
+        private val socialAppRepository: SocialAppRepository,
+    ) {
+        operator fun invoke(loginBody: LoginBody): Flow<Resource<List<LoginUserData>>> {
+            return flow {
+                try {
+                    if (loginBody.username.isBlank()) {
+                        throw InvalidUserException("Ingrese usuario")
                     }
+                    if (loginBody.password.isBlank()) {
+                        throw InvalidUserException("Ingrese contraseña")
+                    }
+                    emit(Resource.Loading())
+                    val login = socialAppRepository.validateUser(loginBody).aLogin()
+                    when (login.status) {
+                        "OK" -> {
+                            emit(Resource.Success(login.response))
+                        }
 
-                    else -> {
-                        emit(Resource.Error(login.response))
+                        else -> {
+                            emit(Resource.Error(login.response))
+                        }
                     }
+                } catch (u: UnknownHostException) {
+                    emit(Resource.Error("No se pudo conectar al servidor"))
+                } catch (e: Exception) {
+                    emit(Resource.Error(e.message.toString()))
                 }
-            } catch (u: UnknownHostException) {
-                emit(Resource.Error("No se pudo conectar al servidor"))
-            } catch (e: Exception) {
-                emit(Resource.Error(e.message.toString()))
             }
         }
     }
-}
