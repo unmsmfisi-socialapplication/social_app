@@ -17,8 +17,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding: FragmentEditProfileBinding
     private val imagePicker =
         registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult(),
-    ) { result ->
+            ActivityResultContracts.StartActivityForResult(),
+        ) { result ->
         if (result.resultCode == Activity.RESULT_OK && result.data != null) {
             result.data?.data?.let {
                 uploadImage(it)
@@ -29,7 +29,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
-        ) {
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
         action()
@@ -52,13 +52,14 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private fun uploadImage(uri: Uri) {
         val bitmap =
             BitmapFactory.decodeStream(
-            requireContext().contentResolver.openInputStream(uri)
-        )
+                requireContext().contentResolver.openInputStream(uri,)
+            )
         binding.imagenProfile.setImageBitmap(bitmap)
     }
 
     private fun userVerification() {
-        binding.inputUserName.addTextChangedListener(object : TextWatcher {
+        binding.inputUserName.addTextChangedListener(
+            object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence?,
                 start: Int,
