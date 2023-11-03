@@ -1,4 +1,4 @@
-package test
+package infrastructure
 
 import (
 	"bytes"
@@ -11,7 +11,6 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/email_sender/application"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/email_sender/domain"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/email_sender/infrastructure"
 )
 
 type mockEmailSenderUsecase struct {
@@ -82,7 +81,7 @@ func TestHandleSendEmail(t *testing.T) {
 			mockUseCase := &mockEmailSenderUsecase{
 				SendEmailFn: tt.mockSend,
 			}
-			handler := infrastructure.NewEmailSenderHandler(mockUseCase)
+			handler := NewEmailSenderHandler(mockUseCase)
 			recorder := httptest.NewRecorder()
 
 			handler.HandleSendEmail(recorder, req)

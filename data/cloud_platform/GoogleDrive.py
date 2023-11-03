@@ -41,24 +41,54 @@ def subir_archivo(ruta_archivo,id_folder):
     archivo.SetContentFile(ruta_archivo)
     archivo.Upload()
 
+def download_file(filename,download_path):
+    credential = login()
+    list_files = credential.ListFile({'q': "title = '" + filename + "'"}).GetList()
+    if not list_files:
+        print('File not found: ' + filename)
+    file = credential.CreateFile({'id': list_files[0]['id']}) 
+    file.GetContentFile(download_path + filename)
 
-def test_subir_archivo(self):
-    # Define a local file path for the test
-    ruta_archivo = 'route_file'   
-     # Define a test folder ID in Google Drive
-    id_folder = 'id_folder'   
-    # Execute the subir_archivo function with the test parameters
-    subir_archivo(ruta_archivo, id_folder)
+def search(filename):
+    result = []
+    credential = login()
+    list_files = credential.ListFile({'q': filename}).GetList()
+    for file in list_files:
+        print('ID Drive:', file['id'])
+        print('File name:', file['title'])
+        print('Type of file:', file['mimeType'])
+        print('Size:', file['fileSize'])
+        print('Date of creation:', file['createdDate'])
+        print('Date of last modification:', file['modifiedDate'])
+        print('Version:', file['version'])
+        result.append(file)
 
-         
+    return result
+
+def delete_recover(id_file):
+    credential = login()
+    file = credential.CreateFile({'id': id_file})
+    
+    file.Trash()
+
+    file.UnTrash()
+
+    file.Delete()
+
+def create_folder(folder_name,id_folder):
+    credential = login()
+    folder = credential.CreateFile({'title': folder_name,
+                                    'mimeType': 'application/vnd.google-apps.folder',
+                                    'parents': [{'kind': 'drive#fileLink',
+                                                'id': id_folder}]})
+    folder.Upload()
  
 if __name__ == "__main__":
     ruta_archivo = 'route_file'
     id_folder = 'id_folder'
     id_drive = 'id_drive'
     ruta_descarga = 'download_path'
-    #crear_archivo_texto('file','commet',id_folder)
-    subir_archivo(ruta_archivo,id_folder)
+    
     unittest.main()
     
     
