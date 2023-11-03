@@ -15,6 +15,7 @@ import com.social.databinding.FragmentEditProfileBinding
 
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding: FragmentEditProfileBinding
+
     private val imagePicker = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -28,6 +29,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
+
         action()
     }
 
@@ -35,6 +37,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         binding.buttonUploadProfile.setOnClickListener {
             openGallery()
         }
+
         userVerification()
     }
 
@@ -46,8 +49,9 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private fun uploadImage(uri: Uri) {
         val bitmap = BitmapFactory.decodeStream(
-            requireContext().contentResolver.openInputStream((uri))
+            requireContext().contentResolver.openInputStream(uri)
         )
+
         binding.imagenProfile.setImageBitmap(bitmap)
     }
 
@@ -71,6 +75,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         if (username == "c" || username == "cr" || username == "crh") {
             return false
         }
+
         return true
     }
 }
