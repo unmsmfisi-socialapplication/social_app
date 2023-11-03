@@ -27,19 +27,20 @@ class ListPostFragment : Fragment(R.layout.fragment_list_post) {
             return object : BaseViewHolder<Post>(view) {
                 private val binding: ItemPostBinding = ItemPostBinding.bind(view)
 
-                override fun bind(entity: Post) = with(binding) {
-                    textNames.text = entity.names
-                    textHour.text = entity.hour
-                    textContentPost.text = entity.content
-                    if (entity.image.isNotEmpty()) {
-                        loadImage(entity.image, binding.imagePost)
-                    } else {
-                        binding.imagePost.visibility = View.GONE
+                override fun bind(entity: Post) =
+                    with(binding) {
+                        textNames.text = entity.names
+                        textHour.text = entity.hour
+                        textContentPost.text = entity.content
+                        if (entity.image.isNotEmpty()) {
+                            loadImage(entity.image, binding.imagePost)
+                        } else {
+                            binding.imagePost.visibility = View.GONE
+                        }
+                        binding.iconLike.setOnClickListener {
+                            handleIconLikeClick(binding.iconLike)
+                        }
                     }
-                    binding.iconLike.setOnClickListener {
-                        handleIconLikeClick(binding.iconLike)
-                    }
-                }
             }
         }
     }
