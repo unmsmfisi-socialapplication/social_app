@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseAdapter<T>(var data: List<T>) :
     RecyclerView.Adapter<BaseAdapter.BaseViewHolder<T>>() {
-
     abstract fun getViewHolder(parent: ViewGroup): BaseViewHolder<T>
 
     override fun onCreateViewHolder(

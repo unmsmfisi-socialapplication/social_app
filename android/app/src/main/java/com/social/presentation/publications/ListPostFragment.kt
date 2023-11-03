@@ -21,10 +21,12 @@ class ListPostFragment : Fragment(R.layout.fragment_list_post) {
 
     private val adapter: BaseAdapter<Post> = object : BaseAdapter<Post>(emptyList()) {
         override fun getViewHolder(parent: ViewGroup): BaseViewHolder<Post> {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_post, parent, false)
+            val view =
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_post, parent, false)
             return object : BaseViewHolder<Post>(view) {
                 private val binding: ItemPostBinding = ItemPostBinding.bind(view)
+
                 override fun bind(entity: Post) = with(binding) {
                     textNames.text = entity.names
                     textHour.text = entity.hour

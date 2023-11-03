@@ -20,9 +20,10 @@ class ListPostViewModel : ViewModel() {
     fun obtainData() {
         viewModelScope.launch(Dispatchers.Main) {
             try {
-                val response = withContext(Dispatchers.IO) {
-                    repository.obtainPost()
-                }
+                val response =
+                    withContext(Dispatchers.IO) {
+                        repository.obtainPost()
+                    }
                 response.let {
                     _data.value = it
                 }
