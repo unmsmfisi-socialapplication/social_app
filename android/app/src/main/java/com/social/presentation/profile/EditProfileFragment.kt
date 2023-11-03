@@ -16,7 +16,7 @@ import com.social.databinding.FragmentEditProfileBinding
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding: FragmentEditProfileBinding
     private val imagePicker = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
+        ActivityResultContracts.StartActivityForResult(),
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK && result.data != null) {
             result.data?.data?.let {
@@ -25,7 +25,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+        ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
         action()
@@ -57,7 +60,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 s: CharSequence?,
                 start: Int,
                 count: Int,
-                after: Int
+                after: Int,
             ) {
             }
 
@@ -65,7 +68,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 s: CharSequence?,
                 start: Int,
                 count: Int,
-                after: Int
+                after: Int,
             ) {
                 if (userUnique(s.toString())) {
                     binding.errorUsername.visibility = View.GONE
@@ -78,7 +81,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         })
     }
 
-    private fun userUnique(username: String): Boolean {
+    private fun userUnique(username: String,): Boolean {
         if (username == "c" || username == "cr" || username == "crh") {
             return false
         }
