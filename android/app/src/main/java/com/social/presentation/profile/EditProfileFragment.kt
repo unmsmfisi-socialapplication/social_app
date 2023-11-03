@@ -43,7 +43,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun openGallery() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        val intent =
+            Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         imagePicker.launch(intent)
     }
