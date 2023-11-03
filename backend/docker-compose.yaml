@@ -19,6 +19,7 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD} 
       POSTGRES_DB: ${DB_NAME}
+      POSTGRES_INITDB_ARGS: "-c search_path=${DB_SCHEMA}"
     ports:
       - "5432:5432"
     volumes:

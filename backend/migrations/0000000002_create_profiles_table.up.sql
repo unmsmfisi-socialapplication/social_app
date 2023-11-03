@@ -15,7 +15,7 @@ CREATE TABLE sa.SOC_APP_USER_PROFILE(
   update_date timestamp,
   profile_picture text,
   PRIMARY KEY (profile_id),
-  FOREIGN KEY (user_id) REFERENCES sa.SOC_APP_USERS(user_id)
+  FOREIGN KEY (user_id) REFERENCES SOC_APP_USERS(user_id)
 );
 CREATE UNIQUE INDEX UQ_SOC_APP_USER_PROFILE ON sa.SOC_APP_USER_PROFILE(user_id);
 CREATE INDEX IDX1_SOC_APP_USER_PROFILE ON sa.SOC_APP_USER_PROFILE(insertion_date);
