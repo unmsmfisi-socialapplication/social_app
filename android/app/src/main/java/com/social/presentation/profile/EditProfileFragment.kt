@@ -58,7 +58,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 start: Int,
                 count: Int,
                 after: Int
-            ) {}
+            ) {
+            }
 
             override fun onTextChanged(
                 s: CharSequence?,
