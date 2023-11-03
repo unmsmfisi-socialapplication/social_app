@@ -1,9 +1,7 @@
-package test
+package domain
 
 import (
 	"testing"
-
-	"github.com/unmsmfisi-socialapplication/social_app/internal/email_sender/domain"
 )
 
 func TestNewEmail(t *testing.T) {
@@ -25,7 +23,7 @@ func TestNewEmail(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			email, err := domain.NewEmail(tt.to, tt.subject, tt.body)
+			email, err := NewEmail(tt.to, tt.subject, tt.body)
 
 			if (err != nil) != tt.wantErr {
 				t.Errorf("NewEmail() error = %v, wantErr %v", err, tt.wantErr)
