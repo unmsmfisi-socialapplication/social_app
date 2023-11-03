@@ -6,16 +6,18 @@ import { Box } from '@mui/material'
 import EnrollmentHoc from '@/app/auth/auth'
 import { WInput, WButton, WLink, WCardAuth } from '@/components'
 import { INITIAL_FORMIK_VALUES, LOGIN_VALUES, YUP_SCHEMA } from './constant'
+import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { validateUsername, validatePassword } from '@/utilities/Validation'
 import AuthRepository from '@/domain/repositories/AuthRepository'
+import { login } from '@/redux/ducks/user'
 
 export default function LoginPage() {
     const [auth, setAuth] = useState<any>(null)
-    const authRequestLogin = async (request: any) => {
-        const { data, error } = await AuthRepository.authRequest(request)
-        if (data && error === null) {
-            setAuth({ ...data })
-        } else {
+    const dispatch = useAppDispatch()
+    const onLogin = ({ username, password }: { username: string; password: string }) => {
+        try {
+            dispatch(login(username, password))
+        } catch (error) {
             console.log('error', error)
         }
     }
@@ -27,7 +29,8 @@ export default function LoginPage() {
         onSubmit: (values) => {
             // TODO: Add login logic
             console.log(values)
-            authRequestLogin(values)
+            const { username, password } = values
+            onLogin({ username, password })
         },
     })
     return (
