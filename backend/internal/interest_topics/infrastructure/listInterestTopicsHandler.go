@@ -13,7 +13,7 @@ type ListInterestTopicsHandler struct {
 	useCase application.ListInterestTopicsUseCaseI
 }
 
-func NewHandleListTopicsHandler(useCase application.ListInterestTopicsUseCaseI) *ListInterestTopicsHandler {
+func NewListInterestTopicsHandler(useCase application.ListInterestTopicsUseCaseI) *ListInterestTopicsHandler {
 	return &ListInterestTopicsHandler{useCase: useCase}
 }
 

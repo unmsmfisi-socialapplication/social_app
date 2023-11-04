@@ -12,10 +12,16 @@ func InterestTopicsModuleRouter(dbInstance *sql.DB) *chi.Mux {
 	r := chi.NewRouter()
 
 	userInterestRepo := infrastructure.NewUserInterestsDBRepository(dbInstance)
-	interestTopicUseCase := application.NewInterestTopicsUseCase(userInterestRepo)
+	interestTopicUseCase := application.NewSelectTopicUseCase(userInterestRepo)
 	selectTopicHandler := infrastructure.NewSelectTopicHandler(interestTopicUseCase)
 
-	r.Post("/", selectTopicHandler.HandleSelectTopic)
+	InterestTopicsRepo := infrastructure.NewInterestTopicsDBRepository(dbInstance)
+	ListinterestTopicUseCase := application.NewListInterestTopicsUseCase(InterestTopicsRepo)
+	listInterestTopicHandler := infrastructure.NewListInterestTopicsHandler(ListinterestTopicUseCase)
+
+	r.Get("/list", listInterestTopicHandler.HandleListTopics)
+
+	r.Post("/select", selectTopicHandler.HandleSelectTopic)
 
 	return r
 }
