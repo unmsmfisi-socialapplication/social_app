@@ -13,7 +13,7 @@ type ListInterestTopicsUseCase struct {
 	repository domain.InterestTopicsRepository
 }
 
-func NewInterestTopicsUseCase(repository domain.InterestTopicsRepository) *ListInterestTopicsUseCase {
+func NewListInterestTopicsUseCase(repository domain.InterestTopicsRepository) *ListInterestTopicsUseCase {
 	return &ListInterestTopicsUseCase{repository: repository}
 }
 
