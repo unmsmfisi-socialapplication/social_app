@@ -3,7 +3,7 @@ BEGIN;
 CREATE TABLE sa.SOC_APP_M_USERS_INTERESTS(
   interest_id bigserial,
   interest_name VARCHAR(200),
-  interest_summary VARCHAR(500),
+  interest_summary VARCHAR(500) DEFAULT '',
   insertion_date timestamp,
   update_date timestamp,
   PRIMARY KEY (interest_id)
