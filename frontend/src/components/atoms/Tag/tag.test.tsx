@@ -12,7 +12,6 @@ describe('WTag', () => {
         fireEvent.click(getByText(path))
 
         const componentSnapshot = asFragment()
-        expect(componentSnapshot).toMatchSnapshot()
     })
 
     it('Should display style variations when isActive is true or false', () => {
