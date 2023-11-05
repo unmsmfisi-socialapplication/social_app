@@ -6,10 +6,9 @@ import com.social.presentation.interaction.chats.ChatAdapter
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito.*
+import org.mockito.Mockito.mock
 
 class ChatAdapterTest {
-
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var chatMessageList: MutableList<ChatMessageUser>
 
@@ -32,7 +31,9 @@ class ChatAdapterTest {
     @Test
     fun testChatAdapterSenderMessageType() {
         // Agregar un mensaje enviado por el remitente al adaptador
-        chatMessageList.add(ChatMessageUser(senderId = "sender123", receiverId = "receiver456", message = "Hello", dateTime = "2023-10-06 10:00 AM"))
+        chatMessageList.add(
+            ChatMessageUser(senderId = "sender123", receiverId = "receiver456", message = "Hello", dateTime = "2023-10-06 10:00 AM"),
+        )
 
         // Verificar que el tipo de vista para este mensaje sea VIEW_TYPE_SENT
         assertEquals(ChatAdapter.VIEW_TYPE_SENT, chatAdapter.getItemViewType(0))
@@ -41,7 +42,9 @@ class ChatAdapterTest {
     @Test
     fun testChatAdapterReceiverMessageType() {
         // Agregar un mensaje recibido por el receptor al adaptador
-        chatMessageList.add(ChatMessageUser(senderId = "receiver456", receiverId = "sender123", message = "Hi", dateTime = "2023-10-06 10:05 AM"))
+        chatMessageList.add(
+            ChatMessageUser(senderId = "receiver456", receiverId = "sender123", message = "Hi", dateTime = "2023-10-06 10:05 AM"),
+        )
 
         // Verificar que el tipo de vista para este mensaje sea VIEW_TYPE_RECEIVER
         assertEquals(ChatAdapter.VIEW_TYPE_RECEIVER, chatAdapter.getItemViewType(0))
@@ -50,9 +53,10 @@ class ChatAdapterTest {
     @Test
     fun testChatAdapterMessageContent() {
         val message = "This is a test message"
-        chatMessageList.add(ChatMessageUser(senderId = "sender123", receiverId = "receiver456", message = message, dateTime = "2023-10-06 10:10 AM"))
+        chatMessageList.add(
+            ChatMessageUser(senderId = "sender123", receiverId = "receiver456", message = message, dateTime = "2023-10-06 10:10 AM"),
+        )
 
         assertEquals(message, chatAdapter.chatMessage[0].message)
     }
 }
-

@@ -8,14 +8,16 @@ import com.social.domain.model.CreatePostBody
 import com.social.domain.model.LoginBody
 import javax.inject.Inject
 
-class SocialAppRepositoryImp @Inject constructor(
-    private val api: ApiInterface
-): SocialAppRepository {
-    override suspend fun validateUser(loginBody: LoginBody): LoginDto {
-        return api.validateUser(loginBody)
-    }
+class SocialAppRepositoryImp
+    @Inject
+    constructor(
+        private val api: ApiInterface,
+    ) : SocialAppRepository {
+        override suspend fun validateUser(loginBody: LoginBody): LoginDto {
+            return api.validateUser(loginBody)
+        }
 
-    override suspend fun createPost(createPostBody: CreatePostBody): CreatePostDto {
-        return api.createPost(createPostBody)
+        override suspend fun createPost(createPostBody: CreatePostBody): CreatePostDto {
+            return api.createPost(createPostBody)
+        }
     }
-}

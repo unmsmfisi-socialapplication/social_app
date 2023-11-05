@@ -11,13 +11,15 @@ import androidx.viewpager.widget.ViewPager
 import com.social.R
 import com.social.databinding.FragmentOnboardingBinding
 
-
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     private lateinit var binding: FragmentOnboardingBinding
     private lateinit var globalView: View
     private lateinit var dots: Array<TextView>
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentOnboardingBinding.bind(view)
         globalView = view
@@ -53,7 +55,6 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         setElementVisibility(position > 0)
     }
 
-
     private fun configureIndicatorLayout(shouldModify: Boolean) {
         val params = binding.indicatorLayout.layoutParams as ConstraintLayout.LayoutParams
         if (shouldModify) {
@@ -79,12 +80,16 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     private val viewListener: ViewPager.OnPageChangeListener =
         object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
-                position: Int, positionOffset: Float, positionOffsetPixels: Int
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int,
             ) {
             }
+
             override fun onPageSelected(position: Int) {
                 setUpIndicator(position)
             }
+
             override fun onPageScrollStateChanged(state: Int) {}
         }
 }

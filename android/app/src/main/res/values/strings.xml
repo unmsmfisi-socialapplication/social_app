@@ -41,5 +41,17 @@
     <string name="resend_code">Reenviar código</string>
     <string name="title_message">Mensajes</string>
     <string name="send_message">Escribe tu mensaje</string>
-
+    <string name="speaker">Altavoz</string>
+    <string name="mute">Mutear</string>
+    <string name="video_camera">Video</string>
+    <string name="end_call">Cortar</string>
+    <string name="call_in_progress">Llamada en curso</string>
+    <string name="edit_photo">Editar foto</string>
+    <string name="name">Nombre</string>
+    <string name="user_name">Nombre de usuario</string>
+    <string name="biography">Biografia</string>
+    <string name="add_link">Agregar enlace</string>
+    <string name="photo_profile">Foto de perfil</string>
+    <string name="user_exists">El usuario existe</string>
+    <string name="description">Descripción</string>
 </resources>
