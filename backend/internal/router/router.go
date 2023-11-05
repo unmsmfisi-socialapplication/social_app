@@ -14,13 +14,15 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
 
+	interest_topics "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics"
 	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
 	registerinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
+
+	wsInf "github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
 )
 
-func Router() http.Handler {
-
+func Router(wsHandler *wsInf.Handler) http.Handler {
 	err := database.InitDatabase()
 	if err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
@@ -61,6 +63,11 @@ func Router() http.Handler {
 	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
 	r.Post("/login", loginHandler.HandleLogin)
 
+	r.Post("/ws/createRoom", wsHandler.CreateRoom)
+	r.Get("/ws/joinRoom/{roomId}", wsHandler.JoinRoom)
+	r.Get("/ws/getRooms", wsHandler.GetRooms)
+	r.Get("/ws/getClients/{roomId}", wsHandler.GetClients)
+
 	// Register
 	registerRepo := registerinfrastructure.NewUserRepository(dbInstance)
 	registerUseCase := registerapplication.NewRegistrationUseCase(registerRepo)
@@ -75,5 +82,9 @@ func Router() http.Handler {
 
 	emailRouter := email.EmailModuleRouter()
 	r.Mount("/email", emailRouter)
+
+	//interestTopics
+	interestTopicsRouter := interest_topics.InterestTopicsModuleRouter(dbInstance)
+	r.Mount("/interestTopics", interestTopicsRouter)
 	return r
 }
