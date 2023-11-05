@@ -71,7 +71,7 @@ def func_get_reddit(client_id,client_secret,user_agent,username,password):
     return top_posts,new_posts
 
 def consume_api_and_save_csv(api_url):
-    # Make a GET request to the API for information
+   # Make a GET request to the API for information
     response = requests.get(api_url)
 
     # Check if the application was successful
@@ -97,11 +97,14 @@ def consume_api_and_save_csv(api_url):
                     writer.writerow(item)
 
             print(f"Los datos se han guardado en el archivo '{csv_filename}'.")
+            return True
         else:
             print("No se encontraron datos en la respuesta del API.")
+            return False
     else:
         print("Error al obtener datos del API. Código de estado:", response.status_code)
-
+        return False
+  
 # Calling the function with the API URL 
 # api_url = "https://jsonplaceholder.typicode.com/posts" # Replace with the URL of the API you want to consume
 # consume_api_and_save_csv(api_url)
