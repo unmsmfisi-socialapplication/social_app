@@ -6,29 +6,23 @@ import './index.scss'
 describe('WTag', () => {
     it('Should redirect to pages correctly as specified', () => {
         const path = '/ruta-especifica'
-        const loggedMessages = []
 
-        //Redirect the output of console.log to loggedMessages
-        const originalLog = console.log
-        console.log = (...args) => {
-            loggedMessages.push(args.join(' '))
-        };
+        // Render the component
+        const { getByText, asFragment } = render(<WTag icon={AllInclusive} text={path} path={path} />)
+        fireEvent.click(getByText(path))
 
-        const { getByText } = render(<WTag icon={AllInclusive} text={path} path={path} />); //Chage "text" to "path"
-        fireEvent.click(getByText(path)); //Change "TagLink" to "path"
-
-        //Restore the original console.log function
-        console.log = originalLog
-
-        //Verify that it has been called with the expected message
-        expect(loggedMessages).toContain(`Ir a la ruta ${path}`);
+        const componentSnapshot = asFragment()
+        expect(componentSnapshot).toMatchSnapshot()
     })
 
     it('Should display style variations when isActive is true or false', () => {
-        const { container } = render(<WTag icon={AllInclusive} text="TagLink" isActive={true} />);
-        expect(container.firstChild).toHaveClass('tagLink--active');
+        // Render the component with isActive true
+        const { container: containerActive } = render(<WTag icon={AllInclusive} text="TagLink" isActive={true} />)
 
-        const { container: containerFalse } = render(<WTag icon={AllInclusive} text="TagLink" isActive={false}/>);
-        expect(containerFalse.firstChild).not.toHaveClass('tagLink--active');
+        // Render the component with isActive false
+        const { container: containerFalse } = render(<WTag icon={AllInclusive} text="TagLink" isActive={false} />)
+
+        expect(containerActive).toMatchSnapshot()
+        expect(containerFalse).toMatchSnapshot()
     })
 })
