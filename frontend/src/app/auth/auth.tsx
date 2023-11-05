@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { Box, Grid } from '@mui/material'
-
 import RootEnrollment from '../Enrollment'
 import './auth.scss'
 export default function EnrollmentHoc({ children }: { children: React.ReactNode }) {
