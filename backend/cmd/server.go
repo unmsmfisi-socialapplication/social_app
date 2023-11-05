@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/router"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/domain"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
 )
@@ -22,7 +22,7 @@ func main() {
 	go hub.RunChatManager()
 
 	// The HTTP Server
-	server := &http.Server{Addr: "0.0.0.0:3333", Handler: internal.Router(wsHandler)}
+	server := &http.Server{Addr: "0.0.0.0:3333", Handler: router.Router(wsHandler)}
 
 	// Server run context
 	serverCtx, serverStopCtx := context.WithCancel(context.Background())
