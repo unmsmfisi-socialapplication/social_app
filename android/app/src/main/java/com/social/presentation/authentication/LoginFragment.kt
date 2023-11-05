@@ -14,6 +14,7 @@ import com.social.utils.Validation
 import com.social.utils.Validation.setupValidation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -29,7 +30,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding = FragmentLoginBinding.bind(view)
         globalView = view
 
-        lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.evenFlow.collectLatest { event ->
                 when (event) {
                     is LoginViewModel.UILoginEvent.GetData -> {
