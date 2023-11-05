@@ -18,11 +18,10 @@ describe('WTag', () => {
     it('Should display style variations when isActive is true or false', () => {
         // Render the component with isActive true
         const { container: containerActive } = render(<WTag icon={AllInclusive} text="TagLink" isActive={true} />)
+        expect(containerActive).toMatchSnapshot()
 
         // Render the component with isActive false
         const { container: containerFalse } = render(<WTag icon={AllInclusive} text="TagLink" isActive={false} />)
-
-        expect(containerActive).toMatchSnapshot()
         expect(containerFalse).toMatchSnapshot()
     })
 })
