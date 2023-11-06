@@ -8,13 +8,13 @@ import { useState } from 'react'
 import { INITIAL_FORMIK_VALUES, REGISTER_VALUES, YUP_SCHEMA } from './constant'
 import { useFormik } from 'formik'
 import { validateEmail, validateName, validatePassword } from '@/utilities/Validation'
-import RegisterRepository from '@/domain/repositories/RegisterRepository'
+import AuthServices from '@/domain/usecases/AuthServises'
 
 export default function RegisterPage() {
     const [register, setRegister] = useState<any>(null)
 
     const registerRequestLogin = async (resquest: any) => {
-        const { data, error } = await RegisterRepository.registerRequest(resquest)
+        const { data, error } = await AuthServices.registerRequest(resquest)
         if (data && error == null) {
             setRegister({ ...register })
         } else {

@@ -6,4 +6,8 @@ export default class AuthServices {
         const { data, error } = await AuthRepository.authRequest(request)
         return { data, error }
     }
+    static async registerRequest(request: any) {
+        const { data, error } = await AuthRepository.registerRequest(request)
+        return { data, error }
+    }
 }
