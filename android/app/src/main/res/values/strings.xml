@@ -55,4 +55,5 @@
     <string name="user_exists">El usuario existe</string>
     <string name="description">Descripción</string>
     <string name="icon">icono</string>
+    <string name="hour">08:39 am</string>
 </resources>
