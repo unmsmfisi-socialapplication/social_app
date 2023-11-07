@@ -50,9 +50,25 @@
                     app:riv_border_color="@color/white"
                     app:riv_border_width="6dp"
                     app:riv_oval="true" />
+
+                <ImageButton
+                    android:id="@+id/button_add_profile_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="100dp"
+                    android:src="@drawable/icon_camera"
+                    android:background="@drawable/round_style"
+                    android:backgroundTint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/UserProfileFontPage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.955"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/color06" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/text_name_ProfileUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -63,11 +79,21 @@
                 android:layout_marginTop="5dp"/>
 
             <TextView
+                android:id="@+id/text_direction_ProfileUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/poppins_light"
                 android:text="@string/user_profile"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/text_bibliography_ProfileUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/user_bibliography"
                 android:textSize="16dp"/>
 
             <LinearLayout
