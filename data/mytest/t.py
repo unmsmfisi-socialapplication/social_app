@@ -1,6 +1,5 @@
 import unittest
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col
 import tempfile
 
 from sa_lr_pyspark_preprocessing import ID_COLUMN, LABEL_COLUMN, TWEET_COLUMN, pre_process
