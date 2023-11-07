@@ -1,6 +1,6 @@
 BEGIN;
 
-CREATE TABLE sa.SOC_APP_USER_PROFILE_FOLLOW (
+CREATE TABLE SOC_APP_USER_PROFILE_FOLLOW (
   follow_id bigserial,
   follower_profile_id bigint NOT NULL,
   following_profile_id bigint NOT NULL,
