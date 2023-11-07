@@ -12,7 +12,7 @@
     <string name="create_new_account">Crear una nueva cuenta</string>
     <string name="continue_with_google">Continuar con Google</string>
     <string name="error_email">Correo electronico inválido</string>
-    <string name="error_password">Contraseña inválida</string>
+    <string name="error_password">Mínimo 8 caracteres</string>
     <string name="or_enter_with">O ingresa con</string>
     <string name="remember_me">Recuérdame</string>
     <string name="google">Google</string>
@@ -27,8 +27,8 @@
     <string name="onboarding_remote_meeting_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
     <string name="onboarding_online_friends_title">Chatea con amigos</string>
     <string name="onboarding_online_friends_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
-    <string name="full_name">Tu nombre</string>
-    <string name="conditions_register">By Using this app you agree with the Terms of Service</string>
+    <string name="full_name">Nombres completos</string>
+    <string name="conditions_register">Al utilizar esta aplicación, acepta los Términos de Servicio</string>
     <string name="join_now">Únete Ahora</string>
     <string name="recover_password">Recuperar contraseña</string>
     <string name="enter_email">Ingresa tu correo electrónico</string>
@@ -68,4 +68,6 @@
     <string name="followings">Following</string>
     <string name="featured">Destacados</string>
     <string name="activity">Actividad</string>
+    <string name="error_user">Mínimo 6 caracteres</string>
+    <string name="error_coincidence">Contraseñas no coinciden</string>
 </resources>

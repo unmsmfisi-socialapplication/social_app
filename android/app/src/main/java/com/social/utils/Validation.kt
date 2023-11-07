@@ -15,6 +15,10 @@ object Validation {
         return password.isNotEmpty() && password.length >= 8 && !password.contains(" ")
     }
 
+    fun isUserValid(user: String): Boolean {
+        return user.isNotEmpty() && user.length >= 6 && !user.contains(" ")
+    }
+
     fun setupValidation(
         inputField: EditText,
         errorView: View,
@@ -27,7 +31,8 @@ object Validation {
                     start: Int,
                     count: Int,
                     after: Int,
-                ) {}
+                ) {
+                }
 
                 override fun onTextChanged(
                     s: CharSequence?,
@@ -45,6 +50,40 @@ object Validation {
                 }
 
                 override fun afterTextChanged(s: Editable?) {}
+            },
+        )
+    }
+
+    fun setupCoincidence(
+        inputField1: EditText,
+        inputField2: EditText,
+        errorView: View,
+    ) {
+        inputField2.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                }
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    if (s.toString() == inputField1.text.toString()) {
+                        errorView.visibility = View.GONE
+                    } else {
+                        errorView.visibility = View.VISIBLE
+                    }
+                }
             },
         )
     }
