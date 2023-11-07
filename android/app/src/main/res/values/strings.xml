@@ -56,4 +56,16 @@
     <string name="description">Descripción</string>
     <string name="icon">icono</string>
     <string name="hour">08:39 am</string>
+    <string name="user_profile">@user_profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="number_post">100</string>
+    <string name="number_photos">120</string>
+    <string name="number_followers">1000</string>
+    <string name="number_followings">64</string>
+    <string name="post">Post</string>
+    <string name="photos">Photos</string>
+    <string name="followers">Followers</string>
+    <string name="followings">Following</string>
+    <string name="featured">Destacados</string>
+    <string name="activity">Actividad</string>
 </resources>
