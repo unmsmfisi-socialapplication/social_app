@@ -101,9 +101,6 @@ export default function TestPage() {
                 <WSearch />
                 {/* Otras partes de tu aplicación */}
             </div>
-            <div className="App">
-                <SquareButton />
-            </div>
 
             <WCircleIcon iconSize={30} icon={CheckIcon} />
             <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
