@@ -34,7 +34,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearance="@style/ImageViewBottomRadius"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="centerCrop"/>
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/img_contactProfile"
@@ -59,7 +59,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="@string/full_name"
                 android:textStyle="bold"
-                android:textSize="28dp"
+                android:textSize="28sp"
                 android:layout_marginTop="5dp"/>
 
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/poppins_light"
                 android:text="@string/user_profile"
-                android:textSize="16dp"/>
+                android:textSize="16sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,7 +86,7 @@
                     android:fontFamily="@font/poppins"
                     android:text="@string/edit_profile"
                     android:paddingHorizontal="50dp"
-                    android:layout_marginRight="30dp"/>
+                    android:layout_marginEnd="30dp"/>
 
                 <ImageButton
                     android:id="@+id/button_setting_profile"
@@ -95,6 +95,7 @@
                     android:background="@drawable/style_imagebtn_radius"
                     android:src="@drawable/icon_settings"
                     android:paddingHorizontal="10dp"
+                    android:contentDescription="@string/description"
                     android:paddingVertical="4dp"/>
             </LinearLayout>
 
@@ -121,14 +122,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:text="@string/number_post"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text="@string/post"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textColor="@color/color06"/>
                 </LinearLayout>
 
@@ -152,14 +153,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:text="@string/number_photos"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text="@string/photos"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textColor="@color/color06"/>
                 </LinearLayout>
 
@@ -183,14 +184,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:text="@string/number_followers"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text="@string/followers"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textColor="@color/color06"/>
                 </LinearLayout>
 
@@ -214,14 +215,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:text="@string/number_followings"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text="@string/followings"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textColor="@color/color06"/>
                 </LinearLayout>
             </LinearLayout>
