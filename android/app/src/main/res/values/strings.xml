@@ -19,7 +19,7 @@
     <string name="mastodon">Mastodon</string>
     <string name="sign_up">Regístrate</string>
     <string name="does_not_count">¿No tienes una cuenta?</string>
-    <string name="none"></string>
+    <string name="none">_</string>
     <string name="onboarding_register">Regístrate</string>
     <string name="onboarding_connected_world_title">Encuentra amigos y obtén inspiración</string>
     <string name="onboarding_connected_world_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
@@ -46,5 +46,14 @@
     <string name="video_camera">Video</string>
     <string name="end_call">Cortar</string>
     <string name="call_in_progress">Llamada en curso</string>
-
+    <string name="edit_photo">Editar foto</string>
+    <string name="name">Nombre</string>
+    <string name="user_name">Nombre de usuario</string>
+    <string name="biography">Biografia</string>
+    <string name="add_link">Agregar enlace</string>
+    <string name="photo_profile">Foto de perfil</string>
+    <string name="user_exists">El usuario existe</string>
+    <string name="description">Descripción</string>
+    <string name="icon">icono</string>
+    <string name="hour">08:39 am</string>
 </resources>
