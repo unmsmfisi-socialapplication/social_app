@@ -12,9 +12,22 @@ interface WButtonProps {
     size?: 'large'
     disabled?: boolean
     variant?: 'outlined' | 'contained'
+    loading?: boolean
+    onClick?: () => void
 }
 
-const WButton: React.FC<WButtonProps> = ({ dataTestid, id, disabled, typeColor, text, type, size, variant }) => {
+const WButton: React.FC<WButtonProps> = ({
+    dataTestid,
+    id,
+    disabled,
+    typeColor,
+    text,
+    type,
+    size,
+    variant,
+    loading,
+    onClick,
+}) => {
     const buttonClass = `button typeButton--${disabled ? 'disabled' : typeColor}`
     return (
         <Button
@@ -26,8 +39,9 @@ const WButton: React.FC<WButtonProps> = ({ dataTestid, id, disabled, typeColor, 
             size={size}
             disabled={disabled}
             variant={variant}
+            onClick={onClick}
         >
-            {text}
+            {loading ? 'Cargando...' : text}
         </Button>
     )
 }
@@ -40,4 +54,6 @@ WButton.defaultProps = {
     disabled: false,
     variant: 'contained',
     dataTestid: 'button',
+    loading: false,
+    onClick: () => {},
 }
