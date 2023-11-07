@@ -24,37 +24,37 @@ describe('Validate passwords', () => {
 describe('Text Similarity Functions', () => {
     describe('distanceLevenshtein', () => {
         it('Should return the correct Levenshtein distance for similar strings', () => {
-            const distance = distanceLevenshtein('kitten', 'sitting');
-            expect(distance).toBe(3);
-        });
+            const distance = distanceLevenshtein('kitten', 'sitting')
+            expect(distance).toBe(3)
+        })
 
         it('Should return 0 for identical strings', () => {
-            const distance = distanceLevenshtein('apple', 'apple');
-            expect(distance).toBe(0);
-        });
+            const distance = distanceLevenshtein('apple', 'apple')
+            expect(distance).toBe(0)
+        })
 
         it('Should return the correct Levenshtein distance for different strings', () => {
-            const distance = distanceLevenshtein('hello', 'world');
-            expect(distance).toBe(4);
-        });
-    });
+            const distance = distanceLevenshtein('hello', 'world')
+            expect(distance).toBe(4)
+        })
+    })
 
     describe('mostSimilarPhrase', () => {
-        const phrases = ['apple', 'banana', 'cherry', 'date', 'fig'];
+        const phrases = ['apple', 'banana', 'cherry', 'date', 'fig']
 
         it('Should return the most similar phrase when a similar one exists', () => {
-            const similarPhrase = mostSimilarPhrase('apples', phrases);
-            expect(similarPhrase).toBe('apple');
-        });
+            const similarPhrase = mostSimilarPhrase('apples', phrases)
+            expect(similarPhrase).toBe('apple')
+        })
 
         it('Should return the exact phrase when its in the list', () => {
-            const exactPhrase = mostSimilarPhrase('bananas', phrases);
-            expect(exactPhrase).toBe('banana');
-        });
+            const exactPhrase = mostSimilarPhrase('bananas', phrases)
+            expect(exactPhrase).toBe('banana')
+        })
 
         it('Should return the most similar phrase when no exact match is found', () => {
-            const similarPhrase = mostSimilarPhrase('dates', phrases);
-            expect(similarPhrase).toBe('date');
-        });
-    });
-});
+            const similarPhrase = mostSimilarPhrase('dates', phrases)
+            expect(similarPhrase).toBe('date')
+        })
+    })
+})
