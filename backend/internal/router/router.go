@@ -87,6 +87,5 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	//interestTopics
 	interestTopicsRouter := interest_topics.InterestTopicsModuleRouter(dbInstance)
 	r.Mount("/interestTopics", interestTopicsRouter)
-
 	return r
 }
