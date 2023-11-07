@@ -23,7 +23,6 @@ func (rh *FollowerUserHandler) FollowProfile(w http.ResponseWriter, r *http.Requ
 	}
 	err := json.NewDecoder(r.Body).Decode(&data)
 	if err != nil {
-
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -36,6 +35,7 @@ func (rh *FollowerUserHandler) FollowProfile(w http.ResponseWriter, r *http.Requ
 		default:
 			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", er.Error())
 		}
+	} else {
+		json.NewEncoder(w).Encode(data)
 	}
-	json.NewEncoder(w).Encode(data)
 }

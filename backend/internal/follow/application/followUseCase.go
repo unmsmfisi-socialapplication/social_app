@@ -7,7 +7,8 @@ import (
 )
 
 var (
-	ErrFollowHimself = errors.New("PROFILE_FOLLOW_HIMSELF")
+	ErrFollowHimself        = errors.New("PROFILE_FOLLOW_HIMSELF")
+	ErrForeignKeyConstraint = errors.New("VIOLATES_FOREIGN_KEY_CONSTRAINT")
 )
 
 type FollowerRepository interface {
