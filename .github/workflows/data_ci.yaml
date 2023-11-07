@@ -58,7 +58,7 @@ jobs:
         run: |
           # Perform syntax linting using 'ruff'
           # Stop the build if there are Python syntax errors or undefined names
-          ruff --format=github --select=E,F --ignore=E501 --target-version=py311 .
+          ruff -v --select=E,F --ignore=E501 --target-version=py310 .
 
       - name: Run Tests
         run: echo "Run future tests"
