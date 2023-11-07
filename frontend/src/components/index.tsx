@@ -24,3 +24,5 @@ export { default as WComentThink } from './molecules/CommentThink/index'
 export { default as WDetailImage } from './molecules/DetailsImage/index'
 // export organism components
 export { default as WCardAuth } from './organisms/CardAuth'
+export { default as WRightBar } from './organisms/RightBar/RightBar'
+export { default as WSideBar } from './organisms/SideBar/SideBar'
