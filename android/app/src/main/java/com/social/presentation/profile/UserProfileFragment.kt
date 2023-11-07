@@ -10,7 +10,7 @@ import com.social.R
 import com.social.databinding.FragmentUserProfileBinding
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
-    private lateinit var binding: FragmentUserProfileBinding
+    lateinit var binding: FragmentUserProfileBinding
 
     override fun onViewCreated(
         view: View,
@@ -76,11 +76,13 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
     }
 
-    private fun convertNumberToK(number: Int): String {
-        return when {
-            number >= 1000 && number < 1000000 -> "${number / 1000}k"
-            number >= 1000000 -> "${number / 1000000}M"
-            else -> number.toString()
+    companion object {
+        fun convertNumberToK(number: Int): String {
+            return when {
+                number >= 1000000 -> "${number / 1000000}.${(number % 1000000) / 100000}M"
+                number >= 1000 -> "${number / 1000}.${(number % 1000) / 100}k"
+                else -> number.toString()
+            }
         }
     }
 }
