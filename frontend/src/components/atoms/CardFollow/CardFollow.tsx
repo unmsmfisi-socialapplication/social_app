@@ -5,10 +5,10 @@ import styles from './CardFollow.module.scss'
 interface WCardFollowProps {
     avatar?: string
     name?: string
-    handle?: string
+    userhandle?: string
 }
 
-const WCardFollow: React.FC<WCardFollowProps> = ({ avatar, name, handle }) => {
+const WCardFollow: React.FC<WCardFollowProps> = ({ avatar, name, userhandle }) => {
     return (
         <Card className={styles.cardFollow}>
             <Avatar src={avatar} className={styles.avatar} />
@@ -18,7 +18,7 @@ const WCardFollow: React.FC<WCardFollowProps> = ({ avatar, name, handle }) => {
                         {name}
                     </Typography>
                     <Typography color="textSecondary" className={styles.userHandle}>
-                        @{handle}
+                        @{userhandle}
                     </Typography>
                 </div>
             </CardContent>
@@ -34,5 +34,5 @@ export default WCardFollow
 WCardFollow.defaultProps = {
     avatar: 'https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png',
     name: 'Nombre de usuario',
-    handle: 'handle',
+    userhandle: 'handle',
 }
