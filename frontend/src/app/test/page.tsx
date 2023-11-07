@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Button } from '@mui/material'
-import { WButton, WInput, WCircleIcon, WModalPhoto, WComment, WButtonMotion, WCardFollow } from '@/components'
+import { WButton, WInput, WCircleIcon, WModalPhoto, WComment, WButtonMotion, WCardFollow, WSearch } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
 import AllInclusive from '@mui/icons-material/AllInclusive'
@@ -97,6 +97,14 @@ export default function TestPage() {
                 />
             </div>
 
+            <div>
+                <WSearch />
+                {/* Otras partes de tu aplicación */}
+            </div>
+            <div className="App">
+                <SquareButton />
+            </div>
+
             <WCircleIcon iconSize={30} icon={CheckIcon} />
             <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
             <WModalPhoto warning />
@@ -119,7 +127,7 @@ export default function TestPage() {
                 <WCardFollow
                     avatar="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     name="XokasXD"
-                    handle="XokasXD"
+                    userhandle="XokasXD"
                 />
             </div>
         </RootLayout>
