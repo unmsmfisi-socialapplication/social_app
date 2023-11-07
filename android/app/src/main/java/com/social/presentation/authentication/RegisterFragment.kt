@@ -94,7 +94,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             viewModel.insertData(RegisterEvent.EnterEmail(value = email))
             viewModel.insertData(RegisterEvent.EnterPassword(value = passwordConfirm))
             viewModel.insertData(RegisterEvent.RegisterUser)
-            //navigateToPin()
+            // navigateToPin()
         }
     }
 
@@ -125,11 +125,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
     }
 
-    private fun setupCoincidence(){
+    private fun setupCoincidence() {
         Validation.setupCoincidence(
             binding.txtPasswordRegister,
             binding.txtConfirmPasswordRegister,
-            binding.errorCoincidence
+            binding.errorCoincidence,
         )
     }
 
