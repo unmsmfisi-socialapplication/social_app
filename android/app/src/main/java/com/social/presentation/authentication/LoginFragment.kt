@@ -1,5 +1,6 @@
 package com.social.presentation.authentication
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -29,12 +30,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
         globalView = view
-
+        readPreference()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.evenFlow.collectLatest { event ->
                 when (event) {
                     is LoginViewModel.UILoginEvent.GetData -> {
+                        savePreference()
                         val userData = viewModel.state.value!!.dataLogin?.get(0)
+
                         Log.i("dato_usuario", userData.toString())
                     }
 
@@ -45,8 +48,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
         }
 
-        // setupEmailValidation()
-        // setupPasswordValidation()
+        setupUserValidation()
+        setupPasswordValidation()
         action()
     }
 
@@ -78,14 +81,20 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         showMessage(requireContext(), "Pendiente")
     }
 
-    private fun setupEmailValidation() {
-        setupValidation(binding.inputEmail, binding.errorEmail) { email ->
-            Validation.isEmailValid(email)
+    private fun setupUserValidation() {
+        setupValidation(
+            binding.inputEmail,
+            binding.errorEmail,
+        ) { email ->
+            Validation.isUserValid(email)
         }
     }
 
     private fun setupPasswordValidation() {
-        setupValidation(binding.inputPassword, binding.errorPassword) { password ->
+        setupValidation(
+            binding.inputPassword,
+            binding.errorPassword,
+        ) { password ->
             Validation.isPasswordValid(password)
         }
     }
@@ -93,21 +102,35 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun loginButton() {
         val email = binding.inputEmail.text.toString()
         val password = binding.inputPassword.text.toString()
-        /*if (Validation.isEmailValid(email) && Validation.isPasswordValid(password)) {
-            performLogin(email, password)
-        } else {
-            showMessage(requireContext(), "Campos vacíos")
-        }*/
-        viewModel.getData(LoginEvent.EnterUser(value = email))
-        viewModel.getData(LoginEvent.EnterPassword(value = password))
-        viewModel.getData(LoginEvent.SearchUser)
-        // viewModel.getData(LoginEvent.SearchUser)
+        if (Validation.isPasswordValid(password) && Validation.isUserValid(email)) {
+            viewModel.getData(LoginEvent.EnterUser(value = email))
+            viewModel.getData(LoginEvent.EnterPassword(value = password))
+            viewModel.getData(LoginEvent.SearchUser)
+        }
     }
 
-    private fun performLogin(
-        email: String,
-        password: String,
-    ) {
-        showMessage(requireContext(), "$email - $password")
+    private fun readPreference() {
+        binding.apply {
+            val preference = requireContext().getSharedPreferences("login_saved", MODE_PRIVATE)
+            val check = preference.getBoolean("check", false)
+            if (check) {
+                val usr = preference.getString("user", "")
+                val psw = preference.getString("psw", "")
+                inputEmail.setText(usr)
+                inputPassword.setText(psw)
+                checkBox.isChecked = check
+            }
+        }
+    }
+
+    private fun savePreference() {
+        binding.apply {
+            val preference = requireContext().getSharedPreferences("login_saved", MODE_PRIVATE)
+            val editor = preference.edit()
+            editor.putString("user", inputEmail.text.toString())
+            editor.putString("psw", inputPassword.text.toString())
+            editor.putBoolean("check", checkBox.isChecked)
+            editor.apply()
+        }
     }
 }

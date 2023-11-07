@@ -70,7 +70,8 @@ class LoginViewModel
                             }
 
                             is Resource.Success -> {
-                                _state.value = LoginDataState(error = user.message ?: "Autenticado")
+                                _state.value = LoginDataState(dataLogin = "${user.message}")
+                                eventFlowM.emit(UILoginEvent.GetData)
                                 eventFlowM.emit(UILoginEvent.ShowMessage(user.message.toString()))
                             }
                         }

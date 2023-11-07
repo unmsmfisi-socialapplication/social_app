@@ -142,6 +142,18 @@
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
+    <style name="ButtonStyleProfile2">
+        <item name="android:layout_width">1dp</item>
+        <item name="cornerRadius">5dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/color03</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="strokeColor">@color/color03</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
     <style name="ImageIconNavBar">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">22.5dp</item>
@@ -154,5 +166,10 @@
         <item name="cornerSizeBottomRight">25dp</item>
         <item name="cornerSizeBottomLeft">25dp</item>
         <item name="cornerSizeTopLeft">25dp</item>
+    </style>
+
+    <style name="ImageViewBottomRadius">
+        <item name="cornerSizeBottomRight">15dp</item>
+        <item name="cornerSizeBottomLeft">15dp</item>
     </style>
 </resources>

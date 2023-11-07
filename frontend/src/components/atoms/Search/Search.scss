@@ -1,0 +1,20 @@
+.custom-search {
+    width: 50%;
+    background-color: #ebeef0;
+    border-radius: 25px; /* Agrega un borde redondeado */
+
+    & .MuiOutlinedInput-root {
+        border: none; /* Elimina el borde por defecto de Material-UI */
+    }
+}
+
+/* Estilos para el icono de búsqueda */
+.custom-search .MuiSvgIcon-root {
+    color: #000; /* Cambia el color del icono a negro */
+}
+
+/* Estilos para el botón de búsqueda */
+.custom-search .MuiButton-root {
+    background-color: #ebeef0; /* Ajusta el fondo del botón a juego */
+    border: none; /* Elimina el borde del botón */
+}
