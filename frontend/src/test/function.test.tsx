@@ -1,7 +1,7 @@
 import { validatePassword } from '../utilities/Functions'
-const { distanceLevenshtein, mostSimilarPhrase } = require('./index');
-//import { distanceLevenshtein } from '../utilities/Functions'
-//import { mostSimilarPhrase } from '../utilities/Functions'
+//const { distanceLevenshtein, mostSimilarPhrase } = require('./index');
+import { distanceLevenshtein } from '../utilities/Functions'
+import { mostSimilarPhrase } from '../utilities/Functions'
 
 //Test: Validate passwords
 describe('Validate passwords', () => {
