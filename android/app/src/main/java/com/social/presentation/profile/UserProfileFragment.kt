@@ -15,17 +15,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
-        ) {
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserProfileBinding.bind(view)
+        action()
         setupClickListeners()
         updateTextViewsWithKFormat(
             binding.textNumberPost,
             binding.textNumberPhotos,
             binding.textNumberFollowers,
-            binding.textNumberFollowings
+            binding.textNumberFollowings,
         )
-        action()
     }
 
     private fun action() {
