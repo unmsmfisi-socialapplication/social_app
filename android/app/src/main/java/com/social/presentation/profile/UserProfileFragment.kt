@@ -25,7 +25,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         action()
     }
 
-    private fun action(){
+    private fun action() {
         binding.buttonEditProfile.setOnClickListener {
             findNavController().navigate(R.id.action_userProfileFragment_to_editProfileFragment)
         }
