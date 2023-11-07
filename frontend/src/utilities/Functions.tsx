@@ -5,47 +5,47 @@ export function validatePassword(password1: string, password2: string): boolean 
 
 export function distanceLevenshtein(str1: string, str2: string): number {
     if (str1.length < str2.length) {
-      return distanceLevenshtein(str2, str1);
+        return distanceLevenshtein(str2, str1)
     }
-  
+
     if (str2.length === 0) {
-      return str1.length;
+        return str1.length
     }
-  
-    let previousRow: number[] = [];
+
+    let previousRow: number[] = []
     for (let i = 0; i <= str2.length; i++) {
-      previousRow.push(i);
+        previousRow.push(i)
     }
-  
+
     for (let i = 0; i < str1.length; i++) {
-      let currentRow: number[] = [i + 1];
-  
-      for (let j = 0; j < str2.length; j++) {
-        const insertions = previousRow[j + 1] + 1;
-        const deletions = currentRow[j] + 1;
-        const substitutions = previousRow[j] + (str1[i] !== str2[j] ? 1 : 0);
-  
-        currentRow.push(Math.min(insertions, deletions, substitutions));
-      }
-  
-      previousRow = currentRow;
+        let currentRow: number[] = [i + 1]
+
+        for (let j = 0; j < str2.length; j++) {
+            const insertions = previousRow[j + 1] + 1
+            const deletions = currentRow[j] + 1
+            const substitutions = previousRow[j] + (str1[i] !== str2[j] ? 1 : 0)
+
+            currentRow.push(Math.min(insertions, deletions, substitutions))
+        }
+
+        previousRow = currentRow
     }
-  
-    return previousRow[str2.length];
+
+    return previousRow[str2.length]
 }
 
 export function mostSimilarPhrase(phrase: string, arrayPhrase: string[]): string | null {
-    let mostSimilarPhrase: string | null = null;
-    let minimalDistance: number = Infinity;
-  
+    let mostSimilarPhrase: string | null = null
+    let minimalDistance: number = Infinity
+
     for (const f of arrayPhrase) {
-      const distance = distanceLevenshtein(phrase, f);
-  
-      if (distance < minimalDistance) {
-        minimalDistance = distance;
-        mostSimilarPhrase = f;
-      }
+        const distance = distanceLevenshtein(phrase, f)
+
+        if (distance < minimalDistance) {
+            minimalDistance = distance
+            mostSimilarPhrase = f
+        }
     }
-  
-    return mostSimilarPhrase;
+
+    return mostSimilarPhrase
 }
