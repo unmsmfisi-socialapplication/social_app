@@ -1,11 +1,10 @@
 package com.social.profileTest
 
 import com.social.presentation.profile.UserProfileFragment
-import org.junit.Test
 import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class UserProfileFragmentTest {
-
     @Test
     fun testConvertNumberToK() {
         // Prueba con un número mayor o igual a 1000000
