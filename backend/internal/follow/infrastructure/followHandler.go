@@ -36,6 +36,22 @@ func (rh *FollowerUserHandler) FollowProfile(w http.ResponseWriter, r *http.Requ
 			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", er.Error())
 		}
 	} else {
-		json.NewEncoder(w).Encode(data)
+		responseData := struct {
+			Response string `json:"response"`
+			Follow   struct {
+				Follower_profile_id  int `json:"follower_profile_id"`
+				Following_profile_id int `json:"following_profile_id"`
+			} `json:"follow"`
+		}{
+			Response: "Profile Followed Succesfully",
+			Follow: struct {
+				Follower_profile_id  int `json:"follower_profile_id"`
+				Following_profile_id int `json:"following_profile_id"`
+			}{
+				Follower_profile_id:  data.Follower_profile_id,
+				Following_profile_id: data.Following_profile_id,
+			},
+		}
+		json.NewEncoder(w).Encode(responseData)
 	}
 }
