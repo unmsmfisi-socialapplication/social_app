@@ -12,7 +12,10 @@ import com.social.databinding.FragmentUserProfileBinding
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private lateinit var binding: FragmentUserProfileBinding
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+        ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserProfileBinding.bind(view)
         setupClickListeners()
