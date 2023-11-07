@@ -1,0 +1,50 @@
+.cardFollow {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    justify-content: space-between; /* Alinea los elementos horizontalmente */
+    transition: background-color 0.3s;
+    max-height: 50px;
+    width: 350px;
+    &:hover {
+        background-color: #f5f5f5;
+    }
+
+    .avatar {
+        margin-right: 0px;
+        height: 60px;
+        width: 60px;
+    }
+
+    .cardContent {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .userInfo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .userName {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 0px;
+    }
+
+    .userHandle {
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    .followButton {
+        border: 1px solid #1da1f2;
+        font-weight: bold;
+        background-color: white;
+        color: #1da1f2; /* Texto azul */
+        border-radius: 16px; /* Bordes redondeados */
+        width: 150px;
+        text-transform: capitalize;
+    }
+}
