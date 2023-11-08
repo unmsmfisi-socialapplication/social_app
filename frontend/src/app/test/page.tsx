@@ -1,7 +1,17 @@
 'use client'
 import { useState } from 'react'
 import { Button } from '@mui/material'
-import { WButton, WInput, WCircleIcon, WModalPhoto, WComment, WButtonMotion, WCardFollow, WSearch } from '@/components'
+import {
+    WButton,
+    WInput,
+    WCircleIcon,
+    WModalPhoto,
+    WComment,
+    WButtonMotion,
+    WCardFollow,
+    WSearch,
+    WTopicFollow,
+} from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
 import AllInclusive from '@mui/icons-material/AllInclusive'
@@ -126,6 +136,9 @@ export default function TestPage() {
                     name="XokasXD"
                     userhandle="XokasXD"
                 />
+            </div>
+            <div>
+                <WTopicFollow name="Tecnología" topicHandle="Todo sobre tecnología" />
             </div>
         </RootLayout>
     )
