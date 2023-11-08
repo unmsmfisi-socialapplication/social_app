@@ -73,7 +73,7 @@ class ListPostFragment : Fragment(R.layout.fragment_list_post) {
         viewModel.obtainData()
     }
 
-    private fun loadImage(
+    fun loadImage(
         imageURL: String,
         imageView: ShapeableImageView,
     ) {

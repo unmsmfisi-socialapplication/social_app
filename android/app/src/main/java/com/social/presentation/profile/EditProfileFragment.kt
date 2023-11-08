@@ -86,7 +86,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         )
     }
 
-    private fun userUnique(username: String): Boolean {
+    fun userUnique(username: String): Boolean {
         if (username == "c" || username == "cr" || username == "crh") {
             return false
         }

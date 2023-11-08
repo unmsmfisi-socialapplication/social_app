@@ -92,6 +92,7 @@ dependencies {
     // kotlin extenciones
     implementation("androidx.room:room-ktx:$roomVersion")
     implementation("org.mockito:mockito-core:5.1.1")
+    implementation("org.mockito:mockito-android:2.28.2")
     implementation("com.makeramen:roundedimageview:2.3.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -102,6 +103,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:5.1.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.09.01"))
