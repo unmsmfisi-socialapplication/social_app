@@ -23,6 +23,7 @@ export { default as WModalPhoto } from './molecules/modalPhoto/index'
 export { default as WComment } from './molecules/Comment/comment'
 export { default as WComentThink } from './molecules/CommentThink/index'
 export { default as WDetailImage } from './molecules/DetailsImage/index'
+export { default as WUserCHATCTA } from './molecules/UserChatCTA/index'
 // export organism components
 export { default as WCardAuth } from './organisms/CardAuth'
 export { default as WRightBar } from './organisms/RightBar/RightBar'
