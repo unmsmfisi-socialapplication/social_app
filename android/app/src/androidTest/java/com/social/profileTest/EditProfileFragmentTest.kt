@@ -5,7 +5,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class EditProfileFragmentTest {
-
     @Test
     fun userUniqueTest() {
         val fragment = EditProfileFragment()
