@@ -1,6 +1,7 @@
 package application
 
 import (
+	"database/sql"
 	"errors"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/domain"
@@ -30,10 +31,11 @@ func NewLoginUseCase(r UserRepository) *LoginUseCase {
 func (l *LoginUseCase) Authenticate(username, password string) (bool, error) {
 	user, err := l.repo.GetUserByUsername(username)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return false, ErrUserNotFound
+		}
+
 		return false, err
-	}
-	if username != user.Username {
-		return false, ErrUserNotFound
 	}
 
 	if !user.ComparePassword(password) {
