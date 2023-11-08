@@ -4,6 +4,8 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("com.google.dagger.hilt.android")
+    id("com.google.firebase.appdistribution")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -26,6 +28,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            firebaseAppDistribution {
+                groups = "MOBILE"
+            }
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
