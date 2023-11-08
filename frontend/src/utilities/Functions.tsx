@@ -49,3 +49,17 @@ export function mostSimilarPhrase(phrase: string, arrayPhrase: string[]): string
 
     return mostSimilarPhrase
 }
+
+export function findMatchingWords(text: string, words: string[]): string[] {
+    if (text === '') {
+      return ['The entrance is empty'];
+    }
+  
+    const wordsMatching = words.filter(word => word.indexOf(text) === 0);
+  
+    if (wordsMatching.length > 0) {
+      return wordsMatching;
+    } else {
+      return ['No matching words found'];
+    }
+}
