@@ -12,7 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/syne_bold"
         android:text="@string/student_network"
         android:textSize="20sp"
@@ -24,7 +24,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -65,14 +65,14 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_email"
                 style="@style/TextInputEditTextStyle"
-                android:hint="@string/email"
+                android:hint="@string/user_name"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/error_email"
             style="@style/TextViewError"
-            android:text="@string/error_email" />
+            android:text="@string/error_user" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -95,14 +95,14 @@
         <CheckBox
             android:id="@+id/checkBox"
             style="@style/TextView16sp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:checked="true"
             android:text="@string/remember_me" />
 
         <Button
             android:id="@+id/button_login"
             style="@style/ButtonStyle"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/color01"
             android:textColor="@color/white"
             android:text="@string/login" />
@@ -118,7 +118,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -171,23 +171,7 @@
                 android:text="@string/mastodon" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:gravity="center"
-            android:orientation="horizontal">
 
-            <TextView
-                style="@style/TextView16sp"
-                android:text="@string/does_not_count" />
-
-            <TextView
-                android:id="@+id/text_linked_register"
-                style="@style/TextViewLinked"
-                android:layout_marginStart="5dp"
-                android:text="@string/sign_up"/>
-        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

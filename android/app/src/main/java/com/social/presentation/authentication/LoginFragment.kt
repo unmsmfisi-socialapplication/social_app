@@ -37,7 +37,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     is LoginViewModel.UILoginEvent.GetData -> {
                         savePreference()
                         val userData = viewModel.state.value!!.dataLogin?.get(0)
-
+                        findNavController()
+                            .navigate(R.id.userProfileFragment)
                         Log.i("dato_usuario", userData.toString())
                     }
 
@@ -48,8 +49,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
         }
 
-        // setupEmailValidation()
-        // setupPasswordValidation()
+        setupUserValidation()
+        setupPasswordValidation()
         action()
     }
 
@@ -81,14 +82,20 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         showMessage(requireContext(), "Pendiente")
     }
 
-    private fun setupEmailValidation() {
-        setupValidation(binding.inputEmail, binding.errorEmail) { email ->
-            Validation.isEmailValid(email)
+    private fun setupUserValidation() {
+        setupValidation(
+            binding.inputEmail,
+            binding.errorEmail,
+        ) { email ->
+            Validation.isUserValid(email)
         }
     }
 
     private fun setupPasswordValidation() {
-        setupValidation(binding.inputPassword, binding.errorPassword) { password ->
+        setupValidation(
+            binding.inputPassword,
+            binding.errorPassword,
+        ) { password ->
             Validation.isPasswordValid(password)
         }
     }
@@ -96,22 +103,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun loginButton() {
         val email = binding.inputEmail.text.toString()
         val password = binding.inputPassword.text.toString()
-        /*if (Validation.isEmailValid(email) && Validation.isPasswordValid(password)) {
-            performLogin(email, password)
-        } else {
-            showMessage(requireContext(), "Campos vacíos")
-        }*/
-        viewModel.getData(LoginEvent.EnterUser(value = email))
-        viewModel.getData(LoginEvent.EnterPassword(value = password))
-        viewModel.getData(LoginEvent.SearchUser)
-        // viewModel.getData(LoginEvent.SearchUser)
-    }
-
-    private fun performLogin(
-        email: String,
-        password: String,
-    ) {
-        showMessage(requireContext(), "$email - $password")
+        if (Validation.isPasswordValid(password) && Validation.isUserValid(email)) {
+            viewModel.getData(LoginEvent.EnterUser(value = email))
+            viewModel.getData(LoginEvent.EnterPassword(value = password))
+            viewModel.getData(LoginEvent.SearchUser)
+        }
     }
 
     private fun readPreference() {
