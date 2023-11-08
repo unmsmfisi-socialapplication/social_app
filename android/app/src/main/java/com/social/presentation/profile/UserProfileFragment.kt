@@ -103,7 +103,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private fun updateTextStyle(textView: TextView) {
         textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-
     }
 
     private fun resetTextStyle(vararg textViews: TextView) {
@@ -129,9 +128,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
     }
 
-
     private fun setupAdapter() {
-       binding.recyclerPostProfile.adapter = adapter
+        binding.recyclerPostProfile.adapter = adapter
     }
 
     private fun observeViewModel() {
@@ -147,5 +145,4 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     ) {
         Picasso.get().load(imageURL).into(imageView)
     }
-
 }
