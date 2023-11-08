@@ -65,7 +65,7 @@ func (r *ImportProfileRequest) ToProfile() *domain.Profile {
 		lastname = ""
 	}
 
-	return domain.NewProfile(
+	profile := domain.NewProfileToImport(
 		r.Object.Id,
 		name,
 		lastname,
@@ -73,6 +73,8 @@ func (r *ImportProfileRequest) ToProfile() *domain.Profile {
 		r.Object.ProfileImage,
 		r.Object.Summary,
 	)
+
+	return profile
 }
 
 func (r *ImportProfileRequest) Validate() error {

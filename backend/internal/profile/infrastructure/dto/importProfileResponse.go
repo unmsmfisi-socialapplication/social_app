@@ -13,19 +13,19 @@ type ImportProfileResponse struct {
 func NewImportProfileResponse(profile *domain.Profile) *ImportProfileResponse {
 
 	person := &activitypub.Person{
-		ID: activitypub.IRI(profile.Id_profile),
+		ID: activitypub.IRI(profile.Name),
 		Name: activitypub.NaturalLanguageValues{
-			{Ref: activitypub.NilLangRef, Value: activitypub.Content(profile.Username)},
+			{Ref: activitypub.NilLangRef, Value: activitypub.Content(profile.Name)},
 		},
 		Type: activitypub.PersonType,
 		PreferredUsername: activitypub.NaturalLanguageValues{
-			{Ref: activitypub.NilLangRef, Value: activitypub.Content(profile.Username)},
+			{Ref: activitypub.NilLangRef, Value: activitypub.Content(profile.Name)},
 		},
 		Summary: activitypub.NaturalLanguageValues{
-			{Ref: activitypub.NilLangRef, Value: activitypub.Content(profile.Biography)},
+			{Ref: activitypub.NilLangRef, Value: activitypub.Content(profile.AboutMe)},
 		},
 		Icon: activitypub.Image{
-			URL: activitypub.IRI(profile.ProfileImage),
+			URL: activitypub.IRI(profile.ProfilePicture),
 		},
 	}
 

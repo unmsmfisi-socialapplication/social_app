@@ -21,6 +21,9 @@ func (mr *MockProfileRepository) UpdateProfile(p *domain.Profile) error {
 	return nil
 }
 
+func (mr *MockProfileRepository) CreateProfile(p *domain.Profile) error {
+	return nil
+}
 func TestImportProfileHandler_ImportProfile(t *testing.T) {
 	profileRepository := newMockProfileRepository()
 	importProfileUseCase := application.NewImportProfileUseCase(profileRepository)

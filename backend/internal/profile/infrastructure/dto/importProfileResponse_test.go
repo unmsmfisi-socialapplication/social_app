@@ -17,13 +17,15 @@ func TestNewImportProfileResponse(t *testing.T) {
 		Summary:           activitypub.DefaultNaturalLanguageValue("Amante de la naturaleza y entusiasta de la tecnología."),
 		Icon:              activitypub.IRI("https://kenzoishii.example.com/image/165987aklre4"),
 	}
-
-	profile := &domain.Profile{
-		Id_profile:   "https://appsocial.com/sofia/id1234",
-		Username:     "SofiR",
-		Biography:    "Amante de la naturaleza y entusiasta de la tecnología.",
-		ProfileImage: "https://appsocial.com/sofia/profileImage.jpg",
-	}
+	
+	profile := domain.NewProfileToImport(
+		"Sofia",
+		"https://appsocial.com/sofia/id1234",
+		"Rodriguez",
+		"SofiR",
+		"https://appsocial.com/sofia/profileImage.jpg",
+		"Amante de la naturaleza y entusiasta de la tecnología.",
+	)
 
 	response := NewImportProfileResponse(profile)
 
@@ -35,5 +37,4 @@ func TestNewImportProfileResponse(t *testing.T) {
 	if response.Data.ID != expectedPerson.ID {
 		t.Errorf("Expected ID '%s', but got '%s'", expectedPerson.ID, response.Data.ID)
 	}
-
 }
