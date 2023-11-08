@@ -24,6 +24,14 @@ func NewMockCommentUseCase() *MockCommentUseCase {
 	}
 }
 
+func (mcu *MockCommentUseCase) GetAll() ([]*domain.Comment, error) {
+	comments := make([]*domain.Comment, 0)
+	for _, comment := range mcu.Comments {
+		comments = append(comments, comment)
+	}
+	return comments, nil
+}
+
 func (mcu *MockCommentUseCase) GetByID(commentID int64) (*domain.Comment, error) {
 	comment, ok := mcu.Comments[commentID]
 	if !ok {
@@ -60,6 +68,37 @@ func (mcu *MockCommentUseCase) Delete(commentID int64) error {
 func setupRouter() *chi.Mux {
     r := chi.NewRouter()
     return r
+}
+
+func TestCommentHandler_HandleGetAllComments(t *testing.T) {
+	r := chi.NewRouter()
+	mockUseCase := NewMockCommentUseCase()
+
+	mockUseCase.Comments[1] = &domain.Comment{
+		CommentID:  1,
+		UserID:     1,
+		PostID:     1,
+		Comment:    "Este es un comentario de prueba",
+		InsertionDate: time.Now(),
+		UpdateDate:    time.Now(),
+	}
+
+	commentHandler := NewCommentHandler(mockUseCase)
+	r.Get("/comments", commentHandler.HandleGetAllComments)
+
+	req, err := http.NewRequest("GET", "/comments", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusOK {
+		t.Errorf("ERROR: Waiting status code %d, but get %d", http.StatusOK, w.Code)
+	} else {
+		println("Comments retrieved successfully")
+	}
 }
 
 func TestCommentHandler_HandleGetCommentByID(t *testing.T) {
@@ -208,6 +247,27 @@ func TestCommentHandler_HandleDeleteComment(t *testing.T) {
 		t.Errorf("ERROR: Waiting status code %d, but get %d", http.StatusOK, w.Code)
 	} else {
 		println("Comment deleted successfully")
+	}
+}
+
+func TestCommentHandler_HandleGetAllComments_InternalServerError(t *testing.T) {
+	r := chi.NewRouter()
+	mockUseCase := NewMockCommentUseCase()
+	commentHandler := NewCommentHandler(mockUseCase)
+	r.Get("/comments", commentHandler.HandleGetAllComments)
+
+	req, err := http.NewRequest("GET", "/comments", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+
+	if w.Code == http.StatusInternalServerError {
+		t.Errorf("ERROR: Waiting status code %d, but get %d", http.StatusInternalServerError, w.Code)
+	} else {
+		println("Comments retrieved successfully")
 	}
 }
 
