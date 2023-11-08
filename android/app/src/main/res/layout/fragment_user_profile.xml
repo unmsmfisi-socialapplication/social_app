@@ -325,6 +325,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <include layout="@layout/navigation_navbar" />
+        <include layout="@layout/navigation_navbar"
+            android:id="@+id/navbar"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout >

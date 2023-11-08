@@ -72,6 +72,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun action() {
+        binding.navbar.iconProfile.setImageResource(R.drawable.navbar_icon_user_bold)
+
         binding.buttonEditProfile.setOnClickListener {
             findNavController().navigate(R.id.action_userProfileFragment_to_editProfileFragment)
         }
