@@ -10,6 +10,8 @@ plugins {
 
 buildscript {
     dependencies {
+        classpath("com.android.tools.build:gradle:7.3.0")
+        classpath("com.google.firebase:firebase-appdistribution-gradle:4.0.1")
         val navegacionVersion = "2.7.3"
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navegacionVersion")
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.48")
