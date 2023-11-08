@@ -1,10 +1,8 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql.types import StructType, StructField, StringType
-# Configuración de transformaciones para procesar el texto
 from pyspark.ml.feature import RegexTokenizer, StopWordsRemover, CountVectorizer
 from pyspark.ml.classification import LogisticRegression
-# Configuración de una canalización (pipeline) para aplicar las transformaciones
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import StringIndexer
 
