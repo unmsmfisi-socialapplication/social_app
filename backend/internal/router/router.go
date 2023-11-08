@@ -12,8 +12,8 @@ import (
 	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
 
 	interest_topics "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics"
 	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
@@ -22,6 +22,7 @@ import (
 
 	wsInf "github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
 
+	commentDataset "github.com/unmsmfisi-socialapplication/social_app/internal/comment_dataset"
 	follow "github.com/unmsmfisi-socialapplication/social_app/internal/follow"
 )
 
@@ -43,7 +44,7 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 
 	postRoutes := post.PostModuleRouter(dbInstance)
 
-    profileRouter := profile.ProfileModuleRouter(dbInstance)
+	profileRouter := profile.ProfileModuleRouter(dbInstance)
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"world\"}"))
@@ -61,7 +62,6 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 
 		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
 	})
-
 
 	// Login
 	loginRepo := infrastructure.NewUserDBRepository(dbInstance)
@@ -98,5 +98,10 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	// Follow Profile
 	followRouter := follow.FollowModuleRouter(dbInstance)
 	r.Mount("/follow_profile", followRouter)
+
+	// comment dataset
+	commentDatasetRouter := commentDataset.CommentDatasetModuleRouter(dbInstance)
+	r.Mount("/data", commentDatasetRouter)
+
 	return r
 }
