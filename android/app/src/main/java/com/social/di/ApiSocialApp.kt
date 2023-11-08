@@ -3,6 +3,7 @@ package com.social.di
 import com.social.data.repository.SocialAppRepositoryImp
 import com.social.data.source.remote.ApiInterface
 import com.social.domain.SocialAppRepository
+import com.social.domain.usecase.RegisterNewUser
 import com.social.domain.usecase.ValidateUser
 import com.social.presentation.authentication.AuthenticationUseCase
 import dagger.Module
@@ -52,6 +53,7 @@ object ApiSocialApp {
     fun authenticationUseCase(repository: SocialAppRepository): AuthenticationUseCase {
         return AuthenticationUseCase(
             validateUser = ValidateUser(repository),
+            registerNewUser = RegisterNewUser(repository),
         )
     }
 }
