@@ -37,7 +37,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     is LoginViewModel.UILoginEvent.GetData -> {
                         savePreference()
                         val userData = viewModel.state.value!!.dataLogin?.get(0)
-
+                        findNavController()
+                            .navigate(R.id.userProfileFragment)
                         Log.i("dato_usuario", userData.toString())
                     }
 
