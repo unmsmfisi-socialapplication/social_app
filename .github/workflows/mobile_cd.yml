@@ -1,0 +1,49 @@
+name: Mobile CD
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "android/**"
+
+defaults:
+  run:
+    working-directory: ./android
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setting up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Get gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle- 
+
+      - name: Grant execute permissions to gradle wrapper
+        run: chmod +x ./gradlew
+
+      - name: Create Google Application Credentials JSON File
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON}}
+        run: echo $GOOGLE_APPLICATION_CREDENTIALS_JSON > ./google_application_credentials.json
+
+      - name: Build and Upload APK
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{vars.GOOGLE_APPLICATION_CREDENTIALS_PATH}}
+        run: ./gradlew assembleDebug appDistributionUploadDebug
