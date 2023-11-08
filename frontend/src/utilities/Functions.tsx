@@ -52,14 +52,14 @@ export function mostSimilarPhrase(phrase: string, arrayPhrase: string[]): string
 
 export function findMatchingWords(text: string, words: string[]): string[] {
     if (text === '') {
-      return ['The entrance is empty'];
+        return ['The entrance is empty']
     }
-  
-    const wordsMatching = words.filter(word => word.indexOf(text) === 0);
-  
+
+    const wordsMatching = words.filter((word) => word.indexOf(text) === 0)
+
     if (wordsMatching.length > 0) {
-      return wordsMatching;
+        return wordsMatching
     } else {
-      return ['No matching words found'];
+        return ['No matching words found']
     }
 }
