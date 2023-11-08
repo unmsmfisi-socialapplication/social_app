@@ -70,4 +70,5 @@
     <string name="activity">Actividad</string>
     <string name="error_user">Mínimo 6 caracteres</string>
     <string name="error_coincidence">Contraseñas no coinciden</string>
+    <string name="HintNewPub">What\'s on your head?</string>
 </resources>
