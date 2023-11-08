@@ -11,7 +11,7 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 )
 
-func main() {
+func performDownMigrations() {
 
 	err := database.InitDatabase()
 	if err != nil {
