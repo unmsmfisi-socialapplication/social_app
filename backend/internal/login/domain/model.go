@@ -7,7 +7,6 @@ import (
 type User struct {
 	Username string
 	Password string
-	Role     string
 }
 
 func (u *User) ComparePassword(password string) bool {
