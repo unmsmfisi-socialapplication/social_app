@@ -24,9 +24,8 @@ class PreprocessingTest(unittest.TestCase):
 
     def test_preprocess_data(self):
         spark = SparkSession.builder.appName("TestApp").getOrCreate()
-        filename1 = self.test_data_filename  # Utiliza el archivo de muestra generado en tiempo de ejecución
-        filename2 = self.test_data_filename  # Utiliza el archivo de muestra generado en tiempo de ejecución
-        dataset = preprocess_data(spark, filename1, filename2)
+        filename = self.test_data_filename  # Utiliza el archivo de muestra generado en tiempo de ejecución
+        dataset = preprocess_data(spark, filename)
         self.assertIsNotNone(dataset)
         self.assertGreaterEqual(dataset.count(), 0)
 
