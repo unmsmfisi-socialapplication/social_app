@@ -1,6 +1,9 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql.types import StructType, StructField, StringType
+# Configuración de transformaciones para procesar el texto
+from pyspark.ml.feature import RegexTokenizer, StopWordsRemover, CountVectorizer
+from pyspark.ml.classification import LogisticRegression
 # Configuración de una canalización (pipeline) para aplicar las transformaciones
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import StringIndexer
@@ -24,10 +27,6 @@ data = df.na.drop(how='any')
 
 # Agrupación de los datos por la columna "category" y conteo de las categorías
 data.groupBy("category").count().orderBy(col("count").desc())
-
-# Configuración de transformaciones para procesar el texto
-from pyspark.ml.feature import RegexTokenizer, StopWordsRemover, CountVectorizer
-from pyspark.ml.classification import LogisticRegression
 
 # Tokenización del texto utilizando una expresión regular
 regexTokenizer = RegexTokenizer(inputCol="clean_text", outputCol="words", pattern="\\W")
