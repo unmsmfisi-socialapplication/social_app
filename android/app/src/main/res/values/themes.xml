@@ -147,9 +147,9 @@
         <item name="cornerRadius">5dp</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/color03</item>
+        <item name="android:textColor">@color/gray</item>
         <item name="android:backgroundTint">@color/white</item>
-        <item name="strokeColor">@color/color03</item>
+        <item name="strokeColor">@color/gray</item>
         <item name="strokeWidth">1dp</item>
         <item name="android:fontFamily">@font/poppins</item>
     </style>
@@ -157,6 +157,13 @@
     <style name="ImageIconNavBar">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">22.5dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="ImageIconPost">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">20dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_weight">1</item>
     </style>
@@ -169,7 +176,7 @@
     </style>
 
     <style name="ImageViewBottomRadius">
-        <item name="cornerSizeBottomRight">15dp</item>
-        <item name="cornerSizeBottomLeft">15dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
     </style>
 </resources>

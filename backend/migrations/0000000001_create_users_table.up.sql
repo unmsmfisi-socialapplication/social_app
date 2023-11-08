@@ -1,6 +1,6 @@
 BEGIN;
 
-CREATE TABLE sa.SOC_APP_USERS(
+CREATE TABLE SOC_APP_USERS(
   user_id bigserial,
   insertion_date timestamp,
   phone bigint,
@@ -9,7 +9,7 @@ CREATE TABLE sa.SOC_APP_USERS(
   password text,
   CONSTRAINT PK_SOC_APP_USERS PRIMARY KEY (user_id)
 );
-CREATE UNIQUE INDEX UQ_SOC_APP_USERS ON sa.SOC_APP_USERS(phone,email,user_name);
-CREATE INDEX IDX_SOC_APP_USERS ON sa.SOC_APP_USERS (insertion_date);
+CREATE UNIQUE INDEX UQ_SOC_APP_USERS ON SOC_APP_USERS(phone,email,user_name);
+CREATE INDEX IDX_SOC_APP_USERS ON SOC_APP_USERS (insertion_date);
 
 COMMIT;
