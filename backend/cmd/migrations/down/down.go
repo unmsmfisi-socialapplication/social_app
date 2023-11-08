@@ -39,14 +39,14 @@ func main() {
 		return
 	}
 
-	// Re-create the database and apply migrations
-	fmt.Println("Creating a new tables and applying migrations...")
-	err = m.Up()
+	// Drop the existing database
+	fmt.Println("Dropping the existing tables...")
+	err = m.Down()
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
-	fmt.Println("Tables created and migrations applied successfully.")
+	fmt.Println("Tables dropped successfully.")
 
 	version, _, err := m.Version()
 	if err != nil {
