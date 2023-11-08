@@ -1,8 +1,17 @@
 'use client'
 import { useState } from 'react'
-import Layout from '../layout'
 import { Button } from '@mui/material'
-import { WButton, WInput, WCircleIcon, WModalPhoto, WComment, WButtonMotion, WCardFollow, WSearch } from '@/components'
+import {
+    WButton,
+    WInput,
+    WCircleIcon,
+    WModalPhoto,
+    WComment,
+    WButtonMotion,
+    WCardFollow,
+    WSearch,
+    WTopicFollow,
+} from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
 import AllInclusive from '@mui/icons-material/AllInclusive'
@@ -14,7 +23,7 @@ import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined'
 import AvatarInput from '@/components/molecules/AvatarInput'
 import WDetailsImage from '@/components/molecules/DetailsImage/index'
 import CommentThink from '@/components/molecules/CommentThink'
-import SquareButton from '../../components/atoms/ButtonSquare/ButtonSquare'
+import RootLayout from '../layout'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
@@ -29,7 +38,7 @@ export default function TestPage() {
         setPassword(e.target.value)
     }
     return (
-        <Layout>
+        <RootLayout>
             <Button variant="contained">Hello World</Button>
             <div
                 style={{
@@ -97,12 +106,10 @@ export default function TestPage() {
                     type="password"
                 />
             </div>
+
             <div>
                 <WSearch />
                 {/* Otras partes de tu aplicación */}
-            </div>
-            <div className="App">
-                <SquareButton />
             </div>
 
             <WCircleIcon iconSize={30} icon={CheckIcon} />
@@ -130,7 +137,10 @@ export default function TestPage() {
                     userhandle="XokasXD"
                 />
             </div>
-        </Layout>
+            <div>
+                <WTopicFollow name="Tecnología" topicHandle="Todo sobre tecnología" />
+            </div>
+        </RootLayout>
     )
 }
 

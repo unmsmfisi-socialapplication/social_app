@@ -13,6 +13,7 @@ export { default as WCircleImage } from './atoms/CircleImage/circleImage'
 export { default as WInputCode } from './atoms/InputCode/inputCode'
 export { default as WCardFollow } from './atoms/CardFollow/CardFollow'
 export { default as WSearch } from './atoms/Search/Search'
+export { default as WTopicFollow } from './atoms/TopicFollow/TopicFollow'
 
 // export molecule components
 export { default as WLogo } from './atoms/Logo/titleSearch'
@@ -24,3 +25,5 @@ export { default as WComentThink } from './molecules/CommentThink/index'
 export { default as WDetailImage } from './molecules/DetailsImage/index'
 // export organism components
 export { default as WCardAuth } from './organisms/CardAuth'
+export { default as WRightBar } from './organisms/RightBar/RightBar'
+export { default as WSideBar } from './organisms/SideBar/SideBar'

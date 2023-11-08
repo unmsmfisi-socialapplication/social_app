@@ -21,6 +21,8 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 
 	wsInf "github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
+
+	follow "github.com/unmsmfisi-socialapplication/social_app/internal/follow"
 )
 
 func Router(wsHandler *wsInf.Handler) http.Handler {
@@ -92,5 +94,9 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	//interestTopics
 	interestTopicsRouter := interest_topics.InterestTopicsModuleRouter(dbInstance)
 	r.Mount("/interestTopics", interestTopicsRouter)
+
+	// Follow Profile
+	followRouter := follow.FollowModuleRouter(dbInstance)
+	r.Mount("/follow_profile", followRouter)
 	return r
 }
