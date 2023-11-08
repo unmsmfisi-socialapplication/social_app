@@ -1,6 +1,9 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql.types import StructType, StructField, StringType
+# Configuración de una canalización (pipeline) para aplicar las transformaciones
+from pyspark.ml import Pipeline
+from pyspark.ml.feature import StringIndexer
 
 # Crear una instancia de SparkSession
 spark = SparkSession.builder.appName("SocialApp").getOrCreate()
@@ -35,10 +38,6 @@ stopwordsRemover = StopWordsRemover(inputCol="words", outputCol="filtered").setS
 
 # Creación de una representación de "bag of words" a partir de las palabras tokenizadas
 countVectors = CountVectorizer(inputCol="filtered", outputCol="features", vocabSize=30000, minDF=5)
-
-# Configuración de una canalización (pipeline) para aplicar las transformaciones
-from pyspark.ml import Pipeline
-from pyspark.ml.feature import StringIndexer
 
 # Conversión de la columna "category" a etiquetas numéricas
 label_stringIdx = StringIndexer(inputCol="category", outputCol="label")
