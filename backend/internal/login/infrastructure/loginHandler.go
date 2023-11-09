@@ -2,6 +2,7 @@ package infrastructure
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
@@ -17,28 +18,36 @@ func NewLoginHandler(useCase application.LoginUsecaseInterface) *LoginHandler {
 }
 
 func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
-	var requestData map[string]interface{}
-
-	// Decodifica la solicitud en un mapa en lugar de una estructura.
-	err := json.NewDecoder(r.Body).Decode(&requestData)
+	var raw json.RawMessage
+	err := json.NewDecoder(r.Body).Decode(&raw)
 	if err != nil {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
 		return
 	}
 
-	if len(requestData) != 2 || requestData["username"] == nil || requestData["password"] == nil {
+	var requestData struct {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+	err = json.Unmarshal(raw, &requestData)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+	var extra map[string]interface{}
+	err = json.Unmarshal(raw, &extra)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
+		return
+	}
+	delete(extra, "username")
+	delete(extra, "password")
+	if len(extra) != 0 {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
 		return
 	}
 
-	username, ok1 := requestData["username"].(string)
-	password, ok2 := requestData["password"].(string)
-	if !ok1 || !ok2 {
-		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
-		return
-	}
-
-	token, err := lh.useCase.Authenticate(username, password)
+	isAuthenticated, err := lh.useCase.Authenticate(requestData.Username, requestData.Password)
 	if err != nil {
 		switch err {
 		case application.ErrUserNotFound:
@@ -49,23 +58,14 @@ func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 			return
 		default:
 			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error during authentication")
+			fmt.Println(err.Error())
 			return
 		}
 	}
-	jti, err := lh.useCase.ExtractJTI(token)
-	if err != nil {
-		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error extracting JTI from token")
-		return
-	}
 
-	err = lh.useCase.StoreJTIForSession(username, jti)
-	if err != nil {
-		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error saving JTI in database")
-		return
+	if isAuthenticated {
+		utils.SendJSONResponse(w, http.StatusOK, "OK", "Authentication successful")
+	} else {
+		utils.SendJSONResponse(w, http.StatusUnauthorized, "ERROR", "Authentication failed")
 	}
-	responseData := map[string]string{
-		"token": token,
-	}
-
-	utils.SendJSONResponse(w, http.StatusOK, "OK", responseData)
 }
