@@ -28,8 +28,8 @@ class ChatScreenFragment : Fragment(R.layout.fragment_chat_screen) {
 
     private fun setupViews() {
         EmojiManager.install(GoogleEmojiProvider())
-        emojiPopup = EmojiPopup.Builder.fromRootView(binding.rootView)
-            .build(binding.inputSendMessage)
+
+        emojiPopup = EmojiPopup.Builder.fromRootView(binding.rootView).build(binding.inputSendMessage)
 
         binding.btnFace.setOnClickListener {
             emojiPopup.toggle()

@@ -3,9 +3,7 @@ package com.social.presentation.interaction.chats
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.social.R
-import com.social.databinding.FragmentChatScreenBinding
 import com.social.databinding.FragmentListChatBinding
 import com.social.utils.Toast
 
@@ -23,35 +21,35 @@ class ListChatsFragment : Fragment(R.layout.fragment_list_chat) {
 
     private fun action() {
         binding.btnBar.setOnClickListener {
-            BarButton()
+            barButton()
         }
 
         binding.btnListChats.setOnClickListener{
-            ListChatsButton()
+            listChatsButton()
         }
 
         binding.btnMessages.setOnClickListener{
-            MessageButton()
+            messageButton()
         }
 
         binding.btnMessagesConfig.setOnClickListener {
-            ListChatsConfigButton()
+            listChatsConfigButton()
         }
     }
 
-    private fun BarButton() {
+    private fun barButton() {
         Toast.showMessage(requireContext(), "En desarrollo")
     }
 
-    private fun ListChatsButton() {
+    private fun listChatsButton() {
         Toast.showMessage(requireContext(), "En desarrollo")
     }
 
-    private fun MessageButton() {
+    private fun messageButton() {
         Toast.showMessage(requireContext(), "En desarrollo")
     }
 
-    private fun ListChatsConfigButton() {
+    private fun listChatsConfigButton() {
         Toast.showMessage(requireContext(), "En desarrollo")
     }
 
