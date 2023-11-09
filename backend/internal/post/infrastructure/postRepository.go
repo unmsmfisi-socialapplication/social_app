@@ -38,3 +38,7 @@ func (p *PostsDBRepository) CreatePost(post domain.CreatePost) (*domain.Post, er
 
 	return dbPost, nil
 }
+
+func (p *PostsDBRepository) UploadMultimedia(postId int64, multimedia []byte) error {
+    return nil
+}
