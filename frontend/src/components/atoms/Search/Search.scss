@@ -1,0 +1,21 @@
+.custom-search {
+    width: 100%;
+    height: 29px;
+    background-color: #ebeef0;
+    border-radius: 18px;
+
+    & .MuiOutlinedInput-root {
+        border: none;
+    }
+}
+
+/* Estilos para el icono de búsqueda */
+.custom-search .MuiSvgIcon-root {
+    color: #232121;
+}
+
+/* Estilos para el botón de búsqueda */
+.custom-search .MuiButton-root {
+    background-color: #ebeef0;
+    border: none;
+}

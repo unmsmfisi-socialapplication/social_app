@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.profile.EditProfileFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/icon_left"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:contentDescription="@string/description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/icon_left_arrow" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end">
+
+            <ImageView
+                android:id="@+id/icon_check"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/description"
+                app:srcCompat="@drawable/icon_confirmation" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_icon"
+                style="@style/ImageViewProfile"
+                android:backgroundTint="@color/color02"
+                android:contentDescription="@string/photo_profile"
+                android:scaleType="center"
+                app:shapeAppearanceOverlay="@style/ImageViewCorner"
+                app:srcCompat="@drawable/icon_user" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="match_parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagen_profile"
+                style="@style/ImageViewProfile"
+                android:contentDescription="@string/photo_profile"
+                app:shapeAppearanceOverlay="@style/ImageViewCorner"
+                app:srcCompat="@drawable/photo_profile" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_upload_profile"
+            style="@style/ButtonStyleProfile"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="90dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/edit_photo" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_name"
+                style="@style/TextInputEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_user_name"
+                style="@style/TextInputEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/error_username"
+            style="@style/TextViewError"
+            android:text="@string/user_exists" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_biography"
+                style="@style/TextInputEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/biography"
+                android:inputType="textMultiLine"
+                android:maxLength="100" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/button_add_link"
+            style="@style/ButtonStyleProfile"
+            android:layout_width="200dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/add_link" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

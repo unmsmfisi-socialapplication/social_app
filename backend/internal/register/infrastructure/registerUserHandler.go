@@ -44,5 +44,13 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 
 		}
 	}
-	json.NewEncoder(w).Encode(data)
+	var outputData struct {
+		Email    string `json:"email"`
+		Username string `json:"user_name"`
+	}
+	{
+		outputData.Email = data.Email
+		outputData.Username = data.Username
+	}
+	json.NewEncoder(w).Encode(outputData)
 }

@@ -1,10 +1,14 @@
 
-version: '3.1'
+version: '3.9'
 services:
   api:
     build: .
+    restart: always
     env_file:
       - .env
+    command:  > 
+        sh -c "go run cmd/migrations/migrations.go && 
+              build/backend-develop"
     ports:
       - "3333:3333"
     depends_on: 
@@ -18,8 +22,11 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD} 
       POSTGRES_DB: ${DB_NAME}
+      POSTGRES_INITDB_ARGS: "-c search_path=${DB_SCHEMA}"
     ports:
       - "5432:5432"
+    volumes:
+      - ./migrations/0000000000_create_schema.sql:/docker-entrypoint-initdb.d/schema.sql
   adminer:
     image: adminer
     restart: always

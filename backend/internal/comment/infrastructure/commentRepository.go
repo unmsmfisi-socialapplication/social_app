@@ -39,6 +39,46 @@ func (r *CommentRepository) CreateComment(comment *domain.Comment) error {
     return nil
 }
 
+func (r *CommentRepository) GetAllComments() ([]*domain.Comment, error) {
+    query := `
+        SELECT comment_id, user_id, post_id, comment, insertion_date, update_date, parent_comment_id
+        FROM SOC_APP_POSTS_COMMENTS
+    `
+    rows, err := r.db.Query(query)
+
+    if err != nil {
+        return nil, err
+    }
+
+    defer rows.Close()
+
+    comments := make([]*domain.Comment, 0)
+    for rows.Next() {
+        comment := &domain.Comment{}
+        err := rows.Scan(
+            &comment.CommentID,
+            &comment.UserID,
+            &comment.PostID,
+            &comment.Comment,
+            &comment.InsertionDate,
+            &comment.UpdateDate,
+            &comment.ParentCommentID,
+        )
+
+        if err != nil {
+            return nil, err
+        }
+
+        comments = append(comments, comment)
+    }
+
+    if err = rows.Err(); err != nil {
+        return nil, err
+    }
+
+    return comments, nil
+}
+
 // Code to get a comment by its ID
 func (r *CommentRepository) GetCommentByID(commentID int64) (*domain.Comment, error) {
     query := `
