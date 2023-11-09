@@ -209,3 +209,7 @@ replay_pid*
 
 #credentials in gcp
 data/cloud_platform/*.json
+
+# Terraform files
+.terraform
+**/.terraform.lock.hcl
