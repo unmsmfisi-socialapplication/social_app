@@ -33,3 +33,42 @@ func (u *FollowerRepository) InsertNewFollower(newFollower *domain.Follower) (*d
 	}
 
 }
+
+func (u *FollowerRepository) IsFollowing(newFollower *domain.Follower) (*bool, error) {
+	query := `
+		SELECT COUNT(1) is_following
+		FROM soc_app_user_profile_follow
+		WHERE follower_profile_id = $1 AND following_profile_id = $2
+	`
+	tx, err := u.db.Begin()
+	if err != nil {
+		log.Println("Error while starting the transaction")
+		return nil, err
+	}
+
+	rows, err := tx.Query(query, newFollower.Follower_profile_id, newFollower.Following_profile_id)
+	if err != nil {
+		log.Println("Error while executing the query")
+		return nil, err
+	}
+	defer rows.Close()
+
+	var isFollowing bool
+	for rows.Next() {
+		var count int
+		err = rows.Scan(&count)
+		if err != nil {
+			log.Println("Error while scanning the rows")
+			return nil, err
+		}
+		isFollowing = (count == 1)
+	}
+
+	err = rows.Err()
+	if err != nil {
+		log.Println("Error while retrieving the rows")
+		return nil, err
+	}
+
+	return &isFollowing, nil
+}
