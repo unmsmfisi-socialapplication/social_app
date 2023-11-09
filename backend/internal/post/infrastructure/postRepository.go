@@ -3,6 +3,7 @@ package infrastructure
 import (
 	"database/sql"
 	"time"
+	"encoding/json"
 	"fmt"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
@@ -58,4 +59,45 @@ func (p *PostsDBRepository) GetMultimedia(postId int64) ([]byte, error) {
 
     return multimedia, nil
 }
+
+
+func (p *PostsDBRepository) GetPostsUser(userId int64) ([]byte, error) {
+    // Database connection
+    db := map[int64]map[string]interface{}{
+        1: {
+            "Id": 1,
+            "UserId": 456,
+            "Title": "Mi primera publicación",
+            "Description": "Esta es mi primera publicación en la plataforma.",
+            "HasMultimedia": false,
+            "Public": true,
+            "InsertionDate": "2023-11-07T10:00:00.000000000Z",
+        },
+        2: {
+            "Id": 2,
+            "UserId": 456,
+            "Title": "Otra publicación",
+            "Description": "Una segunda publicación para compartir contenido interesante.",
+            "HasMultimedia": true,
+            "Public": true,
+            "Multimedia": []interface{}{"imagen1.jpg", "imagen2.jpg"},
+            "InsertionDate": "2023-11-08T09:30:00.000000000Z",
+        },
+    }
+
+    // Simulates a database query
+    post, ok := db[userId]
+    if !ok {
+        return nil, fmt.Errorf("post not found for userId %d", userId)
+    }
+
+    // Convert the post to JSON
+    jsonData, err := json.Marshal(post)
+    if err != nil {
+        return nil, err
+    }
+
+    return jsonData, nil
+}
+
 
