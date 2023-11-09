@@ -24,9 +24,7 @@ func (ph *PostHandler) HandleCreatePost(w http.ResponseWriter, r *http.Request) 
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
 		return
 	}
-
 	postCreate, err := ph.useCase.CreatePost(requestData)
-
 	if err != nil {
 		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
 		return
