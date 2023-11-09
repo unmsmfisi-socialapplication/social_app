@@ -7,7 +7,7 @@
     tools:context=".presentation.profile.UserProfileFragment">
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +34,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearance="@style/ImageViewBottomRadius"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="centerCrop"/>
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/img_contactProfile"
@@ -50,29 +50,56 @@
                     app:riv_border_color="@color/white"
                     app:riv_border_width="6dp"
                     app:riv_oval="true" />
+
+                <ImageButton
+                    android:id="@+id/button_add_profile_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="100dp"
+                    android:src="@drawable/icon_camera"
+                    android:background="@drawable/round_style"
+                    android:backgroundTint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/UserProfileFontPage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.955"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/button_camera"
+                    app:tint="@color/color06" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/text_name_ProfileUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/poppins"
                 android:text="@string/full_name"
                 android:textStyle="bold"
-                android:textSize="28dp"
+                android:textSize="28sp"
                 android:layout_marginTop="5dp"/>
 
             <TextView
+                android:id="@+id/text_direction_ProfileUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/poppins_light"
                 android:text="@string/user_profile"
-                android:textSize="16dp"/>
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/text_bibliography_ProfileUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/user_bibliography"
+                android:textSize="16sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 android:gravity="center">
@@ -81,20 +108,22 @@
                     android:id="@+id/button_edit_profile"
                     style="@style/ButtonStyleProfile2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAllCaps="true"
                     android:fontFamily="@font/poppins"
                     android:text="@string/edit_profile"
                     android:paddingHorizontal="50dp"
-                    android:layout_marginRight="30dp"/>
+                    android:layout_marginEnd="30dp"/>
 
                 <ImageButton
                     android:id="@+id/button_setting_profile"
+                    android:layout_marginVertical="4dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@drawable/style_imagebtn_radius"
                     android:src="@drawable/icon_settings"
                     android:paddingHorizontal="10dp"
+                    android:contentDescription="@string/description"
                     android:paddingVertical="4dp"/>
             </LinearLayout>
 
@@ -121,14 +150,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:text="@string/number_post"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text="@string/post"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textColor="@color/color06"/>
                 </LinearLayout>
 
@@ -152,14 +181,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:text="@string/number_photos"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text="@string/photos"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textColor="@color/color06"/>
                 </LinearLayout>
 
@@ -183,14 +212,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:text="@string/number_followers"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text="@string/followers"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textColor="@color/color06"/>
                 </LinearLayout>
 
@@ -214,14 +243,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:text="@string/number_followings"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text="@string/followings"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:textColor="@color/color06"/>
                 </LinearLayout>
             </LinearLayout>
@@ -239,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins"
-                    android:textColor="@color/color03"
+                    android:textColor="@color/black"
                     android:text="@string/post"
                     android:gravity="center"
                     android:textSize="18sp" />
@@ -277,6 +306,26 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerPostProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_post" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include layout="@layout/navigation_navbar"
+            android:id="@+id/navbar"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout >

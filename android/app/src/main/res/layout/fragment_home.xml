@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/homebackground"
+    android:orientation="vertical"
+    tools:context=".presentation.home.HomeFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/transparent"
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="189dp"
+                    android:layout_height="72dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/completeimage"
+                    app:layout_constraintEnd_toEndOf="@id/searchIcon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </ImageView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/transparent"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/searchIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@color/transparent"
+                        android:src="@drawable/search2"
+                        app:layout_constraintEnd_toEndOf="@id/notificationIcon"
+                        app:layout_constraintStart_toStartOf="@id/logo" />
+
+                    <ImageView
+                        android:id="@+id/notificationIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@color/transparent"
+                        android:src="@drawable/notifications_none"
+                        app:layout_constraintEnd_toEndOf="@id/notificationIcon"
+                        app:layout_constraintStart_toStartOf="@id/logo" />
+
+                    <ImageView
+                        android:id="@+id/messageIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@color/transparent"
+                        android:src="@drawable/bx_chat"
+                        app:layout_constraintEnd_toEndOf="@id/notificationIcon"
+                        app:layout_constraintStart_toStartOf="@id/logo" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="@id/header"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginVertical="20dp">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:scaleType="centerCrop"
+                                app:shapeAppearanceOverlay="@style/ImagePostRound"
+                                app:srcCompat="@drawable/model" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/transparent">
+
+                            <EditText
+                                android:id="@+id/txtPub"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top"
+                                android:inputType="textMultiLine"
+                                android:background="@color/transparent"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="@string/HintNewPub"
+                                app:srcCompat="@drawable/model" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:weightSum="3"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            style="@style/ImageIconNavBar"
+                            android:background="@color/transparent"
+                            android:src="@drawable/imagebutton" />
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            style="@style/ImageIconNavBar"
+                            android:background="@color/transparent"
+                            android:src="@drawable/videobutton" />
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            style="@style/ImageIconNavBar"
+                            android:background="@color/transparent"
+                            android:src="@drawable/attachbutton" />
+
+                    </LinearLayout>
+
+                    <!--<androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPdv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp" />-->
+                    <include layout="@layout/item_card_post" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

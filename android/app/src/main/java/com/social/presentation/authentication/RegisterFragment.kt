@@ -10,8 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.social.R
 import com.social.databinding.FragmentRegisterBinding
 import com.social.utils.CodeGenerator
-import com.social.utils.Toast
 import com.social.utils.Toast.showMessage
+import com.social.utils.Validation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -37,9 +37,10 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             viewModel.evenFlow.collectLatest { event ->
                 when (event) {
                     is RegisterUserViewModel.UIRegisterUserEvent.GetData -> {
-                        val userRegisterData = viewModel.state.value!!.dataRegister?.get(0)
-                        Log.i("registrado", userRegisterData!!.email)
+                        val userRegisterData = viewModel.state.value!!.dataRegister[0]
+                        Log.i("registrado", userRegisterData.email)
                     }
+
                     is RegisterUserViewModel.UIRegisterUserEvent.ShowMessage -> {
                         showMessage(requireContext(), event.message)
                     }
@@ -48,6 +49,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
 
         action()
+        setup()
     }
 
     private fun action() {
@@ -55,15 +57,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
         binding.btnRegister.setOnClickListener {
-            val email = binding.txtEmailRegister.text.toString()
-            val username = binding.txtFullNameRegister.text.toString()
-            val passwordOne = binding.txtPasswordRegister.text.toString()
-            val passwordTwo = binding.txtConfirmPasswordRegister.text.toString()
-            viewModel.insertData(RegisterEvent.EnterUsername(value = username))
-            viewModel.insertData(RegisterEvent.EnterEmail(value = email))
-            viewModel.insertData(RegisterEvent.EnterPassword(value = passwordTwo))
-            viewModel.insertData(RegisterEvent.RegisterUser)
-            // navegateToPin()
+            registerButton()
         }
         binding.buttonGoogle.setOnClickListener {
             googleLoginButton()
@@ -73,21 +67,79 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
     }
 
+    private fun setup() {
+        setupUserValidation()
+        setupPasswordValidation()
+        setupEmailValidation()
+        setupCoincidence()
+    }
+
     private fun googleLoginButton() {
-        Toast.showMessage(requireContext(), "Proximamente")
+        showMessage(requireContext(), "Proximamente")
     }
 
     private fun mastodonLoginButton() {
-        Toast.showMessage(requireContext(), "Proximamente")
+        showMessage(requireContext(), "Proximamente")
     }
 
-    private fun navegateToPin() {
+    private fun registerButton() {
+        val email = binding.txtEmailRegister.text.toString()
+        val user = binding.txtUserRegister.text.toString()
+        val password = binding.txtPasswordRegister.text.toString()
+        val passwordConfirm = binding.txtConfirmPasswordRegister.text.toString()
+
+        if (Validation.isPasswordValid(password) && Validation.isUserValid(user) && Validation.isEmailValid(email)
+        ) {
+            viewModel.insertData(RegisterEvent.EnterUsername(value = user))
+            viewModel.insertData(RegisterEvent.EnterEmail(value = email))
+            viewModel.insertData(RegisterEvent.EnterPassword(value = passwordConfirm))
+            viewModel.insertData(RegisterEvent.RegisterUser)
+            // navigateToPin()
+        }
+    }
+
+    private fun setupUserValidation() {
+        Validation.setupValidation(
+            binding.txtUserRegister,
+            binding.errorUser,
+        ) { user ->
+            Validation.isUserValid(user)
+        }
+    }
+
+    private fun setupPasswordValidation() {
+        Validation.setupValidation(
+            binding.txtPasswordRegister,
+            binding.errorPassword,
+        ) { password ->
+            Validation.isPasswordValid(password)
+        }
+    }
+
+    private fun setupEmailValidation() {
+        Validation.setupValidation(
+            binding.txtEmailRegister,
+            binding.errorEmail,
+        ) { email ->
+            Validation.isEmailValid(email)
+        }
+    }
+
+    private fun setupCoincidence() {
+        Validation.setupCoincidence(
+            binding.txtPasswordRegister,
+            binding.txtConfirmPasswordRegister,
+            binding.errorCoincidence,
+        )
+    }
+
+    private fun navigateToPin() {
         sendCode()
     }
 
     private fun sendCode() {
         codeArg = CodeGenerator.generateCode()
-        Toast.showMessage(requireContext(), "Codigo: $codeArg")
+        showMessage(requireContext(), "Codigo: $codeArg")
         bundle =
             Bundle().apply {
                 putString("codeConfirm", codeArg)
