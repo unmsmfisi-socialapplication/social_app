@@ -24,11 +24,11 @@ class ListChatsFragment : Fragment(R.layout.fragment_list_chat) {
             barButton()
         }
 
-        binding.btnListChats.setOnClickListener{
+        binding.btnListChats.setOnClickListener {
             listChatsButton()
         }
 
-        binding.btnMessages.setOnClickListener{
+        binding.btnMessages.setOnClickListener {
             messageButton()
         }
 
