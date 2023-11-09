@@ -2,7 +2,6 @@ package infrastructure
 
 import (
 	"bytes"
-	"errors"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -12,47 +11,40 @@ import (
 )
 
 type mockLoginUsecase struct {
-	AuthenticateFn       func(username, password string) (string, error)
-	ExtractJTIFn         func(token string) (string, error)
-	StoreJTIForSessionFn func(username string, jti string) error
+	AuthenticateFn func(username, password string) (bool, error)
 }
 
-func (m *mockLoginUsecase) Authenticate(username, password string) (string, error) {
+func (m *mockLoginUsecase) Authenticate(username, password string) (bool, error) {
 	return m.AuthenticateFn(username, password)
 }
-func (m *mockLoginUsecase) ExtractJTI(token string) (string, error) {
-	return m.ExtractJTIFn(token)
-}
 
-func (m *mockLoginUsecase) StoreJTIForSession(username string, jti string) error {
-	return nil
-}
 func TestHandleLogin(t *testing.T) {
 	tests := []struct {
 		name       string
 		inputBody  string
-		mockAuth   func(username, password string) (string, error)
+		mockAuth   func(username, password string) (bool, error)
 		wantStatus int
 		wantBody   string
 	}{
+
 		{
 			name:       "User not found",
 			inputBody:  `{"username": "nonexistent", "password": "password"}`,
-			mockAuth:   func(username, password string) (string, error) { return "", application.ErrUserNotFound },
+			mockAuth:   func(username, password string) (bool, error) { return false, application.ErrUserNotFound },
 			wantStatus: http.StatusNotFound,
 			wantBody:   `{"response":"User not found","status":"NOTFOUND"}`,
 		},
 		{
 			name:       "Invalid password",
 			inputBody:  `{"username": "test", "password": "wrongpassword"}`,
-			mockAuth:   func(username, password string) (string, error) { return "", application.ErrInvalidCredentials },
+			mockAuth:   func(username, password string) (bool, error) { return false, application.ErrInvalidCredentials },
 			wantStatus: http.StatusUnauthorized,
 			wantBody:   `{"response":"Invalid credentials","status":"BADCREDENTIALS"}`,
 		},
 		{
 			name:       "Bad request",
 			inputBody:  `{"username": "test"`,
-			mockAuth:   func(username, password string) (string, error) { return "", nil },
+			mockAuth:   func(username, password string) (bool, error) { return false, nil },
 			wantStatus: http.StatusBadRequest,
 			wantBody:   `{"response":"Invalid request payload","status":"ERROR"}`,
 		},
@@ -60,23 +52,24 @@ func TestHandleLogin(t *testing.T) {
 		{
 			name:       "Bad request",
 			inputBody:  `{"username": "test","hashedpassword:"test"}`,
-			mockAuth:   func(username, password string) (string, error) { return "", nil },
+			mockAuth:   func(username, password string) (bool, error) { return false, nil },
 			wantStatus: http.StatusBadRequest,
 			wantBody:   `{"response":"Invalid request payload","status":"ERROR"}`,
 		},
 		{
 			name:       "Authentication Failed",
 			inputBody:  `{"username":"validuser", "password":"validformatpassword"}`,
-			mockAuth:   func(username, password string) (string, error) { return "", errors.New("Internal error") },
-			wantStatus: http.StatusInternalServerError,
-			wantBody:   `{"response":"Error during authentication","status":"ERROR"}`,
+			mockAuth:   func(username, password string) (bool, error) { return false, nil },
+			wantStatus: http.StatusUnauthorized,
+			wantBody:   `{"response":"Authentication failed","status":"ERROR"}`,
 		},
+
 		{
 			name:       "Login successful",
 			inputBody:  `{"username": "myuser12", "password": "Social@12"}`,
-			mockAuth:   func(username, password string) (string, error) { return "tokenString", nil },
+			mockAuth:   func(username, password string) (bool, error) { return true, nil },
 			wantStatus: http.StatusOK,
-			wantBody:   `{"response":{"token":"tokenString"},"status":"OK"}`,
+			wantBody:   `{"response":"Authentication successful","status":"OK"}`,
 		},
 	}
 
@@ -89,9 +82,6 @@ func TestHandleLogin(t *testing.T) {
 
 			mockUseCase := &mockLoginUsecase{
 				AuthenticateFn: tt.mockAuth,
-				ExtractJTIFn: func(token string) (string, error) {
-					return "someJTI", nil
-				},
 			}
 			handler := NewLoginHandler(mockUseCase)
 			recorder := httptest.NewRecorder()
@@ -107,7 +97,7 @@ func TestHandleLogin(t *testing.T) {
 
 			body, err := io.ReadAll(res.Body)
 			if err != nil {
-				t.Fatalf("could not read response: %v", err)
+				t.Fatalf("could not read response body: %v", err)
 			}
 
 			if string(body) != tt.wantBody {
