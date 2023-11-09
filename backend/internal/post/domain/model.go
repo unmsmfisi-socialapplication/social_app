@@ -31,7 +31,7 @@ func (c *CreatePost) Validate() error {
 
 	titleRegex := regexp.MustCompile(`^.{0,100}$`)
 	descriptionRegex := regexp.MustCompile(`^.{0,1000}$`)
-	
+
     if !titleRegex.MatchString(c.Title) {
         return errors.New("el título debe tener un máximo de 100 caracteres")
     }
@@ -40,3 +40,9 @@ func (c *CreatePost) Validate() error {
     }
     return nil
 }
+
+type Location struct {
+    Latitude float64
+    Longitude float64
+}
+
