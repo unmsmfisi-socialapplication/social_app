@@ -39,7 +39,7 @@ func (u *UserDBRepository) InsertSession(username string) error {
 	return err
 }
 func (u *UserDBRepository) CheckExistingSession(username string) (bool, error) {
-	query := `SELECT EXISTS (SELECT 1 FROM soc_app_auth_sessions WHERE user_name = $1 AND logged = true)`
+	query := `SELECT EXISTS (SELECT 1 FROM soc_app_auth_sessions WHERE user_name = $1)`
 	var exists bool
 	err := u.db.QueryRow(query, username).Scan(&exists)
 	return exists, err
