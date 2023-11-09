@@ -10,6 +10,7 @@ import (
 var (
 	ErrUserNotFound   = errors.New("user not found")
 	ErrIncompleteData = errors.New("incomplete data")
+	ErrPostNotFound = errors.New("post not found")
 )
 
 type PostUseCaseInterface interface {

@@ -3,7 +3,7 @@ package infrastructure
 import (
 	"encoding/json"
 	"net/http"
-
+	"strconv"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
@@ -39,11 +39,18 @@ func (ph *PostHandler) HandleCreatePost(w http.ResponseWriter, r *http.Request) 
 
 func (ph *PostHandler) HandleGetMultimedia(w http.ResponseWriter, r *http.Request) {
     // Get the post ID from the request
-    postId := r.URL.Query().Get("postId")
+    postIdStr := r.URL.Query().Get("postId")
 
     // Validate the post ID
-    if postId == "" {
+    if postIdStr == "" {
         utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Post ID must not be empty")
+        return
+    }
+
+    // Convert postIdStr to int64
+    postId, err := strconv.ParseInt(postIdStr, 10, 64)
+    if err != nil {
+        utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid Post ID format")
         return
     }
 
@@ -63,4 +70,3 @@ func (ph *PostHandler) HandleGetMultimedia(w http.ResponseWriter, r *http.Reques
     // Send a successful response with the multimedia data
     utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", multimedia)
 }
-
