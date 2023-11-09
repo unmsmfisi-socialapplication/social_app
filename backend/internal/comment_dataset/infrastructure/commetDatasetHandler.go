@@ -17,8 +17,8 @@ func NewCommentDatasetHandler(useCase *application.CommentDatasetUseCase) *comme
 
 func (cdh *commentDatasetHandler) HandleRetrieveScopedComments(w http.ResponseWriter, r *http.Request) {
 
-	start_date := r.URL.Query().Get("fromDate")
-	end_date := r.URL.Query().Get("toDate")
+	start_date := r.URL.Query().Get("start_date")
+	end_date := r.URL.Query().Get("end_date")
 
 	comments, err := cdh.useCase.RetrieveDateScopedComments(start_date, end_date)
 	if err != nil {
