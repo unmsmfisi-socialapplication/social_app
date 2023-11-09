@@ -1,3 +1,23 @@
+variable "subscription_id" {
+  description = "Azure subscription ID"
+  type        = string
+}
+
+variable "client_id" {
+  description = "Azure AD application client ID"
+  type        = string
+}
+
+variable "client_secret" {
+  description = "Azure AD application client secret"
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "Azure AD tenant ID"
+  type        = string
+}
+
 variable "location" {
   description = "The Azure region for the resources."
   type        = string
