@@ -7,6 +7,8 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
+
+	//"github.com/unmsmfisi-socialapplication/social_app/internal/post/infrastructure/postRepository"
 )
 
 type PostHandler struct {
@@ -34,3 +36,31 @@ func (ph *PostHandler) HandleCreatePost(w http.ResponseWriter, r *http.Request) 
 
 	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", postCreate)
 }
+
+func (ph *PostHandler) HandleGetMultimedia(w http.ResponseWriter, r *http.Request) {
+    // Get the post ID from the request
+    postId := r.URL.Query().Get("postId")
+
+    // Validate the post ID
+    if postId == "" {
+        utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Post ID must not be empty")
+        return
+    }
+
+    // Get the multimedia data from the repository
+    multimedia, err := ph.useCase.GetMultimedia(postId)
+
+    // Handle errors
+    if err != nil {
+        if err == application.ErrPostNotFound {
+            utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Post not found")
+        } else {
+            utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
+        }
+        return
+    }
+
+    // Send a successful response with the multimedia data
+    utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", multimedia)
+}
+

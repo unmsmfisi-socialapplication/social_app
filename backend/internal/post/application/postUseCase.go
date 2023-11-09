@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
+
 )
 
 var (
@@ -13,10 +14,13 @@ var (
 
 type PostUseCaseInterface interface {
 	CreatePost(post domain.CreatePost) (*domain.Post, error)
+	GetUserLocation() (*domain.Location, error)
+	GetMultimedia(postId int64) ([]byte, error)
 }
 
 type PostRepository interface {
 	CreatePost(post domain.CreatePost) (*domain.Post, error)
+	GetMultimedia(postId int64) ([]byte, error)
 }
 
 type PostUseCase struct {
@@ -35,6 +39,19 @@ func (l *PostUseCase) CreatePost(post domain.CreatePost) (*domain.Post, error) {
 	}
 
 	return dbPost, nil
+}
+
+func (l *PostUseCase) GetMultimedia(postId int64) ([]byte, error) {
+
+    // Get the multimedia data from the repository
+    multimedia, err := l.repo.GetMultimedia(postId)
+
+    // Handle errors
+    if err != nil {
+		log.Println("error: ", err)
+    }
+
+    return multimedia, nil
 }
 
 func getLatitudeFromGeolocationAPI() (float64, error) {
