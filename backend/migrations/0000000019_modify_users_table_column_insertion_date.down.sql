@@ -1,0 +1,6 @@
+BEGIN;
+
+ALTER TABLE soc_app_users
+ALTER COLUMN insertion_date DROP NOT NULL;
+
+COMMIT;
