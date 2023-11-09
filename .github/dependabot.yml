@@ -61,8 +61,6 @@ updates:
         patterns:
           - "*next*"
           - "*react*"
-        ignore-patterns:
-          - "@testing-library/react"
       ts:
         patterns:
           - "@types*"
