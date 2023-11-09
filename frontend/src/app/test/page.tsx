@@ -44,6 +44,7 @@ export default function TestPage() {
     return (
         <RootLayout>
             <Button variant="contained">Hello World</Button>
+            <WButtonMotion />
             <div
                 style={{
                     paddingLeft: '15px',

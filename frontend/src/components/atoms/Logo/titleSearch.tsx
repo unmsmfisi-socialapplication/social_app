@@ -15,7 +15,7 @@ const WLogo = () => {
     return (
         <div style={containerStyle}>
             <img src="/images/FrameStudentNET.png" alt="FrameStudentNET" style={imageStyle} />
-            <h1>Student Network</h1>
+            <h2>Student Network</h2>
         </div>
     )
 }
