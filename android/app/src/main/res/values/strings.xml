@@ -73,4 +73,10 @@
     <string name="error_coincidence">Contraseñas no coinciden</string>
     <string name="HintNewPub">What\'s on your head?</string>
     <string name="button_camera">Botón Camera</string>
+    <string name="cover_photo_specifications">Especificaciones de foto de portada</string>
+    <string name="photo_weight">Peso max (10 MB)</string>
+    <string name="photo_size">Tamaño max (851 x 315 px)</string>
+    <string name="photo_specifications_summary">La plataforma acepta estas especificaciones para la foto de portada</string>
+    <string name="photo_upload">Cargar foto</string>
+    <string name="error_photo_upload">!La foto no cumple con las especificaciones, subir otra foto!</string>
 </resources>
