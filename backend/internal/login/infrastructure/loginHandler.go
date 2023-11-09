@@ -19,7 +19,6 @@ func NewLoginHandler(useCase application.LoginUsecaseInterface) *LoginHandler {
 func (lh *LoginHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	var requestData map[string]interface{}
 
-	// Decodifica la solicitud en un mapa en lugar de una estructura.
 	err := json.NewDecoder(r.Body).Decode(&requestData)
 	if err != nil {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
