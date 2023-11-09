@@ -55,9 +55,9 @@ export function findMatchingWords(text: string, words: string[]): string[] {
         return ['The entrance is empty']
     }
 
-    const searchText = text.toLowerCase() // Convertir el texto de entrada a minúsculas
+    const searchText = text.toLowerCase()
 
-    const wordsMatching = words.filter((word) => word.toLowerCase().indexOf(searchText) === 0) // Convertir las palabras a minúsculas antes de comparar
+    const wordsMatching = words.filter((word) => word.toLowerCase().indexOf(searchText) === 0)
 
     if (wordsMatching.length > 0) {
         return wordsMatching
