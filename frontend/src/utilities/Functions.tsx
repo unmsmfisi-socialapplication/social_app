@@ -52,16 +52,16 @@ export function mostSimilarPhrase(phrase: string, arrayPhrase: string[]): string
 
 export function findMatchingWords(text: string, words: string[]): string[] {
     if (text === '') {
-        return ['The entrance is empty'];
+        return ['The entrance is empty']
     }
 
-    const searchText = text.toLowerCase(); // Convertir el texto de entrada a minúsculas
+    const searchText = text.toLowerCase() // Convertir el texto de entrada a minúsculas
 
-    const wordsMatching = words.filter((word) => word.toLowerCase().indexOf(searchText) === 0); // Convertir las palabras a minúsculas antes de comparar
+    const wordsMatching = words.filter((word) => word.toLowerCase().indexOf(searchText) === 0) // Convertir las palabras a minúsculas antes de comparar
 
     if (wordsMatching.length > 0) {
-        return wordsMatching;
+        return wordsMatching
     } else {
-        return ['No matching words found'];
+        return ['No matching words found']
     }
 }

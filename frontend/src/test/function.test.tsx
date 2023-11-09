@@ -63,30 +63,30 @@ describe('Text Similarity Functions', () => {
 //Test: Function findMatchingWords
 describe('findMatchingWords', () => {
     it('Should return an empty array if the input text is empty', () => {
-        const text = '';
-        const words = ['apple', 'banana', 'cherry'];
-        const result = findMatchingWords(text, words);
-        expect(result).toEqual(['The entrance is empty']);
-    });
+        const text = ''
+        const words = ['apple', 'banana', 'cherry']
+        const result = findMatchingWords(text, words)
+        expect(result).toEqual(['The entrance is empty'])
+    })
 
     it('It should return a list of words that match the input text', () => {
-        const text = 'app';
-        const words = ['apple', 'banana', 'cherry'];
-        const result = findMatchingWords(text, words);
-        expect(result).toEqual(['apple']);
-    });
+        const text = 'app'
+        const words = ['apple', 'banana', 'cherry']
+        const result = findMatchingWords(text, words)
+        expect(result).toEqual(['apple'])
+    })
 
     it('Should return "No matching words found" if there are no matches', () => {
-        const text = 'grape';
-        const words = ['apple', 'banana', 'cherry'];
-        const result = findMatchingWords(text, words);
-        expect(result).toEqual(['No matching words found']);
-    });
+        const text = 'grape'
+        const words = ['apple', 'banana', 'cherry']
+        const result = findMatchingWords(text, words)
+        expect(result).toEqual(['No matching words found'])
+    })
 
     it('Should handle case-sensitive cases correctly', () => {
-        const text = 'BaNaNa';
-        const words = ['apple', 'banana', 'cherry'];
-        const result = findMatchingWords(text, words);
-        expect(result).toEqual(['banana']);
-    });
-});
+        const text = 'BaNaNa'
+        const words = ['apple', 'banana', 'cherry']
+        const result = findMatchingWords(text, words)
+        expect(result).toEqual(['banana'])
+    })
+})
