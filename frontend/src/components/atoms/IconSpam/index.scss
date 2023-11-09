@@ -1,0 +1,15 @@
+@import '../../../../resources/styles/variables.scss';
+
+.SpamProps {
+    padding: 12px;
+    border-radius: 100%;
+    &--secondary {
+        color: black;
+    }
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

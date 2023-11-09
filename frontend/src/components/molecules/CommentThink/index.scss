@@ -1,0 +1,18 @@
+@import '../../../../resources/styles/variables.scss';
+
+.comment_think_main_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 1px 1px 4px 4px $secondary-color;
+    border-radius: 8px;
+
+    .comment_think_container {
+        height: 75px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+    }
+}

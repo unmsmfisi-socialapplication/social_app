@@ -1,0 +1,676 @@
+{
+	"info": {
+		"_postman_id": "84b2c61a-2f97-44d6-a659-6bed12c0415a",
+		"name": "QA_LOGIN_TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30305102"
+	},
+	"item": [
+		{
+			"name": "061023",
+			"item": [
+				{
+					"name": "CP_01",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"myuser12\",\r\n    \"password\": \"Social@12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CP_01",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"myuser12\",\r\n    \"password\": \"Social@12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+									"protocol": "https",
+									"host": [
+										"social-app-backend-service-7bg5siys2q-uc",
+										"a",
+										"run",
+										"app"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "0af5902951db9d1fb601ab5a1c53c456;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 17:40:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"response\": \"Authentication successful\",\n    \"status\": \"OK\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CP_02",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"myuser12\",\r\n    \"password\": \"hopefullythisisnotaplaintext\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3333/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CP_02",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"myuser12\",\r\n    \"password\": \"hopefullythisisnotaplaintext\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+									"protocol": "https",
+									"host": [
+										"social-app-backend-service-7bg5siys2q-uc",
+										"a",
+										"run",
+										"app"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "6810958ced4cfba6f0cfe44039fcdbdf;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 17:40:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"response\": \"Invalid credentials\",\n    \"status\": \"BADCREDENTIALS\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CP_03",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"nonexistentuser\",\r\n    \"password\": \"Social@12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CP_03",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"nonexistentuser\",\r\n    \"password\": \"Social@12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+									"protocol": "https",
+									"host": [
+										"social-app-backend-service-7bg5siys2q-uc",
+										"a",
+										"run",
+										"app"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "fe7bb2f64a0c4e57dcf9f9252a33ff58;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 17:37:58 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"response\": \"User not found\",\n    \"status\": \"NOTFOUND\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CP_04",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"\", \"password\": \"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CP_04",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"username\": \"\", \"password\": \"\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+									"protocol": "https",
+									"host": [
+										"social-app-backend-service-7bg5siys2q-uc",
+										"a",
+										"run",
+										"app"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "8178c94fd52120f5ef3a2885f0694a2f;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 17:41:30 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"response\": \"User not found\",\n    \"status\": \"NOTFOUND\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CP_05",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"myuser12\",\r\n    \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CP_05",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"myuser12\",\r\n    \"password\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+									"protocol": "https",
+									"host": [
+										"social-app-backend-service-7bg5siys2q-uc",
+										"a",
+										"run",
+										"app"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "a64cfe42aff4c651cb1db200dc03b8ed"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 17:41:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"response\": \"Invalid credentials\",\n    \"status\": \"BADCREDENTIALS\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CP_06",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"Social@12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CP_06",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"Social@12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+									"protocol": "https",
+									"host": [
+										"social-app-backend-service-7bg5siys2q-uc",
+										"a",
+										"run",
+										"app"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "4ff21ba8d4c5650be02134e7a644c839;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 17:41:55 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"response\": \"User not found\",\n    \"status\": \"NOTFOUND\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CP_07",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"invaliduser\",\r\n    \"password\": \"invalidpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+							"protocol": "https",
+							"host": [
+								"social-app-backend-service-7bg5siys2q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CP_07",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"invaliduser\",\r\n    \"password\": \"invalidpassword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/login",
+									"protocol": "https",
+									"host": [
+										"social-app-backend-service-7bg5siys2q-uc",
+										"a",
+										"run",
+										"app"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "7695d847d3c3a771de6828fffe4d67e1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Oct 2023 17:42:03 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"response\": \"User not found\",\n    \"status\": \"NOTFOUND\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

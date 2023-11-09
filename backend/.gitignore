@@ -24,3 +24,10 @@ go.work
 .idea/
 .vscode/
 *.iml
+
+
+# Enviroment variables file
+*.env
+
+# Docker compose override
+docker-compose.override.yaml

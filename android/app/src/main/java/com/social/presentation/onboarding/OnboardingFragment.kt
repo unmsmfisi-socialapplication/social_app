@@ -1,23 +1,25 @@
 package com.social.presentation.onboarding
 
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.social.R
 import com.social.databinding.FragmentOnboardingBinding
 
-
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     private lateinit var binding: FragmentOnboardingBinding
     private lateinit var globalView: View
     private lateinit var dots: Array<TextView>
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentOnboardingBinding.bind(view)
         globalView = view
@@ -43,12 +45,12 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         binding.indicatorLayout.removeAllViews()
         for (i in dots.indices) {
             dots[i] = TextView(requireContext())
-            dots[i].text = Html.fromHtml("&#8226")
+            dots[i].text = HtmlCompat.fromHtml("&#8226;", HtmlCompat.FROM_HTML_MODE_LEGACY)
             dots[i].textSize = 35f
             dots[i].setTextColor(requireContext().getColor(R.color.color03))
             binding.indicatorLayout.addView(dots[i])
         }
-        dots[position]?.setTextColor(requireContext().getColor(R.color.color01))
+        dots[position].setTextColor(requireContext().getColor(R.color.color01))
         configureIndicatorLayout(position > 0)
         setElementVisibility(position > 0)
     }
@@ -78,12 +80,16 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     private val viewListener: ViewPager.OnPageChangeListener =
         object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
-                position: Int, positionOffset: Float, positionOffsetPixels: Int
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int,
             ) {
             }
+
             override fun onPageSelected(position: Int) {
                 setUpIndicator(position)
             }
+
             override fun onPageScrollStateChanged(state: Int) {}
         }
 }

@@ -1,0 +1,14 @@
+BEGIN;
+
+CREATE TABLE SOC_APP_M_USERS_REACTIONS(
+  reaction_id bigserial,
+  reaction_name VARCHAR(200),
+  insertion_date timestamp,
+  update_date timestamp,
+  PRIMARY KEY (reaction_id)
+);
+CREATE UNIQUE INDEX UQ_SOC_APP_M_USERS_REACTIONS ON SOC_APP_M_USERS_REACTIONS(reaction_name);
+CREATE INDEX IDX1_SOC_APP_M_USERS_REACTIONS ON SOC_APP_M_USERS_REACTIONS(insertion_date);
+CREATE INDEX IDX2_SOC_APP_M_USERS_REACTIONS ON SOC_APP_M_USERS_REACTIONS(update_date);
+
+COMMIT;

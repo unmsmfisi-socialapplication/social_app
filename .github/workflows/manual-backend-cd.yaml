@@ -1,0 +1,74 @@
+# This workflow will build a golang project
+name: CD Backend manually triggered
+
+on: workflow_dispatch
+
+# Define default settings for jobs
+defaults:
+  run:
+    working-directory: ./backend
+
+jobs:
+  migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE_BACKEND_TEMP }}" > .env
+
+      - name: Connect to Cloud SQL Proxy
+        uses: mattes/gce-cloudsql-proxy-action@v1
+        with:
+          creds: ${{ secrets.GCP_SA_DCR_KEY }}
+          instance: ${{ vars.PROJECT_ID }}:${{ vars.GAR_LOCATION }}:${{ vars.DB_INSTANCE }}
+
+      - name: Run database migrations
+        run: "go run cmd/migrations/migrations.go"
+
+  deploy:
+    needs: migrations
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE_BACKEND }}" > .env
+
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_DCR_KEY}}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ vars.PROJECT_ID }}
+  
+      - name: Use gcloud CLI
+        run: gcloud info
+
+      - name: Docker auth
+        run: |-
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Build and Push Container
+        run: |-
+          docker build -t ${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.BACKEND_REPOSITORY }}/${{ vars.BACKEND_IMAGES }}:${{ github.sha }} .
+          docker push ${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.BACKEND_REPOSITORY }}/${{ vars.BACKEND_IMAGES }}:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          service: ${{ vars.BACKEND_SERVICE }}
+          region: ${{ vars.REGION }}
+          image: ${{ vars.GAR_LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ vars.BACKEND_REPOSITORY }}/${{ vars.BACKEND_IMAGES }}:${{ github.sha }}
+
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
