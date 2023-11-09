@@ -6,7 +6,7 @@ import (
 
 
 type Profile struct {
-    ProfileID      int64     
+        
 	UserID         int64     
     BirthDate      time.Time 
     Name           string    
@@ -21,9 +21,9 @@ type Profile struct {
     ProfilePicture string    
 }
 
-func NewProfile(profileID int64, userID int64, birthDate time.Time, name string, lastName string, aboutMe string, genre string, address string, country string, city string, insertionDate time.Time, updateDate time.Time, profilePicture string) *Profile {
+func NewProfile( userID int64, birthDate time.Time, name string, lastName string, aboutMe string, genre string, address string, country string, city string, insertionDate time.Time, updateDate time.Time, profilePicture string) *Profile {
 	return &Profile{
-		ProfileID:      profileID,
+		
 		UserID:         userID,
 		BirthDate:      birthDate,
 		Name:           name,
