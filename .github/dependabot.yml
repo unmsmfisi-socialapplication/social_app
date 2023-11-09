@@ -1,7 +1,3 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 version: 2
 updates:
   - package-ecosystem: "gomod"
@@ -22,6 +18,22 @@ updates:
     labels:
       - "backend"
       - "dependencies"
+    groups:
+      http:
+        patterns:
+          - "*go-chi*"
+          - "*websocket*"
+      database:
+        patterns:
+          - "*pq*"
+          - "*migrate*"
+      indirects:
+        patterns:
+          - "*hashicorp*"
+          - "*atomic*"
+      utils:
+        patterns:
+          - "*crypto*"
   - package-ecosystem: 'npm'
     target-branch: "develop"
     directory: '/frontend'
@@ -35,11 +47,22 @@ updates:
         update-types: ["version-update:semver-major"]
     pull-request-branch-name:
       separator: "-"
+    commit-message:
+      prefix: "[FE] "
+    labels:
+      - "frontend"
+      - "dependencies"
     groups:
       ui:
         patterns:
           - "@mui*"
           - "@emotion*"
+      next:
+        patterns:
+          - "*next*"
+          - "*react*"
+        ignore-patterns:
+          - "@testing-library/react"
       ts:
         patterns:
           - "@types*"
@@ -49,12 +72,7 @@ updates:
       testing:
         patterns:
           - "*jest*"
-          - "testing*"
-    commit-message:
-      prefix: "[FE] "
-    labels:
-      - "frontend"
-      - "dependencies"
+          - "*testing*"
   - package-ecosystem: 'github-actions'
     target-branch: "develop"
     directory: '/'
