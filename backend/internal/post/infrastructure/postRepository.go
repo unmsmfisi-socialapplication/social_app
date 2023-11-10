@@ -14,6 +14,11 @@ var localPost = []domain.Post{}
 
 type PostsDBRepository struct {
 	db *sql.DB
+	localPost map[int64]domain.Post
+}
+
+func NewPostsDBRepository() application.PostRepository {
+	return &PostsDBRepository{localPost: make(map[int64]domain.Post)}
 }
 
 func NewPostDBRepository(database *sql.DB) application.PostRepository {
@@ -39,6 +44,33 @@ func (p *PostsDBRepository) CreatePost(post domain.CreatePost) (*domain.Post, er
 
 	return dbPost, nil
 }
+
+//Code to update a post in the database
+func (p *PostsDBRepository) UpdatePost(postId int64, post domain.CreatePost) (*domain.Post, error) {
+    // Get the post from the repository
+    dbPost, ok := p.localPost[postId]
+    if !ok {
+        return nil, fmt.Errorf("post not found for postId %d", postId)
+    }
+
+    // Update the post fields
+    dbPost.Title = post.Title
+    dbPost.Description = post.Description
+    dbPost.HasMultimedia = post.HasMultimedia
+    dbPost.Public = post.Public
+    dbPost.Multimedia = post.Multimedia
+    dbPost.UpdateDate = time.Now()
+
+    // Save the updated post to the repository
+    err := p.SavePost(dbPost)
+    if err != nil {
+        return nil, err
+    }
+
+    return &dbPost, nil
+}
+
+
 
 func (p *PostsDBRepository) UploadMultimedia(postId int64, multimedia []byte) error {
     return nil
@@ -98,6 +130,16 @@ func (p *PostsDBRepository) GetPostsUser(userId int64) ([]byte, error) {
     }
 
     return jsonData, nil
+}
+
+func (p *PostsDBRepository) GetPost(postId int64) (*domain.Post, error) {
+    // Get the post from the repository
+    dbPost, ok := p.localPost[postId]
+    if !ok {
+        return nil, fmt.Errorf("post not found for postId %d", postId)
+    }
+
+    return &dbPost, nil
 }
 
 

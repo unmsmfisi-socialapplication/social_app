@@ -22,6 +22,7 @@ type PostUseCaseInterface interface {
 type PostRepository interface {
 	CreatePost(post domain.CreatePost) (*domain.Post, error)
 	GetMultimedia(postId int64) ([]byte, error)
+	UpdatePost(postId int64, post domain.CreatePost) (*domain.Post, error)
 }
 
 type PostUseCase struct {
@@ -31,7 +32,7 @@ type PostUseCase struct {
 func NewPostUseCase(r PostRepository) *PostUseCase {
 	return &PostUseCase{repo: r}
 }
-
+//create
 func (l *PostUseCase) CreatePost(post domain.CreatePost) (*domain.Post, error) {
 	dbPost, err := l.repo.CreatePost(post)
 
@@ -41,7 +42,18 @@ func (l *PostUseCase) CreatePost(post domain.CreatePost) (*domain.Post, error) {
 
 	return dbPost, nil
 }
+//update
+func (l *PostUseCase) UpdatePost(postId int64, post domain.CreatePost) (*domain.Post, error) {
+    dbPost, err := l.repo.UpdatePost(postId, post)
 
+    if dbPost == nil {
+        return dbPost, err
+    }
+
+    return dbPost, nil
+}
+
+//others
 func (l *PostUseCase) GetMultimedia(postId int64) ([]byte, error) {
 
     // Get the multimedia data from the repository
