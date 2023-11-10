@@ -84,12 +84,13 @@ func (p *PostsDBRepository) DeletePost(postId int64) error {
     if !ok {
         return fmt.Errorf("post not found for postId %d", postId)
     }
-    
+    fmt.Println(dbPost)
     // Delete the post from the repository
     delete(p.localPost, postId)
-    
+
+    // Return a success message
     return nil
-}  
+} 
 
 func (p *PostsDBRepository) UploadMultimedia(postId int64, multimedia []byte) error {
     return nil
