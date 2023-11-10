@@ -217,3 +217,14 @@ data/cloud_platform/*.json
 #credentials in firebase
 android/app/*.json
 
+
+# Terraform
+**/.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+*.auto.tfvars
+terraform.rc
+terraform.log
+terraform.tfout
+
