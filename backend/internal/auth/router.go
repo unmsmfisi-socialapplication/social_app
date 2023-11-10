@@ -14,7 +14,7 @@ func AuthModuleRouter(useCase application.AuthUseCaseInterface) *chi.Mux {
 
 	authHandler := infrastructure.NewAuthHandler(useCase)
 
-	router.Post("/logout", authHandler.LogoutUser)
+	router.Get("/logout", authHandler.LogoutUser)
 
 	return router
 }
