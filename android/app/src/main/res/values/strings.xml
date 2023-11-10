@@ -79,4 +79,8 @@
     <string name="photo_specifications_summary">La plataforma acepta estas especificaciones para la foto de portada</string>
     <string name="photo_upload">Cargar foto</string>
     <string name="error_photo_upload">!La foto no cumple con las especificaciones, subir otra foto!</string>
+    <string name="social_network">Red social</string>
+    <string name="social_link">Link</string>
+    <string name="information_configuration">Configuración de información personal</string>
+    <string name="social_link_profile">Social_link</string>
 </resources>

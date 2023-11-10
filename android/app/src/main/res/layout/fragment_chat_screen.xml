@@ -79,7 +79,7 @@
             android:id="@+id/btn_call"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:background="@drawable/style_imagebtn_radius"
+            android:background="@drawable/style_border_5dp"
             android:backgroundTint="@color/color04"
             android:src="@drawable/icon_phone"
             android:rotationY="180"
@@ -90,7 +90,7 @@
             android:id="@+id/btn_videocam"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:background="@drawable/style_imagebtn_radius"
+            android:background="@drawable/style_border_5dp"
             android:backgroundTint="@color/color04"
             android:src="@drawable/icon_video_camera"
             app:tint="@color/white" />
@@ -137,7 +137,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/style_imagebtn_radius"
+                android:background="@drawable/style_border_5dp"
                 android:backgroundTint="@color/color05"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -189,7 +189,7 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/style_imagebtn_radius"
+                android:background="@drawable/style_border_5dp"
                 android:backgroundTint="@color/color04"
                 android:src="@drawable/icon_send_message"
                 app:tint="@color/white" />

@@ -99,6 +99,36 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/list_social_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/image_social_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_twitter"/>
+
+                    <TextView
+                        android:id="@+id/text_socialLink_ProfileUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/poppins_light"
+                        android:text="@string/social_link_profile"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
@@ -120,7 +150,7 @@
                     android:layout_marginVertical="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@drawable/style_imagebtn_radius"
+                    android:background="@drawable/style_border_5dp"
                     android:backgroundTint="@color/transparent"
                     android:src="@drawable/icon_settings"
                     android:paddingHorizontal="10dp"
@@ -136,7 +166,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:padding="5dp"
                 android:gravity="center"
-                android:background="@drawable/style_imagebtn_radius"
+                android:background="@drawable/style_border_5dp"
                 android:backgroundTint="@color/transparent">
 
                 <LinearLayout

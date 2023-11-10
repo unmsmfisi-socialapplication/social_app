@@ -8,8 +8,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.social.R
 import com.social.databinding.FragmentEditProfileBinding
 
@@ -39,7 +43,21 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         binding.buttonUploadProfile.setOnClickListener {
             openGallery()
         }
+
+        binding.iconLeft.setOnClickListener{
+            findNavController().navigate(R.id.action_editProfileFragment_to_userProfileFragment)
+        }
+
+        binding.buttonAddLink.setOnClickListener {
+            binding.socialLinks.visibility = if (binding.socialLinks.visibility == View.VISIBLE) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+        }
+
         userVerification()
+        setupAutoCompleteTextView()
     }
 
     private fun openGallery() {
@@ -91,5 +109,17 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
             return false
         }
         return true
+    }
+
+    private fun setupAutoCompleteTextView() {
+        val itemsSocial = listOf("Facebook", "Twitter", "Instagram", "Snapchat", "LinkedIn")
+        val adapter = ArrayAdapter(requireContext(), R.layout.items, itemsSocial)
+        binding.dropDownSocialNetwork.setAdapter(adapter)
+        binding.dropDownSocialNetwork.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                val selectedItem = adapter.getItem(position)
+                Toast.makeText(requireContext(), "$selectedItem", Toast.LENGTH_SHORT)
+                    .show()
+            }
     }
 }
