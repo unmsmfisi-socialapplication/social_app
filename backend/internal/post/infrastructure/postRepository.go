@@ -78,6 +78,18 @@ func (p *PostsDBRepository) UpdatePost(postId int64, post domain.CreatePost) (*d
 }
 
 
+func (p *PostsDBRepository) DeletePost(postId int64) error {
+    // Get the post from the repository
+    dbPost, ok := p.localPost[postId]
+    if !ok {
+        return fmt.Errorf("post not found for postId %d", postId)
+    }
+    
+    // Delete the post from the repository
+    delete(p.localPost, postId)
+    
+    return nil
+}  
 
 func (p *PostsDBRepository) UploadMultimedia(postId int64, multimedia []byte) error {
     return nil

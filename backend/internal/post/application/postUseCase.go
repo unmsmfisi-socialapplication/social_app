@@ -23,6 +23,7 @@ type PostRepository interface {
 	CreatePost(post domain.CreatePost) (*domain.Post, error)
 	GetMultimedia(postId int64) ([]byte, error)
 	UpdatePost(postId int64, post domain.CreatePost) (*domain.Post, error)
+    DeletePost(postId int64) error
 }
 
 type PostUseCase struct {
@@ -51,6 +52,16 @@ func (l *PostUseCase) UpdatePost(postId int64, post domain.CreatePost) (*domain.
     }
 
     return dbPost, nil
+}
+
+//delete
+func (l *PostUseCase) DeletePost(postId int64) error {
+    err := l.repo.DeletePost(postId)
+    if err != nil {
+        return err
+    }
+
+    return nil
 }
 
 //others
