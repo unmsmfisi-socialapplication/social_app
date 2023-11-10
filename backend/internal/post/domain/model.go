@@ -4,23 +4,42 @@ import (
 	"time"
 )
 
-type Post struct {
-	Id            int64
+type PostBase struct {
 	UserId        int64
 	Title         string
 	Description   string
 	HasMultimedia bool
 	Public        bool
 	Multimedia    string
-	InsertionDate time.Time
-	UpdateDate    time.Time
 }
 
-type CreatePost struct {
-	UserId        int64  `json:"userId"`
-	Title         string `json:"title" db:"title" validate:"max=100"`
-	Description   string `json:"description" db:"description" validate:"max=1000"`
-	HasMultimedia bool   `json:"hasMultimedia"`
-	Public        bool   `json:"public"`
-	Multimedia    string `json:"multimedia" db:"multimedia" validate:"max=1000"`
+type Post struct {
+	Id            int64
+	InsertionDate time.Time
+	UpdateDate    time.Time
+	PostBase
+}
+
+type PostCreate struct {
+	PostBase
+}
+
+type PostPaginationParams struct {
+	Page  int
+	Limit int
+}
+
+type PostPagination struct {
+	Posts       []Post
+	TotalCount  int
+	CurrentPage int
+}
+
+func PostCreateToPost(p PostCreate) Post {
+	post := Post{
+		PostBase:      p.PostBase,
+		InsertionDate: time.Now(),
+		UpdateDate:    time.Now(),
+	}
+	return post
 }

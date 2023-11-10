@@ -1,6 +1,9 @@
 import unittest
 from unittest.mock import patch
+import sys
 from execution.sp_lr_sklearn_main import run_model_training
+
+sys.path.append('C:/Users/USUARIO/Documents/GitHub/social_app/data')
 
 class TestMainScript(unittest.TestCase):
 
