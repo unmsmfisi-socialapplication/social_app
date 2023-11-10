@@ -27,6 +27,11 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import AvatarInput from '@/components/molecules/AvatarInput'
 import WDetailsImage from '@/components/molecules/DetailsImage/index'
 import CommentThink from '@/components/molecules/CommentThink'
+import WPostTypes from '@/components/molecules/PostTypes/index'
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions'
+import GifBoxIcon from '@mui/icons-material/GifBox'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
 import WReportPost from '@/components/molecules/ReportPost'
 
@@ -153,6 +158,12 @@ export default function TestPage() {
             </div>
             <div>
                 <WReportPost title='¿Qué tipo de problemas quieres reportar?' header='Reunir Información'/>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', rowGap: '8px' }}>
+                <WPostTypes iconComponent={<AddPhotoAlternateIcon />} typeName="FOTO" />
+                <WPostTypes iconComponent={<SubscriptionsIcon />} typeName="VIDEO" />
+                <WPostTypes iconComponent={<GifBoxIcon />} typeName="GIF" />
+                <WPostTypes iconComponent={<LocationOnIcon />} typeName="UBICACIÓN" />
             </div>
         </RootLayout>
     )
