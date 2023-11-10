@@ -9,7 +9,7 @@ my_connection = connect_azure_postgresql_fp(
     host='svbd-data-pg.postgres.database.azure.com',
     database='socialdb',
     user='useradmin',
-    password='_k8A801_'
+    password=' '
 )
 
 # Verifica si la conexión se estableció correctamente
