@@ -213,3 +213,7 @@ data/cloud_platform/*.json
 # Terraform files
 .terraform
 **/.terraform.lock.hcl
+
+#credentials in firebase
+android/app/*.json
+

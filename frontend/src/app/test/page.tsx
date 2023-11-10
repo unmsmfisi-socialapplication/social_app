@@ -11,6 +11,7 @@ import {
     WCardFollow,
     WSearch,
     WTopicFollow,
+    WUserCHATCTA,
 } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
@@ -27,12 +28,16 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import AvatarInput from '@/components/molecules/AvatarInput'
 import WDetailsImage from '@/components/molecules/DetailsImage/index'
 import CommentThink from '@/components/molecules/CommentThink'
+import WPostTypes from '@/components/molecules/PostTypes/index'
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions'
+import GifBoxIcon from '@mui/icons-material/GifBox'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
     const [password, setPassword] = useState('')
-    const [avatar, setAvatar] = useState<File | undefined>()
 
     const handleCount = () => {
         setCount(count + 1)
@@ -131,7 +136,7 @@ export default function TestPage() {
                 <WTag text="Profile" icon={PersonOutlineIcon} />
                 <Button variant="contained">Post</Button>
             </div>
-            <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar) => setAvatar(avatar)} />
+            <AvatarInput />
             <div>
                 <WDetailsImage accountName={'Influencia Animal'} name={'Miguel D.'} icon={TestIcon} />
             </div>
@@ -147,8 +152,15 @@ export default function TestPage() {
                     userhandle="XokasXD"
                 />
             </div>
+            <WUserCHATCTA />
             <div>
                 <WTopicFollow name="Tecnología" topicHandle="Todo sobre tecnología" />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', rowGap: '8px' }}>
+                <WPostTypes iconComponent={<AddPhotoAlternateIcon />} typeName="FOTO" />
+                <WPostTypes iconComponent={<SubscriptionsIcon />} typeName="VIDEO" />
+                <WPostTypes iconComponent={<GifBoxIcon />} typeName="GIF" />
+                <WPostTypes iconComponent={<LocationOnIcon />} typeName="UBICACIÓN" />
             </div>
         </RootLayout>
     )

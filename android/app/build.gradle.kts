@@ -30,7 +30,7 @@ android {
     buildTypes {
         debug {
             firebaseAppDistribution {
-                groups = "MOBILE"
+                groups = "MOBILE, QA, UX/UI, OTROS"
             }
         }
         release {
@@ -118,4 +118,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.vanniktech:emoji-google:0.6.0")
 }
