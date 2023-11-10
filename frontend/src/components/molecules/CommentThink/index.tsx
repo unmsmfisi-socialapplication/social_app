@@ -7,8 +7,8 @@ import WCircleImage from '@/components/atoms/CircleImage/circleImage'
 
 interface CommentThinkProps {
     avatarDefaultURL?: string
-    publicTag: string
-    placeholder: string
+    publicTag?: string
+    placeholder?: string
 }
 
 const CommentThink: React.FC<CommentThinkProps> = ({ avatarDefaultURL, publicTag, placeholder }) => {
