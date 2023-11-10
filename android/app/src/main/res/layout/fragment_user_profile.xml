@@ -121,6 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@drawable/style_imagebtn_radius"
+                    android:backgroundTint="@color/transparent"
                     android:src="@drawable/icon_settings"
                     android:paddingHorizontal="10dp"
                     android:contentDescription="@string/description"
@@ -135,7 +136,8 @@
                 android:layout_marginHorizontal="10dp"
                 android:padding="5dp"
                 android:gravity="center"
-                android:background="@drawable/style_imagebtn_radius">
+                android:background="@drawable/style_imagebtn_radius"
+                android:backgroundTint="@color/transparent">
 
                 <LinearLayout
                     android:layout_width="0dp"

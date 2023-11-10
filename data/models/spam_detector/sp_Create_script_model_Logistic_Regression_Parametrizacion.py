@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
 import re
 from bs4 import BeautifulSoup
 import nltk
@@ -92,6 +93,9 @@ def train_and_evaluate_model():
     # Calcular la precisión del modelo
     accuracy_naive_bayes = accuracy_score(y_test, y_pred_naive_bayes)
 
+    #Obtencion de reporte de clasificacion
+    nb_report = classification_report(y_test, y_pred_naive_bayes)
+
     # Crear un clasificador de Regresión Logística
     logistic_regression_classifier = LogisticRegression()
 
@@ -104,8 +108,11 @@ def train_and_evaluate_model():
     # Calcular la precisión del modelo
     accuracy_logistic_regression = accuracy_score(y_test, y_pred_logistic_regression)
 
+    #Obtencion de reporte de clasificacion
+    lr_report = classification_report(y_test, y_pred_logistic_regression)
+
     # Retornar el vectorizador ajustado junto con las métricas de los modelos
-    return tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier, accuracy_naive_bayes, accuracy_logistic_regression
+    return tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier, accuracy_naive_bayes, accuracy_logistic_regression ,  nb_report ,  lr_report
 
 # Función para clasificar un comentario como spam o no spam
 def classify_comment(comment, tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier):
@@ -129,7 +136,7 @@ def classify_comment(comment, tfidf_vectorizer, naive_bayes_classifier, logistic
 # Define una función para ejecutar el entrenamiento y evaluación del modelo
 def run_model_training():
     print("Ejecutando entrenamiento y evaluación del modelo...")
-    tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier, accuracy_naive_bayes, accuracy_logistic_regression = train_and_evaluate_model()
+    tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier, accuracy_naive_bayes, accuracy_logistic_regression , report_nb , report_lr= train_and_evaluate_model()
     print("Precisión del modelo Naive Bayes:", accuracy_naive_bayes)
     print("Precisión del modelo de Regresión Logística:", accuracy_logistic_regression)
 
@@ -137,6 +144,9 @@ def run_model_training():
     comment_to_classify = "Thank you for your email. I appreciate your prompt response to my inquiry."
     classification_result = classify_comment(comment_to_classify, tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier)
     print("Clasificación del comentario:", classification_result)
+
+    print("Reporte de Naive Bayes:",report_nb)
+    print("Reporte de Regresion Logistica:",report_lr)
 
 if __name__ == "__main__":
     # Definir el intervalo de tiempo en segundos entre cada ejecución (24 horas)
