@@ -10,11 +10,14 @@ interface WTagProps {
     text?: string
     isActive?: boolean
     path?: string
+    dataTestId?: string
 }
+
+
 //aca se crea el link
-const WTag: React.FC<WTagProps> = ({ icon, text, isActive, path }) => {
+const WTag: React.FC<WTagProps> = ({ icon, text, isActive, path, dataTestId }) => {
     return (
-        <Link className={isActive ? 'tagLink tagLink--active' : 'tagLink'} href={path || ''}>
+        <Link data-testid={dataTestId} className={isActive ? 'tagLink tagLink--active' : 'tagLink'} href={path || ''}>
             <SvgIcon component={icon}></SvgIcon>
             {text}
         </Link>
