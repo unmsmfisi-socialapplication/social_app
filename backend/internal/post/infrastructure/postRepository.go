@@ -45,6 +45,13 @@ func (p *PostsDBRepository) CreatePost(post domain.CreatePost) (*domain.Post, er
 	return dbPost, nil
 }
 
+func (p *PostsDBRepository) SavePost(post *domain.Post) error {
+    // Update the post in the repository
+    p.localPost[post.Id] = *post
+
+    return nil
+}
+
 //Code to update a post in the database
 func (p *PostsDBRepository) UpdatePost(postId int64, post domain.CreatePost) (*domain.Post, error) {
     // Get the post from the repository
@@ -62,7 +69,7 @@ func (p *PostsDBRepository) UpdatePost(postId int64, post domain.CreatePost) (*d
     dbPost.UpdateDate = time.Now()
 
     // Save the updated post to the repository
-    err := p.SavePost(dbPost)
+    err := p.SavePost(&dbPost)
     if err != nil {
         return nil, err
     }
