@@ -1,4 +1,6 @@
 import unittest
+import sys
+sys.path.append('C:/Users/USUARIO/Documents/GitHub/social_app/data')
 from preprocessing.sp_lr_sklearn_preprocessing import clean_text
 
 class TestPreprocessing(unittest.TestCase):
