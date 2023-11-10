@@ -45,6 +45,7 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
 	r.Use(configCorsMiddleware())
+    r.Use(middleware.Recoverer)
 
 	commentRouter := comment.CommentModuleRouter(dbInstance)
 
@@ -105,5 +106,10 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	// Follow Profile
 	followRouter := follow.FollowModuleRouter(dbInstance)
 	r.Mount("/follow_profile", followRouter)
+
+    // Notifications
+    notificationHandler := notifications.NewNotificationsHandler(eventManager)
+    r.Get("/notifications", notificationHandler.Handle)
+
 	return r
 }
