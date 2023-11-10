@@ -28,6 +28,7 @@ import AvatarInput from '@/components/molecules/AvatarInput'
 import WDetailsImage from '@/components/molecules/DetailsImage/index'
 import CommentThink from '@/components/molecules/CommentThink'
 import RootLayout from '../layout'
+import WReportPost from '@/components/molecules/ReportPost'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
@@ -149,6 +150,9 @@ export default function TestPage() {
             </div>
             <div>
                 <WTopicFollow name="Tecnología" topicHandle="Todo sobre tecnología" />
+            </div>
+            <div>
+                <WReportPost title='¿Qué tipo de problemas quieres reportar?' header='Reunir Información'/>
             </div>
         </RootLayout>
     )
