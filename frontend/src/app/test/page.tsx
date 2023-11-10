@@ -37,7 +37,6 @@ import RootLayout from '../layout'
 export default function TestPage() {
     const [count, setCount] = useState(0)
     const [password, setPassword] = useState('')
-    const [avatar, setAvatar] = useState<File | undefined>()
 
     const handleCount = () => {
         setCount(count + 1)
@@ -136,7 +135,7 @@ export default function TestPage() {
                 <WTag text="Profile" icon={PersonOutlineIcon} />
                 <Button variant="contained">Post</Button>
             </div>
-            <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar) => setAvatar(avatar)} />
+            <AvatarInput />
             <div>
                 <WDetailsImage accountName={'Influencia Animal'} name={'Miguel D.'} icon={TestIcon} />
             </div>
