@@ -1,0 +1,99 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    target-branch: "develop"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 2
+    allow:
+      - dependency-type: "all"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    pull-request-branch-name:
+      separator: "-"
+    commit-message:
+      prefix: "[BE] "
+    labels:
+      - "backend"
+      - "dependencies"
+    groups:
+      http:
+        patterns:
+          - "*go-chi*"
+          - "*websocket*"
+      database:
+        patterns:
+          - "*pq*"
+          - "*migrate*"
+      indirects:
+        patterns:
+          - "*hashicorp*"
+          - "*atomic*"
+      utils:
+        patterns:
+          - "*crypto*"
+  - package-ecosystem: 'npm'
+    target-branch: "develop"
+    directory: '/frontend'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 2
+    allow:
+      - dependency-type: "all"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    pull-request-branch-name:
+      separator: "-"
+    commit-message:
+      prefix: "[FE] "
+    labels:
+      - "frontend"
+      - "dependencies"
+    groups:
+      ui:
+        patterns:
+          - "@mui*"
+          - "@emotion*"
+      next:
+        patterns:
+          - "*next*"
+          - "*react*"
+      ts:
+        patterns:
+          - "@types*"
+          - "typescript"
+        ignore-patterns:
+          - "@types/jest"
+      testing:
+        patterns:
+          - "*jest*"
+          - "*testing*"
+  - package-ecosystem: 'github-actions'
+    target-branch: "develop"
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    open-pull-requests-limit: 2
+    allow:
+      - dependency-type: "all"
+    commit-message:
+      prefix: "[DEVOPS] "
+    labels:
+      - "devops"
+      - "dependencies"
+  - package-ecosystem: "docker"
+    target-branch: "develop"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 2
+    allow:
+      - dependency-type: "all"
+    commit-message:
+      prefix: "[DEVOPS] "
+    labels:
+      - "devops"
+      - "dependencies"
