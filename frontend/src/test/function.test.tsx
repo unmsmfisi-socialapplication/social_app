@@ -1,5 +1,9 @@
 import { validatePassword } from '../utilities/Functions'
+//const { distanceLevenshtein, mostSimilarPhrase } = require('./index');
+import { distanceLevenshtein } from '../utilities/Functions'
+import { mostSimilarPhrase } from '../utilities/Functions'
 
+//Test: Validate passwords
 describe('Validate passwords', () => {
     it('It should return true if the passwords match', () => {
         const password1 = 'password123'
@@ -13,5 +17,44 @@ describe('Validate passwords', () => {
         const password2 = 'anotherpassword'
         const result = validatePassword(password1, password2)
         expect(result).toBe(false)
+    })
+})
+
+//Test: Text Similarity Functions
+describe('Text Similarity Functions', () => {
+    describe('distanceLevenshtein', () => {
+        it('Should return the correct Levenshtein distance for similar strings', () => {
+            const distance = distanceLevenshtein('kitten', 'sitting')
+            expect(distance).toBe(3)
+        })
+
+        it('Should return 0 for identical strings', () => {
+            const distance = distanceLevenshtein('apple', 'apple')
+            expect(distance).toBe(0)
+        })
+
+        it('Should return the correct Levenshtein distance for different strings', () => {
+            const distance = distanceLevenshtein('hello', 'world')
+            expect(distance).toBe(4)
+        })
+    })
+
+    describe('mostSimilarPhrase', () => {
+        const phrases = ['apple', 'banana', 'cherry', 'date', 'fig']
+
+        it('Should return the most similar phrase when a similar one exists', () => {
+            const similarPhrase = mostSimilarPhrase('apples', phrases)
+            expect(similarPhrase).toBe('apple')
+        })
+
+        it('Should return the exact phrase when its in the list', () => {
+            const exactPhrase = mostSimilarPhrase('bananas', phrases)
+            expect(exactPhrase).toBe('banana')
+        })
+
+        it('Should return the most similar phrase when no exact match is found', () => {
+            const similarPhrase = mostSimilarPhrase('dates', phrases)
+            expect(similarPhrase).toBe('date')
+        })
     })
 })

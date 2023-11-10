@@ -21,9 +21,18 @@ import SearchIcon from '@mui/icons-material/Search'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined'
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline'
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import AvatarInput from '@/components/molecules/AvatarInput'
 import WDetailsImage from '@/components/molecules/DetailsImage/index'
 import CommentThink from '@/components/molecules/CommentThink'
+import WPostTypes from '@/components/molecules/PostTypes/index'
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions'
+import GifBoxIcon from '@mui/icons-material/GifBox'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
 
 export default function TestPage() {
@@ -41,6 +50,7 @@ export default function TestPage() {
     return (
         <RootLayout>
             <Button variant="contained">Hello World</Button>
+            <WButtonMotion />
             <div
                 style={{
                     paddingLeft: '15px',
@@ -121,6 +131,11 @@ export default function TestPage() {
                 <WTag text="Explorer" icon={SearchIcon} />
                 <WTag text="Notifications" icon={NotificationsNoneIcon} />
                 <WTag text="Messages" icon={MailOutlineIcon} />
+                <WTag text="Lists" icon={FormatListBulletedIcon} />
+                <WTag text="Bookmarks" icon={BookmarkBorderIcon} />
+                <WTag text="Communities" icon={PeopleOutlineIcon} />
+                <WTag text="Profile" icon={PersonOutlineIcon} />
+                <Button variant="contained">Post</Button>
             </div>
             <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar) => setAvatar(avatar)} />
             <div>
@@ -141,11 +156,18 @@ export default function TestPage() {
             <div>
                 <WTopicFollow name="Tecnología" topicHandle="Todo sobre tecnología" />
             </div>
+
             <WUserCHATCTA
                 userName="XokasXD"
                 userHandle="XokasXD"
                 avatarURL="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             />
+            <div style={{ display: 'flex', flexDirection: 'column', rowGap: '8px' }}>
+                <WPostTypes iconComponent={<AddPhotoAlternateIcon />} typeName="FOTO" />
+                <WPostTypes iconComponent={<SubscriptionsIcon />} typeName="VIDEO" />
+                <WPostTypes iconComponent={<GifBoxIcon />} typeName="GIF" />
+                <WPostTypes iconComponent={<LocationOnIcon />} typeName="UBICACIÓN" />
+            </div>
         </RootLayout>
     )
 }

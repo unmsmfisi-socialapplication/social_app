@@ -2,6 +2,7 @@
 import React from 'react'
 import { useAppDispatch } from '@/redux/hooks'
 import IntranetHoc from './intranet'
+import CommentThink from '@/components/molecules/CommentThink'
 export default function HomePage() {
     const handleLogout = () => {
         console.log('handleLogout called')
@@ -9,7 +10,8 @@ export default function HomePage() {
     }
     return (
         <IntranetHoc sideBar rightBar>
-            <h1>Home Page</h1>
+            <h1>Inicio</h1>
+            <CommentThink />
             <button
                 onClick={() => {
                     handleLogout()
