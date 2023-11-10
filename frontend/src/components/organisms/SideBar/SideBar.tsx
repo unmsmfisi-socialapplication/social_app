@@ -1,6 +1,6 @@
 'use client'
 import { WLogo, WButton, WTag, WButtonPost } from '@/components'
-import { Box } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import './index.scss'
 import SearchIcon from '@mui/icons-material/Search'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
@@ -14,8 +14,9 @@ interface SideBarProps {}
 
 export default function SideBar({}: SideBarProps) {
     return (
+        <div className="sidebar__section">
+            <WLogo alt="FrameStudentNET" size={30} />
             <Box className="listOptions">
-                <WLogo alt="FrameStudentNET" size={30}/>
                 <WTag text="Home" icon={CottageOutlinedIcon} isActive />
                 <WTag text="Explorer" icon={SearchIcon} />
                 <WTag text="Notifications" icon={NotificationsNoneIcon} />
@@ -26,5 +27,6 @@ export default function SideBar({}: SideBarProps) {
                 <WTag text="Profile" icon={PersonOutlineIcon} />
                 <WButtonPost text="Post" />
             </Box>
+        </div>
     )
 }

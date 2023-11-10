@@ -210,6 +210,8 @@ replay_pid*
 #credentials in gcp
 data/cloud_platform/*.json
 
+#credentials in firebase
+android/app/*.json
 
 # Terraform
 **/.terraform.lock.hcl
