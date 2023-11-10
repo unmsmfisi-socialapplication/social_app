@@ -1,20 +1,21 @@
 .custom-search {
-    width: 50%;
+    width: 100%;
+    height: 29px;
     background-color: #ebeef0;
-    border-radius: 25px; /* Agrega un borde redondeado */
+    border-radius: 18px;
 
     & .MuiOutlinedInput-root {
-        border: none; /* Elimina el borde por defecto de Material-UI */
+        border: none;
     }
 }
 
 /* Estilos para el icono de búsqueda */
 .custom-search .MuiSvgIcon-root {
-    color: #000; /* Cambia el color del icono a negro */
+    color: #232121;
 }
 
 /* Estilos para el botón de búsqueda */
 .custom-search .MuiButton-root {
-    background-color: #ebeef0; /* Ajusta el fondo del botón a juego */
-    border: none; /* Elimina el borde del botón */
+    background-color: #ebeef0;
+    border: none;
 }
