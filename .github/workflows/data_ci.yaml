@@ -37,7 +37,7 @@ jobs:
           files: 'requirements.txt'  # Check if 'requirements.txt' exists
 
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
