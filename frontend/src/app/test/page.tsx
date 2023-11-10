@@ -11,6 +11,7 @@ import {
     WCardFollow,
     WSearch,
     WTopicFollow,
+    WUserCHATCTA,
 } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
@@ -151,6 +152,7 @@ export default function TestPage() {
                     userhandle="XokasXD"
                 />
             </div>
+            <WUserCHATCTA />
             <div>
                 <WTopicFollow name="Tecnología" topicHandle="Todo sobre tecnología" />
             </div>
