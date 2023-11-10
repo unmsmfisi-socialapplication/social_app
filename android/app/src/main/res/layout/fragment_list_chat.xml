@@ -68,7 +68,8 @@
             android:drawableLeft="@drawable/icon_search"
             android:inputType="text"
             android:textSize="12dp"
-            style="@style/EditTextStyle"/>
+            android:background="@drawable/style_imagebtn_radius"
+            android:backgroundTint="@color/color05"/>
     </LinearLayout>
 
     <FrameLayout
