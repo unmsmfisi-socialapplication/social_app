@@ -12,6 +12,7 @@ import (
 	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
 
 	interest_topics "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics"
@@ -20,6 +21,8 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 
 	wsInf "github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
+
+	follow "github.com/unmsmfisi-socialapplication/social_app/internal/follow"
 )
 
 func Router(wsHandler *wsInf.Handler) http.Handler {
@@ -41,6 +44,8 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 
 	postRoutes := post.PostModuleRouter(dbInstance)
 
+    profileRouter := profile.ProfileModuleRouter(dbInstance)
+
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("{\"hello\": \"world\"}"))
 	})
@@ -57,6 +62,7 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 
 		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
 	})
+
 
 	// Login
 	loginRepo := infrastructure.NewUserDBRepository(dbInstance)
@@ -79,6 +85,8 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 
 	r.Mount("/post", postRoutes)
 
+	r.Mount("/profile", profileRouter)
+
 	//Email-sender
 
 	emailRouter := email.EmailModuleRouter()
@@ -87,5 +95,9 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	//interestTopics
 	interestTopicsRouter := interest_topics.InterestTopicsModuleRouter(dbInstance)
 	r.Mount("/interestTopics", interestTopicsRouter)
+
+	// Follow Profile
+	followRouter := follow.FollowModuleRouter(dbInstance)
+	r.Mount("/follow_profile", followRouter)
 	return r
 }

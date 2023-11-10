@@ -1,8 +1,17 @@
 'use client'
 import { useState } from 'react'
-import Layout from '../layout'
 import { Button } from '@mui/material'
-import { WButton, WInput, WCircleIcon, WModalPhoto, WComment, WButtonMotion, WCardFollow, WSearch } from '@/components'
+import {
+    WButton,
+    WInput,
+    WCircleIcon,
+    WModalPhoto,
+    WComment,
+    WButtonMotion,
+    WCardFollow,
+    WSearch,
+    WTopicFollow,
+} from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
 import AllInclusive from '@mui/icons-material/AllInclusive'
@@ -11,10 +20,14 @@ import SearchIcon from '@mui/icons-material/Search'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined'
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline'
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import AvatarInput from '@/components/molecules/AvatarInput'
 import WDetailsImage from '@/components/molecules/DetailsImage/index'
 import CommentThink from '@/components/molecules/CommentThink'
-import SquareButton from '../../components/atoms/ButtonSquare/ButtonSquare'
+import RootLayout from '../layout'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
@@ -29,8 +42,9 @@ export default function TestPage() {
         setPassword(e.target.value)
     }
     return (
-        <Layout>
+        <RootLayout>
             <Button variant="contained">Hello World</Button>
+            <WButtonMotion />
             <div
                 style={{
                     paddingLeft: '15px',
@@ -97,12 +111,10 @@ export default function TestPage() {
                     type="password"
                 />
             </div>
+
             <div>
                 <WSearch />
                 {/* Otras partes de tu aplicación */}
-            </div>
-            <div className="App">
-                <SquareButton />
             </div>
 
             <WCircleIcon iconSize={30} icon={CheckIcon} />
@@ -113,6 +125,11 @@ export default function TestPage() {
                 <WTag text="Explorer" icon={SearchIcon} />
                 <WTag text="Notifications" icon={NotificationsNoneIcon} />
                 <WTag text="Messages" icon={MailOutlineIcon} />
+                <WTag text="Lists" icon={FormatListBulletedIcon} />
+                <WTag text="Bookmarks" icon={BookmarkBorderIcon} />
+                <WTag text="Communities" icon={PeopleOutlineIcon} />
+                <WTag text="Profile" icon={PersonOutlineIcon} />
+                <Button variant="contained">Post</Button>
             </div>
             <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar) => setAvatar(avatar)} />
             <div>
@@ -130,7 +147,10 @@ export default function TestPage() {
                     userhandle="XokasXD"
                 />
             </div>
-        </Layout>
+            <div>
+                <WTopicFollow name="Tecnología" topicHandle="Todo sobre tecnología" />
+            </div>
+        </RootLayout>
     )
 }
 

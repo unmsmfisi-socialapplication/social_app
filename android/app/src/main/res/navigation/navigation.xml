@@ -69,5 +69,28 @@
         android:id="@+id/chatScreenFragment"
         android:name="com.social.presentation.interaction.chats.ChatScreenFragment"
         android:label="fragment_chat_screen"
-        tools:layout="@layout/fragment_chat_screen" />
+        tools:layout="@layout/fragment_chat_screen" >
+        <action
+            android:id="@+id/action_chatScreenFragment_to_listChatsFragment"
+            app:destination="@id/listChatsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.social.presentation.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.social.presentation.profile.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.social.presentation.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

@@ -8,12 +8,14 @@
     tools:context=".presentation.interaction.chats.ChatScreenFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/bottom_radius_style"
+        android:backgroundTint="@color/color01"
         android:padding="15dp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -75,7 +77,10 @@
 
         <ImageButton
             android:id="@+id/btn_call"
-            style="@style/IconButtonStyle"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/style_imagebtn_radius"
+            android:backgroundTint="@color/color04"
             android:src="@drawable/icon_phone"
             android:rotationY="180"
             android:layout_marginHorizontal="10dp"
@@ -83,7 +88,10 @@
 
         <ImageButton
             android:id="@+id/btn_videocam"
-            style="@style/IconButtonStyle"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/style_imagebtn_radius"
+            android:backgroundTint="@color/color04"
             android:src="@drawable/icon_video_camera"
             app:tint="@color/white" />
     </LinearLayout>
@@ -95,80 +103,97 @@
         android:clipToPadding="false"
         android:orientation="vertical"
         android:overScrollMode="never"
-        android:visibility="gone"
         android:padding="20dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/root_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/color05"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <ImageButton
-                android:id="@+id/btn_emojis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/icon_face"
-                app:tint="@color/white" />
-
-            <EditText
-                android:id="@+id/input_sendMessage"
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/poppins"
-                android:hint="@string/send_message"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:background="@drawable/style_imagebtn_radius"
+                android:backgroundTint="@color/color05"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_face"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/icon_face"
+                    app:tint="@color/white" />
+
+                <EditText
+                    android:id="@+id/inputSendMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color05"
+                    android:fontFamily="@font/poppins"
+                    android:hint="@string/send_message"
+                    android:inputType="text"
+                    android:paddingVertical="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp"/>
+
+                <ImageButton
+                    android:id="@+id/btn_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/icon_camera"
+                    app:tint="@color/white" />
+
+                <ImageButton
+                    android:id="@+id/btn_microphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/icon_microphone"
+                    app:tint="@color/white" />
+            </LinearLayout>
 
             <ImageButton
-                android:id="@+id/btn_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/icon_camera"
+                android:id="@+id/btn_sendMessage"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/style_imagebtn_radius"
+                android:backgroundTint="@color/color04"
+                android:src="@drawable/icon_send_message"
                 app:tint="@color/white" />
 
-            <ImageButton
-                android:id="@+id/btn_microphone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/icon_microphone"
-                app:tint="@color/white" />
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/btn_sendMessage"
-            style="@style/IconButtonStyle"
-            android:layout_height="match_parent"
-            android:src="@drawable/icon_send_message"
-            android:layout_marginLeft="10dp"
-            app:tint="@color/white" />
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
