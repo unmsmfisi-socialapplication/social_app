@@ -22,6 +22,17 @@ func NewCommentHandler(useCase application.CommentUseCaseInterface) *CommentHand
 	return &CommentHandler{useCase: useCase}
 }
 
+func (ch *CommentHandler) HandleGetAllComments(w http.ResponseWriter, r *http.Request) {
+	comments, err := ch.useCase.GetAll()
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error getting comments")
+		fmt.Println(err.Error())
+		return
+	}
+
+	utils.SendJSONResponse(w, http.StatusOK, "OK", comments)
+}
+
 func (ch *CommentHandler) HandleGetCommentByID(w http.ResponseWriter, r *http.Request) {
 	commentIDStr := chi.URLParam(r, "commentID")
 	if commentIDStr == "" {
@@ -30,9 +41,6 @@ func (ch *CommentHandler) HandleGetCommentByID(w http.ResponseWriter, r *http.Re
 	}
 
 	commentID, _ := strconv.ParseInt(commentIDStr, 10, 64)
-
-
-
 	comment, err := ch.useCase.GetByID(commentID)
 	if err != nil {
 		if commentID > 0{
@@ -43,15 +51,8 @@ func (ch *CommentHandler) HandleGetCommentByID(w http.ResponseWriter, r *http.Re
 		fmt.Println(err.Error())
 		return
 	}
-	
-	commentJSON, err := json.Marshal(comment)
-	if err != nil {
-		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error marshaling comment to JSON")
-		fmt.Println(err.Error())
-		return
-	}
 
-	utils.SendJSONResponse(w, http.StatusOK, "OK", string(commentJSON))
+	utils.SendJSONResponse(w, http.StatusOK, "OK", comment)
 }
 
 func (ch *CommentHandler) HandleCreateComment(w http.ResponseWriter, r *http.Request) {
@@ -61,7 +62,7 @@ func (ch *CommentHandler) HandleCreateComment(w http.ResponseWriter, r *http.Req
 		Comment         string    `json:"comment"`
 		InsertionDate   time.Time `json:"insertionDate"`
 		UpdateDate      time.Time `json:"updateDate"`
-		ParentCommentID int64     `json:"parentCommentID"`  
+		ParentCommentID *int64     `json:"parentCommentID"`  
 	}
 
 	errStructure := json.NewDecoder(r.Body).Decode(&commentData)
@@ -103,7 +104,7 @@ func (ch *CommentHandler) HandleUpdateComment(w http.ResponseWriter, r *http.Req
 		Comment         string    `json:"comment"`
 		InsertionDate   time.Time `json:"insertionDate"`
 		UpdateDate      time.Time `json:"updateDate"`
-		ParentCommentID int64     `json:"parentCommentID"`  
+		ParentCommentID *int64     `json:"parentCommentID"`  
 	}
 	errStructure := json.NewDecoder(r.Body).Decode(&commentData)
 	if errStructure != nil {
