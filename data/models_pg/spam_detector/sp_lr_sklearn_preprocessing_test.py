@@ -1,6 +1,8 @@
 import unittest
+import sys
 from preprocessing.sp_lr_sklearn_preprocessing import clean_text
 
+sys.path.append('C:/Users/USUARIO/Documents/GitHub/social_app/data')
 class TestPreprocessing(unittest.TestCase):
 
     def test_clean_text(self):
