@@ -5,6 +5,8 @@ from pyspark.ml.feature import RegexTokenizer, StopWordsRemover, CountVectorizer
 from pyspark.ml.classification import LogisticRegression
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import StringIndexer
+#Classification report 
+from pyspark.ml.evaluation import MulticlassClassificationEvaluator #Local basline testing only
 
 spark = SparkSession.builder.appName("SocialApp").getOrCreate()
 
@@ -12,7 +14,7 @@ customSchema = StructType([
     StructField("clean_text", StringType()), 
     StructField("category", StringType())])
 
-filename = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQrsbFzUZtypCv80I7lGN4qs1m56Qss5X54FzTH-gb0lx569sjkRKCtSRemMhF1tca38rVu-mQFhbez/pubhtml?gid=817597830&single=true'
+filename = 'Twitter_Data_ii - Twitter_Data_ii.csv'
 
 df = spark.read.format("csv").option("header", "true").schema(customSchema).load(filename)
 
@@ -40,6 +42,21 @@ lr = LogisticRegression(maxIter=20, regParam=0.3, elasticNetParam=0)
 lrModel = lr.fit(trainingData)
 
 predictions = lrModel.transform(testData)
+
+# Classification report with pyspark
+evaluator = MulticlassClassificationEvaluator(predictionCol="prediction", labelCol="label", metricName="accuracy")
+accuracy = evaluator.evaluate(predictions)
+print("Test Error = %g" % (1.0 - accuracy))
+print("Accuracy = %g" % accuracy)
+
+# Other metrics
+precision = evaluator.evaluate(predictions, {evaluator.metricName: "weightedPrecision"})
+recall = evaluator.evaluate(predictions, {evaluator.metricName: "weightedRecall"})
+f1 = evaluator.evaluate(predictions, {evaluator.metricName: "f1"})
+
+print("Precision = %g" % precision)
+print("Recall = %g" % recall)
+print("F1 Score = %g" % f1)
 
 predictions.filter(predictions['prediction'] == 0).select("clean_text", "category", "probability", "label", "prediction")\
     .orderBy("probability", ascending=False).show(n=10, truncate=30)

@@ -4,10 +4,11 @@
     align-items: center;
     width: max-content;
     padding: 8px 15px;
+    margin-bottom: 8px; /* Puedes ajustar el valor del margen según tus preferencias */
     border-radius: 20px;
     gap: 6px;
     font-size: 14px;
-    background-color: $third-color;
+    background-color: white;
     transition: all 0.3s;
     cursor: pointer;
     &--active {
