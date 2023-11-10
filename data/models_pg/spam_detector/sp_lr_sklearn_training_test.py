@@ -1,7 +1,8 @@
 import unittest
 import sys
-sys.path.append('C:/Users/USUARIO/Documents/GitHub/social_app/data')
 from training.sp_lr_sklearn_training import load_and_analyze_data, train_and_evaluate_model, classify_comment
+
+sys.path.append('C:/Users/USUARIO/Documents/GitHub/social_app/data')
 
 class TestTraining(unittest.TestCase):
 
