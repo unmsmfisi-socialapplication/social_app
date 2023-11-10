@@ -11,19 +11,13 @@ resource "google_project_service" "service_networking_api" {
   service    = "servicenetworking.googleapis.com"
   depends_on = [google_project_service.compute_engine_api]
 }
-/*
 resource "google_project_service" "cloud_run_admin_api" {
   service = "run.googleapis.com"
 }
 resource "google_project_service" "service_usage_api" {
   service = "serviceusage.googleapis.com"
 }
-*/
-/*
-data "google_compute_network" "default" {
-  name = "default"
-}
-*/
+
 resource "google_compute_network" "private_network" {
   provider = google-beta
   project  = var.project_id
