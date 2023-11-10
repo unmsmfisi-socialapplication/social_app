@@ -7,6 +7,7 @@ import (
 )
 
 type CommentUseCaseInterface interface {
+	GetAll() ([]*domain.Comment, error)
 	GetByID(commentID int64) (*domain.Comment, error)
 	Create(comment *domain.Comment) error
 	Update(commentID int64, comment *domain.Comment) error
@@ -14,6 +15,7 @@ type CommentUseCaseInterface interface {
 }
 
 type CommentRepository interface {
+	GetAllComments() ([]*domain.Comment, error)
 	GetCommentByID(commentID int64) (*domain.Comment, error)
 	CreateComment(comment *domain.Comment) error
 	UpdateComment(commentID int64, comment *domain.Comment) error
@@ -26,6 +28,10 @@ type CommentUseCase struct {
 
 func NewCommentUseCase(r CommentRepository) *CommentUseCase {
 	return &CommentUseCase{repo: r}
+}
+
+func (c *CommentUseCase) GetAll() ([]*domain.Comment, error) {
+	return c.repo.GetAllComments()
 }
 
 func (c *CommentUseCase) GetByID(commentID int64) (*domain.Comment, error) {
