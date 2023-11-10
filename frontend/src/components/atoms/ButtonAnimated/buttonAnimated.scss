@@ -3,18 +3,21 @@
 .button-animated {
     position: relative;
     display: block;
-    width: 290px;
     height: 50px;
     background-color: #f0f0f0;
-    color: #007aff;
-    font-size: 19px;
-    font-weight: 600;
-    border: 1px solid #a7caf8;
+    
+    border: 1px solid #A7CAF8;
     border-radius: 13px;
     overflow: hidden;
     transition: all 500ms ease;
     z-index: 0;
     font-family: $font-poppins-regular;
+    
+    color: #007AFF;
+    font-size: 16px !important;
+    font-weight: 650 !important;
+
+    border: #007AFF solid 1px !important; 
     cursor: pointer;
 
     &::before {
@@ -44,7 +47,7 @@
     }
 
     &:hover {
-        background-color: #007aff;
+        background-color: #007aff !important;
         border: 1px solid #007aff;
         color: #dfdfdf;
         transition: all 1850ms ease;
