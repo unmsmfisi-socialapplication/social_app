@@ -114,7 +114,7 @@ export default function TestPage() {
 
             <WCircleIcon iconSize={30} icon={CheckIcon} />
             <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
-            <WModalPhoto warning />
+            <WModalPhoto />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '10px' }}>
                 <WTag text="Home" icon={CottageOutlinedIcon} isActive />
                 <WTag text="Explorer" icon={SearchIcon} />

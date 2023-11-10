@@ -10,13 +10,13 @@ import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import { WButton } from '@/components'
 
-interface CustomDialogProps {
-    warning?: boolean
+interface ModalPhotoProps {
     title?: CustomText
     content?: string
     subtitle?: string
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
     btnText?: string
+    dataTestid?: string
 }
 
 interface CustomText {
@@ -46,7 +46,7 @@ const sxCloseButton = {
     color: (theme: Theme) => theme.palette.grey[500],
 }
 
-const CustomDialog: React.FC<CustomDialogProps> = ({ warning, content, title, subtitle, size, btnText }) => {
+const ModalPhoto: React.FC<ModalPhotoProps> = ({ content, title, subtitle, size, btnText }) => {
     const [open, setOpen] = React.useState(false)
 
     const handleClickOpen = () => {
@@ -63,7 +63,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ warning, content, title, su
             </Button>
             <BootstrapDialog onClose={handleClose} open={open} maxWidth={size} fullWidth={true}>
                 <DialogTitle sx={sxDialogTitle} color={title?.typeColor}>
-                    {warning && title?.textContent}
+                    {title?.textContent}
                 </DialogTitle>
 
                 <IconButton onClick={handleClose} sx={sxCloseButton}>
@@ -105,8 +105,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ warning, content, title, su
     )
 }
 
-CustomDialog.defaultProps = {
-    warning: false,
+ModalPhoto.defaultProps = {
     title: {
         textContent: '!La foto no cumple con las especificaciones, subir otra foto¡',
         typeColor: 'error',
@@ -117,5 +116,4 @@ CustomDialog.defaultProps = {
     size: 'xs',
     btnText: 'Cargar Foto',
 }
-
-export default CustomDialog
+export default ModalPhoto
