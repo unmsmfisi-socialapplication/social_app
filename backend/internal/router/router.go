@@ -38,6 +38,7 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
 	r.Use(configCorsMiddleware())
+    r.Use(configRateLimitterMiddleware(100, 5*time.Minute))
 
 	commentRouter := comment.CommentModuleRouter(dbInstance)
 

@@ -5,8 +5,11 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/go-chi/cors"
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/middleware"
 )
 
 func getCorsOrigins() []string {
@@ -36,4 +39,11 @@ func configCorsMiddleware() func(http.Handler) http.Handler {
 		MaxAge:           maxAge,
 	})
 	return corsMiddleware.Handler
+}
+
+func configRateLimitterMiddleware(maxRequests int, interval time.Duration) func(http.Handler) http.Handler {
+	realTimeProvider := utils.NewRealTimeProvider()
+	rateLimiterMiddleware := middleware.NewRateLimiter(maxRequests, interval, realTimeProvider)
+
+	return rateLimiterMiddleware.Handle 
 }
