@@ -3,8 +3,7 @@ nltk.download('punkt')
 import unittest
 import pandas as pd
 import numpy as np
-from unittest.mock import patch
-from data.preprocessing import pc_lr_preprocessing   
+from unittest.mock import patch 
 from data.training.pc_lr_training import train_LSTM, evaluate_model, classify_post   
 
 class TestPCLRTraining(unittest.TestCase):
