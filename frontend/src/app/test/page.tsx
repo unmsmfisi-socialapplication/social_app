@@ -33,6 +33,7 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions'
 import GifBoxIcon from '@mui/icons-material/GifBox'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
+import WReportPost from '@/components/molecules/ReportPost'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
@@ -154,6 +155,9 @@ export default function TestPage() {
             </div>
             <div>
                 <WTopicFollow name="Tecnología" topicHandle="Todo sobre tecnología" />
+            </div>
+            <div>
+                <WReportPost title='¿Qué tipo de problemas quieres reportar?' header='Reunir Información'/>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', rowGap: '8px' }}>
                 <WPostTypes iconComponent={<AddPhotoAlternateIcon />} typeName="FOTO" />

@@ -1,0 +1,48 @@
+@import '../../../../resources/styles/variables.scss';
+
+.cardFollow {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+}
+
+.headerText {
+    margin: 0;
+}
+
+.headerLine {
+    width: 40%;
+    height: 2px;
+    position: absolute;
+    background-color: #1da1f2;
+}
+
+.closeButton {
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    color: #5b7083;
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+}
+
+.title {
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
