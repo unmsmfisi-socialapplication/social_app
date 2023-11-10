@@ -5,7 +5,7 @@ on:
     branches:
       - develop
     paths:
-      - "android/**"
+      - 'android/**'
 
 defaults:
   run:
@@ -22,9 +22,9 @@ jobs:
       - name: Setting up Java
         uses: actions/setup-java@v3
         with:
-          java-version: "17"
-          distribution: "temurin"
-          cache: "gradle"
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
 
       - name: Grant execute permissions to gradle wrapper
         run: chmod +x ./gradlew
