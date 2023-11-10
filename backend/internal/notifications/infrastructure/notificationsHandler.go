@@ -1,4 +1,4 @@
-package notifications
+package infrastructure
 
 import (
 	"net/http"
@@ -23,6 +23,7 @@ func (nh *NotificationsHandler) Handle(w http.ResponseWriter, r *http.Request) {
 			return true
 		},
 	}
+
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		// Handle error

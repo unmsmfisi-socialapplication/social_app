@@ -13,7 +13,6 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/events"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/notifications"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
 
@@ -23,6 +22,9 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 
 	wsInf "github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
+
+	notificationsapplication "github.com/unmsmfisi-socialapplication/social_app/internal/notifications/application"
+	notificationsinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/notifications/infrastructure"
 
 	follow "github.com/unmsmfisi-socialapplication/social_app/internal/follow"
 )
@@ -37,7 +39,7 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 
     eventManager := events.NewEventManager()
 
-    notificationListener := notifications.NewNotificationListener(eventManager)
+    notificationListener := notificationsapplication.NewNotificationListener(eventManager)
     eventManager.AddEventListener("postCreated", notificationListener)
 
 	r := chi.NewRouter()
@@ -108,7 +110,7 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	r.Mount("/follow_profile", followRouter)
 
     // Notifications
-    notificationHandler := notifications.NewNotificationsHandler(eventManager)
+    notificationHandler := notificationsinfrastructure.NewNotificationsHandler(eventManager)
     r.Get("/notifications", notificationHandler.Handle)
 
 	return r

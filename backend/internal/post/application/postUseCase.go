@@ -36,7 +36,7 @@ func (l *PostUseCase) CreatePost(post domain.CreatePost) (*domain.Post, error) {
 		return dbPost, err
 	}
 
-    l.eventManager.TriggerEvent("postCreated", nil)
+    l.eventManager.TriggerEvent("postCreated", dbPost)
 
 	return dbPost, nil
 }
