@@ -1,0 +1,79 @@
+@import '../../../../resources/styles/variables.scss';
+.chat_user_cta_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    box-shadow:
+        rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+        rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    border-radius: 5px;
+    width: 350px;
+    .chat_user_cta_user_info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .chat_user_avatar {
+            width: 60px;
+            height: 60px;
+        }
+        p {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            span {
+                color: rgba(0, 0, 0, 0.6);
+            }
+        }
+    }
+    .chat_user_cta_user_options {
+        display: flex;
+        padding: 5px 0;
+        gap: 4px;
+
+        .cta_dot {
+            background-color: rgb(168, 168, 168);
+            border-radius: 100%;
+            width: 5px;
+            height: 5px;
+        }
+        ul {
+            margin: 0;
+            padding-left: 0;
+            align-self: center;
+            overflow: hidden;
+            position: absolute;
+            border-radius: 10px;
+            background-color: white;
+            right: -120px;
+            box-shadow:
+                rgba(0, 0, 0, 0.1) 0px 0px 2px 0px,
+                rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+
+            list-style: none;
+            li {
+                padding: 10px 15px;
+                transition: all 0.3s;
+                font-size: 14px;
+                &:first-child {
+                    color: red;
+                    &:hover {
+                        background-color: red;
+                        color: white;
+                    }
+                }
+                &:hover {
+                    background-color: $blue-color;
+                    color: white;
+                }
+            }
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &:hover {
+        background-color: #f5f5f5;
+    }
+}
