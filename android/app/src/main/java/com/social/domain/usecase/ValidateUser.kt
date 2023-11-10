@@ -1,5 +1,6 @@
 package com.social.domain.usecase
 
+import com.social.data.source.remote.dto.LoginDto
 import com.social.data.source.remote.dto.aLogin
 import com.social.domain.SocialAppRepository
 import com.social.domain.model.InvalidUserException
@@ -17,7 +18,7 @@ class ValidateUser
     constructor(
         private val socialAppRepository: SocialAppRepository,
     ) {
-        operator fun invoke(loginBody: LoginBody): Flow<Resource<List<LoginUserData>>> {
+        operator fun invoke(loginBody: LoginBody): Flow<Resource<List<LoginDto>>> {
             return flow {
                 try {
                     if (loginBody.username.isBlank()) {
