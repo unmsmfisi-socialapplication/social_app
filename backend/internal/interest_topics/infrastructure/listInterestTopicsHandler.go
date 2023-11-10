@@ -19,10 +19,10 @@ func NewListInterestTopicsHandler(useCase application.ListInterestTopicsUseCaseI
 
 func (handler *ListInterestTopicsHandler) HandleListTopics(writer http.ResponseWriter, r *http.Request) {
 
-	var interestTopics []domain.InterestTopics
+	var interestTopics []domain.InterestTopic
 	interestTopics, err := handler.useCase.GetInteresTopics()
 	if err != nil {
-		utils.SendJSONResponse(writer, http.StatusInternalServerError, "ERROR", "Error while fetching BFD data")
+		utils.SendJSONResponse(writer, http.StatusInternalServerError, "ERROR", "Error while fetching data")
 		fmt.Print(err.Error())
 		return
 	}

@@ -13,8 +13,8 @@ type InterestTopicsDBRepository struct {
 func NewInterestTopicsDBRepository(database *sql.DB) domain.InterestTopicsRepository {
 	return &InterestTopicsDBRepository{db: database}
 }
-func (dbRepository InterestTopicsDBRepository) FindAll() ([]domain.InterestTopics, error) {
-	var interestTopics []domain.InterestTopics
+func (dbRepository InterestTopicsDBRepository) FindAll() ([]domain.InterestTopic, error) {
+	var interestTopics []domain.InterestTopic
 	query := `SELECT interest_id, interest_name, interest_summary FROM soc_app_m_users_interests`
 	rows, err := dbRepository.db.Query(query)
 	if err != nil {
@@ -22,7 +22,7 @@ func (dbRepository InterestTopicsDBRepository) FindAll() ([]domain.InterestTopic
 	}
 
 	for rows.Next() {
-		var interestTopic domain.InterestTopics
+		var interestTopic domain.InterestTopic
 		err := rows.Scan(&interestTopic.InterestId, &interestTopic.InterestName, &interestTopic.InterestSummary)
 		if err != nil {
 			return nil, err

@@ -6,7 +6,7 @@ import (
 )
 
 type ListInterestTopicsUseCaseI interface {
-	GetInteresTopics() ([]domain.InterestTopics, error)
+	GetInteresTopics() ([]domain.InterestTopic, error)
 }
 
 type ListInterestTopicsUseCase struct {
@@ -17,8 +17,8 @@ func NewListInterestTopicsUseCase(repository domain.InterestTopicsRepository) *L
 	return &ListInterestTopicsUseCase{repository: repository}
 }
 
-func (usecase *ListInterestTopicsUseCase) GetInteresTopics() ([]domain.InterestTopics, error) {
-	var interestTopics []domain.InterestTopics
+func (usecase *ListInterestTopicsUseCase) GetInteresTopics() ([]domain.InterestTopic, error) {
+	var interestTopics []domain.InterestTopic
 	interestTopics, err := usecase.repository.FindAll()
 	if err != nil {
 		return nil, err
