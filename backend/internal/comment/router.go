@@ -2,7 +2,6 @@ package comment
 
 import (
 	"database/sql"
-	"net/http"
 
 	"github.com/go-chi/chi"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment/application"
@@ -17,12 +16,10 @@ func CommentModuleRouter(dbInstance *sql.DB) *chi.Mux{
 	commentUseCase := application.NewCommentUseCase(commentRepo)
 	commentHandler := infrastructure.NewCommentHandler(commentUseCase)
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("{\"hello\": \"from comments section\"}"))
-	})
+	r.Get("/", commentHandler.HandleGetAllComments)
 	r.Get("/{commentID:[0-9]+}", commentHandler.HandleGetCommentByID)
 	r.Post("/", commentHandler.HandleCreateComment)
-	r.Put("/", commentHandler.HandleUpdateComment) //refactor this route
+	r.Put("/{commentID:[0-9]+}", commentHandler.HandleUpdateComment)
 	r.Delete("/{commentID:[0-9]+}", commentHandler.HandleDeleteComment)
 
 	return r
