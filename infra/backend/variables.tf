@@ -19,7 +19,7 @@ variable "database_instance_tier" {
   type        = string
 }
 variable "artifact_registry_repository_id" {
-  description = "Tier configuration to database instance"
+  description = "Artifact Registry repository name"
   type        = string
 }
 variable "private-network-name" {
