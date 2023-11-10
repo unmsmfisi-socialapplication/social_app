@@ -1,5 +1,4 @@
 import psycopg2
-from psycopg2 import sql
 import pandas as pd
 
 # Crea un dataframe de pandas para el ejemplo
@@ -10,10 +9,10 @@ df = pd.DataFrame({
 })
 
 # Datos de conexión a la base de datos PostgreSQL
-dbname = 'socialdb'
-user = 'useradmin'
-password = '_k8A801_'
-host = 'svbd-data-pg.postgres.database.azure.com'  # o la dirección del servidor de la base de datos
+dbname = 'dbname'
+user = 'user'
+password = 'password'
+host = 'host'  # o la dirección del servidor de la base de datos
 port = '5432'  # Puerto por defecto de PostgreSQL
 
 # Conexión a la base de datos
