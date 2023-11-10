@@ -1,8 +1,9 @@
 'use client'
 import React from 'react'
-import { Box, SvgIcon, SvgIconProps } from '@mui/material'
+import { SvgIcon, SvgIconProps } from '@mui/material'
 import AllInclusive from '@mui/icons-material/AllInclusive'
 import './index.scss'
+import Link from 'next/link'
 
 interface WTagProps {
     icon: React.ComponentType<SvgIconProps>
@@ -10,18 +11,15 @@ interface WTagProps {
     isActive?: boolean
     path?: string
 }
-
+//aca se crea el link
 const WTag: React.FC<WTagProps> = ({ icon, text, isActive, path }) => {
     return (
-        <Box
-            onClick={() => console.log(`Ir a la ruta ${text}`)}
-            className={isActive ? 'tagLink tagLink--active' : 'tagLink'}
-        >
+        <Link className={isActive ? 'tagLink tagLink--active' : 'tagLink'} href={path || ''}>
             <SvgIcon component={icon}></SvgIcon>
             {text}
-        </Box>
+        </Link>
     )
-}
+} 
 
 export default WTag
 
