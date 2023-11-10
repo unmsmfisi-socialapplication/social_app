@@ -68,7 +68,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
+            android:weightSum="4"
             android:paddingVertical = "5dp"
             android:orientation="horizontal">
 
@@ -78,12 +78,38 @@
                 android:contentDescription="@string/icon"
                 app:srcCompat="@drawable/post_icon_like" />
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/color03" />
+
+            <ImageView
+                android:id="@+id/icon_comment"
+                style="@style/ImageIconPost"
+                android:contentDescription="@string/icon"
+                app:srcCompat="@drawable/post_icon_comment" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/color03" />
+
             <ImageView
                 android:id="@+id/icon_share"
-                style="@style/ImageIconNavBar"
+                style="@style/ImageIconPost"
                 android:contentDescription="@string/icon"
-                android:elevation="4dp"
                 app:srcCompat="@drawable/post_icon_share" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/color03" />
+
+            <ImageView
+                android:id="@+id/icon_save"
+                style="@style/ImageIconPost"
+                android:contentDescription="@string/icon"
+                app:srcCompat="@drawable/post_icon_save" />
         </LinearLayout>
 
     </LinearLayout>
