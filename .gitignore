@@ -210,8 +210,13 @@ replay_pid*
 #credentials in gcp
 data/cloud_platform/*.json
 
+# Terraform files
+.terraform
+**/.terraform.lock.hcl
+
 #credentials in firebase
 android/app/*.json
+
 
 # Terraform
 **/.terraform.lock.hcl
@@ -222,3 +227,4 @@ terraform.tfstate.backup
 terraform.rc
 terraform.log
 terraform.tfout
+
