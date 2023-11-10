@@ -42,9 +42,9 @@ const blue = {
   );
 
 interface TextAreaProps {
-    textAreaValue: string;
-    handleChangeTextArea: any;
-    placeholder: string
+    textAreaValue?: string;
+    handleChangeTextArea?: any;
+    placeholder?: string
 }
 
 const WTextArea: React.FC<TextAreaProps> = ({ textAreaValue, handleChangeTextArea, placeholder}) => {
