@@ -3,6 +3,7 @@ package application
 import (
 	"errors"
 
+	"github.com/unmsmfisi-socialapplication/social_app/internal/events"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
 )
 
@@ -21,10 +22,11 @@ type PostRepository interface {
 
 type PostUseCase struct {
 	repo PostRepository
+    eventManager *events.EventManager
 }
 
-func NewPostUseCase(r PostRepository) *PostUseCase {
-	return &PostUseCase{repo: r}
+func NewPostUseCase(r PostRepository, eventManager *events.EventManager) *PostUseCase {
+	return &PostUseCase{repo: r, eventManager: eventManager}
 }
 
 func (l *PostUseCase) CreatePost(post domain.CreatePost) (*domain.Post, error) {
@@ -33,6 +35,8 @@ func (l *PostUseCase) CreatePost(post domain.CreatePost) (*domain.Post, error) {
 	if dbPost == nil {
 		return dbPost, err
 	}
+
+    l.eventManager.TriggerEvent("postCreated", dbPost)
 
 	return dbPost, nil
 }

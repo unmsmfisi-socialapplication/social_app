@@ -10,10 +10,11 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment"
 	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/events"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
 
 	interest_topics "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics"
 	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
@@ -21,6 +22,9 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 
 	wsInf "github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
+
+	notificationsapplication "github.com/unmsmfisi-socialapplication/social_app/internal/notifications/application"
+	notificationsinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/notifications/infrastructure"
 
 	follow "github.com/unmsmfisi-socialapplication/social_app/internal/follow"
 )
@@ -33,15 +37,21 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 
 	dbInstance := database.GetDB()
 
+    eventManager := events.NewEventManager()
+
+    notificationListener := notificationsapplication.NewNotificationListener(eventManager)
+    eventManager.AddEventListener("postCreated", notificationListener)
+
 	r := chi.NewRouter()
 
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
 	r.Use(configCorsMiddleware())
+    r.Use(middleware.Recoverer)
 
 	commentRouter := comment.CommentModuleRouter(dbInstance)
 
-	postRoutes := post.PostModuleRouter(dbInstance)
+	postRoutes := post.PostModuleRouter(dbInstance, eventManager)
 
     profileRouter := profile.ProfileModuleRouter(dbInstance)
 
@@ -98,5 +108,10 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	// Follow Profile
 	followRouter := follow.FollowModuleRouter(dbInstance)
 	r.Mount("/follow_profile", followRouter)
+
+    // Notifications
+    notificationHandler := notificationsinfrastructure.NewNotificationsHandler(eventManager)
+    r.Get("/notifications", notificationHandler.Handle)
+
 	return r
 }
