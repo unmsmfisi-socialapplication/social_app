@@ -1,23 +1,27 @@
 import React from 'react'
 
-const WLogo = () => {
-    const containerStyle = {
-        display: 'flex',
-        alignItems: 'center',
-    }
+interface WLogoProps {
+    alt?: string
+    size?: number
+}
 
-    const imageStyle = {
-        marginRight: '15px',
-        width: '50px',
-        height: '50px',
-    }
+const containerStyle = {
+    display: 'flex',
+    alignItems: 'center',
+}
 
+const WLogo: React.FC<WLogoProps> = ({ alt, size }) => {
     return (
         <div style={containerStyle}>
-            <img src="/images/FrameStudentNET.png" alt="FrameStudentNET" style={imageStyle} />
-            <h2>Student Network</h2>
+            <img src="/images/FrameStudentNET.png" alt={alt} style={{ marginRight: '15px', width: size, height: size }} />
+            <h3>Student Network</h3>
         </div>
     )
 }
 
 export default WLogo
+
+WLogo.defaultProps = {
+    alt: 'FrameStudentNET',
+    size: 30,
+}
