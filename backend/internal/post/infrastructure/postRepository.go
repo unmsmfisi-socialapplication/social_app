@@ -5,12 +5,10 @@ import (
 	"time"
 	"encoding/json"
 	"fmt"
+
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
 )
-
-var countPost int64 = 0
-var localPost = []domain.Post{}
 
 type PostsDBRepository struct {
 	db *sql.DB
@@ -25,24 +23,79 @@ func NewPostDBRepository(database *sql.DB) application.PostRepository {
 	return &PostsDBRepository{db: database}
 }
 
-func (p *PostsDBRepository) CreatePost(post domain.CreatePost) (*domain.Post, error) {
-	countPost++
+func (p *PostsDBRepository) CreatePost(post domain.PostCreate) (*domain.Post, error) {
 
-	dbPost := &domain.Post{
-		Id:            countPost,
-		UserId:        post.UserId,
-		Title:         post.Title,
-		Description:   post.Description,
-		HasMultimedia: post.HasMultimedia,
-		Public:        post.Public,
-		Multimedia:    post.Multimedia,
-		InsertionDate: time.Now(),
-		UpdateDate:    time.Now(),
+	query := `INSERT INTO soc_app_posts
+	(user_id,title, description, has_multimedia, public, multimedia, insertion_date, update_date)
+	VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+	RETURNING post_id;	
+	`
+
+	dbPost := domain.PostCreateToPost(post)
+
+	err := p.db.QueryRow(
+		query,
+		dbPost.UserId,
+		dbPost.Description,
+		dbPost.Title,
+		dbPost.HasMultimedia,
+		dbPost.Public,
+		dbPost.Multimedia,
+		dbPost.InsertionDate,
+		dbPost.UpdateDate,
+	).Scan(&dbPost.Id)
+
+	if err != nil {
+		return nil, err
 	}
 
-	localPost = append(localPost, *dbPost)
+	return &dbPost, nil
+}
 
-	return dbPost, nil
+func (p *PostsDBRepository) UserExist(post domain.PostCreate) bool {
+	query := `SELECT user_id FROM sa.soc_app_users WHERE user_id =  $1`
+
+	var dbUserId int64
+
+	p.db.QueryRow(query, post.UserId).Scan(&dbUserId)
+
+	return dbUserId != 0
+}
+
+func (p *PostsDBRepository) GetAll(params domain.PostPaginationParams) (*domain.PostPagination, error) {
+	query := `SELECT post_id ,user_id, title, description, has_multimedia, 
+				public, multimedia, insertion_date, update_date 
+				FROM sa.soc_app_posts 
+				ORDER BY insertion_date DESC 
+              	LIMIT $1 OFFSET $2`
+
+	offset := (params.Page - 1) * params.Limit
+
+	rows, err := p.db.Query(query, params.Limit, offset)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var dbPosts domain.PostPagination
+	for rows.Next() {
+		var post domain.Post
+		err := rows.Scan(&post.Id, &post.UserId, &post.Title, &post.Description, &post.HasMultimedia, &post.Public, &post.Multimedia, &post.InsertionDate, &post.UpdateDate)
+		if err != nil {
+			return nil, err
+		}
+		dbPosts.Posts = append(dbPosts.Posts, post)
+	}
+
+	totalRowsQuery := "SELECT COUNT(*) FROM sa.soc_app_posts "
+	err = p.db.QueryRow(totalRowsQuery).Scan(&dbPosts.TotalCount)
+	if err != nil {
+		return nil, err
+	}
+
+	dbPosts.CurrentPage = params.Page
+
+	return &dbPosts, nil
 }
 
 func (p *PostsDBRepository) SavePost(post *domain.Post) error {
