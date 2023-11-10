@@ -14,9 +14,8 @@ interface SideBarProps {}
 
 export default function SideBar({}: SideBarProps) {
     return (
-        <Box className="sidebar__section">
-            <WLogo />
             <Box className="listOptions">
+                <WLogo alt="FrameStudentNET" size={30}/>
                 <WTag text="Home" icon={CottageOutlinedIcon} isActive />
                 <WTag text="Explorer" icon={SearchIcon} />
                 <WTag text="Notifications" icon={NotificationsNoneIcon} />
@@ -27,6 +26,5 @@ export default function SideBar({}: SideBarProps) {
                 <WTag text="Profile" icon={PersonOutlineIcon} />
                 <WButtonPost text="Post" />
             </Box>
-        </Box>
     )
 }
