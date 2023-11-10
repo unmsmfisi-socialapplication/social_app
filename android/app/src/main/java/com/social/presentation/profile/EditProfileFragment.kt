@@ -49,12 +49,12 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         }
 
         binding.buttonAddLink.setOnClickListener {
-
-            binding.socialLinks.visibility = if (binding.socialLinks.visibility == View.VISIBLE) {
-                View.GONE
-            } else {
-                View.VISIBLE
-            }
+            binding.socialLinks.visibility =
+                if (binding.socialLinks.visibility == View.VISIBLE) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
         }
 
         userVerification()
