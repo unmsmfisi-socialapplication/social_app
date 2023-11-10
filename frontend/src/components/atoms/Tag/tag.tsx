@@ -14,7 +14,7 @@ interface WTagProps {
 const WTag: React.FC<WTagProps> = ({ icon, text, isActive, path }) => {
     return (
         <Box
-            onClick={() => console.log(`Ir a la ruta ${text}`)}
+            onClick={() => console.log('Ir a la ruta ${path}')}
             className={isActive ? 'tagLink tagLink--active' : 'tagLink'}
         >
             <SvgIcon component={icon}></SvgIcon>

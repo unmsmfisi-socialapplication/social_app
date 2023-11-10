@@ -13,6 +13,10 @@ export const YUP_SCHEMA = {
         })
         .required('Campo incorrecto o faltante'),
 }
+
+export const ERROR_MESSAGE =
+    '¡Oops!... Tu usuario o contraseña es incorrecta. Si no recuerdas tu contraseña, puedes restablecerla.'
+
 export const LOGIN_VALUES = {
     USERNAME: 'username',
     PASSWORD: 'password',
