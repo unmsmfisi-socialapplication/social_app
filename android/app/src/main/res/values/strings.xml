@@ -19,7 +19,7 @@
     <string name="mastodon">Mastodon</string>
     <string name="sign_up">Regístrate</string>
     <string name="does_not_count">¿No tienes una cuenta?</string>
-    <string name="none">_</string>
+    <string name="none"> </string>
     <string name="onboarding_register">Regístrate</string>
     <string name="onboarding_connected_world_title">Encuentra amigos y obtén inspiración</string>
     <string name="onboarding_connected_world_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
