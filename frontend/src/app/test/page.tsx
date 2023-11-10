@@ -11,6 +11,7 @@ import {
     WCardFollow,
     WSearch,
     WTopicFollow,
+    WUserCHATCTA,
 } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
@@ -37,7 +38,6 @@ import RootLayout from '../layout'
 export default function TestPage() {
     const [count, setCount] = useState(0)
     const [password, setPassword] = useState('')
-    const [avatar, setAvatar] = useState<File | undefined>()
 
     const handleCount = () => {
         setCount(count + 1)
@@ -136,7 +136,7 @@ export default function TestPage() {
                 <WTag text="Profile" icon={PersonOutlineIcon} />
                 <Button variant="contained">Post</Button>
             </div>
-            <AvatarInput avatarValue={avatar} onChangeAvatar={(avatar) => setAvatar(avatar)} />
+            <AvatarInput />
             <div>
                 <WDetailsImage accountName={'Influencia Animal'} name={'Miguel D.'} icon={TestIcon} />
             </div>
@@ -152,6 +152,7 @@ export default function TestPage() {
                     userhandle="XokasXD"
                 />
             </div>
+            <WUserCHATCTA />
             <div>
                 <WTopicFollow name="Tecnología" topicHandle="Todo sobre tecnología" />
             </div>
