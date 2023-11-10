@@ -44,11 +44,12 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
             openGallery()
         }
 
-        binding.iconLeft.setOnClickListener{
+        binding.iconLeft.setOnClickListener {
             findNavController().navigate(R.id.action_editProfileFragment_to_userProfileFragment)
         }
 
         binding.buttonAddLink.setOnClickListener {
+
             binding.socialLinks.visibility = if (binding.socialLinks.visibility == View.VISIBLE) {
                 View.GONE
             } else {
