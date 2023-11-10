@@ -1,0 +1,74 @@
+@import '../../../../resources/styles/variables.scss';
+
+.AddPost_main_container{
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    grid-template-areas: "avatar post";
+
+    .avatar_container{
+        grid-area: avatar;
+        display: grid;
+        justify-content: center;
+        
+    }
+
+    .post_container{
+        grid-area: post;
+        display: grid;
+        row-gap: 0.5em;
+    
+        & a{
+            color: #1DA1F2;
+            text-decoration: none;
+            display: flex;
+            align-items: center
+        }
+    
+        & a:hover{
+            color: #1DA1F2;
+        }
+    
+        & hr{
+            color: #EBEEF0;
+        }
+    
+        & input{
+            font-size: 30px;
+            height: 100px;
+        }
+        & input:focus{
+           border: none;
+    
+        }
+        &.text_area_container{
+            display: "flex";
+            flex-direction: "column";
+        }
+    }
+    
+}
+
+.post_buttons_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .buttons_container_two{
+        display: flex;
+        align-items: center
+    }
+
+    & button{
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        color: #1DA1F2;
+        border-radius: 5px;
+    }
+
+    & button:hover{
+        background-color: #EBEEF0;
+        cursor: pointer;
+    }
+
+}
