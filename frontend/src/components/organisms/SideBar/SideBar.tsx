@@ -7,7 +7,7 @@ interface SideBarProps {}
 export default function SideBar({}: SideBarProps) {
     return (
         <Box className="sidebar__section">
-            <WLogo />
+            <WLogo alt="FrameStudentNET" size={30}/>
             <div>lista de items</div>
         </Box>
     )
