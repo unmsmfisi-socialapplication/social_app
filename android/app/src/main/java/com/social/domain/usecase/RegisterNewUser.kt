@@ -36,7 +36,7 @@ class RegisterNewUser
                         }
                     }
                     emit(Resource.Loading())
-                    val register = socialAppRepository.registerNewUser(registerBody).aRegister()
+                    val register = socialAppRepository.registerNewUser(registerBody)
                     if (register.user_name.isNotEmpty()) {
                         emit(Resource.Success("Registrado", listOf(register)))
                     } else {

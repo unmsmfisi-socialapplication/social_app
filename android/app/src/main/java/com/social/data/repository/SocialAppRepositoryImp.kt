@@ -10,6 +10,7 @@ import com.social.domain.SocialAppRepository
 import com.social.domain.model.CreatePostBody
 import com.social.domain.model.LoginBody
 import com.social.domain.model.RegisterBody
+import com.social.domain.model.RegisterData
 import javax.inject.Inject
 
 class SocialAppRepositoryImp
@@ -25,7 +26,7 @@ class SocialAppRepositoryImp
             return api.createPost(createPostBody)
         }
 
-        override suspend fun registerNewUser(registerBody: RegisterBody): RegisterDto {
+        override suspend fun registerNewUser(registerBody: RegisterBody): RegisterData {
             return api.registerUser(registerBody)
         }
 
