@@ -106,7 +106,7 @@ func (p *PostsDBRepository) SavePost(post *domain.Post) error {
 }
 
 //Code to update a post in the database
-func (p *PostsDBRepository) UpdatePost(postId int64, post domain.CreatePost) (*domain.Post, error) {
+func (p *PostsDBRepository) UpdatePost(postId int64, post domain.PostCreate) (*domain.Post, error) {
     // Get the post from the repository
     dbPost, ok := p.localPost[postId]
     if !ok {
