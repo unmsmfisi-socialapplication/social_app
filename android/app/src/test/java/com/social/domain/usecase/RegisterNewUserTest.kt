@@ -1,17 +1,17 @@
+import com.social.domain.SocialAppRepository
 import com.social.domain.model.RegisterBody
 import com.social.domain.model.RegisterData
-import com.social.domain.SocialAppRepository
 import com.social.domain.usecase.RegisterNewUser
 import com.social.utils.Resource
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
+import org.junit.Before
+import org.junit.Test
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
-import org.junit.Before
-import org.junit.Test
 
 class RegisterNewUserTest {
     private lateinit var registerNewUser: RegisterNewUser
@@ -25,11 +25,11 @@ class RegisterNewUserTest {
     @Test
     fun `registerNewUser with valid data should emit success`() =
         runBlocking {
-            val registerBody = RegisterBody(
+            val registerBody = RegisterBody (
                 Phone = "",
                 Email = "josecalletest@gmail.com",
                 User_name = "josecalletest",
-                Password = "Social@43"
+                Password = "Social@43",
             )
             val registerData = RegisterData("josecalletest@gmail.com", "josecalletest")
 
