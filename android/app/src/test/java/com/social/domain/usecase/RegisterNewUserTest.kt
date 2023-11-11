@@ -25,7 +25,12 @@ class RegisterNewUserTest {
     @Test
     fun `registerNewUser with valid data should emit success`() =
         runBlocking {
-            val registerBody = RegisterBody(Phone = "", Email = "josecalletest@gmail.com", User_name = "josecalletest", Password = "Social@43")
+            val registerBody = RegisterBody(
+                Phone = "",
+                Email = "josecalletest@gmail.com",
+                User_name = "josecalletest",
+                Password = "Social@43"
+            )
             val registerData = RegisterData("josecalletest@gmail.com", "josecalletest")
 
             coEvery { socialAppRepository.registerNewUser(registerBody) } returns registerData
@@ -55,7 +60,7 @@ class RegisterNewUserTest {
     @Test
     fun `registerNewUser with invalid data should emit error`() =
         runBlocking {
-            val registerBody = RegisterBody("", "email321@gmail.com", "","Social@12")
+            val registerBody = RegisterBody("", "email321@gmail.com", "", "Social@12")
 
             val result = registerNewUser(registerBody)
 
@@ -72,8 +77,7 @@ class RegisterNewUserTest {
     @Test
     fun `registerNewUser with invalid email should emit error`() =
         runBlocking {
-
-            val registerBody = RegisterBody("", "", "josecalletest","Social@12")
+            val registerBody = RegisterBody("", "", "josecalletest", "Social@12")
 
             val result = registerNewUser(registerBody)
 
@@ -85,14 +89,14 @@ class RegisterNewUserTest {
                     else -> assert(false)
                 }
             }
-    }
+        }
 
     @Test
     fun `registerNewUser with invalid psw should emit error`() =
         runBlocking {
-            val registerBody = RegisterBody("", "email321@gmail.com", "josecalletest","")
+            val registerBody = RegisterBody("", "email321@gmail.com", "josecalletest", "")
             val result = registerNewUser(registerBody)
-            val registerBody2 = RegisterBody("", "email321@gmail.com", "josecalletest","dd")
+            val registerBody2 = RegisterBody("", "email321@gmail.com", "josecalletest", "dd")
             val result2 = registerNewUser(registerBody2)
 
             result.collect { resource ->
