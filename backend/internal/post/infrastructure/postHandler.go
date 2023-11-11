@@ -9,7 +9,6 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/helpers"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 
-	//"github.com/unmsmfisi-socialapplication/social_app/internal/post/infrastructure/postRepository"
 )
 
 type PostHandler struct {

@@ -8,26 +8,26 @@ import (
 )
 
 var (
-
 	ErrUserNotFound   = errors.New("user not found")
 	ErrIncompleteData = errors.New("incomplete data")
 	ErrPostNotFound = errors.New("post not found")
 )
 
 type PostUseCaseInterface interface {
-	CreatePost(post domain.CreatePost) (*domain.Post, error)
+	CreatePost(post domain.PostCreate) (*domain.Post, error)
 	GetUserLocation() (*domain.Location, error)
 	GetMultimedia(postId int64) ([]byte, error)
-  GetPosts(params domain.PostPaginationParams) (*domain.PostPagination, error)
+    GetPosts(params domain.PostPaginationParams) (*domain.PostPagination, error)
 }
 
 type PostRepository interface {
-	CreatePost(post domain.CreatePost) (*domain.Post, error)
-	GetMultimedia(postId int64) ([]byte, error)
-	UpdatePost(postId int64, post domain.CreatePost) (*domain.Post, error)
+  CreatePost(post domain.PostCreate) (*domain.Post, error)
+  GetMultimedia(postId int64) ([]byte, error)
+  UpdatePost(postId int64, post domain.PostCreate) (*domain.Post, error)
+  UserExist(post domain.PostCreate) bool
   DeletePost(postId int64) error
   GetAll(params domain.PostPaginationParams) (*domain.PostPagination, error)
-)
+}
 
 type PostUseCase struct {
 	repo PostRepository
@@ -54,7 +54,7 @@ func (l *PostUseCase) CreatePost(post domain.PostCreate) (*domain.Post, error) {
 }
 
 //update
-func (l *PostUseCase) UpdatePost(postId int64, post domain.CreatePost) (*domain.Post, error) {
+func (l *PostUseCase) UpdatePost(postId int64, post domain.PostCreate) (*domain.Post, error) {
     dbPost, err := l.repo.UpdatePost(postId, post)
 
     if dbPost == nil {
