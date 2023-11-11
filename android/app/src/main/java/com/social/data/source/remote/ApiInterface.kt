@@ -2,11 +2,11 @@ package com.social.data.source.remote
 
 import com.social.data.source.remote.dto.CreatePostDto
 import com.social.data.source.remote.dto.LoginDto
-import com.social.data.source.remote.dto.RegisterDto
 import com.social.data.source.remote.dto.RegisterUserErrorDto
 import com.social.domain.model.CreatePostBody
 import com.social.domain.model.LoginBody
 import com.social.domain.model.RegisterBody
+import com.social.domain.model.RegisterData
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -26,7 +26,7 @@ interface ApiInterface {
     @POST("/register")
     suspend fun registerUser(
         @Body registerBody: RegisterBody,
-    ): RegisterDto
+    ): RegisterData
 
     @POST("/register")
     suspend fun registerUserError(
