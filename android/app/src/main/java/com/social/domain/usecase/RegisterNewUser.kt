@@ -1,7 +1,6 @@
 
 package com.social.domain.usecase
 
-import com.social.data.source.remote.dto.aRegister
 import com.social.data.source.remote.dto.aRegisterError
 import com.social.domain.SocialAppRepository
 import com.social.domain.model.InvalidRegisterException
