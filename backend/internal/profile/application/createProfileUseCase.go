@@ -15,7 +15,7 @@ func NewCreateProfileUseCase(profileRepository IProfileRepository) *CreateProfil
 //ejecuta el caso de uso para la creacion de un perfil
 func (cpuc *CreateProfileUseCase) CreateProfile(p *domain.Profile) error {
 	//crea un nuevo perfil
-	profile := domain.NewProfile( p.UserID, p.BirthDate, p.Name, p.LastName, p.AboutMe, p.Genre, p.Address, p.Country, p.City, p.InsertionDate, p.UpdateDate, p.ProfilePicture)
+	profile := domain.NewProfile( p.UserID, p.BirthDate, p.Name, p.LastName, p.AboutMe, p.Genre, p.Address, p.Country, p.City, p.ProfilePicture)
 
 	//guarda el perfil
 	err := cpuc.profileRepository.CreateProfile(profile)
