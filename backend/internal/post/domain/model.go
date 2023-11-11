@@ -46,7 +46,7 @@ func PostCreateToPost(p PostCreate) Post {
 	return post
 }
 
-func (c *CreatePost) Validate() error {
+func (c *PostCreate) Validate() error {
 
 	titleRegex := regexp.MustCompile(`^.{0,100}$`)
 	descriptionRegex := regexp.MustCompile(`^.{0,1000}$`)
