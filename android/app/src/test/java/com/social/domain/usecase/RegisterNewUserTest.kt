@@ -1,7 +1,7 @@
-import com.social.domain.SocialAppRepository
-import com.social.domain.usecase.RegisterNewUser
 import com.social.domain.model.RegisterBody
 import com.social.domain.model.RegisterData
+import com.social.domain.SocialAppRepository
+import com.social.domain.usecase.RegisterNewUser
 import com.social.utils.Resource
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -23,9 +23,10 @@ class RegisterNewUserTest {
     }
 
     @Test
-    fun `registerNewUser with valid data should emit success`() = runBlocking {
-        val registerBody = RegisterBody(Phone = "", Email = "josecalletest@gmail.com", User_name="josecalletest", Password="Social@43")
-        val registerData  = RegisterData("josecalletest@gmail.com", "josecalletest")
+    fun `registerNewUser with valid data should emit success`() =
+        runBlocking {
+        val registerBody = RegisterBody(Phone = "", Email = "josecalletest@gmail.com", User_name = "josecalletest", Password = "Social@43")
+        val registerData = RegisterData("josecalletest@gmail.com", "josecalletest")
 
         coEvery { socialAppRepository.registerNewUser(registerBody) } returns registerData
 
@@ -52,7 +53,8 @@ class RegisterNewUserTest {
     }
 
     @Test
-    fun `registerNewUser with invalid data should emit error`() = runBlocking {
+    fun `registerNewUser with invalid data should emit error`() =
+        runBlocking {
 
         val registerBody = RegisterBody("", "email321@gmail.com", "","Social@12")
 
@@ -69,7 +71,8 @@ class RegisterNewUserTest {
     }
 
     @Test
-    fun `registerNewUser with invalid email should emit error`() = runBlocking {
+    fun `registerNewUser with invalid email should emit error`() =
+        runBlocking {
 
         val registerBody = RegisterBody("", "", "josecalletest","Social@12")
 
@@ -86,30 +89,29 @@ class RegisterNewUserTest {
     }
 
     @Test
-    fun `registerNewUser with invalid psw should emit error`() = runBlocking {
+    fun `registerNewUser with invalid psw should emit error`() =
+        runBlocking {
+            val registerBody = RegisterBody("", "email321@gmail.com", "josecalletest","")
+            val result = registerNewUser(registerBody)
+            val registerBody2 = RegisterBody("", "email321@gmail.com", "josecalletest","dd")
+            val result2 = registerNewUser(registerBody2)
 
-        val registerBody = RegisterBody("", "email321@gmail.com", "josecalletest","")
-        val result = registerNewUser(registerBody)
-
-        val registerBody2 = RegisterBody("", "email321@gmail.com", "josecalletest","dd")
-        val result2 = registerNewUser(registerBody2)
-
-        result.collect { resource ->
-            when (resource) {
-                is Resource.Error -> {
-                    assert(resource.message == "Ingrese contraseña")
+            result.collect { resource ->
+                when (resource) {
+                    is Resource.Error -> {
+                        assert(resource.message == "Ingrese contraseña")
+                    }
+                    else -> assert(false)
                 }
-                else -> assert(false)
+            }
+
+            result2.collect { resource2 ->
+                when (resource2) {
+                    is Resource.Error -> {
+                        assert(resource2.message == "La contraseña debe ser segura")
+                    }
+                    else -> assert(false)
+                }
             }
         }
-
-        result2.collect { resource2 ->
-            when (resource2) {
-                is Resource.Error -> {
-                    assert(resource2.message == "La contraseña debe ser segura")
-                }
-                else -> assert(false)
-            }
-        }
-    }
 }
