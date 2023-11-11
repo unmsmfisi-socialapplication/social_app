@@ -25,7 +25,7 @@ class RegisterNewUserTest {
     @Test
     fun `registerNewUser with valid data should emit success`() =
         runBlocking {
-            val registerBody = RegisterBody (
+            val registerBody = RegisterBody(
                 Phone = "",
                 Email = "josecalletest@gmail.com",
                 User_name = "josecalletest",
