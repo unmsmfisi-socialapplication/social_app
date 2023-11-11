@@ -24,8 +24,8 @@ class RegisterNewUserTest {
 
     @Test
     fun `registerNewUser with valid data should emit success`() = runBlocking {
-        val registerBody = RegisterBody(Phone = "", Email = "josecalletest123@gmail.com", User_name="josecalletest", Password="Social@43")
-        val registerData  = RegisterData("josecalletest123@gmail.com", "josecalletest")
+        val registerBody = RegisterBody(Phone = "", Email = "josecalletest@gmail.com", User_name="josecalletest", Password="Social@43")
+        val registerData  = RegisterData("josecalletest@gmail.com", "josecalletest")
 
         coEvery { socialAppRepository.registerNewUser(registerBody) } returns registerData
 
