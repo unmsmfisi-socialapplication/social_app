@@ -4,7 +4,7 @@ import WTextArea from './textArea'
 
 describe('TextArea', () => {
    
-    it('Renderiza el componente atomo área de texto', () => {
+    it('Renders the text area atom component', () => {
         
         const { getByPlaceholderText } = render(
             <WTextArea placeholder="Escribe..."/>,
@@ -13,7 +13,7 @@ describe('TextArea', () => {
         expect(textArea.getAttribute('placeholder')).toBe('Escribe...')
     })
 
-    it('Verifica el valor del componente atomo área de texto', () => {
+    it('Check the value of the textarea atom component', () => {
         const value = "Hola"
         const { queryByText } = render(
             <WTextArea textAreaValue={value}/>,
