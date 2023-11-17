@@ -17,7 +17,7 @@ func NewPostDBRepository(database *sql.DB) application.PostRepository {
 
 func (p *PostsDBRepository) CreatePost(post domain.PostCreate) (*domain.Post, error) {
 
-	query := `INSERT INTO soc_app_posts
+	query := `INSERT INTO sa.soc_app_posts
 	(user_id,title, description, has_multimedia, public, multimedia, insertion_date, update_date)
 	VALUES($1, $2, $3, $4, $5, $6, $7, $8)
 	RETURNING post_id;	
@@ -57,7 +57,8 @@ func (p *PostsDBRepository) UserExist(post domain.PostCreate) bool {
 func (p *PostsDBRepository) GetAll(params domain.PostPaginationParams) (*domain.PostPagination, error) {
 	query := `SELECT post_id ,user_id, title, description, has_multimedia, 
 				public, multimedia, insertion_date, update_date 
-				FROM sa.soc_app_posts 
+				FROM sa.soc_app_posts
+				WHERE public = true
 				ORDER BY insertion_date DESC 
               	LIMIT $1 OFFSET $2`
 
@@ -79,13 +80,32 @@ func (p *PostsDBRepository) GetAll(params domain.PostPaginationParams) (*domain.
 		dbPosts.Posts = append(dbPosts.Posts, post)
 	}
 
-	totalRowsQuery := "SELECT COUNT(*) FROM sa.soc_app_posts "
-	err = p.db.QueryRow(totalRowsQuery).Scan(&dbPosts.TotalCount)
+	dbPosts.TotalCount = len(dbPosts.Posts)
+	dbPosts.CurrentPage = params.Page
+
+	return &dbPosts, nil
+}
+
+func (p *PostsDBRepository) GetById(id int) (*domain.Post, error) {
+	query := `
+        SELECT post_id, user_id, title, description, has_multimedia, public, multimedia, insertion_date, update_date 
+        FROM sa.soc_app_posts
+        WHERE post_id = $1
+    `
+
+	dbPost := domain.Post{}
+	err := p.db.QueryRow(query, id).Scan(
+		&dbPost.Id, &dbPost.UserId, &dbPost.Title, &dbPost.Description, &dbPost.HasMultimedia,
+		&dbPost.Public, &dbPost.Multimedia, &dbPost.InsertionDate, &dbPost.UpdateDate,
+	)
+
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+
 	if err != nil {
 		return nil, err
 	}
 
-	dbPosts.CurrentPage = params.Page
-
-	return &dbPosts, nil
+	return &dbPost, nil
 }
