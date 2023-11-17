@@ -1,8 +1,7 @@
 package com.social.domain.usecase
 
-import com.social.data.source.remote.dto.aLogin
+import com.social.data.source.remote.dto.InvalidUserException
 import com.social.domain.SocialAppRepository
-import com.social.domain.model.InvalidUserException
 import com.social.domain.model.LoginBody
 import com.social.domain.model.LoginUserData
 import com.social.utils.Resource
@@ -27,14 +26,14 @@ class ValidateUser
                         throw InvalidUserException("Ingrese contraseña")
                     }
                     emit(Resource.Loading())
-                    val login = socialAppRepository.validateUser(loginBody).aLogin()
+                    val login = socialAppRepository.validateUser(loginBody)
                     when (login.status) {
                         "OK" -> {
-                            emit(Resource.Success(login.response))
+                            emit(Resource.Success(listOf(login.response)))
                         }
 
                         else -> {
-                            emit(Resource.Error(login.response))
+                            emit(Resource.Error(message = login.status, data = null))
                         }
                     }
                 } catch (u: UnknownHostException) {
