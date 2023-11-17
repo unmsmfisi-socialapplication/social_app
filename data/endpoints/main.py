@@ -4,6 +4,9 @@ from models import load_model, PostClassifier, SentimentAnalysisModel, SpamDetec
 
 app = FastAPI()
 
+def download_model_from_azure(blob_service, container_name, model_name, local_model_path):
+    blob_service.get_blob_to_path(container_name, model_name, local_model_path)
+
 @app.on_event("startup")
 async def startup_event():
     # Download models from Azure Blob Storage
