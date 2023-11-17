@@ -13,11 +13,12 @@ import (
 )
 
 type mockPostUseCase struct {
-	CreatePostFn func(post domain.PostCreate) (*domain.Post, error)
+	CreatePostFn func(post domain.PostCreate) (*domain.PostResponse, error)
 	GetPostsFn   func(params domain.PostPaginationParams) (*domain.PostPagination, error)
+	GetPostFn    func(id int) (*domain.Post, error)
 }
 
-func (m *mockPostUseCase) CreatePost(post domain.PostCreate) (*domain.Post, error) {
+func (m *mockPostUseCase) CreatePost(post domain.PostCreate) (*domain.PostResponse, error) {
 	return m.CreatePostFn(post)
 }
 
@@ -25,41 +26,47 @@ func (m *mockPostUseCase) GetPosts(params domain.PostPaginationParams) (*domain.
 	return m.GetPostsFn(params)
 }
 
+func (m *mockPostUseCase) GetPost(id int) (*domain.Post, error) {
+	return m.GetPostFn(id)
+}
+
 func TestHandleCreatePost(t *testing.T) {
 	tests := []struct {
 		name       string
 		inputBody  string
-		mockCreate func(post domain.PostCreate) (*domain.Post, error)
+		mockCreate func(post domain.PostCreate) (*domain.PostResponse, error)
 		wantStatus int
 		wantBody   string
 	}{
 		{
 			name:      "Valid Request",
 			inputBody: `{"userId": 1, "title": "Test Post", "description": "Sample description", "hasMultimedia": false, "public": true, "multimedia": ""}`,
-			mockCreate: func(post domain.PostCreate) (*domain.Post, error) {
-				return &domain.Post{Id: 1, PostBase: domain.PostBase{Title: "Test Post", UserId: 1, Description: "Sample description", HasMultimedia: false, Public: true, Multimedia: ""}}, nil
+			mockCreate: func(post domain.PostCreate) (*domain.PostResponse, error) {
+				return &domain.PostResponse{Context: "https://www.w3.org/ns/activitystreams", Type: "create", Object: domain.Post{Id: 1, PostBase: domain.PostBase{Title: "Test Post", UserId: 1, Description: "Sample description", HasMultimedia: false, Public: true, Multimedia: ""}}}, nil
 			},
 			wantStatus: http.StatusOK,
-			wantBody:   `{"response":{"Id":1,"InsertionDate":"0001-01-01T00:00:00Z","UpdateDate":"0001-01-01T00:00:00Z","UserId":1,"Title":"Test Post","Description":"Sample description","HasMultimedia":false,"Public":true,"Multimedia":""},"status":"SUCCESS"}`,
+			wantBody:   `{"response":{"Context":"https://www.w3.org/ns/activitystreams","Type":"create","Object":{"Id":1,"InsertionDate":"0001-01-01T00:00:00Z","UpdateDate":"0001-01-01T00:00:00Z","UserId":1,"Title":"TestPost","Description":"Sampledescription","HasMultimedia":false,"Public":true,"Multimedia":""}},"status":"SUCCESS"}`,
 		},
 		{
 			name:       "Invalid Request User",
 			inputBody:  `{"title": "Test Post", "description": "Sample description", "hasMultimedia": false, "public": true, "multimedia": ""}`,
-			mockCreate: func(post domain.PostCreate) (*domain.Post, error) { return nil, nil },
+			mockCreate: func(post domain.PostCreate) (*domain.PostResponse, error) { return nil, nil },
 			wantStatus: http.StatusBadRequest,
 			wantBody:   `{"response":"Invalid request User","status":"ERROR"}`,
 		},
 		{
 			name:       "Invalid Request Title",
 			inputBody:  `{"userId": 1, "description": "Sample description", "hasMultimedia": false, "public": true, "multimedia": ""}`,
-			mockCreate: func(post domain.PostCreate) (*domain.Post, error) { return nil, nil },
+			mockCreate: func(post domain.PostCreate) (*domain.PostResponse, error) { return nil, nil },
 			wantStatus: http.StatusBadRequest,
 			wantBody:   `{"response":"Invalid request Title","status":"ERROR"}`,
 		},
 		{
-			name:       "Internal Server Error",
-			inputBody:  `{"userId": 1, "title": "Test Post", "description": "Sample description", "hasMultimedia": false, "public": true, "multimedia": ""}`,
-			mockCreate: func(post domain.PostCreate) (*domain.Post, error) { return nil, fmt.Errorf("Internal Server Error") },
+			name:      "Internal Server Error",
+			inputBody: `{"userId": 1, "title": "Test Post", "description": "Sample description", "hasMultimedia": false, "public": true, "multimedia": ""}`,
+			mockCreate: func(post domain.PostCreate) (*domain.PostResponse, error) {
+				return nil, fmt.Errorf("Internal Server Error")
+			},
 			wantStatus: http.StatusInternalServerError,
 			wantBody:   `{"response":"Internal Server Error","status":"ERROR"}`,
 		},
