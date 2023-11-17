@@ -30,7 +30,7 @@ android {
     buildTypes {
         debug {
             firebaseAppDistribution {
-                groups = "MOBILE"
+                groups = "MOBILE, QA, UXUI, OTROS"
             }
         }
         release {
@@ -72,6 +72,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+    testImplementation("junit:junit:4.12")
 
     val roomVersion = "2.6.0"
     val composeUiVersion = "1.5.4"
@@ -119,4 +120,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("com.squareup.picasso:picasso:2.8")
     implementation("com.vanniktech:emoji-google:0.6.0")
+    testImplementation("io.mockk:mockk:1.12.2")
 }

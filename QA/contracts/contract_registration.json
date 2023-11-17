@@ -1,202 +1,182 @@
 {
-  "User Registration": {
-      "description": "User Registration",
-      "request": {
-          "method": "POST",
-          "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
-          "headers": {
-              "Content-Type": "application/json"
+    "User Registration": {
+        "description": "User Registration",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "response": {
+            "status": 200,
+            "body": {
+              "status": "OK",
+              "message": "Successful registration"
           },
-          "body": {
-              "email": {
-                  "type": "string",
-                  "format": "email"
-              },
-              "user_name": {
-                  "type": "string",
-                  "minLength": 6,
-                  "maxLength": 56,
-                  "pattern": "^[a-zA-Z0-9]+$"
-              },
-              "password": {
-                  "type": "string",
-                  "minLength": 8,
-                  "maxLength": 46,
-                  "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
-              }
-          }
-      },
-      "response": {
-          "status": 200,
-          "body": {
-              "status": {
-                  "type": "string"
-              },
-              "message": {
-                  "type": "string"
-              }
+            "required": ["email", "user_name", "password"]
+        }
+    },
+    "User Registration - Server Error": {
+        "description": "User Registration with Server Error",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "response": {
+            "status": 500,
+            "body": {
+              "status": "ERROR",
+              "message": "Internal Server Error. Please try again later."
           },
-          "required": ["email", "user_name", "password"]
-      }
-  },
-  "User Registration - Server Error": {
-      "description": "User Registration with Server Error",
-      "request": {
-          "method": "POST",
-          "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
-          "headers": {
-              "Content-Type": "application/json"
+            "required": ["email", "user_name", "password"]
+        }
+    },
+    "User Registration - Invalid Password": {
+        "description": "User Registration with Invalid Password",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "response": {
+            "status": 400,
+            "body": {
+              "status": "ERROR",
+              "message": "Not secure password"
           },
-          "body": {
-              "email": {
-                  "type": "string",
-                  "format": "email"
-              },
-              "user_name": {
-                  "type": "string",
-                  "minLength": 6,
-                  "maxLength": 56,
-                  "pattern": "^[a-zA-Z0-9]+$"
-              },
-              "password": {
-                  "type": "string",
-                  "minLength": 8,
-                  "maxLength": 46,
-                  "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
-              }
-          }
-      },
-      "response": {
-          "status": 500,
-          "body": {
-              "status": {
-                  "type": "string"
-              },
-              "message": {
-                  "type": "string"
-              }
+            "required": ["email", "user_name", "password"]
+        }
+    },
+    "User Registration - Existing Username": {
+        "description": "User Registration with Existing Username",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
+            "headers": {
+                "Content-Type": "application.json"
+            },
+            "body": {
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "response": {
+            "status": 409,
+            "body": {
+              "status": "ERROR",
+              "message": "Username already in use"
           },
-          "required": ["email", "user_name", "password"]
-      }
-  },
-  "User Registration - Invalid Password": {
-      "description": "User Registration with Invalid Password",
-      "request": {
-          "method": "POST",
-          "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
-          "headers": {
-              "Content-Type": "application/json"
-          },
-          "body": {
-              "email": {
-                  "type": "string",
-                  "format": "email"
+            "required": ["email", "user_name", "password"]
+        }
+    },
+    "User Registration - Email in Use": {
+        "description": "User Registration with Email in Use",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
+            "headers": {
+                "Content-Type": "application.json"
+            },
+            "body": {
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(.*[@#$%^&+=]).*$"
+                }
+            },
+            "response": {
+                "status": 400,
+                "body": {
+                  "status": "ERROR",
+                  "message": "Email already in use"
               },
-              "user_name": {
-                  "type": "string",
-                  "minLength": 6,
-                  "maxLength": 56,
-                  "pattern": "^[a-zA-Z0-9]+$"
-              },
-              "password": {
-                  "type": "string",
-                  "minLength": 8,
-                  "maxLength": 46,
-                  "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
-              }
-          }
-      },
-      "response": {
-          "status": 400,
-          "body": {
-              "status": {
-                  "type": "string"
-              },
-              "message": {
-                  "type": "string"
-              }
-          },
-          "required": ["email", "user_name", "password"]
-      }
-  },
-  "User Registration - Existing Username": {
-      "description": "User Registration with Existing Username",
-      "request": {
-          "method": "POST",
-          "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
-          "headers": {
-              "Content-Type": "application.json"
-          },
-          "body": {
-              "email": {
-                  "type": "string",
-                  "format": "email"
-              },
-              "user_name": {
-                  "type": "string",
-                  "minLength": 6,
-                  "maxLength": 56,
-                  "pattern": "^[a-zA-Z0-9]+$"
-              },
-              "password": {
-                  "type": "string",
-                  "minLength": 8,
-                  "maxLength": 46,
-                  "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(.*[@#$%^&+=]).*$"
-              }
-          }
-      },
-      "response": {
-          "status": 409,
-          "body": {
-              "status": {
-                  "type": "string"
-              },
-              "message": {
-                  "type": "string"
-              }
-          },
-          "required": ["email", "user_name", "password"]
-      }
-  },
-  "User Registration - Email in Use": {
-      "description": "User Registration with Email in Use",
-      "request": {
-          "method": "POST",
-          "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
-          "headers": {
-              "Content-Type": "application.json"
-          },
-          "body": {
-              "email": {
-                  "type": "string",
-                  "format": "email"
-              },
-              "user_name": {
-                  "type": "string",
-                  "minLength": 6,
-                  "maxLength": 56,
-                  "pattern": "^[a-zA-Z0-9]+$"
-              },
-              "password": {
-                  "type": "string",
-                  "minLength": 8,
-                  "maxLength": 46,
-                  "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(.*[@#$%^&+=]).*$"
-              }
-          },
-          "response": {
-              "status": 400,
-              "body": {
-                  "status": {
-                      "type": "string"
-                  },
-                  "message": {
-                      "type": "string"
-                  }
-              },
-              "required": ["email", "user_name", "password"]
-          }
-      }
-  }
+                "required": ["email", "user_name", "password"]
+            }
+        }
+    }
 }
