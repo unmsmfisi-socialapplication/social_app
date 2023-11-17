@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from azure.storage.blob import BlockBlobService
 from models import load_model, PostClassifier, SentimentAnalysisModel, SpamDetector
 
