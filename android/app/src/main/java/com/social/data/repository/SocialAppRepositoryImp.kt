@@ -10,6 +10,7 @@ import com.social.domain.model.CreatePostBody
 import com.social.domain.model.LoginBody
 import com.social.domain.model.RegisterBody
 import com.social.domain.model.RegisterData
+import java.util.Objects
 import javax.inject.Inject
 
 class SocialAppRepositoryImp
@@ -17,7 +18,7 @@ class SocialAppRepositoryImp
     constructor(
         private val api: ApiInterface,
     ) : SocialAppRepository {
-        override suspend fun validateUser(loginBody: LoginBody): LoginDto {
+        override suspend fun validateUser(loginBody: LoginBody): LoginDto<Objects> {
             return api.validateUser(loginBody)
         }
 

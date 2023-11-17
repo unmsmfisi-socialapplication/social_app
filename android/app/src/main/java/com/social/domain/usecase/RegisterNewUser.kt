@@ -37,7 +37,7 @@ class RegisterNewUser
                     emit(Resource.Loading())
                     val register = socialAppRepository.registerNewUser(registerBody)
                     if (register.user_name.isNotEmpty()) {
-                        emit(Resource.Success("Registrado", listOf(register)))
+                        emit(Resource.Success(listOf(register)))
                     } else {
                         val registerError = socialAppRepository.registerNewUserError(registerBody).aRegisterError()
                         emit(Resource.Error(registerError.response))
