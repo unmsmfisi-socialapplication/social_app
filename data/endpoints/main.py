@@ -1,13 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from azure.storage.blob import BlockBlobService
-from models import (
-    load_post_classifier,
-    predict_post_classifier,
-    load_sentiment_analysis_model,
-    predict_sentiment_analysis,
-    load_spam_detector,
-    predict_spam_detector,
-)
+from models import load_model, PostClassifier, SentimentAnalysisModel, SpamDetector
 
 app = FastAPI()
 
@@ -26,30 +19,22 @@ async def startup_event():
         download_model_from_azure(blob_service, container_name, model_name, local_model_path)
 
     # Load models on application startup
-    app.state.post_classifier = load_post_classifier("local_post_classifier.pkl")
-    app.state.sentiment_analysis_model = load_sentiment_analysis_model("local_sentiment_analysis_model.pkl")
-    app.state.spam_detector = load_spam_detector("local_spam_detector.pkl")
+    app.state.post_classifier = load_model("local_post_classifier.pkl", PostClassifier)
+    app.state.sentiment_analysis_model = load_model("local_sentiment_analysis_model.pkl", SentimentAnalysisModel)
+    app.state.spam_detector = load_model("local_spam_detector.pkl", SpamDetector)
     
-# Post Classification endpoint
-@app.post("/post_classification/{version}")
-def post_classification_endpoint(version: str, data: dict):
-    if version == "v1":
-        return predict_post_classifier(data)
-    else:
-        raise HTTPException(status_code=404, detail="Model version not found")
+# Post Classification endpoint Define endpoints for predictions
+@app.post("/post_classification")
+def post_classification_endpoint(data: dict):
+    prediction = app.state.post_classifier.predict(data)
+    return {"post_classification": prediction}
 
-# Sentiment Analysis endpoint
-@app.post("/sentiment_analysis/{version}")
-def sentiment_analysis_endpoint(version: str, data: dict):
-    if version == "v1":
-        return predict_sentiment_analysis(data)
-    else:
-        raise HTTPException(status_code=404, detail="Model version not found")
+@app.post("/sentiment_analysis")
+def sentiment_analysis_endpoint(data: dict):
+    prediction = app.state.sentiment_analysis_model.predict(data)
+    return {"sentiment_analysis": prediction}
 
-# Spam Detector endpoint
-@app.post("/spam_detector/{version}")
-def spam_detector_endpoint(version: str, data: dict):
-    if version == "v1":
-        return predict_spam_detector(data)
-    else:
-        raise HTTPException(status_code=404, detail="Model version not found")
+@app.post("/spam_detector")
+def spam_detector_endpoint(data: dict):
+    prediction = app.state.spam_detector.predict(data)
+    return {"spam_detection": prediction}
