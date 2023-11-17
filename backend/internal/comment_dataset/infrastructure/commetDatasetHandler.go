@@ -1,6 +1,7 @@
 package infrastructure
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 	"time"
@@ -19,8 +20,19 @@ func NewCommentDatasetHandler(useCase *application.CommentDatasetUseCase) *comme
 
 func (cdh *commentDatasetHandler) HandleRetrieveScopedComments(w http.ResponseWriter, r *http.Request) {
 
-	start_date := r.URL.Query().Get("start_date")
-	end_date := r.URL.Query().Get("end_date")
+	var dataReq struct {
+		StartDate string `json: "startDate"`
+		EndDate   string `json: "endDate"`
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&dataReq)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	start_date := dataReq.StartDate
+	end_date := dataReq.EndDate
 
 	sd, err_sd := time.Parse(time.RFC3339, start_date)
 	ed, err_ed := time.Parse(time.RFC3339, end_date)
