@@ -14,6 +14,10 @@ type PostUseCaseInterface interface {
 	CreatePost(post domain.PostCreate) (*domain.PostResponse, error)
 	GetPost(id int) (*domain.Post, error)
 	GetPosts(params domain.PostPaginationParams) (*domain.PostPagination, error)
+    
+    //For multipost
+    MultipostPixelfeed(post domain.PostCreate) error
+    MultipostMastodon(post domain.PostCreate) error
 }
 
 type PostRepository interface {
@@ -25,6 +29,9 @@ type PostRepository interface {
 
 type PostUseCase struct {
 	repo PostRepository
+    //For multipost
+    pixelfeedAPI PixelfeedAPI
+    mastodonAPI  MastodonAPI
 }
 
 func NewPostUseCase(r PostRepository) *PostUseCase {
@@ -72,4 +79,20 @@ func (l *PostUseCase) GetPost(id int) (*domain.Post, error) {
 	}
 
 	return dbPost, nil
+}
+
+
+func NewPostUseCaseWithApis(r PostRepository, pixelfeedAPI PixelfeedAPI, mastodonAPI MastodonAPI) *PostUseCase {
+    return &PostUseCase{repo: r, pixelfeedAPI: pixelfeedAPI, mastodonAPI: mastodonAPI}
+}
+
+
+func (l *PostUseCase) MultipostPixelfeed(post domain.PostCreate) error {
+    /// Logic for posting to Mastodon using pixelfeedAPI
+    return nil
+}
+
+func (l *PostUseCase) MultipostMastodon(post domain.PostCreate) error {
+    // Logic for posting to Mastodon using mastodonAPI
+    return nil
 }
