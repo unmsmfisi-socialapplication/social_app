@@ -9,13 +9,14 @@ import com.social.domain.model.RegisterBody
 import com.social.domain.model.RegisterData
 import retrofit2.http.Body
 import retrofit2.http.POST
+import java.util.Objects
 
 interface ApiInterface {
     // Login
     @POST("/login")
     suspend fun validateUser(
         @Body loginBody: LoginBody,
-    ): LoginDto
+    ): LoginDto<Objects>
 
     // Create Post
     @POST("/post/")

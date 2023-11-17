@@ -7,9 +7,10 @@ import com.social.domain.model.CreatePostBody
 import com.social.domain.model.LoginBody
 import com.social.domain.model.RegisterBody
 import com.social.domain.model.RegisterData
+import java.util.Objects
 
 interface SocialAppRepository {
-    suspend fun validateUser(loginBody: LoginBody): LoginDto
+    suspend fun validateUser(loginBody: LoginBody): LoginDto<Objects>
 
     suspend fun createPost(createPostBody: CreatePostBody): CreatePostDto
 

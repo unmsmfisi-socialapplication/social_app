@@ -1,11 +1,10 @@
 package com.social.data.source.remote.dto
-import com.social.domain.model.Login
 
-data class LoginDto(
-    val response: String,
+import com.social.domain.model.LoginUserData
+
+data class LoginDto<T>(
+    val response: LoginUserData,
     val status: String,
 )
 
-fun LoginDto.aLogin(): Login {
-    return Login(response, status)
-}
+class InvalidUserException(message: String) : Exception(message)
