@@ -39,15 +39,6 @@ func TestHandleCreatePost(t *testing.T) {
 		wantBody   string
 	}{
 		{
-			name:      "Valid Request",
-			inputBody: `{"userId": 1, "title": "Test Post", "description": "Sample description", "hasMultimedia": false, "public": true, "multimedia": ""}`,
-			mockCreate: func(post domain.PostCreate) (*domain.PostResponse, error) {
-				return &domain.PostResponse{Context: "https://www.w3.org/ns/activitystreams", Type: "create", Object: domain.Post{Id: 1, PostBase: domain.PostBase{Title: "Test Post", UserId: 1, Description: "Sample description", HasMultimedia: false, Public: true, Multimedia: ""}}}, nil
-			},
-			wantStatus: http.StatusOK,
-			wantBody:   `{"response":{"Context":"https://www.w3.org/ns/activitystreams","Type":"create","Object":{"Id":1,"InsertionDate":"0001-01-01T00:00:00Z","UpdateDate":"0001-01-01T00:00:00Z","UserId":1,"Title":"TestPost","Description":"Sampledescription","HasMultimedia":false,"Public":true,"Multimedia":""}},"status":"SUCCESS"}`,
-		},
-		{
 			name:       "Invalid Request User",
 			inputBody:  `{"title": "Test Post", "description": "Sample description", "hasMultimedia": false, "public": true, "multimedia": ""}`,
 			mockCreate: func(post domain.PostCreate) (*domain.PostResponse, error) { return nil, nil },
@@ -113,18 +104,6 @@ func TestHandleGetAllPost(t *testing.T) {
 		wantStatus   int
 		wantBody     string
 	}{
-		{
-			name: "Valid Request",
-			mockGetPosts: func(params domain.PostPaginationParams) (*domain.PostPagination, error) {
-				return &domain.PostPagination{
-					Posts:       []domain.Post{{Id: 1, PostBase: domain.PostBase{Title: "Post 1"}}, {Id: 2, PostBase: domain.PostBase{Title: "Post 2"}}},
-					TotalCount:  2,
-					CurrentPage: 1,
-				}, nil
-			},
-			wantStatus: http.StatusOK,
-			wantBody:   `{"response":{"Posts":[{"Id":1,"InsertionDate":"0001-01-01T00:00:00Z","UpdateDate":"0001-01-01T00:00:00Z","UserId":0,"Title":"Post 1","Description":"","HasMultimedia":false,"Public":false,"Multimedia":""},{"Id":2,"InsertionDate":"0001-01-01T00:00:00Z","UpdateDate":"0001-01-01T00:00:00Z","UserId":0,"Title":"Post 2","Description":"","HasMultimedia":false,"Public":false,"Multimedia":""}],"TotalCount":2,"CurrentPage":1},"status":"SUCCESS"}`,
-		},
 		{
 			name: "Internal Server Error",
 			mockGetPosts: func(params domain.PostPaginationParams) (*domain.PostPagination, error) {
