@@ -1,0 +1,130 @@
+{
+    "Successful Login": {
+        "description": "Successful login with valid credentials",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "response": {
+            "status": 200,
+            "body": {
+                "status": "OK",
+                "message": "Authentication successful"
+            },
+        "required": ["user_name", "password"]
+    },
+    "Login with Incorrect Password": {
+        "description": "Attempted login with an incorrect password",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "response": {
+            "status": 401,
+            "body": {
+                "status": "BADCREDENTIALS",
+                "message": "Invalid credentials"
+            }
+        },
+        "required": ["user_name", "password"]
+    },
+    "Login with Non-Existent User": {
+        "description": "Attempted login with a non-existent user",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "response": {
+            "status": 404,
+            "body": {
+                "status": "NOTFOUND",
+                "message": "User not found"
+              }
+        },
+        "required": ["user_name", "password"]
+    },
+    "Login with Invalid User and Password": {
+        "description": "Attempted login with an invalid user and password",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "response": {
+            "status": 400,
+            "body": {
+                "status": "NOTFOUND",
+                "message": "User not found"
+            }
+        },
+        "required": ["user_name", "password"]
+    }
+    }
+}
