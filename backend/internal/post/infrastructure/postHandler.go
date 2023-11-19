@@ -3,7 +3,9 @@ package infrastructure
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
+	"github.com/go-chi/chi"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/helpers"
@@ -61,4 +63,28 @@ func (ph *PostHandler) HandleGetAllPost(w http.ResponseWriter, r *http.Request) 
 	}
 
 	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", posts)
+}
+
+func (ph *PostHandler) HandleGetPost(w http.ResponseWriter, r *http.Request) {
+
+	idStr := chi.URLParam(r, "id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "param error.")
+		return
+	}
+
+	post, err := ph.useCase.GetPost(id)
+
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
+		return
+	}
+
+	if post == nil {
+		utils.SendJSONResponse(w, http.StatusNotFound, "SUCCESS", "Post not found")
+		return
+	}
+
+	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", post)
 }
