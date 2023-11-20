@@ -1,5 +1,5 @@
 import React from 'react'
-import WCircleIcon from '@/components/atoms/CircleIcon/circleIcon'
+import WCircleIcon from '../../../components/atoms/CircleIcon/circleIcon'
 interface WDetailsImageProps {
     accountName: string
     name: string
