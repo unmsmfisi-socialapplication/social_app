@@ -138,7 +138,7 @@ export default function TestPage() {
             </div>
             <AvatarInput />
             <div>
-                <WDetailsImage accountName={'Influencia Animal'} name={'Miguel D.'} icon={TestIcon} />
+                <WDetailsImage />
             </div>
             <CommentThink
                 avatarDefaultURL="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
