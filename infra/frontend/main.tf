@@ -48,7 +48,7 @@ resource "random_id" "db_name_suffix" {
   byte_length = 4
 }
 
-resource "google_artifact_registry_repository" "backend-repo" {
+resource "google_artifact_registry_repository" "frontend-repo" {
   provider               = google-beta
   project                = var.project_id
   location               = var.client_region
@@ -60,7 +60,7 @@ resource "google_artifact_registry_repository" "backend-repo" {
     id     = "keep-minimum-versions"
     action = "KEEP"
     most_recent_versions {
-      keep_count = 20
+      keep_count = 10
     }
   }
   depends_on = [

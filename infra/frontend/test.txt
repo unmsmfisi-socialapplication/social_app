@@ -1,0 +1,4 @@
+docker pull hashicorp/terraform:latest
+docker run --rm -it -v $pwd\:/fe -w /fe hashicorp/terraform:latest init
+docker run --rm -it -v $pwd\:/fe -w /fe hashicorp/terraform:latest validate
+docker run --rm -it -v $pwd\:/fe -w /fe hashicorp/terraform:latest plan -var-file="dev.tfvars”
