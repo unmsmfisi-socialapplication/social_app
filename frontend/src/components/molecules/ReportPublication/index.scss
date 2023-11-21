@@ -1,0 +1,47 @@
+.modal--main--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .modal--report--container {
+        background-color: white;
+        border-radius: 11px;
+        border: none;
+        padding: 20px;
+        max-width: 430px;
+        outline: none;
+        .modal--report--header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            svg {
+                font-size: 14px;
+                cursor: pointer;
+            }
+        }
+        .modal--report--body {
+            display: flex;
+            flex-direction: column;
+            margin: 20px 0;
+            gap: 20px;
+            .modal--report--options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                max-height: 300px;
+                overflow-y: scroll;
+                input[type='radio'] {
+                    width: 60px; /* Ajusta el ancho según sea necesario */
+                    height: 60px; /* Ajusta la altura según sea necesario */
+                }
+            }
+            .modal--report--submit {
+                .button {
+                    text-transform: none;
+                    padding: 8px 25px;
+                    border-radius: 100px;
+                }
+            }
+        }
+    }
+}
