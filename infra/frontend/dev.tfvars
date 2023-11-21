@@ -1,6 +1,6 @@
 project_id                      = "pruebas-403404"
 client_region                   = "us-central1"
 client_zone                     = "us-central1-a"
-artifact_registry_repository_id = "social-app-frontend-repo"
+artifact_registry_repository_id = "social-app-frontend-repo-2"
 private-network-name            = "test-private-network"
 private-ip-address-name         = "test-private-ip-address"
