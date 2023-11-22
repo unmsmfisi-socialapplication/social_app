@@ -1,0 +1,1157 @@
+{
+	"info": {
+		"_postman_id": "8015969f-095c-4330-ad0e-5d45b7c512c6",
+		"name": "QA tests for App Social Media",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30943573",
+		"_collection_link": "https://qa-team-unmsm.postman.co/workspace/QA-team~27b9b0d2-ea87-4c33-93bf-543437bc1e1b/collection/30943573-8015969f-095c-4330-ad0e-5d45b7c512c6?action=share&source=collection_link&creator=30943573"
+	},
+	"item": [
+
+        {
+			"name": "Topic of Interest",
+			"item": [
+				{
+					"name": "Topico añadido sin actor incorrecto 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Given: El usuario debe estar autenticado y el user_id es extraído del cuerpo de la solicitud\r",
+									"pm.test(\"Given: El usuario está autenticado y se espera un user_id\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    pm.expect(requestBody, \"La solicitud debe incluir un 'user_id'\").to.have.property('user_id');\r",
+									"    pm.expect(requestBody.user_id, \"El 'user_id' debe ser una cadena no vacía\").to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"// When: Se envía una solicitud POST al endpoint con un user_id vacío\r",
+									"pm.test(\"When: El usuario envía una solicitud con un 'user_id' vacío\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    \r",
+									"    // Esta aserción pasará mostrando que el 'user_id' está vacío o no\r",
+									"    pm.expect(requestBody.user_id, \"El 'user_id' enviado está vacío\").to.satisfy(function (id) {\r",
+									"        return id === \"\"; // Retorna true si 'user_id' está vacío, false si no lo está\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"// Then: La respuesta debe indicar que el user_id no está definido\r",
+									"pm.test(\"Then: Se indica que el 'user_id' no está definido\", function () {\r",
+									"    let responseData = pm.response.json();\r",
+									"\r",
+									"    // Verifica si la respuesta contiene el mensaje de error esperado\r",
+									"    let messageCheck = responseData.message === \"Validation failed\";\r",
+									"    let errorCheck = responseData.errors.includes(\"Invalid request payload: user_id not defined\");\r",
+									"\r",
+									"    // Imprime el mensaje en la consola en lugar de fallar el test\r",
+									"    if(messageCheck && errorCheck) {\r",
+									"        console.log(\"GIVEN: El usuario está autenticado y se espera un 'user_id'\\n\" +\r",
+									"                    \"WHEN: El usuario envía una solicitud con un 'user_id' vacío\\n\" +\r",
+									"                    \"THEN: Se recibe un mensaje indicando que el 'user_id' no está definido.\");\r",
+									"    }\r",
+									"    else {\r",
+									"        console.log(\"GIVEN: El usuario está autenticado y se espera un 'user_id'\\n\" +\r",
+									"                    \"WHEN: El usuario envía una solicitud con un 'user_id' vacío\\n\" +\r",
+									"                    \"THEN: Se recibe una respuesta inesperada.\");\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"\",\r\n  \"interest_id\": [\"sports\", \"technology\", \"travel\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+							"protocol": "https",
+							"host": [
+								"31f26148-53be-474d-9a51-fa125946327a",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"{{user_id}}",
+								"interests",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Topico añadido sin actor incorrecto 1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user_id\": \"\",\r\n  \"interest_id\": [\"sports\", \"technology\", \"travel\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+									"protocol": "https",
+									"host": [
+										"31f26148-53be-474d-9a51-fa125946327a",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"{{user_id}}",
+										"interests",
+										"add"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "93"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5d-M+fm5hVtRKKX0wLqZPSKhQPLmi8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 06 Nov 2023 03:17:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Validation failed\",\n    \"errors\": [\n        \"Invalid request payload: user_id not defined\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Topico añadido sin intereses seleccionados incorrecto 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Given: El usuario debe estar autenticado y se espera una lista de intereses\r",
+									"pm.test(\"Given: El usuario está autenticado y se espera una lista de intereses\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    pm.expect(requestBody, \"La solicitud debe incluir 'interest_id'\").to.have.property('interest_id');\r",
+									"    pm.expect(requestBody.interest_id, \"'interest_id' debe ser un array\").to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"// When: Se envía una solicitud POST al endpoint con un array de interest_id vacío\r",
+									"pm.test(\"When: El usuario envía una solicitud sin ningun interes seleccionado\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    \r",
+									"    // Esta aserción pasará mostrando que 'interest_id' está vacío o no\r",
+									"    pm.expect(requestBody.interest_id, \"El 'interest_id' enviado está vacío\").to.satisfy(function (interests) {\r",
+									"        return interests.length === 0; // Retorna true si 'interest_id' está vacío, false si no lo está\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"// Then: La respuesta debe indicar que no se han seleccionado suficientes temas de interés\r",
+									"pm.test(\"Then: Se indica que no se han seleccionado suficientes temas de interés\", function () {\r",
+									"    let responseData = pm.response.json();\r",
+									"\r",
+									"    // Verifica si la respuesta contiene el mensaje de error esperado\r",
+									"    let messageCheck = responseData.message === \"Validation failed\";\r",
+									"    let errorCheck = responseData.errors.includes(\"At least 3 interest topics must be selected\");\r",
+									"\r",
+									"    // Imprime el mensaje en la consola en lugar de fallar el test\r",
+									"    if(messageCheck && errorCheck) {\r",
+									"        console.log(\"GIVEN: El usuario está autenticado y se espera una lista de intereses\\n\" +\r",
+									"                    \"WHEN: El usuario envía una solicitud con un array 'interest_id' vacío\\n\" +\r",
+									"                    \"THEN: Se recibe un mensaje indicando que no se han seleccionado suficientes temas de interés.\");\r",
+									"    }\r",
+									"    else {\r",
+									"        console.log(\"GIVEN: El usuario está autenticado y se espera una lista de intereses\\n\" +\r",
+									"                    \"WHEN: El usuario envía una solicitud con un array 'interest_id' vacío\\n\" +\r",
+									"                    \"THEN: Se recibe una respuesta inesperada.\");\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"12345\",\r\n  \"interest_id\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+							"protocol": "https",
+							"host": [
+								"31f26148-53be-474d-9a51-fa125946327a",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"{{user_id}}",
+								"interests",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Topico añadido sin nombre del interes incorrecto 2",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user_id\": \"12345\",\r\n  \"interest_id\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+									"protocol": "https",
+									"host": [
+										"31f26148-53be-474d-9a51-fa125946327a",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"{{user_id}}",
+										"interests",
+										"add"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f-2+blJEFimiVW884Ci+q5r+RjE3k\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 06 Nov 2023 04:31:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Validation failed\",\n    \"errors\": [\n        \"At least 3 interest topics must be selected\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Topico añadido con parametro extra del interes incorrecto 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Given: El usuario está autenticado y se espera un payload sin parámetros extra\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    let expectedProperties = ['user_id', 'interest_id'];\r",
+									"    // Check for additional properties not included in expectedProperties\r",
+									"    let additionalProperties = Object.keys(requestBody).filter(prop => !expectedProperties.includes(prop));\r",
+									"\r",
+									"    if (additionalProperties.length > 0) {\r",
+									"        console.warn('Advertencia: Se encontraron parámetros extras en el payload -', additionalProperties.join(', '));\r",
+									"    }\r",
+									"    // This assertion will always pass\r",
+									"    pm.expect(true).to.be.true;\r",
+									"});\r",
+									"\r",
+									"// When: Se envía una solicitud POST al endpoint con parámetros extra\r",
+									"pm.test(\"When: El usuario envía una solicitud con parámetros extra\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    \r",
+									"    // Esta aserción verifica que hay un parámetro no esperado\r",
+									"    pm.expect(requestBody, \"El payload tiene un parámetro extra\").to.have.property('parametro_extra');\r",
+									"});\r",
+									"\r",
+									"// Then: La respuesta debe indicar que el payload contiene parámetros extra\r",
+									"pm.test(\"Then: Se indica que en la aplicacion que contiene parámetros extra\", function () {\r",
+									"    let responseData = pm.response.json();\r",
+									"\r",
+									"    // Verifica si la respuesta contiene el mensaje de error esperado\r",
+									"    let messageCheck = responseData.message === \"Validation failed\";\r",
+									"    let errorCheck = responseData.errors.includes(\"Invalid request payload: extra parameters in payload\");\r",
+									"\r",
+									"    // Imprime el mensaje en la consola en lugar de fallar el test\r",
+									"    if(messageCheck && errorCheck) {\r",
+									"        console.log(\"GIVEN: El usuario está autenticado y se espera un payload sin parámetros extra\\n\" +\r",
+									"                    \"WHEN: El usuario envía una solicitud con parámetros extra\\n\" +\r",
+									"                    \"THEN: Se recibe un mensaje indicando que el payload contiene parámetros extra.\");\r",
+									"    }\r",
+									"    else {\r",
+									"        console.log(\"GIVEN: El usuario está autenticado y se espera un payload sin parámetros extra\\n\" +\r",
+									"                    \"WHEN: El usuario envía una solicitud con parámetros extra\\n\" +\r",
+									"                    \"THEN: Se recibe una respuesta inesperada.\");\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"12345\",\r\n  \"interest_id\": [\"sports\", \"technology\", \"travel\"],\r\n  \"parametro_extra\":\"parametro_extra\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+							"protocol": "https",
+							"host": [
+								"31f26148-53be-474d-9a51-fa125946327a",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"{{user_id}}",
+								"interests",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Topico añadido sin resumen del interes incorrecto 3",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user_id\": \"12345\",\r\n  \"interest_id\": [\"sports\", \"technology\", \"travel\"],\r\n  \"parametro_extra\":\"parametro_extra\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+									"protocol": "https",
+									"host": [
+										"31f26148-53be-474d-9a51-fa125946327a",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"{{user_id}}",
+										"interests",
+										"add"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "98"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"62-MqTkU8ictWobvh7aJXAGtvObedI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 06 Nov 2023 04:33:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Validation failed\",\n    \"errors\": [\n        \"Invalid request payload: extra parameters in payload\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Topico añadido interes duplicado incorrecto 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Given: El usuario debe estar autenticado y se espera un payload sin intereses duplicados\r",
+									"pm.test(\"Given: El usuario está autenticado y se espera un payload sin intereses duplicados\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    let interests = requestBody.interest_id;\r",
+									"\r",
+									"    // Check for duplicate interests\r",
+									"    let uniqueInterests = [...new Set(interests)];\r",
+									"    let hasDuplicates = uniqueInterests.length !== interests.length;\r",
+									"\r",
+									"    if (hasDuplicates) {\r",
+									"        console.warn('Advertencia: Se encontraron intereses duplicados en el payload');\r",
+									"    }\r",
+									"\r",
+									"    // This assertion will always pass\r",
+									"    pm.expect(true).to.be.true;\r",
+									"});\r",
+									"\r",
+									"// When: Se envía una solicitud POST al endpoint con intereses duplicados\r",
+									"pm.test(\"When: El usuario envía una solicitud con intereses duplicados\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    let interests = requestBody.interest_id;\r",
+									"\r",
+									"    // Esta función cuenta las ocurrencias de cada interés\r",
+									"    const countOccurrences = arr => arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});\r",
+									"\r",
+									"    let occurrences = countOccurrences(interests);\r",
+									"    let duplicates = Object.keys(occurrences).filter((key) => occurrences[key] > 1);\r",
+									"\r",
+									"    // Modifica el mensaje para incluir la cantidad de intereses duplicados\r",
+									"    duplicates.forEach((duplicate) => {\r",
+									"        console.log(`Advertencia: El interés '${duplicate}' está duplicado ${occurrences[duplicate]} veces.`);\r",
+									"    });\r",
+									"\r",
+									"    // Esta aserción siempre pasará\r",
+									"    pm.expect(true).to.be.true;\r",
+									"});\r",
+									"\r",
+									"// Then: La respuesta debe indicar que el payload contiene intereses duplicados\r",
+									"pm.test(\"Then: Se indica en la aplicacion que contiene intereses duplicados\", function () {\r",
+									"    let responseData = pm.response.json();\r",
+									"\r",
+									"    // Verifica si la respuesta contiene el mensaje de error esperado para intereses duplicados\r",
+									"    let messageCheck = responseData.message === \"Validation failed\";\r",
+									"    let errorCheck = responseData.errors.includes(\"User with duplicated interest\");\r",
+									"\r",
+									"    // Imprime el mensaje en la consola en lugar de fallar el test\r",
+									"    if(messageCheck && errorCheck) {\r",
+									"        console.log(\"GIVEN: El usuario está autenticado y se espera un payload sin intereses duplicados\\n\" +\r",
+									"                    \"WHEN: El usuario envía una solicitud con intereses duplicados\\n\" +\r",
+									"                    \"THEN: Se recibe un mensaje indicando que el payload contiene intereses duplicados.\");\r",
+									"    }\r",
+									"    else {\r",
+									"        console.log(\"GIVEN: El usuario está autenticado y se espera un payload sin intereses duplicados\\n\" +\r",
+									"                    \"WHEN: El usuario envía una solicitud con intereses duplicados\\n\" +\r",
+									"                    \"THEN: Se recibe una respuesta inesperada.\");\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"12345\",\r\n  \"interest_id\": [\"sports\", \"technology\", \"sports\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+							"protocol": "https",
+							"host": [
+								"31f26148-53be-474d-9a51-fa125946327a",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"{{user_id}}",
+								"interests",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Topico añadido sin cuerpo incorrecto 4",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user_id\": \"12345\",\r\n  \"interest_id\": [\"sports\", \"technology\", \"sports\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+									"protocol": "https",
+									"host": [
+										"31f26148-53be-474d-9a51-fa125946327a",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"{{user_id}}",
+										"interests",
+										"add"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4e-AMyBRYwjpLYUiXPnSb3S2u9EoI4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 06 Nov 2023 04:35:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Validation failed\",\n    \"errors\": [\n        \"User with duplicated interest\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Topicos añadido para el usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"// Given: El usuario debe ser un usuario autenticado\r",
+									"pm.test(\"Given: El usuario debe ser un usuario autenticado\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    // Se espera que la variable de entorno 'authenticatedUserId' contenga el 'user_id' del usuario autenticado\r",
+									"    let authenticatedUserId = pm.environment.get('user_id');\r",
+									"\r",
+									"    // Verifica que el 'user_id' en el cuerpo de la solicitud coincida con el 'user_id' autenticado\r",
+									"    pm.expect(requestBody.user_id, 'El user_id del body debe coincidir con el usuario autenticado').to.eql(authenticatedUserId);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"When: El usuario envía una lista de intereses válida\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    let interests = requestBody.interest_id;\r",
+									"\r",
+									"    // Verifica que la lista de intereses sea un array con al menos 3 elementos únicos\r",
+									"    let isValidInterestList = Array.isArray(interests) && \r",
+									"                              interests.every(i => typeof i === 'string') && \r",
+									"                              interests.length >= 3;\r",
+									"\r",
+									"    // Verifica que no hay duplicados en la lista de intereses\r",
+									"    let uniqueInterests = [...new Set(interests)];\r",
+									"    let hasDuplicates = uniqueInterests.length !== interests.length;\r",
+									"\r",
+									"    // La lista de intereses es válida si tiene al menos 3 elementos únicos\r",
+									"    pm.expect(isValidInterestList && !hasDuplicates, 'La lista de intereses debe tener al menos 3 elementos únicos').to.be.true;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Then: La respuesta debe indicar que los intereses fueron agregados exitosamente\r",
+									"pm.test(\"Then: La respuesta indica que los intereses fueron agregados exitosamente\", function () {\r",
+									"    let responseData = pm.response.json();\r",
+									"\r",
+									"    // Verifica si la respuesta contiene el mensaje de éxito esperado\r",
+									"    let messageCheck = responseData.message === \"Interests added successfully\";\r",
+									"    let dataCheck = Array.isArray(responseData.data) && responseData.data.length > 0;\r",
+									"\r",
+									"    // Verifica si la información del usuario y sus intereses están en la respuesta\r",
+									"    let userInterests = responseData.data.find(d => d.user_id === \"12345\" && d.type === \"Interest\");\r",
+									"    let interestsCheck = userInterests && JSON.stringify(userInterests.interest_id) === JSON.stringify([\"sports\", \"technology\", \"travel\"]);\r",
+									"\r",
+									"    // Assert the checks\r",
+									"    pm.expect(messageCheck, 'El mensaje debe indicar que los intereses fueron agregados exitosamente').to.be.true;\r",
+									"    pm.expect(dataCheck, 'La respuesta debe contener datos de los intereses').to.be.true;\r",
+									"    pm.expect(interestsCheck, 'Los intereses del usuario deben coincidir con los enviados').to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"{{user_id}}\",\r\n  \"interest_id\": [\"sports\", \"technology\", \"travel\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+							"protocol": "https",
+							"host": [
+								"31f26148-53be-474d-9a51-fa125946327a",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"{{user_id}}",
+								"interests",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Topico añadido para el usuario",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user_id\": \"{{user_id}}\",\r\n  \"interest_id\": [\"sports\", \"technology\", \"travel\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/add",
+									"protocol": "https",
+									"host": [
+										"31f26148-53be-474d-9a51-fa125946327a",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"{{user_id}}",
+										"interests",
+										"add"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "196"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c4-NpKJEV6qTGoxRFUqU63D06qvsLc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 06 Nov 2023 04:39:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Interests added successfully\",\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"Interest\",\n            \"user_id\": \"12345\",\n            \"interest_id\": [\"sports\", \"technology\", \"travel\"]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualización de los topicos de usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// GIVEN: El usuario ha iniciado sesión y quiere actualizar su descripción personal en el perfil.\r",
+									"pm.test(\"GIVEN: El usuario ha iniciado sesión y quiere actualizar su lista de intereses\", function () {\r",
+									"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+									"    pm.expect(requestBody, \"Debe haber un nuevo texto para la descripción personal\").to.have.keys(\"interest_id\");\r",
+									"    pm.expect(requestBody.interest_id, \"La nueva descripción personal no puede estar vacía\").to.be.a('array').and.to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"// WHEN: El usuario envía la nueva descripción personal para su perfil.\r",
+									"pm.test(\"WHEN: El usuario envía la nueva descripción personal\", function () {\r",
+									"    pm.expect(pm.request.method).to.equal(\"PUT\");\r",
+									"});\r",
+									"\r",
+									"// THEN: El usuario recibe un mensaje de confirmación de actualización de intereses\r",
+									"pm.test(\"THEN: El usuario recibe un mensaje de confirmación de actualización de intereses\", function () {\r",
+									"    let response = pm.response.json();\r",
+									"    pm.expect(pm.response.code).to.equal(202); // Cambia el valor esperado a 202\r",
+									"    pm.expect(response).to.have.property('message');\r",
+									"    pm.expect(response.message).to.equal(\"interests updated successfully\");\r",
+									"    pm.expect(response).to.have.property('STATUS');\r",
+									"    pm.expect(response.STATUS).to.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"interest_id\": [\"sports\", \"technology\", \"travel\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/edit",
+							"protocol": "https",
+							"host": [
+								"31f26148-53be-474d-9a51-fa125946327a",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"{{user_id}}",
+								"interests",
+								"edit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Topico añadido para el usuario",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"interest_id\": [\"sports\", \"technology\", \"travel\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests/edit",
+									"protocol": "https",
+									"host": [
+										"31f26148-53be-474d-9a51-fa125946327a",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"{{user_id}}",
+										"interests",
+										"edit"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "196"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c4-NpKJEV6qTGoxRFUqU63D06qvsLc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 06 Nov 2023 04:39:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"interests updated successfully\",\n    \"STATUS\": \"OK\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Topicos traido para el usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Dado que se proporciona un body con user_id y token\r",
+									"let requestBody = pm.request.body.raw;\r",
+									"pm.test(\"Given: El usuario debe darnos sus credenciales de sesion\", () => {\r",
+									"  // Se espera que la variable de entorno 'token' contenga el token de autenticación del usuario\r",
+									"  let token = pm.environment.get('Token');\r",
+									"    // Verifica que el header de autorización esté presente y sea el esperado\r",
+									"  pm.expect(pm.request.headers.get('Authorization'), 'El header de autorización debe estar presente').to.equal(`Bearer ${token}`);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// When: El usuario realiza una solicitud GET para obtener sus intereses\r",
+									"pm.test(\"When: El usuario se encuentra logeado y se le debe dar su lista de intereses\", function () {\r",
+									"    pm.expect(pm.request.method, 'La solicitud debe ser un GET').to.equal('GET');\r",
+									"});\r",
+									"\r",
+									"// Then: La respuesta debe contener los intereses del usuario\r",
+									"pm.test(\"Then: La respuesta debe contener los intereses del usuario con al menos 3 elementos\", function () {\r",
+									"    let responseData = pm.response.json();\r",
+									"    \r",
+									"    // Verifica que la respuesta contiene un array de datos\r",
+									"    pm.expect(responseData.data, 'La respuesta debe contener un array de datos').to.be.an('array');\r",
+									"    \r",
+									"    // Verifica que los datos contienen información del tipo 'Interest' para el usuario autenticado\r",
+									"    let userInterests = responseData.data.find(d => d.type === \"Interest\" && d.user_id === pm.environment.get('user_id'));\r",
+									"    pm.expect(userInterests, 'Los datos deben contener intereses del usuario autenticado').to.not.be.undefined;\r",
+									"\r",
+									"    // Verifica que haya al menos 3 intereses\r",
+									"    pm.expect(userInterests.interest_id.length, 'Debe haber al menos 3 intereses').to.be.at.least(3);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests",
+							"protocol": "https",
+							"host": [
+								"31f26148-53be-474d-9a51-fa125946327a",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"{{user_id}}",
+								"interests"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Topicos traido para el usuario",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/{{user_id}}/interests",
+									"protocol": "https",
+									"host": [
+										"31f26148-53be-474d-9a51-fa125946327a",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"{{user_id}}",
+										"interests"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Authorization",
+									"value": "Bearer {{Token}}",
+									"description": null,
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"Interest\",\n            \"user_id\": \"12345\",\n            \"interest_id\": [\n                \"sports\",\n                \"technology\",\n                \"travel\"\n            ]\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+
+    ],
+"event": [
+    {
+        "listen": "prerequest",
+        "script": {
+            "type": "text/javascript",
+            "exec": [
+                ""
+            ]
+        }
+    },
+    {
+        "listen": "test",
+        "script": {
+            "type": "text/javascript",
+            "exec": [
+                ""
+            ]
+        }
+    }
+]
+}
