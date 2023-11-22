@@ -1,0 +1,5 @@
+{
+    "subscription_id": "Tu_ID_de_Suscripción_de_Azure",
+    "resource_group": "Tu_Grupo_de_Recursos",
+    "workspace_name": "Tu_Nombre_de_Espacio_de_Trabajo"
+}
