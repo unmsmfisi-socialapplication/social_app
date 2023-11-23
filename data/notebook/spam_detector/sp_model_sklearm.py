@@ -1,29 +1,18 @@
 import pandas as pd
-import requests
-import io
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
 import re
 from bs4 import BeautifulSoup
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+import gdown
+import joblib
 import time
 import schedule
-
-# Definición de variables parametrizadas
-file_url = "https://drive.google.com/uc?id=153kIWdyo8JaMoaKHnQ90qigDMW1830Mg"
-TEXT_COLUMN = "FORMATTED_CONTENT"
-LABEL_COLUMN = "CLASS"
-max_features = 5000
-test_size = 0.2
-random_state = 42
-INTERVAL_SECONDS = 24 * 60 * 60  # 24 horas
-
 
 # Función para limpiar el texto
 def clean_text(text):
@@ -40,23 +29,17 @@ def clean_text(text):
     cleaned_text = ' '.join(tokens)
     return cleaned_text
 
-
-# Función para cargar y analizar el archivo desde la URL
-def load_and_analyze_data(file_url):
-    try:
-        response = requests.get(file_url)
-        response.raise_for_status()  # Verificar si la solicitud fue exitosa
-        data = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
-        return data
-    except requests.exceptions.RequestException as e:
-        print(f"Error en la solicitud: {e}")
-        return None
-
 # Función para entrenar y evaluar el modelo
 def train_and_evaluate_model():
     # Descargar los recursos de NLTK necesarios
     nltk.download('punkt')
     nltk.download('stopwords')
+
+    # Define el enlace compartible de Google Drive
+    google_drive_url = "https://drive.google.com/uc?id=153kIWdyo8JaMoaKHnQ90qigDMW1830Mg"
+
+    # Descarga el archivo desde Google Drive
+    gdown.download(google_drive_url, 'Final-Dataset.csv', quiet=False)
 
     # Cargar el archivo CSV
     data = pd.read_csv('Final-Dataset.csv')
@@ -93,9 +76,6 @@ def train_and_evaluate_model():
     # Calcular la precisión del modelo
     accuracy_naive_bayes = accuracy_score(y_test, y_pred_naive_bayes)
 
-    #Obtencion de reporte de clasificacion
-    nb_report = classification_report(y_test, y_pred_naive_bayes)
-
     # Crear un clasificador de Regresión Logística
     logistic_regression_classifier = LogisticRegression()
 
@@ -108,26 +88,39 @@ def train_and_evaluate_model():
     # Calcular la precisión del modelo
     accuracy_logistic_regression = accuracy_score(y_test, y_pred_logistic_regression)
 
-    #Obtencion de reporte de clasificacion
-    lr_report = classification_report(y_test, y_pred_logistic_regression)
+    # Guardar modelos entrenados en archivos específicos en la ruta deseada
+    save_path = 'C:/Users/USUARIO/Documents/GitHub/social_app/data/notebook/spam_detector/'
+
+    joblib.dump(naive_bayes_classifier, save_path + 'naive_bayes_model.pkl')
+    joblib.dump(logistic_regression_classifier, save_path + 'logistic_regression_model.pkl')
+    joblib.dump(tfidf_vectorizer, save_path + 'tfidf_vectorizer.pkl')
+
 
     # Retornar el vectorizador ajustado junto con las métricas de los modelos
-    return tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier, accuracy_naive_bayes, accuracy_logistic_regression ,  nb_report ,  lr_report
+    return tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier, accuracy_naive_bayes, accuracy_logistic_regression
 
 # Función para clasificar un comentario como spam o no spam
 def classify_comment(comment, tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier):
     # Limpia el comentario
     cleaned_comment = clean_text(comment)
-    
+
     # Transforma el comentario en un vector TF-IDF
     tfidf_comment = tfidf_vectorizer.transform([cleaned_comment])
-    
+
     # Clasifica el comentario usando el modelo Naive Bayes
     naive_bayes_prediction = naive_bayes_classifier.predict(tfidf_comment)
-    
+
     # Clasifica el comentario usando el modelo de Regresión Logística
     logistic_regression_prediction = logistic_regression_classifier.predict(tfidf_comment)
-    
+
+    # Cargar modelos previamente entrenados desde la ruta deseada
+    save_path = 'C:/Users/USUARIO/Documents/GitHub/social_app/data/notebook/spam_detector/'
+
+    naive_bayes_classifier = joblib.load(save_path + 'naive_bayes_model.pkl')
+    logistic_regression_classifier = joblib.load(save_path + 'logistic_regression_model.pkl')
+    tfidf_vectorizer = joblib.load(save_path + 'tfidf_vectorizer.pkl')
+
+
     return {
         "Naive Bayes Prediction": "spam" if naive_bayes_prediction[0] == 1 else "not spam",
         "Logistic Regression Prediction": "spam" if logistic_regression_prediction[0] == 1 else "not spam"
@@ -136,7 +129,7 @@ def classify_comment(comment, tfidf_vectorizer, naive_bayes_classifier, logistic
 # Define una función para ejecutar el entrenamiento y evaluación del modelo
 def run_model_training():
     print("Ejecutando entrenamiento y evaluación del modelo...")
-    tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier, accuracy_naive_bayes, accuracy_logistic_regression , report_nb , report_lr= train_and_evaluate_model()
+    tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier, accuracy_naive_bayes, accuracy_logistic_regression = train_and_evaluate_model()
     print("Precisión del modelo Naive Bayes:", accuracy_naive_bayes)
     print("Precisión del modelo de Regresión Logística:", accuracy_logistic_regression)
 
@@ -144,9 +137,6 @@ def run_model_training():
     comment_to_classify = "Thank you for your email. I appreciate your prompt response to my inquiry."
     classification_result = classify_comment(comment_to_classify, tfidf_vectorizer, naive_bayes_classifier, logistic_regression_classifier)
     print("Clasificación del comentario:", classification_result)
-
-    print("Reporte de Naive Bayes:",report_nb)
-    print("Reporte de Regresion Logistica:",report_lr)
 
 if __name__ == "__main__":
     # Definir el intervalo de tiempo en segundos entre cada ejecución (24 horas)
