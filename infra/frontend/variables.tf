@@ -1,3 +1,8 @@
+variable "gcp_svc_key" {
+  description = "GCP Service Account Key"
+  type        = string
+}
+
 variable "project_id" {
   description = "Social App DEV Project ID"
   type        = string
