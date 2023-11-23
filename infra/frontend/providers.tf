@@ -8,13 +8,13 @@ terraform {
 }
 
 provider "google" {
-  credentials = file(var.gcp_svc_key)
+  credentials = var.gcp_svc_key != "" ? file(var.gcp_svc_key) : null
   project = var.project_id
   region  = var.client_region
 }
 
 provider "google-beta" {
-  credentials = file(var.gcp_svc_key)
+  credentials = var.gcp_svc_key != "" ? file(var.gcp_svc_key) : null
   project = var.project_id
   region  = var.client_region
 }
