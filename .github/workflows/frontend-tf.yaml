@@ -1,11 +1,11 @@
 name: IAC with Terraform
 
 on:
-    push:
-      branches:
-        - develop
-      paths:
-        - 'infra/backend/**'
+  push:
+    branches:
+      - develop
+    paths:
+      - 'infra/frontend/**'
 
 permissions:
   contents: read
@@ -55,7 +55,7 @@ jobs:
       run: terraform plan -input=false
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve -input=false -var-file=dev.tfvars
+      run: terraform apply -auto-approve -input=false
 
     - name: Upload Terraform state
       run: gsutil cp terraform.tfstate gs://${{ vars.TEST_BUCKET_TF_NAME }}/terraform.tfstate

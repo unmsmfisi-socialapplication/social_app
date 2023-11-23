@@ -34,6 +34,9 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
+    - name: Create Terraform Variables File
+      run: echo ${{ vars.FRONTEND_TF_VARS }} > local.auto.tfvars
+
     - name: Download Terraform state
       run: gsutil cp gs://${{ vars.TEST_BUCKET_TF_NAME }}/terraform.tfstate terraform.tfstate
 
@@ -50,7 +53,7 @@ jobs:
       run: terraform plan -input=false
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve -input=false -var-file=dev.tfvars
+      run: terraform apply -auto-approve -input=false
       
     - name: Upload Terraform state
       run: gsutil cp terraform.tfstate gs://${{ vars.TEST_BUCKET_TF_NAME }}/terraform.tfstate
