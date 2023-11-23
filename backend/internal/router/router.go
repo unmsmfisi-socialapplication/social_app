@@ -12,8 +12,9 @@ import (
 	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/search"
 
 	interest_topics "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics"
 	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
@@ -98,5 +99,10 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	// Follow Profile
 	followRouter := follow.FollowModuleRouter(dbInstance)
 	r.Mount("/follow_profile", followRouter)
+
+    // Search
+    searchRouter := search.SearchModuleRouter(dbInstance)
+    r.Mount("/search", searchRouter)
+
 	return r
 }
