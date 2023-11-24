@@ -55,7 +55,9 @@ export function findMatchingWords(text: string, words: string[]): string[] {
         return ['The entrance is empty']
     }
 
-    const wordsMatching = words.filter((word) => word.indexOf(text) === 0)
+    const searchText = text.toLowerCase()
+
+    const wordsMatching = words.filter((word) => word.toLowerCase().indexOf(searchText) === 0)
 
     if (wordsMatching.length > 0) {
         return wordsMatching
