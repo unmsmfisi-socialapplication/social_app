@@ -1,9 +1,6 @@
 import joblib
 import json
 from azureml.core.model import Model
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
 from bs4 import BeautifulSoup
 import re
 from nltk.tokenize import word_tokenize
