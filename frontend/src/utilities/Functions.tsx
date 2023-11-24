@@ -65,3 +65,7 @@ export function findMatchingWords(text: string, words: string[]): string[] {
         return ['No matching words found']
     }
 }
+
+export function filterContentByTag(tag: string, contentArray: { tags: string[]; content: string }[]): string[] {
+    return contentArray.filter((item) => item.tags.some((t) => t === tag)).map((item) => item.content)
+}
