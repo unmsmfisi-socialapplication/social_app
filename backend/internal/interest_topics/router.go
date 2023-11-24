@@ -1,4 +1,4 @@
-package post
+package interest_topics
 
 import (
 	"database/sql"
