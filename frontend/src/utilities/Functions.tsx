@@ -65,3 +65,7 @@ export function findMatchingWords(text: string, words: string[]): string[] {
         return ['No matching words found']
     }
 }
+
+export const useHistory = (url: string) => {
+    window.history.pushState({}, '', url)
+}

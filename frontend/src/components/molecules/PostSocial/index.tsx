@@ -1,14 +1,15 @@
 import React from 'react'
-import './index.scss'
 
-import { Avatar, Box, CardMedia, Link } from '@mui/material'
+import { Avatar, Box, CardMedia } from '@mui/material'
 import { WCircleIcon } from '@/components'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ModeCommentIcon from '@mui/icons-material/ModeComment'
 import CachedIcon from '@mui/icons-material/Cached'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import IosShareIcon from '@mui/icons-material/IosShare'
-import { boolean } from 'yup'
+import Link from 'next/link'
+import './index.scss'
+import { useHistory } from '@/utilities/Functions'
 interface WPostSocialProps {
     published?: string
     postImg?: string
@@ -45,7 +46,7 @@ export default function WPostSocial({ published, postImg, user, postText, stadis
                     <div>...</div>
                 </div>
                 <div className="post__social--body">
-                    {postText && <h3 className="post__social--body--text">{postText}</h3>}
+                    {postText && <h4 className="post__social--body--text">{postText}</h4>}
                     {postImg && (
                         <CardMedia
                             component="img"
@@ -56,10 +57,10 @@ export default function WPostSocial({ published, postImg, user, postText, stadis
                     )}
                 </div>
                 <div className="post__social--footer">
-                    <div className="post-icon">
+                    <Link href="/intranet/post" className="post-icon">
                         <WCircleIcon typeColor="comment" iconSize={18} icon={ChatBubbleOutlineIcon} />
                         <span>{stadistics?.countComment}</span>
-                    </div>
+                    </Link>
                     <div className="post-icon">
                         <WCircleIcon typeColor="comment" iconSize={18} icon={CachedIcon} />
                     </div>
