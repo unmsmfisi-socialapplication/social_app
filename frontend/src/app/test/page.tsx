@@ -12,6 +12,7 @@ import {
     WSearch,
     WTopicFollow,
     WUserCHATCTA,
+    WReportPublication,
 } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
@@ -38,6 +39,7 @@ import RootLayout from '../layout'
 export default function TestPage() {
     const [count, setCount] = useState(0)
     const [password, setPassword] = useState('')
+    const [reportModal, setReportModal] = useState<boolean>(false)
 
     const handleCount = () => {
         setCount(count + 1)
@@ -162,6 +164,12 @@ export default function TestPage() {
                 <WPostTypes iconComponent={<GifBoxIcon />} typeName="GIF" />
                 <WPostTypes iconComponent={<LocationOnIcon />} typeName="UBICACIÓN" />
             </div>
+            <WButton text="Reportar este usuario" onClick={() => setReportModal(true)} />
+            <WReportPublication
+                open={reportModal}
+                onClose={() => setReportModal(false)}
+                onConfirm={(reason) => console.log(`Se reporto al usuario por ${reason}`)}
+            />
         </RootLayout>
     )
 }
