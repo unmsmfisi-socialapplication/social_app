@@ -1,15 +1,13 @@
 import unittest
 import pandas as pd
 import numpy as np
-from unittest.mock import patch  
-from ...training import pc_lr_training
+from unittest.mock import patch 
+from data.training.pc_lr_training import train_LSTM, evaluate_model, classify_post   
+
 #PC: Post Clasification
 class Test_Training_PC(unittest.TestCase):
-    @patch('data.preprocessing.pc_lr_preprocessing.preprocess_data')
-    @patch('keras.models.Sequential.fit')
-    @patch('data.training.pc_lr_training.evaluate_model')
-    @patch('data.training.pc_lr_training.classify_post')
-    @patch('data.training.pc_lr_training.train_LSTM')
+    @patch('data.preprocessing.pc_lr_preprocessing.preprocess_data') 
+ 
     def test_train_LSTM(self, mock_preprocess_data, mock_fit, mock_evaluate_model, mock_classify_post):
         # Configure mocks to simulate model preprocessing and training
         mock_preprocess_data.return_value = (pd.DataFrame({'text_sequences': [[1, 2, 3]]}), 45, 100)
