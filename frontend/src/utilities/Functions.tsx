@@ -65,3 +65,24 @@ export function findMatchingWords(text: string, words: string[]): string[] {
         return ['No matching words found']
     }
 }
+
+export function generateUniqueUsernames(
+    existingUsernames: string[],
+    baseUsername: string,
+    numAlternatives: number,
+): string[] {
+    const uniqueUsernames: string[] = []
+    let suffix = 1
+
+    while (uniqueUsernames.length < numAlternatives) {
+        const newUsername = `${baseUsername}${suffix}`
+
+        if (!existingUsernames.includes(newUsername) && !uniqueUsernames.includes(newUsername)) {
+            uniqueUsernames.push(newUsername)
+        }
+
+        suffix++
+    }
+
+    return uniqueUsernames
+}

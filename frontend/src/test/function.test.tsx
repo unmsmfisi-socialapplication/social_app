@@ -1,8 +1,11 @@
 import { validatePassword } from '../utilities/Functions'
 //const { distanceLevenshtein, mostSimilarPhrase } = require('./index');
-import { distanceLevenshtein } from '../utilities/Functions'
-import { mostSimilarPhrase } from '../utilities/Functions'
-import { findMatchingWords } from '../utilities/Functions'
+import {
+    distanceLevenshtein,
+    mostSimilarPhrase,
+    findMatchingWords,
+    generateUniqueUsernames,
+} from '../utilities/Functions'
 
 //Test: Validate passwords
 describe('Validate passwords', () => {
@@ -88,5 +91,33 @@ describe('findMatchingWords', () => {
         const words = ['apple', 'banana', 'cherry']
         const result = findMatchingWords(text, words)
         expect(result).toEqual(['banana'])
+    })
+})
+
+//Test: generateUniqueUsernames
+describe('generateUniqueUsernames', () => {
+    it('Should generate three unique usernames based on the base username and existing usernames', () => {
+        const existingUsernames = ['user1', 'user2', 'user3']
+        const baseUsername = 'newUser'
+        const numAlternatives = 3
+
+        const uniqueUsernames = generateUniqueUsernames(existingUsernames, baseUsername, numAlternatives)
+
+        // Check if the generated usernames are unique and not in the existing usernames
+        expect(uniqueUsernames.length).toEqual(numAlternatives)
+        uniqueUsernames.forEach((username) => {
+            expect(existingUsernames.includes(username)).toBeFalsy()
+        })
+    })
+
+    it('Should handle the case where numAlternatives is zero', () => {
+        const existingUsernames = ['user1', 'user2', 'user3']
+        const baseUsername = 'user'
+        const numAlternatives = 0
+
+        const uniqueUsernames = generateUniqueUsernames(existingUsernames, baseUsername, numAlternatives)
+
+        // Check if the result is an empty array
+        expect(uniqueUsernames).toEqual([])
     })
 })
