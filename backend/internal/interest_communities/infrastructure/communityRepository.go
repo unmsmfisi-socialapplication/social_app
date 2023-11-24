@@ -36,7 +36,7 @@ func (dbRepository CommunityDBRepository) CheckUserInterestTopics(user_id string
 
 func (dbRepository CommunityDBRepository) GetCommunities() ([]domain.Community, error) {
 	var communities []domain.Community
-	query := `SELECT community_id, community_name, community_description FROM soc_app_interest_communities`
+	query := `SELECT community_id, community_name, community_description,interest_id FROM soc_app_interest_communities`
 	rows, err := dbRepository.db.Query(query)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func (dbRepository CommunityDBRepository) GetCommunities() ([]domain.Community, 
 
 func (dbRepository CommunityDBRepository) GetCommunitiesByUserId(userId string) ([]domain.Community, error) {
 	var communities []domain.Community
-	query := `SELECT community_id, community_name, community_description FROM soc_app_interest_communities com
+	query := `SELECT com.community_id, com.community_name, com.community_description, com.interest_id FROM soc_app_interest_communities com
 				INNER JOIN soc_app_users_interest_topics userit ON com.interest_id=userit.interest_id
 				WHERE userit.user_id=$1`
 	rows, err := dbRepository.db.Query(query, userId)
@@ -65,7 +65,7 @@ func (dbRepository CommunityDBRepository) GetCommunitiesByUserId(userId string) 
 
 	for rows.Next() {
 		var community domain.Community
-		err := rows.Scan(&community.CommunityId, &community.CommunityName, &community.CommunityDescription)
+		err := rows.Scan(&community.CommunityId, &community.CommunityName, &community.CommunityDescription, &community.InterestId)
 		if err != nil {
 			return nil, err
 		}
