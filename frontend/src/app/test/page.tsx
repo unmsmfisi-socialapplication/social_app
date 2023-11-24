@@ -171,6 +171,7 @@ export default function TestPage() {
                 open={modalConfirm}
                 onClose={() => setModalConfirm(false)}
                 onConfirm={() => console.log('Publicación subida')}
+            />
             <WButton text="Reportar este usuario" onClick={() => setReportModal(true)} />
             <WReportPublication
                 open={reportModal}
