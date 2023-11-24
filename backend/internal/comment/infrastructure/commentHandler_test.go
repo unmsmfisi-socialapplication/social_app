@@ -41,6 +41,16 @@ func (mcu *MockCommentUseCase) GetByID(commentID int64) (*domain.Comment, error)
 	return comment, nil
 }
 
+func (mcu *MockCommentUseCase) GetByPostID(postID int64) ([]*domain.Comment, error) {
+	comments := make([]*domain.Comment, 0)
+	for _, comment := range mcu.Comments {
+		if comment.PostID == postID {
+			comments = append(comments, comment)
+		}
+	}
+	return comments, nil
+}
+
 func (mcu *MockCommentUseCase) Create(comment *domain.Comment) error {
 	mcu.Comments[comment.CommentID] = comment
 	return nil
@@ -123,6 +133,15 @@ func TestCommentHandler_HandleGetCommentByID(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/comments/1", nil)
 	response := executeTestRequest(r, req)
 	checkResponseCode(t, http.StatusOK, response.Code)
+}
+
+func TestCommentHandler_HandleGetCommentsByPostId(t *testing.T) {
+	mcu := NewMockCommentUseCase()
+	mcu.Comments = generateDummyComments(2)
+	r := newTestRouter(mcu)
+	req, _ := http.NewRequest("GET", "/comments/post/1", nil)
+	response := executeTestRequest(r, req)
+	checkResponseCode(t, http.StatusOK, response.Code)	
 }
 
 func TestCommentHandler_HandleCreateComment(t *testing.T){
