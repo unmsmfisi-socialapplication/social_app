@@ -1,12 +1,13 @@
 import unittest
 import pandas as pd
 from unittest.mock import patch
-from execution import pc_lr_main
+from ...execution import pc_lr_main
+from ...training import pc_lr_training
 
-class TestPCLRModel(unittest.TestCase): 
-    @patch('data.models_pg.post_classification.pc_lr_training.train_LSTM')
+#PC: Post Clasification
+class Test_Model_PC(unittest.TestCase):  
     @patch('pandas.read_csv')
-    def test_main_function(self, mock_read_csv, mock_train_lstm):
+    def test_main_function_with_mocked_data(self, mock_read_csv, mock_train_lstm):
         # Configure mocks to simulate CSV reading and model training
         mock_read_csv.return_value = pd.DataFrame({'column1': [1, 2, 3], 'column2': [4, 5, 6]})
         mock_train_lstm.return_value = 'mocked_model'

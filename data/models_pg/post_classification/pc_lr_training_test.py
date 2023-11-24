@@ -4,7 +4,8 @@ import numpy as np
 from unittest.mock import patch 
 from data.training.pc_lr_training import train_LSTM, evaluate_model, classify_post   
 
-class TestPCLRTraining(unittest.TestCase):
+#PC: Post Clasification
+class Test_Training_PC(unittest.TestCase):
     @patch('data.preprocessing.pc_lr_preprocessing.preprocess_data')
     @patch('keras.models.Sequential.fit')
     @patch('data.training.pc_lr_training.evaluate_model')

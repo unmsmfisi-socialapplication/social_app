@@ -3,7 +3,8 @@ import pandas as pd
 from unittest.mock import patch
 from data.preprocessing import pc_lr_preprocessing  
 
-class TestPCLRPreprocessing(unittest.TestCase):
+#PC: Post Clasification
+class Test_Preprocessing_PC(unittest.TestCase):
     @patch('nltk.corpus.stopwords.words')
     @patch('tensorflow.keras.preprocessing.text.Tokenizer.texts_to_sequences')
     def test_preprocess_data(self, mock_stopwords, mock_texts_to_sequences):
@@ -18,7 +19,7 @@ class TestPCLRPreprocessing(unittest.TestCase):
         preprocessed_data, input_shape, Max_words = pc_lr_preprocessing.preprocess_data(test_data)
 
         # Verify that the stopwords function was called in the correct language
-        mock_stopwords.assert_called_once_with('spanish')
+        mock_stopwords.assert_called_once_with('english')
 
         #  Verify that the processed data dataframe has the appropriate columns
         self.assertTrue(pc_lr_preprocessing.CLEANED_COLUMN in preprocessed_data.columns)
