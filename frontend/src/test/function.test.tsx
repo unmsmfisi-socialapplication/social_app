@@ -3,6 +3,7 @@ import { validatePassword } from '../utilities/Functions'
 import { distanceLevenshtein } from '../utilities/Functions'
 import { mostSimilarPhrase } from '../utilities/Functions'
 import { findMatchingWords } from '../utilities/Functions'
+import { countCharacters } from '../utilities/Functions'
 
 //Test: Validate passwords
 describe('Validate passwords', () => {
@@ -88,5 +89,22 @@ describe('findMatchingWords', () => {
         const words = ['apple', 'banana', 'cherry']
         const result = findMatchingWords(text, words)
         expect(result).toEqual(['banana'])
+    })
+})
+
+//Test: Function countCharacters
+describe('countCharacters', () => {
+    it('should return the correct character count for valid input', () => {
+        expect(countCharacters('Hello', 10)).toBe(5)
+        expect(countCharacters('This is a test', 15)).toBe(14)
+    })
+
+    it('should return the maxLength if input exceeds maxLength', () => {
+        expect(countCharacters('TooLongInput', 5)).toBe(5)
+        expect(countCharacters('123456789', 5)).toBe(5)
+    })
+
+    it('should handle empty input correctly', () => {
+        expect(countCharacters('', 10)).toBe(0)
     })
 })
