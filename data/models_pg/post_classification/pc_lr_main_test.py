@@ -2,7 +2,7 @@ import unittest
 import pandas as pd
 from unittest.mock import patch
 from ...execution import pc_lr_main
-from ...training import pc_lr_training
+#from ...training import pc_lr_training
 
 #PC: Post Clasification
 class Test_Model_PC(unittest.TestCase):  
