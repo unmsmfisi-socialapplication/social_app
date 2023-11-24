@@ -62,17 +62,21 @@ class LoginViewModel
                                     eventFlowM.emit(
                                         UILoginEvent.ShowMessage("Invalid credentials"),
                                     )
+                                } else if (user.message.contains("HTTP 500")) {
+                                    eventFlowM.emit(
+                                        UILoginEvent.ShowMessage("Error during authentication"),
+                                    )
                                 } else {
                                     eventFlowM.emit(
-                                        UILoginEvent.ShowMessage(user.message ?: "Error"),
+                                        UILoginEvent.ShowMessage("Error, intente más tarde"),
                                     )
                                 }
                             }
 
                             is Resource.Success -> {
-                                _state.value = LoginDataState(dataLogin = "${user.message}")
+                                _state.value = LoginDataState(dataLogin = user.data!!)
                                 eventFlowM.emit(UILoginEvent.GetData)
-                                eventFlowM.emit(UILoginEvent.ShowMessage(user.message.toString()))
+                                eventFlowM.emit(UILoginEvent.ShowMessage("Authentication Successful"))
                             }
                         }
                     }.launchIn(viewModelScope)

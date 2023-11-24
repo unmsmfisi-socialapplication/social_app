@@ -1,0 +1,1125 @@
+
+{
+	"info": {
+		"_postman_id": "8015969f-095c-4330-ad0e-5d45b7c512c6",
+		"name": "QA tests for App Social Media",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30943573",
+		"_collection_link": "https://qa-team-unmsm.postman.co/workspace/QA-team~27b9b0d2-ea87-4c33-93bf-543437bc1e1b/collection/30943573-8015969f-095c-4330-ad0e-5d45b7c512c6?action=share&source=collection_link&creator=30943573"
+	},
+	"item": [
+
+{
+    "name": "Profile Update/Get",
+    "item": [
+        {
+            "name": "Obtener un perfil para mostrarlo al usuario principal",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: Un usuario que proporciona su nombre de usuario y token\r",
+                            "// Dado que se proporciona un body con user_id y token\r",
+                            "let requestBody = pm.request.body.raw;\r",
+                            "pm.test(\"Given: El usuario debe darnos sus credenciales de sesion\", () => {\r",
+                            "  // Se espera que la variable de entorno 'token' contenga el token de autenticación del usuario\r",
+                            "  let token = pm.environment.get('Token');\r",
+                            "    // Verifica que el header de autorización esté presente y sea el esperado\r",
+                            "  pm.expect(pm.request.headers.get('Authorization'), 'El header de autorización debe estar presente').to.equal(`Bearer ${token}`);\r",
+                            "});\r",
+                            "\r",
+                            "// When: Se envía una solicitud POST al endpoint para recuperar perfil\r",
+                            "pm.test(\"When: Se realiza la solicitud para recuperar el perfil del usuario\", function () {\r",
+                            "    // Confirma que se ha enviado una solicitud POST\r",
+                            "    pm.expect(pm.request.method).to.equal('GET');\r",
+                            "});\r",
+                            "\r",
+                            "// Then: La respuesta debe contener el perfil del usuario\r",
+                            "pm.test(\"Then: Debe recibir el perfil del usuario como respuesta\", function () {\r",
+                            "    // Verifica que la respuesta contenga los datos del perfil del usuario\r",
+                            "    var responseData = pm.response.json();\r",
+                            "    pm.expect(responseData).to.have.property('type', 'Person');\r",
+                            "    pm.expect(responseData).to.have.property('actor').that.equals('https://appsocial.com/sofia/');\r",
+                            "    pm.expect(responseData).to.have.property('name', 'Sofia Rodriguez');\r",
+                            "    pm.expect(responseData).to.have.property('username', 'SofiaR');\r",
+                            "    pm.expect(responseData).to.have.property('hasMultimedia').that.is.true;\r",
+                            "    pm.expect(responseData).to.have.property('public').that.is.true;\r",
+                            "    pm.expect(responseData).to.have.property('summary').that.is.not.empty;\r",
+                            "    pm.expect(responseData).to.have.property('profileImage').that.includes('https://example.com/images/sofia.jpg');\r",
+                            "    pm.expect(responseData.endpoints).to.have.property('sharedInbox').that.equals('https://example.com/inbox/sofia');\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{Token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text",
+                        "disabled": true
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia?userid=sofia",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "sofia"
+                    ],
+                    "query": [
+                        {
+                            "key": "userid",
+                            "value": "sofia"
+                        }
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Obtener un perfil para mostrarlo",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{Token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia?userid=sofia",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "sofia"
+                            ],
+                            "query": [
+                                {
+                                    "key": "userid",
+                                    "value": "sofia"
+                                }
+                            ]
+                        }
+                    },
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"type\": \"Person\",\n    \"actor\": \"https://appsocial.com/sofia/\",\n    \"name\": \"Sofia Rodriguez\",\n    \"username\": \"SofiaR\",\n    \"hasMultimedia\": true,\n    \"public\": true,\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\n    \"profileImage\": \"https://example.com/images/sofia.jpg\",\n    \"endpoints\": {\n        \"sharedInbox\": \"https://example.com/inbox/sofia\"\n    }\n}"
+                }
+            ]
+        },
+        {
+            "name": "Obtener un perfil para mostrarlo a usuario externo",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: Un usuario que proporciona su nombre de usuario y token\r",
+                            "// Dado que se proporciona un body con user_id y token\r",
+                            "let requestBody = pm.request.body.raw;\r",
+                            "pm.test(\"Given: El usuario debe darnos sus credenciales de sesion\", () => {\r",
+                            "  // Se espera que la variable de entorno 'token' contenga el token de autenticación del usuario\r",
+                            "  let token = pm.environment.get('Token');\r",
+                            "    // Verifica que el header de autorización esté presente y sea el esperado\r",
+                            "  pm.expect(pm.request.headers.get('Authorization'), 'El header de autorización debe estar presente').to.equal(`Bearer ${token}`);\r",
+                            "});\r",
+                            "\r",
+                            "\r",
+                            "// When: Se hace el request al endpoint\r",
+                            "pm.test(\"When: se le proporciona al usuario su informacion de perfil\", function () {\r",
+                            "    // Aquí se asume que el método de la solicitud es correcto, de lo contrario se debe cambiar \"GET\" por \"POST\"\r",
+                            "    pm.expect(pm.request.method).to.equal(\"GET\");\r",
+                            "});\r",
+                            "\r",
+                            "// Then: Se debe recibir la respuesta con el perfil\r",
+                            "pm.test(\"Then: Se debe recibir la respuesta con el perfil\", function () {\r",
+                            "    var response = pm.response.json();\r",
+                            "\r",
+                            "    // Imprime un mensaje en la consola de Postman con los resultados esperados de la prueba\r",
+                            "    pm.expect(response, \"La respuesta debe ser un objeto con los detalles del perfil\").to.be.an('object');\r",
+                            "    pm.expect(response.type).to.eql(\"Person\");\r",
+                            "    pm.expect(response.actor).to.eql(\"https://appsocial.com/sofia/\");\r",
+                            "    pm.expect(response.name).to.eql(\"Sofia Rodriguez\");\r",
+                            "    pm.expect(response.username).to.eql(\"SofiaR\");\r",
+                            "    pm.expect(response.summary).to.be.a(\"string\");\r",
+                            "    pm.expect(response.profileImage).to.eql(\"https://example.com/images/sofia.jpg\");\r",
+                            "    // Añade un mensaje a la consola para confirmar el éxito de la prueba\r",
+                            "    console.log(\"El perfil ha sido recibido correctamente en la respuesta.\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{Token}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia?userid=pedro",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "sofia"
+                    ],
+                    "query": [
+                        {
+                            "key": "userid",
+                            "value": "pedro"
+                        }
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Obtener un perfil para mostrarlo a usuario externo",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{Token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia?userid=pedro",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "sofia"
+                            ],
+                            "query": [
+                                {
+                                    "key": "userid",
+                                    "value": "pedro"
+                                }
+                            ]
+                        }
+                    },
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"type\": \"Person\",\n    \"actor\": \"https://appsocial.com/sofia/\",\n    \"name\": \"Sofia Rodriguez\",\n    \"username\": \"SofiaR\",\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\n    \"profileImage\": \"https://example.com/images/sofia.jpg\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Editar biografia",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// GIVEN: El usuario ha iniciado sesión y quiere actualizar su descripción personal en el perfil.\r",
+                            "pm.test(\"GIVEN: El usuario ha iniciado sesión y quiere actualizar su descripción personal\", function () {\r",
+                            "    let requestBody = JSON.parse(pm.request.body.raw);\r",
+                            "    pm.expect(requestBody, \"Debe haber un nuevo texto para la descripción personal\").to.have.keys(\"summary\");\r",
+                            "    pm.expect(requestBody.summary, \"La nueva descripción personal no puede estar vacía\").to.be.a('string').and.to.not.be.empty;\r",
+                            "});\r",
+                            "\r",
+                            "// WHEN: El usuario envía la nueva descripción personal para su perfil.\r",
+                            "pm.test(\"WHEN: El usuario envía la nueva descripción personal\", function () {\r",
+                            "    pm.expect(pm.request.method).to.equal(\"PUT\");\r",
+                            "});\r",
+                            "\r",
+                            "// THEN: El usuario recibe una confirmación de que su descripción personal ha sido actualizada.\r",
+                            "pm.test(\"THEN: El usuario recibe una confirmación de actualización\", function () {\r",
+                            "    let response = pm.response.json();\r",
+                            "    pm.expect(pm.response.code).to.equal(200); // Asegurarse de que la solicitud fue exitosa.\r",
+                            "    pm.expect(response, \"Debería haber una confirmación de que la actualización fue exitosa\").to.be.an('object');\r",
+                            "    pm.expect(response.message, \"El mensaje debería confirmar que la descripción personal fue actualizada\").to.equal(\"successfully updated summary\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{Token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"summary\": \"Nuevas experiencias.\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "sofia",
+                        "edit"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Editar biografia",
+                    "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{Token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"summary\": \"Nuevas experiencias.\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "sofia",
+                                "edit"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"successfully updated summary\",\n    \"STATUS\": \"OK\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Cambiar Imagen de Perfil",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// GIVEN: El usuario ha decidido agregar o cambiar la foto de su perfil.\r",
+                            "pm.test(\"GIVEN: El usuario ha decidido agregar o cambiar la foto de su perfil\", function () {\r",
+                            "    let requestBody = JSON.parse(pm.request.body.raw);\r",
+                            "    pm.expect(requestBody, \"Debe incluir la información de si hay contenido multimedia y la nueva foto\").to.have.keys([\"hasMultimedia\", \"profileImage\"]);\r",
+                            "    pm.expect(requestBody.hasMultimedia, \"Debe indicar que hay una foto nueva\").to.be.true;\r",
+                            "    pm.expect(requestBody.profileImage, \"La dirección de la nueva foto no puede estar vacía\").to.be.a('string').and.to.not.be.empty;\r",
+                            "});\r",
+                            "\r",
+                            "// WHEN: El usuario sube la nueva foto a su perfil.\r",
+                            "pm.test(\"WHEN: El usuario sube la nueva foto a su perfil\", function () {\r",
+                            "    pm.expect(pm.request.method).to.equal(\"PUT\");\r",
+                            "});\r",
+                            "\r",
+                            "// THEN: El usuario recibe un mensaje confirmando que su foto de perfil se ha actualizado correctamente.\r",
+                            "pm.test(\"THEN: El usuario recibe un mensaje confirmando que su foto de perfil se ha actualizado\", function () {\r",
+                            "    let response = pm.response.json();\r",
+                            "    pm.expect(pm.response.code).to.equal(200); // Verificar que la solicitud fue exitosa.\r",
+                            "    pm.expect(response, \"Debe haber un mensaje de confirmación\").to.be.an('object');\r",
+                            "    pm.expect(response.message, \"El mensaje de confirmación debe indicar que la foto fue guardada exitosamente\").to.equal(\"successfully updated cover image\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{Token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"hasMultimedia\": true,\r\n    \"profileImage\": \"https://example.com/images/sofia_2.jpg\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "sofia",
+                        "edit"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Editar biografia",
+                    "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{Token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"hasMultimedia\": true,\r\n    \"profileImage\": \"https://example.com/images/sofia_2.jpg\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "sofia",
+                                "edit"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"successfully updated cover image\",\n    \"STATUS\": \"OK\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Imagen muy pesada",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// GIVEN: El usuario ha decidido agregar o cambiar la foto de su perfil.\r",
+                            "pm.test(\"GIVEN: El usuario ha decidido agregar o cambiar la foto de su perfil\", function () {\r",
+                            "    let requestBody = JSON.parse(pm.request.body.raw);\r",
+                            "    pm.expect(requestBody, \"Debe incluir la información de si hay contenido multimedia y la nueva foto\").to.have.keys([\"hasMultimedia\", \"profileImage\"]);\r",
+                            "    pm.expect(requestBody.hasMultimedia, \"Debe indicar que hay una foto nueva\").to.be.true;\r",
+                            "    pm.expect(requestBody.profileImage, \"La dirección de la nueva foto no puede estar vacía\").to.be.a('string').and.to.not.be.empty;\r",
+                            "});\r",
+                            "\r",
+                            "// WHEN: El usuario sube la nueva foto a su perfil.\r",
+                            "pm.test(\"WHEN: El usuario sube la nueva foto a su perfil\", function () {\r",
+                            "    pm.expect(pm.request.method).to.equal(\"PUT\");\r",
+                            "});\r",
+                            "\r",
+                            "// THEN: El usuario recibe un mensaje confirmando que su foto de perfil se ha actualizado correctamente.\r",
+                            "pm.test(\"THEN: El usuario recibe un mensaje confirmando que su foto de perfil es muy pesada\", function () {\r",
+                            "    let response = pm.response.json();\r",
+                            "    pm.expect(pm.response.code).to.equal(400); // Verificar que la solicitud fue exitosa.\r",
+                            "    pm.expect(response, \"Debe haber un mensaje de confirmación\").to.be.an('object');\r",
+                            "    pm.expect(response.response, \"El mensaje de confirmación debe indicar que la foto fue guardada exitosamente\").to.equal(\"image too big\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{Token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"hasMultimedia\": true,\r\n    \"profileImage\": \"https://example.com/images/sofia_3.jpg\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "sofia",
+                        "edit"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Editar biografia",
+                    "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{Token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"hasMultimedia\": true,\r\n    \"profileImage\": \"https://example.com/images/sofia_3.jpg\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "sofia",
+                                "edit"
+                            ]
+                        }
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        },
+                        {
+                            "key": "Authorization",
+                            "value": "Bearer {{Token}}",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"response\": \"image too big\",\n    \"status\": \"BADREQUEST\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Quitar la Imagen de Perfil",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// GIVEN: El usuario decide quitar su foto de perfil.\r",
+                            "pm.test(\"GIVEN: El usuario decide quitar su foto de perfil\", function () {\r",
+                            "    let requestBody = JSON.parse(pm.request.body.raw);\r",
+                            "    pm.expect(requestBody, \"Debería haber un indicador de que ya no hay foto y la dirección de la foto debería estar vacía\").to.deep.equal({\r",
+                            "        \"hasMultimedia\": false,\r",
+                            "        \"profileImage\": \"\"\r",
+                            "    });\r",
+                            "});\r",
+                            "\r",
+                            "// WHEN: El usuario elimina la foto de su perfil.\r",
+                            "pm.test(\"WHEN: El usuario elimina la foto de su perfil\", function () {\r",
+                            "    pm.expect(pm.request.method).to.equal(\"PUT\");\r",
+                            "});\r",
+                            "\r",
+                            "// THEN: El usuario recibe una confirmación de que la foto se ha quitado.\r",
+                            "pm.test(\"THEN: El usuario recibe una confirmación de que la foto se ha quitado\", function () {\r",
+                            "    let response = pm.response.json();\r",
+                            "    pm.expect(pm.response.code).to.equal(200); // Comprueba que la solicitud ha sido exitosa.\r",
+                            "    pm.expect(response, \"Debe haber un mensaje confirmando que la foto fue eliminada\").to.be.an('object');\r",
+                            "    pm.expect(response.message, \"El mensaje debería confirmar que la foto de perfil fue eliminada con éxito\").to.equal(\"Image successfully removed\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{Token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"hasMultimedia\": false,\r\n    \"profileImage\": \"\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "sofia",
+                        "edit"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Editar biografia",
+                    "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{Token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"hasMultimedia\": false,\r\n    \"profileImage\": \"\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "sofia",
+                                "edit"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"Image successfully removed\",\n    \"STATUS\": \"OK\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Cambiar Perfil a Privado",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// GIVEN: El usuario quiere hacer su perfil privado.\r",
+                            "pm.test(\"GIVEN: El usuario quiere hacer su perfil privado\", function () {\r",
+                            "    let requestBody = JSON.parse(pm.request.body.raw);\r",
+                            "    pm.expect(requestBody, \"Debería haber una opción para cambiar la configuración de privacidad\").to.have.property('public');\r",
+                            "    pm.expect(requestBody.public, \"La opción de perfil público debe estar desactivada\").to.be.false;\r",
+                            "});\r",
+                            "\r",
+                            "// WHEN: El usuario cambia la configuración de su perfil a privado.\r",
+                            "pm.test(\"WHEN: El usuario cambia la configuración de su perfil a privado\", function () {\r",
+                            "    pm.expect(pm.request.method).to.equal(\"PUT\");\r",
+                            "});\r",
+                            "\r",
+                            "// THEN: El usuario recibe un mensaje confirmando que su perfil ahora es privado.\r",
+                            "pm.test(\"THEN: El usuario recibe un mensaje confirmando que su perfil ahora es privado\", function () {\r",
+                            "    let response = pm.response.json();\r",
+                            "    pm.expect(pm.response.code).to.equal(200); // Comprueba que la solicitud ha sido exitosa.\r",
+                            "    pm.expect(response, \"Debe haber un mensaje confirmando que el perfil es ahora privado\").to.be.an('object');\r",
+                            "    pm.expect(response.message, \"El mensaje debería confirmar que el perfil se ha puesto en privado\").to.equal(\"The profile has been set to private\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{Token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"public\": false\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "sofia",
+                        "edit"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Editar biografia",
+                    "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{Token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"public\": false\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "sofia",
+                                "edit"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"The profile has been set to private\",\n    \"status\": \"OK\"\n}\n"
+                }
+            ]
+        },
+        {
+            "name": "Biografia muy extensa en la edición de perfil",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// GIVEN: El usuario intenta actualizar su biografía con un texto extenso.\r",
+                            "pm.test(\"GIVEN: El usuario intenta actualizar su biografía con un texto muy largo\", function () {\r",
+                            "    let requestBody = JSON.parse(pm.request.body.raw);\r",
+                            "    pm.expect(requestBody, \"Debería contener el campo 'summary' para la actualización de la biografía\").to.have.property('summary');\r",
+                            "    pm.expect(requestBody.summary.length, \"La longitud del texto de la biografía debe exceder el límite permitido\").to.be.above(200);\r",
+                            "});\r",
+                            "\r",
+                            "// WHEN: El usuario envía la solicitud para actualizar su biografía.\r",
+                            "pm.test(\"WHEN: El usuario envía la solicitud para actualizar su biografía\", function () {\r",
+                            "    pm.expect(pm.request.method).to.equal(\"PUT\");\r",
+                            "});\r",
+                            "\r",
+                            "// THEN: El usuario recibe un mensaje indicando que la biografía es demasiado larga.\r",
+                            "pm.test(\"THEN: El usuario recibe un mensaje indicando que la biografía es demasiado larga\", function () {\r",
+                            "    let response = pm.response.json();\r",
+                            "    pm.expect(pm.response.code).to.equal(400); // Asumiendo que el servidor devuelve un estado 400 por una solicitud incorrecta.\r",
+                            "    pm.expect(response, \"Debería haber un mensaje indicando que la longitud de la biografía no es adecuada\").to.be.an('object');\r",
+                            "    pm.expect(response.message, \"El mensaje debería indicar que la biografía debe tener una longitud válida\").to.equal(\"The biography must be between 1 to 100 characters\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{Token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"summary\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "sofia",
+                        "edit"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Editar biografia",
+                    "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{Token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"summary\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/sofia/edit",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "sofia",
+                                "edit"
+                            ]
+                        }
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"The biography must be between 1 to 100 characters\",\n    \"status\": \"INCORRECT\"\n}"
+                }
+            ]
+        }
+    ]
+}
+
+],
+"event": [
+    {
+        "listen": "prerequest",
+        "script": {
+            "type": "text/javascript",
+            "exec": [
+                ""
+            ]
+        }
+    },
+    {
+        "listen": "test",
+        "script": {
+            "type": "text/javascript",
+            "exec": [
+                ""
+            ]
+        }
+    }
+]
+}
