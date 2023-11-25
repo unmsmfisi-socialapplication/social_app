@@ -15,16 +15,12 @@ func NewCommunityDBRepository(database *sql.DB) domain.CommunityRepository {
 }
 
 func (dbRepository CommunityDBRepository) CheckUserInterestTopics(user_id string) (bool, error) {
-	query := `SELECT user_id FROM soc_app_users_interest_topics WHERE user_id=$1`
-	rows, err := dbRepository.db.Query(query, user_id)
+	query := `SELECT count(user_id) FROM soc_app_users_interest_topics WHERE user_id=$1`
+	var count int
+	
+	err := dbRepository.db.QueryRow(query, user_id).Scan(&count)
 	if err != nil {
 		return false, err
-	}
-	defer rows.Close()
-
-	var count int
-	for rows.Next() {
-		count++
 	}
 
 	if count > 0 {
