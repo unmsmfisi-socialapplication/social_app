@@ -70,11 +70,6 @@ func (ah *AuthHandler) LogoutUser(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	if err != nil {
-		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid request payload")
-		return
-	}
-
 	err = ah.useCase.Logout(user.Username)
 	if err != nil {
 		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error during logout process")
