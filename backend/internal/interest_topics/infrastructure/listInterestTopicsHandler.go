@@ -1,6 +1,7 @@
 package infrastructure
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -17,10 +18,22 @@ func NewListInterestTopicsHandler(useCase application.ListInterestTopicsUseCaseI
 	return &ListInterestTopicsHandler{useCase: useCase}
 }
 
-func (handler *ListInterestTopicsHandler) HandleListTopics(writer http.ResponseWriter, r *http.Request) {
+func (handler *ListInterestTopicsHandler) HandleListTopics(writer http.ResponseWriter, request *http.Request) {
+	var requestData struct {
+		PageNumber string `json:"page_number"`
+		PageSize   string `json:"page_size"`
+	}
+
+	er := json.NewDecoder(request.Body).Decode(&requestData)
+	if er != nil {
+		utils.SendJSONResponse(writer, http.StatusBadRequest, "ERROR", "Invalid request payload")
+	}
 
 	var interestTopics []domain.InterestTopic
-	interestTopics, err := handler.useCase.GetInteresTopics()
+	pageSize := requestData.PageSize
+	pageNumber := requestData.PageNumber
+
+	interestTopics, err := handler.useCase.GetInteresTopics(pageSize, pageNumber)
 	if err != nil {
 		utils.SendJSONResponse(writer, http.StatusInternalServerError, "ERROR", "Error while fetching data")
 		fmt.Print(err.Error())
@@ -31,5 +44,4 @@ func (handler *ListInterestTopicsHandler) HandleListTopics(writer http.ResponseW
 		return
 	}
 	utils.SendJSONResponse(writer, http.StatusOK, "OK", interestTopics)
-
 }

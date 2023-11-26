@@ -6,11 +6,11 @@ import (
 )
 
 type mockInterestTopicsRepository struct {
-	FindAllFunc func() ([]domain.InterestTopic, error)
+	GetAllFunc func(pageSize, pageNumber string) ([]domain.InterestTopic, error)
 }
 
-func (m *mockInterestTopicsRepository) FindAll() ([]domain.InterestTopic, error) {
-	return m.FindAllFunc()
+func (m *mockInterestTopicsRepository) GetAll(pageSize, pageNumber string) ([]domain.InterestTopic, error) {
+	return m.GetAllFunc(pageSize, pageNumber)
 }
 
 func TestGetInterestTopics(t *testing.T) {
@@ -22,10 +22,12 @@ func TestGetInterestTopics(t *testing.T) {
 		{InterestId: "1", InterestName: "Topic 1", InterestSummary: "Summary 1"},
 		{InterestId: "2", InterestName: "Topic 2", InterestSummary: "Summary 2"},
 	}
-	mockRepo.FindAllFunc = func() ([]domain.InterestTopic, error) {
+	mockRepo.GetAllFunc = func(pageSize, pageNumber string) ([]domain.InterestTopic, error) {
 		return expectedTopics, nil
 	}
-	topics, err := usecase.GetInteresTopics()
+	pageSize:="1"
+	pageNumber:="2"
+	topics, err := usecase.GetInteresTopics(pageSize, pageNumber)
 
 	// Verify the function's result
 	if err != nil {
