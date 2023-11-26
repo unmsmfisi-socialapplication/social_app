@@ -1,14 +1,15 @@
 @import '../../../../resources/styles/variables.scss';
 .tagLink {
+    text-decoration: none;
+    color: black;
     display: flex;
     align-items: center;
     width: max-content;
     padding: 8px 15px;
-    margin-bottom: 8px; /* Puedes ajustar el valor del margen según tus preferencias */
     border-radius: 20px;
     gap: 6px;
     font-size: 14px;
-    background-color: white;
+    background-color: $third-color;
     transition: all 0.3s;
     cursor: pointer;
     &--active {

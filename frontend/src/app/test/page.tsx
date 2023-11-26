@@ -125,20 +125,15 @@ export default function TestPage() {
                 <WSearch />
                 {/* Otras partes de tu aplicación */}
             </div>
-
+            
             <WCircleIcon iconSize={30} icon={CheckIcon} />
             <WCircleIcon iconSize={50} icon={AllInclusive} typeColor="secondary" />
             <WModalPhoto warning />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '10px' }}>
-                <WTag text="Home" icon={CottageOutlinedIcon} isActive />
-                <WTag text="Explorer" icon={SearchIcon} />
-                <WTag text="Notifications" icon={NotificationsNoneIcon} />
-                <WTag text="Messages" icon={MailOutlineIcon} />
-                <WTag text="Lists" icon={FormatListBulletedIcon} />
-                <WTag text="Bookmarks" icon={BookmarkBorderIcon} />
-                <WTag text="Communities" icon={PeopleOutlineIcon} />
-                <WTag text="Profile" icon={PersonOutlineIcon} />
-                <Button variant="contained">Post</Button>
+                <WTag path="/home" text="Home" icon={CottageOutlinedIcon} isActive />
+                <WTag path="/explorer" text="Explorer" icon={SearchIcon} />
+                <WTag path="/notifications" text="Notifications" icon={NotificationsNoneIcon} />
+                <WTag path="/messages" text="Messages" icon={MailOutlineIcon} />
             </div>
             <AvatarInput />
             <div>
