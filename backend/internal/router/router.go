@@ -8,6 +8,8 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/chat/domain"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/chat/infraestructure"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment"
 	email "github.com/unmsmfisi-socialapplication/social_app/internal/email_sender"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
@@ -20,12 +22,11 @@ import (
 	registerinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 
-	wsInf "github.com/unmsmfisi-socialapplication/social_app/internal/chat/infraestructure"
-
+	chat "github.com/unmsmfisi-socialapplication/social_app/internal/chat"
 	follow "github.com/unmsmfisi-socialapplication/social_app/internal/follow"
 )
 
-func Router(wsHandler *wsInf.Handler) http.Handler {
+func Router() http.Handler {
 	err := database.InitDatabase()
 	if err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
@@ -68,10 +69,14 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
 	r.Post("/login", loginHandler.HandleLogin)
 
-	r.Post("/ws/createRoom", wsHandler.CreateRoom)
-	r.Get("/ws/joinRoom/{roomId}", wsHandler.JoinRoom)
-	r.Get("/ws/getRooms", wsHandler.GetRooms)
-	r.Get("/ws/getClients/{roomId}", wsHandler.GetClients)
+	//Chat
+	hub := domain.NewHub()
+	chatHandler := infraestructure.NewHandler(hub)
+
+	go hub.RunChatManager()
+
+	chatRouter := chat.ChatModuleRouter(chatHandler)
+	r.Mount("/chat", chatRouter)
 
 	// Register
 	registerRepo := registerinfrastructure.NewUserRepository(dbInstance)
