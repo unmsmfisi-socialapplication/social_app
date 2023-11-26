@@ -7,45 +7,33 @@ This folder contains all data scripts and features , all made in python with ini
 ├── bussines_analytics
 │   ├── data_transformation
 │   └── migration
-├── cloud_platorm
-│   ├── GoogleDrive.py
-│   ├── QuickStart.py
-│   └── setting.yaml
+├── cloud_mldeployment
+│   ├── sentiment_analysis
+├── database_management
+│   ├── connection details
+│   ├── store procedure
 ├── notebook
 │   ├── post_classification
 │   ├── sentiment_analysis
 │   └── spam_detector
-├── postgresql_bd
-│   ├── connection details
-├── preprocessing
-│   ├── pp_model.py
-├── training
-│   ├── tn_pc.py
-│   ├── tn_sa.py
-│   └── tn_sd.py
-├── execution
-│   ├── ex_model.py
+├── test
+│   ├── mldeployment
+│   ├── preprocessing
+│   ├── training
  ```
 ### bussines_analytics
 This folder is about business analytics, referring to data transformation
 
-### cloud_platorm
+### cloud_mldeployment
 All the components required to configure storage will be in the Cloud_platform folder , this includes an 
 initial File for Automatic credentials in Google Cloud Platform and a script with all cloud functions required
 for development
 
+### database_management
+This folder contains the connection and creation of the objects.
+
 ### notebook
 This folder is  just for concept testing made in jupyter notebook
 
-### postgresql_bd
-This folder is for the connection to the PosgreSQL database, it includes a
-Initial automatic configurations file for Azure Cloud.
-
-### preprocessing
-This folder contains the script(s) for maange the preprocessing of raw data and deliver it for the respective feature model
-
-# training
-This folder contains the script(s) for manage the training of each model.
-
-#Execution
-This folder contains the script(s) for execution and results obtaining of each model
+### test
+This folder contains the local tests

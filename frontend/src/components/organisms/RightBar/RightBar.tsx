@@ -14,7 +14,7 @@ export default function RightBar({}: PropsRightBar) {
     return (
         <Box>
             <WSearch />
-            <Button variant="contained"  onClick={handleLogout}>
+            <Button variant="contained" onClick={handleLogout}>
                 Salir
             </Button>
         </Box>
