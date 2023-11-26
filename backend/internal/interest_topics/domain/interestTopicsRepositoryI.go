@@ -2,5 +2,5 @@ package domain
 
 
 type InterestTopicsRepository interface {
-	FindAll() ([]InterestTopic, error)
+	GetAll(pageSize, pageNumber string) ([]InterestTopic, error)
 }
