@@ -2,7 +2,6 @@ package infrastructure
 
 import (
 	"database/sql"
-	"strconv"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/domain"
 )
@@ -14,28 +13,13 @@ type InterestTopicsDBRepository struct {
 func NewInterestTopicsDBRepository(database *sql.DB) domain.InterestTopicsRepository {
 	return &InterestTopicsDBRepository{db: database}
 }
-
-func (dbRepository *InterestTopicsDBRepository) GetAll(pageSize, pageNumber string) ([]domain.InterestTopic, error) {
-
+func (dbRepository InterestTopicsDBRepository) FindAll() ([]domain.InterestTopic, error) {
 	var interestTopics []domain.InterestTopic
-	pageSizeInt, err := strconv.Atoi(pageSize)
-    if err != nil {
-        return nil, err
-    }
-
-    pageNumberInt, err := strconv.Atoi(pageNumber)
-    if err != nil {
-        return nil, err
-    }
-
-    offset := (pageNumberInt - 1) * pageSizeInt
-
-	query := `SELECT interest_id, interest_name, interest_summary FROM soc_app_m_users_interests LIMIT $1 OFFSET $2`
-	rows, err := dbRepository.db.Query(query,pageSizeInt,offset)
+	query := `SELECT interest_id, interest_name, interest_summary FROM soc_app_m_users_interests`
+	rows, err := dbRepository.db.Query(query)
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
 
 	for rows.Next() {
 		var interestTopic domain.InterestTopic

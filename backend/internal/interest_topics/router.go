@@ -19,7 +19,7 @@ func InterestTopicsModuleRouter(dbInstance *sql.DB) *chi.Mux {
 	ListinterestTopicUseCase := application.NewListInterestTopicsUseCase(InterestTopicsRepo)
 	listInterestTopicHandler := infrastructure.NewListInterestTopicsHandler(ListinterestTopicUseCase)
 
-	r.Post("/list", listInterestTopicHandler.HandleListTopics)
+	r.Get("/list", listInterestTopicHandler.HandleListTopics)
 
 	r.Post("/select", selectTopicHandler.HandleSelectTopic)
 

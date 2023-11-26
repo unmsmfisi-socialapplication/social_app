@@ -1,11 +1,12 @@
 package application
 
 import (
+
 	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/domain"
 )
 
 type ListInterestTopicsUseCaseI interface {
-	GetInteresTopics(pageSize, pageNumber string) ([]domain.InterestTopic, error)
+	GetInteresTopics() ([]domain.InterestTopic, error)
 }
 
 type ListInterestTopicsUseCase struct {
@@ -16,11 +17,13 @@ func NewListInterestTopicsUseCase(repository domain.InterestTopicsRepository) *L
 	return &ListInterestTopicsUseCase{repository: repository}
 }
 
-func (usecase *ListInterestTopicsUseCase) GetInteresTopics(pageSize, pageNumber string) ([]domain.InterestTopic, error) {
+func (usecase *ListInterestTopicsUseCase) GetInteresTopics() ([]domain.InterestTopic, error) {
 	var interestTopics []domain.InterestTopic
-	interestTopics, err := usecase.repository.GetAll(pageSize, pageNumber)
+	interestTopics, err := usecase.repository.FindAll()
 	if err != nil {
 		return nil, err
 	}
+
 	return interestTopics, nil
+
 }
