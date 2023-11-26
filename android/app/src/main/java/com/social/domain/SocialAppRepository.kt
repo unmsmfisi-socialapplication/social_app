@@ -21,9 +21,13 @@ interface SocialAppRepository {
 
     suspend fun insertUser(userEntity: UserEntity)
 
-    suspend fun getUser():UserEntity
+    suspend fun getUser(): UserEntity
 
-    suspend fun updateUser(id:Int, username:String, photo:String)
+    suspend fun updateUser(
+        id: Int,
+        username: String,
+        photo: String,
+    )
 
     suspend fun deleteUser()
 }

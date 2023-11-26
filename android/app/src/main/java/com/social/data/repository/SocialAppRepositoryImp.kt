@@ -45,11 +45,19 @@ class SocialAppRepositoryImp
             return socialDAO.getUser()
         }
 
-        override suspend fun updateUser(id: Int, username:String, photo:String) {
-            socialDAO.updateUser(id, username, photo)
+        override suspend fun updateUser(
+            id: Int,
+            username: String,
+            photo: String,
+        ) {
+            socialDAO.updateUser(
+                id,
+                username,
+                photo,
+            )
         }
 
         override suspend fun deleteUser() {
             return socialDAO.deleteUser()
         }
-}
+    }

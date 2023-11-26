@@ -1,3 +1,4 @@
+
 package com.social.data.source.local
 
 import androidx.room.Dao
@@ -11,10 +12,14 @@ interface SocialDAO {
     suspend fun insertUser(userEntity: UserEntity)
 
     @Query("SELECT * FROM user")
-    suspend fun getUser():UserEntity
+    suspend fun getUser(): UserEntity
 
     @Query("UPDATE user SET sUsuario = :username, sFoto = :photo WHERE id = :id")
-    suspend fun updateUser(id:Int, username:String, photo:String)
+    suspend fun updateUser(
+        id: Int,
+        username: String,
+        photo: String,
+    )
 
     @Query("DELETE FROM user")
     suspend fun deleteUser()

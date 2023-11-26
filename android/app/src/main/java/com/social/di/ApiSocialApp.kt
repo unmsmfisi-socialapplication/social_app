@@ -47,7 +47,10 @@ object ApiSocialApp {
 
     @Provides
     @Singleton
-    fun supplierSocialAppRepository(apiInterface: ApiInterface, db:SocialDB): SocialAppRepository {
+    fun supplierSocialAppRepository(
+        apiInterface: ApiInterface,
+        db: SocialDB,
+    ): SocialAppRepository {
         return SocialAppRepositoryImp(apiInterface, db.socialDAO)
     }
 
@@ -62,7 +65,7 @@ object ApiSocialApp {
 
     @Provides
     @Singleton
-    fun supplierSocialLocalDatabase(app:Application):SocialDB{
-        return Room.databaseBuilder(app,SocialDB::class.java,SocialDB.DATABASE_NAME).fallbackToDestructiveMigration().build()
+    fun supplierSocialLocalDatabase(app: Application): SocialDB {
+        return Room.databaseBuilder(app, SocialDB::class.java, SocialDB.DATABASE_NAME).fallbackToDestructiveMigration().build()
     }
 }
