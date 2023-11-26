@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS bi.ResultsPostClasif
 (
-    "ID" INT ,
+    "ID" INT UNIQUE,
     post_description TEXT ,
     category TEXT ,
     model_version VARCHAR[20] ,
