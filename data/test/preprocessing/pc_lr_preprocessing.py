@@ -1,29 +1,38 @@
-import string
+from sklearn.preprocessing import LabelEncoder
 from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
 from tensorflow import keras
+import re
 
-# Parameterized variable
-CLEANED_COLUMN ='text_cleaned'
+# Variables that parameterize the columns of the final dataframe
 SEQUENCES_COLUMN ='text_sequences'
-POST_COLUMN = 'description' # It will be modified by the post column brought from backend.
+POST_COLUMN = 'clean_text'
+LABEL_ENCODER = 'label'
+TEXT_TOKENIZED = 'text_tokenized'
+CATEGORY_LABEL = 'category_label'
+
 
 def preprocess_data(data):
-    # Collects all types of punctuation and obtains common Spanish words
-    punct = string.punctuation
-    common_words=stopwords.words('spanish')
+    
+    # Post cleaning
+    data[POST_COLUMN] = data[POST_COLUMN].apply(lambda x: re.sub(r'[^\w\s]', '', x))
+    data[POST_COLUMN] = data[POST_COLUMN].apply(lambda x: x.lower())
+    data[TEXT_TOKENIZED] = data[POST_COLUMN].apply(word_tokenize)
 
-    data[CLEANED_COLUMN] = data[POST_COLUMN].str.lower().str.replace('[' + ''.join(punct) + ']', '', regex=True)
-    data[CLEANED_COLUMN] = data[CLEANED_COLUMN].apply(word_tokenize)
-    data[CLEANED_COLUMN] = data[CLEANED_COLUMN].apply(lambda x: [word for word in x if word not in common_words])
+    lb_encoder = LabelEncoder()
+    data[LABEL_ENCODER] = lb_encoder.fit_transform(data[CATEGORY_LABEL])
 
-    # Text Tokenization using Keras Tokenizer
+    # Text tokenization using Keras
     tokenizer = keras.preprocessing.text.Tokenizer()
-    tokenizer.fit_on_texts(data[CLEANED_COLUMN])
-    data[SEQUENCES_COLUMN] = tokenizer.texts_to_sequences(data[CLEANED_COLUMN])
+    tokenizer.fit_on_texts(data[TEXT_TOKENIZED])
 
-    # The input_shape to be used in the LSTM model and the maximum number of words per post are determined.
-    input_shape = int(sum(data[SEQUENCES_COLUMN].apply(len)) / len(data[SEQUENCES_COLUMN]))
-    Max_words = max(map(max, data[SEQUENCES_COLUMN])) + 1
+    sequences = tokenizer.texts_to_sequences(data[TEXT_TOKENIZED])
+    Max_words = 0
 
-    return data, input_shape, Max_words
+    if sequences:
+        Max_words = len(tokenizer.word_index) + 1
+
+    data[SEQUENCES_COLUMN] = sequences
+
+    return data, lb_encoder, Max_words
+
+
