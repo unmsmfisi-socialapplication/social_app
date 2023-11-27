@@ -7,7 +7,7 @@ def connect_azure_postgresql_ce():
         # Leyendo los parametros de la conexión
         params = config()
   
-        # connect to the PostgreSQL server
+        # Conectando al servidor de postgreSQL
         print('-----------------------------------------------------------------------------------------------')
         conn = psycopg2.connect(**params)
         return conn
