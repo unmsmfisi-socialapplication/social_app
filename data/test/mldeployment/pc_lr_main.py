@@ -3,7 +3,6 @@ import numpy as np
 import os
 from ..preprocessing import pc_lr_preprocessing as preprocessing
 from ..training import pc_lr_training as training
-from keras.models import load_model
 import joblib
 from joblib import load
 from keras.preprocessing.sequence import pad_sequences
