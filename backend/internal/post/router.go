@@ -17,5 +17,6 @@ func PostModuleRouter(dbInstance *sql.DB) *chi.Mux {
 
 	r.Post("/create", postHandler.HandleCreatePost)
 	r.Get("/getall", postHandler.HandleGetAllPost)
+	r.Get("/{id}", postHandler.HandleGetPost)
 	return r
 }
