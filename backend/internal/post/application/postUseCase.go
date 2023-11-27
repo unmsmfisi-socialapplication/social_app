@@ -7,16 +7,20 @@ import (
 )
 
 var (
-	ErrUserNotFound   = errors.New("user not found")
-	ErrIncompleteData = errors.New("incomplete data")
+	ErrUserNotFound = errors.New("user not found")
 )
 
 type PostUseCaseInterface interface {
-	CreatePost(post domain.CreatePost) (*domain.Post, error)
+	CreatePost(post domain.PostCreate) (*domain.PostResponse, error)
+	GetPost(id int) (*domain.Post, error)
+	GetPosts(params domain.PostPaginationParams) (*domain.PostPagination, error)
 }
 
 type PostRepository interface {
-	CreatePost(post domain.CreatePost) (*domain.Post, error)
+	CreatePost(post domain.PostCreate) (*domain.Post, error)
+	UserExist(post domain.PostCreate) bool
+	GetById(id int) (*domain.Post, error)
+	GetAll(params domain.PostPaginationParams) (*domain.PostPagination, error)
 }
 
 type PostUseCase struct {
@@ -27,11 +31,44 @@ func NewPostUseCase(r PostRepository) *PostUseCase {
 	return &PostUseCase{repo: r}
 }
 
-func (l *PostUseCase) CreatePost(post domain.CreatePost) (*domain.Post, error) {
+func (l *PostUseCase) CreatePost(post domain.PostCreate) (*domain.PostResponse, error) {
+
+	if !l.repo.UserExist(post) {
+		return nil, ErrUserNotFound
+	}
+
 	dbPost, err := l.repo.CreatePost(post)
 
-	if dbPost == nil {
-		return dbPost, err
+	if err != nil {
+		return nil, err
+	}
+
+	response := domain.PostToPostResponse(*dbPost)
+
+	return &response, nil
+}
+
+func (l *PostUseCase) GetPosts(params domain.PostPaginationParams) (*domain.PostPagination, error) {
+
+	if params.Page == 0 && params.Limit == 0 {
+		params.Limit = 10
+		params.Page = 1
+	}
+
+	dbPosts, err := l.repo.GetAll(params)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return dbPosts, nil
+}
+
+func (l *PostUseCase) GetPost(id int) (*domain.Post, error) {
+	dbPost, err := l.repo.GetById(id)
+
+	if err != nil {
+		return nil, err
 	}
 
 	return dbPost, nil

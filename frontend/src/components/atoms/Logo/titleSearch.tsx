@@ -13,7 +13,11 @@ const containerStyle = {
 const WLogo: React.FC<WLogoProps> = ({ alt, size }) => {
     return (
         <div style={containerStyle}>
-            <img src="/images/FrameStudentNET.png" alt={alt} style={{ marginRight: '15px', width: size, height: size }} />
+            <img
+                src="/images/FrameStudentNET.png"
+                alt={alt}
+                style={{ marginRight: '15px', width: size, height: size }}
+            />
             <h3>Student Network</h3>
         </div>
     )
