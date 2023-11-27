@@ -1,5 +1,8 @@
-import * as Yup from 'yup'
-import { emailRegex, nameRegex, passwordRegex } from '@/utilities/Constant'
+import * as Yup from 'yup';
+import { emailRegex, nameRegex, passwordRegex } from '@/utilities/Constant';
+
+// Update the passwordRegex to match the new requirements
+const newPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,56}$/;
 
 export const YUP_SCHEMA = {
     name: Yup.string()
@@ -12,26 +15,24 @@ export const YUP_SCHEMA = {
             message: 'El correo electrónico no tiene un formato válido',
         })
         .required('El correo electrónico es requerido'),
-
     username: Yup.string()
         .matches(emailRegex, {
             message: 'El correo electrónico no tiene un formato válido',
         })
         .required('El correo electrónico es requerido'),
     password: Yup.string()
-        .matches(passwordRegex, {
+        .matches(newPasswordRegex, {
             message:
-                'La contraseña debe contener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial (@$!%*?&)',
+                'La contraseña debe contener entre 6 y 56 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial (@$!%*?&)',
         })
         .required('La contraseña es requerida'),
-
     password_confirm: Yup.string()
-        .matches(passwordRegex, {
+        .matches(newPasswordRegex, {
             message:
-                'La contraseña debe contener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial (@$!%*?&)',
+                'La contraseña debe contener entre 6 y 56 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial (@$!%*?&)',
         })
         .required('La contraseña es requerida'),
-}
+};
 
 export const REGISTER_VALUES = {
     NAME: 'name',
@@ -39,7 +40,7 @@ export const REGISTER_VALUES = {
     USERNAME: 'username',
     PASSWORD: 'password',
     PASSWORD_CONFIRM: 'password_confirm',
-}
+};
 
 export const INITIAL_FORMIK_VALUES = {
     name: '',
@@ -47,4 +48,5 @@ export const INITIAL_FORMIK_VALUES = {
     username: '',
     password: '',
     password_confirm: '',
-}
+};
+
