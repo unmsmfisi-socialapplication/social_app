@@ -12,12 +12,14 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/router"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/domain"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 func main() {
 	//Handlers
 	hub := domain.NewHub()
 	wsHandler := infraestructure.NewHandler(hub)
+	utils.LoadEnvFromFile(".env")
 
 	go hub.RunChatManager()
 
