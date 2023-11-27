@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "173201470280",
+    "project_id": "crack-braid-308100",
+    "storage_bucket": "crack-braid-308100.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173201470280:android:78d906017c2f3e207e397d",
+        "android_client_info": {
+          "package_name": "com.social"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTU3eYKiKTFky2vXM-1jUarFuRzX6gmYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
