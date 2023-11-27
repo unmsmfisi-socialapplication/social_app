@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import { Box } from '@mui/material'
 import EnrollmentHoc from '@/app/auth/auth'
 import { WInput, WButton, WLink, WCardAuth } from '@/components'
-import { INITIAL_FORMIK_VALUES, LOGIN_VALUES, YUP_SCHEMA } from './constant'
+import { INITIAL_FORMIK_VALUES, LOGIN_VALUES, YUP_SCHEMA, ERROR_MESSAGE } from './constant'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { validateUsername, validatePassword } from '@/utilities/Validation'
 import { getUser } from '@/redux/actions/userAction'
@@ -49,7 +49,15 @@ export default function LoginPage() {
     return (
         <EnrollmentHoc>
             <form onSubmit={formik.handleSubmit}>
+                {auth && auth.response && (
+                    <span style={{ color: 'red', marginBottom: '10px', display: 'block', textAlign: 'center' }}>
+                        {auth.response || ERROR_MESSAGE}
+                    </span>
+                )}
                 <WCardAuth title="Bienvenido" size="large">
+                    {formik.touched.username && formik.errors.username && (
+                        <span style={{ color: 'red', marginBottom: '10px' }}>{ERROR_MESSAGE}</span>
+                    )}
                     <span>Nombre de usuario</span>
                     <WInput
                         name={LOGIN_VALUES.USERNAME}
@@ -86,7 +94,6 @@ export default function LoginPage() {
                         text="Iniciar Sesión"
                         size="large"
                     />
-                    {auth && <span>{auth?.response}</span>}
                 </WCardAuth>
             </form>
         </EnrollmentHoc>
