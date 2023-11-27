@@ -1,16 +1,11 @@
-import firebase_admin
-from firebase_admin import credentials, storage
+import azure.storage.blob
 
+def initialize_azure_storage_client(connection_string):
+    return azure.storage.blob.BlobServiceClient.from_connection_string(connection_string)
 
-def initialize_firebase_app(firebase_credential_path, firebase_storage_url):
-    cred = credentials.Certificate(firebase_credential_path)
-    firebase_admin.initialize_app(cred, {'storageBucket': firebase_storage_url})
-
-    firebase_bucket = storage.bucket(app=firebase_admin.get_app())
-
-    return firebase_bucket
-
-
-def upload_to_firebase_storage(firebase_bucket, output_local_file_path, firebase_storage_path):
-    blob = firebase_bucket.blob(firebase_storage_path)
-    blob.upload_from_filename(output_local_file_path)
+def upload_to_azure_storage(blob_service_client, local_file_path, container_name, blob_name):
+    container_client = blob_service_client.get_container_client(container_name)
+    blob_client = container_client.get_blob_client(blob_name)
+    
+    with open(local_file_path, "rb") as data:
+        blob_client.upload_blob(data)

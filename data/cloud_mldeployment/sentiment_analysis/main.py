@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import pandas as pd
 from joblib import load
 from preprocessing import preprocess_data
-from storage import initialize_firebase_app, upload_to_firebase_storage
+from storage import initialize_azure_storage_client, upload_to_azure_storage
 
 import logging
 
@@ -17,11 +17,10 @@ def load_environment_variables():
     load_dotenv()
 
     return (
-        os.getenv('ENDPOINT'),
-        os.getenv('FIREBASE_CREDENTIAL_PATH'),
-        os.getenv('FIREBASE_STORAGE_URL'),
-        os.getenv('FIREBASE_STORAGE_PATH'),
-        os.getenv('OUTPUT_LOCAL_FILE_PATH')
+        os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
+        os.getenv('OUTPUT_LOCAL_FILE_PATH'),
+        os.getenv('AZURE_STORAGE_CONTAINER_NAME'),
+        os.getenv('AZURE_STORAGE_BLOB_NAME')
     )
 
 
@@ -44,15 +43,15 @@ def main():
     setup_logging()
 
     try:
-        endpoint, firebase_credential_path, firebase_storage_url, firebase_storage_path, output_local_file_path = load_environment_variables()
+        azure_storage_connection_string, output_local_file_path, container_name, blob_name = load_environment_variables()
 
-        df_predictions = preprocess_and_predict(endpoint)
+        df_predictions = preprocess_and_predict(azure_storage_connection_string)
 
         df_predictions.to_csv(output_local_file_path, index=False)
 
-        firebase_bucket = initialize_firebase_app(firebase_credential_path, firebase_storage_url)
+        blob_service_client = initialize_azure_storage_client(azure_storage_connection_string)
 
-        upload_to_firebase_storage(firebase_bucket, output_local_file_path, firebase_storage_path)
+        upload_to_azure_storage(blob_service_client, output_local_file_path, container_name, blob_name)
 
         logging.info("Process completed successfully.")
 
