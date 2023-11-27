@@ -6,14 +6,12 @@ import (
 	"testing"
 
 	"github.com/go-chi/chi"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/router"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
 )
 
 func mockAuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		if r.Header.Get("Authorization") != "" {
+		if r.Header.Get("Authorization") == "valid_token" {
 			ctx := r.Context()
 			next.ServeHTTP(w, r.WithContext(ctx))
 		} else {
@@ -21,10 +19,12 @@ func mockAuthMiddleware(next http.Handler) http.Handler {
 		}
 	})
 }
+
 func mockHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"message":"success"}`))
 }
+
 func mockRouter() http.Handler {
 	freeRoutes := chi.NewRouter()
 
@@ -40,9 +40,6 @@ func mockRouter() http.Handler {
 
 func TestProtectedRoutes(t *testing.T) {
 	r := mockRouter()
-	setupTestEnv(t)
-	mockWsHandler := infraestructure.NewHandler(nil)
-	_ = router.Router(mockWsHandler)
 
 	tests := []struct {
 		name       string
@@ -69,6 +66,7 @@ func TestProtectedRoutes(t *testing.T) {
 			name:       "Protected Route with Authentication header (invalid token)",
 			route:      "/protected",
 			method:     http.MethodGet,
+			headers:    map[string]string{"Authorization": "invalid_token"},
 			wantStatus: http.StatusUnauthorized,
 		},
 		{
@@ -98,16 +96,4 @@ func TestProtectedRoutes(t *testing.T) {
 			}
 		})
 	}
-}
-
-func setupTestEnv(t *testing.T) {
-	t.Setenv("JWT_SECRET_KEY", "secret")
-	t.Setenv("DB_HOST", "localhost")
-	t.Setenv("DB_USER", "postgres")
-	t.Setenv("DB_PASSWORD", "root")
-	t.Setenv("DB_NAME", "redsocial")
-	t.Setenv("DB_SSLMODE", "disable")
-	t.Setenv("DB_SCHEMA", "sa")
-	t.Setenv("CORS_ORIGINS", "*")
-	t.Setenv("CORS_MAXAGE", "300")
 }
