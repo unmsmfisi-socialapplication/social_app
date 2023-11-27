@@ -1,5 +1,5 @@
 import React from 'react'
-import { WCircleIcon } from '@/components'
+import WCircleIcon from './../../atoms/CircleIcon/circleIcon'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ModeCommentIcon from '@mui/icons-material/ModeComment'
 import CachedIcon from '@mui/icons-material/Cached'
