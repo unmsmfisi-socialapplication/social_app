@@ -21,7 +21,6 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
 
     private fun action() {
         binding.iconLocation.setOnClickListener {
-
         }
     }
 }
