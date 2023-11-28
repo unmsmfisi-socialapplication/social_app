@@ -99,6 +99,7 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
             toggleLocationVisibility()
         }
         binding.iconGif.setOnClickListener {
+            openGalleryForGifs()
         }
     }
 
@@ -204,5 +205,8 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
     }
 
     private fun openGalleryForVideos() {
+    }
+
+    private fun openGalleryForGifs() {
     }
 }
