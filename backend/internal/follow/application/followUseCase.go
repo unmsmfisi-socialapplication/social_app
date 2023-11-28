@@ -13,6 +13,7 @@ var (
 
 type FollowerRepository interface {
 	InsertNewFollower(newFollower *domain.Follower) (*domain.Follower, error)
+	IsFollowing(newFollower *domain.Follower) (*bool, error)
 }
 
 type FollowerUseCase struct {
@@ -37,4 +38,21 @@ func (r *FollowerUseCase) FollowProfile(p_follower_profile_id, p_following_profi
 		return nil, err
 	}
 	return newFollower, nil
+}
+
+func (r *FollowerUseCase) IsFollowing(p_follower_profile_id, p_following_profile_id int) (*bool, error) {
+	if p_follower_profile_id == p_following_profile_id {
+		return nil, ErrFollowHimself
+	}
+
+	newFollower, err := domain.NewFollower(p_follower_profile_id, p_following_profile_id)
+	if err != nil {
+		return nil, err
+	}
+
+	isFollowing, err := r.repo.IsFollowing(newFollower)
+	if err != nil {
+		return nil, err
+	}
+	return isFollowing, nil
 }
