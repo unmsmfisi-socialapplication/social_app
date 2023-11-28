@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/domain"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/chat/domain"
 )
 
 func TestNewHub(t *testing.T) {
