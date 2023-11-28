@@ -1,24 +1,36 @@
 package com.social.presentation.home
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.provider.MediaStore.Images.Media.getBitmap
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.imageview.ShapeableImageView
 import com.social.R
 import com.social.databinding.FragmentNewPostBinding
+import java.util.Locale
 
 class NewPostFragment : Fragment(R.layout.fragment_new_post) {
     private lateinit var binding: FragmentNewPostBinding
     private lateinit var imageViews: List<ShapeableImageView>
     private val selectedImages: MutableList<Bitmap> = mutableListOf()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var isLocationVisible = false
 
     companion object {
         const val MAX_IMAGES = 6
+        const val LOCATION_PERMISSION_REQUEST_CODE = 123
     }
 
     private val galleryLauncher =
@@ -54,6 +66,7 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
     ) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewPostBinding.bind(view)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         imageViews =
             listOf(
@@ -83,7 +96,81 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
         }
 
         binding.iconLocation.setOnClickListener {
+            toggleLocationVisibility()
         }
+        binding.iconGif.setOnClickListener {
+            openGalleryForGifs()
+        }
+    }
+
+    private fun toggleLocationVisibility() {
+        if (isLocationVisible) {
+            clearLocationData()
+        } else {
+            requestLocationPermission()
+        }
+    }
+
+    private fun clearLocationData() {
+        binding.textLocation.text = ""
+        binding.linearLayoutLocation.visibility = View.INVISIBLE
+        isLocationVisible = false
+    }
+
+    private fun requestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            getLastLocation()
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE,
+            )
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                location?.let {
+                    val geocoder =
+                        Geocoder(
+                            requireContext(),
+                            Locale.getDefault(),
+                        )
+                    val addresses =
+                        geocoder.getFromLocation(
+                            it.latitude,
+                            it.longitude,
+                            1,
+                        )
+                    if (addresses != null) {
+                        if (addresses.isNotEmpty()) {
+                            val city = addresses[0]?.locality
+                            val country = addresses[0]?.countryName
+                            val locationString = "$city - $country"
+                            binding.textLocation.text = locationString
+                            binding.linearLayoutLocation.visibility = View.VISIBLE
+                            isLocationVisible = true
+                        }
+                    }
+                }
+            }
     }
 
     @Suppress("DEPRECATION")
@@ -118,5 +205,8 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
     }
 
     private fun openGalleryForVideos() {
+    }
+
+    private fun openGalleryForGifs() {
     }
 }

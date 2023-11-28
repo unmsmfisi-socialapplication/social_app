@@ -91,12 +91,14 @@
                                 tools:ignore="TouchTargetSizeCheck" />
 
                             <LinearLayout
+                                android:visibility="invisible"
                                 android:id="@+id/linearLayoutLocation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
                                 <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/icon_location_point"
                                     style="@style/ImageIconHead"
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
@@ -106,7 +108,6 @@
                                 <TextView
                                     android:id="@+id/text_location"
                                     style="@style/TextView16sp"
-                                    android:text="@string/lima_peru"
                                     android:textColor="@color/gray"
                                     android:textSize="14sp"
                                     tools:ignore="TextContrastCheck" />
