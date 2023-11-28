@@ -16,7 +16,7 @@ def conexion():
         time.sleep(50000)
 
         # Create a cursor
-        cursor = connection.cursor()
+        #cursor = connection.cursor()
 
     except Exception as ex:
         print(f"Error de conexión: {ex}")
