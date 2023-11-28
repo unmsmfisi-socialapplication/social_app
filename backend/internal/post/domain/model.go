@@ -41,6 +41,15 @@ type PostPagination struct {
 	CurrentPage int
 }
 
+// POST UPDATE //
+type PostUpdate struct {
+	Title         string
+	Description   string
+	HasMultimedia bool
+	Public        bool
+	Multimedia    string
+}
+
 func PostCreateToPost(p PostCreate) Post {
 	post := Post{
 		PostBase:      p.PostBase,

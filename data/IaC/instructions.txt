@@ -1,0 +1,5 @@
+az login
+az account show
+terraform init
+terraform plan
+terraform apply
