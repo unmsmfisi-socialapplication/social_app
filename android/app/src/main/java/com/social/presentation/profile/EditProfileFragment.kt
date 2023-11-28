@@ -164,13 +164,12 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         setupAddButton(socialLinkItemBinding)
 
         val autoCompleteTextView = socialLinkItemBinding.dropDownSocialNetwork
-
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
-            getFilteredSocialNetworks(selectedNetwork),
-        )
-
+        val adapter =
+            ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_dropdown_item_1line,
+                getFilteredSocialNetworks(selectedNetwork),
+            )
         autoCompleteTextView.setAdapter(adapter)
     }
 
