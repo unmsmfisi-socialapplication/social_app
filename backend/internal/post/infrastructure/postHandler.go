@@ -88,3 +88,24 @@ func (ph *PostHandler) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 
 	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", post)
 }
+
+func (ph *PostHandler) HandleDeletePost(w http.ResponseWriter, r *http.Request) {
+	idStr := chi.URLParam(r, "id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil || id < 0 {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid post ID")
+		return
+	}
+
+	err = ph.useCase.DeletePost(id)
+	if err != nil {
+		if err.Error() == "post not found" {
+			utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Post not found")
+			return
+		}
+		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
+		return
+	}
+
+	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", "Post deleted successfully")
+}
