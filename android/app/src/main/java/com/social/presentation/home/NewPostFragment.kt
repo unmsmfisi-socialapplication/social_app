@@ -98,6 +98,8 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
         binding.iconLocation.setOnClickListener {
             toggleLocationVisibility()
         }
+        binding.iconGif.setOnClickListener {
+        }
     }
 
     private fun toggleLocationVisibility() {
