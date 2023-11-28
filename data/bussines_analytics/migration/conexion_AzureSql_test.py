@@ -1,8 +1,8 @@
 import pyodbc
 import unittest
-from unittest.mock import patch, MagicMock
-import io
-import sys
+#from unittest.mock import patch, MagicMock
+#import io
+#import sys
 from df_conection_sqlserver import conexion
 
 class Test_AzureSqlConnection(unittest.TestCase):

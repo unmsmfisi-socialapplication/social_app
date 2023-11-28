@@ -1,5 +1,5 @@
 import pyodbc
-<<<<<<< HEAD
+
 import time
 
 
