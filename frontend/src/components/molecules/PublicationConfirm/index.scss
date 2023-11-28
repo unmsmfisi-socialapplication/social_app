@@ -1,0 +1,48 @@
+.modal--main--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .modal--publication--confirm {
+        background-color: white;
+        border-radius: 11px;
+        border: none;
+        padding: 20px;
+        max-width: 400px;
+        outline: none;
+        .modal--publication--header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            svg {
+                font-size: 14px;
+                cursor: pointer;
+            }
+        }
+        .modal--publication--body {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+            gap: 30px;
+            .modal--publication--user--info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .chat_user_avatar {
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+            .modal--publication-buttons {
+                display: flex;
+                justify-content: space-around;
+                .button {
+                    border-radius: 20px;
+                    text-transform: capitalize;
+                    padding: 5px 25px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
