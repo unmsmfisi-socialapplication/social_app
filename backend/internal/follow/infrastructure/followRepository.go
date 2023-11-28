@@ -2,6 +2,7 @@ package infrastructure
 
 import (
 	"database/sql"
+	"errors"
 	"log"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/follow/domain"
@@ -36,10 +37,10 @@ func (u *FollowerRepository) InsertNewFollower(newFollower *domain.Follower) (*d
 
 func (u *FollowerRepository) IsFollowing(newFollower *domain.Follower) (*bool, error) {
 	query := `
-		SELECT COUNT(1) is_following
-		FROM soc_app_user_profile_follow
-		WHERE follower_profile_id = $1 AND following_profile_id = $2
-	`
+        SELECT COUNT(1) is_following
+        FROM soc_app_user_profile_follow
+        WHERE follower_profile_id = $1 AND following_profile_id = $2
+    `
 	tx, err := u.db.Begin()
 	if err != nil {
 		log.Println("Error while starting the transaction")
@@ -54,7 +55,8 @@ func (u *FollowerRepository) IsFollowing(newFollower *domain.Follower) (*bool, e
 	defer rows.Close()
 
 	var isFollowing bool
-	for rows.Next() {
+
+	if rows.Next() {
 		var count int
 		err = rows.Scan(&count)
 		if err != nil {
@@ -62,6 +64,9 @@ func (u *FollowerRepository) IsFollowing(newFollower *domain.Follower) (*bool, e
 			return nil, err
 		}
 		isFollowing = (count == 1)
+	} else {
+		log.Println("No rows returned from the query")
+		return nil, errors.New("no rows returned")
 	}
 
 	err = rows.Err()
