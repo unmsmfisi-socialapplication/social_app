@@ -26,7 +26,6 @@ def conexion():
         if connection:
             connection.close()
             print("Conexión cerrada")
-=======
 
 
 # Connection Testing
@@ -60,4 +59,3 @@ finally:
     if connection:
         connection.close()
         print("Conexión cerrada")
->>>>>>> 7be6b8235b5b8216bff234995dd3bcdd31742614
