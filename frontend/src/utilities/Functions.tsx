@@ -65,7 +65,16 @@ export function findMatchingWords(text: string, words: string[]): string[] {
         return ['No matching words found']
     }
 }
+//This function must be called on the text input event (every time the user enters a character in a post)
+export function countCharacters(inputText: string, maxLength: number): number {
+    if (inputText.length <= maxLength) {
+        return inputText.length
+    } else {
+        return maxLength
+    }
+}
 
 export const useHistory = (url: string) => {
     window.history.pushState({}, '', url)
+    window.history.go()
 }
