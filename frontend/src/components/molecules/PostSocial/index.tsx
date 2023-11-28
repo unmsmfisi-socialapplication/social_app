@@ -38,7 +38,7 @@ export default function WPostSocial({ published, postImg, user, postText, stadis
                 <div className="post__social--header">
                     <div className="post__social--title">
                         <h3>{user?.name}</h3>
-                        <Link href="#" underline="hover" color="inherit">
+                        <Link href="#" color="inherit">
                             @{user?.userHandler}
                         </Link>
                         <span>· {published}</span>
