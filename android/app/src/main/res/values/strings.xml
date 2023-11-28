@@ -79,4 +79,13 @@
     <string name="photo_specifications_summary">La plataforma acepta estas especificaciones para la foto de portada</string>
     <string name="photo_upload">Cargar foto</string>
     <string name="error_photo_upload">!La foto no cumple con las especificaciones, subir otra foto!</string>
+    <string name="publicar">Publicar</string>
+    <string name="writes">Escribe lo que estas pensando</string>
+    <string name="add_image">Adjuntar imagen</string>
+    <string name="add_location">Añadir ubicación</string>
+    <string name="add_gif">Adjuntar GIF</string>
+    <string name="add_video">Adjuntar video</string>
+    <string name="hint_multimedia_post">Máximo 6 fotografías</string>
+    <string name="privacy">Publico</string>
+    <string name="lima_peru">En Lima - Perú</string>
 </resources>
