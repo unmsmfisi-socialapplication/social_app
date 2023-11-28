@@ -85,10 +85,10 @@ export function generateUniqueUsernames(
     }
 
     return uniqueUsernames
-
+}
 export function filterContentByTag(tag: string, contentArray: { tags: string[]; content: string }[]): string[] {
     return contentArray.filter((item) => item.tags.some((t) => t === tag)).map((item) => item.content)
-
+}
 //This function must be called on the text input event (every time the user enters a character in a post)
 export function countCharacters(inputText: string, maxLength: number): number {
     if (inputText.length <= maxLength) {

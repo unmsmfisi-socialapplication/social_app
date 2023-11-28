@@ -122,6 +122,8 @@ describe('generateUniqueUsernames', () => {
 
         // Check if the result is an empty array
         expect(uniqueUsernames).toEqual([])
+    })
+})
 //Test: Function filterContentByTag
 describe('Filter content by tag', () => {
     const contentArray = [
