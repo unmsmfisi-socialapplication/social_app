@@ -4,6 +4,8 @@ import { distanceLevenshtein } from '../utilities/Functions'
 import { mostSimilarPhrase } from '../utilities/Functions'
 import { findMatchingWords } from '../utilities/Functions'
 import { filterContentByTag } from '../utilities/Functions'
+import { countCharacters } from '../utilities/Functions'
+
 //Test: Validate passwords
 describe('Validate passwords', () => {
     it('It should return true if the passwords match', () => {
@@ -112,5 +114,19 @@ describe('Filter content by tag', () => {
         const tagToFilter = '#ruby'
         const filteredContent = filterContentByTag(tagToFilter, contentArray)
         expect(filteredContent).toEqual([])
+//Test: Function countCharacters
+describe('countCharacters', () => {
+    it('should return the correct character count for valid input', () => {
+        expect(countCharacters('Hello', 10)).toBe(5)
+        expect(countCharacters('This is a test', 15)).toBe(14)
+    })
+
+    it('should return the maxLength if input exceeds maxLength', () => {
+        expect(countCharacters('TooLongInput', 5)).toBe(5)
+        expect(countCharacters('123456789', 5)).toBe(5)
+    })
+
+    it('should handle empty input correctly', () => {
+        expect(countCharacters('', 10)).toBe(0)
     })
 })
