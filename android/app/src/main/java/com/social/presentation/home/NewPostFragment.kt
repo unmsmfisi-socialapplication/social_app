@@ -23,15 +23,16 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
 
     private val galleryLauncher =
         registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
+            ActivityResultContracts.StartActivityForResult(),
         ) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data = result.data
                 if (data?.clipData != null) {
-                    val count = minOf(
-                        data.clipData!!.itemCount,
-                        MAX_IMAGES - selectedImages.size,
-                    )
+                    val count =
+                        minOf(
+                            data.clipData!!.itemCount,
+                            MAX_IMAGES - selectedImages.size,
+                        )
                     for (i in 0 until count) {
                         val imageUri = data.clipData!!.getItemAt(i).uri
                         val bitmap = getBitmapFromUri(imageUri)
@@ -54,14 +55,15 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNewPostBinding.bind(view)
 
-        imageViews = listOf(
-            binding.imageOne,
-            binding.imageTwo,
-            binding.imageThree,
-            binding.imageFour,
-            binding.imageFive,
-            binding.imageSix,
-        )
+        imageViews =
+            listOf(
+                binding.imageOne,
+                binding.imageTwo,
+                binding.imageThree,
+                binding.imageFour,
+                binding.imageFive,
+                binding.imageSix,
+            )
 
         for (i in imageViews.indices) {
             imageViews[i].setOnClickListener {
