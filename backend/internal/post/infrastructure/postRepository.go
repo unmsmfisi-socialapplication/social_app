@@ -58,7 +58,7 @@ func (p *PostsDBRepository) GetAll(params domain.PostPaginationParams) (*domain.
 	query := `SELECT post_id ,user_id, title, description, has_multimedia, 
 				public, multimedia, insertion_date, update_date 
 				FROM sa.soc_app_posts
-				WHERE public = true
+				WHERE public = true  AND is_deleted = FALSE
 				ORDER BY insertion_date DESC 
               	LIMIT $1 OFFSET $2`
 
@@ -90,7 +90,7 @@ func (p *PostsDBRepository) GetById(id int) (*domain.Post, error) {
 	query := `
         SELECT post_id, user_id, title, description, has_multimedia, public, multimedia, insertion_date, update_date 
         FROM sa.soc_app_posts
-        WHERE post_id = $1
+        WHERE post_id = $1 AND is_deleted = FALSE
     `
 
 	dbPost := domain.Post{}
@@ -113,13 +113,13 @@ func (p *PostsDBRepository) GetById(id int) (*domain.Post, error) {
 // DELETE POST //
 
 func (p *PostsDBRepository) DeletePost(id int64) error {
-	query := `DELETE FROM soc_app_posts WHERE post_id = $1;`
+	query := `UPDATE sa.soc_app_posts SET is_deleted = TRUE WHERE post_id = $1;`
 	_, err := p.db.Exec(query, id)
 	return err
 }
 
 func (p *PostsDBRepository) PostExists(id int64) bool {
-	query := `SELECT EXISTS(SELECT 1 FROM sa.soc_app_posts WHERE post_id = $1);`
+	query := `SELECT EXISTS(SELECT 1 FROM sa.soc_app_posts WHERE post_id = $1 AND is_deleted = FALSE)  ;`
 	var exists bool
 	err := p.db.QueryRow(query, id).Scan(&exists)
 	if err != nil {
