@@ -91,27 +91,28 @@
                                 tools:ignore="TouchTargetSizeCheck" />
 
                             <LinearLayout
+                                android:visibility="invisible"
                                 android:id="@+id/linearLayoutLocation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
                                 <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/icon_location_point"
                                     style="@style/ImageIconHead"
-                                    android:paddingBottom="5dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:padding="1dp"
                                     app:srcCompat="@drawable/icon_location_point" />
 
                                 <TextView
                                     android:id="@+id/text_location"
                                     style="@style/TextView16sp"
-                                    android:text="@string/lima_peru"
                                     android:textColor="@color/gray"
-                                    android:textSize="14sp" />
+                                    android:textSize="14sp"
+                                    tools:ignore="TextContrastCheck" />
                             </LinearLayout>
-
                         </LinearLayout>
-
-
                     </LinearLayout>
 
                     <EditText
@@ -200,14 +201,6 @@
                             app:shapeAppearanceOverlay="@style/ImagePostContent"
                             app:srcCompat="@drawable/photo_profile" />
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/hint_max_photo"
-                        style="@style/TextViewError"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hint_multimedia_post"
-                        android:textColor="@color/gray" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </androidx.cardview.widget.CardView>
@@ -224,12 +217,12 @@
         app:layout_constraintTop_toTopOf="@+id/guideline70">
 
         <LinearLayout
+            android:id="@+id/icon_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/icon_image"
                 style="@style/ImageIconHead"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -243,12 +236,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/icon_video"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/icon_video"
                 style="@style/ImageIconHead"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -262,12 +255,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/icon_gif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/icon_gif"
                 style="@style/ImageIconHead"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -281,12 +274,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/icon_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/icon_location"
                 style="@style/ImageIconHead"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
