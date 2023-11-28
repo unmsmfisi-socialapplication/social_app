@@ -10,7 +10,7 @@ import (
 
 type mockSearchRepository struct{}
 
-func (m *mockSearchRepository) GetProfilesByName(keyword string) *domain.QueryResult {
+func (m *mockSearchRepository) GetProfilesByName(keyword string, psize, pnumber int) *domain.QueryResult {
 	result := domain.NewQueryResult([]domainprofile.Profile{})
 	return result
 }
@@ -23,7 +23,7 @@ func (m *mockSearchRepository) GetsuggestionsProfiles(keyword string) *domain.Qu
 func TestSearchProfileByName(t *testing.T) {
     useCase := NewSearchProfileUseCase(&mockSearchRepository{})
 
-    result := useCase.SearchProfileByName("test")
+    result := useCase.SearchProfileByName("test", 10, 1)
 
     expectedResults := []domainprofile.Profile{}
     if !reflect.DeepEqual(result.Results, expectedResults) {

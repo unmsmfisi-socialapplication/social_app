@@ -15,10 +15,11 @@ func NewSearchRepository(database *sql.DB) *SearchRepository {
 	return &SearchRepository{db: database}
 }
 
-func (repository *SearchRepository) GetProfilesByName(keyword string) *domain.QueryResult {
+func (repository *SearchRepository) GetProfilesByName(keyword string, psize, pnumber int) *domain.QueryResult {
     var profiles []profiledomain.Profile
 
-    rows, err := repository.db.Query("SELECT * FROM soc_app_user_profile WHERE name LIKE '%" + keyword + "%'")
+    query := "SELECT profile_id, name, about_me, profile_picture FROM soc_app_user_profile WHERE name LIKE $1 LIMIT $2 OFFSET $3"
+    rows, err := repository.db.Query(query, "%" + keyword + "%", psize, pnumber)
     if err != nil {
         panic(err)
     }
@@ -40,7 +41,8 @@ func (repository *SearchRepository) GetProfilesByName(keyword string) *domain.Qu
 func (repository *SearchRepository) GetsuggestionsProfiles(keyword string) *domain.QueryResult {
     var profiles []profiledomain.Profile
 
-    rows, err := repository.db.Query("SELECT * FROM soc_app_user_profile WHERE name LIKE '%" + keyword + "%' limit 5")
+    query := "SELECT profile_id, name, about_me, profile_picture FROM soc_app_user_profile WHERE name LIKE $1 LIMIT $2 OFFSET $3"
+    rows, err := repository.db.Query(query, "%" + keyword + "%", 5, 1)
     if err != nil {
         panic(err)
     }
