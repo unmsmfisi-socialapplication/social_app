@@ -119,6 +119,6 @@ func Router(wsHandler *wsInf.Handler) http.Handler {
 
 	// Follow Profile
 	followRouter := follow.FollowModuleRouter(dbInstance)
-	freeRoutes.Mount("/follow_profile", followRouter)
+	protectedRoutes.Mount("/follow_profile", followRouter)
 	return freeRoutes
 }
