@@ -3,6 +3,8 @@ import { validatePassword } from '../utilities/Functions'
 import { distanceLevenshtein } from '../utilities/Functions'
 import { mostSimilarPhrase } from '../utilities/Functions'
 import { findMatchingWords } from '../utilities/Functions'
+import { filterContentByTag } from '../utilities/Functions'
+import { countCharacters } from '../utilities/Functions'
 
 //Test: Validate passwords
 describe('Validate passwords', () => {
@@ -88,5 +90,43 @@ describe('findMatchingWords', () => {
         const words = ['apple', 'banana', 'cherry']
         const result = findMatchingWords(text, words)
         expect(result).toEqual(['banana'])
+    })
+})
+
+//Test: Function filterContentByTag
+describe('Filter content by tag', () => {
+    const contentArray = [
+        { tags: ['#javascript', '#tutorial'], content: 'Contenido del #tutorial de #JavaScript' },
+        { tags: ['#typescript', '#tutorial'], content: 'Contenido del #tutorial de #TypeScript' },
+        { tags: ['#javascript', '#guide'], content: '#Guide of #JavaScript' },
+        { tags: ['#typescript', '#guide'], content: '#Guide of #TypeScript' },
+        { tags: ['#python', '#tutorial'], content: 'Contenido del #tutorial de #Python' },
+    ]
+
+    it('should filter content by tag and return an array of matching content', () => {
+        const tagToFilter = '#javascript'
+        const filteredContent = filterContentByTag(tagToFilter, contentArray)
+        const expectedContent = ['Contenido del #tutorial de #JavaScript', '#Guide of #JavaScript']
+        expect(filteredContent).toEqual(expectedContent)
+    })
+
+    it('should return an empty array if no content matches the tag', () => {
+        const tagToFilter = '#ruby'
+        const filteredContent = filterContentByTag(tagToFilter, contentArray)
+        expect(filteredContent).toEqual([])
+//Test: Function countCharacters
+describe('countCharacters', () => {
+    it('should return the correct character count for valid input', () => {
+        expect(countCharacters('Hello', 10)).toBe(5)
+        expect(countCharacters('This is a test', 15)).toBe(14)
+    })
+
+    it('should return the maxLength if input exceeds maxLength', () => {
+        expect(countCharacters('TooLongInput', 5)).toBe(5)
+        expect(countCharacters('123456789', 5)).toBe(5)
+    })
+
+    it('should handle empty input correctly', () => {
+        expect(countCharacters('', 10)).toBe(0)
     })
 })

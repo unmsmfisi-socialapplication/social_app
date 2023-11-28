@@ -22,11 +22,11 @@ export default function IntranetHoc({ children, sideBar, rightBar }: PropsIntran
     return (
         <RootLayout>
             {isClient && (
-                <Grid container spacing={{ xs: 2, md: 3 }}>
+                <Grid container spacing={{ xs: 2, md: 2 }}>
                     <Grid item xs={2.5} sm={2.5} md={2.5}>
                         {sideBar && <SideBar />}
                     </Grid>
-                    <Grid item xs={rightBar ? 7 : 10.5} sm={rightBar ? 7 : 10.5} md={rightBar ? 7 : 10.5}>
+                    <Grid item xs={rightBar ? 7 : 9.5} sm={rightBar ? 7 : 9.5} md={rightBar ? 7 : 9.5}>
                         <Box className="home_section">{children}</Box>
                     </Grid>
                     {rightBar && (

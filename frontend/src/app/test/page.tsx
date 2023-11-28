@@ -12,6 +12,7 @@ import {
     WSearch,
     WTopicFollow,
     WUserCHATCTA,
+    WPublicationConfirm,
     WReportPublication,
 } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
@@ -39,6 +40,7 @@ import RootLayout from '../layout'
 export default function TestPage() {
     const [count, setCount] = useState(0)
     const [password, setPassword] = useState('')
+    const [modalConfirm, setModalConfirm] = useState<boolean>(false)
     const [reportModal, setReportModal] = useState<boolean>(false)
 
     const handleCount = () => {
@@ -164,6 +166,12 @@ export default function TestPage() {
                 <WPostTypes iconComponent={<GifBoxIcon />} typeName="GIF" />
                 <WPostTypes iconComponent={<LocationOnIcon />} typeName="UBICACIÓN" />
             </div>
+            <WButton text="Abrir publicación" onClick={() => setModalConfirm(true)} />
+            <WPublicationConfirm
+                open={modalConfirm}
+                onClose={() => setModalConfirm(false)}
+                onConfirm={() => console.log('Publicación subida')}
+            />
             <WButton text="Reportar este usuario" onClick={() => setReportModal(true)} />
             <WReportPublication
                 open={reportModal}
