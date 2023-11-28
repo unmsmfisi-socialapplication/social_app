@@ -92,7 +92,7 @@ func (ph *PostHandler) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 func (ph *PostHandler) HandleDeletePost(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)
-	if err != nil {
+	if err != nil || id < 0 {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid post ID")
 		return
 	}
