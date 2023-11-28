@@ -65,3 +65,19 @@ export function findMatchingWords(text: string, words: string[]): string[] {
         return ['No matching words found']
     }
 }
+
+export function filterContentByTag(tag: string, contentArray: { tags: string[]; content: string }[]): string[] {
+    return contentArray.filter((item) => item.tags.some((t) => t === tag)).map((item) => item.content)
+
+//This function must be called on the text input event (every time the user enters a character in a post)
+export function countCharacters(inputText: string, maxLength: number): number {
+    if (inputText.length <= maxLength) {
+        return inputText.length
+    } else {
+        return maxLength
+    }
+}
+
+export const useHistory = (url: string) => {
+    window.history.pushState({}, '', url)
+}
