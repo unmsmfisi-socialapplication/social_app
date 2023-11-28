@@ -36,10 +36,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 when (event) {
                     is LoginViewModel.UILoginEvent.GetData -> {
                         savePreference()
-                        val userData = viewModel.state.value!!.dataLogin?.get(0)
+                        val userData = viewModel.state.value!!.dataLogin[0]
+                        Log.i("tkn", userData.token)
                         findNavController()
                             .navigate(R.id.userProfileFragment)
-                        Log.i("dato_usuario", userData.toString())
                     }
 
                     is LoginViewModel.UILoginEvent.ShowMessage -> {
