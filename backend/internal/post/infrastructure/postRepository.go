@@ -109,3 +109,21 @@ func (p *PostsDBRepository) GetById(id int) (*domain.Post, error) {
 
 	return &dbPost, nil
 }
+
+// DELETE POST //
+
+func (p *PostsDBRepository) DeletePost(id int64) error {
+	query := `DELETE FROM soc_app_posts WHERE post_id = $1;`
+	_, err := p.db.Exec(query, id)
+	return err
+}
+
+func (p *PostsDBRepository) PostExists(id int64) bool {
+	query := `SELECT EXISTS(SELECT 1 FROM sa.soc_app_posts WHERE post_id = $1);`
+	var exists bool
+	err := p.db.QueryRow(query, id).Scan(&exists)
+	if err != nil {
+		return false
+	}
+	return exists
+}
