@@ -1,10 +1,14 @@
-import { validatePassword } from '../utilities/Functions'
 //const { distanceLevenshtein, mostSimilarPhrase } = require('./index');
-import { distanceLevenshtein } from '../utilities/Functions'
-import { mostSimilarPhrase } from '../utilities/Functions'
-import { findMatchingWords } from '../utilities/Functions'
-import { filterContentByTag } from '../utilities/Functions'
-import { countCharacters } from '../utilities/Functions'
+import {
+    validatePassword ,
+    distanceLevenshtein,
+    mostSimilarPhrase,
+    findMatchingWords,
+    generateUniqueUsernames,
+    filterContentByTag ,
+    countCharacters ,
+} from '../utilities/Functions'
+
 
 //Test: Validate passwords
 describe('Validate passwords', () => {
@@ -93,6 +97,33 @@ describe('findMatchingWords', () => {
     })
 })
 
+//Test: generateUniqueUsernames
+describe('generateUniqueUsernames', () => {
+    it('Should generate three unique usernames based on the base username and existing usernames', () => {
+        const existingUsernames = ['user1', 'user2', 'user3']
+        const baseUsername = 'newUser'
+        const numAlternatives = 3
+
+        const uniqueUsernames = generateUniqueUsernames(existingUsernames, baseUsername, numAlternatives)
+
+        // Check if the generated usernames are unique and not in the existing usernames
+        expect(uniqueUsernames.length).toEqual(numAlternatives)
+        uniqueUsernames.forEach((username) => {
+            expect(existingUsernames.includes(username)).toBeFalsy()
+        })
+    })
+
+    it('Should handle the case where numAlternatives is zero', () => {
+        const existingUsernames = ['user1', 'user2', 'user3']
+        const baseUsername = 'user'
+        const numAlternatives = 0
+
+        const uniqueUsernames = generateUniqueUsernames(existingUsernames, baseUsername, numAlternatives)
+
+        // Check if the result is an empty array
+        expect(uniqueUsernames).toEqual([])
+    })
+})
 //Test: Function filterContentByTag
 describe('Filter content by tag', () => {
     const contentArray = [
@@ -114,7 +145,8 @@ describe('Filter content by tag', () => {
         const tagToFilter = '#ruby'
         const filteredContent = filterContentByTag(tagToFilter, contentArray)
         expect(filteredContent).toEqual([])
-//Test: Function countCharacters
+    })
+})
 describe('countCharacters', () => {
     it('should return the correct character count for valid input', () => {
         expect(countCharacters('Hello', 10)).toBe(5)
