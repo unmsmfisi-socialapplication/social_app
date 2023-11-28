@@ -50,7 +50,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
         binding.iconLeft.setOnClickListener {
             findNavController().navigate(R.id.action_editProfileFragment_to_userProfileFragment)
-            CleanFormEditProfile()
+            cleanFormEditProfile()
         }
 
         binding.buttonAddLink.setOnClickListener {
@@ -111,7 +111,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         return true
     }
 
-    private fun CleanFormEditProfile() {
+    private fun cleanFormEditProfile() {
         binding.linearLayoutContainer.removeAllViews()
         socialLinkList.clear()
         binding.inputName.text?.clear()
@@ -164,11 +164,13 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         setupAddButton(socialLinkItemBinding)
 
         val autoCompleteTextView = socialLinkItemBinding.dropDownSocialNetwork
+
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_dropdown_item_1line,
-            getFilteredSocialNetworks(selectedNetwork)
+            getFilteredSocialNetworks(selectedNetwork),
         )
+
         autoCompleteTextView.setAdapter(adapter)
     }
 
