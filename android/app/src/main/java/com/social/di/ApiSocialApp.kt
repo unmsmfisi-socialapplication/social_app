@@ -1,6 +1,9 @@
 package com.social.di
 
+import android.app.Application
+import androidx.room.Room
 import com.social.data.repository.SocialAppRepositoryImp
+import com.social.data.source.local.SocialDB
 import com.social.data.source.remote.ApiInterface
 import com.social.domain.SocialAppRepository
 import com.social.domain.usecase.RegisterNewUser
@@ -44,8 +47,11 @@ object ApiSocialApp {
 
     @Provides
     @Singleton
-    fun supplierSocialAppRepository(apiInterface: ApiInterface): SocialAppRepository {
-        return SocialAppRepositoryImp(apiInterface)
+    fun supplierSocialAppRepository(
+        apiInterface: ApiInterface,
+        db: SocialDB,
+    ): SocialAppRepository {
+        return SocialAppRepositoryImp(apiInterface, db.socialDAO)
     }
 
     @Provides
@@ -55,5 +61,11 @@ object ApiSocialApp {
             validateUser = ValidateUser(repository),
             registerNewUser = RegisterNewUser(repository),
         )
+    }
+
+    @Provides
+    @Singleton
+    fun supplierSocialLocalDatabase(app: Application): SocialDB {
+        return Room.databaseBuilder(app, SocialDB::class.java, SocialDB.DATABASE_NAME).fallbackToDestructiveMigration().build()
     }
 }
