@@ -1,6 +1,10 @@
 BEGIN;
 
-CREATE OR REPLACE FUNCTION FN_SOC_APP_GET_PROFILES_BY_NAME(p_keyword VARCHAR)
+CREATE OR REPLACE FUNCTION FN_SOC_APP_GET_PROFILES_BY_NAME(
+    p_keyword VARCHAR,
+    p_page_size INT,
+    p_page_number INT
+)
 RETURNS TABLE (
     profile_id bigint,
     user_id bigint,
@@ -37,7 +41,10 @@ BEGIN
             a.update_date,
             a.profile_picture
         FROM soc_app_user_profile a
-        WHERE UPPER(a.name) LIKE UPPER('%'||p_keyword||'%');
+        WHERE UPPER(a.name) LIKE UPPER('%'||p_keyword||'%')
+        ORDER BY a.insertion_date DESC
+        LIMIT p_page_size
+        OFFSET (p_page_number - 1) * p_page_size;
 
     -- Initialize v_fecha_fin_proceso after running the query
     v_fecha_fin_proceso := now();
@@ -53,5 +60,6 @@ BEGIN
     );
 END;
 $$ LANGUAGE plpgsql;
+
 
 COMMIT;
