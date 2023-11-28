@@ -1,5 +1,5 @@
 {
-    "subscription_id": "Tu_ID_de_Suscripción_de_Azure",
-    "resource_group": "Tu_Grupo_de_Recursos",
-    "workspace_name": "Tu_Nombre_de_Espacio_de_Trabajo"
+    "subscription_id": "4f283a8e-be85-4cdd-938c-3c6b05ed9b49",
+    "resource_group": "rg_myfirstaction",
+    "workspace_name": "ML_SPAM_RL"
 }
