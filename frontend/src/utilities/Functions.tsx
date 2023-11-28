@@ -72,7 +72,9 @@ export function countCharacters(inputText: string, maxLength: number): number {
     } else {
         return maxLength
     }
+}
 
 export const useHistory = (url: string) => {
     window.history.pushState({}, '', url)
+    window.history.go()
 }

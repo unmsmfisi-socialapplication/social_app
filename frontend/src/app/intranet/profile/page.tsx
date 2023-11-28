@@ -37,7 +37,7 @@ export default function ProfilePage() {
                                 alt="MCMXCVIII's avatar"
                                 size={150}
                             />
-                            <h3 className ="name_profile" >MICHITO 21</h3>
+                            <h3 className="name_profile">MICHITO 21</h3>
                             <div className="userName">@tumimicho</div>
                         </Box>
                     </Grid>
