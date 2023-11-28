@@ -9,24 +9,24 @@ import com.social.domain.model.UserM
 data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val sApePat: String,
-    val sNombre: String,
-    val sCorreo: String,
-    val sUsuario: String,
-    val sFoto: String,
+    val sLastName: String,
+    val sName: String,
+    val sEmail: String,
+    val sUserName: String,
+    val sPhoto: String,
     val sHeader: String,
-    val sBiografia: String,
+    val sBiography: String,
 )
 
 fun UserEntity.aUser(): UserM {
     return UserM(
         id,
-        sApePat,
-        sNombre,
-        sCorreo,
-        sUsuario,
-        sFoto,
+        sLastName,
+        sName,
+        sEmail,
+        sUserName,
+        sPhoto,
         sHeader,
-        sBiografia,
+        sBiography,
     )
 }
