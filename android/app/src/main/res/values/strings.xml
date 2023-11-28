@@ -88,4 +88,6 @@
     <string name="hint_multimedia_post">Máximo 6 fotografías</string>
     <string name="privacy">Publico</string>
     <string name="lima_peru">Lima - Perú</string>
+    <string name="search">Busqueda</string>
+    <string name="work">Work</string>
 </resources>

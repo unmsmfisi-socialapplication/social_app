@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:paddingBottom="20dp"
-        android:weightSum="5"
+        android:weightSum="6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,6 +27,12 @@
             style="@style/ImageIconNavBar"
             android:contentDescription="@string/icon"
             app:srcCompat="@drawable/navbar_icon_adduser" />
+
+        <ImageView
+            android:id="@+id/icon_search"
+            style="@style/ImageIconNavBar"
+            android:contentDescription="@string/icon"
+            app:srcCompat="@drawable/navbar_icon_search" />
 
         <ImageView
             android:id="@+id/icon_business"

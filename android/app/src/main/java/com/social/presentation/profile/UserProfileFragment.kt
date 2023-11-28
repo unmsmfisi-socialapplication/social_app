@@ -1,5 +1,6 @@
 package com.social.presentation.profile
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -72,7 +73,12 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun action() {
-        binding.navbar.iconProfile.setImageResource(R.drawable.navbar_icon_user_bold)
+        val iconDrawable = binding.navbar.iconProfile.drawable
+        iconDrawable.setColorFilter(
+            ContextCompat.getColor(requireContext(), R.color.color01),
+            PorterDuff.Mode.SRC_IN,
+        )
+        binding.navbar.iconProfile.setImageDrawable(iconDrawable)
 
         binding.buttonEditProfile.setOnClickListener {
             findNavController().navigate(R.id.action_userProfileFragment_to_editProfileFragment)
