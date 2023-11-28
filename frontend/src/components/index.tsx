@@ -14,6 +14,7 @@ export { default as WInputCode } from './atoms/InputCode/inputCode'
 export { default as WCardFollow } from './atoms/CardFollow/CardFollow'
 export { default as WSearch } from './atoms/Search/Search'
 export { default as WTopicFollow } from './atoms/TopicFollow/TopicFollow'
+export { default as WSelectedText } from './atoms/SelectText/selectText'
 
 // export molecule components
 export { default as WLogo } from './atoms/Logo/titleSearch'
