@@ -12,6 +12,8 @@ import {
     WSearch,
     WTopicFollow,
     WUserCHATCTA,
+    WPublicationConfirm,
+    WReportPublication,
 } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
@@ -46,6 +48,8 @@ export default function TestPage() {
         { value: "Instagram" },
         { value: "Tik Tok" }
     ];
+    const [modalConfirm, setModalConfirm] = useState<boolean>(false)
+    const [reportModal, setReportModal] = useState<boolean>(false)
 
     const handleCount = () => {
         setCount(count + 1)
@@ -146,7 +150,7 @@ export default function TestPage() {
             </div>
             <AvatarInput />
             <div>
-                <WDetailsImage accountName={'Influencia Animal'} name={'Miguel D.'} icon={TestIcon} />
+                <WDetailsImage />
             </div>
             <CommentThink
                 avatarDefaultURL="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -188,6 +192,18 @@ export default function TestPage() {
                     iconComponent={ExpandCircleDownIcon}
                 ></WSelectedText>
             </div>
+            <WButton text="Abrir publicación" onClick={() => setModalConfirm(true)} />
+            <WPublicationConfirm
+                open={modalConfirm}
+                onClose={() => setModalConfirm(false)}
+                onConfirm={() => console.log('Publicación subida')}
+            />
+            <WButton text="Reportar este usuario" onClick={() => setReportModal(true)} />
+            <WReportPublication
+                open={reportModal}
+                onClose={() => setReportModal(false)}
+                onConfirm={(reason) => console.log(`Se reporto al usuario por ${reason}`)}
+            />
         </RootLayout>
     )
 }
