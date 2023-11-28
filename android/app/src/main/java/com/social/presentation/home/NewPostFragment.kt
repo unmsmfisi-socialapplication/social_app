@@ -134,7 +134,7 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
     private fun getLastLocation() {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION,
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -150,11 +150,12 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
                             requireContext(),
                             Locale.getDefault(),
                         )
-                    val addresses = geocoder.getFromLocation(
-                        it.latitude,
-                        it.longitude,
-                        1,
-                    )
+                    val addresses =
+                        geocoder.getFromLocation(
+                            it.latitude,
+                            it.longitude,
+                            1,
+                        )
                     if (addresses != null) {
                         if (addresses.isNotEmpty()) {
                             val city = addresses[0]?.locality
