@@ -1,4 +1,4 @@
-package test
+package infrastructure
 
 import (
 	"bytes"
@@ -12,7 +12,6 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/post/infrastructure"
 )
 
 type mockPostUseCase struct {
@@ -81,7 +80,7 @@ func TestHandleCreatePost(t *testing.T) {
 			mockUseCase := &mockPostUseCase{
 				CreatePostFn: tt.mockCreate,
 			}
-			handler := infrastructure.NewPostHandler(mockUseCase)
+			handler := NewPostHandler(mockUseCase)
 			recorder := httptest.NewRecorder()
 
 			handler.HandleCreatePost(recorder, req)
@@ -132,7 +131,7 @@ func TestHandleGetAllPost(t *testing.T) {
 			mockUseCase := &mockPostUseCase{
 				GetPostsFn: tt.mockGetPosts,
 			}
-			handler := infrastructure.NewPostHandler(mockUseCase)
+			handler := NewPostHandler(mockUseCase)
 			recorder := httptest.NewRecorder()
 
 			handler.HandleGetAllPost(recorder, req)
@@ -202,7 +201,7 @@ func TestHandleDeletePost(t *testing.T) {
 			mockUseCase := &mockPostUseCase{
 				DeletePostFn: tt.mockDelete,
 			}
-			handler := infrastructure.NewPostHandler(mockUseCase)
+			handler := NewPostHandler(mockUseCase)
 			recorder := httptest.NewRecorder()
 
 			handler.HandleDeletePost(recorder, req)
