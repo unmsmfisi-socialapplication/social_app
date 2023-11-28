@@ -22,7 +22,11 @@ import (
 	registerinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 
+	auth "github.com/unmsmfisi-socialapplication/social_app/internal/auth"
 	chat "github.com/unmsmfisi-socialapplication/social_app/internal/chat"
+
+	auth_application "github.com/unmsmfisi-socialapplication/social_app/internal/auth/application"
+	auth_infrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/auth/infrastructure"
 	follow "github.com/unmsmfisi-socialapplication/social_app/internal/follow"
 )
 
@@ -34,23 +38,43 @@ func Router() http.Handler {
 
 	dbInstance := database.GetDB()
 
-	r := chi.NewRouter()
+	authRepo := auth_infrastructure.NewAuthSessionDBRepository(dbInstance)
+	authUseCase := auth_application.NewAuthUseCase(authRepo)
+	tokenMiddleware := auth.AuthModuleRouter(authUseCase)
 
-	r.Use(middleware.RequestID)
-	r.Use(middleware.Logger)
-	r.Use(configCorsMiddleware())
+	freeRoutes := chi.NewRouter()
 
+	freeRoutes.Use(middleware.RequestID)
+	freeRoutes.Use(middleware.Logger)
+	freeRoutes.Use(configCorsMiddleware())
+	//subrouter for protected routes
+	protectedRoutes := chi.NewRouter()
+
+	freeRoutes.Mount("/", protectedRoutes)
+
+	// Apply the TokenMiddleware to all routes that are mounted on protectedRoutes subrouter\
+	protectedRoutes.Use(tokenMiddleware.Middlewares()...)
+
+	/* IMPORTANT:
+	Use freeRoutes to your endpoint if you consider your component is not for a registered user
+
+	Otherwhise, use protectedRoutes when you mount your endpoint.
+
+	*/
+	protectedRoutes.Get("/", func(w http.ResponseWriter, freeRoutes *http.Request) {
+		w.Write([]byte("{\"hello\": \"world\"}"))
+	})
+
+	//AUTH
+	authRouter := auth.AuthModuleRouter(authUseCase)
+	protectedRoutes.Mount("/auth", authRouter)
 	commentRouter := comment.CommentModuleRouter(dbInstance)
 
 	postRoutes := post.PostModuleRouter(dbInstance)
 
 	profileRouter := profile.ProfileModuleRouter(dbInstance)
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("{\"hello\": \"world\"}"))
-	})
-
-	r.Get("/slow", func(w http.ResponseWriter, r *http.Request) {
+	freeRoutes.Get("/slow", func(w http.ResponseWriter, freeRoutes *http.Request) {
 		// Simulates some hard work.
 		//
 		// We want this handler to complete successfully during a shutdown signal,
@@ -67,7 +91,7 @@ func Router() http.Handler {
 	loginRepo := infrastructure.NewUserDBRepository(dbInstance)
 	loginUseCase := application.NewLoginUseCase(loginRepo)
 	loginHandler := infrastructure.NewLoginHandler(loginUseCase)
-	r.Post("/login", loginHandler.HandleLogin)
+	freeRoutes.Post("/login", loginHandler.HandleLogin)
 
 	//Chat
 	hub := domain.NewHub()
@@ -76,31 +100,31 @@ func Router() http.Handler {
 	go hub.RunChatManager()
 
 	chatRouter := chat.ChatModuleRouter(chatHandler)
-	r.Mount("/chat", chatRouter)
+	protectedRoutes.Mount("/chat", chatRouter)
 
 	// Register
 	registerRepo := registerinfrastructure.NewUserRepository(dbInstance)
 	registerUseCase := registerapplication.NewRegistrationUseCase(registerRepo)
 	registerHandler := registerinfrastructure.NewRegisterUserHandler(registerUseCase)
-	r.Post("/register", registerHandler.RegisterUser)
+	freeRoutes.Post("/register", registerHandler.RegisterUser)
 
-	r.Mount("/comments", commentRouter)
+	protectedRoutes.Mount("/comments", commentRouter)
 
-	r.Mount("/post", postRoutes)
+	protectedRoutes.Mount("/post", postRoutes)
 
-	r.Mount("/profile", profileRouter)
+	protectedRoutes.Mount("/profile", profileRouter)
 
 	//Email-sender
 
 	emailRouter := email.EmailModuleRouter()
-	r.Mount("/email", emailRouter)
+	protectedRoutes.Mount("/email", emailRouter)
 
 	//interestTopics
 	interestTopicsRouter := interest_topics.InterestTopicsModuleRouter(dbInstance)
-	r.Mount("/interestTopics", interestTopicsRouter)
+	protectedRoutes.Mount("/interestTopics", interestTopicsRouter)
 
 	// Follow Profile
 	followRouter := follow.FollowModuleRouter(dbInstance)
-	r.Mount("/follow_profile", followRouter)
-	return r
+	protectedRoutes.Mount("/follow_profile", followRouter)
+	return freeRoutes
 }
