@@ -145,6 +145,8 @@ describe('Filter content by tag', () => {
         const tagToFilter = '#ruby'
         const filteredContent = filterContentByTag(tagToFilter, contentArray)
         expect(filteredContent).toEqual([])
+    })
+})
 describe('countCharacters', () => {
     it('should return the correct character count for valid input', () => {
         expect(countCharacters('Hello', 10)).toBe(5)
