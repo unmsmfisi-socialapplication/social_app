@@ -14,7 +14,7 @@ interface SocialDAO {
     @Query("SELECT * FROM user")
     suspend fun getUser(): UserEntity
 
-    @Query("UPDATE user SET sUsuario = :username, sFoto = :photo WHERE id = :id")
+    @Query("UPDATE user SET sUserName = :username, sPhoto = :photo WHERE id = :id")
     suspend fun updateUser(
         id: Int,
         username: String,
