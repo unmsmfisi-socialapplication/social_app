@@ -8,8 +8,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/domain"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/chat/domain"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/chat/infraestructure"
 )
 
 func TestCreateRoom(t *testing.T) {
