@@ -66,9 +66,29 @@ export function findMatchingWords(text: string, words: string[]): string[] {
     }
 }
 
+export function generateUniqueUsernames(
+    existingUsernames: string[],
+    baseUsername: string,
+    numAlternatives: number,
+): string[] {
+    const uniqueUsernames: string[] = []
+    let suffix = 1
+
+    while (uniqueUsernames.length < numAlternatives) {
+        const newUsername = `${baseUsername}${suffix}`
+
+        if (!existingUsernames.includes(newUsername) && !uniqueUsernames.includes(newUsername)) {
+            uniqueUsernames.push(newUsername)
+        }
+
+        suffix++
+    }
+
+    return uniqueUsernames
+}
 export function filterContentByTag(tag: string, contentArray: { tags: string[]; content: string }[]): string[] {
     return contentArray.filter((item) => item.tags.some((t) => t === tag)).map((item) => item.content)
-
+}
 //This function must be called on the text input event (every time the user enters a character in a post)
 export function countCharacters(inputText: string, maxLength: number): number {
     if (inputText.length <= maxLength) {
