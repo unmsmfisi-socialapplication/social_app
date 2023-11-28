@@ -8,6 +8,10 @@ import com.social.data.source.remote.ApiInterface
 import com.social.domain.SocialAppRepository
 import com.social.domain.usecase.RegisterNewUser
 import com.social.domain.usecase.ValidateUser
+import com.social.domain.usecase.sqlite.SQLiteDeleteUser
+import com.social.domain.usecase.sqlite.SQLiteGetUser
+import com.social.domain.usecase.sqlite.SQLiteInsertUser
+import com.social.domain.usecase.sqlite.SQLiteUpdateUser
 import com.social.presentation.authentication.AuthenticationUseCase
 import dagger.Module
 import dagger.Provides
@@ -60,6 +64,10 @@ object ApiSocialApp {
         return AuthenticationUseCase(
             validateUser = ValidateUser(repository),
             registerNewUser = RegisterNewUser(repository),
+            sqliteInsertUser = SQLiteInsertUser(repository),
+            sqliteGetUser = SQLiteGetUser(repository),
+            sqliteDeleteUser = SQLiteDeleteUser(repository),
+            sqliteUpdateUser = SQLiteUpdateUser(repository),
         )
     }
 
