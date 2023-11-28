@@ -10,21 +10,12 @@ import (
 	"time"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/router"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/domain"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/infraestructure"
-	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 func main() {
-	//Handlers
-	hub := domain.NewHub()
-	wsHandler := infraestructure.NewHandler(hub)
-	utils.LoadEnvFromFile(".env")
-
-	go hub.RunChatManager()
 
 	// The HTTP Server
-	server := &http.Server{Addr: "0.0.0.0:3333", Handler: router.Router(wsHandler)}
+	server := &http.Server{Addr: "0.0.0.0:3333", Handler: router.Router()}
 
 	// Server run context
 	serverCtx, serverStopCtx := context.WithCancel(context.Background())

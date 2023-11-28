@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/gorilla/websocket"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/domain"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/chat/domain"
 )
 
 type Handler struct {

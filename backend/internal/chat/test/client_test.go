@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/gorilla/websocket"
-	"github.com/unmsmfisi-socialapplication/social_app/internal/ws/domain"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/chat/domain"
 )
 
 func TestClientReadWrite(t *testing.T) {
