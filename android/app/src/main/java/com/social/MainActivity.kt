@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                startActivity(Intent(this@MainActivity, EmptyActivity::class.java))
+                startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
                 finish()
             }
         }.start()

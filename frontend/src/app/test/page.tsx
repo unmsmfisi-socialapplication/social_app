@@ -36,10 +36,18 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions'
 import GifBoxIcon from '@mui/icons-material/GifBox'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
+import WSelectedText from '@/components/atoms/SelectText/selectText'
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
     const [password, setPassword] = useState('')
+    const socialNetworkOptions = [
+        { value: "Twitter" },
+        { value: "Facebook" },
+        { value: "Instagram" },
+        { value: "Tik Tok" }
+    ];
     const [modalConfirm, setModalConfirm] = useState<boolean>(false)
     const [reportModal, setReportModal] = useState<boolean>(false)
 
@@ -165,6 +173,24 @@ export default function TestPage() {
                 <WPostTypes iconComponent={<SubscriptionsIcon />} typeName="VIDEO" />
                 <WPostTypes iconComponent={<GifBoxIcon />} typeName="GIF" />
                 <WPostTypes iconComponent={<LocationOnIcon />} typeName="UBICACIÓN" />
+            </div>
+            <div
+                style={{
+                    width: '500px',
+                    height: '150px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: '15px auto',
+                    gap: '15px',
+                }}
+            >
+                <WSelectedText
+                    label="Red social"
+                    options={socialNetworkOptions}
+                    iconComponent={ExpandCircleDownIcon}
+                ></WSelectedText>
             </div>
             <WButton text="Abrir publicación" onClick={() => setModalConfirm(true)} />
             <WPublicationConfirm
