@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboarding"
+    app:startDestination="@id/onboardingFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.social.presentation.authentication.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_confirmationEmailFragment"
+            app:destination="@id/confirmationEmailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.social.presentation.authentication.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_codeConfirmationFragment"
+            app:destination="@id/codeConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.social.presentation.onboarding.OnboardingFragment"
+        android:label="fragment_onboarding"
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onboardingFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_onboardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationEmailFragment"
+        android:name="com.social.presentation.authentication.confirm.ConfirmationEmailFragment"
+        android:label="fragment_confirmation_email"
+        tools:layout="@layout/fragment_confirmation_email" >
+        <action
+            android:id="@+id/action_confirmationEmailFragment_to_codeConfirmationFragment"
+            app:destination="@id/codeConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/codeConfirmationFragment"
+        android:name="com.social.presentation.authentication.confirm.CodeConfirmationFragment"
+        android:label="fragment_code_confirmation"
+        tools:layout="@layout/fragment_code_confirmation" />
+</navigation>
