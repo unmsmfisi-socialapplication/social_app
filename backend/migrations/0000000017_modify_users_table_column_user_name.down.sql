@@ -1,0 +1,6 @@
+BEGIN;
+
+ALTER TABLE soc_app_users
+ALTER COLUMN user_name DROP NOT NULL;
+
+COMMIT;
