@@ -59,10 +59,6 @@ const WComment: React.FC<WCommentProps> = ({
                     <span>{countComment}</span>
                 </div>
                 <div className="comment-icon">
-                    <WCircleIcon typeColor="comment" iconSize={18} icon={CachedIcon} />
-                    <span>{countShareds}</span>
-                </div>
-                <div className="comment-icon">
                     <WCircleIcon typeColor="comment" iconSize={18} icon={BarChartIcon} />
                     <span>{countStatistics}</span>
                 </div>
