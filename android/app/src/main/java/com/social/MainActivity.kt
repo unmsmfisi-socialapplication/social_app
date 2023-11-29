@@ -26,14 +26,14 @@ class MainActivity : AppCompatActivity() {
                         Intent(
                             this@MainActivity,
                             EmptyActivity::class.java,
-                        )
+                        ),
                     )
                 } else {
                     startActivity(
                         Intent(
                             this@MainActivity,
                             OnboardingActivity::class.java,
-                        )
+                        ),
                     )
                 }
                 finish()

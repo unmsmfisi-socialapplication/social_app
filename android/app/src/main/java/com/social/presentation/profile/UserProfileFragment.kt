@@ -161,7 +161,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             Intent(
                 requireContext(),
                 OnboardingActivity::class.java,
-            )
+            ),
         )
     }
 }
