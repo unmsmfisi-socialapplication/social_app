@@ -37,17 +37,17 @@ import GifBoxIcon from '@mui/icons-material/GifBox'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
 import WSelectedText from '@/components/atoms/SelectText/selectText'
-import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
     const [password, setPassword] = useState('')
     const socialNetworkOptions = [
-        { value: "Twitter" },
-        { value: "Facebook" },
-        { value: "Instagram" },
-        { value: "Tik Tok" }
-    ];
+        { value: 'Twitter' },
+        { value: 'Facebook' },
+        { value: 'Instagram' },
+        { value: 'Tik Tok' },
+    ]
     const [modalConfirm, setModalConfirm] = useState<boolean>(false)
     const [reportModal, setReportModal] = useState<boolean>(false)
 
