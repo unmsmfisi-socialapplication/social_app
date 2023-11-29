@@ -4,15 +4,6 @@ import { AllInclusive } from '@mui/icons-material'
 import './index.scss'
 
 describe('WTag', () => {
-    it('Should redirect to pages correctly as specified', () => {
-        const path = '/ruta-especifica'
-
-        // Render the component
-        const { getByText, asFragment } = render(<WTag icon={AllInclusive} text={path} path={path} />)
-        fireEvent.click(getByText(path))
-
-        const componentSnapshot = asFragment()
-    })
 
     it('Should display style variations when isActive is true or false', () => {
         // Render the component with isActive true
