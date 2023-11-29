@@ -91,4 +91,6 @@
     <string name="information_configuration">Configuración de información personal</string>
     <string name="social_network">Red Social</string>
     <string name="social_link">Link</string>
+    <string name="search">Busqueda</string>
+    <string name="work">Work</string>
 </resources>

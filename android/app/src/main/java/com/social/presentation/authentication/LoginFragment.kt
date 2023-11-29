@@ -1,6 +1,7 @@
 package com.social.presentation.authentication
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.social.EmptyActivity
 import com.social.R
 import com.social.databinding.FragmentLoginBinding
 import com.social.domain.model.UserM
@@ -52,8 +54,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                             ),
                         )
                         Log.i("tkn", userData.token)
-                        findNavController()
-                            .navigate(R.id.userProfileFragment)
+                        startActivity(
+                            Intent(
+                                requireContext(),
+                                EmptyActivity::class.java,
+                            )
+                        )
+
                     }
 
                     is LoginViewModel.UILoginEvent.ShowMessage -> {
