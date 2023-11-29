@@ -79,7 +79,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     ContextCompat.getColor(
                         requireContext(),
                         R.color.color01,
-                    )
+                    ),
                 )
             } else {
                 shareCount--
@@ -105,7 +105,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     ContextCompat.getColor(
                         requireContext(),
                         R.color.color01,
-                    )
+                    ),
                 )
             } else {
                 favoriteCount--
@@ -130,8 +130,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 post.iconComment.setColorFilter(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.color01
-                    )
+                        R.color.color01,
+                    ),
                 )
             } else {
                 commentsCount--
