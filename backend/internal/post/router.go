@@ -23,6 +23,8 @@ func PostModuleRouter(dbInstance *sql.DB) *chi.Mux {
 	r.Delete("/delete/{id}", postHandler.HandleDeletePost)
 	// UPDATE POST //
 	r.Put("/update/{id}", postHandler.HandleUpdatePost)
+	// REPORT POST //
+	r.Post("/report", postHandler.HandleReportPost)
 
 	return r
 }
