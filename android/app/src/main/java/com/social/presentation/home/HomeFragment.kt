@@ -35,7 +35,10 @@ class HomeFragment : Fragment() {
         return view
     }
 
-    private fun setupLikes(iconLike: ImageView, txtCountLikes: TextView) {
+    private fun setupLikes(
+        iconLike: ImageView,
+        txtCountLikes: TextView,
+    ) {
         var isLiked = false
         var likeCount = 0
 
@@ -56,64 +59,73 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupShares(iconShare: ImageView, txtCountShare: TextView) {
+    private fun setupShares(
+        iconShare: ImageView,
+        txtCountShare: TextView,
+    ) {
         var isShare = false
-        var ShareCount = 0
+        var shareCount = 0
 
         iconShare.setOnClickListener {
             if (!isShare) {
-                ShareCount++
+                shareCount++
                 iconShare.setImageResource(R.drawable.fowardbutton)
                 iconShare.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
             } else {
-                ShareCount--
+                shareCount--
                 iconShare.setImageResource(R.drawable.fowardbutton)
                 iconShare.clearColorFilter()
             }
 
-            txtCountShare.text = ShareCount.toString()
+            txtCountShare.text = shareCount.toString()
 
             isShare = !isShare
         }
     }
 
-    private fun setupFavorites(iconFavorite: ImageView, txtCountFavorite: TextView) {
+    private fun setupFavorites(
+        iconFavorite: ImageView,
+        txtCountFavorite: TextView,
+    ) {
         var isFavorite = false
-        var FavoriteCount = 0
+        var favoriteCount = 0
 
         iconFavorite.setOnClickListener {
             if (!isFavorite) {
-                FavoriteCount++
+                favoriteCount++
                 iconFavorite.setImageResource(R.drawable.favoritebutton)
                 iconFavorite.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
             } else {
-                FavoriteCount--
+                favoriteCount--
                 iconFavorite.setImageResource(R.drawable.favoritebutton)
                 iconFavorite.clearColorFilter()
             }
 
-            txtCountFavorite.text = FavoriteCount.toString()
+            txtCountFavorite.text = favoriteCount.toString()
 
             isFavorite = !isFavorite
         }
     }
 
-    private fun setupComments(iconComments: ImageView, txtCountComments: TextView) {
+    private fun setupComments(
+        iconComments: ImageView,
+        txtCountComments: TextView,
+    ) {
         var isComments = false
-        var CommentsCount = 0
+        var commentsCount = 0
 
         iconComments.setOnClickListener {
             if (!isComments) {
-                CommentsCount++
+                commentsCount++
                 iconComments.setImageResource(R.drawable.commentbutton)
                 iconComments.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
             } else {
-                CommentsCount--
+                commentsCount--
                 iconComments.setImageResource(R.drawable.commentbutton)
                 iconComments.clearColorFilter()
             }
 
-            txtCountComments.text = CommentsCount.toString()
+            txtCountComments.text = commentsCount.toString()
 
             isComments = !isComments
         }
