@@ -58,9 +58,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                             Intent(
                                 requireContext(),
                                 EmptyActivity::class.java,
-                            )
+                            ),
                         )
-
                     }
 
                     is LoginViewModel.UILoginEvent.ShowMessage -> {
