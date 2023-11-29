@@ -6,9 +6,9 @@ import (
 	"errors"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"testing"
 	"time"
-	"strconv"
 
 	"github.com/go-chi/chi"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment/domain"
@@ -82,6 +82,7 @@ func newTestRouter(mcu *MockCommentUseCase) *chi.Mux {
 	r.Route("/comments", func(r chi.Router) {
 		r.Get("/", commentHandler.HandleGetAllComments)
 		r.Get("/{commentID}", commentHandler.HandleGetCommentByID)
+		r.Get("/post/{postID}", commentHandler.HandleGetCommentsByPostId)
 		r.Post("/", commentHandler.HandleCreateComment)
 		r.Put("/{commentID}", commentHandler.HandleUpdateComment)
 		r.Delete("/{commentID}", commentHandler.HandleDeleteComment)
