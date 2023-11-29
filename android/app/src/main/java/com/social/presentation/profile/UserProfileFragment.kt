@@ -15,6 +15,7 @@ import com.social.databinding.ItemPostBinding
 import com.social.domain.model.Post
 import com.social.presentation.publications.ListPostViewModel
 import com.social.utils.BaseAdapter
+import com.social.utils.FragmentUtils.replaceFragment
 import com.squareup.picasso.Picasso
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
@@ -72,19 +73,18 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private fun action() {
         binding.buttonEditProfile.setOnClickListener {
-            replaceFragment(EditProfileFragment())
+            replaceFragment(
+                requireActivity().supportFragmentManager,
+                EditProfileFragment(),
+            )
         }
 
         binding.buttonSettingProfile.setOnClickListener {
-            replaceFragment(SettingProfileFragment())
+            replaceFragment(
+                requireActivity().supportFragmentManager,
+                SettingProfileFragment(),
+            )
         }
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.navHostFragment, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
     }
 
     private fun setupClickListeners() {

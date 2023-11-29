@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.social.R
 import com.social.databinding.FragmentChatScreenBinding
 import com.social.domain.model.ChatUserData
+import com.social.utils.FragmentUtils.replaceFragment
 import com.social.utils.Toast
 import com.vanniktech.emoji.EmojiManager
 import com.vanniktech.emoji.EmojiPopup
@@ -57,6 +58,10 @@ class ChatScreenFragment : Fragment(R.layout.fragment_chat_screen) {
         }
 
         binding.btnBack.setOnClickListener {
+            replaceFragment(
+                requireActivity().supportFragmentManager,
+                ListChatsFragment(),
+            )
         }
     }
 

@@ -19,6 +19,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.imageview.ShapeableImageView
 import com.social.R
 import com.social.databinding.FragmentNewPostBinding
+import com.social.utils.FragmentUtils
 import java.util.Locale
 
 class NewPostFragment : Fragment(R.layout.fragment_new_post) {
@@ -100,6 +101,12 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
         }
         binding.iconGif.setOnClickListener {
             openGalleryForGifs()
+        }
+        binding.iconPadlock.setOnClickListener {
+            FragmentUtils.replaceFragment(
+                requireActivity().supportFragmentManager,
+                HomeFragment(),
+            )
         }
     }
 

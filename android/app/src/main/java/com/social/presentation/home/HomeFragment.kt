@@ -1,131 +1,145 @@
-
 package com.social.presentation.home
+
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.social.R
+import com.social.databinding.FragmentHomeBinding
+import com.social.databinding.ItemCardPostBinding
+import com.social.presentation.interaction.chats.ListChatsFragment
+import com.social.utils.FragmentUtils
 
-class HomeFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+class HomeFragment : Fragment(R.layout.fragment_home) {
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var post: ItemCardPostBinding
+
+    override fun onViewCreated(
+        view: View,
         savedInstanceState: Bundle?,
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHomeBinding.bind(view)
+        post = ItemCardPostBinding.bind(view)
 
-        val iconLike = view.findViewById<ImageView>(R.id.icon_like)
-        val txtCountLikes = view.findViewById<TextView>(R.id.txt_countLikes)
-        val iconComments = view.findViewById<ImageView>(R.id.icon_comment)
-        val txtCountComments = view.findViewById<TextView>(R.id.txt_countComments)
-        val iconShare = view.findViewById<ImageView>(R.id.icon_share)
-        val txtCountShare = view.findViewById<TextView>(R.id.txt_countShare)
-        val iconFavorite = view.findViewById<ImageView>(R.id.icon_favorite)
-        val txtCountFavorite = view.findViewById<TextView>(R.id.txt_countFavorite)
-
-        setupLikes(iconLike, txtCountLikes)
-        setupShares(iconShare, txtCountShare)
-        setupFavorites(iconFavorite, txtCountFavorite)
-        setupComments(iconComments, txtCountComments)
-
-        return view
+        action()
+        setupLikes()
+        setupComments()
+        setupFavorites()
+        setupLikes()
+        setupShares()
     }
 
-    private fun setupLikes(
-        iconLike: ImageView,
-        txtCountLikes: TextView,
-    ) {
+    private fun action() {
+        binding.txtPub.setOnClickListener {
+            FragmentUtils.replaceFragment(
+                requireActivity().supportFragmentManager,
+                NewPostFragment(),
+            )
+        }
+
+        binding.messageIcon.setOnClickListener {
+            FragmentUtils.replaceFragment(
+                requireActivity().supportFragmentManager,
+                ListChatsFragment(),
+            )
+        }
+    }
+
+    private fun setupLikes() {
         var isLiked = false
         var likeCount = 0
 
-        iconLike.setOnClickListener {
+        post.iconLike.setOnClickListener {
             if (!isLiked) {
                 likeCount++
-                iconLike.setImageResource(R.drawable.likebutton)
-                iconLike.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
+                post.iconLike.setImageResource(R.drawable.likebutton)
+                post.iconLike
             } else {
                 likeCount--
-                iconLike.setImageResource(R.drawable.likebutton)
-                iconLike.clearColorFilter()
+                post.iconLike.setImageResource(R.drawable.likebutton)
+                post.iconLike.clearColorFilter()
             }
 
-            txtCountLikes.text = likeCount.toString()
+            post.txtCountLikes.text = likeCount.toString()
 
             isLiked = !isLiked
         }
     }
 
-    private fun setupShares(
-        iconShare: ImageView,
-        txtCountShare: TextView,
-    ) {
+    private fun setupShares() {
         var isShare = false
         var shareCount = 0
 
-        iconShare.setOnClickListener {
+        post.iconShare.setOnClickListener {
             if (!isShare) {
                 shareCount++
-                iconShare.setImageResource(R.drawable.fowardbutton)
-                iconShare.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
+                post.iconShare.setImageResource(R.drawable.fowardbutton)
+                post.iconShare.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.color01,
+                    )
+                )
             } else {
                 shareCount--
-                iconShare.setImageResource(R.drawable.fowardbutton)
-                iconShare.clearColorFilter()
+                post.iconShare.setImageResource(R.drawable.fowardbutton)
+                post.iconShare.clearColorFilter()
             }
 
-            txtCountShare.text = shareCount.toString()
+            post.txtCountShare.text = shareCount.toString()
 
             isShare = !isShare
         }
     }
 
-    private fun setupFavorites(
-        iconFavorite: ImageView,
-        txtCountFavorite: TextView,
-    ) {
+    private fun setupFavorites() {
         var isFavorite = false
         var favoriteCount = 0
 
-        iconFavorite.setOnClickListener {
+        post.iconFavorite.setOnClickListener {
             if (!isFavorite) {
                 favoriteCount++
-                iconFavorite.setImageResource(R.drawable.favoritebutton)
-                iconFavorite.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
+                post.iconFavorite.setImageResource(R.drawable.favoritebutton)
+                post.iconFavorite.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.color01,
+                    )
+                )
             } else {
                 favoriteCount--
-                iconFavorite.setImageResource(R.drawable.favoritebutton)
-                iconFavorite.clearColorFilter()
+                post.iconFavorite.setImageResource(R.drawable.favoritebutton)
+                post.iconFavorite.clearColorFilter()
             }
 
-            txtCountFavorite.text = favoriteCount.toString()
+            post.txtCountFavorite.text = favoriteCount.toString()
 
             isFavorite = !isFavorite
         }
     }
 
-    private fun setupComments(
-        iconComments: ImageView,
-        txtCountComments: TextView,
-    ) {
+    private fun setupComments() {
         var isComments = false
         var commentsCount = 0
 
-        iconComments.setOnClickListener {
+        post.iconComment.setOnClickListener {
             if (!isComments) {
                 commentsCount++
-                iconComments.setImageResource(R.drawable.commentbutton)
-                iconComments.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
+                post.iconComment.setImageResource(R.drawable.commentbutton)
+                post.iconComment.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.color01
+                    )
+                )
             } else {
                 commentsCount--
-                iconComments.setImageResource(R.drawable.commentbutton)
-                iconComments.clearColorFilter()
+                post.iconComment.setImageResource(R.drawable.commentbutton)
+                post.iconComment.clearColorFilter()
             }
 
-            txtCountComments.text = commentsCount.toString()
+            post.txtCountComments.text = commentsCount.toString()
 
             isComments = !isComments
         }

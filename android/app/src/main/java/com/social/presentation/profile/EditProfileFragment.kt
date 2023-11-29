@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.social.R
 import com.social.databinding.FragmentEditProfileBinding
 import com.social.databinding.ItemSocialLinkLayoutBinding
+import com.social.utils.FragmentUtils
 
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding: FragmentEditProfileBinding
@@ -49,6 +50,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
         binding.iconLeft.setOnClickListener {
             cleanFormEditProfile()
+            FragmentUtils.replaceFragment(
+                requireActivity().supportFragmentManager,
+                UserProfileFragment(),
+            )
         }
 
         binding.buttonAddLink.setOnClickListener {
