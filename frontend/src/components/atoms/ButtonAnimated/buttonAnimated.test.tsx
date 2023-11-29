@@ -1,5 +1,5 @@
-import  WButtonMotion  from './../../../components/atoms/ButtonAnimated/buttonAnimated';
-import { render } from '@testing-library/react';
+import  WButtonMotion  from './buttonAnimated'
+import { render } from '@testing-library/react'
 
 describe('ButtonAnimated', () => {
     it('renders the ButtonAnimated', () => {
