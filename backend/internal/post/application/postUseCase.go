@@ -15,8 +15,10 @@ type PostUseCaseInterface interface {
 	GetPost(id int) (*domain.Post, error)
 	GetPosts(params domain.PostPaginationParams) (*domain.PostPagination, error)
 	// DELETE POST //
-
 	DeletePost(id int64) error
+
+	//UPDATE POST //
+	UpdatePost(id int64, update domain.PostUpdate) error
 }
 
 type PostRepository interface {
@@ -27,6 +29,8 @@ type PostRepository interface {
 	// DELETE POST //
 	DeletePost(id int64) error
 	PostExists(id int64) bool
+	// UPDATE POST //
+	UpdatePost(id int64, update domain.PostUpdate) error
 }
 
 type PostUseCase struct {
@@ -88,4 +92,14 @@ func (l *PostUseCase) DeletePost(id int64) error {
 	}
 
 	return l.repo.DeletePost(id)
+}
+
+// UPDATE POST //
+func (l *PostUseCase) UpdatePost(id int64, update domain.PostUpdate) error {
+
+	if !l.repo.PostExists(id) {
+		return errors.New("post not found")
+	}
+
+	return l.repo.UpdatePost(id, update)
 }

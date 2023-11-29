@@ -19,6 +19,7 @@ type mockPostUseCase struct {
 	GetPostsFn   func(params domain.PostPaginationParams) (*domain.PostPagination, error)
 	GetPostFn    func(id int) (*domain.Post, error)
 	DeletePostFn func(id int64) error
+	UpdatePostFn func(id int64, update domain.PostUpdate) error
 }
 
 func (m *mockPostUseCase) CreatePost(post domain.PostCreate) (*domain.PostResponse, error) {
@@ -35,6 +36,9 @@ func (m *mockPostUseCase) GetPost(id int) (*domain.Post, error) {
 
 func (m *mockPostUseCase) DeletePost(id int64) error {
 	return m.DeletePostFn(id)
+}
+func (m *mockPostUseCase) UpdatePost(id int64, update domain.PostUpdate) error {
+	return m.UpdatePostFn(id, update)
 }
 
 func TestHandleCreatePost(t *testing.T) {
@@ -205,6 +209,85 @@ func TestHandleDeletePost(t *testing.T) {
 			recorder := httptest.NewRecorder()
 
 			handler.HandleDeletePost(recorder, req)
+
+			res := recorder.Result()
+			defer res.Body.Close()
+
+			if res.StatusCode != tt.wantStatus {
+				t.Errorf("expected status %v; got %v", tt.wantStatus, res.StatusCode)
+			}
+
+			body, err := io.ReadAll(res.Body)
+			if err != nil {
+				t.Fatalf("could not read response: %v", err)
+			}
+
+			if string(body) != tt.wantBody {
+				t.Errorf("expected body %q; got %q", tt.wantBody, body)
+			}
+		})
+	}
+}
+
+func TestHandleUpdatePost(t *testing.T) {
+	tests := []struct {
+		name       string
+		postID     int64
+		inputBody  string
+		mockUpdate func(id int64, update domain.PostUpdate) error
+		wantStatus int
+		wantBody   string
+	}{
+		{
+			name:      "Successful Post Update",
+			postID:    1,
+			inputBody: `{"Title": "Updated Title", "Description": "Updated Description", "HasMultimedia": true, "Public": true, "Multimedia": "http://newimage.com"}`,
+			mockUpdate: func(id int64, update domain.PostUpdate) error {
+				return nil
+			},
+			wantStatus: http.StatusOK,
+			wantBody:   `{"response":"Post edited successfully","status":"SUCCESS"}`,
+		},
+		{
+			name:      "Post Not Found",
+			postID:    2,
+			inputBody: `{"Title": "Updated Title", "Description": "Updated Description", "HasMultimedia": true, "Public": true, "Multimedia": "http://newimage.com"}`,
+			mockUpdate: func(id int64, update domain.PostUpdate) error {
+				return fmt.Errorf("post not found")
+			},
+			wantStatus: http.StatusNotFound,
+			wantBody:   `{"response":"Post not found","status":"ERROR"}`,
+		},
+		{
+			name:      "Invalid post ID",
+			postID:    -2,
+			inputBody: `{"Title": "Updated Title", "Description": "Updated Description", "HasMultimedia": true, "Public": true, "Multimedia": "http://newimage.com"}`,
+			mockUpdate: func(id int64, update domain.PostUpdate) error {
+				return fmt.Errorf("post not found")
+			},
+			wantStatus: http.StatusBadRequest,
+			wantBody:   `{"response":"Invalid post ID","status":"ERROR"}`,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			req, err := http.NewRequest(http.MethodPatch, fmt.Sprintf("/update/%v", tt.postID), bytes.NewBufferString(tt.inputBody))
+			if err != nil {
+				t.Fatalf("could not create request: %v", err)
+			}
+
+			rctx := chi.NewRouteContext()
+			rctx.URLParams.Add("id", strconv.FormatInt(tt.postID, 10))
+			req = req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, rctx))
+
+			mockUseCase := &mockPostUseCase{
+				UpdatePostFn: tt.mockUpdate,
+			}
+			handler := NewPostHandler(mockUseCase)
+			recorder := httptest.NewRecorder()
+
+			handler.HandleUpdatePost(recorder, req)
 
 			res := recorder.Result()
 			defer res.Body.Close()

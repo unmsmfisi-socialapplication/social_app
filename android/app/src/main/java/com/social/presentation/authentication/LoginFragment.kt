@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.social.R
 import com.social.databinding.FragmentLoginBinding
+import com.social.domain.model.UserM
 import com.social.utils.Toast.showMessage
 import com.social.utils.Validation
 import com.social.utils.Validation.setupValidation
@@ -37,6 +38,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     is LoginViewModel.UILoginEvent.GetData -> {
                         savePreference()
                         val userData = viewModel.state.value!!.dataLogin[0]
+                        viewModel.deleteUserData()
+                        viewModel.saveUserDataSQLite(
+                            UserM(
+                                id = 0,
+                                sLastName = "Nuñez Alcorta",
+                                sName = "Sofía",
+                                sEmail = "sofia_nunez@gmail.com",
+                                sUsername = "sofinunez",
+                                sPhoto = "",
+                                sHeader = "Marketera",
+                                sBiography = "Mi primera descripción",
+                            ),
+                        )
                         Log.i("tkn", userData.token)
                         findNavController()
                             .navigate(R.id.userProfileFragment)

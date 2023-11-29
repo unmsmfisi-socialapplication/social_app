@@ -17,6 +17,7 @@ func FollowModuleRouter(dbInstance *sql.DB) *chi.Mux {
 	followHandler := infrastructure.NewFollowerHandler(followerUseCase)
 
 	r.Post("/", followHandler.FollowProfile)
+	r.Get("/is_following", followHandler.IsFollowing)
 
 	return r
 }

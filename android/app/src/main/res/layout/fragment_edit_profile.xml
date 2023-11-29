@@ -39,105 +39,141 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:orientation="vertical"
+        android:layout_marginVertical="15dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image_icon"
-                style="@style/ImageViewProfile"
-                android:backgroundTint="@color/color02"
-                android:contentDescription="@string/photo_profile"
-                android:scaleType="center"
-                app:shapeAppearanceOverlay="@style/ImageViewCorner"
-                app:srcCompat="@drawable/icon_user" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="match_parent" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/image_icon"
+                    style="@style/ImageViewProfile"
+                    android:backgroundTint="@color/color02"
+                    android:contentDescription="@string/photo_profile"
+                    android:scaleType="center"
+                    app:shapeAppearanceOverlay="@style/ImageViewCorner"
+                    app:srcCompat="@drawable/icon_user" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imagen_profile"
-                style="@style/ImageViewProfile"
-                android:contentDescription="@string/photo_profile"
-                app:shapeAppearanceOverlay="@style/ImageViewCorner"
-                app:srcCompat="@drawable/photo_profile" />
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_profile"
+                    style="@style/ImageViewProfile"
+                    android:contentDescription="@string/photo_profile"
+                    app:shapeAppearanceOverlay="@style/ImageViewCorner"
+                    app:srcCompat="@drawable/photo_profile" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_upload_profile"
+                style="@style/ButtonStyleProfile"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="90dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/edit_photo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_name"
+                    style="@style/TextInputEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_user_name"
+                    style="@style/TextInputEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/user_name" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/error_username"
+                style="@style/TextViewError"
+                android:text="@string/user_exists" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_biography"
+                    style="@style/TextInputEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/biography"
+                    android:inputType="textMultiLine"
+                    android:maxLength="100" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/button_add_link"
+                style="@style/ButtonStyleProfile"
+                android:layout_width="200dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/add_link" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/button_add_link" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/style_border_5dp"
+                android:backgroundTint="@color/color05"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="5dp"
+                android:text="@string/information_configuration"
+                android:textColor="@color/color01"
+                android:textSize="18sp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button_upload_profile"
-            style="@style/ButtonStyleProfile"
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="90dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/edit_photo" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/TextInputLayoutStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_name"
-                style="@style/TextInputEditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/name" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/TextInputLayoutStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_user_name"
-                style="@style/TextInputEditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/user_name" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/error_username"
-            style="@style/TextViewError"
-            android:text="@string/user_exists" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/TextInputLayoutStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_biography"
-                style="@style/TextInputEditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/biography"
-                android:inputType="textMultiLine"
-                android:maxLength="100" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/button_add_link"
-            style="@style/ButtonStyleProfile"
-            android:layout_width="200dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/add_link" />
-    </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

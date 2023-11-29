@@ -87,5 +87,8 @@
     <string name="add_video">Adjuntar video</string>
     <string name="hint_multimedia_post">Máximo 6 fotografías</string>
     <string name="privacy">Publico</string>
-    <string name="lima_peru">En Lima - Perú</string>
+    <string name="lima_peru">Lima - Perú</string>
+    <string name="information_configuration">Configuración de información personal</string>
+    <string name="social_network">Red Social</string>
+    <string name="social_link">Link</string>
 </resources>
