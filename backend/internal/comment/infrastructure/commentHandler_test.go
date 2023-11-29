@@ -6,9 +6,9 @@ import (
 	"errors"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"testing"
 	"time"
-	"strconv"
 
 	"github.com/go-chi/chi"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment/domain"
@@ -39,6 +39,16 @@ func (mcu *MockCommentUseCase) GetByID(commentID int64) (*domain.Comment, error)
 		return nil, errors.New("GetByID: comment not found")
 	} 
 	return comment, nil
+}
+
+func (mcu *MockCommentUseCase) GetByPostID(postID int64) ([]*domain.Comment, error) {
+	comments := make([]*domain.Comment, 0)
+	for _, comment := range mcu.Comments {
+		if comment.PostID == postID {
+			comments = append(comments, comment)
+		}
+	}
+	return comments, nil
 }
 
 func (mcu *MockCommentUseCase) Create(comment *domain.Comment) error {
@@ -72,6 +82,7 @@ func newTestRouter(mcu *MockCommentUseCase) *chi.Mux {
 	r.Route("/comments", func(r chi.Router) {
 		r.Get("/", commentHandler.HandleGetAllComments)
 		r.Get("/{commentID}", commentHandler.HandleGetCommentByID)
+		r.Get("/post/{postID}", commentHandler.HandleGetCommentsByPostId)
 		r.Post("/", commentHandler.HandleCreateComment)
 		r.Put("/{commentID}", commentHandler.HandleUpdateComment)
 		r.Delete("/{commentID}", commentHandler.HandleDeleteComment)
@@ -123,6 +134,15 @@ func TestCommentHandler_HandleGetCommentByID(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/comments/1", nil)
 	response := executeTestRequest(r, req)
 	checkResponseCode(t, http.StatusOK, response.Code)
+}
+
+func TestCommentHandler_HandleGetCommentsByPostId(t *testing.T) {
+	mcu := NewMockCommentUseCase()
+	mcu.Comments = generateDummyComments(2)
+	r := newTestRouter(mcu)
+	req, _ := http.NewRequest("GET", "/comments/post/1", nil)
+	response := executeTestRequest(r, req)
+	checkResponseCode(t, http.StatusOK, response.Code)	
 }
 
 func TestCommentHandler_HandleCreateComment(t *testing.T){
