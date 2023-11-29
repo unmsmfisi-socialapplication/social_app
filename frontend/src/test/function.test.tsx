@@ -1,14 +1,13 @@
 //const { distanceLevenshtein, mostSimilarPhrase } = require('./index');
 import {
-    validatePassword ,
+    validatePassword,
     distanceLevenshtein,
     mostSimilarPhrase,
     findMatchingWords,
     generateUniqueUsernames,
-    filterContentByTag ,
-    countCharacters ,
+    filterContentByTag,
+    countCharacters,
 } from '../utilities/Functions'
-
 
 //Test: Validate passwords
 describe('Validate passwords', () => {
