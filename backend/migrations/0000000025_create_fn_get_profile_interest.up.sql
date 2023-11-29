@@ -1,5 +1,6 @@
 BEGIN;
 
+
 CREATE OR REPLACE FUNCTION FN_SOC_APP_GET_PROFILE_INTEREST(
     p_profile_id BIGINT,
     p_page_size INT,
@@ -34,5 +35,6 @@ BEGIN
     OFFSET (p_page_number - 1) * p_page_size;
 END;
 $$ LANGUAGE plpgsql;
+
 
 COMMIT;
