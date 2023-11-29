@@ -14,7 +14,7 @@ interface WTagProps {
     disabled?: boolean
 }
 
-const WTag: React.FC<WTagProps> = ({ icon, text, isActive, path }) => {
+const WTag: React.FC<WTagProps> = ({ icon, text, isActive, path = '/' }) => {
     const router = useRouter()
 
     return (
