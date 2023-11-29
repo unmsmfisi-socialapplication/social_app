@@ -1,19 +1,20 @@
 'use client'
 import React from 'react'
 import './index.scss'
-import { WButton } from '@/components'
+import WButton from './../../../components/atoms/Button/button'
 import Textarea from '@mui/joy/Textarea'
-import WCircleImage from '@/components/atoms/CircleImage/circleImage'
+import WCircleImage from './../../../components/atoms/CircleImage/circleImage'
 
 interface CommentThinkProps {
     avatarDefaultURL?: string
     publicTag?: string
     placeholder?: string
+    dataTestid?: string
 }
 
-const CommentThink: React.FC<CommentThinkProps> = ({ avatarDefaultURL, publicTag, placeholder }) => {
+const CommentThink: React.FC<CommentThinkProps> = ({ avatarDefaultURL, publicTag, placeholder, dataTestid }) => {
     return (
-        <div className="comment_think_main_container">
+        <div className="comment_think_main_container" data-testid={dataTestid}>
             <div className="comment_think_container">
                 <WCircleImage avatarDefaultURL={avatarDefaultURL} size={80} typeColor="third" />
                 <WButton typeColor="white" text={publicTag} variant="outlined" />
