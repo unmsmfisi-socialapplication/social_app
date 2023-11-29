@@ -1,5 +1,7 @@
 package com.social.presentation.profile
 
+import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +10,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.imageview.ShapeableImageView
+import com.social.OnboardingActivity
 import com.social.R
 import com.social.databinding.FragmentUserProfileBinding
 import com.social.databinding.ItemPostBinding
@@ -73,9 +75,9 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private fun action() {
         binding.buttonEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_userProfileFragment_to_editProfileFragment)
         }
         binding.buttonSettingProfile.setOnClickListener {
+            logout()
         }
     }
 
@@ -146,5 +148,20 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         imageView: ShapeableImageView,
     ) {
         Picasso.get().load(imageURL).into(imageView)
+    }
+
+    private fun logout() {
+        val preference =
+            requireContext().getSharedPreferences("login_saved", MODE_PRIVATE)
+        val editor = preference.edit()
+        editor.remove("psw")
+        editor.remove("check")
+        editor.apply()
+        startActivity(
+            Intent(
+                requireContext(),
+                OnboardingActivity::class.java,
+            ),
+        )
     }
 }
