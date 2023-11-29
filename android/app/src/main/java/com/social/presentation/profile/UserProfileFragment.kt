@@ -71,19 +71,20 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun action() {
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-
         binding.buttonEditProfile.setOnClickListener {
-            transaction.replace(R.id.navHostFragment, EditProfileFragment())
-            transaction.addToBackStack(null)
-            transaction.commit()
+            replaceFragment(EditProfileFragment())
         }
 
         binding.buttonSettingProfile.setOnClickListener {
-            transaction.replace(R.id.navHostFragment, SettingProfileFragment())
-            transaction.addToBackStack(null)
-            transaction.commit()
+            replaceFragment(SettingProfileFragment())
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.navHostFragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun setupClickListeners() {
