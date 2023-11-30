@@ -14,7 +14,7 @@ interface WCircleImageProps {
 
 const WCircleImage: React.FC<WCircleImageProps> = ({ avatarDefaultURL, alt, typeColor, size }) => {
     return (
-        <div className={`circleImage circleImage--${typeColor}`}>
+        <div className={`circleImage circleImage--${typeColor}`} data-testid="circle-image-container">
             <Avatar alt={alt} src={avatarDefaultURL || ''} sx={{ width: size, height: size }}>
                 {!avatarDefaultURL && <PersonIcon style={{ width: '100%', height: '100%' }} />}
             </Avatar>

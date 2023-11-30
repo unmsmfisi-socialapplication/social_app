@@ -1,3 +1,4 @@
+'use client'
 import { Avatar, Box, Modal, Typography } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import React, { useState } from 'react'

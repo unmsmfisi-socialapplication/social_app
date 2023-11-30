@@ -55,6 +55,28 @@ func (ch *CommentHandler) HandleGetCommentByID(w http.ResponseWriter, r *http.Re
 	utils.SendJSONResponse(w, http.StatusOK, "OK", comment)
 }
 
+func (ch *CommentHandler) HandleGetCommentsByPostId(w http.ResponseWriter, r *http.Request) {
+	postIDStr := chi.URLParam(r, "postID")
+	if postIDStr == "" {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid postID")
+		return
+	}
+
+	postID, _ := strconv.ParseInt(postIDStr, 10, 64)
+	comments, err := ch.useCase.GetByPostID(postID)
+	if err != nil {
+		if postID > 0{
+			utils.SendJSONResponse(w, http.StatusNotFound, "ERROR", "Post not found")
+		} else {
+			utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", "Error getting comments")
+		}
+		fmt.Println(err.Error())
+		return
+	}
+
+	utils.SendJSONResponse(w, http.StatusOK, "OK", comments)
+}
+
 func (ch *CommentHandler) HandleCreateComment(w http.ResponseWriter, r *http.Request) {
 	var commentData struct {
 		UserID          int64     `json:"userID"`

@@ -24,7 +24,7 @@ export default function SideBar({}: SideBarProps) {
                 <WTag text="Lists" icon={FormatListBulletedIcon} />
                 <WTag text="Bookmarks" icon={BookmarkBorderIcon} />
                 <WTag text="Communities" icon={PeopleOutlineIcon} />
-                <WTag text="Profile" icon={PersonOutlineIcon} />
+                <WTag path="/profile" text="Profile" icon={PersonOutlineIcon} />
                 <WButtonPost text="Post" />
             </Box>
         </div>
