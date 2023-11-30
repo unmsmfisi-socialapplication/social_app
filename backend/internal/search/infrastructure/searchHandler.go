@@ -7,6 +7,7 @@ import (
 
 	profiledomain "github.com/unmsmfisi-socialapplication/social_app/internal/profile/domain"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/search/application"
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
 type SearchHandler struct {
@@ -35,15 +36,13 @@ func (handler *SearchHandler) SearchProfileByName(w http.ResponseWriter, r *http
 
 	page, err := strconv.Atoi(spage)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode("Error: page must be a number")
+        utils.SendJSONResponse(w, http.StatusBadRequest, "Error: page must be a number", nil)
 		return
 	}
 
 	limit, err = strconv.Atoi(slimit)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode("Error: limit must be a number")
+        utils.SendJSONResponse(w, http.StatusBadRequest, "Error: page must be a number", nil)
 		return
 	}
 
@@ -64,7 +63,8 @@ func (handler *SearchHandler) SearchProfileByName(w http.ResponseWriter, r *http
 		Next     string                  `json:"next"`
 		Previous string                  `json:"previous"`
 	}{Results: result.Results, Page: page, Next: next, Previous: previous}
-
+    
+    w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -76,5 +76,6 @@ func (handler *SearchHandler) SuggestProfileByName(w http.ResponseWriter, r *htt
 		Results []profiledomain.Profile `json:"results"`
 	}{Results: result.Results}
 
+    w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }
