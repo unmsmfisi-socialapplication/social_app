@@ -12,7 +12,6 @@ import android.provider.MediaStore.Images.Media.getBitmap
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -20,6 +19,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.social.R
 import com.social.databinding.FragmentNewPostBinding
 import com.social.utils.FragmentUtils
+import com.social.utils.PermissionUtils
 import java.util.Locale
 
 class NewPostFragment : Fragment(R.layout.fragment_new_post) {
@@ -31,7 +31,6 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
 
     companion object {
         const val MAX_IMAGES = 6
-        const val LOCATION_PERMISSION_REQUEST_CODE = 123
     }
 
     private val galleryLauncher =
@@ -114,7 +113,9 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
         if (isLocationVisible) {
             clearLocationData()
         } else {
-            requestLocationPermission()
+            if (PermissionUtils.requestLocationPermission(this)) {
+                getLastLocation()
+            }
         }
     }
 
@@ -124,21 +125,6 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
         isLocationVisible = false
     }
 
-    private fun requestLocationPermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION,
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            getLastLocation()
-        } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE,
-            )
-        }
-    }
 
     @Suppress("DEPRECATION")
     private fun getLastLocation() {
@@ -208,7 +194,7 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-        galleryLauncher.launch(Intent.createChooser(intent, "Select Images"))
+        galleryLauncher.launch(Intent.createChooser(intent, ""))
     }
 
     private fun openGalleryForVideos() {
