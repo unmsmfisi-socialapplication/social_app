@@ -216,3 +216,76 @@ func TestProfileFollowers(t *testing.T) {
 		}
 	}
 }
+
+func TestProfileFollowingProfiles(t *testing.T) {
+	repo := &MockFollowerRepository{}
+	useCase := NewFollowerUseCase(repo)
+
+	followingProfiles, err := useCase.ProfileFollowingProfiles(1, 10, 1)
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
+	}
+	if followingProfiles == nil {
+		t.Error("followingProfiles is null, but a non-null value was expected.")
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(-1, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the profile_id provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(1, -10, 1)
+	if err == nil {
+		t.Error("An error was expected as the page_size provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(1, 10, -1)
+	if err == nil {
+		t.Error("An error was expected as the page_number provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(0, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the profile_id provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(1, 0, 1)
+	if err == nil {
+		t.Error("An error was expected as the page_size provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(1, 10, 0)
+	if err == nil {
+		t.Error("An error was expected as the page_number provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+}

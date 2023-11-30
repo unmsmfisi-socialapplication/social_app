@@ -99,3 +99,20 @@ func (r *FollowerUseCase) ProfileFollowers(p_profile_id, p_page_size, p_page_num
 	}
 	return newFollowerDataList, nil
 }
+
+func (r *FollowerUseCase) ProfileFollowingProfiles(p_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error) {
+
+	if p_profile_id < 0 || p_page_size < 0 || p_page_number < 0 {
+		return nil, ErrNegativeParameters
+	}
+
+	if p_profile_id == 0 || p_page_size == 0 || p_page_number == 0 {
+		return nil, ErrNullParameters
+	}
+
+	newFollowerDataList, err := r.repo.ProfileFollowers(p_profile_id, p_page_size, p_page_number)
+	if err != nil {
+		return nil, err
+	}
+	return newFollowerDataList, nil
+}
