@@ -6,4 +6,7 @@ package domain
 type UserInterestsRepository interface {
 	FindUserInterestTopics(interests []UserInterestTopic)  error
 	Create(interests[] UserInterestTopic) error
+	GetInterestTopics(userId string) ([]string, error)
 }
+
+

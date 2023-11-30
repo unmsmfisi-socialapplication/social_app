@@ -10,6 +10,7 @@ import (
 type mockUserInterestsRepository struct {
 	findFunc func(interests []domain.UserInterestTopic) error
 	createFunc func(interests []domain.UserInterestTopic) error	
+	getFunc func(userId string) ([]string, error)
 }
 
 
@@ -25,6 +26,13 @@ func (m *mockUserInterestsRepository) Create(interests []domain.UserInterestTopi
 		return m.createFunc(interests)
 	}
 	return nil
+}
+
+func (m *mockUserInterestsRepository) GetInterestTopics(userId string) ([]string, error) {
+	if m.getFunc != nil {
+		return m.getFunc(userId)
+	}
+	return nil, nil
 }
 
 func TestInterestTopicsUseCase_SetInterestTopics(t *testing.T) {
