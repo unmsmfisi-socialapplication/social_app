@@ -317,17 +317,4 @@
                 tools:listitem="@layout/item_post" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <include layout="@layout/navigation_navbar"
-            android:id="@+id/navbar"/>
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout >

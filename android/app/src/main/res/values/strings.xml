@@ -91,4 +91,11 @@
     <string name="information_configuration">Configuración de información personal</string>
     <string name="social_network">Red Social</string>
     <string name="social_link">Link</string>
+    <string name="search">Busqueda</string>
+    <string name="work">Work</string>
+    <string name="count_likes">0</string>
+    <string name="count_comments">0</string>
+    <string name="count_shares">0</string>
+    <string name="count_favorites">0</string>
+    <string name="logout">Cerrar sesión</string>
 </resources>
