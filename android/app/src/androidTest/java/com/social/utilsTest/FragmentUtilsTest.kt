@@ -13,7 +13,6 @@ import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 
 class FragmentUtilsTest {
-
     @Mock
     private lateinit var fragmentManager: FragmentManager
 
