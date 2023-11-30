@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 object PermissionUtils {
-
     private const val LOCATION_PERMISSION_REQUEST_CODE = 945
 
     fun requestLocationPermission(fragment: Fragment): Boolean {

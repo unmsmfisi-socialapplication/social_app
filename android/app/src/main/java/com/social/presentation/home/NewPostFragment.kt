@@ -125,7 +125,6 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
         isLocationVisible = false
     }
 
-
     @Suppress("DEPRECATION")
     private fun getLastLocation() {
         if (ActivityCompat.checkSelfPermission(
