@@ -165,7 +165,45 @@ func (rh *FollowerUserHandler) ProfileFollowers(w http.ResponseWriter, r *http.R
 			Page_number int                      `json:"page_number"`
 			Data        *domain.FollowerDataList `json:"data"`
 		}{
-			Response:    "Profile Followers Succesfully",
+			Response:    "Profile Following Succesfully",
+			Profile_id:  data.Profile_id,
+			Page_size:   data.Page_size,
+			Page_number: data.Page_number,
+			Data:        profile_followers,
+		}
+		json.NewEncoder(w).Encode(responseData)
+	}
+}
+
+func (rh *FollowerUserHandler) ProfileFollowingProfiles(w http.ResponseWriter, r *http.Request) {
+	var data struct {
+		Profile_id  int `json:"profile_id"`
+		Page_size   int `json:"page_size"`
+		Page_number int `json:"page_number"`
+	}
+	err := json.NewDecoder(r.Body).Decode(&data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	profile_followers, er := rh.useCase.ProfileFollowers(data.Profile_id, data.Page_size, data.Page_number)
+	if er != nil {
+		switch er {
+		case application.ErrFollowHimself:
+			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "The same profiles have been entered")
+		default:
+			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", er.Error())
+		}
+	} else {
+		responseData := struct {
+			Response    string                   `json:"response"`
+			Profile_id  int                      `json:"profile_id"`
+			Page_size   int                      `json:"page_size"`
+			Page_number int                      `json:"page_number"`
+			Data        *domain.FollowerDataList `json:"data"`
+		}{
+			Response:    "Profile Following Profiles Succesfully",
 			Profile_id:  data.Profile_id,
 			Page_size:   data.Page_size,
 			Page_number: data.Page_number,
