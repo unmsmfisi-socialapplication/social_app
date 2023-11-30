@@ -20,6 +20,10 @@ func (m *MockFollowerRepository) ViewCommonFollowers(p_own_profile_id, p_viewed_
 	return &domain.FollowerDataList{}, nil
 }
 
+func (m *MockFollowerRepository) ProfileFollowers(p_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error) {
+	return &domain.FollowerDataList{}, nil
+}
+
 func TestNewFollowerUseCase(t *testing.T) {
 	repo := &MockFollowerRepository{}
 	useCase := NewFollowerUseCase(repo)
@@ -134,6 +138,79 @@ func TestCommonFollowers(t *testing.T) {
 		t.Error("An error was expected as the user provided is negative.")
 	} else {
 		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+}
+
+func TestProfileFollowers(t *testing.T) {
+	repo := &MockFollowerRepository{}
+	useCase := NewFollowerUseCase(repo)
+
+	followers, err := useCase.ProfileFollowers(1, 10, 1)
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
+	}
+	if followers == nil {
+		t.Error("followers is null, but a non-null value was expected.")
+	}
+
+	_, err = useCase.ProfileFollowers(-1, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the profile_id provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(1, -10, 1)
+	if err == nil {
+		t.Error("An error was expected as the page_size provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(1, 10, -1)
+	if err == nil {
+		t.Error("An error was expected as the page_number provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(0, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the profile_id provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(1, 0, 1)
+	if err == nil {
+		t.Error("An error was expected as the page_size provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(1, 10, 0)
+	if err == nil {
+		t.Error("An error was expected as the page_number provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
 		if err.Error() != expectedErrMsg {
 			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
 		}
