@@ -2,24 +2,26 @@
 import React from 'react'
 import { Box, SvgIcon, SvgIconProps } from '@mui/material'
 import AllInclusive from '@mui/icons-material/AllInclusive'
+import { useRouter } from 'next/navigation'
+
 import './index.scss'
-import Link from 'next/link'
 
 interface WTagProps {
     icon: React.ComponentType<SvgIconProps>
     text?: string
     isActive?: boolean
     path?: string
+    disabled?: boolean
 }
 
-const WTag: React.FC<WTagProps> = ({ icon, text, isActive, path }) => {
+const WTag: React.FC<WTagProps> = ({ icon, text, isActive, path = '/' }) => {
+    const router = useRouter()
+
     return (
-        <Link href={`intranet/${path}`} style={{ textDecoration: 'none', color: 'black' }}>
-            <Box className={isActive ? 'tagLink tagLink--active' : 'tagLink'}>
-                <SvgIcon component={icon}></SvgIcon>
-                {text}
-            </Box>
-        </Link>
+        <Box onClick={() => router.push(path)} className={isActive ? 'tagLink tagLink--active' : 'tagLink'}>
+            <SvgIcon component={icon}></SvgIcon>
+            {text}
+        </Box>
     )
 }
 
@@ -30,4 +32,5 @@ WTag.defaultProps = {
     isActive: false,
     text: 'TagLink',
     path: '/',
+    disabled: false,
 }
