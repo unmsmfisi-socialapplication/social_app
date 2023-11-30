@@ -9,5 +9,5 @@ type Comment struct {
     Comment         string    `json:"comment"`
     InsertionDate   time.Time `json:"insertionDate"`
     UpdateDate      time.Time `json:"updateDate"`
-    ParentCommentID int64     `json:"parentCommentID"`  
+    ParentCommentID *int64     `json:"parentCommentID"`  
 }

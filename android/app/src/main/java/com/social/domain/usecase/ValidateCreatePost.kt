@@ -1,10 +1,10 @@
 package com.social.domain.usecase
 
+import com.social.data.source.remote.dto.InvalidUserException
 import com.social.data.source.remote.dto.aCreatePost
 import com.social.domain.SocialAppRepository
 import com.social.domain.model.CreatePostBody
 import com.social.domain.model.CreatePostResponse
-import com.social.domain.model.InvalidUserException
 import com.social.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -34,7 +34,7 @@ class ValidateCreatePost
                     val post = socialAppRepository.createPost(createPostBody).aCreatePost()
                     when (post.status) {
                         "OK" -> {
-                            emit(Resource.Success(post.status))
+                            emit(Resource.Success(listOf(post.response)))
                         }
 
                         else -> {

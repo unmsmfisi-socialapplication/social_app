@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.imageview.ShapeableImageView
 import com.social.R
 import com.social.databinding.FragmentUserProfileBinding
@@ -16,6 +15,7 @@ import com.social.databinding.ItemPostBinding
 import com.social.domain.model.Post
 import com.social.presentation.publications.ListPostViewModel
 import com.social.utils.BaseAdapter
+import com.social.utils.FragmentUtils.replaceFragment
 import com.squareup.picasso.Picasso
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
@@ -72,10 +72,18 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun action() {
-        binding.navbar.iconProfile.setImageResource(R.drawable.navbar_icon_user_bold)
-
         binding.buttonEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_userProfileFragment_to_editProfileFragment)
+            replaceFragment(
+                requireActivity().supportFragmentManager,
+                EditProfileFragment(),
+            )
+        }
+
+        binding.buttonSettingProfile.setOnClickListener {
+            replaceFragment(
+                requireActivity().supportFragmentManager,
+                SettingProfileFragment(),
+            )
         }
     }
 

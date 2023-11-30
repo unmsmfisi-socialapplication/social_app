@@ -1,0 +1,36 @@
+.post_social {
+    display: flex;
+    .post__social--avatar {
+        margin: 10px;
+    }
+    .post__social--info {
+        min-width: 95%;
+        .post__social--header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .post__social--title {
+                display: flex;
+                align-items: center;
+            }
+        }
+        .post__social--body {
+            box-sizing: border-box;
+            &--text {
+                width: 98%;
+                text-align: justify;
+            }
+        }
+        .post__social--footer {
+            display: flex;
+            margin: 5px;
+            justify-content: space-between;
+            .post-icon {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: #000;
+            }
+        }
+    }
+}

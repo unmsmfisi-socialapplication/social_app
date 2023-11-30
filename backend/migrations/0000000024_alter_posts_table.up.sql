@@ -1,0 +1,1 @@
+ALTER TABLE soc_app_posts ADD COLUMN is_deleted BOOLEAN DEFAULT FALSE;
