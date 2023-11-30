@@ -1,0 +1,68 @@
+@import '../../../../resources/styles/variables.scss';
+
+.button.typeButton {
+    padding: 0 35px 0 35px;
+    height: 38px;
+    border-radius: 5px;
+
+    &--primary {
+        background-color: $primary-color;
+        color: white;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: $primary-color;
+            color: white;
+        }
+    }
+
+    &--secondary {
+        background-color: $third-color;
+        color: black;
+        border: 1px solid black;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: $third-color;
+            border: 1px solid #dadada;
+            color: #dadada;
+        }
+    }
+
+    &--terciary {
+        background-color: #ffffff;
+        color: #007aff;
+        border: 1px solid #a7caf8;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: #ffffff;
+            color: #007aff;
+            border: 1px solid #a7caf8;
+        }
+    }
+
+    &--quaternary {
+        background-color: #e0edfd;
+        color: #007aff;
+        border: 1px solid #a7caf8;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: #e0edfd;
+            color: #007aff;
+            border: 1px solid #a7caf8;
+        }
+    }
+
+    &--disabled {
+        background-color: $disabled-color;
+        color: white;
+        font-family: $font-poppins-regular;
+
+        &:hover {
+            background-color: $disabled-color;
+            color: white;
+        }
+    }
+}
