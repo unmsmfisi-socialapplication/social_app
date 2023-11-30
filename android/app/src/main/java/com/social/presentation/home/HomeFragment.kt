@@ -54,7 +54,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             if (!isLiked) {
                 likeCount++
                 post.iconLike.setImageResource(R.drawable.likebutton)
-                post.iconLike
+                post.iconLike.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.color01,
+                    ),
+                )
             } else {
                 likeCount--
                 post.iconLike.setImageResource(R.drawable.likebutton)
