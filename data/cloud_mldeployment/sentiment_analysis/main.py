@@ -17,6 +17,7 @@ def load_environment_variables():
     load_dotenv()
 
     return (
+        os.getenv('DATA_ENDPOINT'),
         os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
         os.getenv('OUTPUT_LOCAL_FILE_PATH'),
         os.getenv('AZURE_STORAGE_CONTAINER_NAME'),
@@ -43,9 +44,9 @@ def main():
     setup_logging()
 
     try:
-        azure_storage_connection_string, output_local_file_path, container_name, blob_name = load_environment_variables()
+        data_endpoint, azure_storage_connection_string, output_local_file_path, container_name, blob_name = load_environment_variables()
 
-        df_predictions = preprocess_and_predict(azure_storage_connection_string)
+        df_predictions = preprocess_and_predict(data_endpoint)
 
         df_predictions.to_csv(output_local_file_path, index=False)
 
