@@ -14,6 +14,14 @@ type PostUseCaseInterface interface {
 	CreatePost(post domain.PostCreate) (*domain.PostResponse, error)
 	GetPost(id int) (*domain.Post, error)
 	GetPosts(params domain.PostPaginationParams) (*domain.PostPagination, error)
+	// DELETE POST //
+	DeletePost(id int64) error
+
+	//UPDATE POST //
+	UpdatePost(id int64, update domain.PostUpdate) error
+
+	//REPORT POST //
+	ReportPost(report domain.PostReport) error
 }
 
 type PostRepository interface {
@@ -21,6 +29,14 @@ type PostRepository interface {
 	UserExist(post domain.PostCreate) bool
 	GetById(id int) (*domain.Post, error)
 	GetAll(params domain.PostPaginationParams) (*domain.PostPagination, error)
+	// DELETE POST //
+	DeletePost(id int64) error
+	PostExists(id int64) bool
+	// UPDATE POST //
+	UpdatePost(id int64, update domain.PostUpdate) error
+	CreateReport(report domain.PostReport) error
+	ReporterExists(username string) bool
+	HasUserAlreadyReportedPost(postId int64, username string) bool
 }
 
 type PostUseCase struct {
@@ -72,4 +88,39 @@ func (l *PostUseCase) GetPost(id int) (*domain.Post, error) {
 	}
 
 	return dbPost, nil
+}
+
+// DELETE POST //
+
+func (l *PostUseCase) DeletePost(id int64) error {
+	if !l.repo.PostExists(id) {
+		return errors.New("post not found")
+	}
+
+	return l.repo.DeletePost(id)
+}
+
+// UPDATE POST //
+func (l *PostUseCase) UpdatePost(id int64, update domain.PostUpdate) error {
+
+	if !l.repo.PostExists(id) {
+		return errors.New("post not found")
+	}
+
+	return l.repo.UpdatePost(id, update)
+}
+
+// REPORT POST //
+func (l *PostUseCase) ReportPost(report domain.PostReport) error {
+	if !l.repo.ReporterExists(report.ReportedBy) {
+		return domain.ErrReporterUserDoesNotExist
+	}
+	if !l.repo.PostExists(report.PostId) {
+		return domain.ErrPostNotFound
+	}
+
+	if l.repo.HasUserAlreadyReportedPost(report.PostId, report.ReportedBy) {
+		return domain.ErrUserHasAlreadyReportedPost
+	}
+	return l.repo.CreateReport(report)
 }

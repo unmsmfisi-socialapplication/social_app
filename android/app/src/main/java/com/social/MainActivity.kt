@@ -21,9 +21,28 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                startActivity(Intent(this@MainActivity, EmptyActivity::class.java))
+                if (isSessionActive()) {
+                    startActivity(
+                        Intent(
+                            this@MainActivity,
+                            EmptyActivity::class.java,
+                        ),
+                    )
+                } else {
+                    startActivity(
+                        Intent(
+                            this@MainActivity,
+                            OnboardingActivity::class.java,
+                        ),
+                    )
+                }
                 finish()
             }
         }.start()
+    }
+
+    private fun isSessionActive(): Boolean {
+        val preference = getSharedPreferences("login_saved", MODE_PRIVATE)
+        return preference.getBoolean("check", false)
     }
 }

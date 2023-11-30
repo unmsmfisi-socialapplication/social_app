@@ -2,7 +2,7 @@ import { Avatar, Box, Modal, Typography } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import React from 'react'
 import './index.scss'
-import { WButton } from '@/components'
+import WButton from './../../atoms/Button/button'
 
 interface PublicationConfirmProps {
     userName?: string
@@ -10,6 +10,7 @@ interface PublicationConfirmProps {
     avatarURL?: string
     publicationContent?: string
     open?: boolean
+    dataTestid?: string
     onClose?: () => void
     onConfirm?: () => void
 }
@@ -20,6 +21,7 @@ const PublicationConfirm: React.FC<PublicationConfirmProps> = ({
     avatarURL,
     publicationContent,
     open,
+    dataTestid,
     onClose,
     onConfirm,
 }) => {
@@ -40,6 +42,7 @@ const PublicationConfirm: React.FC<PublicationConfirmProps> = ({
                 className="modal--main--container"
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
+                data-testid={dataTestid}
             >
                 <Box className="modal--publication--confirm">
                     <Box className="modal--publication--header">
