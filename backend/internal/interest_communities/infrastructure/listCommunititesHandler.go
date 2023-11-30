@@ -22,6 +22,8 @@ func (handler *ListCommunitiesHandler) HandleListCommunities(writer http.Respons
 
 	var requestData struct {
 		UserId string `json:"user_id"`
+		PageNumber string `json:"page_number"`
+		PageSize   string `json:"page_size"`
 	}
 
 	er := json.NewDecoder(request.Body).Decode(&requestData)
@@ -32,7 +34,9 @@ func (handler *ListCommunitiesHandler) HandleListCommunities(writer http.Respons
 	var communities []domain.Community
 
 	userId := requestData.UserId
-	communities, err := handler.useCase.GetCommunitiesList(userId)
+	pageSize := requestData.PageSize
+	pageNumber := requestData.PageNumber
+	communities, err := handler.useCase.GetCommunitiesList(userId,pageSize,pageNumber)
 	
 	if err != nil {
 		utils.SendJSONResponse(writer, http.StatusInternalServerError, "ERROR", "Error while fetching data")

@@ -5,7 +5,7 @@ import (
 )
 
 type ListCommunitiesUseCaseI interface {
-	GetCommunitiesList(userId string) ([]domain.Community, error)
+	GetCommunitiesList(userId, pageSize, pageNumber string) ([]domain.Community, error)
 }
 
 type ListCommunitiesUseCase struct {
@@ -17,7 +17,7 @@ func NewListCommunitiesUseCase(repository domain.CommunityRepository) *ListCommu
 }
 
 
-func (usecase *ListCommunitiesUseCase) GetCommunitiesList(userId string) ([]domain.Community, error) {
+func (usecase *ListCommunitiesUseCase) GetCommunitiesList(userId, pageSize, pageNumber string) ([]domain.Community, error) {
 
 	var communities []domain.Community
 
@@ -27,12 +27,12 @@ func (usecase *ListCommunitiesUseCase) GetCommunitiesList(userId string) ([]doma
 		return nil, err
 	}
 	if(flag){
-		communities, err = usecase.repository.GetCommunitiesByUserId(userId)
+		communities, err = usecase.repository.GetCommunitiesByUserId(userId, pageSize, pageNumber)
 		if err != nil {
 			return nil, err
 		}
 	}else{
-		communities, err = usecase.repository.GetCommunities()
+		communities, err = usecase.repository.GetCommunities(pageSize, pageNumber)
 		if err != nil {
 			return nil, err
 		}
