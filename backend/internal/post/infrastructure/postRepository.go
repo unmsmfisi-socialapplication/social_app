@@ -130,10 +130,37 @@ func (p *PostsDBRepository) PostExists(id int64) bool {
 
 // UPDATE POST //
 func (p *PostsDBRepository) UpdatePost(id int64, update domain.PostUpdate) error {
-	query := `UPDATE sa.soc_app_posts SET title=$2, description=$3, has_multimedia=$4, public=$5, multimedia=$6, update_date=NOW() WHERE post_id=$1 ;`
+	query := `UPDATE soc_app_posts SET title=$2, description=$3, has_multimedia=$4, public=$5, multimedia=$6, update_date=NOW() WHERE post_id=$1 ;`
 	_, err := p.db.Exec(query, id, update.Title, update.Description, update.HasMultimedia, update.Public, update.Multimedia)
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+// REPORT POST //
+
+func (p *PostsDBRepository) CreateReport(report domain.PostReport) error {
+	query := `INSERT INTO soc_app_post_reports (post_id, reported_by, reason, report_date) VALUES ($1, $2, $3, NOW());`
+	_, err := p.db.Exec(query, report.PostId, report.ReportedBy, report.Reason)
+	return err
+}
+
+func (p *PostsDBRepository) ReporterExists(username string) bool {
+	query := `SELECT EXISTS(SELECT 1 FROM soc_app_users WHERE user_name = $1);`
+	var exists bool
+	err := p.db.QueryRow(query, username).Scan(&exists)
+	if err != nil {
+		return false
+	}
+	return exists
+}
+func (p *PostsDBRepository) HasUserAlreadyReportedPost(postId int64, username string) bool {
+	query := `SELECT EXISTS(SELECT 1 FROM soc_app_post_reports WHERE post_id = $1 AND reported_by = $2);`
+	var exists bool
+	err := p.db.QueryRow(query, postId, username).Scan(&exists)
+	if err != nil {
+		return false
+	}
+	return exists
 }
