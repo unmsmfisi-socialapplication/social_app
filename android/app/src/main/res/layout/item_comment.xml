@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/content_comment">
+
+    <ImageView
+        android:id="@+id/icon_retract"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:srcCompat="@drawable/icon_bar"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_comment"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="14sp"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="10dp"
+        android:backgroundTint="@color/transparent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginVertical="15dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="top|center">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/comment_imageProfile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/defaul_user_profile"
+                app:riv_oval="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/style_border_5dp"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:backgroundTint="@color/gray">
+
+                    <TextView
+                        android:id="@+id/txt_usernamePost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/full_name"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="14sp"
+                        android:backgroundTint="@color/transparent"/>
+
+                    <TextView
+                        android:id="@+id/txt_userComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comment_user"
+                        android:fontFamily="@font/poppins"
+                        android:textSize="14sp"
+                        android:backgroundTint="@color/transparent"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:paddingHorizontal="10dp">
+
+                    <TextView
+                        android:id="@+id/txt_timeComment"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_comment"
+                        android:fontFamily="@font/poppins"
+                        android:textSize="8sp"
+                        android:backgroundTint="@color/transparent"/>
+
+                    <TextView
+                        android:id="@+id/txt_reactionComment"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/transparent"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/reaction_comment"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/txt_replyComment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/reply_comment"
+                        android:fontFamily="@font/poppins"
+                        android:textSize="8sp"
+                        android:backgroundTint="@color/transparent"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="end|center">
+
+                        <TextView
+                            android:id="@+id/txt_countReactionComment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/count_reaction_comment"
+                            android:fontFamily="@font/poppins"
+                            android:textSize="10sp"
+                            android:layout_marginRight="2dp"
+                            android:layout_gravity="center_vertical"
+                            android:backgroundTint="@color/transparent"/>
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:id="@+id/icon_reaction_comment_like"
+                            app:srcCompat="@drawable/likebutton"/>
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:id="@+id/icon_reaction_comment_iLove"
+                            app:srcCompat="@drawable/icon_i_love"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/comment_user_port"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/comment_userProfile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/defaul_user_profile"
+            app:riv_oval="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:layout_gravity="center_vertical"
+            android:textSize="12sp"
+            android:layout_marginVertical="20dp"
+            android:backgroundTint="@color/transparent"
+            android:hint="@string/comment"
+            android:drawableEnd="@drawable/icon_send_message"
+            android:drawableTint="@color/gray"/>
+
+    </LinearLayout>
+</LinearLayout>

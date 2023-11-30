@@ -17,14 +17,14 @@ export default function SideBar({}: SideBarProps) {
         <div className="sidebar__section">
             <WLogo alt="FrameStudentNET" size={30} />
             <Box className="listOptions">
-                <WTag text="Home" icon={CottageOutlinedIcon} isActive />
-                <WTag text="Explorer" icon={SearchIcon} />
-                <WTag text="Notifications" icon={NotificationsNoneIcon} />
-                <WTag text="Messages" icon={MailOutlineIcon} />
-                <WTag text="Lists" icon={FormatListBulletedIcon} />
-                <WTag text="Bookmarks" icon={BookmarkBorderIcon} />
-                <WTag text="Communities" icon={PeopleOutlineIcon} />
-                <WTag text="Profile" icon={PersonOutlineIcon} />
+                <WTag path="/intranet" text="Home" icon={CottageOutlinedIcon} />
+                <WTag path="#" text="Explorer" icon={SearchIcon} />
+                <WTag path="#" text="Notifications" icon={NotificationsNoneIcon} />
+                <WTag path="#" text="Messages" icon={MailOutlineIcon} />
+                <WTag path="#" text="Lists" icon={FormatListBulletedIcon} />
+                <WTag path="/intranet/analitics" text="Estadisticas" icon={BookmarkBorderIcon} />
+                <WTag path="#" text="Communities" icon={PeopleOutlineIcon} />
+                <WTag path="/intranet/profile" text="Perfil" icon={PersonOutlineIcon} />
                 <WButtonPost text="Post" />
             </Box>
         </div>
