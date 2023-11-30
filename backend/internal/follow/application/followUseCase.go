@@ -18,6 +18,7 @@ type FollowerRepository interface {
 	InsertNewFollower(newFollower *domain.Follower) (*domain.Follower, error)
 	IsFollowing(newFollower *domain.Follower) (*bool, error)
 	ViewCommonFollowers(p_own_profile_id, p_viewed_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error)
+	ProfileFollowers(p_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error)
 }
 
 type FollowerUseCase struct {
@@ -80,4 +81,21 @@ func (r *FollowerUseCase) IsFollowing(p_follower_profile_id, p_following_profile
 		return nil, err
 	}
 	return isFollowing, nil
+}
+
+func (r *FollowerUseCase) ProfileFollowers(p_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error) {
+
+	if p_profile_id < 0 || p_page_size < 0 || p_page_number < 0 {
+		return nil, ErrNegativeParameters
+	}
+
+	if p_profile_id == 0 || p_page_size == 0 || p_page_number == 0 {
+		return nil, ErrNullParameters
+	}
+
+	newFollowerDataList, err := r.repo.ProfileFollowers(p_profile_id, p_page_size, p_page_number)
+	if err != nil {
+		return nil, err
+	}
+	return newFollowerDataList, nil
 }
