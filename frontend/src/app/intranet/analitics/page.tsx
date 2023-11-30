@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import dynamic from 'next/dynamic'
 import { EmbedProps } from 'powerbi-client-react'
 import IntranetHoc from '../intranet'
@@ -11,8 +11,7 @@ const PowerBIEmbed = dynamic<EmbedProps>(() => import('powerbi-client-react').th
     ssr: false,
 })
 
-export default function index() {
-    useEffect(() => {}, [])
+export default function Stadistic() {
 
     return (
         <IntranetHoc sideBar>
