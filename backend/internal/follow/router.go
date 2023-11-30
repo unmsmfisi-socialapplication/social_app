@@ -19,6 +19,8 @@ func FollowModuleRouter(dbInstance *sql.DB) *chi.Mux {
 	r.Post("/", followHandler.FollowProfile)
 	r.Get("/is_following", followHandler.IsFollowing)
 	r.Get("/common_followers", followHandler.ViewCommonFollowers)
+	r.Get("/profile_followers", followHandler.ProfileFollowers)
+	r.Get("/profile_following_profiles", followHandler.ProfileFollowingProfiles)
 
 	return r
 }
