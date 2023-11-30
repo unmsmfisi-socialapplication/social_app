@@ -8,9 +8,12 @@ import { WInput, WButton, WLink, WCardAuth } from '@/components'
 import { INITIAL_FORMIK_VALUES, LOGIN_VALUES, YUP_SCHEMA } from './constant'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { validateUsername, validatePassword } from '@/utilities/Validation'
+import { useRouter } from 'next/navigation'
 import { getUser } from '@/redux/actions/userAction'
 import { apiSattus } from '@/utilities/Constant'
 export default function LoginPage() {
+    const router = useRouter()
+
     const [auth, setAuth] = useState<any>(null)
     const dispatch = useAppDispatch()
     const useSelector = useAppSelector((state) => state.auth)
@@ -18,7 +21,7 @@ export default function LoginPage() {
     const handleStatusAuth = (status: string) => {
         switch (status) {
             case apiSattus.SUCCES:
-                window.location.href = '/intranet'
+                router.push('/intranet')
                 break
             case apiSattus.FAILED:
                 setAuth({ response: 'Credenciales incorrectas' })
