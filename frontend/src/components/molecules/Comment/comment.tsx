@@ -1,5 +1,5 @@
 import React from 'react'
-import { WCircleIcon } from '@/components'
+import WCircleIcon from './../../atoms/CircleIcon/circleIcon'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ModeCommentIcon from '@mui/icons-material/ModeComment'
 import CachedIcon from '@mui/icons-material/Cached'
@@ -57,10 +57,6 @@ const WComment: React.FC<WCommentProps> = ({
                 <div className="comment-icon">
                     <WCircleIcon typeColor="comment" iconSize={18} icon={ModeCommentIcon} />
                     <span>{countComment}</span>
-                </div>
-                <div className="comment-icon">
-                    <WCircleIcon typeColor="comment" iconSize={18} icon={CachedIcon} />
-                    <span>{countShareds}</span>
                 </div>
                 <div className="comment-icon">
                     <WCircleIcon typeColor="comment" iconSize={18} icon={BarChartIcon} />

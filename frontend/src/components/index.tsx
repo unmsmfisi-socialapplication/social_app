@@ -14,6 +14,7 @@ export { default as WInputCode } from './atoms/InputCode/inputCode'
 export { default as WCardFollow } from './atoms/CardFollow/CardFollow'
 export { default as WSearch } from './atoms/Search/Search'
 export { default as WTopicFollow } from './atoms/TopicFollow/TopicFollow'
+export { default as WSelectedText } from './atoms/SelectText/selectText'
 
 // export molecule components
 export { default as WLogo } from './atoms/Logo/titleSearch'
@@ -26,6 +27,8 @@ export { default as WDetailImage } from './molecules/DetailsImage/index'
 export { default as WPostSocial } from './molecules/PostSocial/index'
 export { default as WPostTypes } from './molecules/PostTypes/index'
 export { default as WUserCHATCTA } from './molecules/UserChatCTA/index'
+export { default as WPublicationConfirm } from './molecules/PublicationConfirm/index'
+export { default as WReportPublication } from './molecules/ReportPublication/index'
 // export organism components
 export { default as WCardAuth } from './organisms/CardAuth'
 export { default as WRightBar } from './organisms/RightBar/RightBar'
