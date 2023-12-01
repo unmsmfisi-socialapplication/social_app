@@ -8,7 +8,7 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_communities/infrastructure"
 )
 
-func InterestTopicsModuleRouter(dbInstance *sql.DB) *chi.Mux {
+func InterestCommunitiesModuleRouter(dbInstance *sql.DB) *chi.Mux {
 	r := chi.NewRouter()
 
 	CommunityRepo := infrastructure.NewCommunityDBRepository(dbInstance)

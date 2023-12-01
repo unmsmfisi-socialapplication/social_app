@@ -128,7 +128,7 @@ func Router() http.Handler {
 	followRouter := follow.FollowModuleRouter(dbInstance)
 	protectedRoutes.Mount("/follow_profile", followRouter)
 	//Interest Communities
-	interestCommunitiesRouter := interest_communities.InterestTopicsModuleRouter(dbInstance)
+	interestCommunitiesRouter := interest_communities.InterestCommunitiesModuleRouter(dbInstance)
 	protectedRoutes.Mount("/interestCommunities", interestCommunitiesRouter)
 	return freeRoutes
 }
