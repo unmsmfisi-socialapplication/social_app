@@ -23,5 +23,4 @@ describe('WSearch', () => {
 
         expect(searchButton).toBeInTheDocument()
     })
-    
 })
