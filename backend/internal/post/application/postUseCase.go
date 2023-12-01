@@ -7,7 +7,25 @@ import (
 )
 
 var (
-	ErrUserNotFound = errors.New("user not found")
+	 // User-related errors
+	 ErrUserNotFound = errors.New("user not found")
+	 ErrUserUnauthorized = errors.New("user unauthorized")
+	 ErrUserInactive = errors.New("user inactive")
+ 
+	 // Post-related errors
+	 ErrPostNotFound = errors.New("post not found")
+	 ErrPostInvalid = errors.New("invalid post")
+	 ErrPostAccessDenied = errors.New("access to post denied")
+ 
+	 // External API-related errors
+	 ErrAPIConnectionFailure = errors.New("failed to connect to external API")
+	 ErrAPIResponseError = errors.New("error in external API response")
+	 ErrAPITimeout = errors.New("external API request timed out")
+ 
+	 // Database-related errors
+	 ErrDatabaseConnection = errors.New("database connection error")
+	 ErrDatabaseQueryFailed = errors.New("database query failed")
+	 ErrRecordNotFound = errors.New("record not found in database") 
 )
 
 type PostUseCaseInterface interface {
