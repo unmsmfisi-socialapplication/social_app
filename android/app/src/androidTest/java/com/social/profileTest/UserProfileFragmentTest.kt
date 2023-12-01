@@ -5,15 +5,33 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class UserProfileFragmentTest {
-    /*@Test
-    fun testConvertNumberToK() {
-        // Prueba con un número mayor o igual a 1000000
-        assertEquals("1.2M", UserProfileFragment.convertNumberToK(1230000))
+    @Test
+    fun testConvertNumber() {
+        val userProfileFragment = UserProfileFragment()
+        val result = userProfileFragment.convertNumberToK(500)
+        assertEquals(
+            "500",
+            result,
+        )
+    }
 
-        // Prueba con un número mayor o igual a 1000
-        assertEquals("1.2k", UserProfileFragment.convertNumberToK(1230))
+    @Test
+    fun testConvertNumberK() {
+        val userProfileFragment = UserProfileFragment()
+        val result = userProfileFragment.convertNumberToK(2500)
+        assertEquals(
+            "2k",
+            result,
+        )
+    }
 
-        // Prueba con un número menor a 1000
-        assertEquals("500", UserProfileFragment.convertNumberToK(500))
-    }*/
+    @Test
+    fun testConvertNumberM() {
+        val userProfileFragment = UserProfileFragment()
+        val result = userProfileFragment.convertNumberToK(1200000)
+        assertEquals(
+            "1M",
+            result,
+        )
+    }
 }

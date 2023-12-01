@@ -10,20 +10,20 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
 class NewPostFragmentTest {
-
     @Test
     fun testRemoveImage() {
         val newPostFragment = NewPostFragment()
         newPostFragment.selectedImages.clear()
 
-        newPostFragment.imageViews = listOf(
-            createMockImageView(),
-            createMockImageView(),
-            createMockImageView(),
-            createMockImageView(),
-            createMockImageView(),
-            createMockImageView(),
-        )
+        newPostFragment.imageViews =
+            listOf(
+                createMockImageView(),
+                createMockImageView(),
+                createMockImageView(),
+                createMockImageView(),
+                createMockImageView(),
+                createMockImageView(),
+            )
 
         val bitmap1 = createTestBitmap()
         val bitmap2 = createTestBitmap()
@@ -33,7 +33,7 @@ class NewPostFragmentTest {
                 bitmap1,
                 bitmap2,
                 bitmap3,
-            )
+            ),
         )
 
         newPostFragment.removeImage(1)
@@ -57,7 +57,7 @@ class NewPostFragmentTest {
             1,
             1,
             Bitmap.Config.ARGB_8888,
-            )
+        )
     }
 
     private fun createMockImageView(): ShapeableImageView {
@@ -73,11 +73,12 @@ class NewPostFragmentTest {
         val mockImageView2 = createMockImageView()
         val mockImageView3 = createMockImageView()
 
-        newPostFragment.imageViews = listOf(
-            mockImageView1,
-            mockImageView2,
-            mockImageView3,
-        )
+        newPostFragment.imageViews =
+            listOf(
+                mockImageView1,
+                mockImageView2,
+                mockImageView3,
+            )
 
         val bitmap1 = createTestBitmap()
         val bitmap2 = createTestBitmap()
@@ -87,7 +88,7 @@ class NewPostFragmentTest {
                 bitmap1,
                 bitmap2,
                 bitmap3,
-            )
+            ),
         )
 
         newPostFragment.updateImageUI()
