@@ -88,3 +88,6 @@ func (ph *PostHandler) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 
 	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", post)
 }
+
+func (h *PostHandler) PostToPlatforms(w http.ResponseWriter, r *http.Request) {
+}
