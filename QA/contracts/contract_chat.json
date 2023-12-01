@@ -1,5 +1,5 @@
 {
-    "Creation Successful Room": {
+    "Creation Successful Room Chat": {
         "description": "Create a new chat room with a valid request",
         "request": {
             "method": "POST",
@@ -31,6 +31,41 @@
             "body": {
                 "status": "OK",
                 "message": "Break room created successfully"
+            },
+        "required": ["id", "name"]
+    }},
+    "Creation Room Chat with Invalid Request Payload": {
+        "description": "Attempted creation Room Chat with an invalid request payload",
+        "request": {
+            "method": "POST",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/create.room",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "id": {
+                    "type": "integer",
+                    "minLength": 1,
+                    "description": "The unique ID of the room."
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The name of the room."
+                }
+            }
+        },
+        "example": [
+            {
+                "id": "room123",
+                "name": ""
+            }
+        ],
+        "response": {
+            "status": 400,
+            "body": {
+                "status": "ERROR",
+                "message": "The field name is required"
             },
         "required": ["id", "name"]
     }}
