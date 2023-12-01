@@ -2,7 +2,6 @@ package com.social.interactionTest.chatsTest
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.social.domain.model.ChatUserData
-import com.social.presentation.interaction.chats.UserAdapter
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

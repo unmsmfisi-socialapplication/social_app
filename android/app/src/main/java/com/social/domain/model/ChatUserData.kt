@@ -1,12 +1,10 @@
 package com.social.domain.model
 
-import java.io.Serializable
-
 data class ChatUserData(
-    var name: String = "",
-    var image: String = "",
-    var message: String = "",
-    var hourSend: String = "",
-    var countNotification: String = "",
-    var token: String = "",
-) : Serializable
+    val name: String,
+    val image: String,
+    val message: String,
+    val hourSend: String,
+    val countNotification: String,
+    //var token: String,
+)
