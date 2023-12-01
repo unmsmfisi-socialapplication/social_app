@@ -22,7 +22,7 @@ jobs:
     # Define the steps to be executed within the job
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2 # Check out the repository code
+        uses: actions/checkout@v4 # Check out the repository code
 
       - name: Set Up Go
         uses: actions/setup-go@v2

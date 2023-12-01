@@ -66,6 +66,25 @@ func (ph *PostHandler) HandleGetAllPost(w http.ResponseWriter, r *http.Request) 
 	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", posts)
 }
 
+func (ph *PostHandler) HandleTimeline(w http.ResponseWriter, r *http.Request) {
+
+	var data struct {
+		UserId int `json:"user_id"`
+	}
+	err := json.NewDecoder(r.Body).Decode(&data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	timeline, err := ph.useCase.RetrieveTimelinePosts(int64(data.UserId))
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
+		return
+	}
+
+	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", timeline)
+}
 func (ph *PostHandler) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 
 	idStr := chi.URLParam(r, "id")
