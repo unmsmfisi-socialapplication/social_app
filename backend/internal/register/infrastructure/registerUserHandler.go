@@ -34,7 +34,7 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	dbUser, err := rh.useCase.RegisterUser(data.Email, data.Username, data.Password)
+	dbUser, err := rh.useCase.RegisterUser(data)
 	if err != nil {
 		switch err {
 		case application.ErrEmailInUse:
@@ -46,10 +46,13 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 		case application.ErrPhone:
 			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid phone format")
 			return
+		default:
+			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", err.Error())
+			return
 		}
 	}
 
-	reponse := domain.UserToUserResponse(*dbUser)
+	response := domain.UserToUserResponse(*dbUser)
 
-	utils.SendJSONResponse(w, http.StatusOK, "OK", reponse)
+	utils.SendJSONResponse(w, http.StatusOK, "OK", response)
 }
