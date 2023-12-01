@@ -73,7 +73,6 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation("com.google.android.gms:play-services-location:21.0.1")
-    implementation("androidx.fragment:fragment-testing:1.6.2")
     testImplementation("junit:junit:4.13.2")
 
     val roomVersion = "2.6.0"
