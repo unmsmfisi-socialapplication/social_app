@@ -131,7 +131,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             AlertDialog.Builder(requireContext()).apply {
                 setView(dialogView)
                 setCancelable(true)
-        }.create()
+            }.create()
 
         dialog.show()
 
@@ -140,7 +140,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 copyFrom(dialog.window?.attributes)
                 width = WindowManager.LayoutParams.MATCH_PARENT
                 height = WindowManager.LayoutParams.MATCH_PARENT
-        }
+            }
 
         dialog.window?.attributes = layoutParams
 
