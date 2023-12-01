@@ -84,7 +84,7 @@
                     style="@style/ImageViewProfile"
                     android:contentDescription="@string/photo_profile"
                     app:shapeAppearanceOverlay="@style/ImageViewCorner"
-                    app:srcCompat="@drawable/photo_profile" />
+                    app:srcCompat="@drawable/model" />
             </LinearLayout>
 
             <Button
