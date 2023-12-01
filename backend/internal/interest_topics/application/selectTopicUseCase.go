@@ -10,21 +10,21 @@ var (
 	ExistingUserInterestTopic = errors.New("existing user interest topic")
 )
 
-type InterestTopicsUseCaseI interface {
+type SelectTopicUseCaseI interface {
 	SetInterestTopics(userId string, interest_id []string) error
 }
 
-type InterestTopicsUseCase struct {
+type SelectTopicUseCase struct {
 	repository domain.UserInterestsRepository
 }
 
-func NewInterestTopicsUseCase(repository domain.UserInterestsRepository) *InterestTopicsUseCase {
-	return &InterestTopicsUseCase{
+func NewSelectTopicUseCase(repository domain.UserInterestsRepository) *SelectTopicUseCase {
+	return &SelectTopicUseCase{
 		repository: repository,
 	}
 }
 
-func (usecase *InterestTopicsUseCase) SetInterestTopics(userId string, interestId []string) error {
+func (usecase *SelectTopicUseCase) SetInterestTopics(userId string, interestId []string) error {
 	var userInterests []domain.UserInterestTopic
 
 	for i := 0; i < len(interestId); i++ {

@@ -30,7 +30,7 @@ func (m *mockUserInterestsRepository) Create(interests []domain.UserInterestTopi
 func TestInterestTopicsUseCase_SetInterestTopics(t *testing.T) {
 
 	mockRepo := &mockUserInterestsRepository{}
-	useCase := NewInterestTopicsUseCase(mockRepo)
+	useCase := NewSelectTopicUseCase(mockRepo)
 
 	// Test Case: Successful Insertion
 	t.Run("Successful Insertion", func(t *testing.T) {

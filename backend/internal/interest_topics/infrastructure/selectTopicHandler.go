@@ -1,4 +1,4 @@
-package infraestructure
+package infrastructure
 
 import (
 	"encoding/json"
@@ -9,7 +9,7 @@ import (
 )
 
 type SelectTopicHandler struct {
-	useCase application.InterestTopicsUseCaseI
+	useCase application.SelectTopicUseCaseI
 }
 
 type requestData struct {
@@ -17,7 +17,7 @@ type requestData struct {
 	InterestId []string `json:"interest_id"`
 }
 
-func NewSelectTopicHandler(useCase application.InterestTopicsUseCaseI) *SelectTopicHandler {
+func NewSelectTopicHandler(useCase application.SelectTopicUseCaseI) *SelectTopicHandler {
 
 	return &SelectTopicHandler{useCase: useCase}
 }

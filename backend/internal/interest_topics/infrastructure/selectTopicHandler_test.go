@@ -1,4 +1,4 @@
-package infraestructure
+package infrastructure
 
 import (
 	"bytes"
@@ -116,10 +116,10 @@ func TestHandleHandleSelectTopic(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			req, err := http.NewRequest(http.MethodPost, "/interestTopics", bytes.NewBufferString(tt.inputBody))
+			req, err := http.NewRequest(http.MethodPost, "/interestTopics/select", bytes.NewBufferString(tt.inputBody))
 
-			if req.URL.Path != "/interestTopics" {
-				t.Errorf("expected request to /interestTopics, got %s", req.URL.Path)
+			if req.URL.Path != "/interestTopics/select" {
+				t.Errorf("expected request to /interestTopics/select, got %s", req.URL.Path)
 				return
 			}
 
