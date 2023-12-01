@@ -1,6 +1,6 @@
 'use client'
 
-import  WSearch  from './../../atoms/Search/Search'
+import WSearch from './../../atoms/Search/Search'
 import { Box, Button } from '@mui/material'
 
 interface PropsRightBar {}

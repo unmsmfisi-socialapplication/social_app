@@ -57,7 +57,7 @@ export default function TestPage() {
         photos: 120,
         followers: 10000,
         following: 64,
-     };
+    }
     const [modalConfirm, setModalConfirm] = useState<boolean>(false)
     const [reportModal, setReportModal] = useState<boolean>(false)
 
@@ -221,9 +221,8 @@ export default function TestPage() {
                 messagePreview="Hey muy buenas a todos guapísimos"
                 time="20:17"
             />
-            <ChatInfo username='Jonathan Lara' />
+            <ChatInfo username="Jonathan Lara" />
             <ChatActions />
-
         </RootLayout>
     )
 }
