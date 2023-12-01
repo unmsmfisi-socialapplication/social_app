@@ -62,3 +62,7 @@ type SocialMediaPost struct {
     ID      int64
     Message string
 }
+
+type PixelfedAPI interface {
+    MultipostPixelfeed(post PostCreate) error
+}
