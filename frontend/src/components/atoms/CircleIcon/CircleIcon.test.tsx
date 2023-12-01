@@ -20,4 +20,12 @@ describe('CircleIcon', () => {
         expect(iconElement).toHaveStyle('color: red')
         expect(iconElement).toHaveStyle('font-size: 24px')
     })
+
+    it('renders the WCircleIcon with the default icon and primary color', () => {
+        const { getByTestId } = render(<WCircleIcon dataTestid="icon" />)
+
+        const iconElement = getByTestId('icon')
+        expect(iconElement).toBeInTheDocument()
+        expect(iconElement).toHaveClass('circleIcon--primary')
+    })
 })
