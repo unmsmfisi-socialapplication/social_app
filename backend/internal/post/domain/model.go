@@ -6,9 +6,9 @@ import (
 )
 
 var (
-	ErrReporterUserDoesNotExist   = errors.New("Reporter user does not exist")
-	ErrPostNotFound               = errors.New("Post not found")
-	ErrUserHasAlreadyReportedPost = errors.New("User has already reported this post")
+	ErrReporterUserDoesNotExist   = errors.New("reporter user does not exist")
+	ErrPostNotFound               = errors.New("post not found")
+	ErrUserHasAlreadyReportedPost = errors.New("user has already reported this post")
 )
 
 type PostBase struct {
