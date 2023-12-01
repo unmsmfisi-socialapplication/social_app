@@ -127,17 +127,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun showCommentsFullScreen() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.item_comment, null)
-        val dialog = AlertDialog.Builder(requireContext()).apply {
-            setView(dialogView)
-            setCancelable(true)
+        val dialog =
+            AlertDialog.Builder(requireContext()).apply {
+                setView(dialogView)
+                setCancelable(true)
         }.create()
 
         dialog.show()
 
-        val layoutParams = WindowManager.LayoutParams().apply {
-            copyFrom(dialog.window?.attributes)
-            width = WindowManager.LayoutParams.MATCH_PARENT
-            height = WindowManager.LayoutParams.MATCH_PARENT
+        val layoutParams =
+            WindowManager.LayoutParams().apply {
+                copyFrom(dialog.window?.attributes)
+                width = WindowManager.LayoutParams.MATCH_PARENT
+                height = WindowManager.LayoutParams.MATCH_PARENT
         }
 
         dialog.window?.attributes = layoutParams
