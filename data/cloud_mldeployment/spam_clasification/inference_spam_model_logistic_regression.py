@@ -1,5 +1,4 @@
 import joblib
-from sklearn.feature_extraction.text import TfidfVectorizer
 from bs4 import BeautifulSoup
 import re
 from nltk.tokenize import word_tokenize

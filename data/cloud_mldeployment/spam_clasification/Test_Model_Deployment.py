@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
-from azureml.core import Workspace, Environment, Model
+from azureml.core import Workspace, Environment
 from azureml.core.model import InferenceConfig
 from azureml.core.webservice import AciWebservice
 from model_deployment import deploy_model

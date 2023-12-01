@@ -1,5 +1,5 @@
 import json
-from azureml.core import Workspace, Model
+from azureml.core import Workspace
 from azureml.core.webservice import AciWebservice
 
 # Configura tu espacio de trabajo de Azure Machine Learning
