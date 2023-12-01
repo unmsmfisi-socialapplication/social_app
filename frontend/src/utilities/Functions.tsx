@@ -1,3 +1,5 @@
+import { validFormatImage } from '../utilities/Constant'
+
 //TODO: Create function reutilization file for all the constant values
 export function validatePassword(password1: string, password2: string): boolean {
     return password1 === password2
@@ -100,4 +102,8 @@ export function countCharacters(inputText: string, maxLength: number): number {
 
 export const useHistory = (url: string) => {
     window.history.pushState({}, '', url)
+}
+
+export function validateImageFormat(fileName: string): boolean {
+    return validFormatImage.test(fileName)
 }

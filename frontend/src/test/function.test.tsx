@@ -7,6 +7,7 @@ import {
     generateUniqueUsernames,
     filterContentByTag,
     countCharacters,
+    validateImageFormat,
 } from '../utilities/Functions'
 
 //Test: Validate passwords
@@ -159,5 +160,33 @@ describe('countCharacters', () => {
 
     it('should handle empty input correctly', () => {
         expect(countCharacters('', 10)).toBe(0)
+    })
+})
+
+//Test: Function validateImageFormat
+describe('validateImageFormat', () => {
+    it('should return true for valid image formats', () => {
+        expect(validateImageFormat('image1.jpg')).toBe(true)
+        expect(validateImageFormat('photo.png')).toBe(true)
+    })
+
+    it('should return false for invalid image formats', () => {
+        expect(validateImageFormat('capture.gif')).toBe(false)
+        expect(validateImageFormat('notanimage.txt')).toBe(false)
+    })
+
+    it('should be case-insensitive', () => {
+        expect(validateImageFormat('IMAGE.JPG')).toBe(true)
+        expect(validateImageFormat('PHOTO.PNG')).toBe(true)
+    })
+
+    it('should handle various file name lengths', () => {
+        expect(validateImageFormat('short.jpg')).toBe(true)
+        expect(validateImageFormat('mediumlength.png')).toBe(true)
+        expect(validateImageFormat('verylongfilenameforanimage.jpeg')).toBe(true)
+    })
+
+    it('should handle empty input correctly', () => {
+        expect(validateImageFormat('', 10)).toBe(false)
     })
 })
