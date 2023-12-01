@@ -38,6 +38,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
 import WSelectedText from '@/components/atoms/SelectText/selectText'
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown'
+import WProfileStatitics from '@/components/molecules/ProfileStatitics'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
@@ -48,6 +49,12 @@ export default function TestPage() {
         { value: 'Instagram' },
         { value: 'Tik Tok' },
     ]
+    const user = {
+        posts: 100,
+        photos: 120,
+        followers: 10000,
+        following: 64,
+     };
     const [modalConfirm, setModalConfirm] = useState<boolean>(false)
     const [reportModal, setReportModal] = useState<boolean>(false)
 
@@ -204,6 +211,7 @@ export default function TestPage() {
                 onClose={() => setReportModal(false)}
                 onConfirm={(reason) => console.log(`Se reporto al usuario por ${reason}`)}
             />
+            <WProfileStatitics {...user} />
         </RootLayout>
     )
 }
