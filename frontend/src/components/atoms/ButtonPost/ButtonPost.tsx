@@ -1,17 +1,18 @@
-'use client'
+// WButtonPost.tsx
 import React from 'react'
 import Button from '@mui/material/Button'
 import './index.scss'
 
-interface WButtonPost {
+interface WButtonPostProps {
     typeColor?: 'primary' | 'secondary' | 'disabled'
     text?: string
     size?: 'large'
     disabled?: boolean
     borderRadius?: string
+    onClick?: () => void // Nueva prop onClick
 }
 
-const WButtonPost: React.FC<WButtonPost> = ({ disabled, typeColor, text, size }) => {
+const WButtonPost: React.FC<WButtonPostProps> = ({ disabled, typeColor, text, size, onClick }) => {
     const buttonClass = `button typeButton--${disabled ? 'disabled' : typeColor}`
     return (
         <Button
@@ -19,6 +20,7 @@ const WButtonPost: React.FC<WButtonPost> = ({ disabled, typeColor, text, size })
             className={buttonClass}
             size={size}
             disabled={disabled}
+            onClick={onClick} // Usa la prop onClick aquí
         >
             {text}
         </Button>
