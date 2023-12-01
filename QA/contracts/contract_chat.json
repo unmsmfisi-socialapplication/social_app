@@ -1,0 +1,37 @@
+{
+    "Creation Successful Room": {
+        "description": "Create a new chat room with a valid request",
+        "request": {
+            "method": "POST",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/create.room",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "id": {
+                    "type": "integer",
+                    "minLength": 1,
+                    "description": "The unique ID of the room."
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The name of the room."
+                }
+            }
+        },
+        "example": [
+            {
+                "id": "room123",
+                "name": "General Chat Room"
+            }
+        ],
+        "response": {
+            "status": 200,
+            "body": {
+                "status": "OK",
+                "message": "Break room created successfully"
+            },
+        "required": ["id", "name"]
+    }}
+}
