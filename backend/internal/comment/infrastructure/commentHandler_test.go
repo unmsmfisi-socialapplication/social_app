@@ -114,6 +114,7 @@ func generateDummyComments(numComments int) map[int64]*domain.Comment {
 			Comment:       "This is a test comment " + strconv.Itoa(int(i)),
 			InsertionDate: time.Now(),
 			UpdateDate:    time.Now(),
+			IsActive:      true,
 		}
 	}
 	return comments
@@ -155,6 +156,7 @@ func TestCommentHandler_HandleCreateComment(t *testing.T){
 		InsertionDate   time.Time `json:"insertionDate"`
 		UpdateDate      time.Time `json:"updateDate"`
 		ParentCommentID int64     `json:"parentCommentID"`
+		IsActive        bool      `json:"isActive"`
 	}{
 		UserID:          1,
 		PostID:          2,
@@ -162,6 +164,7 @@ func TestCommentHandler_HandleCreateComment(t *testing.T){
 		InsertionDate:   time.Now(),
 		UpdateDate:      time.Now(),
 		ParentCommentID: 0,
+		IsActive:        true,
 	}
 	requestBody, _ := json.Marshal(commentData)
 	req, err := http.NewRequest("POST", "/comments", bytes.NewReader(requestBody))
@@ -171,8 +174,6 @@ func TestCommentHandler_HandleCreateComment(t *testing.T){
 	response := executeTestRequest(r, req)
 	checkResponseCode(t, http.StatusOK, response.Code)
 }
-
-//CONTINUAR AQUÍ
 
 func TestCommentHandler_HandleUpdateComment(t *testing.T) {
 	mcu := NewMockCommentUseCase()
@@ -185,6 +186,7 @@ func TestCommentHandler_HandleUpdateComment(t *testing.T) {
 		InsertionDate   time.Time `json:"insertionDate"`
 		UpdateDate      time.Time `json:"updateDate"`
 		ParentCommentID int64     `json:"parentCommentID"`
+
 	}{
 		UserID:          1,
 		PostID:          2,
