@@ -16,7 +16,17 @@ interface WButtonPost {
     variant?: 'outlined' | 'contained'
 }
 
-const WButtonPost: React.FC<WButtonPost> = ({ dataTestid, id, disabled, typeColor, text, type, size, variant , onClick }) => {
+const WButtonPost: React.FC<WButtonPost> = ({
+    dataTestid,
+    id,
+    disabled,
+    typeColor,
+    text,
+    type,
+    size,
+    variant,
+    onClick,
+}) => {
     const buttonClass = `button typeButton--${disabled ? 'disabled' : typeColor}`
     return (
         <Button
