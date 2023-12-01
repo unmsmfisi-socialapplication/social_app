@@ -6,8 +6,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
-
 	"github.com/golang-jwt/jwt"
 	"github.com/google/uuid"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/domain"
@@ -38,7 +36,6 @@ type LoginUseCase struct {
 }
 
 func NewLoginUseCase(r UserRepository) *LoginUseCase {
-	utils.LoadEnvFromFile(".env")
 	jwtKey := os.Getenv("JWT_SECRET_KEY")
 	if jwtKey == "" {
 		panic("JWT_SECRET_KEY is not set in environment variables")

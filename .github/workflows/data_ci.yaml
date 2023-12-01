@@ -23,7 +23,7 @@ jobs:
     # Define the steps to be executed within the job
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Check out the repository code
+        uses: actions/checkout@v4  # Check out the repository code
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
@@ -37,7 +37,7 @@ jobs:
           files: 'requirements.txt'  # Check if 'requirements.txt' exists
 
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}

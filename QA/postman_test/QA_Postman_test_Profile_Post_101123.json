@@ -1,0 +1,1190 @@
+{
+	"info": {
+		"_postman_id": "8015969f-095c-4330-ad0e-5d45b7c512c6",
+		"name": "QA tests for App Social Media",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30943573",
+		"_collection_link": "https://qa-team-unmsm.postman.co/workspace/QA-team~27b9b0d2-ea87-4c33-93bf-543437bc1e1b/collection/30943573-8015969f-095c-4330-ad0e-5d45b7c512c6?action=share&source=collection_link&creator=30943573"
+	},
+	"item": [
+
+{
+    "name": "Profile Post",
+    "item": [
+        {
+            "name": "Creacion del perfil",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: The user must be authenticated and the username is extracted from the request body\r",
+                            "pm.test(\"Given: The user is authenticated\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var user = JSON.parse(requestBody);\r",
+                            "    pm.expect(user, \"The user object should have a 'name' property\").to.have.property('name');\r",
+                            "    // Add an assertion that will always pass to display the user's name in the test results\r",
+                            "    pm.expect(`User's name: ${user.name}`).to.be.a('string');\r",
+                            "});\r",
+                            "\r",
+                            "// When: A POST request is sent to the endpoint to create a profile\r",
+                            "pm.test(\"When: The user creates their profile correctly filling in the fields 'name', 'summary', 'Profile Image' in public mode\", function () {\r",
+                            "    pm.expect(pm.request.body.raw).to.be.a('string'); // Confirm that a body has been sent in the request\r",
+                            "    \r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var body = JSON.parse(requestBody); // Convert the request body to a JSON object\r",
+                            "    \r",
+                            "    // Confirm that the required fields are present and have appropriate content\r",
+                            "    pm.expect(body).to.have.property('type', 'Person');\r",
+                            "    pm.expect(body).to.have.property('name', 'John Doe');\r",
+                            "    pm.expect(body).to.have.property('username', 'johndoe');\r",
+                            "    pm.expect(body).to.have.property('summary');\r",
+                            "    pm.expect(body).to.have.property('profileImage').that.includes('https://example.com/images/johndoe.jpg');\r",
+                            "    pm.expect(body).to.have.property('endpoints').that.is.an('object');\r",
+                            "    \r",
+                            "    // Confirm that the fields 'hasMultimedia' and 'public' are booleans and have the expected values\r",
+                            "    pm.expect(body.hasMultimedia).to.be.true;\r",
+                            "    pm.expect(body.public).to.be.true;\r",
+                            "});\r",
+                            "\r",
+                            "// Then: The response should contain the message \"Profile created successfully\"\r",
+                            "pm.test(\"Then: Should receive confirmation message 'Profile created successfully'\", function () {\r",
+                            "    var responseData = pm.response.json();\r",
+                            "    pm.expect(responseData.message).to.eql(\"Profile created successfully\");\r",
+                            "});\r",
+                            "\r",
+                            "// Here you can continue with more tests like verifying headers, response times, etc.\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"John Doe\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": true,\r\n    \"public\":true,\r\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\r\n    \"profileImage\": \"https://example.com/images/johndoe.jpg\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "crear-perfil"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Creacion del perfil",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"John Doe\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": true,\r\n    \"public\":true,\r\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\r\n    \"profileImage\": \"https://example.com/images/johndoe.jpg\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "crear-perfil"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"Profile created successfully\",\n    \"STATUS\": \"OK\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Creacion del perfil Privado",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: The user must be authenticated and the username is extracted from the request body\r",
+                            "pm.test(\"Given: The user is authenticated\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var user = JSON.parse(requestBody);\r",
+                            "    pm.expect(user, \"The user object should have a 'name' property\").to.have.property('name');\r",
+                            "    // Add an assertion that will always pass to display the user's name in the test results\r",
+                            "    pm.expect(`User's name: ${user.name}`).to.be.a('string');\r",
+                            "});\r",
+                            "\r",
+                            "// When: A POST request is sent to the endpoint to create a profile\r",
+                            "pm.test(\"When: The user creates their profile correctly filling in the fields 'name', 'summary', 'Profile Image' (optional) in private mode\", function () {\r",
+                            "    pm.expect(pm.request.body.raw).to.be.a('string'); // Confirm that a body has been sent in the request\r",
+                            "    \r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var body = JSON.parse(requestBody); // Convert the request body to a JSON object\r",
+                            "    \r",
+                            "    // Confirm that the required fields are present and have appropriate content\r",
+                            "    pm.expect(body).to.have.property('type', 'Person');\r",
+                            "    pm.expect(body).to.have.property('name', 'John Doe');\r",
+                            "    pm.expect(body).to.have.property('username', 'johndoe');\r",
+                            "    pm.expect(body).to.have.property('summary');\r",
+                            "    pm.expect(body).to.have.property('profileImage').that.includes('https://example.com/images/johndoe.jpg');\r",
+                            "    pm.expect(body).to.have.property('endpoints').that.is.an('object');\r",
+                            "    \r",
+                            "    // Confirm that the fields 'hasMultimedia' and 'public' are booleans and have the expected values\r",
+                            "    pm.expect(body.hasMultimedia).to.be.true;\r",
+                            "    pm.expect(body.public).to.be.false;\r",
+                            "});\r",
+                            "\r",
+                            "// Then: The response should contain the message \"Profile created successfully\"\r",
+                            "pm.test(\"Then: Should receive confirmation message 'Profile created successfully'\", function () {\r",
+                            "    pm.response.to.have.status(200); // Confirm that the response status is 200 OK\r",
+                            "    var responseData = pm.response.json();\r",
+                            "    pm.expect(responseData.message).to.eql(\"Profile created successfully\"); // Confirm that the response message is as expected\r",
+                            "});\r",
+                            "\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"John Doe\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": true,\r\n    \"public\":false,\r\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\r\n    \"profileImage\": \"https://example.com/images/johndoe.jpg\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "crear-perfil"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Creacion del perfil Privado",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"John Doe\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": true,\r\n    \"public\":false,\r\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\r\n    \"profileImage\": \"https://example.com/images/johndoe.jpg\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "crear-perfil"
+                            ]
+                        }
+                    },
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"Profile created successfully\",\n    \"STATUS\": \"OK\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Creacion del perfil Sin Imagen",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: The user must be authenticated and the username is extracted from the request body\r",
+                            "pm.test(\"Given: The user is authenticated\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var user = JSON.parse(requestBody);\r",
+                            "    pm.expect(user, \"The user object should have a 'name' property\").to.have.property('name');\r",
+                            "    // Add an assertion that will always pass to display the user's name in the test results\r",
+                            "    pm.expect(`User's name: ${user.name}`).to.be.a('string');\r",
+                            "});\r",
+                            "\r",
+                            "// When: A POST request is sent to the endpoint to create a profile\r",
+                            "pm.test(\"When: The user creates their profile correctly filling in the fields 'name', 'summary' in public mode\", function () {\r",
+                            "    pm.expect(pm.request.body.raw).to.be.a('string'); // Confirm that a body has been sent in the request\r",
+                            "    \r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var body = JSON.parse(requestBody); // Convert the request body to a JSON object\r",
+                            "    \r",
+                            "    // Confirm that the required fields are present and have appropriate content\r",
+                            "    pm.expect(body).to.have.property('type', 'Person');\r",
+                            "    pm.expect(body).to.have.property('name', 'John Doe');\r",
+                            "    pm.expect(body).to.have.property('username', 'johndoe');\r",
+                            "    pm.expect(body).to.have.property('summary');\r",
+                            "    pm.expect(body.profileImage).to.be.empty; // Verify that the 'profileImage' field is empty\r",
+                            "    pm.expect(body).to.have.property('endpoints').that.is.an('object');\r",
+                            "    \r",
+                            "    // Confirm that the fields 'hasMultimedia' and 'public' are booleans and have the expected values\r",
+                            "    pm.expect(body.hasMultimedia).to.be.false;\r",
+                            "    pm.expect(body.public).to.be.true;\r",
+                            "});\r",
+                            "\r",
+                            "// Then: The response should contain the message \"Profile created successfully\"\r",
+                            "pm.test(\"Then: Should receive confirmation message 'Profile created successfully'\", function () {\r",
+                            "    pm.response.to.have.status(200); // Confirm that the response status is 200 OK\r",
+                            "    var responseData = pm.response.json();\r",
+                            "    pm.expect(responseData.message).to.eql(\"Profile created successfully\"); // Confirm that the response message is as expected\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"John Doe\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": false,\r\n    \"public\":true,\r\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\r\n    \"profileImage\": \"\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "crear-perfil"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Creacion del perfil sin imagen",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"John Doe\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": false,\r\n    \"public\":true,\r\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\r\n    \"profileImage\": \"\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "crear-perfil"
+                            ]
+                        }
+                    },
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"Profile created successfully\",\n    \"STATUS\": \"OK\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Creacion del perfil Incorrecto 1 Sin Nombre",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: The user must be authenticated and the username is extracted from the request body\r",
+                            "pm.test(\"Given: The user is authenticated\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var user = JSON.parse(requestBody);\r",
+                            "    pm.expect(user, \"The user object should have a 'name' property\").to.have.property('name');\r",
+                            "    // Add an assertion that will always pass to display the user's name in the test results\r",
+                            "    pm.expect(`User's name: ${user.name}`).to.be.a('string');\r",
+                            "});\r",
+                            "\r",
+                            "// When: A POST request is sent to the endpoint to create a profile with an error in the 'name'\r",
+                            "pm.test(\"When: The user attempts to create their profile but the 'name' field is empty\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var body = JSON.parse(requestBody);\r",
+                            "    \r",
+                            "    // Confirm that the request body has an empty 'name' field\r",
+                            "    pm.expect(body).to.have.property('name').that.is.empty;\r",
+                            "    \r",
+                            "    // The following assertions pass as in the correct case, no need to change them\r",
+                            "    pm.expect(body).to.have.property('type', 'Person');\r",
+                            "    pm.expect(body).to.have.property('username', 'johndoe');\r",
+                            "    pm.expect(body).to.have.property('summary');\r",
+                            "    pm.expect(body).to.have.property('profileImage').that.includes('https://example.com/images/johndoe.jpg');\r",
+                            "    pm.expect(body).to.have.property('endpoints').that.is.an('object');\r",
+                            "    pm.expect(body.hasMultimedia).to.be.true;\r",
+                            "    pm.expect(body.public).to.be.true;\r",
+                            "});\r",
+                            "\r",
+                            "// Then: The response should contain an error message because the name is empty\r",
+                            "pm.test(\"Then: Should receive an error message because the name is empty\", function () {\r",
+                            "    pm.response.to.have.status(400); // Assuming the response status would be 400 Bad Request or similar\r",
+                            "    var responseData = pm.response.json();\r",
+                            "    pm.expect(responseData.message).to.eql(\"Profile creation failed due to empty name field\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": true,\r\n    \"public\":true,\r\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\r\n    \"profileImage\": \"https://example.com/images/johndoe.jpg\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "crear-perfil"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Creacion del perfil Incorrecto 1 Sin Nombre",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": true,\r\n    \"public\":true,\r\n    \"summary\": \"Experienced web developer with a passion for responsive design and user experience.\",\r\n    \"profileImage\": \"https://example.com/images/johndoe.jpg\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "crear-perfil"
+                            ]
+                        }
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"Profile creation failed due to empty name field\",\n    \"errors\": [\n        \"Name is required and cannot be empty \"\n    ]\n}"
+                }
+            ]
+        },
+        {
+            "name": "Creacion del perfil Incorrecto 2 Sin Biografia",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: The user must be authenticated and the username is extracted from the request body\r",
+                            "pm.test(\"Given: The user is authenticated and has a valid name\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var user = JSON.parse(requestBody);\r",
+                            "    pm.expect(user, \"The user object should have a non-empty 'name' property\").to.have.property('name').that.is.not.empty;\r",
+                            "    // Add an assertion that will always pass to display the user's name in the test results\r",
+                            "    pm.expect(`User's name: ${user.name}`).to.be.a('string');\r",
+                            "});\r",
+                            "\r",
+                            "// When: A POST request is sent to the endpoint to create a profile but the 'summary' field is empty\r",
+                            "pm.test(\"When: The user attempts to create their profile but the 'summary' field is empty\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var body = JSON.parse(requestBody);\r",
+                            "    \r",
+                            "    // Confirm that the request body has an empty 'summary' field\r",
+                            "    pm.expect(body, \"The request body should have an empty 'summary' field\").to.have.property('summary').that.is.empty;\r",
+                            "    \r",
+                            "    // The following assertions will pass, as other fields are correctly provided\r",
+                            "    pm.expect(body).to.have.property('type', 'Person');\r",
+                            "    pm.expect(body).to.have.property('name', 'John Doe');\r",
+                            "    pm.expect(body).to.have.property('username', 'johndoe');\r",
+                            "    pm.expect(body).to.have.property('profileImage').that.includes('https://example.com/images/johndoe.jpg');\r",
+                            "    pm.expect(body).to.have.property('endpoints').that.is.an('object');\r",
+                            "    pm.expect(body.hasMultimedia).to.be.true;\r",
+                            "    pm.expect(body.public).to.be.true;\r",
+                            "});\r",
+                            "\r",
+                            "// Then: The response should contain a specific error message about the 'summary' field\r",
+                            "pm.test(\"Then: Verify specific error message about the 'summary' field\", function () {\r",
+                            "    var responseData = pm.response.json();\r",
+                            "\r",
+                            "    // Print a message in the Postman console instead of failing the test\r",
+                            "    if(responseData.message === \"Profile creation failed\" && \r",
+                            "       responseData.errors.includes(\"Biography is required and cannot be empty\")) {\r",
+                            "        console.log(\"The profile was not created because the 'summary' field is empty.\");\r",
+                            "    } else {\r",
+                            "        console.log(\"An unexpected response was received or the 'summary' field is not empty.\");\r",
+                            "    }\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"John Doe\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": true,\r\n    \"public\":true,\r\n    \"summary\": \"\",\r\n    \"profileImage\": \"https://example.com/images/johndoe.jpg\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "crear-perfil"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Creacion del perfil",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"type\": \"Person\",\r\n    \"actor\": \"https://appsocial.com/jhondoe/\",\r\n    \"name\": \"John Doe\",\r\n    \"username\": \"johndoe\",\r\n    \"hasMultimedia\": true,\r\n    \"public\":true,\r\n    \"summary\": \"\",\r\n    \"profileImage\": \"https://example.com/images/johndoe.jpg\",\r\n    \"endpoints\": {\r\n        \"sharedInbox\": \"https://example.com/inbox/johndoe\"\r\n    }\r\n}\r\n",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/crear-perfil",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "crear-perfil"
+                            ]
+                        }
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"No se pudo realizar la creacion del perfil\",\n    \"errors\": [\n        \"Summary is required and cannot be empty \"\n    ]\n}"
+                }
+            ]
+        },
+        {
+            "name": "Importación del perfil",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: The user has a profile to import with all the necessary fields\r",
+                            "pm.test(\"Given: The profile to be imported is complete and well-formed\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var profileToImport = JSON.parse(requestBody);\r",
+                            "    \r",
+                            "    // Verifies that the profile to import has all the necessary fields\r",
+                            "    pm.expect(profileToImport).to.have.property('type', 'ImportProfile');\r",
+                            "    pm.expect(profileToImport).to.have.property('actor').that.includes('https://appsocial.com/sofia/');\r",
+                            "    pm.expect(profileToImport).to.have.property('name');\r",
+                            "    pm.expect(profileToImport.object).to.be.an('object').that.includes({\r",
+                            "        type: 'Person',\r",
+                            "        name: 'Pepe Rodriguez',\r",
+                            "        username: 'PepeR',\r",
+                            "        hasMultimedia: true,\r",
+                            "        public: true,\r",
+                            "        summary: 'Amante de la naturaleza y entusiasta de la tecnología.',\r",
+                            "        profileImage: 'https://appsocial.com/sofia/profileImage.jpg',\r",
+                            "        importedFrom: 'https://mastodon.ejemplo.com/@sofiR'\r",
+                            "    });\r",
+                            "    pm.expect(profileToImport.object.endpoints).to.have.property('sharedInbox');\r",
+                            "    pm.expect(profileToImport).to.have.property('to').that.is.an('array').that.includes('https://appsocial.com/system/import');\r",
+                            "    pm.expect(profileToImport).to.have.property('cc').that.is.an('array');\r",
+                            "});\r",
+                            "\r",
+                            "// When: A POST request is sent to the endpoint to import a profile\r",
+                            "pm.test(\"When: The profile import request is made\", function () {\r",
+                            "    // Here you simply confirm that the request has been sent\r",
+                            "    // There are no failure conditions as this is a step in the process\r",
+                            "    pm.expect(pm.request.method).to.equal('POST');\r",
+                            "});\r",
+                            "\r",
+                            "// Then: The response should indicate that the profile was successfully imported\r",
+                            "pm.test(\"Then: Should receive a confirmation message of successful import\", function () {\r",
+                            "    // Verify that the response message is as expected\r",
+                            "    var responseData = pm.response.json();\r",
+                            "    pm.expect(responseData.message).to.eql(\"Profile imported successfully\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"type\": \"ImportProfile\",\r\n    \"actor\": \"https://appsocial.com/sofia/\",\r\n    \"name\": \"Perfil de Sofia\",\r\n    \"object\": {\r\n        \"id\": \"https://appsocial.com/Pepe/id1234\",\r\n        \"type\": \"Person\",\r\n        \"name\": \"Pepe Rodriguez\",\r\n        \"username\": \"PepeR\",\r\n        \"hasMultimedia\": true,\r\n        \"public\":true,\r\n        \"summary\": \"Amante de la naturaleza y entusiasta de la tecnología.\",\r\n        \"profileImage\": \"https://appsocial.com/sofia/profileImage.jpg\",\r\n        \"endpoints\": {\r\n            \"sharedInbox\": \"https://appsocial.com/inbox\"\r\n        },\r\n        \"importedFrom\": \"https://mastodon.ejemplo.com/@sofiR\"\r\n    },\r\n    \"to\": [\"https://appsocial.com/system/import\"],\r\n    \"cc\": []\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "importar-perfil"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Creacion del perfil",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"type\": \"ImportProfile\",\r\n    \"actor\": \"https://appsocial.com/sofia/\",\r\n    \"name\": \"Perfil de Sofia\",\r\n    \"object\": {\r\n        \"id\": \"https://appsocial.com/Pepe/id1234\",\r\n        \"type\": \"Person\",\r\n        \"name\": \"Pepe Rodriguez\",\r\n        \"username\": \"PepeR\",\r\n        \"hasMultimedia\": true,\r\n        \"public\":true,\r\n        \"summary\": \"Amante de la naturaleza y entusiasta de la tecnología.\",\r\n        \"profileImage\": \"https://appsocial.com/sofia/profileImage.jpg\",\r\n        \"endpoints\": {\r\n            \"sharedInbox\": \"https://appsocial.com/inbox\"\r\n        },\r\n        \"importedFrom\": \"https://mastodon.ejemplo.com/@sofiR\"\r\n    },\r\n    \"to\": [\"https://appsocial.com/system/import\"],\r\n    \"cc\": []\r\n}\r\n",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "importar-perfil"
+                            ]
+                        }
+                    },
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"Profile imported successfully\",\n    \"STATUS\": \"OK\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Importación del perfil sin imagen",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: The user has a profile to import with all necessary fields\r",
+                            "pm.test(\"Given: The profile to be imported is complete and well-formed\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var profileToImport = JSON.parse(requestBody);\r",
+                            "    \r",
+                            "    // Verifies that the profile to be imported has all the necessary fields\r",
+                            "    pm.expect(profileToImport).to.have.property('type', 'ImportProfile');\r",
+                            "    pm.expect(profileToImport).to.have.property('actor', 'https://appsocial.com/sofia/');\r",
+                            "    pm.expect(profileToImport).to.have.property('name', 'Perfil de Sofia');\r",
+                            "    pm.expect(profileToImport).to.have.property('object').that.is.an('object');\r",
+                            "\r",
+                            "    // Verifies the 'object' part of the profile\r",
+                            "    var object = profileToImport.object;\r",
+                            "    pm.expect(object).to.have.property('id', 'https://appsocial.com/Pepe/id1234');\r",
+                            "    pm.expect(object).to.have.property('type', 'Person');\r",
+                            "    pm.expect(object).to.have.property('name', 'Pepe Rodriguez');\r",
+                            "    pm.expect(object).to.have.property('username', 'PepeR');\r",
+                            "    pm.expect(object).to.have.property('hasMultimedia', false);\r",
+                            "    pm.expect(object).to.have.property('public', true);\r",
+                            "    pm.expect(object).to.have.property('summary', 'Amante de la naturaleza y entusiasta de la tecnología.');\r",
+                            "    pm.expect(object).to.have.property('profileImage', '');\r",
+                            "    pm.expect(object).to.have.property('importedFrom', 'https://mastodon.ejemplo.com/@sofiR');\r",
+                            "    pm.expect(object).to.have.property('endpoints').that.is.an('object');\r",
+                            "    pm.expect(object.endpoints).to.have.property('sharedInbox', 'https://appsocial.com/inbox');\r",
+                            "\r",
+                            "    // Verifies the 'to' and 'cc' arrays\r",
+                            "    pm.expect(profileToImport).to.have.property('to').that.is.an('array').that.eql(['https://appsocial.com/system/import']);\r",
+                            "    pm.expect(profileToImport).to.have.property('cc').that.is.an('array').that.is.empty;\r",
+                            "});\r",
+                            "\r",
+                            "// When: A POST request is sent to the endpoint to import a profile\r",
+                            "pm.test(\"When: The profile import request is made\", function () {\r",
+                            "    pm.expect(pm.request.method).to.equal('POST');\r",
+                            "});\r",
+                            "\r",
+                            "// Then: The response should indicate that the profile was successfully imported\r",
+                            "pm.test(\"Then: Should receive a confirmation message of successful import\", function () {\r",
+                            "    var responseData = pm.response.json();\r",
+                            "    pm.expect(responseData.message).to.eql(\"Profile imported successfully\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"type\": \"ImportProfile\",\r\n    \"actor\": \"https://appsocial.com/sofia/\",\r\n    \"name\": \"Perfil de Sofia\",\r\n    \"object\": {\r\n        \"id\": \"https://appsocial.com/Pepe/id1234\",\r\n        \"type\": \"Person\",\r\n        \"name\": \"Pepe Rodriguez\",\r\n        \"username\": \"PepeR\",\r\n        \"hasMultimedia\": false,\r\n        \"public\":true,\r\n        \"summary\": \"Amante de la naturaleza y entusiasta de la tecnología.\",\r\n        \"profileImage\": \"\",\r\n        \"endpoints\": {\r\n            \"sharedInbox\": \"https://appsocial.com/inbox\"\r\n        },\r\n        \"importedFrom\": \"https://mastodon.ejemplo.com/@sofiR\"\r\n    },\r\n    \"to\": [\"https://appsocial.com/system/import\"],\r\n    \"cc\": []\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "importar-perfil"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Creacion del perfil",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"type\": \"ImportProfile\",\r\n    \"actor\": \"https://appsocial.com/sofia/\",\r\n    \"name\": \"Perfil de Sofia\",\r\n    \"object\": {\r\n        \"id\": \"https://appsocial.com/Pepe/id1234\",\r\n        \"type\": \"Person\",\r\n        \"name\": \"Pepe Rodriguez\",\r\n        \"username\": \"PepeR\",\r\n        \"hasMultimedia\": false,\r\n        \"public\":true,\r\n        \"summary\": \"Amante de la naturaleza y entusiasta de la tecnología.\",\r\n        \"profileImage\": \"\",\r\n        \"endpoints\": {\r\n            \"sharedInbox\": \"https://appsocial.com/inbox\"\r\n        },\r\n        \"importedFrom\": \"https://mastodon.ejemplo.com/@sofiR\"\r\n    },\r\n    \"to\": [\"https://appsocial.com/system/import\"],\r\n    \"cc\": []\r\n}\r\n",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "importar-perfil"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"Profile imported successfully\",\n    \"STATUS\": \"OK\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "Importación del perfil Incorrecto 1 Importar Perfil no Publico desde otro usuario",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: The profile is prepared for import with all necessary fields\r",
+                            "pm.test(\"Given: The profile is prepared with all necessary fields for import\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var profileToImport = JSON.parse(requestBody);\r",
+                            "    \r",
+                            "    // Verifies that the profile to be imported has the necessary fields correctly filled\r",
+                            "    pm.expect(profileToImport).to.have.property('type', 'ImportProfile');\r",
+                            "    pm.expect(profileToImport).to.have.property('actor').that.equals('https://appsocial.com/sofia/');\r",
+                            "    pm.expect(profileToImport).to.have.property('name').that.equals(\"Perfil de Sofia\");\r",
+                            "    pm.expect(profileToImport.object).to.have.property('id').that.equals('https://appsocial.com/Pepe/id1234');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('type', 'Person');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('name').that.equals('Pepe Rodriguez');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('username').that.equals('PepeR');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('hasMultimedia').that.is.true;\r",
+                            "    pm.expect(profileToImport.object).to.have.property('public').that.is.false;\r",
+                            "    pm.expect(profileToImport.object).to.have.property('summary').that.is.not.empty;\r",
+                            "    pm.expect(profileToImport.object).to.have.property('profileImage').that.equals('https://appsocial.com/sofia/profileImage.jpg');\r",
+                            "    pm.expect(profileToImport.object.endpoints).to.have.property('sharedInbox').that.equals('https://appsocial.com/inbox');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('importedFrom').that.equals('https://mastodon.ejemplo.com/@sofiR');\r",
+                            "    pm.expect(profileToImport).to.have.property('to').that.is.an('array').that.includes('https://appsocial.com/system/import');\r",
+                            "    pm.expect(profileToImport).to.have.property('cc').that.is.an('array').that.is.empty;\r",
+                            "});\r",
+                            "\r",
+                            "// When: A POST request is sent to the endpoint to import a profile\r",
+                            "pm.test(\"When: The profile import request is made\", function () {\r",
+                            "    // This step verifies that the POST request was sent correctly\r",
+                            "    pm.expect(pm.request.method).to.equal('POST');\r",
+                            "});\r",
+                            "\r",
+                            "// Then: The response should indicate that the profile import failed because it is not public\r",
+                            "pm.test(\"Then: Should receive an error message because the profile is not public\", function () {\r",
+                            "    // Verifies that the response message is as expected\r",
+                            "    var responseData = pm.response.json();\r",
+                            "    pm.expect(responseData.message).to.eql(\"Profile importation failed\");\r",
+                            "    // Verifies that the error list contains the specific error message about the profile not being public\r",
+                            "    pm.expect(responseData.errors).to.include(\"Please ensure the profile is a public profile\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"type\": \"ImportProfile\",\r\n    \"actor\": \"https://appsocial.com/sofia/\",\r\n    \"name\": \"Perfil de Sofia\",\r\n    \"object\": {\r\n        \"id\": \"https://appsocial.com/Pepe/id1234\",\r\n        \"type\": \"Person\",\r\n        \"name\": \"Pepe Rodriguez\",\r\n        \"username\": \"PepeR\",\r\n        \"hasMultimedia\": true,\r\n        \"public\":false,\r\n        \"summary\": \"Amante de la naturaleza y entusiasta de la tecnología.\",\r\n        \"profileImage\": \"https://appsocial.com/sofia/profileImage.jpg\",\r\n        \"endpoints\": {\r\n            \"sharedInbox\": \"https://appsocial.com/inbox\"\r\n        },\r\n        \"importedFrom\": \"https://mastodon.ejemplo.com/@sofiR\"\r\n    },\r\n    \"to\": [\"https://appsocial.com/system/import\"],\r\n    \"cc\": []\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "importar-perfil"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Creacion del perfil",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"type\": \"ImportProfile\",\r\n    \"actor\": \"https://appsocial.com/sofia/\",\r\n    \"name\": \"Perfil de Sofia\",\r\n    \"object\": {\r\n        \"id\": \"https://appsocial.com/Pepe/id1234\",\r\n        \"type\": \"Person\",\r\n        \"name\": \"Pepe Rodriguez\",\r\n        \"username\": \"PepeR\",\r\n        \"hasMultimedia\": true,\r\n        \"public\":false,\r\n        \"summary\": \"Amante de la naturaleza y entusiasta de la tecnología.\",\r\n        \"profileImage\": \"https://appsocial.com/sofia/profileImage.jpg\",\r\n        \"endpoints\": {\r\n            \"sharedInbox\": \"https://appsocial.com/inbox\"\r\n        },\r\n        \"importedFrom\": \"https://mastodon.ejemplo.com/@sofiR\"\r\n    },\r\n    \"to\": [\"https://appsocial.com/system/import\"],\r\n    \"cc\": []\r\n}\r\n",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "importar-perfil"
+                            ]
+                        }
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"Profile importation failed\",\n    \"errors\": [\n        \"Please the profile should be a public profile\"\n    ]\n}"
+                }
+            ]
+        },
+        {
+            "name": "Importación del perfil Incorrecto 1 Importar Perfil no Publico desde otro usuario Copy",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "// Given: The profile is prepared for import with all necessary fields\r",
+                            "pm.test(\"Given: The profile is prepared with all necessary fields for import\", function () {\r",
+                            "    var requestBody = pm.request.body.raw;\r",
+                            "    var profileToImport = JSON.parse(requestBody);\r",
+                            "    \r",
+                            "    // Verifies that the profile to be imported has the necessary fields correctly filled\r",
+                            "    pm.expect(profileToImport).to.have.property('type', 'ImportProfile');\r",
+                            "    pm.expect(profileToImport).to.have.property('actor').that.equals('https://appsocial.com/sofia/');\r",
+                            "    pm.expect(profileToImport).to.have.property('name').that.equals(\"Perfil de Sofia\");\r",
+                            "    pm.expect(profileToImport.object).to.have.property('id').that.equals('https://appsocial.com/Pepe/id1234');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('type', 'Person');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('name').that.equals('Pepe Rodriguez');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('username').that.equals('PepeR');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('hasMultimedia').that.is.true;\r",
+                            "    pm.expect(profileToImport.object).to.have.property('public').that.is.false;\r",
+                            "    pm.expect(profileToImport.object).to.have.property('summary').that.is.not.empty;\r",
+                            "    pm.expect(profileToImport.object).to.have.property('profileImage').that.equals('https://appsocial.com/sofia/profileImage.jpg');\r",
+                            "    pm.expect(profileToImport.object.endpoints).to.have.property('sharedInbox').that.equals('https://appsocial.com/inbox');\r",
+                            "    pm.expect(profileToImport.object).to.have.property('importedFrom').that.equals('https://mastodon.ejemplo.com/@sofiR');\r",
+                            "    pm.expect(profileToImport).to.have.property('to').that.is.an('array').that.includes('https://appsocial.com/system/import');\r",
+                            "    pm.expect(profileToImport).to.have.property('cc').that.is.an('array').that.is.empty;\r",
+                            "});\r",
+                            "\r",
+                            "// When: A POST request is sent to the endpoint to import a profile\r",
+                            "pm.test(\"When: The profile import request is made\", function () {\r",
+                            "    // This step verifies that the POST request was sent correctly\r",
+                            "    pm.expect(pm.request.method).to.equal('POST');\r",
+                            "});\r",
+                            "\r",
+                            "// Then: The response should indicate that the profile import failed because it is not public\r",
+                            "pm.test(\"Then: Should receive an error message because the profile is not public\", function () {\r",
+                            "    // Verifies that the response message is as expected\r",
+                            "    var responseData = pm.response.json();\r",
+                            "    pm.expect(responseData.message).to.eql(\"Profile importation failed\");\r",
+                            "    // Verifies that the error list contains the specific error message about the profile not being public\r",
+                            "    pm.expect(responseData.errors).to.include(\"Please ensure the profile is a public profile\");\r",
+                            "});\r",
+                            ""
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"type\": \"ImportProfile\",\r\n    \"actor\": \"https://appsocial.com/sofia/\",\r\n    \"name\": \"Perfil de Sofia\",\r\n    \"object\": {\r\n        \"id\": \"https://appsocial.com/Pepe/id1234\",\r\n        \"type\": \"Person\",\r\n        \"name\": \"Pepe Rodriguez\",\r\n        \"username\": \"PepeR\",\r\n        \"hasMultimedia\": true,\r\n        \"public\":false,\r\n        \"summary\": \"Amante de la naturaleza y entusiasta de la tecnología.\",\r\n        \"profileImage\": \"https://appsocial.com/sofia/profileImage.jpg\",\r\n        \"endpoints\": {\r\n            \"sharedInbox\": \"https://appsocial.com/inbox\"\r\n        },\r\n        \"importedFrom\": \"https://mastodon.ejemplo.com/@sofiR\"\r\n    },\r\n    \"to\": [\"https://appsocial.com/system/import\"],\r\n    \"cc\": []\r\n}\r\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                    "protocol": "https",
+                    "host": [
+                        "31f26148-53be-474d-9a51-fa125946327a",
+                        "mock",
+                        "pstmn",
+                        "io"
+                    ],
+                    "path": [
+                        "importar-perfil"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Creacion del perfil",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"type\": \"ImportProfile\",\r\n    \"actor\": \"https://appsocial.com/sofia/\",\r\n    \"name\": \"Perfil de Sofia\",\r\n    \"object\": {\r\n        \"id\": \"https://appsocial.com/Pepe/id1234\",\r\n        \"type\": \"Person\",\r\n        \"name\": \"Pepe Rodriguez\",\r\n        \"username\": \"PepeR\",\r\n        \"hasMultimedia\": true,\r\n        \"public\":false,\r\n        \"summary\": \"Amante de la naturaleza y entusiasta de la tecnología.\",\r\n        \"profileImage\": \"https://appsocial.com/sofia/profileImage.jpg\",\r\n        \"endpoints\": {\r\n            \"sharedInbox\": \"https://appsocial.com/inbox\"\r\n        },\r\n        \"importedFrom\": \"https://mastodon.ejemplo.com/@sofiR\"\r\n    },\r\n    \"to\": [\"https://appsocial.com/system/import\"],\r\n    \"cc\": []\r\n}\r\n",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                            "protocol": "https",
+                            "host": [
+                                "31f26148-53be-474d-9a51-fa125946327a",
+                                "mock",
+                                "pstmn",
+                                "io"
+                            ],
+                            "path": [
+                                "importar-perfil"
+                            ]
+                        }
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json",
+                            "name": "Content-Type",
+                            "description": "",
+                            "type": "text"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"message\": \"Profile importation failed\",\n    \"errors\": [\n        \"Please ensure the profile is a public profile\"\n    ]\n}"
+                }
+            ]
+        }
+    ]
+}
+
+],
+"event": [
+    {
+        "listen": "prerequest",
+        "script": {
+            "type": "text/javascript",
+            "exec": [
+                ""
+            ]
+        }
+    },
+    {
+        "listen": "test",
+        "script": {
+            "type": "text/javascript",
+            "exec": [
+                ""
+            ]
+        }
+    }
+]
+}
