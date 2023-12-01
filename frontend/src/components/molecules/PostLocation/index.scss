@@ -1,0 +1,97 @@
+@import '../../../../resources/styles/variables.scss';
+
+
+.post_location_main_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 1px 1px 4px 4px $secondary-color;
+    border-radius: 8px;
+
+    .post_location_container {
+        height: 75px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .post_location_footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+.cardFollow {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+}
+
+.headerText {
+    margin: 0;
+}
+
+.headerLine {
+    width: 40%;
+    height: 2px;
+    position: absolute;
+    background-color: #1da1f2;
+}
+
+.closeButton {
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    color: #5b7083;
+    font-size: 1.5em;
+}
+
+.title {
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.modal--report--submit {
+    margin-top: 20px;
+    margin-left: 10px;
+    .button {
+        text-transform: none;
+        padding: 8px 25px;
+        border-radius: 100px;
+    }
+}
+
+.modal--report--cancel {
+    margin-top: 20px;
+    margin-left: 10px;
+    .button {
+        text-transform: none;
+        padding: 8px 25px;
+        border-radius: 100px;
+    }
+}
