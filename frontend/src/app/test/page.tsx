@@ -38,6 +38,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
 import WSelectedText from '@/components/atoms/SelectText/selectText'
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown'
+import WPhotoInformation from '@/components/molecules/PhotoInformation'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
@@ -204,6 +205,19 @@ export default function TestPage() {
                 onClose={() => setReportModal(false)}
                 onConfirm={(reason) => console.log(`Se reporto al usuario por ${reason}`)}
             />
+            <div
+                style={{
+                    width: '500px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: '15px auto',
+                    gap: '15px',
+                }}
+            >
+                <WPhotoInformation title="Información de la imagen" />
+            </div>
         </RootLayout>
     )
 }
