@@ -2,26 +2,25 @@
     display: flex;
     justify-content: space-around;
     padding: 16px;
-  }
-  
-  .stat {
+}
+
+.stat {
     text-align: center;
     padding-right: 16px;
     border-right: 1px solid #ccc;
     flex: 1;
     box-sizing: border-box;
-  }
-  
-  .stat:last-child {
+}
+
+.stat:last-child {
     border-right: none;
-  }
-  
-  .number {
+}
+
+.number {
     font-size: 24px;
     font-weight: bold;
-  }
-  
-  .title {
+}
+
+.title {
     margin-top: 8px;
-  }
-  
+}

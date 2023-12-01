@@ -1,39 +1,43 @@
 import * as Yup from 'yup'
-import { emailRegex, nameRegex, passwordRegex } from '@/utilities/Constant'
+import { emailRegex, nameRegex, passwordRegex, phoneRegex, usernameRegex } from '@/utilities/Constant'
 
 export const YUP_SCHEMA = {
     name: Yup.string()
         .matches(nameRegex, {
-            message: 'El nombre completo no tiene un formato válido',
+            message: 'Formato no valido',
         })
         .required('El nombre completo es requerido'),
     email: Yup.string()
         .matches(emailRegex, {
-            message: 'El correo electrónico no tiene un formato válido',
+            message: 'Formato no valido',
         })
         .required('El correo electrónico es requerido'),
 
     username: Yup.string()
-        .matches(emailRegex, {
-            message: 'El correo electrónico no tiene un formato válido',
+        .matches(usernameRegex, {
+            message: 'Formato no valido',
         })
-        .required('El correo electrónico es requerido'),
+        .required('El uusario es requerido'),
+    phone: Yup.string()
+        .matches(phoneRegex, {
+            message: 'Formato no valido',
+        })
+        .required('El uusario es requerido'),
     password: Yup.string()
         .matches(passwordRegex, {
-            message:
-                'La contraseña debe contener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial (@$!%*?&)',
+            message: 'Formato no valido',
         })
         .required('La contraseña es requerida'),
 
     password_confirm: Yup.string()
         .matches(passwordRegex, {
-            message:
-                'La contraseña debe contener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial (@$!%*?&)',
+            message: 'Formato no valido',
         })
         .required('La contraseña es requerida'),
 }
 
 export const REGISTER_VALUES = {
+    PHONE: 'phone',
     NAME: 'name',
     EMAIL: 'email',
     USERNAME: 'username',
@@ -42,6 +46,7 @@ export const REGISTER_VALUES = {
 }
 
 export const INITIAL_FORMIK_VALUES = {
+    phone: '',
     name: '',
     email: '',
     username: '',

@@ -44,7 +44,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:scaleType="centerCrop"
                 android:background="@color/transparent"
-                android:src="@drawable/defaul_user_profile"
+                android:src="@drawable/photo_profile"
                 app:riv_oval="true" />
 
             <LinearLayout
