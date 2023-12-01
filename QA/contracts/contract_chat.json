@@ -9,7 +9,7 @@
             },
             "body": {
                 "id": {
-                    "type": "integer",
+                    "type": "string",
                     "minLength": 1,
                     "description": "The unique ID of the room."
                 },
@@ -44,7 +44,7 @@
             },
             "body": {
                 "id": {
-                    "type": "integer",
+                    "type": "string",
                     "minLength": 1,
                     "description": "The unique ID of the room."
                 },
@@ -68,5 +68,75 @@
                 "message": "The field name is required"
             },
         "required": ["id", "name"]
+    }},
+    "Successful Join a Chat Room": {
+        "description": "Join a Chat Room with the correct parameters",
+        "request": {
+            "method": "GET",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io//join-room/1?userId=456&username=Paula",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "roomId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The unique ID of a room chat."
+                },
+                "userId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The unique ID of a user."
+                },
+                "username": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The username of a user."
+                }
+            }
+        },
+        "response": {
+            "status": 200,
+            "body": {
+                "username": "Paula",
+                "status": "OK",
+                "message": "The connection is upgraded to a WebSocket connection to join the room."
+            },
+        "required": ["roomId", "userId"]
+    }},
+    "Fail Join a Chat Room": {
+        "description": "Join a Chat Room without parameters",
+        "request": {
+            "method": "GET",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/join-room/1?userId=&username=",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "roomId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The unique ID of a room chat."
+                },
+                "userId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The unique ID of a user."
+                },
+                "username": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The username of a user."
+                }
+            }
+        },
+        "response": {
+            "status": 400,
+            "body": {
+                "username": "",
+                "status": "ERROR",
+                "message": "Unable to upgrade the connection to WebSocket or missing parameters."
+            },
+        "required": ["roomId", "userId"]
     }}
 }
