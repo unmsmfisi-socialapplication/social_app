@@ -2,7 +2,7 @@
 import React from 'react'
 import { Box, SvgIcon, SvgIconProps } from '@mui/material'
 import AllInclusive from '@mui/icons-material/AllInclusive'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import './index.scss'
 
