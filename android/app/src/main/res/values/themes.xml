@@ -234,7 +234,7 @@
     <style name="StyleIconPost">
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">25dp</item>
-        <item name="android:padding">3dp</item>
+        <item name="android:padding">2dp</item>
         <item name="marginHorizontal">10dp</item>
     </style>
 
