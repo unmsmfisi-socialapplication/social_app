@@ -7,32 +7,47 @@ import (
 )
 
 type User struct {
+	Id       uint
 	Phone    string
+	Name     string
 	Email    string
 	Username string
 	Password string
+	Photo    string
 }
 
 type UserResponse struct {
-	Email    string `json:"email"`
-	Username string `json:"user_name"`
+	Id                uint
+	Type              string
+	Name              string
+	Username          string
+	Email             string
+	Photo             string
+	Phone             string
+	Role              uint
+	PreferredUsername string
+	Summary           string
 }
 
 type UserRequest struct {
-	Email    string `json:"email"`
-	Username string `json:"user_name"`
-	Password string `json:"password"`
+	Email    string
+	Username string
+	Phone    string
+	Name     string
+	Password string
 }
 
-func NewUser(email, username, password string) (*User, error) {
-	hashedPassword, err := HashPassword(password)
+func NewUser(userReq UserRequest) (*User, error) {
+	hashedPassword, err := HashPassword(userReq.Password)
 	if err != nil {
 		return nil, err
 	}
 
 	return &User{
-		Email:    email,
-		Username: username,
+		Phone:    userReq.Phone,
+		Name:     userReq.Name,
+		Email:    userReq.Email,
+		Username: userReq.Username,
 		Password: hashedPassword,
 	}, nil
 }
@@ -46,7 +61,17 @@ func HashPassword(password string) (string, error) {
 }
 
 func UserToUserResponse(u User) UserResponse {
-	return UserResponse{Username: u.Username, Email: u.Email}
+	return UserResponse{
+		Id:                u.Id,
+		Username:          u.Username,
+		Name:              u.Name,
+		Type:              "user",
+		Role:              1,
+		Email:             u.Email,
+		Phone:             u.Phone,
+		PreferredUsername: u.Username,
+		Photo:             u.Photo,
+		Summary:           "I am a developer"}
 }
 
 func ValidateUserRequest(u UserRequest) error {
@@ -60,6 +85,14 @@ func ValidateUserRequest(u UserRequest) error {
 
 	if u.Password == "" {
 		return errors.New("Password is required")
+	}
+
+	if u.Phone == "" {
+		return errors.New("Phone is required")
+	}
+
+	if u.Name == "" {
+		return errors.New("Name is required")
 	}
 
 	return nil
