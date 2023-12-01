@@ -36,9 +36,7 @@
                     android:src="@drawable/completeimage"
                     app:layout_constraintEnd_toEndOf="@id/searchIcon"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </ImageView>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -81,11 +79,9 @@
                 </LinearLayout>
             </LinearLayout>
 
-
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -114,7 +110,6 @@
                                 android:scaleType="centerCrop"
                                 app:shapeAppearanceOverlay="@style/ImagePostRound"
                                 app:srcCompat="@drawable/model" />
-
                         </LinearLayout>
 
                         <LinearLayout
@@ -134,9 +129,7 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:hint="@string/HintNewPub"
                                 app:srcCompat="@drawable/model" />
-
                         </LinearLayout>
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -168,15 +161,14 @@
                             style="@style/ImageIconNavBar"
                             android:background="@color/transparent"
                             android:src="@drawable/attachbutton" />
-
                     </LinearLayout>
 
-                    <!--<androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvPdv"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvListPostHome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp" />-->
-                    <include layout="@layout/item_card_post" />
+                        android:layout_marginTop="5dp"
+                        tools:listitem="@layout/item_post"/>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>

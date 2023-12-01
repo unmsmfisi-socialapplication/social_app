@@ -1,0 +1,7 @@
+gcp_svc_key                     = "credentials.json"
+project_id                      = "pruebas"
+client_region                   = "us-central1"
+client_zone                     = "us-central1-a"
+artifact_registry_repository_id = "social-test-fe-repo"
+private-network-name            = "test-private-network"
+private-ip-address-name         = "test-private-ip-address"

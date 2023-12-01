@@ -16,6 +16,15 @@ func PostModuleRouter(dbInstance *sql.DB) *chi.Mux {
 	postHandler := infrastructure.NewPostHandler(postUseCase)
 
 	r.Post("/create", postHandler.HandleCreatePost)
+	r.Get("/getall", postHandler.HandleGetAllPost)
+	r.Get("/{id}", postHandler.HandleGetPost)
+
+	// DELETE POST //
+	r.Delete("/delete/{id}", postHandler.HandleDeletePost)
+	// UPDATE POST //
+	r.Put("/update/{id}", postHandler.HandleUpdatePost)
+	// REPORT POST //
+	r.Post("/report", postHandler.HandleReportPost)
 
 	return r
 }

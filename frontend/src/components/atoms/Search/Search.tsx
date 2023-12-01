@@ -6,13 +6,13 @@ import './Search.scss' // Importa el archivo de estilos SCSS
 const WSearch = () => {
     return (
         <TextField
-            variant="outlined"
+            variant="standard"
             placeholder="Buscar" // Agrega un marcador de posición
             className="custom-search" // Agrega una clase personalizada
             InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">
-                        <IconButton>
+                        <IconButton data-testid="search-icon">
                             <SearchIcon />
                         </IconButton>
                     </InputAdornment>

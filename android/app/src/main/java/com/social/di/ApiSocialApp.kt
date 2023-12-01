@@ -1,10 +1,17 @@
 package com.social.di
 
+import android.app.Application
+import androidx.room.Room
 import com.social.data.repository.SocialAppRepositoryImp
+import com.social.data.source.local.SocialDB
 import com.social.data.source.remote.ApiInterface
 import com.social.domain.SocialAppRepository
 import com.social.domain.usecase.RegisterNewUser
 import com.social.domain.usecase.ValidateUser
+import com.social.domain.usecase.sqlite.SQLiteDeleteUser
+import com.social.domain.usecase.sqlite.SQLiteGetUser
+import com.social.domain.usecase.sqlite.SQLiteInsertUser
+import com.social.domain.usecase.sqlite.SQLiteUpdateUser
 import com.social.presentation.authentication.AuthenticationUseCase
 import dagger.Module
 import dagger.Provides
@@ -44,8 +51,11 @@ object ApiSocialApp {
 
     @Provides
     @Singleton
-    fun supplierSocialAppRepository(apiInterface: ApiInterface): SocialAppRepository {
-        return SocialAppRepositoryImp(apiInterface)
+    fun supplierSocialAppRepository(
+        apiInterface: ApiInterface,
+        db: SocialDB,
+    ): SocialAppRepository {
+        return SocialAppRepositoryImp(apiInterface, db.socialDAO)
     }
 
     @Provides
@@ -54,6 +64,16 @@ object ApiSocialApp {
         return AuthenticationUseCase(
             validateUser = ValidateUser(repository),
             registerNewUser = RegisterNewUser(repository),
+            sqliteInsertUser = SQLiteInsertUser(repository),
+            sqliteGetUser = SQLiteGetUser(repository),
+            sqliteDeleteUser = SQLiteDeleteUser(repository),
+            sqliteUpdateUser = SQLiteUpdateUser(repository),
         )
+    }
+
+    @Provides
+    @Singleton
+    fun supplierSocialLocalDatabase(app: Application): SocialDB {
+        return Room.databaseBuilder(app, SocialDB::class.java, SocialDB.DATABASE_NAME).fallbackToDestructiveMigration().build()
     }
 }

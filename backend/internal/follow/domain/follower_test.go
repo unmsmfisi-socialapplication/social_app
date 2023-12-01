@@ -37,3 +37,53 @@ func TestNewFollower(t *testing.T) {
 		}
 	})
 }
+
+func TestNewFollowerDataList(t *testing.T) {
+	// Test case 1
+	data1 := FollowerData{
+		ProfileID:      1,
+		UserID:         101,
+		Name:           "John",
+		LastName:       "Doe",
+		ProfilePicture: "profile1.jpg",
+		UserName:       "john_doe",
+	}
+
+	// Test case 2
+	data2 := FollowerData{
+		ProfileID:      2,
+		UserID:         102,
+		Name:           "Jane",
+		LastName:       "Smith",
+		ProfilePicture: "profile2.jpg",
+		UserName:       "jane_smith",
+	}
+
+	// Test case 3 (empty list)
+	emptyList := FollowerDataList{}
+
+	// NewFollowerDataList function call with multiple data
+	resultList := NewFollowerDataList(data1, data2)
+
+	// Check the length of the resulting list
+	if len(resultList) != 2 {
+		t.Errorf("Expected length 2, got %d", len(resultList))
+	}
+
+	// Verify if the items in the list match the input data
+	if resultList[0] != data1 {
+		t.Errorf("Expected %v, got %v", data1, resultList[0])
+	}
+
+	if resultList[1] != data2 {
+		t.Errorf("Expected %v, got %v", data2, resultList[1])
+	}
+
+	// Call to NewFollowerDataList function with empty list
+	emptyResultList := NewFollowerDataList(emptyList...)
+
+	// Check that the resulting list is empty
+	if len(emptyResultList) != 0 {
+		t.Errorf("Expected an empty list, got %v", emptyResultList)
+	}
+}

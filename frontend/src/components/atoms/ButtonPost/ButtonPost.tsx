@@ -1,4 +1,4 @@
-'use client'
+// WButtonPost.tsx
 import React from 'react'
 import Button from '@mui/material/Button'
 import './index.scss'
@@ -27,6 +27,7 @@ const WButtonPost: React.FC<WButtonPost> = ({ dataTestid, id, disabled, typeColo
             size={size}
             disabled={disabled}
             variant={variant}
+            onClick={onClick} // Usa la prop onClick aquí
         >
             {text}
         </Button>

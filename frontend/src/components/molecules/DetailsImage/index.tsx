@@ -1,57 +1,41 @@
+import { Avatar, Box, Typography } from '@mui/material'
 import React from 'react'
-import WCircleIcon from '@/components/atoms/CircleIcon/circleIcon'
+import './index.scss'
+
 interface WDetailsImageProps {
-    accountName: string
-    name: string
-    icon: React.ComponentType
+    userName?: string
+    userHandle?: string
+    avatarURL?: string
+    avatarSize?: number
+    textSize?: number
 }
 
-const DefaultIconPropValue: React.FC = () => {
-    // Default Icon prop value
+const WDetailsImage: React.FC<WDetailsImageProps> = ({ userName, userHandle, avatarURL, avatarSize, textSize }) => {
     return (
-        <div>
-            <img
-                style={{ height: '30px', width: '30px', borderRadius: '100%' }}
-                src="https://images.unsplash.com/photo-1606425270259-998c37268501?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1758&q=80"
+        <Box className="details--user--info">
+            <Avatar
+                className="details--user--avatar"
+                style={{ width: `${avatarSize}px`, height: `${avatarSize}px` }}
+                src={avatarURL}
+                alt="User Avatar"
             />
-        </div>
-    )
-}
-
-const WDetailsImage: React.FC<WDetailsImageProps> = ({ accountName, name, icon }) => {
-    const divStyle = {
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-        gap: '11px',
-    }
-    const divStyleText = {
-        margin: '0',
-        fontFamily: 'Poppins',
-        fontWeight: '600',
-        fontSize: '14px',
-        lineHeight: '19px',
-        color: '#000',
-    }
-    const pStyleName = {
-        color: 'rgba(0, 0, 0, 0.40)',
-    }
-
-    return (
-        <div style={divStyle}>
-            <WCircleIcon iconSize={30} typeColor={'secondary'} icon={icon} />
-            <div>
-                <p style={divStyleText}>{accountName}</p>
-                <p style={{ ...divStyleText, ...pStyleName }}>Posteado por {name}</p>
-            </div>
-        </div>
+            <Box>
+                <Typography style={{ fontWeight: '700', fontSize: `${textSize}px` }}>{userName}</Typography>
+                <Typography style={{ color: 'rgba(0, 0, 0, 0.6)', fontSize: textSize ? `${textSize - 1}px` : 15 }}>
+                    @{userHandle}
+                </Typography>
+            </Box>
+        </Box>
     )
 }
 
 export default WDetailsImage
 
 WDetailsImage.defaultProps = {
-    accountName: 'Jane Doe',
-    name: 'janedoe123',
-    icon: DefaultIconPropValue,
+    avatarURL:
+        'https://images.ecestaticos.com/FjaDMYL1rpd8bqAVvR91YL-gZbY=/0x0:2252x1336/1200x1200/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fae2%2F47e%2F66d%2Fae247e66d9b8d8928d41a592b61690ca.jpg',
+    userName: 'XokasXD',
+    userHandle: 'XokasXD',
+    avatarSize: 60,
+    textSize: 16,
 }

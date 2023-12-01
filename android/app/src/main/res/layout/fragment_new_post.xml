@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.home.NewPostFragment">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_margin="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_padlock"
+            style="@style/ImageIconHead"
+            android:layout_gravity="center_vertical"
+            android:padding="3dp"
+            app:srcCompat="@drawable/icon_clear" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <Button
+                style="@style/ButtonStylePost"
+                android:text="@string/publicar"
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck,TextSizeCheck" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline8">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="15dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="20dp">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/ImagePostCreateRound"
+                            app:srcCompat="@drawable/photo_profile" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical">
+
+                            <Button
+                                style="@style/ButtonStyleSocial"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:drawableEnd="@drawable/icon_caret_down"
+                                android:paddingHorizontal="10dp"
+                                android:text="@string/privacy"
+                                android:textAlignment="center"
+                                tools:ignore="TouchTargetSizeCheck" />
+
+                            <LinearLayout
+                                android:visibility="invisible"
+                                android:id="@+id/linearLayoutLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/icon_location_point"
+                                    style="@style/ImageIconHead"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:padding="1dp"
+                                    app:srcCompat="@drawable/icon_location_point" />
+
+                                <TextView
+                                    android:id="@+id/text_location"
+                                    style="@style/TextView16sp"
+                                    android:textColor="@color/gray"
+                                    android:textSize="14sp"
+                                    tools:ignore="TextContrastCheck" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/content"
+                        style="@style/EditTexContent"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/writes"
+                        android:maxLength="400"
+                        tools:ignore="Autofill,TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:weightSum="3">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/image_one"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:shapeAppearanceOverlay="@style/ImagePostContent"
+                            app:srcCompat="@drawable/photo_profile" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/image_two"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="2dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:shapeAppearanceOverlay="@style/ImagePostContent"
+                            app:srcCompat="@drawable/photo_profile" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/image_three"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:shapeAppearanceOverlay="@style/ImagePostContent"
+                            app:srcCompat="@drawable/photo_profile" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="8dp"
+                        android:weightSum="3">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/image_four"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:shapeAppearanceOverlay="@style/ImagePostContent"
+                            app:srcCompat="@drawable/photo_profile" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/image_five"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="2dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:shapeAppearanceOverlay="@style/ImagePostContent"
+                            app:srcCompat="@drawable/photo_profile" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/image_six"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:shapeAppearanceOverlay="@style/ImagePostContent"
+                            app:srcCompat="@drawable/photo_profile" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.cardview.widget.CardView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline70">
+
+        <LinearLayout
+            android:id="@+id/icon_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                style="@style/ImageIconHead"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/icon_image" />
+
+            <TextView
+                style="@style/TextView16sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:text="@string/add_image" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/icon_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                style="@style/ImageIconHead"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/icon_video" />
+
+            <TextView
+                style="@style/TextView16sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:text="@string/add_video" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/icon_gif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                style="@style/ImageIconHead"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/icon_gif" />
+
+            <TextView
+                style="@style/TextView16sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:text="@string/add_gif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/icon_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                style="@style/ImageIconHead"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/icon_location" />
+
+            <TextView
+                style="@style/TextView16sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:text="@string/add_location" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+</androidx.constraintlayout.widget.ConstraintLayout>

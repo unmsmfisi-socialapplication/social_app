@@ -1,6 +1,7 @@
 package com.social.presentation.authentication
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.social.EmptyActivity
 import com.social.R
 import com.social.databinding.FragmentLoginBinding
+import com.social.domain.model.UserM
 import com.social.utils.Toast.showMessage
 import com.social.utils.Validation
 import com.social.utils.Validation.setupValidation
@@ -36,10 +39,27 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 when (event) {
                     is LoginViewModel.UILoginEvent.GetData -> {
                         savePreference()
-                        val userData = viewModel.state.value!!.dataLogin?.get(0)
-                        findNavController()
-                            .navigate(R.id.userProfileFragment)
-                        Log.i("dato_usuario", userData.toString())
+                        val userData = viewModel.state.value!!.dataLogin[0]
+                        viewModel.deleteUserData()
+                        viewModel.saveUserDataSQLite(
+                            UserM(
+                                id = 0,
+                                sLastName = "Nuñez Alcorta",
+                                sName = "Sofía",
+                                sEmail = "sofia_nunez@gmail.com",
+                                sUsername = "sofinunez",
+                                sPhoto = "",
+                                sHeader = "Marketera",
+                                sBiography = "Mi primera descripción",
+                            ),
+                        )
+                        Log.i("tkn", userData.token)
+                        startActivity(
+                            Intent(
+                                requireContext(),
+                                EmptyActivity::class.java,
+                            ),
+                        )
                     }
 
                     is LoginViewModel.UILoginEvent.ShowMessage -> {
