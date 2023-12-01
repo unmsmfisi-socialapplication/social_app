@@ -19,18 +19,29 @@ export const getUser = createAsyncThunk(
     'auth/getUser',
     async ({ username, password }: { username: string; password: string }) => {
         try {
+            if `${process.env.ENVIRONMENT}`== "development" {
+                return UserFake()
+            }
+
             const request = {
                 username,
                 password,
             }
-            const { data, error } = await AuthServices.authRequest(request)
-            if (data && error === null) {
+            const { authResponse, error } = await AuthServices.authRequest(request)
+
+            if ( error != null ) {
+              throw new Error(error)
+            }
+
+            // save token
+            authResponse.token
+            if ( authResponse ) {
                 return UserFake()
             }
+
             if (request.username === 'myuser123' && request.password === 'Social@123') {
                 return UserFake()
             }
-            throw new Error('Credenciales incorrectas')
         } catch (error) {
             console.log('error', error)
             throw error // Lanzar el error para que Redux Toolkit lo maneje
