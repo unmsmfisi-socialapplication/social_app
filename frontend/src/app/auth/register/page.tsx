@@ -4,34 +4,53 @@ import * as Yup from 'yup'
 import { WInput, WButton, WCardAuth, WLink } from '@/components'
 import { Box } from '@mui/material'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { INITIAL_FORMIK_VALUES, REGISTER_VALUES, YUP_SCHEMA } from './constant'
 import { useFormik } from 'formik'
-import { validateEmail, validateName, validatePassword } from '@/utilities/Validation'
+import { validateEmail, validateName, validatePassword, validatePhone, validateUsername } from '@/utilities/Validation'
 import AuthServices from '@/domain/usecases/AuthServises'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { useRouter } from 'next/navigation'
+import { apiSattus } from '@/utilities/Constant'
+import { getUserRegister } from '@/redux/actions/userAction'
 
 export default function RegisterPage() {
     const [register, setRegister] = useState<any>(null)
-
-    const registerRequestLogin = async (resquest: any) => {
-        const { data, error } = await AuthServices.registerRequest(resquest)
-        if (data && error == null) {
-            setRegister({ ...register })
-        } else {
-            console.log(error)
+    const router = useRouter()
+    const dispatch = useAppDispatch()
+    const useSelector = useAppSelector((state) => state.auth)
+   
+    const handleStatusAuth = (status: string) => {
+        console.log('status', status)
+        switch (status) {
+            case apiSattus.SUCCES:
+                router.push('/intranet')
+                break
+            case apiSattus.FAILED:
+                setRegister({ response: 'No pudo registrarse' })
+                break
+            default:
+                break
         }
     }
-
     const formik = useFormik({
         initialValues: { ...INITIAL_FORMIK_VALUES },
         validationSchema: Yup.object({
             ...YUP_SCHEMA,
         }),
         onSubmit: (values) => {
+            const { username , password } = values
+
             // TODO: Add login logic
-            registerRequestLogin(values)
-        },
+            dispatch(getUserRegister({username , password , values})).then(() => {
+                handleStatusAuth(useSelector.status)
+            })
+        }
     })
+
+    useEffect(() => {
+        handleStatusAuth(useSelector.status)
+    }, [useSelector.status])
 
     return (
         <EnrollmentHoc>
@@ -73,8 +92,21 @@ export default function RegisterPage() {
                         value={formik.values.username}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        error={formik.touched.username && !validateName(formik.values.username)}
+                        error={formik.touched.username && !validateUsername(formik.values.username)}
                         errorMessage={formik.errors.username}
+                    />
+                    <span>Telefono</span>
+                    <WInput
+                        placeholder="Telefono"
+                        size="small"
+                        fullWidth
+                        type="text"
+                        name={REGISTER_VALUES.PHONE}
+                        value={formik.values.phone}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.phone && !validatePhone(formik.values.phone)}
+                        errorMessage={formik.errors.phone}
                     />
                     <span>Contraseña</span>
                     <WInput

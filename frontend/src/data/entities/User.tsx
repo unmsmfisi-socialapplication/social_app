@@ -4,6 +4,7 @@ export interface IUser {
     name: string
     username: string
     email: string
+    photo : string
     phone: string
     roleId: number
     preferredUsername: string
@@ -16,6 +17,7 @@ class User implements IUser {
     name: string
     username: string
     email: string
+    photo : string
     phone: string
     roleId: number
     preferredUsername: string
@@ -27,8 +29,9 @@ class User implements IUser {
         this.name = props.name
         this.username = props.username
         this.email = props.email
+        this.photo = props.photo
         this.phone = props.phone
-        this.roleId = props.roleId
+        this.roleId= props.roleId
         this.preferredUsername = props.preferredUsername
         this.summary = props.summary
     }
@@ -43,6 +46,7 @@ const initalUser = (): User => {
         name: '',
         username: '',
         email: '',
+        photo : '',
         phone: '',
         roleId: 0,
         preferredUsername: '',

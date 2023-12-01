@@ -5,14 +5,14 @@ import { act } from 'react-dom/test-utils'
 import WTag from '../../../components/atoms/Tag/tag'
 
 // Mock of the next/router module
-jest.mock('next/router', () => ({
+jest.mock('next/navigation', () => ({
     useRouter: jest.fn(),
 }))
 describe('WTag Component', () => {
     it('should navigate to the specified path on click', () => {
         const pushMock = jest.fn()
         // Configure useRouter to return the required object
-        const useRouterMock = jest.spyOn(require('next/router'), 'useRouter')
+        const useRouterMock = jest.spyOn(require('next/navigation'), 'useRouter')
         useRouterMock.mockReturnValue({ push: pushMock })
 
         render(<WTag icon={AllInclusive} text="TagLink" path="/some-path" />)
