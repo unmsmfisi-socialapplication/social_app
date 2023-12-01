@@ -6,7 +6,7 @@ terraform {
       version = ">= 3.0, < 4.0"
     }
   }
-}
+}    
 
 provider "azurerm" {
   subscription_id = var.subscription_id
