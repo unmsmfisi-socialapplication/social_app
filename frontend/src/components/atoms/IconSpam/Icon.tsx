@@ -8,12 +8,13 @@ interface WSpamProps {
     typeColor?: 'primary' | 'secondary' | 'comment'
     icon: React.ComponentType<SvgIconProps>
     iconSize?: number
-    text: String
+    testId?: string
+    text: string
 }
 
-const WSpamProps: React.FC<WSpamProps> = ({ typeColor, icon, iconSize, text }) => {
+const WSpamProps: React.FC<WSpamProps> = ({ typeColor, icon, iconSize, testId, text }) => {
     return (
-        <div className="content">
+        <div data-testid={testId} className="content">
             <SvgIcon
                 component={icon}
                 sx={{ fontSize: iconSize }}

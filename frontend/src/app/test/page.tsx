@@ -14,6 +14,7 @@ import {
     WUserCHATCTA,
     WPublicationConfirm,
     WReportPublication,
+    WIconSpam,
 } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CheckIcon from '@mui/icons-material/Check'
@@ -204,6 +205,7 @@ export default function TestPage() {
                 onClose={() => setReportModal(false)}
                 onConfirm={(reason) => console.log(`Se reporto al usuario por ${reason}`)}
             />
+            <WIconSpam icon={ExpandCircleDownIcon} text="IconSpam" iconSize={20} typeColor="primary" />
         </RootLayout>
     )
 }
