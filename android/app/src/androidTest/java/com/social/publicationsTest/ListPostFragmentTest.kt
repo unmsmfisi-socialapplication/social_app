@@ -14,22 +14,23 @@ import org.mockito.Mockito.`when`
 
 class ListPostFragmentTest {
     @Test
-    fun testObtainData() = runBlockingTest {
-        // Arrange
-        val viewModel = ListPostViewModel()
-        val mockedRepository = mock(PostRepository::class.java)
-        viewModel.repository = mockedRepository
+    fun testObtainData() =
+        runBlockingTest {
+            // Arrange
+            val viewModel = ListPostViewModel()
+            val mockedRepository = mock(PostRepository::class.java)
+            viewModel.repository = mockedRepository
 
-        // Simula la respuesta del repositorio
-        val fakeData = listOf(Post("Test", "12:00", "Fake content", ""))
-        `when`(mockedRepository.obtainPost()).thenReturn(fakeData.toMutableList())
+            // Simula la respuesta del repositorio
+            val fakeData = listOf(Post("Test", "12:00", "Fake content", ""))
+            `when`(mockedRepository.obtainPost()).thenReturn(fakeData.toMutableList())
 
-        // Act
-        viewModel.obtainData()
+            // Act
+            viewModel.obtainData()
 
-        // Assert
-        assertEquals(fakeData, viewModel.data.value)
-    }
+            // Assert
+            assertEquals(fakeData, viewModel.data.value)
+        }
 
     @Test
     fun testAdapterInitialization() {
