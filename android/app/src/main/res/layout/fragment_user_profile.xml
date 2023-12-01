@@ -42,7 +42,7 @@
                     android:layout_height="100dp"
                     android:background="@color/transparent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/photo_profile"
+                    android:src="@drawable/model"
                     app:layout_constraintBottom_toBottomOf="@+id/UserProfileFontPage"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
