@@ -20,6 +20,7 @@ type PostUseCaseInterface interface {
     MultipostMastodon(post domain.PostCreate) error
 }
 
+
 type PostRepository interface {
 	CreatePost(post domain.PostCreate) (*domain.Post, error)
 	UserExist(post domain.PostCreate) bool
@@ -37,6 +38,7 @@ type PostUseCase struct {
 func NewPostUseCase(r PostRepository) *PostUseCase {
 	return &PostUseCase{repo: r}
 }
+
 
 func (l *PostUseCase) CreatePost(post domain.PostCreate) (*domain.PostResponse, error) {
 
@@ -95,4 +97,8 @@ func (l *PostUseCase) MultipostPixelfeed(post domain.PostCreate) error {
 func (l *PostUseCase) MultipostMastodon(post domain.PostCreate) error {
     // Logic for posting to Mastodon using mastodonAPI
     return nil
+}
+
+func (p *PostUseCase) PostToMultiplePlatforms(post domain.PostCreate) error {
+	return nil
 }
