@@ -15,20 +15,20 @@ func NewCommunityDBRepository(database *sql.DB) domain.CommunityRepository {
 	return &CommunityDBRepository{db: database}
 }
 
-func (dbRepository CommunityDBRepository) CheckUserInterestTopics(user_id string) (bool, error) {
+func (dbRepository CommunityDBRepository) CheckUserInterestTopics(userId string) (string, error) {
 	query := `SELECT count(user_id) FROM soc_app_users_interest_topics WHERE user_id=$1`
 	var count int
 
-	err := dbRepository.db.QueryRow(query, user_id).Scan(&count)
+	err := dbRepository.db.QueryRow(query, userId).Scan(&count)
 	if err != nil {
-		return false, err
+		return "-1", err
 	}
 
 	if count > 0 {
-		return true, nil
+		return userId, nil
 	}
-
-	return false, nil
+	//User has no interests topics
+	return "-1", nil
 }
 
 func parsePageSizeAndNumber(pageSize, pageNumber string) (int, int, error) {
@@ -60,25 +60,6 @@ func processRows(rows *sql.Rows) ([]domain.Community, error) {
     return communities, nil
 }
 
-func (dbRepository CommunityDBRepository) GetCommunities(pageSize, pageNumber string) ([]domain.Community, error) {
-
-	pageSizeInt, pageNumberInt, err := parsePageSizeAndNumber(pageSize, pageNumber)
-    if err != nil {
-        return nil, err
-    }
-	offset := (pageNumberInt - 1) * pageSizeInt
-
-	query := `SELECT community_id, community_name, community_description,interest_id FROM soc_app_communities LIMIT $1 OFFSET $2`
-	rows, err := dbRepository.db.Query(query,pageSizeInt,offset)
-	if err != nil {
-		return nil, err
-	}
-
-	defer rows.Close()
-
-	return processRows(rows)
-}
-
 func (dbRepository CommunityDBRepository) GetCommunitiesByUserId(userId, pageSize, pageNumber string) ([]domain.Community, error) {
 
 	pageSizeInt, pageNumberInt, err := parsePageSizeAndNumber(pageSize, pageNumber)
@@ -88,8 +69,8 @@ func (dbRepository CommunityDBRepository) GetCommunitiesByUserId(userId, pageSiz
 	offset := (pageNumberInt - 1) * pageSizeInt
 	
 	query := `SELECT com.community_id, com.community_name, com.community_description, com.interest_id FROM soc_app_communities com
-				INNER JOIN soc_app_users_interest_topics userit ON com.interest_id=userit.interest_id
-				WHERE userit.user_id=$1
+				LEFT JOIN soc_app_users_interest_topics userit ON com.interest_id=userit.interest_id
+				WHERE userit.user_id=$1 or -1=$1
 				LIMIT $2 OFFSET $3`
 
 	rows, err := dbRepository.db.Query(query, userId,pageSizeInt,offset)

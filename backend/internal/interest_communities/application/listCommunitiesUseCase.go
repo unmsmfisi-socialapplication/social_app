@@ -21,23 +21,14 @@ func (usecase *ListCommunitiesUseCase) GetCommunitiesList(userId, pageSize, page
 
 	var communities []domain.Community
 
-	flag,err:=usecase.repository.CheckUserInterestTopics(userId)
-	
+	userid,err:=usecase.repository.CheckUserInterestTopics(userId)
 	if err != nil {
 		return nil, err
 	}
-	if(flag){
-		communities, err = usecase.repository.GetCommunitiesByUserId(userId, pageSize, pageNumber)
-		if err != nil {
-			return nil, err
-		}
-	}else{
-		communities, err = usecase.repository.GetCommunities(pageSize, pageNumber)
-		if err != nil {
-			return nil, err
-		}
+	communities, err = usecase.repository.GetCommunitiesByUserId(userid, pageSize, pageNumber)
+	if err != nil {
+		return nil, err
 	}
-	
 	return communities, nil
 
 }
