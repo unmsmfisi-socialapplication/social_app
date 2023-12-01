@@ -130,7 +130,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
     }
 
-    private fun convertNumberToK(number: Int): String {
+    fun convertNumberToK(number: Int): String {
         return when {
             number in 1000..999999 -> "${number / 1000}k"
             number >= 1000000 -> "${number / 1000000}M"
