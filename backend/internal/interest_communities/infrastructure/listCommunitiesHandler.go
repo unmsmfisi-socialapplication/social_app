@@ -1,5 +1,6 @@
 package infrastructure
 
+
 import (
 	"encoding/json"
 	"fmt"
