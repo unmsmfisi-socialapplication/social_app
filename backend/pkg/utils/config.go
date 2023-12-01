@@ -55,9 +55,7 @@ func CheckEnvVariables() error {
 }
 
 func LoadConfig() (*Config, error) {
-
 	LoadEnvFromFile(".env")
-
 	err := CheckEnvVariables()
 	if err != nil {
 		log.Fatal("Environment variables are incorrectly set")
