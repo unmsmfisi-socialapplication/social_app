@@ -37,7 +37,7 @@ export const YUP_SCHEMA = {
 }
 
 export const REGISTER_VALUES = {
-    PHONE : 'phone',
+    PHONE: 'phone',
     NAME: 'name',
     EMAIL: 'email',
     USERNAME: 'username',

@@ -1,31 +1,31 @@
-'use client'
 import React from 'react'
-import AllInclusiveIcon from '@mui/icons-material/AllInclusive'
 import { SvgIcon, SvgIconProps } from '@mui/material'
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive'
 import './index.scss'
 
 interface WCircleIconProps {
     typeColor?: 'primary' | 'secondary' | 'comment'
-    icon: React.ComponentType<SvgIconProps>
+    icon?: React.ComponentType<SvgIconProps>
     iconSize?: number
     dataTestid?: string
+    style?: React.CSSProperties
 }
 
-const WCircleIcon: React.FC<WCircleIconProps> = ({ typeColor, icon, iconSize, dataTestid }) => {
+const WCircleIcon: React.FC<WCircleIconProps> = ({
+    typeColor = 'primary',
+    icon: IconComponent = AllInclusiveIcon,
+    iconSize = 40,
+    dataTestid,
+    style,
+}) => {
     return (
         <SvgIcon
             data-testid={dataTestid}
-            component={icon}
-            sx={{ fontSize: iconSize }}
+            component={IconComponent}
+            sx={{ fontSize: iconSize, ...style }}
             className={`circleIcon circleIcon--${typeColor}`}
-        ></SvgIcon>
+        />
     )
 }
 
 export default WCircleIcon
-
-WCircleIcon.defaultProps = {
-    typeColor: 'primary',
-    icon: AllInclusiveIcon,
-    iconSize: 40,
-}
