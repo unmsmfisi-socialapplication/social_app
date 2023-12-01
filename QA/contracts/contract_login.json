@@ -40,7 +40,7 @@
         "description": "Attempted login with an incorrect password",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/login",
             "headers": {
                 "Content-Type": "application/json"
             },
@@ -66,6 +66,12 @@
                 "message": "Invalid credentials"
             }
         },
+        "example": [
+            {
+                "user_name": "testuser1",
+                "password": "badpass@123"
+            }
+        ],
         "required": ["user_name", "password"]
     },
     "Login with Non-Existent User": {
