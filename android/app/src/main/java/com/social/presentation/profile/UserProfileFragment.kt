@@ -130,14 +130,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
     }
 
-    private fun convertNumberToK(number: Int): String {
-        return when {
-            number in 1000..999999 -> "${number / 1000}k"
-            number >= 1000000 -> "${number / 1000000}M"
-            else -> number.toString()
-        }
-    }
-
     private fun setupAdapter() {
         binding.recyclerPostProfile.adapter = adapter
     }
@@ -154,5 +146,15 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         imageView: ShapeableImageView,
     ) {
         Picasso.get().load(imageURL).into(imageView)
+    }
+
+    companion object {
+        fun convertNumberToK(number: Int): String {
+            return when {
+                number in 1000..999999 -> "${number / 1000}k"
+                number >= 1000000 -> "${number / 1000000}M"
+                else -> number.toString()
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 
 class ListChatsViewModel : ViewModel() {
     private var _chats: MutableLiveData<List<ChatUserData>> = MutableLiveData()
-    val chats: LiveData<List<ChatUserData>> = _chats
+    var chats: LiveData<List<ChatUserData>> = _chats
 
     private val repository: ChatRepository = ChatRepositoryImp()
 

@@ -19,7 +19,7 @@ class ListPostFragment : Fragment(R.layout.fragment_list_post) {
     private lateinit var binding: FragmentListPostBinding
     private lateinit var globalView: View
 
-    private val adapter: BaseAdapter<Post> =
+    val adapter: BaseAdapter<Post> =
         object : BaseAdapter<Post>(emptyList()) {
             override fun getViewHolder(parent: ViewGroup): BaseViewHolder<Post> {
                 val view =
@@ -80,7 +80,7 @@ class ListPostFragment : Fragment(R.layout.fragment_list_post) {
         Picasso.get().load(imageURL).into(imageView)
     }
 
-    private fun handleIconLikeClick(iconLike: ImageView) {
+    fun handleIconLikeClick(iconLike: ImageView) {
         if (iconLike.tag == null || iconLike.tag == "unliked") {
             iconLike.setImageResource(R.drawable.post_icon_like_bold)
             iconLike.tag = "liked"

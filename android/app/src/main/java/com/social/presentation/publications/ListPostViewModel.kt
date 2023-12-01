@@ -13,9 +13,9 @@ import kotlinx.coroutines.withContext
 
 class ListPostViewModel : ViewModel() {
     private var _data: MutableLiveData<List<Post>> = MutableLiveData()
-    val data: LiveData<List<Post>> = _data
+    var data: LiveData<List<Post>> = _data
 
-    private val repository: PostRepository = PostRepositoryImp()
+    var repository: PostRepository = PostRepositoryImp()
 
     fun obtainData() {
         viewModelScope.launch(Dispatchers.Main) {
