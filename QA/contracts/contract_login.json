@@ -112,11 +112,11 @@
         },
         "required": ["user_name", "password"]
     },
-    "Login with Invalid User and Password": {
-        "description": "Attempted login with an invalid user and password",
+    "Login with Invalid Request Payload": {
+        "description": "Attempted login with an invalid request payload",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/login",
             "headers": {
                 "Content-Type": "application/json"
             },
@@ -135,14 +135,20 @@
                 }
             }
         },
+        "example": [
+            {
+                "user_name": "notuser3",
+                "password": "badpass@123"
+            }
+        ],
         "response": {
             "status": 400,
             "body": {
-                "status": "NOTFOUND",
-                "message": "User not found"
-            }
+                "status": "ERROR",
+                "message": "Invalid request payload"
+              }
         },
         "required": ["user_name", "password"]
     }
-    }
+
 }
