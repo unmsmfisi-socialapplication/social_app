@@ -13,6 +13,14 @@ resource "azurerm_key_vault" "example" {
   sku_name            = "premium"
 }
 
+# Create App Insight
+resource "azurerm_application_insights" "AML" {
+  name = "${var.resource_group_name}-cloudquickpocsappinsight"
+  location = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  application_type = "web"
+}
+
 resource "azurerm_machine_learning_workspace" "example" {
   name                    = "example-workspace"
   location                = azurerm_resource_group.example.location
