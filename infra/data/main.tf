@@ -14,7 +14,7 @@ resource "azurerm_key_vault" "example" {
 }
 
 # Create App Insight
-resource "azurerm_application_insights" "AML" {
+resource "azurerm_application_insights" "example" {
   name = "${var.resource_group_name}-cloudquickpocsappinsight"
   location = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
