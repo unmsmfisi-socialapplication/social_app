@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.social.databinding.ContainerReceivedMessageBinding
 import com.social.databinding.ContainerSendMessageBinding
 import com.social.domain.model.ChatMessageUser
+
 class ChatAdapter(
     val chatMessage: List<ChatMessageUser>,
     private val receiverProfileImage: Bitmap,
@@ -17,6 +18,7 @@ class ChatAdapter(
         const val VIEW_TYPE_SENT = 1
         const val VIEW_TYPE_RECEIVER = 2
     }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -34,6 +36,7 @@ class ChatAdapter(
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
+
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
         position: Int,
@@ -43,9 +46,11 @@ class ChatAdapter(
             is ReceivedMessageViewHolder -> holder.setData(chatMessage[position], receiverProfileImage)
         }
     }
+
     override fun getItemCount(): Int {
         return chatMessage.size
     }
+
     override fun getItemViewType(position: Int): Int {
         return if (chatMessage[position].senderId == senderId) {
             VIEW_TYPE_SENT
@@ -53,6 +58,7 @@ class ChatAdapter(
             VIEW_TYPE_RECEIVER
         }
     }
+
     inner class SentMessageViewHolder(private val binding: ContainerSendMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(
@@ -64,6 +70,7 @@ class ChatAdapter(
             binding.messageUserProfile.setImageBitmap(sendProfileImage)
         }
     }
+
     inner class ReceivedMessageViewHolder(private val binding: ContainerReceivedMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(
