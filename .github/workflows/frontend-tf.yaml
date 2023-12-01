@@ -1,0 +1,61 @@
+name: IAC with Terraform
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'infra/frontend/**'
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: development
+
+    defaults:
+      run:
+        working-directory: ./infra/frontend
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Google Auth
+      id: auth
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_TEST_TERRAFORM_KEY }}
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ vars.TEST_PROJECT_ID }}
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Download Terraform state
+      run: gsutil cp gs://${{ vars.TEST_BUCKET_TF_NAME }}/terraform.tfstate terraform.tfstate
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Format
+      run: terraform fmt
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan -input=false
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve -input=false
+
+    - name: Upload Terraform state
+      run: gsutil cp terraform.tfstate gs://${{ vars.TEST_BUCKET_TF_NAME }}/terraform.tfstate

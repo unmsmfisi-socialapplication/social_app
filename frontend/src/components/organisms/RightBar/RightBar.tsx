@@ -1,6 +1,6 @@
 'use client'
 
-import { WSearch } from '@/components'
+import WSearch from './../../atoms/Search/Search'
 import { Box, Button } from '@mui/material'
 
 interface PropsRightBar {}
@@ -14,7 +14,7 @@ export default function RightBar({}: PropsRightBar) {
     return (
         <Box>
             <WSearch />
-            <Button variant="contained"  onClick={handleLogout}>
+            <Button variant="contained" onClick={handleLogout}>
                 Salir
             </Button>
         </Box>

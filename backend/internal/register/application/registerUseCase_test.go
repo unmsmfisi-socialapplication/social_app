@@ -35,11 +35,13 @@ func TestRegistrationUseCase_RegisterUser(t *testing.T) {
 
 	useCase := NewRegistrationUseCase(repo)
 
-	email := "user@example.com"
-	username := "user123"
-	password := "Password123!"
+	userReq := domain.UserRequest{
+		Email:    "user@example.com",
+		Username: "user123",
+		Password: "Password123!",
+	}
 
-	user, err := useCase.RegisterUser(email, username, password)
+	user, err := useCase.RegisterUser(userReq)
 	if err != nil {
 		t.Errorf("Expected no error, but got %v", err)
 	}
@@ -47,17 +49,21 @@ func TestRegistrationUseCase_RegisterUser(t *testing.T) {
 		t.Error("Expected a user, but got nil")
 		return
 	}
-	if user.Email != email {
-		t.Errorf("Expected user email to be %s, but got %s", email, user.Email)
+	if user.Email != userReq.Email {
+		t.Errorf("Expected user email to be %s, but got %s", userReq.Email, user.Email)
 	}
 
-	_, err = useCase.RegisterUser(email, username, password)
+	_, err = useCase.RegisterUser(userReq)
 	if err != ErrEmailInUse {
 		t.Errorf("Expected ErrEmailInUse, but got %v", err)
 	}
 
-	invalidPassword := "password"
-	_, err = useCase.RegisterUser("new@example.com", "newuser", invalidPassword)
+	_, err = useCase.RegisterUser(domain.UserRequest{
+		Email:    "new@example.com",
+		Username: "newuser",
+		Password: "password",
+	})
+
 	if err != ErrFormat {
 		t.Errorf("Expected ErrFormat, but got %v", err)
 	}

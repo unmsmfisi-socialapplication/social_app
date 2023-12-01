@@ -1,0 +1,8 @@
+.details--user--info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .details--user--avatar {
+        aspect-ratio: 1/1;
+    }
+}
