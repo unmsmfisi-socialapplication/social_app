@@ -187,19 +187,3 @@ func (r *CommentRepository) DeleteComment(commentID int64) error {
 
     return nil
 }
-
-
-//Code to delete a comment in the database
-func (r *CommentRepository) ForceDeleteComment(commentID int64) error {
-    query := `
-        DELETE FROM SOC_APP_POSTS_COMMENTS
-        WHERE comment_id = $1
-    `
-    _, err := r.db.Exec(query, commentID)
-
-    if err != nil {
-        return err
-    }
-
-    return nil
-}
