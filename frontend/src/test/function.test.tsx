@@ -7,6 +7,7 @@ import {
     generateUniqueUsernames,
     filterContentByTag,
     countCharacters,
+    validateImageSize,
 } from '../utilities/Functions'
 
 //Test: Validate passwords
@@ -123,6 +124,7 @@ describe('generateUniqueUsernames', () => {
         expect(uniqueUsernames).toEqual([])
     })
 })
+
 //Test: Function filterContentByTag
 describe('Filter content by tag', () => {
     const contentArray = [
@@ -146,6 +148,8 @@ describe('Filter content by tag', () => {
         expect(filteredContent).toEqual([])
     })
 })
+
+//Test: Function countCharacters
 describe('countCharacters', () => {
     it('should return the correct character count for valid input', () => {
         expect(countCharacters('Hello', 10)).toBe(5)
@@ -159,5 +163,19 @@ describe('countCharacters', () => {
 
     it('should handle empty input correctly', () => {
         expect(countCharacters('', 10)).toBe(0)
+    })
+})
+
+// Test: Function validateImageSize
+describe('validateImageSize', () => {
+    it('should return true for valid image size', () => {
+        const validImage = new File([''], 'valid_image.png', { type: 'image/png' })
+        expect(validateImageSize(validImage, 2)).toBe(true)
+    })
+
+    it('should return false for image size exceeding the maximum', () => {
+        const oversizedImage = new File([''], 'oversized_image.png', { type: 'image/png' })
+        Object.defineProperty(oversizedImage, 'size', { value: 4 * 1024 * 1024 })
+        expect(validateImageSize(oversizedImage, 2)).toBe(false)
     })
 })

@@ -101,3 +101,8 @@ export function countCharacters(inputText: string, maxLength: number): number {
 export const useHistory = (url: string) => {
     window.history.pushState({}, '', url)
 }
+
+export function validateImageSize(image: File, maxSizeMB: number): boolean {
+    const sizeInMB = image.size / (1024 * 1024)
+    return sizeInMB <= maxSizeMB
+}
