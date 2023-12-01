@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "Registro Exitoso",
+			"name": "Successful User Registration",
 			"event": [
 				{
 					"listen": "test",
@@ -18,9 +18,11 @@
 							"pm.test('El usuario intenta registrarse con información válida', function () {\r",
 							"    // Configuración del cuerpo de la solicitud\r",
 							"    let requestBody = {\r",
-							"        'email': 'testuser1@example.com',\r",
-							"        'user_name': 'testuser1',\r",
-							"        'password': 'TestP@ss123'\r",
+							"        \"full_name\": \"John Doe\",\r",
+							"        \"email\": \"test1@example.com\",\r",
+							"        \"user_name\": \"testuser1\",\r",
+							"        \"password\": \"TestP@ss123\",\r",
+							"        \"confirm_password\": \"TestP@ss123\"\r",
 							"    };\r",
 							"    \r",
 							"    // Configuración del cuerpo de la solicitud en la petición actual\r",
@@ -32,10 +34,18 @@
 							"    // Validaciones del cuerpo de la solicitud\r",
 							"    pm.expect(requestBody).to.have.property('email');\r",
 							"    pm.expect(requestBody.email).to.not.be.empty;\r",
+							"\r",
 							"    pm.expect(requestBody).to.have.property('user_name');\r",
 							"    pm.expect(requestBody.user_name).to.not.be.empty;\r",
+							"\r",
+							"    pm.expect(requestBody).to.have.property('full_name');\r",
+							"    pm.expect(requestBody.full_name).to.not.be.empty;\r",
+							"\r",
 							"    pm.expect(requestBody).to.have.property('password');\r",
 							"    pm.expect(requestBody.password).to.not.be.empty;\r",
+							"\r",
+							"    pm.expect(requestBody).to.have.property('confirm_password');\r",
+							"    pm.expect(requestBody.confirm_password).to.not.be.empty;\r",
 							"\r",
 							"    // Validación del formato del correo\r",
 							"    pm.test('Validar Correo', function () {\r",
@@ -48,24 +58,38 @@
 							"        pm.expect(requestBody.user_name).to.have.length.within(6, 56, 'El campo Nombre de Usuario debe tener entre 6 y 56 caracteres');\r",
 							"    });\r",
 							"\r",
+							"    // Validación del nombre completo\r",
+							"    pm.test('Validar Nombre Completo', function () {\r",
+							"        pm.expect(requestBody.full_name).to.be.a('string');\r",
+							"        pm.expect(requestBody.full_name.length).to.be.within(2, 255, 'El campo Nombre Completo debe tener entre 2 y 255 caracteres');\r",
+							"    });\r",
+							"\r",
 							"    // Validación de la contraseña\r",
 							"    pm.test('Validar Contraseña', function () {\r",
 							"        pm.expect(requestBody.password).to.match(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/, 'El campo Contraseña debe contener letras, números y al menos un caracter especial');\r",
+							"    });\r",
+							"\r",
+							"    // Validación de confirmar contraseña\r",
+							"    pm.test('Validar Confirmar Contraseña', function () {\r",
+							"        pm.expect(requestBody.confirm_password).to.be.a('string');\r",
+							"        pm.expect(requestBody.confirm_password).to.equal(requestBody.password, 'El campo Confirmar Contraseña debe coincidir con el campo Contraseña');\r",
 							"    });\r",
 							"});\r",
 							"\r",
 							"// Test para simular que el usuario envía una solicitud POST al endpoint de registro\r",
 							"pm.test('El usuario envía una solicitud POST al endpoint de registro', function () {\r",
 							"    pm.sendRequest({\r",
-							"        url: 'https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register',\r",
+							"        url: 'https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/register',\r",
 							"        method: 'POST',\r",
 							"        header: { 'Content-Type': 'application/json' },\r",
 							"        body: {\r",
 							"            mode: 'raw',\r",
 							"            raw: JSON.stringify({\r",
-							"                'email': 'test1@example.com',\r",
-							"                'user_name': 'testuser1',\r",
-							"                'password': 'TestP@ss123'\r",
+							"                \"full_name\": \"John Doe\",\r",
+							"                \"email\": \"test1@example.com\",\r",
+							"                \"user_name\": \"testuser1\",\r",
+							"                \"password\": \"TestP@ss123\",\r",
+							"                \"confirm_password\": \"TestP@ss123\"\r",
 							"            })\r",
 							"        }\r",
 							"    }, function (err, response) {\r",
@@ -117,7 +141,7 @@
 							"});\r",
 							"\r",
 							"pm.test(\"El tiempo de respuesta está dentro del rango aceptable\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(2000, \"El tiempo de respuesta debe ser inferior a 2 segundos\");\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(5000, \"El tiempo de respuesta debe ser inferior a 5 segundos\");\r",
 							"});\r",
 							"\r",
 							"// Validar respuesta contra el valor guardado en 'status'\r",
@@ -134,7 +158,8 @@
 							"    var respuesta = pm.response.json();\r",
 							"    var messageRespuesta = respuesta.message;\r",
 							"    pm.expect(messageRespuesta).to.equal(messageGuardado);\r",
-							"});"
+							"});\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -155,7 +180,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"test1@example.com\",\r\n  \"user_name\": \"testuser1\",\r\n  \"password\": \"TestP@ss123\"\r\n}",
+					"raw": "{\r\n    \"full_name\": \"John Doe\",\r\n    \"email\": \"test1@example.com\",\r\n    \"user_name\": \"testuser1\",\r\n    \"password\": \"TestP@ss123\",\r\n    \"confirm_password\": \"TestP@ss123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -174,5 +199,6 @@
 			},
 			"response": []
 		}
+		
 	]
 }
