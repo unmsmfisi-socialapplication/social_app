@@ -44,19 +44,19 @@ func isValidPassword(password string) bool {
 	return true
 }
 
-func (r *RegistrationUseCase) RegisterUser(email, username, password string) (*domain.User, error) {
-	existingUser, err := r.repo.GetUserByEmail(email)
+func (r *RegistrationUseCase) RegisterUser(user domain.UserRequest) (*domain.User, error) {
+	existingUser, err := r.repo.GetUserByEmail(user.Email)
 	if err != nil {
 		return nil, err
 	}
 	if existingUser != nil {
 		return nil, ErrEmailInUse
 	}
-	if !isValidPassword(password) {
+	if !isValidPassword(user.Password) {
 		return nil, ErrFormat
 	}
 
-	newUser, err := domain.NewUser(email, username, password)
+	newUser, err := domain.NewUser(user)
 	if err != nil {
 		return nil, err
 	}

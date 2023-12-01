@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
 
@@ -17,21 +18,25 @@ func NewRegisterUserHandler(uc *application.RegistrationUseCase) *RegisterUserHa
 }
 
 func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Request) {
-	var data struct {
-		Email    string `json:"email"`
-		Username string `json:"user_name"`
-		Password string `json:"password"`
-	}
-	err := json.NewDecoder(r.Body).Decode(&data)
-	if err != nil {
 
+	var data domain.UserRequest
+
+	err := json.NewDecoder(r.Body).Decode(&data)
+
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	_, er := rh.useCase.RegisterUser(data.Email, data.Username, data.Password)
-	if er != nil {
-		switch er {
+	err = domain.ValidateUserRequest(data)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", err.Error())
+		return
+	}
+
+	dbUser, err := rh.useCase.RegisterUser(data)
+	if err != nil {
+		switch err {
 		case application.ErrEmailInUse:
 			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Email already in use")
 			return
@@ -41,16 +46,13 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 		case application.ErrPhone:
 			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Invalid phone format")
 			return
-
+		default:
+			utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", err.Error())
+			return
 		}
 	}
-	var outputData struct {
-		Email    string `json:"email"`
-		Username string `json:"user_name"`
-	}
-	{
-		outputData.Email = data.Email
-		outputData.Username = data.Username
-	}
-	json.NewEncoder(w).Encode(outputData)
+
+	response := domain.UserToUserResponse(*dbUser)
+
+	utils.SendJSONResponse(w, http.StatusOK, "OK", response)
 }

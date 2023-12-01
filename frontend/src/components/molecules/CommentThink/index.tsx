@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 import './index.scss'
-import { WButton } from '@/components'
+import WButton from './../../atoms/Button/button'
 import Textarea from '@mui/joy/Textarea'
-import WCircleImage from '@/components/atoms/CircleImage/circleImage'
+import WCircleImage from './../../atoms/CircleImage/circleImage'
 
 interface CommentThinkProps {
     avatarDefaultURL?: string
