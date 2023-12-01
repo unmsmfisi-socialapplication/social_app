@@ -12,10 +12,11 @@ interface WButtonPost {
     size?: 'large'
     disabled?: boolean
     borderRadius?: string
+    onClick?: () => void // Nueva prop onClick
     variant?: 'outlined' | 'contained'
 }
 
-const WButtonPost: React.FC<WButtonPost> = ({ dataTestid, id, disabled, typeColor, text, type, size, variant }) => {
+const WButtonPost: React.FC<WButtonPost> = ({ dataTestid, id, disabled, typeColor, text, type, size, variant , onClick }) => {
     const buttonClass = `button typeButton--${disabled ? 'disabled' : typeColor}`
     return (
         <Button
