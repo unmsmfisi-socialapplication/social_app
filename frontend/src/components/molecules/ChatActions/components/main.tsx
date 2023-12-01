@@ -64,7 +64,7 @@ const MainChatActions: React.FC<MainChatActionsProps> = (
                 margin={'10px'}
             >
                 {/* Boton azul de eliminar chat */}
-                <Button variant="contained" color="primary" style={styles.buttonDelete}>
+                <Button variant="contained" color="primary" style={styles.buttonDelete} sx={{textTransform: 'none'}}>
                     Eliminar Chat
                 </Button>
             </Box>
@@ -75,7 +75,7 @@ const MainChatActions: React.FC<MainChatActionsProps> = (
                 margin={'10px'}
             >
                 {/* Boton rojo de reportar chat */}
-                <Button variant="contained" color="primary" style={styles.buttonReport}>
+                <Button variant="contained" color="primary" style={styles.buttonReport} sx={{textTransform: 'none'}}>
                     Reportar Chat
                 </Button>
             </Box>
