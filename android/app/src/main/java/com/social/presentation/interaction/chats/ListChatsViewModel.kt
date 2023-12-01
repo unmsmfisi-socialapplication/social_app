@@ -22,8 +22,8 @@ class ListChatsViewModel : ViewModel() {
             try {
                 val response =
                     withContext(Dispatchers.IO) {
-                    repository.getChats()
-                }
+                        repository.getChats()
+                    }
                 response.let {
                     _chats.value = it
                 }

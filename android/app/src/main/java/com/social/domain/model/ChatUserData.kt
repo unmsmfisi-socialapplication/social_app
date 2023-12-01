@@ -6,5 +6,4 @@ data class ChatUserData(
     val message: String,
     val hourSend: String,
     val countNotification: String,
-    //var token: String,
 )

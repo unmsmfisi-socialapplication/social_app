@@ -27,12 +27,12 @@ class ListChatsFragment : Fragment(R.layout.fragment_list_chat) {
                 return object : BaseViewHolder<ChatUserData>(view) {
                     private val binding: ConteinerUserChatBinding = ConteinerUserChatBinding.bind(view)
 
-                    override fun bind(chatUser: ChatUserData) =
+                    override fun bind(entity: ChatUserData) =
                         with(binding) {
-                            chatUserName.text = chatUser.name
-                            chatMessage.text = chatUser.message
-                            hourSendMessage.text = chatUser.hourSend
-                            countNotificationsMessages.text = chatUser.countNotification
+                            chatUserName.text = entity.name
+                            chatMessage.text = entity.message
+                            hourSendMessage.text = entity.hourSend
+                            countNotificationsMessages.text = entity.countNotification
                         }
                 }
             }
