@@ -66,3 +66,7 @@ type SocialMediaPost struct {
 type PixelfedAPI interface {
     MultipostPixelfeed(post PostCreate) error
 }
+
+type MastodonAPI interface {
+    MultipostMastodon(post PostCreate) error
+}
