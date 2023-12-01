@@ -42,14 +42,16 @@ func TestRegisterUserHandler_RegisterUser(t *testing.T) {
 
 	handler := NewRegisterUserHandler(mockUseCase)
 
-	data := map[string]string{
-		"phone":     "123456789",
-		"email":     "test@example.com",
-		"user_name": "testuser",
-		"password":  "TestPassword123!",
+	data := domain.UserRequest{
+		Email:    "test@example.com",
+		Username: "testuser",
+		Password: "TestPassword123!",
 	}
+
 	requestData, _ := json.Marshal(data)
+
 	req, err := http.NewRequest("POST", "/register", bytes.NewReader(requestData))
+
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -62,17 +64,22 @@ func TestRegisterUserHandler_RegisterUser(t *testing.T) {
 		t.Errorf("Expected status code %d, but got %d", http.StatusOK, rr.Code)
 	}
 
-	var response map[string]string
+	var response struct {
+		Response domain.UserResponse `json:"response"`
+		Status   string              `json:"status"`
+	}
+
 	err = json.Unmarshal(rr.Body.Bytes(), &response)
+
 	if err != nil {
 		t.Errorf("Failed to unmarshal response: %v", err)
 	}
 
-	if response["email"] != data["email"] {
-		t.Errorf("Expected email to be %s, but got %s", data["email"], response["email"])
+	if response.Response.Email != data.Email {
+		t.Errorf("Expected email to be %s, but got %s", data.Email, response.Response.Email)
 	}
 
-	if response["user_name"] != data["user_name"] {
-		t.Errorf("Expected user_name to be %s, but got %s", data["user_name"], response["user_name"])
+	if response.Response.Username != data.Username {
+		t.Errorf("Expected user_name to be %s, but got %s", data.Username, response.Response.Username)
 	}
 }

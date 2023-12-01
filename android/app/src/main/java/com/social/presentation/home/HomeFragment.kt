@@ -1,9 +1,11 @@
 package com.social.presentation.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -47,6 +49,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 handleIconLikeClick(entity, binding.iconLike, binding.txtCountLikes)
                             }
                             binding.txtCountLikes.text = entity.likeCount.toString()
+                            binding.iconComment.setOnClickListener {
+                                showCommentsFullScreen()
+                            }
                         }
                 }
             }
@@ -112,11 +117,36 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         post.isLiked = !post.isLiked
         if (post.isLiked) {
             post.likeCount++
-            iconLike.setImageResource(R.drawable.post_icon_like_bold)
+            iconLike.setImageResource(R.drawable.post_icon_heart_bold)
         } else {
             post.likeCount--
             iconLike.setImageResource(R.drawable.post_icon_like)
         }
         countLikes.text = post.likeCount.toString()
+    }
+
+    private fun showCommentsFullScreen() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.item_comment, null)
+        val dialog =
+            AlertDialog.Builder(requireContext()).apply {
+                setView(dialogView)
+                setCancelable(true)
+            }.create()
+
+        dialog.show()
+
+        val layoutParams =
+            WindowManager.LayoutParams().apply {
+                copyFrom(dialog.window?.attributes)
+                width = WindowManager.LayoutParams.MATCH_PARENT
+                height = WindowManager.LayoutParams.MATCH_PARENT
+            }
+
+        dialog.window?.attributes = layoutParams
+
+        val iconRetract = dialogView.findViewById<ImageView>(R.id.icon_retract)
+        iconRetract.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 }

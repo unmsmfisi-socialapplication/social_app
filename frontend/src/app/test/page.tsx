@@ -38,6 +38,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
 import WSelectedText from '@/components/atoms/SelectText/selectText'
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown'
+import ChatInfo from '@/components/molecules/ChatInfo'
+import ChatActions from '@/components/molecules/ChatActions'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
@@ -204,6 +206,9 @@ export default function TestPage() {
                 onClose={() => setReportModal(false)}
                 onConfirm={(reason) => console.log(`Se reporto al usuario por ${reason}`)}
             />
+            <ChatInfo username='Jonathan Lara' />
+            <ChatActions />
+
         </RootLayout>
     )
 }
