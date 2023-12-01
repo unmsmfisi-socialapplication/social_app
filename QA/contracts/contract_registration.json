@@ -1,13 +1,18 @@
 {
-    "User Registration": {
-        "description": "User Registration",
+    "Successful User Registration": {
+        "description": "Successful User Registration with valid credentials",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/register",
             "headers": {
                 "Content-Type": "application/json"
             },
             "body": {
+                "full_name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 255
+                },
                 "email": {
                     "type": "string",
                     "format": "email"
@@ -23,63 +28,44 @@
                     "minLength": 8,
                     "maxLength": 46,
                     "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                },
+                "confirm_password": {
+                    "type": "string"
                 }
             }
         },
+        "example": [
+            {
+                "full_name": "John Doe",
+                "email": "test1@example.com",
+                "user_name": "testuser1",
+                "password": "TestP@ss123",
+                "confirm_password": "TestP@ss123"
+            }
+        ],
         "response": {
             "status": 200,
             "body": {
               "status": "OK",
               "message": "Successful registration"
           },
-            "required": ["email", "user_name", "password"]
-        }
-    },
-    "User Registration - Server Error": {
-        "description": "User Registration with Server Error",
-        "request": {
-            "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "body": {
-                "email": {
-                    "type": "string",
-                    "format": "email"
-                },
-                "user_name": {
-                    "type": "string",
-                    "minLength": 6,
-                    "maxLength": 56,
-                    "pattern": "^[a-zA-Z0-9]+$"
-                },
-                "password": {
-                    "type": "string",
-                    "minLength": 8,
-                    "maxLength": 46,
-                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
-                }
-            }
-        },
-        "response": {
-            "status": 500,
-            "body": {
-              "status": "ERROR",
-              "message": "Internal Server Error. Please try again later."
-          },
-            "required": ["email", "user_name", "password"]
+            "required": ["full_name", "email", "user_name", "password", "confirm_password"]
         }
     },
     "User Registration - Invalid Password": {
         "description": "User Registration with Invalid Password",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/register",
             "headers": {
                 "Content-Type": "application/json"
             },
             "body": {
+                "full_name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 255
+                },
                 "email": {
                     "type": "string",
                     "format": "email"
@@ -95,27 +81,44 @@
                     "minLength": 8,
                     "maxLength": 46,
                     "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                },
+                "confirm_password": {
+                    "type": "string"
                 }
             }
         },
+        "example": [
+            {
+                "full_name": "Pedro Caceres",
+                "email": "test3@example.com",
+                "user_name": "testuser3",
+                "password": "badpass",
+                "confirm_password": "badpass"
+            }
+        ],
         "response": {
             "status": 400,
             "body": {
               "status": "ERROR",
               "message": "Not secure password"
           },
-            "required": ["email", "user_name", "password"]
+            "required": ["full_name", "email", "user_name", "password", "confirm_password"]
         }
     },
     "User Registration - Existing Username": {
         "description": "User Registration with Existing Username",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/register",
             "headers": {
-                "Content-Type": "application.json"
+                "Content-Type": "application/json"
             },
             "body": {
+                "full_name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 255
+                },
                 "email": {
                     "type": "string",
                     "format": "email"
@@ -130,28 +133,45 @@
                     "type": "string",
                     "minLength": 8,
                     "maxLength": 46,
-                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(.*[@#$%^&+=]).*$"
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                },
+                "confirm_password": {
+                    "type": "string"
                 }
             }
         },
+        "example": [
+            {
+                "full_name": "Maria Solis",
+                "email": "test4@example.com",
+                "user_name": "myuser12",
+                "password": "TestP@ss123",
+                "confirm_password": "TestP@ss123"
+            }
+        ],
         "response": {
             "status": 409,
             "body": {
               "status": "ERROR",
               "message": "Username already in use"
           },
-            "required": ["email", "user_name", "password"]
+            "required": ["full_name", "email", "user_name", "password", "confirm_password"]
         }
     },
     "User Registration - Email in Use": {
         "description": "User Registration with Email in Use",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/register",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/register",
             "headers": {
-                "Content-Type": "application.json"
+                "Content-Type": "application/json"
             },
             "body": {
+                "full_name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 255
+                },
                 "email": {
                     "type": "string",
                     "format": "email"
@@ -166,17 +186,87 @@
                     "type": "string",
                     "minLength": 8,
                     "maxLength": 46,
-                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(.*[@#$%^&+=]).*$"
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                },
+                "confirm_password": {
+                    "type": "string"
                 }
             },
+            "example": [
+                {
+                    "full_name": "Carla Sanchez",
+                    "email": "test1@example.com",
+                    "user_name": "testuser2",
+                    "password": "TestP@ss123",
+                    "confirm_password": "TestP@ss123"
+                }
+            ],
             "response": {
                 "status": 400,
                 "body": {
                   "status": "ERROR",
                   "message": "Email already in use"
               },
-                "required": ["email", "user_name", "password"]
+                "required": ["full_name", "email", "user_name", "password", "confirm_password"]
             }
         }
+    },
+    "User Registration - Server Error": {
+        "description": "User Registration with Server Error",
+        "request": {
+            "method": "POST",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/register",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "full_name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 255
+                },
+                "email": {
+                    "type": "string",
+                    "format": "email"
+                },
+                "user_name": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                },
+                "confirm_password": {
+                    "type": "string"
+                }
+            }
+        },
+        "example": [
+            {
+                "full_name": "Juan Salinas",
+                "email": "test5@example.com",
+                "user_name": "testuser5",
+                "password": "TestP@ss123",
+                "confirm_password": "TestP@ss123"
+            }
+        ],
+        "comments": [
+            "In the event of a significant server delay when pressing the 'Registrarse' button,",
+            "You expect to receive a 500 response with the message 'Internal Server Error. Please try again later.'"
+        ],
+        "response": {
+            "status": 500,
+            "body": {
+              "status": "ERROR",
+              "message": "Internal Server Error. Please try again later."
+          },
+            "required": ["full_name", "email", "user_name", "password", "confirm_password"]
+        }
+        
     }
 }
