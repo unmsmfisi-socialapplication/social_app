@@ -16,6 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: development
 
+    env:
+      ARM SUBSCRIPTION ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM CLIENT ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM CLIENT SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM TENANT ID: ${{ secrets.ARM_TENANT_ID }}
+
     defaults:
       run:
         working-directory: ./infra/data
@@ -25,22 +31,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Google Auth
-      id: auth
-      uses: google-github-actions/auth@v1
-      with:
-        credentials_json: ${{ secrets.GCP_TEST_TERRAFORM_KEY }}
-
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
-      with:
-        project_id: ${{ vars.TEST_PROJECT_ID }}
-
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
-    - name: Download Terraform state
-      run: gsutil cp gs://${{ vars.TEST_BUCKET_TF_NAME }}/terraform.tfstate terraform.tfstate
+    - name: Get Vars
+      run: echo "${{vars.TF_DATA_VARS}}" > ./terraform.auto.tfvars
 
     - name: Terraform Init
       run: terraform init
@@ -52,4 +47,4 @@ jobs:
       run: terraform validate
 
     - name: Terraform Plan
-      run: terraform plan -input=false
+      run: terraform plan -out=tfplan
