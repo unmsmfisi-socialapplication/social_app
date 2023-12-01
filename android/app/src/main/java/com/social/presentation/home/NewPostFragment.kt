@@ -24,8 +24,8 @@ import java.util.Locale
 
 class NewPostFragment : Fragment(R.layout.fragment_new_post) {
     private lateinit var binding: FragmentNewPostBinding
-    private lateinit var imageViews: List<ShapeableImageView>
-    private val selectedImages: MutableList<Bitmap> = mutableListOf()
+    lateinit var imageViews: List<ShapeableImageView>
+    val selectedImages: MutableList<Bitmap> = mutableListOf()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var isLocationVisible = false
 
@@ -171,14 +171,14 @@ class NewPostFragment : Fragment(R.layout.fragment_new_post) {
         return getBitmap(contentResolver, imageUri)
     }
 
-    private fun removeImage(index: Int) {
+    fun removeImage(index: Int) {
         if (index < selectedImages.size) {
             selectedImages.removeAt(index)
             updateImageUI()
         }
     }
 
-    private fun updateImageUI() {
+    fun updateImageUI() {
         for (i in imageViews.indices) {
             if (i < selectedImages.size) {
                 imageViews[i].visibility = View.VISIBLE
