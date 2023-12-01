@@ -8,11 +8,13 @@ interface WCircleIconProps {
     typeColor?: 'primary' | 'secondary' | 'comment'
     icon: React.ComponentType<SvgIconProps>
     iconSize?: number
+    dataTestid?: string
 }
 
-const WCircleIcon: React.FC<WCircleIconProps> = ({ typeColor, icon, iconSize }) => {
+const WCircleIcon: React.FC<WCircleIconProps> = ({ typeColor, icon, iconSize, dataTestid }) => {
     return (
         <SvgIcon
+            data-testid={dataTestid}
             component={icon}
             sx={{ fontSize: iconSize }}
             className={`circleIcon circleIcon--${typeColor}`}
