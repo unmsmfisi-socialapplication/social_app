@@ -32,10 +32,9 @@ type UserResponse struct {
 type UserRequest struct {
 	Email    string
 	Username string
-	Photo    string
+	Phone    string
 	Name     string
 	Password string
-	Phone    string
 }
 
 func NewUser(userReq UserRequest) (*User, error) {
@@ -50,7 +49,6 @@ func NewUser(userReq UserRequest) (*User, error) {
 		Email:    userReq.Email,
 		Username: userReq.Username,
 		Password: hashedPassword,
-		Photo:    userReq.Photo,
 	}, nil
 }
 
@@ -96,7 +94,6 @@ func ValidateUserRequest(u UserRequest) error {
 	if u.Name == "" {
 		return errors.New("Name is required")
 	}
-	
 
 	return nil
 }

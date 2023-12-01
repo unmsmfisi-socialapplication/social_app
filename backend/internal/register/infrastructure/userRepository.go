@@ -34,9 +34,9 @@ func (u *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
 
 func (u *UserRepository) InsertUser(newUser *domain.User) (*domain.User, error) {
 	query := `INSERT INTO soc_app_users (insertion_date, email, 
-		user_name, password, name, phone, photo) 
-	VALUES (NOW(), $1, $2, $3, $4, $5, $6)
-	RETURNING user_id
+		user_name, password, name, phone) 
+	VALUES (NOW(), $1, $2, $3, $4, $5)
+	RETURNING user_id,photo
 	`
 
 	err := u.db.QueryRow(
@@ -46,8 +46,7 @@ func (u *UserRepository) InsertUser(newUser *domain.User) (*domain.User, error) 
 		newUser.Password,
 		newUser.Name,
 		newUser.Phone,
-		newUser.Photo,
-	).Scan(&newUser.Id)
+	).Scan(&newUser.Id, &newUser.Photo)
 
 	if err != nil {
 		return nil, err

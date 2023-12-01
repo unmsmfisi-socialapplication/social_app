@@ -10,6 +10,6 @@ ALTER TABLE SOC_APP_USERS
 ADD COLUMN phone varchar(255);
 
 ALTER TABLE SOC_APP_USERS
-ADD COLUMN photo TEXT;
+ADD COLUMN photo TEXT DEFAULT 'https://scontent.flim16-2.fna.fbcdn.net/v/t39.30808-1/361096718_578421127820224_7812375200077875043_n.png?stp=dst-png_p200x200&_nc_cat=104&ccb=1-7&_nc_sid=596444&_nc_eui2=AeGFPiCaIOheJ0EcJIUeYe-zIxhoZCgV9I0jGGhkKBX0jbuInQpa0yLb3WQUCQEKMsPwKBSx7r5REsjhwMAqUYkF&_nc_ohc=cazUFjHWhGIAX_RPs6v&_nc_ht=scontent.flim16-2.fna&oh=00_AfDJV8c2DuV3nA4Ngy76j2ZAqakhzonfeBk7yoSawEETRg&oe=656E1825';
 
 COMMIT;
