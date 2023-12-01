@@ -39,6 +39,8 @@ import RootLayout from '../layout'
 import WSelectedText from '@/components/atoms/SelectText/selectText'
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown'
 import WChatPreview from '@/components/molecules/ChatPreview'
+import ChatInfo from '@/components/molecules/ChatInfo'
+import ChatActions from '@/components/molecules/ChatActions'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
@@ -211,6 +213,9 @@ export default function TestPage() {
                 messagePreview="Hey muy buenas a todos guapísimos"
                 time="20:17"
             />
+            <ChatInfo username='Jonathan Lara' />
+            <ChatActions />
+
         </RootLayout>
     )
 }
