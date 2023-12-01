@@ -5,18 +5,17 @@ import android.widget.TextView
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.social.R
+import com.social.domain.model.Post
+import com.social.presentation.home.HomeFragment
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.social.R
-import com.social.domain.model.Post
-import com.social.presentation.home.HomeFragment
 import org.mockito.Mockito.mock
 
 @RunWith(AndroidJUnit4::class)
 class HomeFragmentTest {
-
     private lateinit var fragmentScenario: FragmentScenario<HomeFragment>
 
     @Before
@@ -27,12 +26,13 @@ class HomeFragmentTest {
 
     @Test
     fun testHandleIconLikeClick() {
-        val post = Post(
-            content = "This is a test content",
-            hour = "12:00 PM",
-            image = "",
-            names = "John Doe",
-        )
+        val post =
+            Post(
+                content = "This is a test content",
+                hour = "12:00 PM",
+                image = "",
+                names = "John Doe",
+            )
         val initialLikeCount = post.likeCount
 
         // Llamar al método handleIconLikeClick con el Post de prueba y verificar los cambios
@@ -49,4 +49,3 @@ class HomeFragmentTest {
         private val mockCountLikes: TextView = mock()
     }
 }
-

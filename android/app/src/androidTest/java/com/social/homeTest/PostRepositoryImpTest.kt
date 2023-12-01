@@ -6,17 +6,15 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class PostRepositoryTest {
-
+class PostRepositoryImpTest {
     class MockPostRepository : PostRepository {
         override suspend fun obtainPost(): MutableList<Post> {
-            // Simulamos la respuesta esperada del repositorio
             return mutableListOf(
                 Post(
                     "Usuario de prueba",
                     "Hora de prueba",
                     "Contenido de prueba",
-                    "URL de imagen de prueba"
+                    "URL de imagen de prueba",
                 ),
             )
         }
