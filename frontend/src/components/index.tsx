@@ -29,6 +29,7 @@ export { default as WPostTypes } from './molecules/PostTypes/index'
 export { default as WUserCHATCTA } from './molecules/UserChatCTA/index'
 export { default as WPublicationConfirm } from './molecules/PublicationConfirm/index'
 export { default as WReportPublication } from './molecules/ReportPublication/index'
+export { default as WChatPreview } from './molecules/ChatPreview/index'
 // export organism components
 export { default as WCardAuth } from './organisms/CardAuth'
 export { default as WRightBar } from './organisms/RightBar/RightBar'
