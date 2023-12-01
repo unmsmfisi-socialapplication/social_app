@@ -8,11 +8,12 @@ import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
-import { WButton } from '@/components'
+import  WButton  from './../../../components/atoms/Button/button'
 
 interface CustomDialogProps {
     warning?: boolean
     title?: CustomText
+    dataTestid?: string
     content?: string
     subtitle?: string
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -46,7 +47,7 @@ const sxCloseButton = {
     color: (theme: Theme) => theme.palette.grey[500],
 }
 
-const CustomDialog: React.FC<CustomDialogProps> = ({ warning, content, title, subtitle, size, btnText }) => {
+const CustomDialog: React.FC<CustomDialogProps> = ({ warning, content, title, subtitle, size, btnText, dataTestid }) => {
     const [open, setOpen] = React.useState(false)
 
     const handleClickOpen = () => {
@@ -58,7 +59,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ warning, content, title, su
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen} data-testid={dataTestid}>
                 Open dialog
             </Button>
             <BootstrapDialog onClose={handleClose} open={open} maxWidth={size} fullWidth={true}>
