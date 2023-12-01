@@ -3,7 +3,7 @@
         "description": "Successful login with valid credentials",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/login",
             "headers": {
                 "Content-Type": "application/json"
             },
@@ -22,19 +22,25 @@
                 }
             }
         },
+        "example": [
+            {
+                "user_name": "testuser1",
+                "password": "TestP@ss123"
+            }
+        ],
         "response": {
             "status": 200,
             "body": {
                 "status": "OK",
-                "message": "Authentication successful"
+                "token": "string"
             },
         "required": ["user_name", "password"]
-    },
+    }},
     "Login with Incorrect Password": {
         "description": "Attempted login with an incorrect password",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/login",
             "headers": {
                 "Content-Type": "application/json"
             },
@@ -60,13 +66,19 @@
                 "message": "Invalid credentials"
             }
         },
+        "example": [
+            {
+                "user_name": "testuser1",
+                "password": "badpass@123"
+            }
+        ],
         "required": ["user_name", "password"]
     },
     "Login with Non-Existent User": {
         "description": "Attempted login with a non-existent user",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/login",
             "headers": {
                 "Content-Type": "application/json"
             },
@@ -85,6 +97,12 @@
                 }
             }
         },
+        "example": [
+            {
+                "user_name": "notuser2",
+                "password": "TestP@ss123"
+            }
+        ],
         "response": {
             "status": 404,
             "body": {
@@ -94,11 +112,11 @@
         },
         "required": ["user_name", "password"]
     },
-    "Login with Invalid User and Password": {
-        "description": "Attempted login with an invalid user and password",
+    "Login with Invalid Request Payload": {
+        "description": "Attempted login with an invalid request payload",
         "request": {
             "method": "POST",
-            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/login",
             "headers": {
                 "Content-Type": "application/json"
             },
@@ -117,14 +135,57 @@
                 }
             }
         },
+        "example": [
+            {
+                "user_name": "notuser3",
+                "password": "badpass@123"
+            }
+        ],
         "response": {
             "status": 400,
             "body": {
-                "status": "NOTFOUND",
-                "message": "User not found"
-            }
+                "status": "ERROR",
+                "message": "Invalid request payload"
+              }
         },
         "required": ["user_name", "password"]
-    }
-    }
-}
+    },
+    "Login - Server Error": {
+        "description": "Attempted login with a server error",
+        "request": {
+            "method": "POST",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/login",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "username": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "example": [
+            {
+                "user_name": "testuser3",
+                "password": "TestP@ss123"
+            }
+        ],
+        "response": {
+            "status": 500,
+            "body": {
+                "status": "ERROR",
+                "message": "Error during authentication"
+            },
+            "required": ["username", "password"]
+        }
+    }    
+ }
