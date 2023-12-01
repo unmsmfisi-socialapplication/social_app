@@ -98,4 +98,12 @@
     <string name="count_shares">0</string>
     <string name="count_favorites">0</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="title_comment">Comentarios</string>
+    <string name="default_comment">Comentar...</string>
+    <string name="time_comment">15 h</string>
+    <string name="reaction_comment">Reaccionar</string>
+    <string name="reply_comment">Responder</string>
+    <string name="count_reaction_comment">0</string>
+    <string name="comment">Comentar...</string>
+    <string name="comment_user">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
 </resources>
