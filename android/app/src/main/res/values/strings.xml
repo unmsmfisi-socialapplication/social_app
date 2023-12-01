@@ -106,4 +106,8 @@
     <string name="count_reaction_comment">0</string>
     <string name="comment">Comentar...</string>
     <string name="comment_user">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Erat vitae quis quam augue quam a.</string>
+    <string name="count_message">2</string>
+    <string name="hour_send_message">15:39</string>
+    <string name="contact_name">Full Name</string>
+    <string name="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
 </resources>
