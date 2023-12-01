@@ -5,6 +5,8 @@ data class Post(
     val hour: String,
     val content: String,
     val image: String,
+    var isLiked: Boolean = false,
+    var likeCount: Int = 0,
 )
 
 data class User(

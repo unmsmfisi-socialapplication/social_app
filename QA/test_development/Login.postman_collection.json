@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "94072a47-28f1-45f6-83de-463b34576d9f",
+		"name": "Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31241057",
+		"_collection_link": "https://qa-unmsm-011223.postman.co/workspace/Team-Workspace~914a49d5-c551-4a7a-86d9-869a323ff02f/collection/27775741-94072a47-28f1-45f6-83de-463b34576d9f?action=share&source=collection_link&creator=31241057"
+	},
+	"item": [
+		{
+			"name": "Inició Sesión Exitoso",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"message\", \"Authentication successful\");\r",
+							"pm.globals.set(\"status\", \"OK\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para verificar que el usuario intenta iniciar sesión con información válida\r",
+							"pm.test('El usuario intenta iniciar sesión con información válida', function () {\r",
+							"    // Configuración del cuerpo de la solicitud\r",
+							"    let requestBody = {\r",
+							"        'user_name': 'testuser1',\r",
+							"        'password': 'TestP@ss123'\r",
+							"    };\r",
+							"\r",
+							"    // Configuración del cuerpo de la solicitud en la petición actual\r",
+							"    pm.request.body = {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    };\r",
+							"\r",
+							"    // Validaciones del cuerpo de la solicitud\r",
+							"    pm.expect(requestBody).to.have.property('user_name');\r",
+							"    pm.expect(requestBody.user_name).to.not.be.empty;\r",
+							"    pm.expect(requestBody).to.have.property('password');\r",
+							"    pm.expect(requestBody.password).to.not.be.empty;\r",
+							"\r",
+							"\r",
+							"    // Validación del nombre de usuario\r",
+							"    pm.test('Validar Nombre de Usuario', function () {\r",
+							"        pm.expect(requestBody.user_name).to.match(/^[a-zA-Z0-9]+$/, 'El campo Nombre de Usuario debe ser alfanumérico');\r",
+							"        pm.expect(requestBody.user_name).to.have.length.within(6, 56, 'El campo Nombre de Usuario debe tener entre 6 y 56 caracteres');\r",
+							"    });\r",
+							"\r",
+							"    // Validación de la contraseña\r",
+							"    pm.test('Validar Contraseña', function () {\r",
+							"        pm.expect(requestBody.password).to.match(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/, 'El campo Contraseña debe contener letras, números y al menos un caracter especial');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"// Test para simular que el usuario envía una solicitud POST al endpoint de inicio de sesión\r",
+							"pm.sendRequest({\r",
+							"    url: 'https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/login', // Asegúrate de que esta URL sea correcta\r",
+							"    method: 'POST',\r",
+							"    header: { 'Content-Type': 'application/json' },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify({\r",
+							"            'user_name': 'testuser1',\r",
+							"            'password': 'TestP@ss123'\r",
+							"        })\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    // Manejo de errores\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"        return;\r",
+							"    }\r",
+							"\r",
+							"    // Test para verificar que el código de estado de la respuesta es 200\r",
+							"    pm.test(\"Inicio Sesion exitoso. Response status code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"    // Validar el tiempo de respuesta\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000, 'El tiempo de respuesta debe ser inferior a 2 segundos');\r",
+							"\r",
+							"    // Obtención de la respuesta JSON\r",
+							"    let responseData = response ? response.json() : null;\r",
+							"\r",
+							"    // Validaciones de la respuesta\r",
+							"    if (responseData) {\r",
+							"        pm.expect(responseData.status).to.equal('OK', 'El campo \"status\" debería ser \\'OK\\'');\r",
+							"        pm.expect(responseData.message).to.equal('Authentication successful', 'El campo \"message\" debería ser \\'Authentication successful\\'');\r",
+							"    } else {\r",
+							"        console.error('La respuesta no es válida');\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"// Tests longitud 'status' y 'message'\r",
+							"pm.test(\"La longitud de 'status' y 'message' debe ser mayor que cero\", function () {\r",
+							"    const respuesta = pm.response.json();\r",
+							"    pm.expect(respuesta.status.length).to.be.greaterThan(0, \"El campo 'status' no debe estar vacío\");\r",
+							"    pm.expect(respuesta.message.length).to.be.greaterThan(0, \"El campo 'message' no debe estar vacío\");\r",
+							"});\r",
+							"\r",
+							"// Validar respuesta contra el valor guardado en 'status'\r",
+							"pm.test(\"Validar respuesta contra el valor guardado en 'status'\", function() {\r",
+							"    var statusGuardado = pm.globals.get(\"status\");\r",
+							"    var respuesta = pm.response.json();\r",
+							"    var statusRespuesta = respuesta.status;\r",
+							"    pm.expect(statusRespuesta).to.equal(statusGuardado);\r",
+							"});\r",
+							"\r",
+							"// Validar respuesta contra el valor guardado en 'message'\r",
+							"pm.test(\"Validar respuesta contra el valor guardado en 'message'\", function() {\r",
+							"    var messageGuardado = pm.globals.get(\"message\");\r",
+							"    var respuesta = pm.response.json();\r",
+							"    var messageRespuesta = respuesta.message;\r",
+							"    pm.expect(messageRespuesta).to.equal(messageGuardado);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user_name\": \"testuser1\",\r\n  \"password\": \"TestP@ss123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

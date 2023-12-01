@@ -12,6 +12,7 @@ import {
     WSearch,
     WTopicFollow,
     WUserCHATCTA,
+    WPublicationConfirm,
     WReportPublication,
 } from '@/components'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
@@ -35,10 +36,29 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions'
 import GifBoxIcon from '@mui/icons-material/GifBox'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import RootLayout from '../layout'
+import WSelectedText from '@/components/atoms/SelectText/selectText'
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown'
+import WProfileStatitics from '@/components/molecules/ProfileStatitics'
+import WChatPreview from '@/components/molecules/ChatPreview'
+import ChatInfo from '@/components/molecules/ChatInfo'
+import ChatActions from '@/components/molecules/ChatActions'
 
 export default function TestPage() {
     const [count, setCount] = useState(0)
     const [password, setPassword] = useState('')
+    const socialNetworkOptions = [
+        { value: 'Twitter' },
+        { value: 'Facebook' },
+        { value: 'Instagram' },
+        { value: 'Tik Tok' },
+    ]
+    const user = {
+        posts: 100,
+        photos: 120,
+        followers: 10000,
+        following: 64,
+     };
+    const [modalConfirm, setModalConfirm] = useState<boolean>(false)
     const [reportModal, setReportModal] = useState<boolean>(false)
 
     const handleCount = () => {
@@ -164,12 +184,46 @@ export default function TestPage() {
                 <WPostTypes iconComponent={<GifBoxIcon />} typeName="GIF" />
                 <WPostTypes iconComponent={<LocationOnIcon />} typeName="UBICACIÓN" />
             </div>
+            <div
+                style={{
+                    width: '500px',
+                    height: '150px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: '15px auto',
+                    gap: '15px',
+                }}
+            >
+                <WSelectedText
+                    label="Red social"
+                    options={socialNetworkOptions}
+                    iconComponent={ExpandCircleDownIcon}
+                ></WSelectedText>
+            </div>
+            <WButton text="Abrir publicación" onClick={() => setModalConfirm(true)} />
+            <WPublicationConfirm
+                open={modalConfirm}
+                onClose={() => setModalConfirm(false)}
+                onConfirm={() => console.log('Publicación subida')}
+            />
             <WButton text="Reportar este usuario" onClick={() => setReportModal(true)} />
             <WReportPublication
                 open={reportModal}
                 onClose={() => setReportModal(false)}
                 onConfirm={(reason) => console.log(`Se reporto al usuario por ${reason}`)}
             />
+            <WProfileStatitics {...user} />
+            <WChatPreview
+                avatar="https://scontent.flim15-1.fna.fbcdn.net/v/t39.30808-6/327176494_836675897571806_7271269400185669869_n.png?_nc_cat=110&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=yLWwkUErvAAAX9If-sL&_nc_ht=scontent.flim15-1.fna&oh=00_AfDjIBf_tedT-iuEaRQzUMgUpu_CoxBl_f9Wx2XTWinDiw&oe=656D608F"
+                name="Samuel de Luque Batuecas"
+                messagePreview="Hey muy buenas a todos guapísimos"
+                time="20:17"
+            />
+            <ChatInfo username='Jonathan Lara' />
+            <ChatActions />
+
         </RootLayout>
     )
 }

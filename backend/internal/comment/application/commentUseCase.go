@@ -9,6 +9,7 @@ import (
 type CommentUseCaseInterface interface {
 	GetAll() ([]*domain.Comment, error)
 	GetByID(commentID int64) (*domain.Comment, error)
+	GetByPostID(postID int64) ([]*domain.Comment, error)
 	Create(comment *domain.Comment) error
 	Update(commentID int64, comment *domain.Comment) error
 	Delete(commentID int64) error
@@ -17,6 +18,7 @@ type CommentUseCaseInterface interface {
 type CommentRepository interface {
 	GetAllComments() ([]*domain.Comment, error)
 	GetCommentByID(commentID int64) (*domain.Comment, error)
+	GetCommentsByPostID(postID int64) ([]*domain.Comment, error)
 	CreateComment(comment *domain.Comment) error
 	UpdateComment(commentID int64, comment *domain.Comment) error
 	DeleteComment(commentID int64) error
@@ -43,6 +45,17 @@ func (c *CommentUseCase) GetByID(commentID int64) (*domain.Comment, error) {
 		return nil, errors.New("comment not found")
 	}
 	return comment, nil
+}
+
+func (c *CommentUseCase) GetByPostID(postID int64) ([]*domain.Comment, error) {
+	comments, err := c.repo.GetCommentsByPostID(postID)
+	if err != nil {
+		return nil, err
+	}
+	if comments == nil {
+		return nil, errors.New("comments not found")
+	}
+	return comments, nil
 }
 
 func (c *CommentUseCase) Create(comment *domain.Comment) error {
