@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/transparent"
                 android:rotationY="180"
-                android:src="@drawable/icon_bar"
+                android:src="@drawable/icon_burger_bar"
                 app:tint="@color/color04" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:scaleType="centerCrop"
                 android:background="@color/transparent"
-                android:src="@drawable/defaul_user_profile"
+                android:src="@drawable/model"
                 app:riv_oval="true" />
         </LinearLayout>
 
@@ -72,28 +72,20 @@
             android:backgroundTint="@color/color05"/>
     </LinearLayout>
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcyViewlistChats"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/conteiner_user_chat"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcyViewlistChats"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-    </FrameLayout>
-
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -128,6 +120,5 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             android:src="@drawable/icon_gear" />
-    </LinearLayout>
-
+    </LinearLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
