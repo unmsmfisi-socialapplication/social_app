@@ -2,7 +2,7 @@
 import React from 'react'
 import styles from './index.module.scss'
 import { Box, Button, Card, Typography } from '@mui/material'
-import { WButton } from '@/components'
+import WButton from './../../atoms/Button/button'
 
 interface PhotoInformationProps {
     title?: string
