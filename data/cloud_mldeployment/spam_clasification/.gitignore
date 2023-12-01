@@ -1,0 +1,3 @@
+# Ignorar archivos JSON de configuración
+*.json
+

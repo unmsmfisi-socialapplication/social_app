@@ -3,6 +3,7 @@ package infrastructure
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -20,6 +21,7 @@ type mockPostUseCase struct {
 	GetPostFn    func(id int) (*domain.Post, error)
 	DeletePostFn func(id int64) error
 	UpdatePostFn func(id int64, update domain.PostUpdate) error
+	ReportPostFn func(report domain.PostReport) error
 }
 
 func (m *mockPostUseCase) CreatePost(post domain.PostCreate) (*domain.PostResponse, error) {
@@ -40,7 +42,9 @@ func (m *mockPostUseCase) DeletePost(id int64) error {
 func (m *mockPostUseCase) UpdatePost(id int64, update domain.PostUpdate) error {
 	return m.UpdatePostFn(id, update)
 }
-
+func (m *mockPostUseCase) ReportPost(report domain.PostReport) error {
+	return m.ReportPostFn(report)
+}
 func TestHandleCreatePost(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -303,6 +307,95 @@ func TestHandleUpdatePost(t *testing.T) {
 
 			if string(body) != tt.wantBody {
 				t.Errorf("expected body %q; got %q", tt.wantBody, body)
+			}
+		})
+	}
+}
+
+func TestHandleReportPost(t *testing.T) {
+	tests := []struct {
+		name       string
+		reportData string
+		mockReport func(report domain.PostReport) error
+		wantStatus int
+		wantBody   string
+	}{
+		{
+			name:       "Successful Post Report",
+			reportData: `{"postId": 1, "reportedBy": "user123", "reason": "Inappropriate content"}`,
+			mockReport: func(report domain.PostReport) error {
+				return nil
+			},
+			wantStatus: http.StatusOK,
+			wantBody:   `{"response":"Post reported successfully","status":"SUCCESS"}`,
+		},
+		{
+			name:       "Reporter User Does Not Exist",
+			reportData: `{"postId": 1, "reportedBy": "nonexistentuser", "reason": "Spam"}`,
+			mockReport: func(report domain.PostReport) error {
+				return domain.ErrReporterUserDoesNotExist
+			},
+			wantStatus: http.StatusBadRequest,
+			wantBody:   `{"response":"Reporter user does not exist","status":"ERROR"}`,
+		},
+		{
+			name:       "Post Not Found",
+			reportData: `{"postId": 999, "reportedBy": "user123", "reason": "Harassment"}`,
+			mockReport: func(report domain.PostReport) error {
+				return domain.ErrPostNotFound
+			},
+			wantStatus: http.StatusNotFound,
+			wantBody:   `{"response":"Post not found","status":"ERROR"}`,
+		},
+		{
+			name:       "User Has Already Reported This Post",
+			reportData: `{"postId": 1, "reportedBy": "user123", "reason": "Duplicate report"}`,
+			mockReport: func(report domain.PostReport) error {
+				return domain.ErrUserHasAlreadyReportedPost
+			},
+			wantStatus: http.StatusConflict,
+			wantBody:   `{"response":"User has already reported this post","status":"ERROR"}`,
+		},
+		{
+			name:       "Report Submission Error",
+			reportData: `{"postId": 2, "reportedBy": "user123", "reason": "Inappropriate content"}`,
+			mockReport: func(report domain.PostReport) error {
+				return errors.New("internal server error")
+			},
+			wantStatus: http.StatusInternalServerError,
+			wantBody:   `{"response":"Internal Server Error","status":"ERROR"}`,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			req, err := http.NewRequest(http.MethodPost, "/report", bytes.NewBufferString(tt.reportData))
+			if err != nil {
+				t.Fatalf("could not create request: %v", err)
+			}
+
+			mockUseCase := &mockPostUseCase{
+				ReportPostFn: tt.mockReport,
+			}
+			handler := NewPostHandler(mockUseCase)
+			recorder := httptest.NewRecorder()
+
+			handler.HandleReportPost(recorder, req)
+
+			res := recorder.Result()
+			defer res.Body.Close()
+
+			if res.StatusCode != tt.wantStatus {
+				t.Errorf("expected status %v; got %v, for case: %s", tt.wantStatus, res.StatusCode, tt.name)
+			}
+
+			body, err := io.ReadAll(res.Body)
+			if err != nil {
+				t.Fatalf("could not read response: %v", err)
+			}
+
+			if gotBody := string(body); gotBody != tt.wantBody {
+				t.Errorf("expected body %q; got %q, for case: %s", tt.wantBody, gotBody, tt.name)
 			}
 		})
 	}

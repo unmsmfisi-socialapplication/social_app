@@ -16,3 +16,18 @@ func NewFollower(p_follower_profile_id, p_following_profile_id int) (*Follower, 
 		Following_profile_id: p_following_profile_id,
 	}, nil
 }
+
+type FollowerData struct {
+	ProfileID      int
+	UserID         int
+	Name           string
+	LastName       string
+	ProfilePicture string
+	UserName       string
+}
+
+type FollowerDataList []FollowerData
+
+func NewFollowerDataList(dataList ...FollowerData) FollowerDataList {
+	return FollowerDataList(dataList)
+}

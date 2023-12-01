@@ -13,10 +13,10 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.social.R
 import com.social.databinding.FragmentEditProfileBinding
 import com.social.databinding.ItemSocialLinkLayoutBinding
+import com.social.utils.FragmentUtils
 
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private lateinit var binding: FragmentEditProfileBinding
@@ -49,8 +49,11 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         }
 
         binding.iconLeft.setOnClickListener {
-            findNavController().navigate(R.id.action_editProfileFragment_to_userProfileFragment)
             cleanFormEditProfile()
+            FragmentUtils.replaceFragment(
+                requireActivity().supportFragmentManager,
+                UserProfileFragment(),
+            )
         }
 
         binding.buttonAddLink.setOnClickListener {
@@ -120,7 +123,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun toggleLinearLayoutVisibility() {
-        val visibility = if (binding.linearLayoutContainer.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+        val visibility =
+            if (binding.linearLayoutContainer.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         binding.linearLayoutContainer.visibility = visibility
     }
 

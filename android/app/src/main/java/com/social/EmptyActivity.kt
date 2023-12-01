@@ -23,6 +23,7 @@ class EmptyActivity : AppCompatActivity() {
     }
 
     private fun navigation() {
+        replaceFragment(HomeFragment())
         binding.bottomNavbar.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navbar_icon_home -> replaceFragment(HomeFragment())

@@ -12,7 +12,7 @@ const WSearch = () => {
             InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">
-                        <IconButton>
+                        <IconButton data-testid="search-icon">
                             <SearchIcon />
                         </IconButton>
                     </InputAdornment>
