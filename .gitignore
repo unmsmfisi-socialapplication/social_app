@@ -209,7 +209,7 @@ replay_pid*
 
 #credentials in gcp
 data/cloud_platform/*.json
-data/database_management/connection_details/credential.py
+data/API/credential.py
 
 # Terraform files
 .terraform
