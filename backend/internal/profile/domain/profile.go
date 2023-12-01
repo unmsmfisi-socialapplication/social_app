@@ -1,21 +1,47 @@
 package domain
 
+import (
+	"time"
+)
+
+
 type Profile struct {
-	Id_profile   string
-	Name         string
-	Lastname     string
-	Username     string
-	ProfileImage string
-	Biography    string
+        
+	UserID         int64     
+    BirthDate      time.Time 
+    Name           string    
+    LastName       string    
+    AboutMe        string    
+    Genre          string    
+    Address        string    
+    Country        string    
+    City           string    
+    InsertionDate  time.Time 
+    UpdateDate     time.Time 
+    ProfilePicture string    
 }
 
-func NewProfile(id_profile, name, lastname, username, profileImage, biography string) *Profile {
+func NewProfile( userID int64, birthDate time.Time, name string, lastName string, aboutMe string, genre string, address string, country string, city string, profilePicture string) *Profile {
 	return &Profile{
-		Id_profile:   id_profile,
-		Name:         name,
-		Lastname:     lastname,
-		Username:     username,
-		ProfileImage: profileImage,
-		Biography:    biography,
+		
+		UserID:         userID,
+		BirthDate:      birthDate,
+		Name:           name,
+		LastName:       lastName,
+		AboutMe:        aboutMe,
+		Genre:          genre,
+		Address:        address,
+		Country:        country,
+		City:           city,
+		ProfilePicture: profilePicture,
+	}
+}
+
+func NewProfileToImport(id_profile , name, lastname, username, profileImage, biography string) *Profile {
+	return &Profile{
+		Name:           name,
+		LastName:       lastname,
+		ProfilePicture: profileImage,
+		AboutMe:        biography,
 	}
 }

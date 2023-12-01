@@ -4,4 +4,5 @@ import "github.com/unmsmfisi-socialapplication/social_app/internal/profile/domai
 
 type IProfileRepository interface {
     UpdateProfile(profile *domain.Profile) (error)
+    CreateProfile(profile *domain.Profile) (error)
 }

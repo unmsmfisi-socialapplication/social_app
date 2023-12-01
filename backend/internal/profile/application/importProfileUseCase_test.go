@@ -9,31 +9,26 @@ import (
 type MockProfileRepository struct{}
 
 func newMockProfileRepository() *MockProfileRepository {
-    return &MockProfileRepository{}
+	return &MockProfileRepository{}
 }
 
 func (mr *MockProfileRepository) UpdateProfile(p *domain.Profile) error {
-    return nil
+	return nil
+}
+
+func (mr *MockProfileRepository) CreateProfile(p *domain.Profile) error {
+	return nil
 }
 
 func TestImportProfileUseCase(t *testing.T) {
 	t.Log("TestImportProfileUseCase")
 
-	p := &domain.Profile{
-		Id_profile:   "test",
-		Username:     "test",
-		ProfileImage: "test",
-		Biography:    "test",
-	}
+	p := domain.NewProfileToImport("id_profile", "test", "test", "test", "test", "test")
+	
+	profile := domain.NewProfileToImport("id_profile", p.Name, p.LastName, "test", p.ProfilePicture, p.AboutMe)
 
-    profile := &domain.Profile{
-        Id_profile:   p.Id_profile,
-        Username:     p.Username,
-        ProfileImage: p.ProfileImage,
-        Biography:    p.Biography,
-    }
+    profileRepository := newMockProfileRepository()
 
-	profileRepository := newMockProfileRepository()
 	importProfileUseCase := NewImportProfileUseCase(profileRepository)
 
 	err := importProfileUseCase.ImportProfile(p)
@@ -42,15 +37,15 @@ func TestImportProfileUseCase(t *testing.T) {
 		t.Errorf("Error: %v", err)
 	}
 
-	if profile.Username != p.Username {
+	if profile.Name != p.Name {
 		t.Errorf("Error: %v", err)
 	}
 
-	if profile.ProfileImage != p.ProfileImage {
+	if profile.ProfilePicture != p.ProfilePicture {
 		t.Errorf("Error: %v", err)
 	}
 
-	if profile.Biography != p.Biography {
+	if profile.AboutMe != p.AboutMe {
 		t.Errorf("Error: %v", err)
 	}
 
