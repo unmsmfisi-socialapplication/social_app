@@ -12,7 +12,6 @@ const PowerBIEmbed = dynamic<EmbedProps>(() => import('powerbi-client-react').th
 })
 
 export default function Stadistic() {
-
     return (
         <IntranetHoc sideBar>
             <h1>Estadisticas</h1>
