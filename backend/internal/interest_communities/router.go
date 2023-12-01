@@ -11,11 +11,11 @@ import (
 func InterestTopicsModuleRouter(dbInstance *sql.DB) *chi.Mux {
 	r := chi.NewRouter()
 
-	CommunityRepo := infrastructure.NewCommunityDBRepository(dbInstance)
+	/*CommunityRepo := infrastructure.NewCommunityDBRepository(dbInstance)
 	ListInterestCommunitiesUseCase := application.NewListCommunitiesUseCase(CommunityRepo)
 	ListInterestCommunitiesHandler := infrastructure.NewListCommunitiesHandler(ListInterestCommunitiesUseCase)
 
-	r.Post("/list", ListInterestCommunitiesHandler.HandleListCommunities)
+	r.Post("/list", ListInterestCommunitiesHandler.HandleListCommunities)*/
 	UserInterestCommunityRepo:= infrastructure.NewUserInterestCommunitiesDBRepository(dbInstance)
 	SetInterestCommunitiesUseCase:=application.NewSetInterestCommunitiesUseCase(UserInterestCommunityRepo)
 	SetInterestCommunitiesHandler:=infrastructure.NewSetInterestCommunitiesHandler(SetInterestCommunitiesUseCase)
