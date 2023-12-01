@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.social.databinding.ActivityEmptyBinding
-import com.social.presentation.friends.FriendsFragment
 import com.social.presentation.home.HomeFragment
+import com.social.presentation.interaction.chats.ListChatsFragment
 import com.social.presentation.profile.UserProfileFragment
 import com.social.presentation.search.SearchFragment
 import com.social.presentation.work.WorkFragment
@@ -29,7 +29,7 @@ class EmptyActivity : AppCompatActivity() {
                 R.id.navbar_icon_home -> replaceFragment(HomeFragment())
                 R.id.navbar_icon_search -> replaceFragment(SearchFragment())
                 R.id.navbar_icon_business -> replaceFragment(WorkFragment())
-                R.id.navbar_icon_friends -> replaceFragment(FriendsFragment())
+                R.id.navbar_icon_friends -> replaceFragment(ListChatsFragment())
                 R.id.navbar_icon_user -> replaceFragment(UserProfileFragment())
                 else -> {
                 }

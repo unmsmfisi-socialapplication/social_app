@@ -85,6 +85,7 @@ func (ch *CommentHandler) HandleCreateComment(w http.ResponseWriter, r *http.Req
 		InsertionDate   time.Time `json:"insertionDate"`
 		UpdateDate      time.Time `json:"updateDate"`
 		ParentCommentID *int64     `json:"parentCommentID"`  
+		IsActive        bool      `json:"isActive"`
 	}
 
 	errStructure := json.NewDecoder(r.Body).Decode(&commentData)
@@ -100,6 +101,7 @@ func (ch *CommentHandler) HandleCreateComment(w http.ResponseWriter, r *http.Req
         InsertionDate:   commentData.InsertionDate,
         UpdateDate:      commentData.UpdateDate,
         ParentCommentID: commentData.ParentCommentID,
+				IsActive:        commentData.IsActive,
     }
 	err := ch.useCase.Create(comment)
 	
@@ -126,7 +128,8 @@ func (ch *CommentHandler) HandleUpdateComment(w http.ResponseWriter, r *http.Req
 		Comment         string    `json:"comment"`
 		InsertionDate   time.Time `json:"insertionDate"`
 		UpdateDate      time.Time `json:"updateDate"`
-		ParentCommentID *int64     `json:"parentCommentID"`  
+		ParentCommentID *int64     `json:"parentCommentID"` 
+		IsActive        bool      `json:"isActive"` 
 	}
 	errStructure := json.NewDecoder(r.Body).Decode(&commentData)
 	if errStructure != nil {
@@ -141,6 +144,7 @@ func (ch *CommentHandler) HandleUpdateComment(w http.ResponseWriter, r *http.Req
 		InsertionDate:   commentData.InsertionDate,
 		UpdateDate:      commentData.UpdateDate,
 		ParentCommentID: commentData.ParentCommentID,
+		IsActive:        commentData.IsActive,
 	}
 	err := ch.useCase.Update(commentID, comment)
 	if err != nil {
