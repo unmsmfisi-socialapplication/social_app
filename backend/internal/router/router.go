@@ -18,6 +18,7 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
 
 	interest_topics "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics"
+	interest_communities "github.com/unmsmfisi-socialapplication/social_app/internal/interest_communities"
 	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
 	registerinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
@@ -126,5 +127,8 @@ func Router() http.Handler {
 	// Follow Profile
 	followRouter := follow.FollowModuleRouter(dbInstance)
 	protectedRoutes.Mount("/follow_profile", followRouter)
+	//Interest Communities
+	interestCommunitiesRouter := interest_communities.InterestCommunitiesModuleRouter(dbInstance)
+	protectedRoutes.Mount("/interestCommunities", interestCommunitiesRouter)
 	return freeRoutes
 }
