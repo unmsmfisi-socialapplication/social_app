@@ -15,7 +15,7 @@ interface PublicationConfirmProps {
     onConfirm?: () => void
 }
 
-const PublicationConfirm: React.FC<PublicationConfirmProps> = ({
+const WPublicationConfirm: React.FC<PublicationConfirmProps> = ({
     userName,
     userHandle,
     avatarURL,
@@ -71,9 +71,9 @@ const PublicationConfirm: React.FC<PublicationConfirmProps> = ({
     )
 }
 
-export default PublicationConfirm
+export default WPublicationConfirm
 
-PublicationConfirm.defaultProps = {
+WPublicationConfirm.defaultProps = {
     avatarURL:
         'https://images.ecestaticos.com/FjaDMYL1rpd8bqAVvR91YL-gZbY=/0x0:2252x1336/1200x1200/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fae2%2F47e%2F66d%2Fae247e66d9b8d8928d41a592b61690ca.jpg',
     userName: 'XokasXD',

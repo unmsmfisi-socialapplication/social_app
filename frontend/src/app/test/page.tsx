@@ -27,9 +27,9 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
-import AvatarInput from '@/components/molecules/AvatarInput'
+import WAvatarInput from '@/components/molecules/AvatarInput'
 import WDetailsImage from '@/components/molecules/DetailsImage/index'
-import CommentThink from '@/components/molecules/CommentThink'
+import WCommentThink from '@/components/molecules/CommentThink'
 import WPostTypes from '@/components/molecules/PostTypes/index'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions'
@@ -148,11 +148,11 @@ export default function TestPage() {
                 <WTag text="Profile" icon={PersonOutlineIcon} />
                 <Button variant="contained">Post</Button>
             </div>
-            <AvatarInput />
+            <WAvatarInput />
             <div>
                 <WDetailsImage />
             </div>
-            <CommentThink
+            <WCommentThink
                 avatarDefaultURL="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 publicTag={'Público'}
                 placeholder={'Escribe lo que estás pensando'}

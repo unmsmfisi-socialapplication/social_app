@@ -1,11 +1,11 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
-import AvatarInput from '.'
+import WAvatarInput from '.'
 
-describe('AvatarInput', () => {
+describe('WAvatarInput', () => {
     global.URL.createObjectURL = jest.fn()
     it('should update the selected image container on image change', () => {
-        render(<AvatarInput testId="avatar-input" />)
+        render(<WAvatarInput testId="avatar-input" />)
 
         // Encuentra el input de archivo por el atributo `data-testid`
         const fileInput = screen.getByTestId('avatar-input')

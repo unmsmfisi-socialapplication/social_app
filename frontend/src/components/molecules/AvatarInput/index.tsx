@@ -11,7 +11,7 @@ interface AvatarInputProps {
     testId?: string
 }
 
-const AvatarInput: React.FC<AvatarInputProps> = ({ avatarDefaultURL, testId }) => {
+const WAvatarInput: React.FC<AvatarInputProps> = ({ avatarDefaultURL, testId }) => {
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
     const handleChangeImage = (e: React.FormEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement & {
@@ -53,8 +53,8 @@ const AvatarInput: React.FC<AvatarInputProps> = ({ avatarDefaultURL, testId }) =
     )
 }
 
-export default AvatarInput
+export default WAvatarInput
 
-AvatarInput.defaultProps = {
+WAvatarInput.defaultProps = {
     avatarDefaultURL: '',
 }

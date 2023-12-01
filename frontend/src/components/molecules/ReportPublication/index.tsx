@@ -12,7 +12,7 @@ interface ReportPublicationProps {
     onConfirm?: (reason: string) => void
 }
 
-const ReportPublication: React.FC<ReportPublicationProps> = ({ userHandle, open, onClose, onConfirm }) => {
+const WReportPublication: React.FC<ReportPublicationProps> = ({ userHandle, open, onClose, onConfirm }) => {
     const [reasonReport, setReasonReport] = useState<string>('')
     const handleSubmitReport = () => {
         // aca se debe reemplazar por una funcion asincrona que debe esperar a que se
@@ -94,9 +94,9 @@ const ReportPublication: React.FC<ReportPublicationProps> = ({ userHandle, open,
     )
 }
 
-export default ReportPublication
+export default WReportPublication
 
-ReportPublication.defaultProps = {
+WReportPublication.defaultProps = {
     userHandle: 'XokasXD',
     open: false,
 }
