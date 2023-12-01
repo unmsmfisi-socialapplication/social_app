@@ -3,7 +3,6 @@ package infrastructure
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/domain"
 )
@@ -17,13 +16,13 @@ func NewUserRepository(database *sql.DB) *UserRepository {
 }
 
 func (u *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
-	query := `SELECT email, user_name, password FROM soc_app_users WHERE email = $1`
+	query := `SELECT user_id, email, user_name, password,name,phone FROM soc_app_users WHERE email = $1`
 
 	row := u.db.QueryRow(query, email)
 	prueba, _ := u.db.Exec(query, email)
 	fmt.Println(prueba.RowsAffected())
 	var user domain.User
-	err := row.Scan(&user.Email, &user.Username, &user.Password)
+	err := row.Scan(&user.Id, &user.Email, &user.Username, &user.Password, &user.Name, &user.Phone)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
@@ -34,20 +33,24 @@ func (u *UserRepository) GetUserByEmail(email string) (*domain.User, error) {
 }
 
 func (u *UserRepository) InsertUser(newUser *domain.User) (*domain.User, error) {
-	query := `INSERT INTO soc_app_users ( insertion_date, email, user_name, password) VALUES (NOW(), $1, $2, $3)`
+	query := `INSERT INTO soc_app_users (insertion_date, email, 
+		user_name, password, name, phone) 
+	VALUES (NOW(), $1, $2, $3, $4, $5)
+	RETURNING user_id,photo
+	`
 
-	tx, err := u.db.Begin()
+	err := u.db.QueryRow(
+		query,
+		newUser.Email,
+		newUser.Username,
+		newUser.Password,
+		newUser.Name,
+		newUser.Phone,
+	).Scan(&newUser.Id, &newUser.Photo)
+
 	if err != nil {
-		log.Println("Error while starting the transaction")
 		return nil, err
 	}
-
-	_, err = tx.Exec(query, newUser.Email, newUser.Username, newUser.Password)
-	if err != nil {
-		return nil, err
-	}
-
-	tx.Commit()
 
 	return newUser, nil
 }
