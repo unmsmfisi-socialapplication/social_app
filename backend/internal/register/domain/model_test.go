@@ -1,6 +1,3 @@
-//go:build unit
-// +build unit
-
 package domain
 
 import (
@@ -45,4 +42,69 @@ func TestHashPassword(t *testing.T) {
 		t.Errorf("Expected a non-empty hashed password, but got an empty string")
 	}
 
+}
+
+func TestUserToUserResponse(t *testing.T) {
+	user := User{
+		Username: "testuser",
+		Email:    "test@example.com",
+		Password: "password123",
+	}
+
+	expectedResponse := UserResponse{
+		Username: "testuser",
+		Email:    "test@example.com",
+	}
+
+	result := UserToUserResponse(user)
+
+	if result != expectedResponse {
+		t.Errorf("Expected %v, but got %v", expectedResponse, result)
+	}
+}
+
+func TestValidateUserRequest(t *testing.T) {
+	validUserRequest := UserRequest{
+		Username: "testuser",
+		Email:    "test@example.com",
+		Password: "password123",
+	}
+
+	emptyEmailUserRequest := UserRequest{
+		Username: "testuser",
+		Email:    "",
+		Password: "password123",
+	}
+
+	emptyUsernameUserRequest := UserRequest{
+		Username: "",
+		Email:    "test@example.com",
+		Password: "password123",
+	}
+
+	emptyPasswordUserRequest := UserRequest{
+		Username: "testuser",
+		Email:    "test@example.com",
+		Password: "",
+	}
+
+	err := ValidateUserRequest(validUserRequest)
+	if err != nil {
+		t.Errorf("Expected no error, but got %v", err)
+	}
+
+	err = ValidateUserRequest(emptyEmailUserRequest)
+	if err == nil || err.Error() != "Email is required" {
+		t.Errorf("Expected 'Email is required' error, but got %v", err)
+	}
+
+	err = ValidateUserRequest(emptyUsernameUserRequest)
+	if err == nil || err.Error() != "Username is required" {
+		t.Errorf("Expected 'Username is required' error, but got %v", err)
+	}
+
+	err = ValidateUserRequest(emptyPasswordUserRequest)
+	if err == nil || err.Error() != "Password is required" {
+		t.Errorf("Expected 'Password is required' error, but got %v", err)
+	}
 }
