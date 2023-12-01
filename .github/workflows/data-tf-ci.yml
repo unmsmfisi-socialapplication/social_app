@@ -17,10 +17,10 @@ jobs:
     environment: development
 
     env:
-      ARM SUBSCRIPTION ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      ARM CLIENT ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM CLIENT SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM TENANT ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
     defaults:
       run:
@@ -35,7 +35,8 @@ jobs:
       uses: hashicorp/setup-terraform@v2
 
     - name: Get Vars
-      run: echo "${{vars.TF_DATA_VARS}}" > ./terraform.auto.tfvars
+      run: | tee -a terraform.auto.tfvars <<EOF ${{vars.TF_DATA_VARS}} 
+              EOF
 
     - name: Terraform Init
       run: terraform init
