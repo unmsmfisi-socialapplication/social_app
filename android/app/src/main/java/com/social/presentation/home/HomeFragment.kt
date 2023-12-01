@@ -1,133 +1,152 @@
-
 package com.social.presentation.home
+
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.imageview.ShapeableImageView
 import com.social.R
+import com.social.databinding.FragmentHomeBinding
+import com.social.databinding.ItemPostBinding
+import com.social.domain.model.Post
+import com.social.presentation.interaction.chats.ListChatsFragment
+import com.social.presentation.publications.ListPostViewModel
+import com.social.utils.BaseAdapter
+import com.social.utils.FragmentUtils
+import com.squareup.picasso.Picasso
 
-class HomeFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+class HomeFragment : Fragment(R.layout.fragment_home) {
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var globalView: View
+
+    private val adapter: BaseAdapter<Post> =
+        object : BaseAdapter<Post>(emptyList()) {
+            override fun getViewHolder(parent: ViewGroup): BaseViewHolder<Post> {
+                val view =
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.item_post, parent, false)
+                return object : BaseViewHolder<Post>(view) {
+                    private val binding: ItemPostBinding = ItemPostBinding.bind(view)
+
+                    override fun bind(entity: Post) =
+                        with(binding) {
+                            textNames.text = entity.names
+                            textHour.text = entity.hour
+                            textContentPost.text = entity.content
+                            if (entity.image.isNotEmpty()) {
+                                loadImage(entity.image, binding.imagePost)
+                            } else {
+                                binding.imagePost.visibility = View.GONE
+                            }
+                            binding.iconLike.setOnClickListener {
+                                handleIconLikeClick(entity, binding.iconLike, binding.txtCountLikes)
+                            }
+                            binding.txtCountLikes.text = entity.likeCount.toString()
+                            binding.iconComment.setOnClickListener {
+                                showCommentsFullScreen()
+                            }
+                        }
+                }
+            }
+        }
+
+    private val viewModel: ListPostViewModel by lazy {
+        ViewModelProvider(this)[ListPostViewModel::class.java]
+    }
+
+    override fun onViewCreated(
+        view: View,
         savedInstanceState: Bundle?,
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHomeBinding.bind(view)
+        globalView = view
 
-        val iconLike = view.findViewById<ImageView>(R.id.icon_like)
-        val txtCountLikes = view.findViewById<TextView>(R.id.txt_countLikes)
-        val iconComments = view.findViewById<ImageView>(R.id.icon_comment)
-        val txtCountComments = view.findViewById<TextView>(R.id.txt_countComments)
-        val iconShare = view.findViewById<ImageView>(R.id.icon_share)
-        val txtCountShare = view.findViewById<TextView>(R.id.txt_countShare)
-        val iconFavorite = view.findViewById<ImageView>(R.id.icon_favorite)
-        val txtCountFavorite = view.findViewById<TextView>(R.id.txt_countFavorite)
-
-        setupLikes(iconLike, txtCountLikes)
-        setupShares(iconShare, txtCountShare)
-        setupFavorites(iconFavorite, txtCountFavorite)
-        setupComments(iconComments, txtCountComments)
-
-        return view
+        setupAdapter()
+        observeViewModel()
+        action()
     }
 
-    private fun setupLikes(
+    private fun action() {
+        binding.txtPub.setOnClickListener {
+            FragmentUtils.replaceFragment(
+                requireActivity().supportFragmentManager,
+                NewPostFragment(),
+            )
+        }
+
+        binding.messageIcon.setOnClickListener {
+            FragmentUtils.replaceFragment(
+                requireActivity().supportFragmentManager,
+                ListChatsFragment(),
+            )
+        }
+    }
+
+    private fun loadImage(
+        imageURL: String,
+        imageView: ShapeableImageView,
+    ) {
+        Picasso.get().load(imageURL).into(imageView)
+    }
+
+    private fun setupAdapter() {
+        binding.rvListPostHome.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvListPostHome.adapter = adapter
+    }
+
+    private fun observeViewModel() {
+        viewModel.data.observe(viewLifecycleOwner) { posts ->
+            adapter.updateList(posts)
+        }
+        viewModel.obtainData()
+    }
+
+    private fun handleIconLikeClick(
+        post: Post,
         iconLike: ImageView,
-        txtCountLikes: TextView,
+        countLikes: TextView,
     ) {
-        var isLiked = false
-        var likeCount = 0
-
-        iconLike.setOnClickListener {
-            if (!isLiked) {
-                likeCount++
-                iconLike.setImageResource(R.drawable.likebutton)
-                iconLike.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
-            } else {
-                likeCount--
-                iconLike.setImageResource(R.drawable.likebutton)
-                iconLike.clearColorFilter()
-            }
-
-            txtCountLikes.text = likeCount.toString()
-
-            isLiked = !isLiked
+        post.isLiked = !post.isLiked
+        if (post.isLiked) {
+            post.likeCount++
+            iconLike.setImageResource(R.drawable.post_icon_heart_bold)
+        } else {
+            post.likeCount--
+            iconLike.setImageResource(R.drawable.post_icon_like)
         }
+        countLikes.text = post.likeCount.toString()
     }
 
-    private fun setupShares(
-        iconShare: ImageView,
-        txtCountShare: TextView,
-    ) {
-        var isShare = false
-        var shareCount = 0
+    private fun showCommentsFullScreen() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.item_comment, null)
+        val dialog =
+            AlertDialog.Builder(requireContext()).apply {
+                setView(dialogView)
+                setCancelable(true)
+            }.create()
 
-        iconShare.setOnClickListener {
-            if (!isShare) {
-                shareCount++
-                iconShare.setImageResource(R.drawable.fowardbutton)
-                iconShare.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
-            } else {
-                shareCount--
-                iconShare.setImageResource(R.drawable.fowardbutton)
-                iconShare.clearColorFilter()
+        dialog.show()
+
+        val layoutParams =
+            WindowManager.LayoutParams().apply {
+                copyFrom(dialog.window?.attributes)
+                width = WindowManager.LayoutParams.MATCH_PARENT
+                height = WindowManager.LayoutParams.MATCH_PARENT
             }
 
-            txtCountShare.text = shareCount.toString()
+        dialog.window?.attributes = layoutParams
 
-            isShare = !isShare
-        }
-    }
-
-    private fun setupFavorites(
-        iconFavorite: ImageView,
-        txtCountFavorite: TextView,
-    ) {
-        var isFavorite = false
-        var favoriteCount = 0
-
-        iconFavorite.setOnClickListener {
-            if (!isFavorite) {
-                favoriteCount++
-                iconFavorite.setImageResource(R.drawable.favoritebutton)
-                iconFavorite.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
-            } else {
-                favoriteCount--
-                iconFavorite.setImageResource(R.drawable.favoritebutton)
-                iconFavorite.clearColorFilter()
-            }
-
-            txtCountFavorite.text = favoriteCount.toString()
-
-            isFavorite = !isFavorite
-        }
-    }
-
-    private fun setupComments(
-        iconComments: ImageView,
-        txtCountComments: TextView,
-    ) {
-        var isComments = false
-        var commentsCount = 0
-
-        iconComments.setOnClickListener {
-            if (!isComments) {
-                commentsCount++
-                iconComments.setImageResource(R.drawable.commentbutton)
-                iconComments.setColorFilter(ContextCompat.getColor(requireContext(), R.color.color01))
-            } else {
-                commentsCount--
-                iconComments.setImageResource(R.drawable.commentbutton)
-                iconComments.clearColorFilter()
-            }
-
-            txtCountComments.text = commentsCount.toString()
-
-            isComments = !isComments
+        val iconRetract = dialogView.findViewById<ImageView>(R.id.icon_retract)
+        iconRetract.setOnClickListener {
+            dialog.dismiss()
         }
     }
 }

@@ -6,7 +6,6 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/follow/domain"
 )
 
-// Mock para el repositorio
 type MockFollowerRepository struct{}
 
 func (m *MockFollowerRepository) InsertNewFollower(newFollower *domain.Follower) (*domain.Follower, error) {
@@ -17,12 +16,18 @@ func (m *MockFollowerRepository) IsFollowing(newFollower *domain.Follower) (*boo
 	return new(bool), nil
 }
 
+func (m *MockFollowerRepository) ViewCommonFollowers(p_own_profile_id, p_viewed_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error) {
+	return &domain.FollowerDataList{}, nil
+}
+
+func (m *MockFollowerRepository) ProfileFollowers(p_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error) {
+	return &domain.FollowerDataList{}, nil
+}
+
 func TestNewFollowerUseCase(t *testing.T) {
-	// Crear un Mock del repositorio
 	repo := &MockFollowerRepository{}
 	useCase := NewFollowerUseCase(repo)
 
-	// Ejecutar la función y asegurarse de que no se produzca un error
 	newFollower, err := useCase.FollowProfile(1, 2)
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
@@ -33,11 +38,9 @@ func TestNewFollowerUseCase(t *testing.T) {
 }
 
 func TestFollowProfile(t *testing.T) {
-	// Crear un Mock del repositorio
 	repo := &MockFollowerRepository{}
 	useCase := NewFollowerUseCase(repo)
 
-	// Ejecutar la función y asegurarse de que se produzca un error
 	newFollower, err := useCase.FollowProfile(-1, -2)
 	if err != nil {
 		t.Logf("Expected error: %v", err)
@@ -45,18 +48,15 @@ func TestFollowProfile(t *testing.T) {
 		t.Error("Expected an error, but got none.")
 	}
 
-	// Asegurarse de que newFollower es nulo
 	if newFollower != nil {
 		t.Error("newFollower is not null, but a null value was expected.")
 	}
 }
 
 func TestIsFollowing(t *testing.T) {
-	// Crear un Mock del repositorio
 	repo := &MockFollowerRepository{}
 	useCase := NewFollowerUseCase(repo)
 
-	// Caso 1: Verificar si el usuario 1 sigue al usuario 2 (esperando falso)
 	isFollowing, err := useCase.IsFollowing(1, 2)
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
@@ -65,7 +65,6 @@ func TestIsFollowing(t *testing.T) {
 		t.Error("User 1 was expected not to follow user 2, but IsFollowing is true.")
 	}
 
-	// Caso 2: Verificar si el usuario 2 sigue al usuario 1 (esperando falso)
 	isFollowing, err = useCase.IsFollowing(2, 1)
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
@@ -74,7 +73,6 @@ func TestIsFollowing(t *testing.T) {
 		t.Error("It was expected that user 2 would not follow user 1, but IsFollowing is true.")
 	}
 
-	// Caso 3: Verificar si el usuario -2 sigue al usuario 1 (esperando error)
 	_, err = useCase.IsFollowing(-2, 1)
 	if err == nil {
 		t.Error("An error was expected as the user provided is negative.")
@@ -85,7 +83,6 @@ func TestIsFollowing(t *testing.T) {
 		}
 	}
 
-	// Caso 4: Verificar si el usuario 2 sigue al usuario -1 (esperando error)
 	_, err = useCase.IsFollowing(2, -1)
 	if err == nil {
 		t.Error("An error was expected as the user provided is negative.")
@@ -96,12 +93,197 @@ func TestIsFollowing(t *testing.T) {
 		}
 	}
 
-	// Caso 5: Verificar si el usuario -2 sigue al usuario -1 (esperando error)
 	_, err = useCase.IsFollowing(-2, -1)
 	if err == nil {
-		t.Error("Se esperaba un error ya que el usuario proporcionado es negativo")
+		t.Error("An error was expected as the user provided is negative.")
 	} else {
 		expectedErrMsg := "Follower profile or followed profile values cannot be negative."
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+}
+
+func TestCommonFollowers(t *testing.T) {
+	repo := &MockFollowerRepository{}
+	useCase := NewFollowerUseCase(repo)
+
+	commonFollowers, err := useCase.CommonFollowers(1, 2, 10, 1)
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
+	}
+	if commonFollowers == nil {
+		t.Error("commonFollowers is null, but a non-null value was expected.")
+	}
+
+	_, err = useCase.CommonFollowers(1, 1, 10, 1)
+	if err != ErroEqualProfile {
+		t.Errorf("Expected error: %v, but got: %v", ErroEqualProfile, err)
+	} else {
+		t.Logf("Expected error: %v", ErroEqualProfile)
+	}
+
+	_, err = useCase.CommonFollowers(-1, 2, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the user provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.CommonFollowers(1, -2, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the user provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+}
+
+func TestProfileFollowers(t *testing.T) {
+	repo := &MockFollowerRepository{}
+	useCase := NewFollowerUseCase(repo)
+
+	followers, err := useCase.ProfileFollowers(1, 10, 1)
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
+	}
+	if followers == nil {
+		t.Error("followers is null, but a non-null value was expected.")
+	}
+
+	_, err = useCase.ProfileFollowers(-1, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the profile_id provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(1, -10, 1)
+	if err == nil {
+		t.Error("An error was expected as the page_size provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(1, 10, -1)
+	if err == nil {
+		t.Error("An error was expected as the page_number provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(0, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the profile_id provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(1, 0, 1)
+	if err == nil {
+		t.Error("An error was expected as the page_size provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowers(1, 10, 0)
+	if err == nil {
+		t.Error("An error was expected as the page_number provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+}
+
+func TestProfileFollowingProfiles(t *testing.T) {
+	repo := &MockFollowerRepository{}
+	useCase := NewFollowerUseCase(repo)
+
+	followingProfiles, err := useCase.ProfileFollowingProfiles(1, 10, 1)
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
+	}
+	if followingProfiles == nil {
+		t.Error("followingProfiles is null, but a non-null value was expected.")
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(-1, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the profile_id provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(1, -10, 1)
+	if err == nil {
+		t.Error("An error was expected as the page_size provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(1, 10, -1)
+	if err == nil {
+		t.Error("An error was expected as the page_number provided is negative.")
+	} else {
+		expectedErrMsg := "NEGATIVE_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(0, 10, 1)
+	if err == nil {
+		t.Error("An error was expected as the profile_id provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(1, 0, 1)
+	if err == nil {
+		t.Error("An error was expected as the page_size provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
+		if err.Error() != expectedErrMsg {
+			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
+		}
+	}
+
+	_, err = useCase.ProfileFollowingProfiles(1, 10, 0)
+	if err == nil {
+		t.Error("An error was expected as the page_number provided is zero.")
+	} else {
+		expectedErrMsg := "NULL_PARAMETERS"
 		if err.Error() != expectedErrMsg {
 			t.Errorf("The error message '%s' was expected, but '%s' was obtained.", expectedErrMsg, err.Error())
 		}

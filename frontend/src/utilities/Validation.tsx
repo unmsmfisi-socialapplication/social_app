@@ -1,4 +1,4 @@
-import { emailRegex, nameRegex, passwordRegex, usernameRegex } from './Constant'
+import { emailRegex, nameRegex, passwordRegex, phoneRegex, usernameRegex } from './Constant'
 
 export const validateName = (inputString: string): boolean => {
     return nameRegex.test(inputString)
@@ -14,4 +14,7 @@ export const validatePassword = (inputString: string): boolean => {
 
 export const validateUsername = (inputString: string): boolean => {
     return usernameRegex.test(inputString)
+}
+export const validatePhone = (inputString: string): boolean => {
+    return phoneRegex.test(inputString)
 }

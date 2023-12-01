@@ -19,6 +19,9 @@ type PostUseCaseInterface interface {
 
 	//UPDATE POST //
 	UpdatePost(id int64, update domain.PostUpdate) error
+
+	//REPORT POST //
+	ReportPost(report domain.PostReport) error
 }
 
 type PostRepository interface {
@@ -31,6 +34,9 @@ type PostRepository interface {
 	PostExists(id int64) bool
 	// UPDATE POST //
 	UpdatePost(id int64, update domain.PostUpdate) error
+	CreateReport(report domain.PostReport) error
+	ReporterExists(username string) bool
+	HasUserAlreadyReportedPost(postId int64, username string) bool
 }
 
 type PostUseCase struct {
@@ -102,4 +108,19 @@ func (l *PostUseCase) UpdatePost(id int64, update domain.PostUpdate) error {
 	}
 
 	return l.repo.UpdatePost(id, update)
+}
+
+// REPORT POST //
+func (l *PostUseCase) ReportPost(report domain.PostReport) error {
+	if !l.repo.ReporterExists(report.ReportedBy) {
+		return domain.ErrReporterUserDoesNotExist
+	}
+	if !l.repo.PostExists(report.PostId) {
+		return domain.ErrPostNotFound
+	}
+
+	if l.repo.HasUserAlreadyReportedPost(report.PostId, report.ReportedBy) {
+		return domain.ErrUserHasAlreadyReportedPost
+	}
+	return l.repo.CreateReport(report)
 }
