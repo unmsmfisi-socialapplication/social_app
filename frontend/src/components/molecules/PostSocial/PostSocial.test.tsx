@@ -14,11 +14,11 @@ describe('WPostSocial', () => {
                     userHandler: 'jndler',
                 }}
                 postImg="https://previews.123rf.com/images/grase/grase1410/grase141000110/32759482-lindo-gato-somal%C3%AD-miente-dentro-del-rect%C3%A1ngulo-de-pl%C3%A1stico.jpg"
-                dataTestid='postSocialId'
+                dataTestid="postSocialId"
             />,
         )
 
-        expect(getByTestId('postSocialId')).toBeInTheDocument();
-        expect(screen.getByTestId('postSocialId')).toHaveTextContent('Don Norman');
+        expect(getByTestId('postSocialId')).toBeInTheDocument()
+        expect(screen.getByTestId('postSocialId')).toHaveTextContent('Don Norman')
     })
 })
