@@ -149,6 +149,43 @@
               }
         },
         "required": ["user_name", "password"]
-    }
-
-}
+    },
+    "Login - Server Error": {
+        "description": "Attempted login with a server error",
+        "request": {
+            "method": "POST",
+            "url": "https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/login",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "username": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 56,
+                    "pattern": "^[a-zA-Z0-9]+$"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 46,
+                    "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$"
+                }
+            }
+        },
+        "example": [
+            {
+                "user_name": "testuser3",
+                "password": "TestP@ss123"
+            }
+        ],
+        "response": {
+            "status": 500,
+            "body": {
+                "status": "ERROR",
+                "message": "Error during authentication"
+            },
+            "required": ["username", "password"]
+        }
+    }    
+ }

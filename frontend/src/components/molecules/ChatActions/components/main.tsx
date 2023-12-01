@@ -1,10 +1,10 @@
-import React from 'react';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { Button } from '@mui/material';
+import React from 'react'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import { Button } from '@mui/material'
 
 interface MainChatActionsProps {
-    title?: string;
+    title?: string
 }
 
 const styles = {
@@ -36,55 +36,37 @@ const styles = {
         fontWeight: 600,
         borderRadius: 10,
     },
-};
+}
 
-
-const MainChatActions: React.FC<MainChatActionsProps> = (
-    {
-        title = defaultValues.title,
-    }
-) => {
-    const mergedProps = { ...defaultValues, title };
+const MainChatActions: React.FC<MainChatActionsProps> = ({ title = defaultValues.title }) => {
+    const mergedProps = { ...defaultValues, title }
     return (
-        <Box
-            p={2}
-            borderBottom={1}
-            borderColor="white"
-            width={styles.witdh}
-            height={styles.height}
-            sx={styles}
-        >
-            <Typography variant="subtitle1" fontWeight={styles.title.fontWeight} fontSize={styles.title.fontSize} sx={{marginBottom:'20px'}}>
+        <Box p={2} borderBottom={1} borderColor="white" width={styles.witdh} height={styles.height} sx={styles}>
+            <Typography
+                variant="subtitle1"
+                fontWeight={styles.title.fontWeight}
+                fontSize={styles.title.fontSize}
+                sx={{ marginBottom: '20px' }}
+            >
                 {mergedProps.title}
             </Typography>
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                margin={'10px'}
-            >
+            <Box display="flex" justifyContent="center" alignItems="center" margin={'10px'}>
                 {/* Boton azul de eliminar chat */}
-                <Button variant="contained" color="primary" style={styles.buttonDelete} sx={{textTransform: 'none'}}>
+                <Button variant="contained" color="primary" style={styles.buttonDelete} sx={{ textTransform: 'none' }}>
                     Eliminar Chat
                 </Button>
             </Box>
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                margin={'10px'}
-            >
+            <Box display="flex" justifyContent="center" alignItems="center" margin={'10px'}>
                 {/* Boton rojo de reportar chat */}
-                <Button variant="contained" color="primary" style={styles.buttonReport} sx={{textTransform: 'none'}}>
+                <Button variant="contained" color="primary" style={styles.buttonReport} sx={{ textTransform: 'none' }}>
                     Reportar Chat
                 </Button>
             </Box>
         </Box>
-    );
-};
-
+    )
+}
 
 const defaultValues: MainChatActionsProps = {
     title: 'Configuración de chat',
-};
-export default MainChatActions;
+}
+export default MainChatActions
