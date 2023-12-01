@@ -4,10 +4,13 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
+
+	login_app "github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
+	login_infra "github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
-
 type RegisterUserHandler struct {
 	useCase *application.RegistrationUseCase
 }
@@ -17,6 +20,7 @@ func NewRegisterUserHandler(uc *application.RegistrationUseCase) *RegisterUserHa
 }
 
 func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	var data struct {
 		Email    string `json:"email"`
 		Username string `json:"user_name"`
@@ -26,6 +30,15 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 	if err != nil {
 
 		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	dbInstance := database.GetDB()
+	loginRepo := login_infra.NewUserDBRepository(dbInstance)
+
+	loginUseCase := login_app.NewLoginUseCase(loginRepo)
+	tokenge, err := loginUseCase.GenerateToken(data.Username, "role")
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Error generating token")
 		return
 	}
 
@@ -44,13 +57,22 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 
 		}
 	}
+	loginRepo.InsertSession(data.Username)
+	jti,err:= loginUseCase.ExtractJTI(tokenge)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Error extracting jti")
+		return
+	}
+	loginUseCase.StoreJTIForSession(data.Username, jti)
 	var outputData struct {
 		Email    string `json:"email"`
 		Username string `json:"user_name"`
+		Token    string `json:"token_result"`
 	}
 	{
 		outputData.Email = data.Email
 		outputData.Username = data.Username
+		outputData.Token = tokenge
 	}
 	json.NewEncoder(w).Encode(outputData)
 }
