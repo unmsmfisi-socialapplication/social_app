@@ -3,16 +3,17 @@ import { Avatar, Box, Modal, Typography } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import React, { useState } from 'react'
 import './index.scss'
-import { WButton } from '@/components'
+import WButton from './../../atoms/Button/button'
 
 interface ReportPublicationProps {
     userHandle?: string
     open?: boolean
+    dataTestid?: string
     onClose?: () => void
     onConfirm?: (reason: string) => void
 }
 
-const ReportPublication: React.FC<ReportPublicationProps> = ({ userHandle, open, onClose, onConfirm }) => {
+const ReportPublication: React.FC<ReportPublicationProps> = ({ userHandle, open, dataTestid, onClose, onConfirm }) => {
     const [reasonReport, setReasonReport] = useState<string>('')
     const handleSubmitReport = () => {
         // aca se debe reemplazar por una funcion asincrona que debe esperar a que se
@@ -30,6 +31,7 @@ const ReportPublication: React.FC<ReportPublicationProps> = ({ userHandle, open,
         <Modal
             open={open || false}
             onClose={onClose}
+            data-testid={dataTestid}
             className="modal--main--container"
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"

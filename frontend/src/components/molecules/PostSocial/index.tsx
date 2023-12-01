@@ -1,15 +1,14 @@
 import React from 'react'
 
 import { Avatar, Box, CardMedia } from '@mui/material'
-import { WCircleIcon } from '@/components'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import ModeCommentIcon from '@mui/icons-material/ModeComment'
+import WCircleIcon from './../../atoms/CircleIcon/circleIcon'
 import CachedIcon from '@mui/icons-material/Cached'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import IosShareIcon from '@mui/icons-material/IosShare'
 import Link from 'next/link'
 import './index.scss'
-import { useHistory } from '@/utilities/Functions'
+
 interface WPostSocialProps {
     published?: string
     postImg?: string
@@ -26,11 +25,12 @@ interface WPostSocialProps {
         countShareds?: boolean
         countCached?: boolean
     }
+    dataTestid?: string
 }
 
-export default function WPostSocial({ published, postImg, user, postText, stadistics }: WPostSocialProps) {
+export default function WPostSocial({ published, postImg, user, postText, stadistics, dataTestid }: WPostSocialProps) {
     return (
-        <Box className="post_social">
+        <Box className="post_social" data-testid={dataTestid}>
             <section className="post__social--avatar">
                 <Avatar alt={user?.alt} src={user?.img} />
             </section>

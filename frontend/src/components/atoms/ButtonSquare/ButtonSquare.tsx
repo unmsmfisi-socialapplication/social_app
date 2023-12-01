@@ -18,7 +18,7 @@ const SquareButton: React.FC = () => {
     }
 
     return (
-        <Button variant="contained" style={buttonStyle}>
+        <Button variant="contained" style={buttonStyle} data-testid="outer-button">
             <IconButton>
                 <SettingsIcon style={iconStyle} />
             </IconButton>
