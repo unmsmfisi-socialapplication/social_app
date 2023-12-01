@@ -57,3 +57,8 @@ func PostToPostResponse(p Post) PostResponse {
 		Object:  p,
 	}
 }
+
+type SocialMediaPost struct {
+    ID      int64
+    Message string
+}
