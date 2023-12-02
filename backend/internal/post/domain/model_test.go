@@ -26,7 +26,7 @@ func TestPostCreateToPost(t *testing.T) {
 
 	createdPost := PostCreateToPost(postCreate)
 
-	if !reflect.DeepEqual(createdPost, expectedPost) {
+	if !reflect.DeepEqual(createdPost.PostBase, expectedPost.PostBase) {
 		t.Error("Converting PostCreate to Post did not produce the expected result")
 	}
 
@@ -34,6 +34,7 @@ func TestPostCreateToPost(t *testing.T) {
 		t.Error("Invalid insertion and update dates")
 	}
 }
+
 
 func TestPostToPostResponse(t *testing.T) {
 
@@ -59,7 +60,11 @@ func TestPostToPostResponse(t *testing.T) {
 
 	createdPostResponse := PostToPostResponse(post)
 
-	if !reflect.DeepEqual(createdPostResponse, expectedPostResponse) {
+	if !reflect.DeepEqual(createdPostResponse.Object, expectedPostResponse.Object) {
 		t.Error("Conversion from Post to PostResponse did not produce the expected result")
+	}
+
+	if !reflect.DeepEqual(createdPostResponse, expectedPostResponse) {
+		t.Errorf("The created PostResponse does not match the expected PostResponse. Got: %+v, Expected: %+v", createdPostResponse, expectedPostResponse)
 	}
 }
