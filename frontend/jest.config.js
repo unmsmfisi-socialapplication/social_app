@@ -24,6 +24,7 @@ module.exports = {
       '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$/i': `<rootDir>/__mocks__/fileMock.js`,
    
       // Handle module aliases
+      '^@/(.*)$': '<rootDir>/src/$1',
       '^@/components/(.*)$': '<rootDir>/src/components/$1',
       
       '^.+\\.(css|sass|scss)$': 'jest-transform-stub',      
