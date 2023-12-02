@@ -1,4 +1,4 @@
-import pandas as pd
+
 import conexion_sql
 from connect_to_azure_blob import get_data_from_containers
 

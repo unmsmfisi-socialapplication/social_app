@@ -1,7 +1,6 @@
 from datetime import datetime,timedelta , timezone
 from azure.storage.blob import BlobServiceClient , generate_blob_sas , BlobSasPermissions
 import pandas as pd
-import requests
 
 def get_data_from_containers():
     #Blob container credentials
