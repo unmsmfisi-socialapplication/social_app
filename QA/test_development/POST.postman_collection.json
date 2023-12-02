@@ -61,12 +61,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}//crear-post",
+					"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+					"protocol": "https",
 					"host": [
-						"{{url}}"
+						"5fff7e05-0538-4ab2-8235-e8976a482701",
+						"mock",
+						"pstmn",
+						"io"
 					],
 					"path": [
-						"",
 						"crear-post"
 					]
 				}
@@ -94,12 +97,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}//crear-post",
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
 							],
 							"path": [
-								"",
 								"crear-post"
 							]
 						}
@@ -161,9 +167,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}//crear-post",
+					"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io//crear-post",
+					"protocol": "https",
 					"host": [
-						"{{url}}"
+						"5fff7e05-0538-4ab2-8235-e8976a482701",
+						"mock",
+						"pstmn",
+						"io"
 					],
 					"path": [
 						"",
@@ -194,9 +204,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}//crear-post",
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io//crear-post",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
 							],
 							"path": [
 								"",
