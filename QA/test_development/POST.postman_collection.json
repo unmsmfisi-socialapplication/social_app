@@ -52,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"userId\": 456,\n  \"title\": \"Publicación con un GIF\",\n  \"description\": \"Descripción de la publicación\",\n  \"hasMultimedia\": true,\n  \"public\": true,\n  \"multimedia\": [\n    \"gif1.gif\"\n  ]\n}",
+					"raw": "{  \n   \"userId\": 123, \n    \"title\": \"Titulo de la publicacion\",\n    \"description\": \"adasdasd\",\n    \"hasMultimedia\": true,\n    \"public\": true,\n    \"multimedia\": \"https://www.example.com/multimedia1.jpg\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,41 +74,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "Creación de publicación con un Gift",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"userId\": 456,\n  \"title\": \"Publicación con un GIF\",\n  \"description\": \"Descripción de la publicación\",\n  \"hasMultimedia\": true,\n  \"public\": true,\n  \"multimedia\": [\n    \"gif1.gif\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
-							"protocol": "https",
-							"host": [
-								"5fff7e05-0538-4ab2-8235-e8976a482701",
-								"mock",
-								"pstmn",
-								"io"
-							],
-							"path": [
-								"crear-post"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": null,
-					"cookie": [],
-					"body": "{\n    \"response\": {\n        \"Id\": 20,\n        \"UserId\": 456,\n        \"Title\": \"Publicación con un GIF\",\n        \"Description\": \"Descripción de la publicación\",\n        \"HasMultimedia\": true,\n        \"Public\": true,\n        \"Multimedia\": [\n            \"gif1.gif\"\n        ],\n        \"InsertionDate\": \"2023-11-07T10:00:00.000000000Z\",\n        \"UpdateDate\": \"2023-11-07T10:00:00.000000000Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
-				},
 				{
 					"name": "Crear publicación Exitosa",
 					"originalRequest": {
@@ -149,6 +114,41 @@
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"response\": {\n        \"Id\": 8,\n        \"UserId\": 123,\n        \"title\": \"Titulo de la publicacion\",\n        \"Description\": \"adasdasd\",\n        \"HasMultimedia\": true,\n        \"Public\": true,\n        \"Multimedia\": \"https://www.example.com/multimedia1.jpg\",\n        \"InsertionDate\": \"2023-11-03T16:46:23.032338218Z\",\n        \"UpdateDate\": \"2023-11-03T16:46:23.032338301Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
+				},
+				{
+					"name": "Creación de publicación en privado",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 123,\n  \"title\": \"Prueba de publicación en privado\",\n  \"description\": \"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto\",\n  \"hasMultimedia\": true,\n  \"public\": false,\n  \"multimedia\": \"asdasd/multimedia1.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+							"protocol": "https",
+							"host": [
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"crear-post"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"response\": {\n        \"Id\": 10,\n        \"UserId\": 123,\n        \"Title\": \"Prueba de publicación en privado\",\n        \"Description\": \"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto\",\n        \"HasMultimedia\": true,\n        \"Public\": false,\n        \"Multimedia\": \"asdasd/multimedia1.jpg\",\n        \"InsertionDate\": \"2023-11-07T10:00:00.000000000Z\",\n        \"UpdateDate\": \"2023-11-07T10:00:00.000000000Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
 				},
 				{
 					"name": "Creación de Post Exitoso sin Tittle",
@@ -192,13 +192,13 @@
 					"body": "{\n    \"response\": {\n        \"Id\": 8,\n        \"UserId\": 123,\n        \"Title\": \"\",\n        \"Description\": \"adasdasd\",\n        \"HasMultimedia\": true,\n        \"Public\": true,\n        \"Multimedia\": \"https://www.ejemplo.com/multimedia1.jpg\",\n        \"InsertionDate\": \"2023-11-03T16:46:23.032338218Z\",\n        \"UpdateDate\": \"2023-11-03T16:46:23.032338301Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
 				},
 				{
-					"name": "Creación de publicación en privado",
+					"name": "Creación de publicación con un Gift",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"userId\": 123,\n  \"title\": \"Prueba de publicación en privado\",\n  \"description\": \"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto\",\n  \"hasMultimedia\": true,\n  \"public\": false,\n  \"multimedia\": \"asdasd/multimedia1.jpg\"\n}",
+							"raw": "{\n  \"userId\": 456,\n  \"title\": \"Publicación con un GIF\",\n  \"description\": \"Descripción de la publicación\",\n  \"hasMultimedia\": true,\n  \"public\": true,\n  \"multimedia\": [\n    \"gif1.gif\"\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -224,7 +224,119 @@
 					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
-					"body": "{\n    \"response\": {\n        \"Id\": 10,\n        \"UserId\": 123,\n        \"Title\": \"Prueba de publicación en privado\",\n        \"Description\": \"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto\",\n        \"HasMultimedia\": true,\n        \"Public\": false,\n        \"Multimedia\": \"asdasd/multimedia1.jpg\",\n        \"InsertionDate\": \"2023-11-07T10:00:00.000000000Z\",\n        \"UpdateDate\": \"2023-11-07T10:00:00.000000000Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
+					"body": "{\n    \"response\": {\n        \"Id\": 20,\n        \"UserId\": 456,\n        \"Title\": \"Publicación con un GIF\",\n        \"Description\": \"Descripción de la publicación\",\n        \"HasMultimedia\": true,\n        \"Public\": true,\n        \"Multimedia\": [\n            \"gif1.gif\"\n        ],\n        \"InsertionDate\": \"2023-11-07T10:00:00.000000000Z\",\n        \"UpdateDate\": \"2023-11-07T10:00:00.000000000Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Creación de publicación Fallido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para validar la respuesta basada en el estado",
+							"pm.test(\"Validate response based on status\", function () {",
+							"    let response = pm.response.json();",
+							"    if (response.status === \"SUCCESS\") {",
+							"        pm.expect(response).to.have.property('response');",
+							"        pm.expect(response.response).to.have.property('Id');",
+							"        pm.expect(response.response).to.have.property('UserId');",
+							"        pm.expect(response.response).to.have.property('Description');",
+							"        pm.expect(response.response).to.have.property('HasMultimedia');",
+							"        pm.expect(response.response).to.have.property('Public');",
+							"        pm.expect(response.response).to.have.property('Multimedia');",
+							"        pm.expect(response.response).to.have.property('InsertionDate');",
+							"        pm.expect(response.response).to.have.property('UpdateDate');",
+							"",
+							"        pm.expect(response.response.Id).to.be.a('number');",
+							"        pm.expect(response.response.UserId).to.be.a('number');",
+							"        pm.expect(response.response.Description).to.be.a('string');",
+							"        pm.expect(response.response.HasMultimedia).to.be.a('boolean');",
+							"        pm.expect(response.response.Public).to.be.a('boolean');",
+							"        pm.expect(response.response.Multimedia).to.be.a('string');",
+							"    }",
+							"    // Verificar si es una respuesta de error",
+							"    else if (response.status === \"ERROR\") {",
+							"        pm.expect(response).to.have.property('error');",
+							"        pm.expect(response.error).to.have.property('code');",
+							"        pm.expect(response.error).to.have.property('message');",
+							"",
+							"        // Validar los tipos de campos y valores para una respuesta de error",
+							"        pm.expect(response.error.code).to.eql(\"MISSING_USERID\");",
+							"        pm.expect(response.error.message).to.eql(\"El campo 'userId' es obligatorio en la solicitud.\");",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"title\": \"Publicación sin userId\",\n\"description\": \"adasdasd\",\n\"hasMultimedia\": true,\n\"public\": true,\n\"multimedia\": \"https://www.ejemplo.com/multimedia1.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+					"protocol": "https",
+					"host": [
+						"5fff7e05-0538-4ab2-8235-e8976a482701",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"crear-post"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Creación de publicación Fallido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"title\": \"Publicación sin userId\",\n\"description\": \"adasdasd\",\n\"hasMultimedia\": true,\n\"public\": true,\n\"multimedia\": \"https://www.ejemplo.com/multimedia1.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+							"protocol": "https",
+							"host": [
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"crear-post"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"code\": \"MISSING_USERID\",\n        \"message\": \"El campo 'userId' es obligatorio en la solicitud.\"\n    },\n    \"status\": \"ERROR\"\n}"
 				}
 			]
 		}
