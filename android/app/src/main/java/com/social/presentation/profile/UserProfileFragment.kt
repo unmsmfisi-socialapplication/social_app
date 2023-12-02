@@ -130,10 +130,26 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
     }
 
+    private fun extractIntegerAndDecimal(number: Double): Pair<String, String> {
+        val stringValue = number.toString()
+        val (integer, decimal) = stringValue.split(".")
+        return Pair(integer, decimal)
+    }
+
     fun convertNumberToK(number: Int): String {
         return when {
-            number in 1000..999999 -> "${number / 1000}k"
-            number >= 1000000 -> "${number / 1000000}M"
+            number in 1000..999999 -> {
+                val thousandValue = (number / 1000.0)
+                val (integer, decimal) = extractIntegerAndDecimal(thousandValue)
+                val firstNumberDecimal = decimal.get(0)
+                String.format("%s.%sk", integer, firstNumberDecimal).replace(".0k", "k")
+            }
+            number >= 1000000 -> {
+                val millionValue = (number / 1000000.0)
+                val (integer, decimal) = extractIntegerAndDecimal(millionValue)
+                val firstNumberDecimal = decimal.get(0)
+                String.format("%s.%sM", integer, firstNumberDecimal).replace(".0M", "M")
+            }
             else -> number.toString()
         }
     }

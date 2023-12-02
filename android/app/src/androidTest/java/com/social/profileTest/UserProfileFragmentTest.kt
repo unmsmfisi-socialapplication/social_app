@@ -20,7 +20,7 @@ class UserProfileFragmentTest {
         val userProfileFragment = UserProfileFragment()
         val result = userProfileFragment.convertNumberToK(2500)
         assertEquals(
-            "2k",
+            "2.5k",
             result,
         )
     }
@@ -28,9 +28,9 @@ class UserProfileFragmentTest {
     @Test
     fun testConvertNumberM() {
         val userProfileFragment = UserProfileFragment()
-        val result = userProfileFragment.convertNumberToK(1200000)
+        val result = userProfileFragment.convertNumberToK(1230000)
         assertEquals(
-            "1M",
+            "1.2M",
             result,
         )
     }
