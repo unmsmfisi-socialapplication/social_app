@@ -1,4 +1,4 @@
-name: CI for Postman test
+name: CI for Postman test manually triggered
 
 on: workflow_dispatch
 
