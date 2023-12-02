@@ -11,6 +11,12 @@ func ParsePaginationParams(query url.Values) (domain.PostPaginationParams, error
 	var params domain.PostPaginationParams
 
 	pageStr := query.Get("page")
+	limitStr := query.Get("limit")
+
+	if pageStr == "" && limitStr == "" {
+		return params, nil
+	}
+
 	if pageStr != "" {
 		page, err := strconv.Atoi(pageStr)
 		if err != nil {
@@ -19,7 +25,6 @@ func ParsePaginationParams(query url.Values) (domain.PostPaginationParams, error
 		params.Page = page
 	}
 
-	limitStr := query.Get("limit")
 	if limitStr != "" {
 		limit, err := strconv.Atoi(limitStr)
 		if err != nil {

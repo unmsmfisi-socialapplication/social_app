@@ -68,23 +68,70 @@ func (ph *PostHandler) HandleGetAllPost(w http.ResponseWriter, r *http.Request) 
 
 func (ph *PostHandler) HandleTimeline(w http.ResponseWriter, r *http.Request) {
 
+	query := r.URL.Query().Get("query")
+
+	var page, limit int
+
+	// Handle Pages param
+	spage := r.URL.Query().Get("page")
+	if spage == "" {
+		spage = "1"
+	}
+	page, err := strconv.Atoi(spage)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "Error: page must be a number", nil)
+		return
+	}
+
+	// Handle Page number param
+	slimit := r.URL.Query().Get("limit")
+	if slimit == "" {
+		slimit = "10"
+	}
+	limit, err = strconv.Atoi(slimit)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "Error: page must be a number", nil)
+		return
+	}
+
 	var data struct {
 		UserId int `json:"user_id"`
 	}
-	err := json.NewDecoder(r.Body).Decode(&data)
+	err = json.NewDecoder(r.Body).Decode(&data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	timeline, err := ph.useCase.RetrieveTimelinePosts(int64(data.UserId))
+	timeline, err := ph.useCase.RetrieveTimelinePosts(int64(data.UserId), int64(page), int64(limit))
 	if err != nil {
 		utils.SendJSONResponse(w, http.StatusInternalServerError, "ERROR", err.Error())
 		return
 	}
+	if timeline.Results == nil {
+		timeline.Results = []domain.TimelineRes{}
+	}
 
-	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", timeline)
+	next := "/timeline?query=" + query + "&page=" + strconv.Itoa(page+1) + "&limit=" + strconv.Itoa(limit)
+
+	var previous string
+	if page > 1 {
+		previous = "/timeline?query=" + query + "&page=" + strconv.Itoa(page-1) + "&limit=" + strconv.Itoa(limit)
+	} else {
+		previous = ""
+	}
+
+	response := domain.PaginatedRes{
+		Results:  timeline.Results,
+		Page:     page,
+		Next:     next,
+		Previous: previous}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
+
 func (ph *PostHandler) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 
 	idStr := chi.URLParam(r, "id")

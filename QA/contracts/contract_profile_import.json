@@ -1,92 +1,292 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Profile Import",
-    "type": "object",
-    "properties": {
-    "@context": {
-    "type": "array",
-    "items": [
-    {
-    "type": "string",
-    "const": "https://www.w3.org/ns/activitystreams"
+    "Succesful Import of profile": {
+        "description": "Import a user profile with valid data",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "type": {
+                    "type": "string",
+                    "value": "ImportProfile",
+                    "description": "Type of the import request."
+                },
+                "actor": {
+                    "type": "string",
+                    "value": "SofiaRV",
+                    "description": "actor's profile."
+                },
+                "name": {
+                    "type": "string",
+                    "value": "Perfil de Sofia",
+                    "description": "Name of the profile to import."
+                },
+                "object": {
+                    "type": "object",
+                    "value": {
+                        "id": {
+                            "type": "string",
+                            "value": "1234",
+                            "description": "Unique identifier of the profile."
+                        },
+                        "type": {
+                            "type": "string",
+                            "value": "Person",
+                            "description": "Type of the object, indicating it's a person."
+                        },
+                        "name": {
+                            "type": "string",
+                            "value": "Pepe Rodriguez",
+                            "description": "Name of the person."
+                        },
+                        "username": {
+                            "type": "string",
+                            "value": "PepeR",
+                            "description": "Username of the person."
+                        },
+                        "hasMultimedia": {
+                            "type": "boolean",
+                            "value": true,
+                            "description": "Indicates if the profile has multimedia content."
+                        },
+                        "public": {
+                            "type": "boolean",
+                            "value": true,
+                            "description": "Indicates if the profile is public."
+                        },
+                        "summary": {
+                            "type": "string",
+                            "value": "Amante de la naturaleza y entusiasta de la tecnología.",
+                            "description": "Brief summary about the person."
+                        },
+                        "profileImage": {
+                            "type": "string",
+                            "value": "https://appsocial.com/sofia/profileImage.jpg",
+                            "description": "URL of the person's profile image."
+                        },
+                        "endpoints": {
+                            "type": "object",
+                            "value": {
+                                "sharedInbox": {
+                                    "type": "string",
+                                    "value": "https://appsocial.com/inbox",
+                                    "description": "URL of the shared inbox endpoint."
+                                }
+                            },
+                            "description": "Endpoints associated with the profile."
+                        },
+                        "importedFrom": {
+                            "type": "string",
+                            "value": "https://mastodon.ejemplo.com/@sofiR",
+                            "description": "Original source from where the profile is imported."
+                        }
+                    },
+                    "description": "Detailed information of the profile."
+                },
+                "to": {
+                    "type": "array",
+                    "value": ["https://appsocial.com/system/import"],
+                    "description": "Destination array for the import."
+                },
+                "cc": {
+                    "type": "array",
+                    "value": [],
+                    "description": "Carbon copy array."
+                }
+            }
+        },
+        "response": {
+            "status": 200,
+            "body": {
+                "status": "OK",
+                "message": "Profile imported successfully"
+            }
+        }
     },
-    {
-    "type": "object",
-    "properties": {
-    "https://github.com/language": {
-    "type": "string"
-    }
-    },
-    "required": ["https://github.com/language"]
-    }
-    ]
-    },
-    "type": {
-    "type": "string",
-    "enum": ["Profile"]
-    },
-    "actor": {
-    "type": "string",
-    "format": "uri"
-    },
-    "name": {
-    "type": "string"
-    },
-    "object": {
-    "type": "object",
-    "properties": {
-    "id": {
-    "type": "string",
-    "format": "uri"
-    },
-    "type": {
-    "type": "string",
-    "enum": ["Person"]
-    },
-    "name": {
-    "type": "string"
-    },
-    "preferredUsername": {
-    "type": "string"
-    },
-    "summary": {
-    "type": "string"
-    },
-    "profileImage": {
-    "type": "string",
-    "format": "uri"
-    },
-    "coverImage": {
-    "type": "string",
-    "format": "uri"
-    },
-    "endpoints": {
-    "type": "object",
-    "properties": {
-    "sharedInbox": {
-    "type": "string",
-    "format": "uri"
-    }
-    }
-    },
-    "importedFrom": {
-    "type": "string",
-    "format": "uri"
-    }
-    },
-    "required": ["id", "type", "name", "preferredUsername"]
-    },
-    "to": {
-    "type": "array",
-    "items": {
-    "type": "string",
-    "format": "uri"
-    }
-    },
-    "cc": {
-    "type": "string",
-    "format": "uri"
-    }
-    },
-    "required": ["@context", "type", "actor", "name", "object", "to"]
-    }
+        "Profile Import Without Actor": {
+            "description": "Attempt to import a user profile with missing data",
+            "request": {
+                "method": "POST",
+                "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "type": {
+                        "type": "string",
+                        "value": "ImportProfile",
+                        "description": "Type of the import request."
+                    },
+                    "actor": {
+                        "type": "string",
+                        "value": "",
+                        "description": "actor's profile, intentionally left blank."
+                    },
+                    "name": {
+                        "type": "string",
+                        "value": "Perfil de Sofia",
+                        "description": "Name of the profile to import."
+                    },
+                    "object": {
+                        "id": {
+                            "type": "string",
+                            "value": "https://appsocial.com/Pepe/id1234",
+                            "description": "Unique identifier of the profile."
+                        },
+                        "type": {
+                            "type": "string",
+                            "value": "Person",
+                            "description": "Type of the object, indicating it's a person."
+                        },
+                        "name": {
+                            "type": "string",
+                            "value": "Pepe Rodriguez",
+                            "description": "Name of the person."
+                        },
+                        "username": {
+                            "type": "string",
+                            "value": "PepeR",
+                            "description": "Username of the person."
+                        },
+                        "hasMultimedia": {
+                            "type": "boolean",
+                            "value": true,
+                            "description": "Indicates if the profile has multimedia content."
+                        },
+                        "public": {
+                            "type": "boolean",
+                            "value": true,
+                            "description": "Indicates if the profile is public."
+                        },
+                        "summary": {
+                            "type": "string",
+                            "value": "Amante de la naturaleza y entusiasta de la tecnología.",
+                            "description": "Brief summary about the person."
+                        },
+                        "profileImage": {
+                            "type": "string",
+                            "value": "https://appsocial.com/sofia/profileImage.jpg",
+                            "description": "URL of the person's profile image."
+                        },
+                        "endpoints": {
+                            "type": "object",
+                            "value": {
+                                "sharedInbox": {
+                                    "type": "string",
+                                    "value": "https://appsocial.com/inbox",
+                                    "description": "URL of the shared inbox endpoint."
+                                }
+                            },
+                            "description": "Endpoints associated with the profile."
+                        },
+                        "importedFrom": {
+                            "type": "string",
+                            "value": "https://mastodon.ejemplo.com/@sofiR",
+                            "description": "Original source from where the profile is imported."
+                        }
+                    }
+                }
+            },
+            "response": {
+                "status": 400,
+                "body": {
+                    "status": "ERROR",
+                    "message": "Actor is required."
+                }
+            }
+        },
+        "Profile Object to import incorrect": {
+            "description": "Attempt to import a user profile with incorrect data format",
+            "request": {
+                "method": "POST",
+                "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/importar-perfil",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "type": {
+                        "type": "string",
+                        "value": "ImportProfile",
+                        "description": "Type of the import request, intentionally incorrect format."
+                    },
+                    "actor": {
+                        "type": "string",
+                        "value": "sofiaRV",
+                        "description": "actor's profile."
+                    },
+                    "name": {
+                        "type": "string",
+                        "value": "Perfil de Sofia",
+                        "description": "Name of the profile to import."
+                    },
+                    "object": {
+                        "id": {
+                            "type": "string",
+                            "value": 1234,
+                            "description": "Unique identifier of the profile."
+                        },
+                        "type": {
+                            "type": "string",
+                            "value": "Person",
+                            "description": "Type of the object, indicating it's a person."
+                        },
+                        "name": {
+                            "type": "string",
+                            "value": "Pepe Rodriguez",
+                            "description": "Name of the person."
+                        },
+                        "username": {
+                            "type": "string",
+                            "value": "PepeR",
+                            "description": "Username of the person."
+                        },
+                        "hasMultimedia": {
+                            "type": "boolean",
+                            "value": true,
+                            "description": "Indicates if the profile has multimedia content."
+                        },
+                        "public": {
+                            "type": "boolean",
+                            "value": true,
+                            "description": "Indicates if the profile is public."
+                        },
+                        "summary": {
+                            "type": "string",
+                            "value": "Amante de la naturaleza y entusiasta de la tecnología.",
+                            "description": "Brief summary about the person."
+                        },
+                        "profileImage": {
+                            "type": "string",
+                            "value": "https://appsocial.com/sofia/profileImage.jpg",
+                            "description": "URL of the person's profile image."
+                        },
+                        "endpoints": {
+                            "type": "object",
+                            "value": {
+                                "sharedInbox": {
+                                    "type": "string",
+                                    "value": "https://appsocial.com/inbox",
+                                    "description": "URL of the shared inbox endpoint."
+                                }
+                            },
+                            "description": "Endpoints associated with the profile."
+                        },
+                        "importedFrom": {
+                            "type": "string",
+                            "value": "https://mastodon.ejemplo.com/@sofiR",
+                            "description": "Original source from where the profile is imported."
+                        }
+                    }
+                }
+            },
+            "response": {
+                "status": 400,
+                "body": {
+                    "status": "ERROR",
+                    "message": "Object to import format is incorrect."
+                }
+            }
+        }   
+}

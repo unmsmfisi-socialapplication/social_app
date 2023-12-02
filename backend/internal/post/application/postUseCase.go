@@ -33,12 +33,10 @@ type PostUseCaseInterface interface {
 	CreatePost(post domain.PostCreate) (*domain.PostResponse, error)
 	GetPost(id int) (*domain.Post, error)
 	GetPosts(params domain.PostPaginationParams) (*domain.PostPagination, error)
-    
-    //For multipost
-    MultipostPixelfeed(post domain.PostCreate) error
-    MultipostMastodon(post domain.PostCreate) error
+  MultipostPixelfeed(post domain.PostCreate) error
+  MultipostMastodon(post domain.PostCreate) error
+	RetrieveTimelinePosts(user_id, page_size, page_num int64) (*domain.QueryResult, error)
 
-	RetrieveTimelinePosts(user_id int64) (*[]domain.TimelineRes, error)
 	// DELETE POST //
 	DeletePost(id int64) error
 
@@ -58,7 +56,7 @@ type PostRepository interface {
 	GetAll(params domain.PostPaginationParams) (*domain.PostPagination, error)
 	CreateHomeTimelineItem(user_id int64, post_id int64) error
 	FanoutHomeTimeline(posts_id int64, following_id int64) error
-	HomeTimeline(user_id int64) (*[]domain.TimelineRes, error)
+	HomeTimeline(user_id, page_size, page_num int64) (*domain.QueryResult, error)
 	// DELETE POST //
 	DeletePost(id int64) error
 	PostExists(id int64) bool
@@ -128,8 +126,8 @@ func (l *PostUseCase) GetPosts(params domain.PostPaginationParams) (*domain.Post
 	return dbPosts, nil
 }
 
-func (puc *PostUseCase) RetrieveTimelinePosts(user_id int64) (*[]domain.TimelineRes, error) {
-	timeline, err := puc.repo.HomeTimeline(user_id)
+func (puc *PostUseCase) RetrieveTimelinePosts(user_id, page_size, page_num int64) (*domain.QueryResult, error) {
+	timeline, err := puc.repo.HomeTimeline(user_id, page_size, page_num)
 	if err != nil {
 		return nil, err
 	}

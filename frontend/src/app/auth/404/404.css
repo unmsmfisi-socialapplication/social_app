@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'Poppins-Italic';
+    src: url('../../../../resources/fonts/Poppins-Italic.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins-Medium';
+    src: url('../../../../resources/fonts/Poppins-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins-Light';
+    src: url('../../../../resources/fonts/Poppins-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('../../../../resources/fonts/Poppins-Regular.ttf');
+}
+
+.error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 95vh;
+}
+
+.error-content {
+    width: 25%;
+}
+
+.error-content h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #167ab9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.error-content h2 {
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: 'Poppins-Medium';
+    margin: 0;
+    padding: 0;
+    margin-top: 1rem;
+}
+.error-content p {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    font-size: 20px;
+    font-family: 'Poppins-Regular';
+}
+
+.error-content WButtonMotion {
+    width: 100px !important;
+}
+
+.error-image {
+    margin-left: 70px;
+    width: 750px;
+}
+.error-image {
+    position: relative;
+    display: block;
+    max-width: 500px;
+}
+
+.error-image img {
+    display: block;
+    max-width: 700px;
+    animation: bounceUpDown 3s infinite;
+}
+
+.logo-container {
+    display: flex;
+    position: absolute;
+    text-align: center;
+    align-items: center;
+    top: 20px;
+    left: 20px;
+    height: auto;
+}
+
+.brand-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+@keyframes bounceUpDown {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
