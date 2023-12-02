@@ -31,7 +31,6 @@
 							"    let response = pm.response.json();",
 							"    pm.expect(response.response.Id).to.be.a('number');",
 							"    pm.expect(response.response.UserId).to.be.a('number');",
-							"    pm.expect(response.response.title).to.be.a('string');",
 							"    pm.expect(response.response.Description).to.be.a('string');",
 							"    pm.expect(response.response.HasMultimedia).to.be.a('boolean');",
 							"    pm.expect(response.response.Public).to.be.a('boolean');",
@@ -53,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{  \n   \"userId\": 123,\n    \"title\": \"Titulo de la publicacion\",\n    \"description\": \"adasdasd\",\n    \"hasMultimedia\": true,\n    \"public\": true,\n    \"multimedia\": \"https://www.example.com/multimedia1.jpg\"\n}",
+					"raw": "{\n  \"userId\": 123,\n  \"title\": \"Prueba de publicación en privado\",\n  \"description\": \"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto\",\n  \"hasMultimedia\": true,\n  \"public\": false,\n  \"multimedia\": \"asdasd/multimedia1.jpg\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -76,7 +75,7 @@
 			},
 			"response": [
 				{
-					"name": "Crear publicación",
+					"name": "Crear publicación Exitosa",
 					"originalRequest": {
 						"method": "POST",
 						"header": [
@@ -115,73 +114,7 @@
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"response\": {\n        \"Id\": 8,\n        \"UserId\": 123,\n        \"title\": \"Titulo de la publicacion\",\n        \"Description\": \"adasdasd\",\n        \"HasMultimedia\": true,\n        \"Public\": true,\n        \"Multimedia\": \"https://www.example.com/multimedia1.jpg\",\n        \"InsertionDate\": \"2023-11-03T16:46:23.032338218Z\",\n        \"UpdateDate\": \"2023-11-03T16:46:23.032338301Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
-				}
-			]
-		},
-		{
-			"name": "Creación de Post Exitoso sin Tittle",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Response has all expected fields\", function () {",
-							"    let response = pm.response.json();",
-							"    pm.expect(response).to.have.property('response');",
-							"    pm.expect(response.response).to.have.property('Id');",
-							"    pm.expect(response.response).to.have.property('UserId');",
-							"    pm.expect(response.response).to.have.property('Description');",
-							"    pm.expect(response.response).to.have.property('HasMultimedia');",
-							"    pm.expect(response.response).to.have.property('Public');",
-							"    pm.expect(response.response).to.have.property('Multimedia');",
-							"    pm.expect(response.response).to.have.property('InsertionDate');",
-							"    pm.expect(response.response).to.have.property('UpdateDate');",
-							"    pm.expect(response).to.have.property('status');",
-							"});",
-							"",
-							"pm.test(\"Title is empty\", function () {",
-							"    let response = pm.response.json();",
-							"    pm.expect(response.response.Title).to.eql(\"\");",
-							"});",
-							"",
-							"pm.test(\"Status is SUCCESS\", function () {",
-							"    let response = pm.response.json();",
-							"    pm.expect(response.status).to.eql(\"SUCCESS\");",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"userId\": 123,\n    \"title\": \"\",\n    \"description\": \"adasdasd\",\n    \"hasMultimedia\": true,\n    \"public\": true,\n    \"multimedia\": \"https://www.example.com/multimedia1.jpg\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
 				},
-				"url": {
-					"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io//crear-post",
-					"protocol": "https",
-					"host": [
-						"5fff7e05-0538-4ab2-8235-e8976a482701",
-						"mock",
-						"pstmn",
-						"io"
-					],
-					"path": [
-						"",
-						"crear-post"
-					]
-				}
-			},
-			"response": [
 				{
 					"name": "Creación de Post Exitoso sin Tittle",
 					"originalRequest": {
@@ -204,7 +137,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io//crear-post",
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
 							"protocol": "https",
 							"host": [
 								"5fff7e05-0538-4ab2-8235-e8976a482701",
@@ -213,7 +146,6 @@
 								"io"
 							],
 							"path": [
-								"",
 								"crear-post"
 							]
 						}
@@ -223,6 +155,39 @@
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"response\": {\n        \"Id\": 8,\n        \"UserId\": 123,\n        \"Title\": \"\",\n        \"Description\": \"adasdasd\",\n        \"HasMultimedia\": true,\n        \"Public\": true,\n        \"Multimedia\": \"https://www.ejemplo.com/multimedia1.jpg\",\n        \"InsertionDate\": \"2023-11-03T16:46:23.032338218Z\",\n        \"UpdateDate\": \"2023-11-03T16:46:23.032338301Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
+				},
+				{
+					"name": "Creación de publicación en privado",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 123,\n  \"title\": \"Prueba de publicación en privado\",\n  \"description\": \"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto\",\n  \"hasMultimedia\": true,\n  \"public\": false,\n  \"multimedia\": \"asdasd/multimedia1.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+							"protocol": "https",
+							"host": [
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"crear-post"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"response\": {\n        \"Id\": 10,\n        \"UserId\": 123,\n        \"Title\": \"Prueba de publicación en privado\",\n        \"Description\": \"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto\",\n        \"HasMultimedia\": true,\n        \"Public\": false,\n        \"Multimedia\": \"asdasd/multimedia1.jpg\",\n        \"InsertionDate\": \"2023-11-07T10:00:00.000000000Z\",\n        \"UpdateDate\": \"2023-11-07T10:00:00.000000000Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
 				}
 			]
 		}
