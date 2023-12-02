@@ -16,6 +16,7 @@ var (
 
 type FollowerRepository interface {
 	InsertNewFollower(newFollower *domain.Follower) (*domain.Follower, error)
+	DeleteFollower(follower *domain.Follower) (*domain.Follower, error)
 	IsFollowing(newFollower *domain.Follower) (*bool, error)
 	ViewCommonFollowers(p_own_profile_id, p_viewed_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error)
 	ProfileFollowers(p_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error)
@@ -43,6 +44,22 @@ func (r *FollowerUseCase) FollowProfile(p_follower_profile_id, p_following_profi
 		return nil, err
 	}
 	return newFollower, nil
+}
+
+func (r *FollowerUseCase) UnfollowProfile(p_follower_profile_id, p_following_profile_id int) (*domain.Follower, error) {
+	if p_follower_profile_id == p_following_profile_id {
+		return nil, ErrFollowHimself
+	}
+
+	oldFollower, err := domain.NewFollower(p_follower_profile_id, p_following_profile_id)
+	if err != nil {
+		return nil, err
+	}
+	oldFollower, err = r.repo.DeleteFollower(oldFollower)
+	if err != nil {
+		return nil, err
+	}
+	return oldFollower, nil
 }
 
 func (r *FollowerUseCase) CommonFollowers(p_own_profile_id, p_viewed_profile_id, p_page_size, p_page_number int) (*domain.FollowerDataList, error) {
