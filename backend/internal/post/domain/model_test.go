@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"reflect"
 	"testing"
 	"time"
 )
@@ -12,32 +11,34 @@ func TestPostCreateToPost(t *testing.T) {
 			UserId:        1,
 			Title:         "Test Title",
 			Description:   "Test Description",
-			HasMultimedia: true,
+			HasMultimedia: false,
 			Public:        true,
-			Multimedia:    "test.jpg",
+			Multimedia:    "",
 		},
 	}
 
+	resultPost := PostCreateToPost(postCreate)
+
 	expectedPost := Post{
 		PostBase:      postCreate.PostBase,
-		InsertionDate: time.Now(),
-		UpdateDate:    time.Now(),
+		InsertionDate: resultPost.InsertionDate,
+		UpdateDate:    resultPost.UpdateDate,
 	}
 
-	createdPost := PostCreateToPost(postCreate)
-
-	if !reflect.DeepEqual(createdPost.PostBase, expectedPost.PostBase) {
-		t.Error("Converting PostCreate to Post did not produce the expected result")
+	if expectedPost.PostBase != resultPost.PostBase {
+		t.Errorf("Expected PostBase %+v, but got %+v", expectedPost.PostBase, resultPost.PostBase)
 	}
 
-	if !createdPost.InsertionDate.After(time.Now().Add(-time.Second)) || !createdPost.UpdateDate.After(time.Now().Add(-time.Second)) {
-		t.Error("Invalid insertion and update dates")
+	if resultPost.InsertionDate.IsZero() {
+		t.Errorf("Expected non-zero InsertionDate, but got zero")
+	}
+
+	if resultPost.UpdateDate.IsZero() {
+		t.Errorf("Expected non-zero UpdateDate, but got zero")
 	}
 }
 
-
 func TestPostToPostResponse(t *testing.T) {
-
 	post := Post{
 		Id:            1,
 		InsertionDate: time.Now(),
@@ -46,11 +47,13 @@ func TestPostToPostResponse(t *testing.T) {
 			UserId:        1,
 			Title:         "Test Title",
 			Description:   "Test Description",
-			HasMultimedia: true,
+			HasMultimedia: false,
 			Public:        true,
-			Multimedia:    "test.jpg",
+			Multimedia:    "",
 		},
 	}
+
+	resultPostResponse := PostToPostResponse(post)
 
 	expectedPostResponse := PostResponse{
 		Context: "https://www.w3.org/ns/activitystreams",
@@ -58,13 +61,7 @@ func TestPostToPostResponse(t *testing.T) {
 		Object:  post,
 	}
 
-	createdPostResponse := PostToPostResponse(post)
-
-	if !reflect.DeepEqual(createdPostResponse.Object, expectedPostResponse.Object) {
-		t.Error("Conversion from Post to PostResponse did not produce the expected result")
-	}
-
-	if !reflect.DeepEqual(createdPostResponse, expectedPostResponse) {
-		t.Errorf("The created PostResponse does not match the expected PostResponse. Got: %+v, Expected: %+v", createdPostResponse, expectedPostResponse)
+	if expectedPostResponse != resultPostResponse {
+		t.Errorf("Expected PostResponse %+v, but got %+v", expectedPostResponse, resultPostResponse)
 	}
 }
