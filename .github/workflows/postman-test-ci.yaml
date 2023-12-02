@@ -39,7 +39,7 @@ jobs:
         done
         if [ "$has_failure" = true ]; then
           echo -e "\e[31mAt least one test failed.\e[0m"
-          exit 0
+          exit 1
         else
           echo -e "\e[32mAll tests passed successfully.\e[0m"
         fi

@@ -24,6 +24,7 @@ import (
 
 	auth_application "github.com/unmsmfisi-socialapplication/social_app/internal/auth/application"
 	auth_infrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/auth/infrastructure"
+	commentDataset "github.com/unmsmfisi-socialapplication/social_app/internal/comment_dataset"
 	follow "github.com/unmsmfisi-socialapplication/social_app/internal/follow"
 )
 
@@ -108,5 +109,10 @@ func Router() http.Handler {
 	// Follow Profile
 	followRouter := follow.FollowModuleRouter(dbInstance)
 	protectedRoutes.Mount("/follow_profile", followRouter)
+
+	// comment dataset
+	commentDatasetRouter := commentDataset.CommentDatasetModuleRouter(dbInstance)
+	protectedRoutes.Mount("/data", commentDatasetRouter)
+
 	return freeRoutes
 }
