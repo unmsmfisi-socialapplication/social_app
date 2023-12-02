@@ -441,6 +441,143 @@
 					"body": "{\n    \"error\": {\n        \"code\": \"TOO_MANY_GIFS\",\n        \"message\": \"Solo se permite un GIF por publicación.\"\n    },\n    \"status\": \"ERROR\"\n}"
 				}
 			]
+		},
+		{
+			"name": "Listar publicaciones de usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response validation based on status code\", function () {",
+							"    let response = pm.response.json();",
+							"    let statusCode = pm.response.code;",
+							"",
+							"    if (statusCode === 200) {",
+							"        // Verificar la existencia del array 'publications'",
+							"        pm.expect(response).to.have.property('publications');",
+							"        pm.expect(response.publications).to.be.an('array');",
+							"",
+							"        // Verificar cada publicación en el array",
+							"        response.publications.forEach((publication) => {",
+							"            pm.expect(publication).to.have.property('Id').that.is.a('number');",
+							"            pm.expect(publication).to.have.property('UserId').that.is.a('number');",
+							"            pm.expect(publication).to.have.property('Title').that.is.a('string');",
+							"            pm.expect(publication).to.have.property('Description').that.is.a('string');",
+							"            pm.expect(publication).to.have.property('HasMultimedia').that.is.a('boolean');",
+							"            pm.expect(publication).to.have.property('Public').that.is.a('boolean');",
+							"            pm.expect(publication).to.have.property('InsertionDate').that.is.a('string');",
+							"",
+							"            if (publication.HasMultimedia) {",
+							"                pm.expect(publication).to.have.property('Multimedia').that.is.an('array');",
+							"            }",
+							"        });",
+							"    }",
+							"",
+							"    else if (statusCode === 400) {",
+							"        pm.expect(response).to.have.property('statusCode', 400);",
+							"        pm.expect(response).to.have.property('message', \"El campo `userId` es obligatorio.\");",
+							"        pm.expect(response).to.have.property('errors').that.is.an('array');",
+							"",
+							"        const error = response.errors.find(e => e.field === \"userId\");",
+							"        pm.expect(error).to.not.be.undefined;",
+							"        pm.expect(error).to.have.property('message', \"El campo `userId` es obligatorio.\");",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/postsUser?userid=456",
+					"protocol": "https",
+					"host": [
+						"5fff7e05-0538-4ab2-8235-e8976a482701",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"postsUser"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "456"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Listar publicaciones de usuario",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/postsUser?userid=456",
+							"protocol": "https",
+							"host": [
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"postsUser"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "456"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"publications\": [\n        {\n            \"Id\": 1,\n            \"UserId\": 456,\n            \"Title\": \"Mi primera publicación\",\n            \"Description\": \"Esta es mi primera publicación en la plataforma.\",\n            \"HasMultimedia\": false,\n            \"Public\": true,\n            \"InsertionDate\": \"2023-11-07T10:00:00.000000000Z\"\n        },\n        {\n            \"Id\": 2,\n            \"UserId\": 456,\n            \"Title\": \"Otra publicación\",\n            \"Description\": \"Una segunda publicación para compartir contenido interesante.\",\n            \"HasMultimedia\": true,\n            \"Public\": true,\n            \"Multimedia\": [\n                \"imagen1.jpg\",\n                \"imagen2.jpg\"\n            ],\n            \"InsertionDate\": \"2023-11-08T09:30:00.000000000Z\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "Listar publicaciones de usuario sin UserID",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/postsUser?userid=",
+							"protocol": "https",
+							"host": [
+								"31f26148-53be-474d-9a51-fa125946327a",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"postsUser"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 400,\n    \"message\": \"El campo `userId` es obligatorio.\",\n    \"errors\": [\n        {\n            \"field\": \"userId\",\n            \"message\": \"El campo `userId` es obligatorio.\"\n        }\n    ]\n}"
+				}
+			]
 		}
 	],
 	"variable": [
