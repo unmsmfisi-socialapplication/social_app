@@ -13,7 +13,5 @@ resource "google_artifact_registry_repository" "frontend-repo" {
       keep_count = 10
     }
   }
-  depends_on = [
-    google_project_service.artifact_registry_api
-  ]
+  
 }
