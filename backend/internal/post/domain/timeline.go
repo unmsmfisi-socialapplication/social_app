@@ -20,3 +20,18 @@ type TimelineRes struct {
 	InsertionDate time.Time `json:"insertionDate"`
 	Username      string    `json:"username"`
 }
+
+type PaginatedRes struct {
+	Results  []TimelineRes `json:"results"`
+	Page     int           `json:"page"`
+	Next     string        `json:"next"`
+	Previous string        `json:"previous"`
+}
+
+type QueryResult struct {
+	Results []TimelineRes
+}
+
+func NewQueryResult(timelinePosts []TimelineRes) *QueryResult {
+	return &QueryResult{Results: timelinePosts}
+}

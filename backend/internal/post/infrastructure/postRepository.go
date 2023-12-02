@@ -213,7 +213,7 @@ func (p *PostsDBRepository) FanoutHomeTimeline(posts_id int64, following_id int6
 	return err
 }
 
-func (p *PostsDBRepository) HomeTimeline(user_id int64) (*[]domain.TimelineRes, error) {
+func (p *PostsDBRepository) HomeTimeline(user_id, page_size, page_num int64) (*domain.QueryResult, error) {
 	query := `SELECT 
 				SOC_APP_POSTS.post_id,
 				SOC_APP_POSTS.user_id,
@@ -226,9 +226,10 @@ func (p *PostsDBRepository) HomeTimeline(user_id int64) (*[]domain.TimelineRes, 
 				INNER JOIN SOC_APP_POSTS ON SOC_APP_HOME_TIMELINE.post_id = SOC_APP_POSTS.post_id
 				INNER JOIN SOC_APP_USERS ON SOC_APP_POSTS.user_id = SOC_APP_USERS.user_id
 			WHERE SOC_APP_HOME_TIMELINE.user_id = $1
-			ORDER BY SOC_APP_HOME_TIMELINE.id DESC;`
+			ORDER BY SOC_APP_HOME_TIMELINE.id DESC
+			LIMIT $2 OFFSET $3;`
 
-	rows, err := p.db.Query(query, user_id)
+	rows, err := p.db.Query(query, user_id, page_size, page_num)
 	if err != nil {
 		return nil, err
 	}
@@ -255,5 +256,7 @@ func (p *PostsDBRepository) HomeTimeline(user_id int64) (*[]domain.TimelineRes, 
 		return nil, err
 	}
 
-	return &timeline, nil
+	result := domain.NewQueryResult(timeline)
+
+	return result, nil
 }
