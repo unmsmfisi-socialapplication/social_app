@@ -23,7 +23,7 @@ type mockPostUseCase struct {
 	DeletePostFn            func(id int64) error
 	UpdatePostFn            func(id int64, update domain.PostUpdate) error
 	ReportPostFn            func(report domain.PostReport) error
-	RetrieveTimelinePostsFn func(user_id int64) (*[]domain.TimelineRes, error)
+	RetrieveTimelinePostsFn func(user_id, page_size, page_num int64) (*domain.QueryResult, error)
 }
 
 func (m *mockPostUseCase) CreatePost(post domain.PostCreate) (*domain.PostResponse, error) {
@@ -47,8 +47,8 @@ func (m *mockPostUseCase) UpdatePost(id int64, update domain.PostUpdate) error {
 func (m *mockPostUseCase) ReportPost(report domain.PostReport) error {
 	return m.ReportPostFn(report)
 }
-func (m *mockPostUseCase) RetrieveTimelinePosts(user_id int64) (*[]domain.TimelineRes, error) {
-	return m.RetrieveTimelinePostsFn(user_id)
+func (m *mockPostUseCase) RetrieveTimelinePosts(user_id, page_size, page_num int64) (*domain.QueryResult, error) {
+	return m.RetrieveTimelinePostsFn(user_id, page_size, page_num)
 }
 
 func TestHandleCreatePost(t *testing.T) {
@@ -411,41 +411,46 @@ func TestHandleTimeline(t *testing.T) {
 	tests := []struct {
 		name         string
 		inputBody    string
-		mockTimeline func(user_id int64) (*[]domain.TimelineRes, error)
+		mockTimeline func(user_id, page_size, page_num int64) (*domain.QueryResult, error)
 		wantStatus   int
 		wantBody     string
 	}{
 		{
 			name:      "Valid Request",
 			inputBody: `{"user_id": 0}`,
-			mockTimeline: func(user_id int64) (*[]domain.TimelineRes, error) {
-				return &[]domain.TimelineRes{
-					{
-						UserId:        123,
-						PostId:        321,
-						Title:         "Post321",
-						Description:   "Post321 Description",
-						Multimedia:    "",
-						InsertionDate: time.Date(2021, time.Month(2), 21, 1, 10, 30, 0, time.UTC),
-						Username:      "User123",
-					}, {
-						UserId:        456,
-						PostId:        654,
-						Title:         "Post654",
-						Description:   "Post654 Description",
-						Multimedia:    "",
-						InsertionDate: time.Date(2021, time.Month(2), 21, 1, 10, 30, 0, time.UTC),
-						Username:      "User456",
-					}}, nil
+			mockTimeline: func(user_id, page_size, page_num int64) (*domain.QueryResult, error) {
+				return domain.NewQueryResult(
+					[]domain.TimelineRes{
+						{
+							UserId:        123,
+							PostId:        321,
+							Title:         "Post321",
+							Description:   "Post321 Description",
+							Multimedia:    "",
+							InsertionDate: time.Date(2021, time.Month(2), 21, 1, 10, 30, 0, time.UTC),
+							Username:      "User123",
+						}, {
+							UserId:        456,
+							PostId:        654,
+							Title:         "Post654",
+							Description:   "Post654 Description",
+							Multimedia:    "",
+							InsertionDate: time.Date(2021, time.Month(2), 21, 1, 10, 30, 0, time.UTC),
+							Username:      "User456",
+						},
+					},
+				), nil
 			},
 			wantStatus: http.StatusOK,
 
-			wantBody: `{"response":[{"userId":123,"postId":321,"title":"Post321","description":"Post321 Description","multimedia":"","insertionDate":"2021-02-21T01:10:30Z","username":"User123"},{"userId":456,"postId":654,"title":"Post654","description":"Post654 Description","multimedia":"","insertionDate":"2021-02-21T01:10:30Z","username":"User456"}],"status":"SUCCESS"}`,
+			// wantBody: `{"response":[{"userId":123,"postId":321,"title":"Post321","description":"Post321 Description","multimedia":"","insertionDate":"2021-02-21T01:10:30Z","username":"User123"},{"userId":456,"postId":654,"title":"Post654","description":"Post654 Description","multimedia":"","insertionDate":"2021-02-21T01:10:30Z","username":"User456"}],"status":"SUCCESS"}`,
+
+			wantBody: `{"results":[{"userId":123,"postId":321,"title":"Post321","description":"Post321 Description","multimedia":"","insertionDate":"2021-02-21T01:10:30Z","username":"User123"},{"userId":456,"postId":654,"title":"Post654","description":"Post654 Description","multimedia":"","insertionDate":"2021-02-21T01:10:30Z","username":"User456"}],"page":1,"next":"/timeline?query=\u0026page=2\u0026limit=10","previous":""}`,
 		},
 		{
 			name:      "Internal Server Error",
 			inputBody: `{"user_id": 0}`,
-			mockTimeline: func(user_id int64) (*[]domain.TimelineRes, error) {
+			mockTimeline: func(user_id, page_size, page_num int64) (*domain.QueryResult, error) {
 				return nil, fmt.Errorf("Internal Server Error")
 			},
 			wantStatus: http.StatusInternalServerError,
@@ -480,6 +485,8 @@ func TestHandleTimeline(t *testing.T) {
 			if err != nil {
 				t.Fatalf("could not read response: %v", err)
 			}
+
+			body = bytes.TrimSuffix(body, []byte("\n"))
 
 			if string(body) != tt.wantBody {
 				t.Errorf("expected body %q; got %q", tt.wantBody, body)
