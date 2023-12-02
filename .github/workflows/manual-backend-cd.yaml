@@ -26,7 +26,8 @@ jobs:
           instance: ${{ vars.PROJECT_ID }}:${{ vars.GAR_LOCATION }}:${{ vars.DB_INSTANCE }}
 
       - name: Run database migrations
-        run: "go run cmd/migrations/migrations.go"
+        run: |
+          go run cmd/migrations/migrations.go || exit 1
 
   deploy:
     needs: migrations
