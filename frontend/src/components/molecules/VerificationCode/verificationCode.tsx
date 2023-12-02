@@ -1,5 +1,5 @@
 import React from 'react'
-import WInputCode from '@/components/atoms/InputCode/inputCode'
+import WInputCode from '../../../components/atoms/InputCode/inputCode'
 
 interface WVerificationCodeProps {
     typeColor?: 'primary' | 'secondary'
