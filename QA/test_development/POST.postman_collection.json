@@ -406,6 +406,39 @@
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"error\": {\n        \"code\": \"TOO_MANY_MULTIMEDIA\",\n        \"message\": \"Se ha excedido el número máximo de imágenes multimedia permitidas (6).\"\n    },\n    \"status\": \"ERROR\"\n}"
+				},
+				{
+					"name": "Creación de publicación Fallido con múltiples posts",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 123,\n  \"title\": \"Publicación con múltiples GIF\",\n  \"description\": \"Descripción de la publicación\",\n  \"hasMultimedia\": true,\n  \"public\": true,\n  \"multimedia\": [\n    \"gif1.gif\",\n    \"gif2.gif\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+							"protocol": "https",
+							"host": [
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"crear-post"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"code\": \"TOO_MANY_GIFS\",\n        \"message\": \"Solo se permite un GIF por publicación.\"\n    },\n    \"status\": \"ERROR\"\n}"
 				}
 			]
 		}
