@@ -1,0 +1,26 @@
+.user-profile {
+    display: flex;
+    justify-content: space-around;
+    padding: 16px;
+}
+
+.stat {
+    text-align: center;
+    padding-right: 16px;
+    border-right: 1px solid #ccc;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.number {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.title {
+    margin-top: 8px;
+}

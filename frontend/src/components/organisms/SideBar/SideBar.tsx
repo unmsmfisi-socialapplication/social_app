@@ -1,5 +1,5 @@
 'use client'
-import { WLogo, WButton, WTag, WButtonPost } from '@/components'
+import { WLogo, WButton, WTag, WButtonPost } from '../../../components'
 import { Box, Button } from '@mui/material'
 import './index.scss'
 import SearchIcon from '@mui/icons-material/Search'
