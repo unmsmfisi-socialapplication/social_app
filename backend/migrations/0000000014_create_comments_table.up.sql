@@ -6,6 +6,7 @@ CREATE TABLE SOC_APP_POSTS_COMMENTS (
   insertion_date timestamp NOT NULL,
   update_date timestamp NOT NULL,
   parent_comment_id bigint,
+  is_active boolean NOT NULL DEFAULT true,
   PRIMARY KEY (comment_id),
   FOREIGN KEY (user_id) REFERENCES SOC_APP_USERS(user_id),
   FOREIGN KEY (post_id) REFERENCES SOC_APP_POSTS(post_id),

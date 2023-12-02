@@ -1,0 +1,49 @@
+name: spam_detection_environment
+dependencies:
+  - python=3.10
+  - scikit-learn
+  - pandas
+  - numpy
+  - beautifulsoup4
+  - nltk
+  - gdown=4.7.1
+  - joblib
+  - schedule=1.2.1
+  - azureml-defaults
+  - matplotlib=3.4.3  # Updated version
+  - opencv-python=4.8.1.78
+  - nltk=3.8.1
+  - h5py=3.9.0
+  - pyodbc=4.0.39
+  - azure-keyvault-secrets=4.7.0
+  - ImageHash=4.3.1
+  - lightgbm=4.1.0
+  - bcrypt=3.2.0  # Updated version
+  - filelock=3.12.4
+  - grpcio=1.57.0
+  - azureml-core=1.53.0
+  - azure-core=1.29.5
+  - urllib3=1.26.6  # Updated version
+  - msal=1.25.0
+  - numpy=1.20.3  # Updated version
+  - cffi=1.16.0
+  - six=1.16.0
+  - azure-identity=1.5.0  # Updated version
+  - wrapt=1.15.0
+  - scipy=1.7.1  # Updated version
+  - scikit-learn=0.24.2  # Updated version
+  - schedule=1.2.1
+  - azure-common=1.1.28
+  - joblib=1.0.1  # Updated version
+  - et-xmlfile=1.1.0
+  - jmespath=0.10.0  # Updated version
+  - wheel=0.36.2  # Updated version
+  - tensorflow=2.6.0  # Updated version
+  - tensorflow-estimator=2.6.0  # Updated version
+  - tensorflow-intel=2.6.0  # Updated version
+  - pydantic-core=1.8.2  # Updated version
+  - werkzeug=2.0.2  # Updated version
+  - termcolor=1.1.0  # Updated version
+  - MarkupSafe=2.0.1  # Updated version
+  - argcomplete=1.12.3  # Updated version
+  - xgboost=1.4.2  # Updated version

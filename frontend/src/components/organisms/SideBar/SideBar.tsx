@@ -18,13 +18,13 @@ export default function SideBar({}: SideBarProps) {
             <WLogo alt="FrameStudentNET" size={30} />
             <Box className="listOptions">
                 <WTag path="/intranet" text="Home" icon={CottageOutlinedIcon} />
-                <WTag path="/intranet/Explorer" text="Explorer" icon={SearchIcon} />
-                <WTag path="/intranet/Notifications" text="Notifications" icon={NotificationsNoneIcon} />
-                <WTag path="/intranet/Messages" text="Messages" icon={MailOutlineIcon} />
-                <WTag path="/intranet/Lists" text="Lists" icon={FormatListBulletedIcon} />
-                <WTag path="/intranet/Bookmarks" text="Bookmarks" icon={BookmarkBorderIcon} />
-                <WTag path="/intranet/Communities" text="Communities" icon={PeopleOutlineIcon} />
-                <WTag path="/intranet/profile" text="Profile" icon={PersonOutlineIcon} />
+                <WTag path="#" text="Explorer" icon={SearchIcon} />
+                <WTag path="#" text="Notifications" icon={NotificationsNoneIcon} />
+                <WTag path="#" text="Messages" icon={MailOutlineIcon} />
+                <WTag path="#" text="Lists" icon={FormatListBulletedIcon} />
+                <WTag path="/intranet/analitics" text="Estadisticas" icon={BookmarkBorderIcon} />
+                <WTag path="#" text="Communities" icon={PeopleOutlineIcon} />
+                <WTag path="/intranet/profile" text="Perfil" icon={PersonOutlineIcon} />
                 <WButtonPost text="Post" />
             </Box>
         </div>
