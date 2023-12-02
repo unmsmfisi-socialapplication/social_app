@@ -1,0 +1,48 @@
+name: CI for Postman test
+
+on: workflow_dispatch
+
+#on:
+#  push:
+#    branches:
+#      - develop
+#    # Only trigger when changes are made within the 'QA/' directory
+#    paths:
+#      - 'QA/test_development/**'
+
+defaults:
+  run:
+    working-directory: ./QA/test_development
+
+jobs:
+  postman-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install Newman
+      run: npm install -g newman newman-reporter-html
+
+    - name: Run Postman tests
+      run: |
+        for file in *_collection.json
+        do
+          echo -e "------------------------------------------------------------------\n"
+          echo -e "\e[36mRunning tests for $file\e[0m"
+          newman run "$file" -e QA_Develop_Environment.postman_environment.json || { has_failure=true; echo -e "\e[31mTest failed\e[0m"; }
+          echo -e "\n------------------------------------------------------------------"
+        done
+
+        if [ "$has_failure" = true ]; then
+          echo -e "\e[31mAt least one test failed.\e[0m"
+          exit 0
+        else
+          echo -e "\e[32mAll tests passed successfully.\e[0m"
+        fi
