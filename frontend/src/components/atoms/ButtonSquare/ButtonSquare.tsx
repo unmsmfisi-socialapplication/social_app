@@ -1,16 +1,22 @@
-'use client'
 import React from 'react'
 import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
 import SettingsIcon from '@mui/icons-material/Settings'
 
-const SquareButton: React.FC = () => {
+interface SquareButtonProps {
+    onClick?: () => void
+    children?: React.ReactNode
+}
+
+const SquareButton: React.FC<SquareButtonProps> = ({ onClick, children }) => {
     const buttonStyle: React.CSSProperties = {
         width: '50px',
         height: '50px',
         borderRadius: '2px',
         background: 'white',
         border: '1px solid #CCCCCC',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 
     const iconStyle: React.CSSProperties = {
@@ -18,10 +24,9 @@ const SquareButton: React.FC = () => {
     }
 
     return (
-        <Button variant="contained" style={buttonStyle} data-testid="outer-button">
-            <IconButton>
-                <SettingsIcon style={iconStyle} />
-            </IconButton>
+        <Button variant="contained" style={buttonStyle} data-testid="outer-button" onClick={onClick}>
+            <SettingsIcon style={iconStyle} />
+            {children}
         </Button>
     )
 }

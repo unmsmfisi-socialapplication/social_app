@@ -45,6 +45,8 @@ func TestRegisterUserHandler_RegisterUser(t *testing.T) {
 	data := domain.UserRequest{
 		Email:    "test@example.com",
 		Username: "testuser",
+		Name:     "testuser",
+		Phone:    "47818189",
 		Password: "TestPassword123!",
 	}
 
@@ -80,6 +82,6 @@ func TestRegisterUserHandler_RegisterUser(t *testing.T) {
 	}
 
 	if response.Response.Username != data.Username {
-		t.Errorf("Expected user_name to be %s, but got %s", data.Username, response.Response.Username)
+		t.Errorf("Expected username to be %s, but got %s", data.Username, response.Response.Username)
 	}
 }
