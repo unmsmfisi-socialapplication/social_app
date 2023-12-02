@@ -1,6 +1,6 @@
 import { IUser } from '@/data/entities/User'
 import { createSlice } from '@reduxjs/toolkit'
-import { getUser } from '../actions/userAction'
+import { getUser, getUserRegister } from '../actions/userAction'
 import build from 'next/dist/build'
 import { apiSattus } from '@/utilities/Constant'
 
@@ -48,6 +48,25 @@ export const authSlice = createSlice({
             state.status = apiSattus.LOADING
         })
         builder.addCase(getUser.rejected, (state, action) => {
+            state.loading = false
+            state.status = apiSattus.FAILED
+            state.error = 'credenciales incorrectas'
+        })
+        builder.addCase(getUserRegister.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = apiSattus.SUCCES
+            if (action.payload === null) {
+                state.error = 'Registro incorrecto'
+            } else {
+                state.user = action.payload
+                localStorage.setItem('user', JSON.stringify(action.payload))
+            }
+        })
+        builder.addCase(getUserRegister.pending, (state) => {
+            state.loading = true
+            state.status = apiSattus.LOADING
+        })
+        builder.addCase(getUserRegister.rejected, (state, action) => {
             state.loading = false
             state.status = apiSattus.FAILED
             state.error = 'credenciales incorrectas'
