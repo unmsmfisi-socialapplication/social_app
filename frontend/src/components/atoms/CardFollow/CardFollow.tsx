@@ -6,11 +6,12 @@ interface WCardFollowProps {
     avatar?: string
     name?: string
     userhandle?: string
+    onClick?: () => void
 }
 
-const WCardFollow: React.FC<WCardFollowProps> = ({ avatar, name, userhandle }) => {
+const WCardFollow: React.FC<WCardFollowProps> = ({ avatar, name, userhandle, onClick }) => {
     return (
-        <Card className={styles.cardFollow}>
+        <Card className={styles.cardFollow} onClick={onClick}>
             <Avatar src={avatar} className={styles.avatar} />
             <CardContent className={styles.cardContent}>
                 <div className={styles.userInfo}>
@@ -29,10 +30,10 @@ const WCardFollow: React.FC<WCardFollowProps> = ({ avatar, name, userhandle }) =
     )
 }
 
-export default WCardFollow
-
 WCardFollow.defaultProps = {
     avatar: 'https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png',
     name: 'Nombre de usuario',
     userhandle: 'handle',
 }
+
+export default WCardFollow

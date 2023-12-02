@@ -8,7 +8,7 @@ import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
-import { WButton } from '@/components'
+import { WButton } from '../../../components'
 
 interface CustomDialogProps {
     warning?: boolean
