@@ -47,7 +47,7 @@ jobs:
       run: terraform validate
 
     - name: Terraform Plan
-    run: terraform plan -input=false -var-file=dev.tfvars
+      run: terraform plan -input=false -var-file=dev.tfvars
 
     - name: Terraform Apply
       run: terraform apply -auto-approve -input=false -var-file=dev.tfvars
