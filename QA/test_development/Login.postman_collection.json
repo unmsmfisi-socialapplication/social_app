@@ -1,0 +1,583 @@
+{
+	"info": {
+		"_postman_id": "94072a47-28f1-45f6-83de-463b34576d9f",
+		"name": "Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31241057",
+		"_collection_link": "https://qa-unmsm-011223.postman.co/workspace/Team-Workspace~914a49d5-c551-4a7a-86d9-869a323ff02f/collection/27775741-94072a47-28f1-45f6-83de-463b34576d9f?action=share&source=collection_link&creator=31241057"
+	},
+	"item": [
+		{
+			"name": "Successful Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Pre-request Script\r",
+							"pm.request.body.raw = JSON.stringify({\r",
+							"    \"user_name\": \"testuser1\",\r",
+							"    \"password\": \"TestP@ss123\"\r",
+							"});\r",
+							"\r",
+							"// Guardar el valor esperado de 'status' y 'message' en variables globales\r",
+							"pm.globals.set(\"expectedStatus\", \"OK\");\r",
+							"pm.globals.set(\"expectedToken\", \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2ML\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para verificar que el usuario intenta iniciar sesión con información válida\r",
+							"pm.test('El usuario intenta iniciar sesión con información válida', function () {\r",
+							"    // Configuración del cuerpo de la solicitud\r",
+							"    let requestBody = {\r",
+							"        'user_name': 'testuser1',\r",
+							"        'password': 'TestP@ss123'\r",
+							"    };\r",
+							"\r",
+							"    // Configuración del cuerpo de la solicitud en la petición actual\r",
+							"    pm.request.body = {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    };\r",
+							"\r",
+							"    // Validaciones del cuerpo de la solicitud\r",
+							"    pm.expect(requestBody).to.have.property('user_name');\r",
+							"    pm.expect(requestBody.user_name).to.not.be.empty;\r",
+							"    pm.expect(requestBody).to.have.property('password');\r",
+							"    pm.expect(requestBody.password).to.not.be.empty;\r",
+							"\r",
+							"    // Validación del nombre de usuario\r",
+							"    pm.test('Validar Nombre de Usuario', function () {\r",
+							"        pm.expect(requestBody.user_name).to.match(/^[a-zA-Z0-9]+$/, 'El campo Nombre de Usuario debe ser alfanumérico');\r",
+							"        pm.expect(requestBody.user_name).to.have.length.within(6, 56, 'El campo Nombre de Usuario debe tener entre 6 y 56 caracteres');\r",
+							"    });\r",
+							"\r",
+							"    // Validación de la contraseña\r",
+							"    pm.test('Validar Contraseña', function () {\r",
+							"        pm.expect(requestBody.password).to.match(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/, 'El campo Contraseña debe contener letras, números y al menos un caracter especial');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el código de estado de la respuesta es 200\r",
+							"pm.test(\"Inicio Sesion exitoso. Response status code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La respuesta tiene una estructura válida.\", function () {\r",
+							"    pm.expect(pm.response.json(), \"token not present\").to.have.property(\"token\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Los campos obligatorios están presentes\", function () {\r",
+							"    pm.expect(pm.response.json(), \"token not present\").to.have.property(\"token\");\r",
+							"});\r",
+							"\r",
+							"// Tests longitud 'status' y 'token'\r",
+							"pm.test(\"La longitud de 'status' y 'token' son mayores que cero\", function () {\r",
+							"    const respuesta = pm.response.json();\r",
+							"    pm.expect(respuesta.status.length).to.be.greaterThan(0, \"El campo 'status' no debe estar vacío\");\r",
+							"    pm.expect(respuesta.token.length).to.be.greaterThan(0, \"El campo 'message' no debe estar vacío\");\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el valor de 'status' coincide con el valor esperado\r",
+							"pm.test(\"El valor de 'status' coincide con el valor esperado\", function () {\r",
+							"    var expectedStatus = pm.globals.get(\"expectedStatus\");\r",
+							"    pm.expect(pm.response.json().status).to.equal(expectedStatus);\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el valor de 'token' coincide con el valor esperado\r",
+							"pm.test(\"El valor de 'token' coincide con el valor esperado\", function () {\r",
+							"    var expectedToken = pm.globals.get(\"expectedToken\");\r",
+							"    pm.expect(pm.response.json().token).to.equal(expectedToken);\r",
+							"});\r",
+							"\r",
+							"// Validar el tiempo de respuesta\r",
+							"pm.expect(pm.response.responseTime).to.be.below(5000, 'El tiempo de respuesta debe ser inferior a 5 segundos');\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_name\": \"testuser1\",\r\n    \"password\": \"TestP@ss123\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login with Incorrect Password",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Pre-request Script\r",
+							"pm.request.body.raw = JSON.stringify({\r",
+							"    \"user_name\": \"testuser1\",\r",
+							"    \"password\": \"badpass@123\"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Guardar los valores de 'status' y 'message' en variables globales\r",
+							"pm.globals.set(\"status\", \"BADCREDENTIALS\");\r",
+							"pm.globals.set(\"message\", \"Invalid credentials\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para verificar que el usuario intenta iniciar sesión con contraseña incorrecta\r",
+							"pm.test('El usuario intenta iniciar sesión con contraseña incorrecta', function () {\r",
+							"    // Configuración del cuerpo de la solicitud\r",
+							"    let requestBody = {\r",
+							"        'user_name': 'testuser1',\r",
+							"        'password': 'badpass@123'\r",
+							"    };\r",
+							"\r",
+							"    // Configuración del cuerpo de la solicitud en la petición actual\r",
+							"    pm.request.body = {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    };\r",
+							"\r",
+							"    // Validaciones del cuerpo de la solicitud\r",
+							"    pm.expect(requestBody).to.have.property('user_name');\r",
+							"    pm.expect(requestBody.user_name).to.not.be.empty;\r",
+							"    pm.expect(requestBody).to.have.property('password');\r",
+							"    pm.expect(requestBody.password).to.not.be.empty;\r",
+							"\r",
+							"    // Validación del nombre de usuario\r",
+							"    pm.test('Validar Nombre de Usuario', function () {\r",
+							"        pm.expect(requestBody.user_name).to.match(/^[a-zA-Z0-9]+$/, 'El campo Nombre de Usuario debe ser alfanumérico');\r",
+							"        pm.expect(requestBody.user_name).to.have.length.within(6, 56, 'El campo Nombre de Usuario debe tener entre 6 y 56 caracteres');\r",
+							"    });\r",
+							"\r",
+							"    // Validación de la contraseña\r",
+							"    pm.test('Validar Contraseña', function () {\r",
+							"        pm.expect(requestBody.password).to.match(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/, 'El campo Contraseña debe contener letras, números y al menos un caracter especial');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el código de estado de la respuesta es 401\r",
+							"pm.test(\"Inicio Sesión fallido. Response status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"/*\r",
+							"// Test para verificar que la respuesta tiene una estructura válida\r",
+							"pm.test(\"La respuesta tiene una estructura válida\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"status\");\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"message\");\r",
+							"});\r",
+							"*/\r",
+							"// Test para verificar que los campos obligatorios están presentes\r",
+							"pm.test(\"Los campos obligatorios están presentes\", function () {\r",
+							"    pm.expect(pm.response.json(), \"status not present\").to.have.property(\"status\");\r",
+							"    pm.expect(pm.response.json(), \"message not present\").to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"// Tests longitud 'status' y 'message'\r",
+							"pm.test(\"La longitud de 'status' y 'message' son mayores que cero\", function () {\r",
+							"    const respuesta = pm.response.json();\r",
+							"    pm.expect(respuesta.status.length).to.be.greaterThan(0, \"El campo 'status' no debe estar vacío\");\r",
+							"    pm.expect(respuesta.message.length).to.be.greaterThan(0, \"El campo 'message' no debe estar vacío\");\r",
+							"});\r",
+							"\r",
+							"// Validar respuesta contra el valor guardado en 'status'\r",
+							"pm.test(\"Validar respuesta contra el valor guardado en 'status'\", function() {\r",
+							"        var statusGuardado = pm.globals.get(\"status\");\r",
+							"        var respuesta = pm.response.json();\r",
+							"        var statusRespuesta = respuesta.status;\r",
+							"        pm.expect(statusRespuesta).to.equal(statusGuardado);\r",
+							" });\r",
+							"\r",
+							"// Validar respuesta contra el valor guardado en 'message'\r",
+							"pm.test(\"Validar respuesta contra el valor guardado en 'message'\", function() {\r",
+							"        var messageGuardado = pm.globals.get(\"message\");\r",
+							"        var respuesta = pm.response.json();\r",
+							"        var messageRespuesta = respuesta.message;\r",
+							"        pm.expect(messageRespuesta).to.equal(messageGuardado);\r",
+							"});\r",
+							"\r",
+							"// Validar el tiempo de respuesta\r",
+							"pm.expect(pm.response.responseTime).to.be.below(5000, 'El tiempo de respuesta debe ser inferior a 5 segundos');\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_name\": \"testuser1\",\r\n    \"password\": \"badpass@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login with Non-Existent User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Pre-request Script\r",
+							"pm.request.body.raw = JSON.stringify({\r",
+							"    \"user_name\": \"notuser2\",\r",
+							"    \"password\": \"TestP@ss123\"\r",
+							"});\r",
+							"\r",
+							"// Guardar el valor esperado de 'status' y 'message' en variables globales\r",
+							"pm.globals.set(\"expectedStatus\", \"NOTFOUND\");\r",
+							"pm.globals.set(\"expectedMessage\", \"User not found\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para verificar que el usuario intenta iniciar sesión con un usuario no existente\r",
+							"pm.test('El usuario intenta iniciar sesión con un usuario no existente', function () {\r",
+							"    // Configuración del cuerpo de la solicitud\r",
+							"    let requestBody = {\r",
+							"        'user_name': 'notuser2',\r",
+							"        'password': 'TestP@ss123'\r",
+							"    };\r",
+							"\r",
+							"    // Configuración del cuerpo de la solicitud en la petición actual\r",
+							"    pm.request.body = {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    };\r",
+							"\r",
+							"    // Validaciones del cuerpo de la solicitud\r",
+							"    pm.expect(requestBody).to.have.property('user_name');\r",
+							"    pm.expect(requestBody.user_name).to.not.be.empty;\r",
+							"    pm.expect(requestBody).to.have.property('password');\r",
+							"    pm.expect(requestBody.password).to.not.be.empty;\r",
+							"\r",
+							"    // Validación del nombre de usuario\r",
+							"    pm.test('Validar Nombre de Usuario', function () {\r",
+							"        pm.expect(requestBody.user_name).to.match(/^[a-zA-Z0-9]+$/, 'El campo Nombre de Usuario debe ser alfanumérico');\r",
+							"        pm.expect(requestBody.user_name).to.have.length.within(6, 56, 'El campo Nombre de Usuario debe tener entre 6 y 56 caracteres');\r",
+							"    });\r",
+							"\r",
+							"    // Validación de la contraseña\r",
+							"    pm.test('Validar Contraseña', function () {\r",
+							"        pm.expect(requestBody.password).to.match(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/, 'El campo Contraseña debe contener letras, números y al menos un caracter especial');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el código de estado de la respuesta es 404\r",
+							"pm.test(\"Inicio Sesión fallido. Response status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que la respuesta tiene una estructura válida\r",
+							"pm.test(\"La respuesta tiene una estructura válida\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"status\");\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que los campos obligatorios están presentes\r",
+							"pm.test(\"Los campos obligatorios están presentes\", function () {\r",
+							"    pm.expect(pm.response.json(), \"status not present\").to.have.property(\"status\");\r",
+							"    pm.expect(pm.response.json(), \"message not present\").to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"// Tests longitud 'status' y 'message'\r",
+							"pm.test(\"La longitud de 'status' y 'message' son mayores que cero\", function () {\r",
+							"    const respuesta = pm.response.json();\r",
+							"    pm.expect(respuesta.status.length).to.be.greaterThan(0, \"El campo 'status' no debe estar vacío\");\r",
+							"    pm.expect(respuesta.message.length).to.be.greaterThan(0, \"El campo 'message' no debe estar vacío\");\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el valor de 'status' coincide con el valor esperado\r",
+							"pm.test(\"El valor de 'status' coincide con el valor esperado\", function () {\r",
+							"    var expectedStatus = pm.globals.get(\"expectedStatus\");\r",
+							"    pm.expect(pm.response.json().status).to.equal(expectedStatus);\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el valor de 'message' coincide con el valor esperado\r",
+							"pm.test(\"El valor de 'message' coincide con el valor esperado\", function () {\r",
+							"    var expectedMessage = pm.globals.get(\"expectedMessage\");\r",
+							"    pm.expect(pm.response.json().message).to.equal(expectedMessage);\r",
+							"});\r",
+							"\r",
+							"// Validar el tiempo de respuesta\r",
+							"pm.expect(pm.response.responseTime).to.be.below(5000, 'El tiempo de respuesta debe ser inferior a 5 segundos');\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_name\": \"notuser2\",\r\n    \"password\": \"TestP@ss123\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login with Invalid Request Payload",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Pre-request Script\r",
+							"pm.request.body.raw = JSON.stringify({\r",
+							"    \"user_name\": \"notuser3\",\r",
+							"    \"password\": \"badpass@123\"\r",
+							"});\r",
+							"\r",
+							"// Guardar el valor esperado de 'status' y 'message' en variables globales\r",
+							"pm.globals.set(\"expectedStatus\", \"ERROR\");\r",
+							"pm.globals.set(\"expectedMessage\", \"Invalid request payload\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para verificar que el código de estado de la respuesta es 400\r",
+							"pm.test(\"Inicio Sesión fallido. Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"/*\r",
+							"// Test para verificar que la respuesta tiene una estructura válida\r",
+							"pm.test(\"La respuesta tiene una estructura válida\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"status\");\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"message\");\r",
+							"});\r",
+							"*/\r",
+							"\r",
+							"// Test para verificar que los campos obligatorios están presentes\r",
+							"pm.test(\"Los campos obligatorios están presentes\", function () {\r",
+							"    pm.expect(pm.response.json(), \"status not present\").to.have.property(\"status\");\r",
+							"    pm.expect(pm.response.json(), \"message not present\").to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"// Tests longitud 'status' y 'message'\r",
+							"pm.test(\"La longitud de 'status' y 'message' son mayores que cero\", function () {\r",
+							"    const respuesta = pm.response.json();\r",
+							"    pm.expect(respuesta.status).to.not.be.empty;\r",
+							"    pm.expect(respuesta.message).to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el valor de 'status' coincide con el valor esperado\r",
+							"pm.test(\"El valor de 'status' coincide con el valor esperado\", function () {\r",
+							"    var expectedStatus = pm.globals.get(\"expectedStatus\");\r",
+							"    pm.expect(pm.response.json().status).to.equal(expectedStatus);\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el valor de 'message' coincide con el valor esperado\r",
+							"pm.test(\"El valor de 'message' coincide con el valor esperado\", function () {\r",
+							"    var expectedMessage = pm.globals.get(\"expectedMessage\");\r",
+							"    pm.expect(pm.response.json().message).to.equal(expectedMessage);\r",
+							"});\r",
+							"\r",
+							"// Validar el tiempo de respuesta\r",
+							"pm.expect(pm.response.responseTime).to.be.below(5000, 'El tiempo de respuesta debe ser inferior a 5 segundos');\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_name\": \"notuser3\",\r\n    \"password\": \"badpass@123\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login with Server Error",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Pre-request Script\r",
+							"pm.request.body.raw = JSON.stringify({\r",
+							"    \"user_name\": \"testuser3\",\r",
+							"    \"password\": \"TestP@ss123\"\r",
+							"});\r",
+							"\r",
+							"// Guardar el valor esperado de 'status' y 'message' en variables globales\r",
+							"pm.globals.set(\"expectedStatus\", \"ERROR\");\r",
+							"pm.globals.set(\"expectedMessage\", \"Error during authentication\");\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para verificar que el código de estado de la respuesta es 500\r",
+							"pm.test(\"Inicio Sesión con error en el servidor. Response status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});\r",
+							"\r",
+							"/*\r",
+							"// Test para verificar que la respuesta tiene una estructura válida\r",
+							"pm.test(\"La respuesta tiene una estructura válida\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"status\");\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"message\");\r",
+							"});\r",
+							"*/\r",
+							"\r",
+							"// Test para verificar que los campos obligatorios están presentes\r",
+							"pm.test(\"Los campos obligatorios están presentes\", function () {\r",
+							"    pm.expect(pm.response.json(), \"status not present\").to.have.property(\"status\");\r",
+							"    pm.expect(pm.response.json(), \"message not present\").to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"// Tests longitud 'status' y 'message'\r",
+							"pm.test(\"La longitud de 'status' y 'message' son mayores que cero\", function () {\r",
+							"    const respuesta = pm.response.json();\r",
+							"    pm.expect(respuesta.status).to.not.be.empty;\r",
+							"    pm.expect(respuesta.message).to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el valor de 'status' coincide con el valor esperado\r",
+							"pm.test(\"El valor de 'status' coincide con el valor esperado\", function () {\r",
+							"    var expectedStatus = pm.globals.get(\"expectedStatus\");\r",
+							"    pm.expect(pm.response.json().status).to.equal(expectedStatus);\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el valor de 'message' coincide con el valor esperado\r",
+							"pm.test(\"El valor de 'message' coincide con el valor esperado\", function () {\r",
+							"    var expectedMessage = pm.globals.get(\"expectedMessage\");\r",
+							"    pm.expect(pm.response.json().message).to.equal(expectedMessage);\r",
+							"});\r",
+							"\r",
+							"// Validar el tiempo de respuesta\r",
+							"pm.expect(pm.response.responseTime).to.be.below(5000, 'El tiempo de respuesta debe ser inferior a 5 segundos');\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_name\": \"testuser3\",\r\n    \"password\": \"TestP@ss123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}	
+	]
+}

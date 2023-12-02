@@ -1,24 +1,39 @@
-import { render, fireEvent } from '@testing-library/react'
-import WTag from './tag'
-import { AllInclusive } from '@mui/icons-material'
-import './index.scss'
+import React from 'react'
+import { render, screen, fireEvent } from '@testing-library/react'
+import AllInclusive from '@mui/icons-material/AllInclusive'
+import { act } from 'react-dom/test-utils'
+import WTag from '../../../components/atoms/Tag/tag'
 
-describe('WTag', () => {
-    it('Should redirect to pages correctly as specified', () => {
-        const path = '/ruta-especifica'
+// Mock of the next/router module
+jest.mock('next/navigation', () => ({
+    useRouter: jest.fn(),
+}))
+describe('WTag Component', () => {
+    it('should navigate to the specified path on click', () => {
+        const pushMock = jest.fn()
+        // Configure useRouter to return the required object
+        const useRouterMock = jest.spyOn(require('next/navigation'), 'useRouter')
+        useRouterMock.mockReturnValue({ push: pushMock })
 
-        // Render the component
-        const { getByText, asFragment } = render(<WTag icon={AllInclusive} text={path} path={path} />)
-        fireEvent.click(getByText(path))
+        render(<WTag icon={AllInclusive} text="TagLink" path="/some-path" />)
 
-        const componentSnapshot = asFragment()
+        act(() => {
+            fireEvent.click(screen.getByText('TagLink'))
+        })
+
+        expect(pushMock).toHaveBeenCalledWith('/some-path')
     })
 
-    it('Should display style variations when isActive is true or false', () => {
-        // Render the component with isActive true
-        const { container: containerActive } = render(<WTag icon={AllInclusive} text="TagLink" isActive={true} />)
+    it('should have active class when isActive is true', () => {
+        render(<WTag icon={AllInclusive} text="TagLink" isActive={true} />)
 
-        // Render the component with isActive false
-        const { container: containerFalse } = render(<WTag icon={AllInclusive} text="TagLink" isActive={false} />)
+        expect(screen.getByText('TagLink')).toHaveClass('tagLink--active')
+    })
+
+    it('should have default values when not provided', () => {
+        render(<WTag />)
+
+        expect(screen.getByText('TagLink')).toBeInTheDocument()
+        expect(screen.getByText('TagLink')).not.toHaveClass('tagLink--active')
     })
 })

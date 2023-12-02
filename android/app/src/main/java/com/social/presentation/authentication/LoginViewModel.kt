@@ -6,13 +6,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.social.data.source.local.UserEntity
 import com.social.domain.model.LoginBody
+import com.social.domain.model.UserM
 import com.social.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -62,20 +65,64 @@ class LoginViewModel
                                     eventFlowM.emit(
                                         UILoginEvent.ShowMessage("Invalid credentials"),
                                     )
+                                } else if (user.message.contains("HTTP 500")) {
+                                    eventFlowM.emit(
+                                        UILoginEvent.ShowMessage("Error during authentication"),
+                                    )
                                 } else {
                                     eventFlowM.emit(
-                                        UILoginEvent.ShowMessage(user.message ?: "Error"),
+                                        UILoginEvent.ShowMessage("Error, intente más tarde"),
                                     )
                                 }
                             }
 
                             is Resource.Success -> {
-                                _state.value = LoginDataState(dataLogin = "${user.message}")
+                                _state.value = LoginDataState(dataLogin = user.data!!)
                                 eventFlowM.emit(UILoginEvent.GetData)
-                                eventFlowM.emit(UILoginEvent.ShowMessage(user.message.toString()))
+                                eventFlowM.emit(UILoginEvent.ShowMessage("Authentication Successful"))
                             }
                         }
                     }.launchIn(viewModelScope)
+                }
+            }
+        }
+
+        fun deleterUserSQLite() {
+            viewModelScope.launch {
+                try {
+                    authenticationUseCase.sqliteDeleteUser()
+                } catch (_: Exception) {
+                }
+            }
+        }
+
+        fun saveUserDataSQLite(userM: UserM) {
+            viewModelScope.launch {
+                try {
+                    authenticationUseCase.sqliteInsertUser(
+                        UserEntity(
+                            id = 0,
+                            sLastName = userM.sLastName!!,
+                            sName = userM.sName!!,
+                            sEmail = userM.sEmail!!,
+                            sUserName = userM.sUsername!!,
+                            sPhoto = userM.sPhoto!!,
+                            sHeader = userM.sHeader!!,
+                            sBiography = userM.sBiography!!,
+                        ),
+                    )
+                } catch (e: Exception) {
+                    eventFlowM.emit(UILoginEvent.ShowMessage("Error en el guardado de datos del usuario"))
+                }
+            }
+        }
+
+        fun deleteUserData() {
+            viewModelScope.launch {
+                try {
+                    authenticationUseCase.sqliteDeleteUser()
+                } catch (_: Exception) {
+                    eventFlowM.emit(UILoginEvent.ShowMessage("Error en el eliminado de datos del usuario"))
                 }
             }
         }

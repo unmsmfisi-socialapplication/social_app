@@ -7,6 +7,7 @@
     height: 50px;
     background-color: #f0f0f0;
     color: #007aff;
+    border: 1px solid #007aff !important;
     font-size: 19px;
     font-weight: 600;
     border: 1px solid #a7caf8;
@@ -44,9 +45,10 @@
     }
 
     &:hover {
-        background-color: #007aff;
+        background-color: #007aff !important;
         border: 1px solid #007aff;
         color: #dfdfdf;
         transition: all 1850ms ease;
     }
+
 }

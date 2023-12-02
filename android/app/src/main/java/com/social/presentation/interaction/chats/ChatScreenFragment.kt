@@ -3,10 +3,10 @@ package com.social.presentation.interaction.chats
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.social.R
 import com.social.databinding.FragmentChatScreenBinding
 import com.social.domain.model.ChatUserData
+import com.social.utils.FragmentUtils.replaceFragment
 import com.social.utils.Toast
 import com.vanniktech.emoji.EmojiManager
 import com.vanniktech.emoji.EmojiPopup
@@ -29,7 +29,8 @@ class ChatScreenFragment : Fragment(R.layout.fragment_chat_screen) {
     private fun setupViews() {
         EmojiManager.install(GoogleEmojiProvider())
 
-        emojiPopup = EmojiPopup.Builder.fromRootView(binding.rootView).build(binding.inputSendMessage)
+        emojiPopup =
+            EmojiPopup.Builder.fromRootView(binding.rootView).build(binding.inputSendMessage)
 
         binding.btnFace.setOnClickListener {
             emojiPopup.toggle()
@@ -57,7 +58,10 @@ class ChatScreenFragment : Fragment(R.layout.fragment_chat_screen) {
         }
 
         binding.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_chatScreenFragment_to_listChatsFragment)
+            replaceFragment(
+                requireActivity().supportFragmentManager,
+                ListChatsFragment(),
+            )
         }
     }
 

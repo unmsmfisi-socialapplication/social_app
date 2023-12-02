@@ -1,0 +1,11 @@
+.container__bi {
+    width: 95%;
+    &--embed {
+        width: 100%;
+        height: 900px;
+        iframe {
+            border: solid 3px #e2e2e2;
+            border-radius: 10px;
+        }
+    }
+}
