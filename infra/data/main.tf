@@ -5,6 +5,7 @@ resource "azurerm_resource_group" "example" {
   location = var.location
 }
 
+
 resource "azurerm_key_vault" "example" {
   name                = "workspaceexamplekeyvault"
   location            = azurerm_resource_group.example.location
