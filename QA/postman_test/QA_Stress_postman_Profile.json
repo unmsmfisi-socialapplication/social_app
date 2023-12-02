@@ -1,0 +1,659 @@
+{
+	"id": "240f68f4-7e8f-475e-be39-931406eb8aaf",
+	"name": "Profile Stress Cases",
+	"timestamp": "2023-12-01T15:23:10.815Z",
+	"collection_id": "31240954-3eaf77df-b601-4e9e-97cb-09dfd0f1f7dc",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 300,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-12-01T15:22:44.796Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "ff359de7-94d8-448f-a0b7-520a82294eab",
+			"name": "New Request",
+			"url": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/profile/import",
+			"time": 187,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Given: The profile to be imported is complete and well-formed": true,
+				"When: The profile import request is made": true,
+				"Then: Should receive a confirmation message of successful import": true
+			},
+			"testPassFailCounts": {
+				"Given: The profile to be imported is complete and well-formed": {
+					"pass": 100,
+					"fail": 0
+				},
+				"When: The profile import request is made": {
+					"pass": 100,
+					"fail": 0
+				},
+				"Then: Should receive a confirmation message of successful import": {
+					"pass": 100,
+					"fail": 0
+				}
+			},
+			"times": [
+				195,
+				186,
+				190,
+				205,
+				183,
+				185,
+				189,
+				195,
+				188,
+				217,
+				205,
+				192,
+				196,
+				183,
+				184,
+				188,
+				193,
+				184,
+				187,
+				188,
+				186,
+				184,
+				185,
+				185,
+				185,
+				202,
+				186,
+				188,
+				220,
+				186,
+				191,
+				186,
+				196,
+				183,
+				188,
+				195,
+				184,
+				190,
+				184,
+				184,
+				185,
+				182,
+				183,
+				190,
+				185,
+				184,
+				182,
+				186,
+				184,
+				187,
+				199,
+				194,
+				186,
+				185,
+				186,
+				185,
+				185,
+				206,
+				185,
+				184,
+				185,
+				184,
+				183,
+				184,
+				183,
+				188,
+				185,
+				191,
+				182,
+				208,
+				183,
+				201,
+				184,
+				192,
+				192,
+				184,
+				186,
+				183,
+				184,
+				183,
+				182,
+				183,
+				184,
+				181,
+				184,
+				186,
+				182,
+				183,
+				183,
+				182,
+				182,
+				181,
+				202,
+				199,
+				184,
+				184,
+				183,
+				187,
+				196,
+				187
+			],
+			"allTests": [
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				},
+				{
+					"Given: The profile to be imported is complete and well-formed": true,
+					"When: The profile import request is made": true,
+					"Then: Should receive a confirmation message of successful import": true
+				}
+			]
+		}
+	],
+	"count": 100,
+	"totalTime": 18824,
+	"collection": {
+		"requests": [
+			{
+				"id": "ff359de7-94d8-448f-a0b7-520a82294eab",
+				"method": "PUT"
+			}
+		]
+	}
+}
