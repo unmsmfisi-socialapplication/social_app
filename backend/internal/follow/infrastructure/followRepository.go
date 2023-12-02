@@ -258,7 +258,7 @@ func (u *FollowerRepository) DeleteFollower(follower *domain.Follower) (*domain.
 	}
 
 	_, err = tx.Exec(query, follower.Follower_profile_id, follower.Following_profile_id)
-
+	//fmt.Print(err)
 	if err != nil {
 		return nil, err
 	} else {
