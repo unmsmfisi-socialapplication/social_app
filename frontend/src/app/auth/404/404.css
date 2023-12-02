@@ -96,3 +96,51 @@
         transform: translateY(-20px); 
     }
 }
+
+@media screen and (max-width:768px){
+    .error-container {
+        margin-top: 150px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+
+    .error-content {
+        width: 70%;
+    }
+
+    .error-content h1{
+        font-size: 3rem;
+        font-weight: 800;
+    }
+    .error-content  h2{
+        font-size: 1.4rem;
+        font-weight: 200;
+        font-family: 'Poppins-Medium';
+        margin: 0;
+        padding: 0;
+        margin-top: 1rem;
+    }
+    .error-content p{
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-size: 16px;
+        font-family: 'Poppins-Regular';
+    }
+
+    .error-image {
+        position: relative;
+        display:flex;
+        justify-content:left;
+        max-width: 300px;
+        margin-top: 60px;
+    }
+    
+    .error-image img{
+        display:block;
+        max-width: 300px;
+        animation: bounceUpDown 3s infinite; 
+    }
+    
+}
