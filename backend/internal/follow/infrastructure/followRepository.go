@@ -248,3 +248,21 @@ func (u *FollowerRepository) ProfileFollowingProfiles(p_profile_id, p_page_size,
 
 	return &followers, nil
 }
+
+func (u *FollowerRepository) DeleteFollower(follower *domain.Follower) (*domain.Follower, error) {
+	query := `CALL unfollow_and_delete_sp($1, $2);`
+	tx, err := u.db.Begin()
+	if err != nil {
+		log.Println("Error while starting the transaction")
+		return nil, err
+	}
+
+	_, err = tx.Exec(query, follower.Follower_profile_id, follower.Following_profile_id)
+	//fmt.Print(err)
+	if err != nil {
+		return nil, err
+	} else {
+		tx.Commit()
+		return follower, nil
+	}
+}
