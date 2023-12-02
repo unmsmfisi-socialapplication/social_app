@@ -235,12 +235,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"// Test para validar la respuesta basada en el estado",
 							"pm.test(\"Validate response based on status\", function () {",
 							"    let response = pm.response.json();",
 							"",
 							"    if (response.status === \"SUCCESS\") {",
-							"        // Verificaciones para una respuesta exitosa",
 							"        pm.expect(response).to.have.property('response');",
 							"        pm.expect(response.response).to.have.property('Id');",
 							"        pm.expect(response.response).to.have.property('UserId');",
@@ -259,20 +257,16 @@
 							"        pm.expect(response.response.Public).to.be.a('boolean');",
 							"        pm.expect(response.response.Multimedia).to.be.a('string');",
 							"    }",
-							"    // Verificar si es una respuesta de error",
 							"    else if (response.status === \"ERROR\") {",
-							"        // Verificaciones para una respuesta de error",
 							"        pm.expect(response).to.have.property('error');",
 							"        pm.expect(response.error).to.have.property('code');",
 							"        pm.expect(response.error).to.have.property('message');",
 							"",
-							"        // Verificar error específico basado en el código",
 							"        if (response.error.code === \"MISSING_USERID\") {",
-							"            // Validar los tipos de campos y valores para un error de falta de UserId",
 							"            pm.expect(response.error.code).to.eql(\"MISSING_USERID\");",
 							"            pm.expect(response.error.message).to.eql(\"El campo 'userId' es obligatorio en la solicitud.\");",
 							"        } else if (response.error.code === \"DESCRIPTION_TOO_LONG\") {",
-							"            // Validar los tipos de campos y valores para un error de descripción demasiado larga",
+							"",
 							"            pm.expect(response.error.code).to.eql(\"DESCRIPTION_TOO_LONG\");",
 							"            pm.expect(response.error.message).to.eql(\"La descripción excede la longitud máxima de 1000 caracteres.\");",
 							"        }",
@@ -379,6 +373,39 @@
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"error\": {\n        \"code\": \"DESCRIPTION_TOO_LONG\",\n        \"message\": \"La descripción excede la longitud máxima de 1000 caracteres.\"\n    },\n    \"status\": \"ERROR\"\n}"
+				},
+				{
+					"name": "Creación de publicación Fallido con exceso de multimedia",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 123,\n  \"title\": \"Publicación con demasiadas imágenes multimedia\",\n  \"description\": \"Descripción de la publicación\",\n  \"hasMultimedia\": true,\n  \"public\": true,\n  \"multimedia\": [\n    \"imagen1.jpg\",\n    \"imagen2.jpg\",\n    \"imagen3.jpg\",\n    \"imagen4.jpg\",\n    \"imagen5.jpg\",\n    \"imagen6.jpg\",\n    \"imagen7.jpg\" \n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+							"protocol": "https",
+							"host": [
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"crear-post"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"code\": \"TOO_MANY_MULTIMEDIA\",\n        \"message\": \"Se ha excedido el número máximo de imágenes multimedia permitidas (6).\"\n    },\n    \"status\": \"ERROR\"\n}"
 				}
 			]
 		}
