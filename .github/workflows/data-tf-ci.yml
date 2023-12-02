@@ -1,4 +1,4 @@
-name: CI Validating IAC with Terraform
+name: CI Validating DATA IAC with Terraform
 
 on:
   pull_request:
@@ -35,8 +35,10 @@ jobs:
       uses: hashicorp/setup-terraform@v2
 
     - name: Get Vars
-      run: | tee -a terraform.auto.tfvars <<EOF ${{vars.TF_DATA_VARS}} 
-              EOF
+      run: | 
+            tee -a terraform.auto.tfvars <<EOF 
+                ${{vars.TF_DATA_VARS}} 
+            EOF
 
     - name: Terraform Init
       run: terraform init

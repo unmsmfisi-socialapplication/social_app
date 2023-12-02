@@ -1,10 +1,8 @@
 package router
 
 import (
-	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -16,10 +14,9 @@ import (
 	"github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/profile"
+	"github.com/unmsmfisi-socialapplication/social_app/internal/register"
 
 	interest_topics "github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics"
-	registerapplication "github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
-	registerinfrastructure "github.com/unmsmfisi-socialapplication/social_app/internal/register/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
 
 	auth "github.com/unmsmfisi-socialapplication/social_app/internal/auth"
@@ -68,24 +65,12 @@ func Router() http.Handler {
 	//AUTH
 	authRouter := auth.AuthModuleRouter(authUseCase)
 	protectedRoutes.Mount("/auth", authRouter)
+
 	commentRouter := comment.CommentModuleRouter(dbInstance)
 
 	postRoutes := post.PostModuleRouter(dbInstance)
 
 	profileRouter := profile.ProfileModuleRouter(dbInstance)
-
-	freeRoutes.Get("/slow", func(w http.ResponseWriter, freeRoutes *http.Request) {
-		// Simulates some hard work.
-		//
-		// We want this handler to complete successfully during a shutdown signal,
-		// so consider the work here as some background routine to fetch a long running
-		// search query to find as many results as possible, but, instead we cut it short
-		// and respond with what we have so far. How a shutdown is handled is entirely
-		// up to the developer, as some code blocks are preemptible, and others are not.
-		time.Sleep(5 * time.Second)
-
-		w.Write([]byte(fmt.Sprintf("{\"response\": \"all done slow\"}")))
-	})
 
 	// Login
 	loginRepo := infrastructure.NewUserDBRepository(dbInstance)
@@ -103,10 +88,8 @@ func Router() http.Handler {
 	protectedRoutes.Mount("/chat", chatRouter)
 
 	// Register
-	registerRepo := registerinfrastructure.NewUserRepository(dbInstance)
-	registerUseCase := registerapplication.NewRegistrationUseCase(registerRepo)
-	registerHandler := registerinfrastructure.NewRegisterUserHandler(registerUseCase)
-	freeRoutes.Post("/register", registerHandler.RegisterUser)
+	registerModule := register.RegisterModule(dbInstance)
+	freeRoutes.Mount("/register", registerModule)
 
 	protectedRoutes.Mount("/comments", commentRouter)
 
@@ -115,7 +98,6 @@ func Router() http.Handler {
 	protectedRoutes.Mount("/profile", profileRouter)
 
 	//Email-sender
-
 	emailRouter := email.EmailModuleRouter()
 	protectedRoutes.Mount("/email", emailRouter)
 
