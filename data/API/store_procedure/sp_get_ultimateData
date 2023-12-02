@@ -1,0 +1,62 @@
+CREATE PROCEDURE GetUltimateData
+	@TypeModel INT,
+	@Results NVARCHAR(MAX) OUTPUT
+AS
+BEGIN
+    
+    DECLARE @DateUpdate DATETIME
+    DECLARE @User NVARCHAR(250)
+
+    DELETE FROM dbo.Response_Matrix;
+
+    IF @TypeModel = 1
+    BEGIN
+	SELECT TOP 1 @DateUpdate = Date
+        FROM dbo.Log_Execution_GUD
+        WHERE CodeModel = 1
+        ORDER BY Date DESC;
+
+        INSERT INTO dbo.Response_Matrix (Id_model, Text, Prediction)
+		SELECT 1 AS Id_model, clean_text, category
+		FROM dbo.bi_post_transformada
+		WHERE fecha_actualizacion BETWEEN @DateUpdate AND GETDATE();
+    END
+
+    ELSE IF @TypeModel = 2
+    BEGIN
+        SELECT TOP 1 @DateUpdate = Date
+        FROM dbo.Log_Execution_GUD
+        WHERE CodeModel = 2
+        ORDER BY Date DESC;
+
+        INSERT INTO dbo.Response_Matrix (Id_model, Text, Prediction)
+		SELECT 2 AS Id_model, FORMATTED_CONTENT, PREDICCION
+		FROM dbo.bi_spam_transformada
+		WHERE fecha_sp BETWEEN @DateUpdate AND GETDATE();
+    END
+	
+    ELSE IF @TypeModel = 3
+    BEGIN
+        SELECT TOP 1 @DateUpdate = Date
+        FROM dbo.Log_Execution_GUD
+        WHERE CodeModel = 3
+        ORDER BY Date DESC
+
+        INSERT INTO dbo.Response_Matrix (Id_model, Text, Prediction)
+		SELECT 3 AS Id_model, clean_text, category
+		FROM ddo.bi_sentimental_transformada
+		WHERE fecha_actualizacion BETWEEN @DateUpdate AND GETDATE();
+    END
+
+    SET @User = SYSTEM_USER;
+
+    INSERT INTO dbo.Execution_Log_GUD (CodeModel, UserExec, DateExec)
+    VALUES (@TypeModel, @User, GETDATE());
+
+    SET @Results = (
+        SELECT Id_model, Text, Prediction 
+        FROM dbo.Response_Matrix 
+        FOR JSON AUTO
+    );
+
+END
