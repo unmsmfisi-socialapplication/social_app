@@ -2,6 +2,7 @@ package application
 
 import (
 	"errors"
+	"log"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
 )
@@ -14,6 +15,7 @@ type PostUseCaseInterface interface {
 	CreatePost(post domain.PostCreate) (*domain.PostResponse, error)
 	GetPost(id int) (*domain.Post, error)
 	GetPosts(params domain.PostPaginationParams) (*domain.PostPagination, error)
+	RetrieveTimelinePosts(user_id, page_size, page_num int64) (*domain.QueryResult, error)
 	// DELETE POST //
 	DeletePost(id int64) error
 
@@ -29,6 +31,9 @@ type PostRepository interface {
 	UserExist(post domain.PostCreate) bool
 	GetById(id int) (*domain.Post, error)
 	GetAll(params domain.PostPaginationParams) (*domain.PostPagination, error)
+	CreateHomeTimelineItem(user_id int64, post_id int64) error
+	FanoutHomeTimeline(posts_id int64, following_id int64) error
+	HomeTimeline(user_id, page_size, page_num int64) (*domain.QueryResult, error)
 	// DELETE POST //
 	DeletePost(id int64) error
 	PostExists(id int64) bool
@@ -59,6 +64,20 @@ func (l *PostUseCase) CreatePost(post domain.PostCreate) (*domain.PostResponse, 
 		return nil, err
 	}
 
+	err = l.repo.CreateHomeTimelineItem(dbPost.UserId, dbPost.Id)
+	if err != nil {
+		log.Fatal("Error while indexing post with timeline user")
+		response := domain.PostToPostResponse(*dbPost)
+		return &response, nil
+	}
+
+	go func() {
+		err = l.repo.FanoutHomeTimeline(dbPost.Id, dbPost.UserId)
+		if err != nil {
+			log.Fatal("Error While Running FanOut Broadcast")
+		}
+	}()
+
 	response := domain.PostToPostResponse(*dbPost)
 
 	return &response, nil
@@ -78,6 +97,14 @@ func (l *PostUseCase) GetPosts(params domain.PostPaginationParams) (*domain.Post
 	}
 
 	return dbPosts, nil
+}
+
+func (puc *PostUseCase) RetrieveTimelinePosts(user_id, page_size, page_num int64) (*domain.QueryResult, error) {
+	timeline, err := puc.repo.HomeTimeline(user_id, page_size, page_num)
+	if err != nil {
+		return nil, err
+	}
+	return timeline, err
 }
 
 func (l *PostUseCase) GetPost(id int) (*domain.Post, error) {

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    background-color: #113E70;
+    background-color: #113e70;
     width: 459px;
     height: 76px;
     padding: 11px 33px;
@@ -28,7 +28,7 @@
     }
 
     .name {
-        color: #FFF;
+        color: #fff;
         font-family: Inter, Poppins;
         font-size: 14px;
         font-style: normal;
@@ -37,18 +37,17 @@
     }
 
     .message {
-        color: #FFF;
+        color: #fff;
         font-family: Inter, Poppins;
         font-size: 11px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
     }
-    
 
     .time {
         display: flex;
-        color: #FFF;
+        color: #fff;
         font-family: Inter, Poppins;
         font-size: 11px;
         font-style: normal;

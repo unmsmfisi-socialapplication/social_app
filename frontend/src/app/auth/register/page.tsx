@@ -19,7 +19,7 @@ export default function RegisterPage() {
     const router = useRouter()
     const dispatch = useAppDispatch()
     const useSelector = useAppSelector((state) => state.auth)
-   
+
     const handleStatusAuth = (status: string) => {
         console.log('status', status)
         switch (status) {
@@ -39,13 +39,13 @@ export default function RegisterPage() {
             ...YUP_SCHEMA,
         }),
         onSubmit: (values) => {
-            const { username , password } = values
+            const { username, password } = values
 
             // TODO: Add login logic
-            dispatch(getUserRegister({username , password , values})).then(() => {
+            dispatch(getUserRegister({ username, password, values })).then(() => {
                 handleStatusAuth(useSelector.status)
             })
-        }
+        },
     })
 
     useEffect(() => {
