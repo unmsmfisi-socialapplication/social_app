@@ -3,6 +3,7 @@ package infrastructure
 import (
 	"database/sql"
 	"fmt"
+	"strings"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/comment/domain"
 )
@@ -159,29 +160,42 @@ func (r *CommentRepository) GetCommentsByPostID(postID int64) ([]*domain.Comment
     return comments, nil
 }
 
-//Code to update a comment in the database
-func (r *CommentRepository) UpdateComment(commentID int64, comment *domain.Comment) error {
-    if commentID <= 0 {
-        return nil
+func (r *CommentRepository) UpdateComment(commentID int64, newComment *domain.Comment) error {
+    if newComment == nil || commentID <= 0 {
+        return fmt.Errorf("invalid input")
     }
 
-    query := `
-        UPDATE SOC_APP_POSTS_COMMENTS
-        SET user_id = $2, post_id = $3, comment = $4, update_date = $5, parent_comment_id = $6
-        WHERE comment_id = $1 and is_active = true
-    `
-    _, err := r.db.Exec(
-        query,
-        commentID,
-        comment.UserID,
-        comment.PostID,
-        comment.Comment,
-        comment.UpdateDate,
-        comment.ParentCommentID,
-    )
-
+    currentComment, err := r.GetCommentByID(commentID)
     if err != nil {
-        return err
+        return fmt.Errorf("error fetching current comment: %w", err)
+    }
+
+    var queryBuilder strings.Builder
+    queryBuilder.WriteString("UPDATE SOC_APP_POSTS_COMMENTS SET ")
+    updateFields := make([]interface{}, 0)
+    fieldCount := 1
+
+    if newComment.UserID != currentComment.UserID {
+        queryBuilder.WriteString(fmt.Sprintf("user_id = $%d, ", fieldCount))
+        updateFields = append(updateFields, newComment.UserID)
+        fieldCount++
+    }
+
+    query := strings.TrimSuffix(queryBuilder.String(), ", ")
+    query += fmt.Sprintf(" WHERE comment_id = $%d and is_active = true", fieldCount)
+    updateFields = append(updateFields, commentID)
+
+    result, err := r.db.Exec(query, updateFields...)
+    if err != nil {
+        return fmt.Errorf("error updating comment: %w", err)
+    }
+
+    rowsAffected, err := result.RowsAffected()
+    if err != nil {
+        return fmt.Errorf("error checking affected rows: %w", err)
+    }
+    if rowsAffected == 0 {
+        return fmt.Errorf("no rows were updated")
     }
 
     return nil
