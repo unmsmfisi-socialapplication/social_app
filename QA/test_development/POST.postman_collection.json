@@ -238,7 +238,9 @@
 							"// Test para validar la respuesta basada en el estado",
 							"pm.test(\"Validate response based on status\", function () {",
 							"    let response = pm.response.json();",
+							"",
 							"    if (response.status === \"SUCCESS\") {",
+							"        // Verificaciones para una respuesta exitosa",
 							"        pm.expect(response).to.have.property('response');",
 							"        pm.expect(response.response).to.have.property('Id');",
 							"        pm.expect(response.response).to.have.property('UserId');",
@@ -249,6 +251,7 @@
 							"        pm.expect(response.response).to.have.property('InsertionDate');",
 							"        pm.expect(response.response).to.have.property('UpdateDate');",
 							"",
+							"        // Validar los tipos de campos para una respuesta exitosa",
 							"        pm.expect(response.response.Id).to.be.a('number');",
 							"        pm.expect(response.response.UserId).to.be.a('number');",
 							"        pm.expect(response.response.Description).to.be.a('string');",
@@ -258,30 +261,36 @@
 							"    }",
 							"    // Verificar si es una respuesta de error",
 							"    else if (response.status === \"ERROR\") {",
+							"        // Verificaciones para una respuesta de error",
 							"        pm.expect(response).to.have.property('error');",
 							"        pm.expect(response.error).to.have.property('code');",
 							"        pm.expect(response.error).to.have.property('message');",
 							"",
-							"        // Validar los tipos de campos y valores para una respuesta de error",
-							"        pm.expect(response.error.code).to.eql(\"MISSING_USERID\");",
-							"        pm.expect(response.error.message).to.eql(\"El campo 'userId' es obligatorio en la solicitud.\");",
+							"        // Verificar error específico basado en el código",
+							"        if (response.error.code === \"MISSING_USERID\") {",
+							"            // Validar los tipos de campos y valores para un error de falta de UserId",
+							"            pm.expect(response.error.code).to.eql(\"MISSING_USERID\");",
+							"            pm.expect(response.error.message).to.eql(\"El campo 'userId' es obligatorio en la solicitud.\");",
+							"        } else if (response.error.code === \"DESCRIPTION_TOO_LONG\") {",
+							"            // Validar los tipos de campos y valores para un error de descripción demasiado larga",
+							"            pm.expect(response.error.code).to.eql(\"DESCRIPTION_TOO_LONG\");",
+							"            pm.expect(response.error.message).to.eql(\"La descripción excede la longitud máxima de 1000 caracteres.\");",
+							"        }",
 							"    }",
 							"});",
+							"",
 							""
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"title\": \"Publicación sin userId\",\n\"description\": \"adasdasd\",\n\"hasMultimedia\": true,\n\"public\": true,\n\"multimedia\": \"https://www.ejemplo.com/multimedia1.jpg\"\n}",
+					"raw": "{\n  \"userId\": 123,\n  \"title\": \"Prueba con extensión de texto\",\n  \"description\": \"Lorem ipsum dolor sit amet. At eius quod sit doloribus voluptatem in internos ipsum rem rerum autem hic temporibus repellat. Cum totam corporis non commodi laboriosam 33 deserunt odio. Aut veniam modi ab veritatis exercitationem et omnis soluta hic provident culpa At vitae molestias eos quam beatae. Sed neque commodi qui omnis dolore et quasi labore qui maiores eligendi ea consequatur illo qui quibusdam suscipit? In consequatur quod est placeat modi qui quasi error et iusto autem aut mollitia alias. Ut quia quam et dolor repellat hic repellendus accusantium? Et temporibus dicta id iusto culpa ut reprehenderit temporibus ut rerum doloremque et sint nesciunt. Et ipsum architecto ut velit velit aut pariatur consectetur eum culpa assumenda et deleniti reprehenderit qui vitae provident. Ut voluptatem atque qui magnam consequatur non temporibus harum et modi quidem est blanditiis laudantium eum laudantium quos est quis quia. Id laborum eligendi aut nihil excepturi et inventore placeat est voluptatem dignissimos ut voluptatibus nostrum quo temporibus nulla ut commodi porro. Qui nisi debitis At autem aliquid sed similique quia qui voluptas deleniti sit enim minus!Ex aspernatur tempore aut consequuntur omnis ut dolorem mollitia ea quis ipsa eos dolor atque aut doloribus sunt. In ipsum quod id repudiandae dolorum aut delectus necessitatibus in eius soluta eum provident minima. Quo aliquid ducimus rem dolorem debitis est debitis quibusdam? Nam consequatur illo vel nihil architecto est sint mollitia. Nam similique velit et eaque accusamus est mollitia quas sit nulla labore in numquam maiores. Et sint quas non voluptas voluptate sed laudantium suscipit et nulla velit et suscipit officia ut minima rerum. Ut quae consectetur eos voluptatem sunt et iure autem aut iste amet nam fugit explicabo. Et deserunt galisum ex quia dolores ex nesciunt perferendis in atque nesciunt.In repellat inventore est maxime neque et illo iste. Quo numquam labore ut asperiores nobis ad impedit dolor hic corrupti illum et vitae blanditiis? Vel perferendis quisquam eum magni voluptatem quo facilis perferendis et accusamus voluptatem qui maxime molestiae aut nesciunt illo sed quia rerum. Ut corporis maiores in distinctio dolore qui assumenda explicabo et doloribus quasi sit similique minus sit numquam soluta 33 voluptatem eaque. Est molestias corrupti est magni placeat nam commodi sequi nam exercitationem tempore est inventore explicabo? Sed quia laborum qui illo voluptas non distinctio necessitatibus eum internos debitis eum amet possimus et explicabo amet. Aut voluptas enim vel nobis omnis est quod excepturi vel enim quae nam unde consequatur sed dolorem alias quo praesentium consequuntur. Est voluptatem accusamus et excepturi culpa et porro alias ut rerum iure eum natus iure. Ut temporibus sunt et neque possimus aut provident voluptas sit nihil omnis et possimus vitae qui rerum corporis est corrupti rerum. Qui autem culpa eos voluptatem assumenda sit galisum rerum. Est corporis maiores aut consequatur fuga rem voluptas atque qui exercitationem fugit eos corrupti debitis et praesentium maxime sit iure sint. Est iste exercitationem et beatae possimus qui cumque pariatur qui odio quae a quis incidunt aut vero consequatur eum voluptatem beatae? Eum sapiente architecto est quod commodi aut illo dolores aut voluptas quibusdam sit repellat tempore non beatae voluptas et totam saepe. In ipsam dolores aut officia ullam eos quibusdam vitae qui mollitia adipisci sit omnis blanditiis vel unde consequatur.\",\n  \"hasMultimedia\": true,\n  \"public\": true,\n  \"multimedia\": \"https://www.ejemplo.com/multimedia1.jpg\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -304,7 +313,7 @@
 			},
 			"response": [
 				{
-					"name": "Creación de publicación Fallido",
+					"name": "Creación de publicación Fallido sin UserId",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -337,6 +346,39 @@
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"error\": {\n        \"code\": \"MISSING_USERID\",\n        \"message\": \"El campo 'userId' es obligatorio en la solicitud.\"\n    },\n    \"status\": \"ERROR\"\n}"
+				},
+				{
+					"name": "Creación de publicación Fallido con Texto Extendido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 123,\n  \"title\": \"Prueba con extensión de texto\",\n  \"description\": \"Lorem ipsum dolor sit amet. At eius quod sit doloribus voluptatem in internos ipsum rem rerum autem hic temporibus repellat. Cum totam corporis non commodi laboriosam 33 deserunt odio. Aut veniam modi ab veritatis exercitationem et omnis soluta hic provident culpa At vitae molestias eos quam beatae. Sed neque commodi qui omnis dolore et quasi labore qui maiores eligendi ea consequatur illo qui quibusdam suscipit? In consequatur quod est placeat modi qui quasi error et iusto autem aut mollitia alias. Ut quia quam et dolor repellat hic repellendus accusantium? Et temporibus dicta id iusto culpa ut reprehenderit temporibus ut rerum doloremque et sint nesciunt. Et ipsum architecto ut velit velit aut pariatur consectetur eum culpa assumenda et deleniti reprehenderit qui vitae provident. Ut voluptatem atque qui magnam consequatur non temporibus harum et modi quidem est blanditiis laudantium eum laudantium quos est quis quia. Id laborum eligendi aut nihil excepturi et inventore placeat est voluptatem dignissimos ut voluptatibus nostrum quo temporibus nulla ut commodi porro. Qui nisi debitis At autem aliquid sed similique quia qui voluptas deleniti sit enim minus!Ex aspernatur tempore aut consequuntur omnis ut dolorem mollitia ea quis ipsa eos dolor atque aut doloribus sunt. In ipsum quod id repudiandae dolorum aut delectus necessitatibus in eius soluta eum provident minima. Quo aliquid ducimus rem dolorem debitis est debitis quibusdam? Nam consequatur illo vel nihil architecto est sint mollitia. Nam similique velit et eaque accusamus est mollitia quas sit nulla labore in numquam maiores. Et sint quas non voluptas voluptate sed laudantium suscipit et nulla velit et suscipit officia ut minima rerum. Ut quae consectetur eos voluptatem sunt et iure autem aut iste amet nam fugit explicabo. Et deserunt galisum ex quia dolores ex nesciunt perferendis in atque nesciunt.In repellat inventore est maxime neque et illo iste. Quo numquam labore ut asperiores nobis ad impedit dolor hic corrupti illum et vitae blanditiis? Vel perferendis quisquam eum magni voluptatem quo facilis perferendis et accusamus voluptatem qui maxime molestiae aut nesciunt illo sed quia rerum. Ut corporis maiores in distinctio dolore qui assumenda explicabo et doloribus quasi sit similique minus sit numquam soluta 33 voluptatem eaque. Est molestias corrupti est magni placeat nam commodi sequi nam exercitationem tempore est inventore explicabo? Sed quia laborum qui illo voluptas non distinctio necessitatibus eum internos debitis eum amet possimus et explicabo amet. Aut voluptas enim vel nobis omnis est quod excepturi vel enim quae nam unde consequatur sed dolorem alias quo praesentium consequuntur. Est voluptatem accusamus et excepturi culpa et porro alias ut rerum iure eum natus iure. Ut temporibus sunt et neque possimus aut provident voluptas sit nihil omnis et possimus vitae qui rerum corporis est corrupti rerum. Qui autem culpa eos voluptatem assumenda sit galisum rerum. Est corporis maiores aut consequatur fuga rem voluptas atque qui exercitationem fugit eos corrupti debitis et praesentium maxime sit iure sint. Est iste exercitationem et beatae possimus qui cumque pariatur qui odio quae a quis incidunt aut vero consequatur eum voluptatem beatae? Eum sapiente architecto est quod commodi aut illo dolores aut voluptas quibusdam sit repellat tempore non beatae voluptas et totam saepe. In ipsam dolores aut officia ullam eos quibusdam vitae qui mollitia adipisci sit omnis blanditiis vel unde consequatur.\",\n  \"hasMultimedia\": true,\n  \"public\": true,\n  \"multimedia\": \"https://www.ejemplo.com/multimedia1.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+							"protocol": "https",
+							"host": [
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"crear-post"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"code\": \"DESCRIPTION_TOO_LONG\",\n        \"message\": \"La descripción excede la longitud máxima de 1000 caracteres.\"\n    },\n    \"status\": \"ERROR\"\n}"
 				}
 			]
 		}
