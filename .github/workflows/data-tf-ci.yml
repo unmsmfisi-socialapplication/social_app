@@ -1,4 +1,4 @@
-name: CI Validating IAC with Terraform
+name: CI Validating DATA IAC with Terraform
 
 on:
   pull_request:
