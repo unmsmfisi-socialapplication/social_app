@@ -371,7 +371,177 @@
 				}
 			},
 			"response": []
-		}
-		
+		},
+		{
+			"name": "User Registration with Existing Username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para el caso cuando el usuario intenta registrarse con un nombre de usuario ya en uso\r",
+							"pm.test('El usuario intenta registrarse con un nombre de usuario ya en uso', function () {\r",
+							"    // Configuración del cuerpo de la solicitud\r",
+							"    let requestBody = {\r",
+							"        'full_name': \"Maria Solis\",\r",
+							"        'email': 'test4@example.com',\r",
+							"        'user_name': 'myuser12', // Este username ya está en uso\r",
+							"        'password': 'TestP@ss123',\r",
+							"        'confirm_password': 'TestP@ss123'\r",
+							"    };\r",
+							"    \r",
+							"    // Configuración del cuerpo de la solicitud en la petición actual\r",
+							"    pm.request.body = {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    };\r",
+							"\r",
+							"    // Validaciones del cuerpo de la solicitud\r",
+							"    pm.expect(requestBody).to.have.property('email');\r",
+							"    pm.expect(requestBody.email).to.not.be.empty;\r",
+							"\r",
+							"    pm.expect(requestBody).to.have.property('user_name');\r",
+							"    pm.expect(requestBody.user_name).to.not.be.empty;\r",
+							"\r",
+							"    pm.expect(requestBody).to.have.property('full_name');\r",
+							"    pm.expect(requestBody.full_name).to.not.be.empty;\r",
+							"\r",
+							"    pm.expect(requestBody).to.have.property('password');\r",
+							"    pm.expect(requestBody.password).to.not.be.empty;\r",
+							"\r",
+							"    pm.expect(requestBody).to.have.property('confirm_password');\r",
+							"    pm.expect(requestBody.confirm_password).to.not.be.empty;\r",
+							"\r",
+							"    // Validación del formato del correo\r",
+							"    pm.test('Validar Correo', function () {\r",
+							"        pm.expect(requestBody.email).to.match(/\\S+@\\S+\\.\\S+/, 'El campo Correo no tiene el formato correcto');\r",
+							"    });\r",
+							"\r",
+							"    // Validación del nombre de usuario\r",
+							"    pm.test('Validar Nombre de Usuario', function () {\r",
+							"        pm.expect(requestBody.user_name).to.match(/^[a-zA-Z0-9]+$/, 'El campo Nombre de Usuario debe ser alfanumérico');\r",
+							"        pm.expect(requestBody.user_name).to.have.length.within(6, 56, 'El campo Nombre de Usuario debe tener entre 6 y 56 caracteres');\r",
+							"    });\r",
+							"\r",
+							"    // Validación del nombre completo\r",
+							"    pm.test('Validar Nombre Completo', function () {\r",
+							"        pm.expect(requestBody.full_name).to.be.a('string');\r",
+							"        pm.expect(requestBody.full_name.length).to.be.within(2, 255, 'El campo Nombre Completo debe tener entre 2 y 255 caracteres');\r",
+							"    });\r",
+							"\r",
+							"    // Validación de la contraseña\r",
+							"    pm.test('Validar Contraseña', function () {\r",
+							"        pm.expect(requestBody.password).to.match(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/, 'El campo Contraseña debe contener letras, números y al menos un caracter especial');\r",
+							"    });\r",
+							"\r",
+							"    // Validación de confirmar contraseña\r",
+							"    pm.test('Validar Confirmar Contraseña', function () {\r",
+							"        pm.expect(requestBody.confirm_password).to.be.a('string');\r",
+							"        pm.expect(requestBody.confirm_password).to.equal(requestBody.password, 'El campo Confirmar Contraseña debe coincidir con el campo Contraseña');\r",
+							"    });\r",
+							"\r",
+							"    // Test para simular que el usuario envía una solicitud POST al endpoint de registro\r",
+							"    pm.sendRequest({\r",
+							"        url: 'https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/register',\r",
+							"        method: 'POST',\r",
+							"        header: { 'Content-Type': 'application/json' },\r",
+							"        body: {\r",
+							"            mode: 'raw',\r",
+							"            raw: JSON.stringify(requestBody)\r",
+							"        }\r",
+							"    }, function (err, response) {\r",
+							"        // Manejo de errores\r",
+							"        if (err) {\r",
+							"            console.error(err);\r",
+							"            return;\r",
+							"        }\r",
+							"        // Obtención de la respuesta JSON\r",
+							"        let responseData = response ? response.json() : null;\r",
+							"\r",
+							"        // Validaciones de la respuesta\r",
+							"        if (responseData) {\r",
+							"            pm.expect(responseData.status).to.equal('ERROR', 'El estado debería ser \\'ERROR\\'');\r",
+							"            pm.expect(responseData.message).to.equal('Username already in use', 'El mensaje debería ser \\'Username already in use\\'');\r",
+							"\r",
+							"            // Guardar el valor de 'status' y 'message' en variables globales\r",
+							"            pm.globals.set('status', responseData.status);\r",
+							"            pm.globals.set('message', responseData.message);\r",
+							"        } else {\r",
+							"            console.error('La respuesta no es válida');\r",
+							"        }\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"// Test para verificar que el código de estado de la respuesta es 409 Conflict\r",
+							"pm.test(\"El username ya fue registrado anteriormente. Response status code is 409 Conflict\", function () {\r",
+							"    pm.response.to.have.status(409);\r",
+							"});\r",
+							"\r",
+							"// Test longitud 'status' y 'message'\r",
+							"pm.test(\"La longitud de 'status' y 'message' debe ser mayor que cero\", function () {\r",
+							"    const respuesta = pm.response.json();\r",
+							"    pm.expect(respuesta.status.length).to.be.greaterThan(0, \"El campo 'status' no debe estar vacío\");\r",
+							"    pm.expect(respuesta.message.length).to.be.greaterThan(0, \"El campo 'message' no debe estar vacío\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El tiempo de respuesta está dentro del rango aceptable\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(5000, \"El tiempo de respuesta debe ser inferior a 5 segundos\");\r",
+							"});\r",
+							"\r",
+							"// Validar respuesta contra el valor guardado en 'status'\r",
+							"pm.test(\"Validar respuesta contra el valor guardado en 'status'\", function() {\r",
+							"    var statusGuardado = pm.globals.get(\"status\");\r",
+							"    var respuesta = pm.response.json();\r",
+							"    var statusRespuesta = respuesta.status;\r",
+							"    pm.expect(statusRespuesta).to.equal(statusGuardado);\r",
+							"});\r",
+							"\r",
+							"// Validar respuesta contra el valor guardado en 'message'\r",
+							"pm.test(\"Validar respuesta contra el valor guardado en 'message'\", function() {\r",
+							"    var messageGuardado = pm.globals.get(\"message\");\r",
+							"    var respuesta = pm.response.json();\r",
+							"    var messageRespuesta = respuesta.message;\r",
+							"    pm.expect(messageRespuesta).to.equal(messageGuardado);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Guardar los valores de 'status' y 'message' en variables globales\r",
+							"pm.globals.set(\"status\", \"ERROR\");\r",
+							"pm.globals.set(\"message\", \"Username already in use\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"full_name\": \"Maria Solis\",\r\n    \"email\": \"test4@example.com\",\r\n    \"user_name\": \"myuser12\",\r\n    \"password\": \"TestP@ss123\",\r\n    \"confirm_password\": \"TestP@ss123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		}	
 	]
 }
