@@ -90,7 +90,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun loadImage(
+    fun loadImage(
         imageURL: String,
         imageView: ShapeableImageView,
     ) {
@@ -109,7 +109,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.obtainData()
     }
 
-    private fun handleIconLikeClick(
+    fun handleIconLikeClick(
         post: Post,
         iconLike: ImageView,
         countLikes: TextView,

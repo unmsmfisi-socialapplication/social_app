@@ -14,7 +14,6 @@ class ChatUserDataTest {
                 message = "Hello",
                 hourSend = "12:00 PM",
                 countNotification = "3",
-                token = "token123",
             )
 
         assertEquals("John Doe", chatUserData.name)
@@ -22,6 +21,5 @@ class ChatUserDataTest {
         assertEquals("Hello", chatUserData.message)
         assertEquals("12:00 PM", chatUserData.hourSend)
         assertEquals("3", chatUserData.countNotification)
-        assertEquals("token123", chatUserData.token)
     }
 }
