@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "efbb9b6d-d433-4dd5-8979-d460ed6218c7",
-		"name": "Registro",
+		"name": "Registration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31241057",
 		"_collection_link": "https://qa-unmsm-011223.postman.co/workspace/Team-Workspace~914a49d5-c551-4a7a-86d9-869a323ff02f/collection/27775741-efbb9b6d-d433-4dd5-8979-d460ed6218c7?action=share&source=collection_link&creator=31241057"
@@ -713,6 +713,134 @@
 				}
 			},
 			"response": []
-		}	
+		},
+		{
+			"name": "User Registration with Server Error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para verificar que se recibe una respuesta de error del servidor durante el registro\r",
+							"pm.test('User Registration - Server Error', function () {\r",
+							"    // Configuración del cuerpo de la solicitud\r",
+							"    let requestBody = {\r",
+							"        \"full_name\": \"Juan Salinas\",\r",
+							"        \"email\": \"test5@example.com\",\r",
+							"        \"user_name\": \"testuser5\",\r",
+							"        \"password\": \"TestP@ss123\",\r",
+							"        \"confirm_password\": \"TestP@ss123\"\r",
+							"    };\r",
+							"    \r",
+							"    // Configuración del cuerpo de la solicitud en la petición actual\r",
+							"    pm.request.body = {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify(requestBody)\r",
+							"    };\r",
+							"\r",
+							"    // Enviar la solicitud POST al endpoint de registro\r",
+							"    pm.sendRequest({\r",
+							"        url: 'https://51790c60-29ec-429c-9ce1-5da259f03d0d.mock.pstmn.io/register',\r",
+							"        method: 'POST',\r",
+							"        header: { 'Content-Type': 'application/json' },\r",
+							"        body: {\r",
+							"            mode: 'raw',\r",
+							"            raw: JSON.stringify(requestBody)\r",
+							"        }\r",
+							"    }, function (err, response) {\r",
+							"        // Manejo de errores\r",
+							"        if (err) {\r",
+							"            console.error(err);\r",
+							"            return;\r",
+							"        }\r",
+							"\r",
+							"        // Obtención de la respuesta JSON\r",
+							"        let responseData = response ? response.json() : null;\r",
+							"\r",
+							"        // Validaciones de la respuesta\r",
+							"        if (responseData) {\r",
+							"            // Validar que la respuesta tenga el estado esperado\r",
+							"            pm.expect(response.code).to.equal(500, 'El estado debería ser 500');\r",
+							"\r",
+							"            // Validar el cuerpo de la respuesta\r",
+							"            pm.expect(responseData.status).to.equal('ERROR', 'El estado debería ser \\'ERROR\\'');\r",
+							"            pm.expect(responseData.message).to.equal('Internal Server Error. Please try again later.', 'El mensaje debería ser \\'Internal Server Error. Please try again later.\\'');\r",
+							"        } else {\r",
+							"            console.error('La respuesta no es válida');\r",
+							"        }\r",
+							"    });\r",
+							"    \r",
+							"    // Validar que el código de estado de la respuesta es 500 Internal Server Error\r",
+							"    pm.test(\"Respuesta de servidor. Response status code is 500\", function () {\r",
+							"        pm.response.to.have.status(500);\r",
+							"    });\r",
+							"\r",
+							"    // Tests longitud 'status' y 'message'\r",
+							"    pm.test(\"La longitud de 'status' y 'message' debe ser mayor que cero\", function () {\r",
+							"        const respuesta = pm.response.json();\r",
+							"        pm.expect(respuesta.status.length).to.be.greaterThan(0, \"El campo 'status' no debe estar vacío\");\r",
+							"        pm.expect(respuesta.message.length).to.be.greaterThan(0, \"El campo 'message' no debe estar vacío\");\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"El tiempo de respuesta está dentro del rango aceptable\", function () {\r",
+							"        pm.expect(pm.response.responseTime).to.be.below(2000, \"El tiempo de respuesta debe ser inferior a 2 segundos\");\r",
+							"    });\r",
+							"\r",
+							"    // Validar respuesta contra el valor guardado en 'status'\r",
+							"    pm.test(\"Validar respuesta contra el valor guardado en 'status'\", function() {\r",
+							"        var statusGuardado = pm.globals.get(\"status\");\r",
+							"        var respuesta = pm.response.json();\r",
+							"        var statusRespuesta = respuesta.status;\r",
+							"        pm.expect(statusRespuesta).to.equal(statusGuardado);\r",
+							"    });\r",
+							"\r",
+							"    // Validar respuesta contra el valor guardado en 'message'\r",
+							"    pm.test(\"Validar respuesta contra el valor guardado en 'message'\", function() {\r",
+							"        var messageGuardado = pm.globals.get(\"message\");\r",
+							"        var respuesta = pm.response.json();\r",
+							"        var messageRespuesta = respuesta.message;\r",
+							"        pm.expect(messageRespuesta).to.equal(messageGuardado);\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Guardar los valores de 'status' y 'message' en variables globales\r",
+							"pm.globals.set(\"status\", \"ERROR\");\r",
+							"pm.globals.set(\"message\", \"Internal Server Error. Please try again later.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"full_name\": \"Juan Salinas\",\r\n    \"email\": \"test5@example.com\",\r\n    \"user_name\": \"testuser5\",\r\n    \"password\": \"TestP@ss123\",\r\n    \"confirm_password\": \"TestP@ss123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
 	]
 }
