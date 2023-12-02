@@ -2,53 +2,91 @@ package helpers
 
 import (
 	"net/url"
-	"reflect"
 	"testing"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/post/domain"
 )
 
 func TestParsePaginationParams(t *testing.T) {
-	validQuery := url.Values{
-		"page":  {"2"},
-		"limit": {"10"},
+	testCases := []struct {
+		name           string
+		query          url.Values
+		expectedParams domain.PostPaginationParams
+		expectedError  bool
+	}{
+		{
+			name: "Valid Query Parameters",
+			query: url.Values{
+				"page":  []string{"1"},
+				"limit": []string{"10"},
+			},
+			expectedParams: domain.PostPaginationParams{
+				Page:  1,
+				Limit: 10,
+			},
+			expectedError: false,
+		},
+		{
+			name: "Missing Page Parameter",
+			query: url.Values{
+				"limit": []string{"10"},
+			},
+			expectedParams: domain.PostPaginationParams{
+				Page:  0,
+				Limit: 10,
+			},
+			expectedError: false,
+		},
+		{
+			name: "Invalid Page Parameter",
+			query: url.Values{
+				"page":  []string{"invalid"},
+				"limit": []string{"10"},
+			},
+			expectedParams: domain.PostPaginationParams{
+				Page:  0,
+				Limit: 0,
+			},
+			expectedError: true,
+		},
+		{
+			name: "Missing Limit Parameter",
+			query: url.Values{
+				"page": []string{"1"},
+			},
+			expectedParams: domain.PostPaginationParams{
+				Page:  1,
+				Limit: 0,
+			},
+			expectedError: false,
+		},
+		{
+			name: "Invalid Limit Parameter",
+			query: url.Values{
+				"page":  []string{"1"},
+				"limit": []string{"invalid"},
+			},
+			expectedParams: domain.PostPaginationParams{
+				Page:  1,
+				Limit: 0,
+			},
+			expectedError: true,
+		},
 	}
 
-	expectedParams := domain.PostPaginationParams{
-		Page:  2,
-		Limit: 10,
-	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			params, err := ParsePaginationParams(tc.query)
 
-	params, err := ParsePaginationParams(validQuery)
+			if tc.expectedError && err == nil {
+				t.Error("Expected an error, but got none")
+			} else if !tc.expectedError && err != nil {
+				t.Errorf("Expected no error, but got one: %v", err)
+			}
 
-	if err != nil {
-		t.Errorf("Se esperaba que ParsePaginationParams no devolviera un error, pero se obtuvo un error: %v", err)
-	}
-
-	if !reflect.DeepEqual(params, expectedParams) {
-		t.Errorf("Los parámetros obtenidos no son los esperados. Esperado: %+v, Obtenido: %+v", expectedParams, params)
-	}
-
-	missingValuesQuery := url.Values{}
-
-	params, err = ParsePaginationParams(missingValuesQuery)
-
-	if err != nil {
-		t.Errorf("Se esperaba que ParsePaginationParams no devolviera un error con valores faltantes, pero se obtuvo un error: %v", err)
-	}
-
-	if !reflect.DeepEqual(params, domain.PostPaginationParams{}) {
-		t.Errorf("Los parámetros obtenidos no son los esperados con valores faltantes. Esperado: %+v, Obtenido: %+v", domain.PostPaginationParams{}, params)
-	}
-
-	invalidValuesQuery := url.Values{
-		"page":  {"invalid"},
-		"limit": {"invalid"},
-	}
-
-	_, err = ParsePaginationParams(invalidValuesQuery)
-
-	if err == nil {
-		t.Error("Se esperaba un error al proporcionar valores no numéricos, pero no se obtuvo un error")
+			if tc.expectedParams != params {
+				t.Errorf("Expected parsed pagination parameters %+v, but got %+v", tc.expectedParams, params)
+			}
+		})
 	}
 }
