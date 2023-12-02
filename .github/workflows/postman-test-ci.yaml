@@ -1,7 +1,7 @@
 name: CI for Postman test
 
 on:
-  push:
+  pull_request:
     branches:
       - develop
     # Only trigger when changes are made within the 'QA/' directory
