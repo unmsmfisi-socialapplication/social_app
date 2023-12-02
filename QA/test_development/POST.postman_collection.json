@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "b91c5eac-66be-4a34-bd03-ad4730769e7b",
+		"name": "POST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19969630"
+	},
+	"item": [
+		{
+			"name": "Creación de publicación Exitoso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response has all expected fields\", function () {",
+							"    let response = pm.response.json();",
+							"    pm.expect(response).to.have.property('response');",
+							"    pm.expect(response.response).to.have.property('Id');",
+							"    pm.expect(response.response).to.have.property('UserId');",
+							"    pm.expect(response.response).to.have.property('title');",
+							"    pm.expect(response.response).to.have.property('Description');",
+							"    pm.expect(response.response).to.have.property('HasMultimedia');",
+							"    pm.expect(response.response).to.have.property('Public');",
+							"    pm.expect(response.response).to.have.property('Multimedia');",
+							"    pm.expect(response.response).to.have.property('InsertionDate');",
+							"    pm.expect(response.response).to.have.property('UpdateDate');",
+							"    pm.expect(response).to.have.property('status');",
+							"});",
+							"",
+							"pm.test(\"Response fields have correct types\", function () {",
+							"    let response = pm.response.json();",
+							"    pm.expect(response.response.Id).to.be.a('number');",
+							"    pm.expect(response.response.UserId).to.be.a('number');",
+							"    pm.expect(response.response.title).to.be.a('string');",
+							"    pm.expect(response.response.Description).to.be.a('string');",
+							"    pm.expect(response.response.HasMultimedia).to.be.a('boolean');",
+							"    pm.expect(response.response.Public).to.be.a('boolean');",
+							"    pm.expect(response.response.Multimedia).to.be.a('string');",
+							"});",
+							"",
+							"pm.test(\"Status is SUCCESS\", function () {",
+							"    let response = pm.response.json();",
+							"    pm.expect(response.status).to.eql(\"SUCCESS\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"userId\": 123,\n    \"title\": \"Titulo de la publicacion\",\n    \"description\": \"adasdasd\",\n    \"hasMultimedia\": true,\n    \"public\": true,\n    \"multimedia\": \"https://www.example.com/multimedia1.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}//crear-post",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"",
+						"crear-post"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear publicación",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n   \"userId\": 123, \n    \"title\": \"Titulo de la publicacion\",\n    \"description\": \"adasdasd\",\n    \"hasMultimedia\": true,\n    \"public\": true,\n    \"multimedia\": \"https://www.example.com/multimedia1.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}//crear-post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"",
+								"crear-post"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"response\": {\n        \"Id\": 8,\n        \"UserId\": 123,\n        \"title\": \"Titulo de la publicacion\",\n        \"Description\": \"adasdasd\",\n        \"HasMultimedia\": true,\n        \"Public\": true,\n        \"Multimedia\": \"https://www.example.com/multimedia1.jpg\",\n        \"InsertionDate\": \"2023-11-03T16:46:23.032338218Z\",\n        \"UpdateDate\": \"2023-11-03T16:46:23.032338301Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io"
+		}
+	]
+}
