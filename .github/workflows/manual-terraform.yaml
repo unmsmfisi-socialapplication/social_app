@@ -1,4 +1,4 @@
-name: IAC with Terraform manually triggered
+name: Terraform manually triggered
 
 on: workflow_dispatch
 
