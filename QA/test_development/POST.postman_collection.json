@@ -52,7 +52,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"userId\": 123,\n  \"title\": \"Prueba de publicación en privado\",\n  \"description\": \"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto\",\n  \"hasMultimedia\": true,\n  \"public\": false,\n  \"multimedia\": \"asdasd/multimedia1.jpg\"\n}",
+					"raw": "{\n  \"userId\": 456,\n  \"title\": \"Publicación con un GIF\",\n  \"description\": \"Descripción de la publicación\",\n  \"hasMultimedia\": true,\n  \"public\": true,\n  \"multimedia\": [\n    \"gif1.gif\"\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,6 +74,41 @@
 				}
 			},
 			"response": [
+				{
+					"name": "Creación de publicación con un Gift",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 456,\n  \"title\": \"Publicación con un GIF\",\n  \"description\": \"Descripción de la publicación\",\n  \"hasMultimedia\": true,\n  \"public\": true,\n  \"multimedia\": [\n    \"gif1.gif\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://5fff7e05-0538-4ab2-8235-e8976a482701.mock.pstmn.io/crear-post",
+							"protocol": "https",
+							"host": [
+								"5fff7e05-0538-4ab2-8235-e8976a482701",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"crear-post"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"response\": {\n        \"Id\": 20,\n        \"UserId\": 456,\n        \"Title\": \"Publicación con un GIF\",\n        \"Description\": \"Descripción de la publicación\",\n        \"HasMultimedia\": true,\n        \"Public\": true,\n        \"Multimedia\": [\n            \"gif1.gif\"\n        ],\n        \"InsertionDate\": \"2023-11-07T10:00:00.000000000Z\",\n        \"UpdateDate\": \"2023-11-07T10:00:00.000000000Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
+				},
 				{
 					"name": "Crear publicación Exitosa",
 					"originalRequest": {
@@ -184,7 +219,9 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
 					"body": "{\n    \"response\": {\n        \"Id\": 10,\n        \"UserId\": 123,\n        \"Title\": \"Prueba de publicación en privado\",\n        \"Description\": \"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto\",\n        \"HasMultimedia\": true,\n        \"Public\": false,\n        \"Multimedia\": \"asdasd/multimedia1.jpg\",\n        \"InsertionDate\": \"2023-11-07T10:00:00.000000000Z\",\n        \"UpdateDate\": \"2023-11-07T10:00:00.000000000Z\"\n    },\n    \"status\": \"SUCCESS\"\n}"
