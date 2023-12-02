@@ -8,7 +8,6 @@
     src: url('../../../../resources/fonts/Poppins-Medium.ttf');
 }
 
-
 @font-face {
     font-family: 'Poppins-Light';
     src: url('../../../../resources/fonts/Poppins-Light.ttf');
@@ -30,15 +29,15 @@
     width: 25%;
 }
 
-.error-content h1{
+.error-content h1 {
     font-size: 4rem;
     font-weight: 800;
-    color: #167AB9;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #167ab9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
 }
-.error-content  h2{
+.error-content h2 {
     font-size: 2rem;
     font-weight: 200;
     font-family: 'Poppins-Medium';
@@ -46,14 +45,14 @@
     padding: 0;
     margin-top: 1rem;
 }
-.error-content p{
+.error-content p {
     margin-top: 4rem;
     margin-bottom: 3rem;
     font-size: 20px;
     font-family: 'Poppins-Regular';
 }
 
-.error-content WButtonMotion{
+.error-content WButtonMotion {
     width: 100px !important;
 }
 
@@ -63,17 +62,17 @@
 }
 .error-image {
     position: relative;
-    display:block;
+    display: block;
     max-width: 500px;
 }
 
-.error-image img{
-    display:block;
+.error-image img {
+    display: block;
     max-width: 700px;
-    animation: bounceUpDown 3s infinite; 
+    animation: bounceUpDown 3s infinite;
 }
 
-.logo-container{
+.logo-container {
     display: flex;
     position: absolute;
     text-align: center;
@@ -83,16 +82,17 @@
     height: auto;
 }
 
-.brand-text{
+.brand-text {
     font-size: 1.2rem;
     font-weight: 500;
 }
 
 @keyframes bounceUpDown {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-20px); 
+        transform: translateY(-20px);
     }
 }
