@@ -1,0 +1,659 @@
+{
+	"id": "79323b61-7cb8-493e-9578-3b8826225ac5",
+	"name": "Post Stress Cases",
+	"timestamp": "2023-12-01T07:04:10.846Z",
+	"collection_id": "31240954-6e3c51a9-bc91-4c94-b6d7-5ebaa234d395",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 300,
+	"delay": "0.1",
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-12-01T07:03:42.514Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "1f886960-0108-4a06-9e32-ee03ba616d0d",
+			"name": "Post cases",
+			"url": "https://social-app-backend-service-7bg5siys2q-uc.a.run.app/post/create",
+			"time": 227,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Given: El usuario está autenticado": true,
+				"When: El usuario crea un post llenando correctamente los campos": true,
+				"Then: Debe recibir datos de post y la creación del post": true
+			},
+			"testPassFailCounts": {
+				"Given: El usuario está autenticado": {
+					"pass": 100,
+					"fail": 0
+				},
+				"When: El usuario crea un post llenando correctamente los campos": {
+					"pass": 100,
+					"fail": 0
+				},
+				"Then: Debe recibir datos de post y la creación del post": {
+					"pass": 100,
+					"fail": 0
+				}
+			},
+			"times": [
+				303,
+				245,
+				214,
+				211,
+				238,
+				223,
+				210,
+				212,
+				223,
+				238,
+				214,
+				212,
+				241,
+				212,
+				210,
+				210,
+				217,
+				238,
+				244,
+				216,
+				222,
+				228,
+				216,
+				216,
+				220,
+				213,
+				214,
+				211,
+				220,
+				209,
+				210,
+				209,
+				225,
+				211,
+				215,
+				219,
+				219,
+				219,
+				221,
+				238,
+				213,
+				210,
+				212,
+				217,
+				211,
+				214,
+				212,
+				212,
+				229,
+				213,
+				211,
+				214,
+				223,
+				211,
+				211,
+				220,
+				218,
+				213,
+				236,
+				212,
+				217,
+				213,
+				218,
+				212,
+				210,
+				241,
+				212,
+				211,
+				217,
+				212,
+				211,
+				210,
+				213,
+				216,
+				213,
+				228,
+				213,
+				211,
+				211,
+				211,
+				210,
+				211,
+				213,
+				210,
+				211,
+				211,
+				234,
+				209,
+				213,
+				219,
+				211,
+				211,
+				225,
+				226,
+				210,
+				212,
+				218,
+				210,
+				212,
+				227
+			],
+			"allTests": [
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				},
+				{
+					"Given: El usuario está autenticado": true,
+					"When: El usuario crea un post llenando correctamente los campos": true,
+					"Then: Debe recibir datos de post y la creación del post": true
+				}
+			]
+		}
+	],
+	"count": 100,
+	"totalTime": 21801,
+	"collection": {
+		"requests": [
+			{
+				"id": "1f886960-0108-4a06-9e32-ee03ba616d0d",
+				"method": "POST"
+			}
+		]
+	}
+}

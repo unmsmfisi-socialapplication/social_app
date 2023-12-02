@@ -1,0 +1,101 @@
+{
+    "Succesful email send": {
+        "description": "Send an email successfully with valid data",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/send-email",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "to": {
+                    "type": "string",
+                    "value": "destinatario@example.com",
+                    "description": "Recipient of the email."
+                },
+                "subject": {
+                    "type": "string",
+                    "value": "Asunto del correo",
+                    "description": "Subject of the email."
+                },
+                "body": {
+                    "type": "string",
+                    "value": "Cuerpo del correo",
+                    "description": "Body of the email."
+                }
+            }
+        },
+        "response": {
+            "status": 200,
+            "body": {
+                "Correo enviado correctamente": "Exitoso"
+            }
+        }
+    },
+    "Invalid Email": {
+        "description": "Attempt to send an email with invalid data",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/send-email",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "to": {
+                    "type": "string",
+                    "value": "correo_invalido",
+                    "description": "Invalid email address."
+                },
+                "subject": {
+                    "type": "string",
+                    "value": "Asunto del correo",
+                    "description": "Subject of the email."
+                },
+                "body": {
+                    "type": "string",
+                    "value": "Cuerpo del correo",
+                    "description": "Body of the email."
+                }
+            }
+        },
+        "response": {
+            "status": 400,
+            "body": {
+                "Correo no enviado": "Correo inválido"
+            }
+        }
+    },
+    "Empty fields": {
+        "description": "Attempt to send an email with empty fields",
+        "request": {
+            "method": "POST",
+            "url": "https://31f26148-53be-474d-9a51-fa125946327a.mock.pstmn.io/send-email",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "to": {
+                    "type": "string",
+                    "value": "",
+                    "description": "Empty recipient field."
+                },
+                "subject": {
+                    "type": "string",
+                    "value": "",
+                    "description": "Empty subject field."
+                },
+                "body": {
+                    "type": "string",
+                    "value": "",
+                    "description": "Empty body field."
+                }
+            }
+        },
+        "response": {
+            "status": 400,
+            "body": {
+                "Correo no enviado": "Complete los campos vacíos"
+            }
+        }
+    }
+}
