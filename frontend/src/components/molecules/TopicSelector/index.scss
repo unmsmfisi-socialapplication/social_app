@@ -1,0 +1,30 @@
+// Estilos para el componente WTopicSelector
+.WTopicSelector {
+    display: flex;
+    flex-direction: column;
+    font-size: 32px;
+
+    // Estilos para la clase del tema
+    &__class {
+      color: #000;
+      font-family: 'Poppins';
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  
+    // Estilos para el contenedor de botones de temas
+    &__topics {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 17px;
+    }
+  
+    // Estilos para los botones de temas
+    &__button {
+      width: 330px;
+      height: 60px;
+    }
+} 
