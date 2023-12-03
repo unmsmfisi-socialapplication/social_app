@@ -7,12 +7,13 @@ interface WUserCHATCTAProps {
     avatarURL?: string
     userName?: string
     userHandle?: string
+    dataTestid?: string
 }
 
-const WUserChatCTA: React.FC<WUserCHATCTAProps> = ({ avatarURL, userName, userHandle }: WUserCHATCTAProps) => {
+const WUserChatCTA: React.FC<WUserCHATCTAProps> = ({ avatarURL, userName, userHandle, dataTestid }: WUserCHATCTAProps) => {
     const [showCTAOptions, setShowCTAOptions] = useState<boolean>(false)
     return (
-        <div className="chat_user_cta_container">
+        <div className="chat_user_cta_container" data-testid={dataTestid}>
             <div className="chat_user_cta_user_info">
                 <Avatar className="chat_user_avatar" src={avatarURL} />
                 <p>
