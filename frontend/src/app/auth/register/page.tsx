@@ -58,7 +58,7 @@ export default function RegisterPage() {
                 <WCardAuth title="Registro" variant="outlined">
                     <span>Nombre Completo</span>
                     <WInput
-                        placeholder="Nombre Completo"
+                        placeholder="Ingrese su Nombre"
                         size="small"
                         fullWidth
                         type="text"
@@ -71,7 +71,7 @@ export default function RegisterPage() {
                     />
                     <span>Correo</span>
                     <WInput
-                        placeholder="Correo"
+                        placeholder="Ingrese su Correo"
                         size="small"
                         fullWidth
                         type="text"
@@ -84,7 +84,7 @@ export default function RegisterPage() {
                     />
                     <span>Nombre de Usuario</span>
                     <WInput
-                        placeholder="Nombre de Usuario"
+                        placeholder="Ingrese su Usuario"
                         size="small"
                         fullWidth
                         type="text"
@@ -111,7 +111,7 @@ export default function RegisterPage() {
                     <span>Contraseña</span>
                     <WInput
                         icon={<VisibilityOffOutlinedIcon />}
-                        placeholder="Contraseña"
+                        placeholder="Ingrese su Contraseña"
                         size="small"
                         fullWidth
                         type="password"
