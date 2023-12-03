@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react'
+import React from 'react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import WButtonPost from './ButtonPost'
 
 describe('Button', () => {
@@ -24,5 +25,13 @@ describe('Button', () => {
         const button = getByTestId('button')
         expect(button).toHaveTextContent('Outlined Button')
         expect(button).toHaveClass('MuiButton-outlined')
+    })
+
+    it('handles click event', () => {
+        const handleClick = jest.fn()
+        render(<WButtonPost onClick={handleClick} />)
+
+        fireEvent.click(screen.getByRole('button'))
+        expect(handleClick).toHaveBeenCalledTimes(1)
     })
 })
