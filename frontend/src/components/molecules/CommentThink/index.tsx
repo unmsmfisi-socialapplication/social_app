@@ -11,7 +11,7 @@ interface CommentThinkProps {
     placeholder?: string
 }
 
-const CommentThink: React.FC<CommentThinkProps> = ({ avatarDefaultURL, publicTag, placeholder }) => {
+const WCommentThink: React.FC<CommentThinkProps> = ({ avatarDefaultURL, publicTag, placeholder }) => {
     return (
         <div className="comment_think_main_container">
             <div className="comment_think_container">
@@ -30,9 +30,9 @@ const CommentThink: React.FC<CommentThinkProps> = ({ avatarDefaultURL, publicTag
     )
 }
 
-export default CommentThink
+export default WCommentThink
 
-CommentThink.defaultProps = {
+WCommentThink.defaultProps = {
     avatarDefaultURL: '',
     publicTag: 'Público',
     placeholder: '',

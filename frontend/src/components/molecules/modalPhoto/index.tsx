@@ -46,7 +46,7 @@ const sxCloseButton = {
     color: (theme: Theme) => theme.palette.grey[500],
 }
 
-const CustomDialog: React.FC<CustomDialogProps> = ({ warning, content, title, subtitle, size, btnText }) => {
+const WCustomDialog: React.FC<CustomDialogProps> = ({ warning, content, title, subtitle, size, btnText }) => {
     const [open, setOpen] = React.useState(false)
 
     const handleClickOpen = () => {
@@ -105,7 +105,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ warning, content, title, su
     )
 }
 
-CustomDialog.defaultProps = {
+WCustomDialog.defaultProps = {
     warning: false,
     title: {
         textContent: '!La foto no cumple con las especificaciones, subir otra foto¡',
@@ -118,4 +118,4 @@ CustomDialog.defaultProps = {
     btnText: 'Cargar Foto',
 }
 
-export default CustomDialog
+export default WCustomDialog

@@ -96,9 +96,9 @@ const ReportPublication: React.FC<ReportPublicationProps> = ({ userHandle, open,
     )
 }
 
-export default ReportPublication
+export default WReportPublication
 
-ReportPublication.defaultProps = {
+WReportPublication.defaultProps = {
     userHandle: 'XokasXD',
     open: false,
 }
