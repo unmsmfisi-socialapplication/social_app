@@ -3,7 +3,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[SP_GetDataAPI]	@TypeModel INT
+ALTER  PROCEDURE [dbo].[SP_GetDataAPI]	@TypeModel INT
 AS
 BEGIN
 
@@ -19,7 +19,7 @@ DECLARE @DateUltimateEX DATETIME
 ----------------------------------------------
 set @User = SYSTEM_USER;
 set @DateUpdate = GETDATE();
-
+SET @DateUltimateEX = (SELECT MAX(DateExec) FROM dbo.API_SP_Execution_Log WHERE CodeModel = @TypeModel )
 -------------------------------------------------
 --[3] Insertamos la ejecucion de la tabal log
 -------------------------------------------------
@@ -29,7 +29,7 @@ SELECT @TypeModel, @User, @DateUpdate;
 ------------------------------------
 --[4] Borramos los datos de matriz
 ------------------------------------
-DELETE FROM dbo.Response_Matrix;  
+truncate table dbo.Response_Matrix;  
 
 ------------------------------------
 --[5] Insertando datos del modelo
@@ -37,11 +37,6 @@ DELETE FROM dbo.Response_Matrix;
 -- Modelo de SPAM
 IF @TypeModel = 1
 BEGIN
-	SELECT  @DateUltimateEX = DateExec
-    FROM dbo.API_SP_Execution_Log
-    WHERE CodeModel = 1
-    ORDER BY DateExec DESC;
-
     INSERT INTO dbo.Response_Matrix (Id_model, text, Prediction)
 	SELECT 1 AS model_id, text, prediction
 	FROM dbo.Master_spam
@@ -51,11 +46,6 @@ END
 ---- Modelo de POST
 ELSE IF @TypeModel = 2
 BEGIN
-    SELECT  @DateUltimateEX = DateExec
-    FROM dbo.API_SP_Execution_Log
-    WHERE CodeModel = 2
-    ORDER BY DateExec DESC;
-
     INSERT INTO dbo.Response_Matrix (Id_model, text, Prediction)
 	SELECT 2 AS model_id, text, prediction
 	FROM dbo.Master_post
@@ -65,14 +55,9 @@ END
 -- Modelo de SENTIMENT
 ELSE IF @TypeModel = 3
 BEGIN
-    SELECT  @DateUltimateEX = DateExec
-    FROM dbo.API_SP_Execution_Log
-    WHERE CodeModel = 3
-    ORDER BY DateExec DESC;
-
     INSERT INTO dbo.Response_Matrix (Id_model, text, Prediction)
-	SELECT 2 AS model_id, text, prediction
-	FROM dbo.Master_post
+	SELECT 3 AS model_id, text, prediction
+	FROM dbo.Master_sentiment
 	WHERE DATEDIFF(hour, @DateUltimateEX, timestamp)>= 0;
 END
 
