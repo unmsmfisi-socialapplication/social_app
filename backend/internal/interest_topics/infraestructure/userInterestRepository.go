@@ -3,6 +3,7 @@ package infraestructure
 import (
 	"database/sql"
 
+
 	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/domain"
 
 	"github.com/unmsmfisi-socialapplication/social_app/internal/interest_topics/application"
@@ -79,4 +80,32 @@ func (dbRepository *UserInterestsDBRepository) Create(interests []domain.UserInt
 
 	tx.Commit()
 	return nil
+}
+
+func (dbRepository *UserInterestsDBRepository) GetInterestTopics(userId string) ([]string, error) {
+	//TODO: Add pagination to the query SELECT * FROM FN_SOC_APP_GET_PROFILE_INTEREST(1, 10, 1);
+	query := `SELECT user_id,interest_id,profile_id,interest_name,user_name FROM FN_SOC_APP_GET_PROFILE_INTEREST($1, 10, 1)`
+	
+	
+	rows, err := dbRepository.db.Query(query, userId)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var interests []string
+	for rows.Next() {
+		var interest string
+		err := rows.Scan(&interest)
+		if err != nil {
+			return nil, err
+		}
+		interests = append(interests, interest)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return interests, nil
 }
