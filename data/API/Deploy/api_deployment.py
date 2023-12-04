@@ -19,8 +19,15 @@ def get_posts():
         type = request.args.get('type', default=None, type=str)
         #Conection
         conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};PORT=1433;DATABASE={database};UID={username};PWD={password}')
+        
+        cursor2 = conn.cursor()
+        tmp= """EXECUTE [dbo].[SP_GetDataAPI] """+type+""";"""
+        cursor2.execute(tmp)
+        cursor2.close()
+
+
         cursor = conn.cursor()
-        query_temp = """SELECT * FROM API_prueba WHERE TIPO = '"""+type+"""' """
+        query_temp = """SELECT * FROM Response_Matrix"""
         #SQL query to get the data
         cursor.execute(query_temp)
         rows = cursor.fetchall()
@@ -28,7 +35,7 @@ def get_posts():
         #Convert to json
         posts = []
         for row in rows:
-            posts.append({'id': row[0], 'Nombre_Usuraio': row[1], 'Comentario': row[2],'Tipo':row[3],'Clasificacion':row[4],'Hora_publicacion':row[5]})
+            posts.append({'id': row[0], 'id_model': row[1], 'Text': row[2],'Prediction':row[3]})
 
         return jsonify(posts)
 
