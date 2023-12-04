@@ -4,19 +4,18 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/unmsmfisi-socialapplication/social_app/pkg/database"
-
 	login_app "github.com/unmsmfisi-socialapplication/social_app/internal/login/application"
-	login_infra "github.com/unmsmfisi-socialapplication/social_app/internal/login/infrastructure"
 	"github.com/unmsmfisi-socialapplication/social_app/internal/register/application"
 	"github.com/unmsmfisi-socialapplication/social_app/pkg/utils"
 )
+
 type RegisterUserHandler struct {
-	useCase *application.RegistrationUseCase
+	registerUseCase *application.RegistrationUseCase
+	authUseCase     *login_app.LoginUseCase
 }
 
-func NewRegisterUserHandler(uc *application.RegistrationUseCase) *RegisterUserHandler {
-	return &RegisterUserHandler{useCase: uc}
+func NewRegisterUserHandler(ru *application.RegistrationUseCase, au *login_app.LoginUseCase) *RegisterUserHandler {
+	return &RegisterUserHandler{registerUseCase: ru, authUseCase: au}
 }
 
 func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Request) {
@@ -28,21 +27,11 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 	}
 	err := json.NewDecoder(r.Body).Decode(&data)
 	if err != nil {
-
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	dbInstance := database.GetDB()
-	loginRepo := login_infra.NewUserDBRepository(dbInstance)
 
-	loginUseCase := login_app.NewLoginUseCase(loginRepo)
-	tokenge, err := loginUseCase.GenerateToken(data.Username, "role")
-	if err != nil {
-		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Error generating token")
-		return
-	}
-
-	_, er := rh.useCase.RegisterUser(data.Email, data.Username, data.Password)
+	_, er := rh.registerUseCase.RegisterUser(data.Email, data.Username, data.Password)
 	if er != nil {
 		switch er {
 		case application.ErrEmailInUse:
@@ -57,13 +46,23 @@ func (rh *RegisterUserHandler) RegisterUser(w http.ResponseWriter, r *http.Reque
 
 		}
 	}
-	loginRepo.InsertSession(data.Username)
-	jti,err:= loginUseCase.ExtractJTI(tokenge)
+
+	tokenge, err := rh.authUseCase.GenerateToken(data.Username, "role")
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Error generating token")
+		return
+	}
+	jti, err := rh.authUseCase.ExtractJTI(tokenge)
 	if err != nil {
 		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Error extracting jti")
 		return
 	}
-	loginUseCase.StoreJTIForSession(data.Username, jti)
+	err = rh.authUseCase.StoreJTIForSession(data.Username, jti)
+	if err != nil {
+		utils.SendJSONResponse(w, http.StatusBadRequest, "ERROR", "Error storing jti")
+		return
+	}
+
 	var outputData struct {
 		Email    string `json:"email"`
 		Username string `json:"user_name"`

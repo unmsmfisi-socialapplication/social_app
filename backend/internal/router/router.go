@@ -105,7 +105,7 @@ func Router() http.Handler {
 	// Register
 	registerRepo := registerinfrastructure.NewUserRepository(dbInstance)
 	registerUseCase := registerapplication.NewRegistrationUseCase(registerRepo)
-	registerHandler := registerinfrastructure.NewRegisterUserHandler(registerUseCase)
+	registerHandler := registerinfrastructure.NewRegisterUserHandler(registerUseCase, loginUseCase)
 	freeRoutes.Post("/register", registerHandler.RegisterUser)
 
 	protectedRoutes.Mount("/comments", commentRouter)
