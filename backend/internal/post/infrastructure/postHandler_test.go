@@ -23,6 +23,8 @@ type mockPostUseCase struct {
 	DeletePostFn            func(id int64) error
 	UpdatePostFn            func(id int64, update domain.PostUpdate) error
 	ReportPostFn            func(report domain.PostReport) error
+	MultipostMastodonFn func(post domain.PostCreate) error
+	MultipostPixelfeedFn func(post domain.PostCreate) error
 	RetrieveTimelinePostsFn func(user_id, page_size, page_num int64) (*domain.QueryResult, error)
 }
 
@@ -49,6 +51,13 @@ func (m *mockPostUseCase) ReportPost(report domain.PostReport) error {
 }
 func (m *mockPostUseCase) RetrieveTimelinePosts(user_id, page_size, page_num int64) (*domain.QueryResult, error) {
 	return m.RetrieveTimelinePostsFn(user_id, page_size, page_num)
+}
+
+func (m *mockPostUseCase) MultipostMastodon(post domain.PostCreate) error {
+    return m.MultipostMastodonFn(post)
+}
+func (m *mockPostUseCase) MultipostPixelfeed(post domain.PostCreate) error {
+    return m.MultipostPixelfeedFn(post)
 }
 
 func TestHandleCreatePost(t *testing.T) {

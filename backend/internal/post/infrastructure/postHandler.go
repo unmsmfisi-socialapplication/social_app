@@ -156,6 +156,11 @@ func (ph *PostHandler) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 	utils.SendJSONResponse(w, http.StatusOK, "SUCCESS", post)
 }
 
+
+func (h *PostHandler) PostToPlatforms(w http.ResponseWriter, r *http.Request) {
+	
+}
+
 func (ph *PostHandler) HandleDeletePost(w http.ResponseWriter, r *http.Request) {
 	idStr := chi.URLParam(r, "id")
 	id, err := strconv.ParseInt(idStr, 10, 64)

@@ -87,3 +87,16 @@ func PostToPostResponse(p Post) PostResponse {
 		Object:  p,
 	}
 }
+
+type SocialMediaPost struct {
+    ID      int64
+    Message string
+}
+
+type PixelfedAPI interface {
+    MultipostPixelfeed(post PostCreate) error
+}
+
+type MastodonAPI interface {
+    MultipostMastodon(post PostCreate) error
+}
